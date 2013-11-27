@@ -1,5 +1,4 @@
-/Debugging/MVCVisualDesignerReport.txt
-/Debugging/MVCVisualDesignerReportVB.txt
+*.suo
 /Dsl/GeneratedCode/ConnectionBuilders.cs
 /Dsl/GeneratedCode/Connectors.cs
 /Dsl/GeneratedCode/Diagram.cs
@@ -31,4 +30,12 @@
 /DslPackage/bin/
 /DslPackage/obj/
 /DslPackage/source.extension.vsixmanifest
-/MVCVisualDesigner.v12.suo
+
+
+#
+# Debugging Project
+#
+/Debugging/obj/
+/Debugging/bin/
+/Debugging/MVCVisualDesignerReport.txt
+/Debugging/MVCVisualDesignerReportVB.txt
