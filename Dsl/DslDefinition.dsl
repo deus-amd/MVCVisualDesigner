@@ -182,7 +182,7 @@
     <XmlSerializationDefinition CustomPostLoad="false">
       <XmlSerializationBehaviorMoniker Name="MVCVisualDesignerSerializationBehavior" />
     </XmlSerializationDefinition>
-    <ToolboxTab TabText="MVCVisualDesigner">
+    <ToolboxTab TabText="MVC Visual Designer">
       <ElementTool Name="ExampleElement" ToolboxIcon="resources\exampleshapetoolbitmap.bmp" Caption="ExampleElement" Tooltip="Create an ExampleElement" HelpKeyword="CreateExampleClassF1Keyword">
         <DomainClassMoniker Name="ExampleElement" />
       </ElementTool>
@@ -193,7 +193,7 @@
     <Validation UsesMenu="false" UsesOpen="false" UsesSave="false" UsesLoad="false" />
     <DiagramMoniker Name="MVCVisualDesignerDiagram" />
   </Designer>
-  <Explorer ExplorerGuid="a88f64c9-f30b-4d4a-825d-009ceed441ad" Title="MVCVisualDesigner Explorer">
+  <Explorer ExplorerGuid="a88f64c9-f30b-4d4a-825d-009ceed441ad" Title="MVC Visual Designer Explorer">
     <ExplorerBehaviorMoniker Name="MVCVisualDesigner/MVCVisualDesignerExplorer" />
   </Explorer>
 </Dsl>
