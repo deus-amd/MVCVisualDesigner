@@ -1,0 +1,35 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@ include file="WidgetList.t4" #>
+namespace MVCVisualDesigner
+{
+    public enum WidgetType 
+    {
+<#
+    foreach(string MEL in AllWidgets)
+    {
+#>
+        <#= MEL.StartsWith("VD") ? MEL.Substring(2) : MEL #>,	
+<#
+    }
+#>
+        Unknown
+    }
+
+
+<#
+    foreach(string MEL in AllWidgets)
+    {
+#>
+    public partial class <#= MEL #>
+    {
+        override public WidgetType WidgetType { get { return WidgetType.<#= MEL.StartsWith("VD") ? MEL.Substring(2) : MEL #>;} } 
+    }
+<#
+    }
+#>
+}

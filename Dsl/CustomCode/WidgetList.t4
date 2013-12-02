@@ -1,0 +1,31 @@
+﻿<#
+// the widgets need to set fixup parent relationship
+string[] WidgetList = new string[]{
+	//"VDPartialView",
+	"VDView",
+	//"VDHtmlTag",
+	//"VDCodeSnippet",
+	"VDSection",
+	//"VDButton",
+	//"VDGridLayout",
+	//"VDForm",
+	//"VDRadio",
+	//"VDCheckBox",
+	//"VDSubmit",
+	//"VDInput",
+	//"VDSelect",
+};
+
+// the widgets needn't to specify parent (alreay specified in DSL definition)
+string[] SubWidgetList = new string[] {
+	//"VDGridLayoutCell",
+	//"VDGridLayoutHeadCell",
+	//"VDSectionTitle",
+	//"VDSectionBody",
+	//"VDSelectOption",
+};
+
+System.Collections.Generic.List<string> AllWidgets = new System.Collections.Generic.List<string>();
+AllWidgets.AddRange(WidgetList);
+AllWidgets.AddRange(SubWidgetList);
+#>

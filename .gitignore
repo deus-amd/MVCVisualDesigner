@@ -39,3 +39,10 @@
 /Debugging/bin/
 /Debugging/MVCVisualDesignerReport.txt
 /Debugging/MVCVisualDesignerReportVB.txt
+
+/Dsl/CustomCode/FixUpDiagram.cs
+/Dsl/CustomCode/WidgetType.cs
+
+/Dsl/Dsl.csproj.user
+
+/Dsl/Resources/MVDResources.Designer.cs

@@ -1,0 +1,20 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>
+namespace MVCVisualDesigner
+{
+    internal sealed partial class FixUpDiagram : FixUpDiagramBase
+    {
+    <#@ include file="WidgetList.t4" #>
+<#
+    foreach(string MEL in WidgetList)
+    {
+#>
+        private Microsoft.VisualStudio.Modeling.ModelElement GetParentFor<#= MEL #>(<#= MEL #> childElement)
+        {
+            return childElement.Parent;
+        }
+<#
+    }
+#>
+    }
+}

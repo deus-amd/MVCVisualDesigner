@@ -1,58 +1,74 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Dsl xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="8f2ca638-e08f-4b6f-96a1-ea046a25c190" Description="" Name="MVCVisualDesigner" DisplayName="MVC Visual Designer" Namespace="MVCVisualDesigner" MajorVersion="0" Revision="1" ProductName="MVC Visual Designer" CompanyName="Jun Wang" PackageGuid="2318dda0-8eed-4398-b67d-2e85e627224d" PackageNamespace="MVCVisualDesigner" xmlns="http://schemas.microsoft.com/VisualStudio/2005/DslTools/DslDefinitionModel">
   <Classes>
-    <DomainClass Id="9d923d83-4392-497f-9c64-437b9ff56f2c" Description="The root in which all other elements are embedded. Appears as a diagram." Name="ExampleModel" DisplayName="Example Model" Namespace="MVCVisualDesigner">
-      <ElementMergeDirectives>
-        <ElementMergeDirective>
-          <Notes>Creates an embedding link when an element is dropped onto a model. </Notes>
-          <Index>
-            <DomainClassMoniker Name="ExampleElement" />
-          </Index>
-          <LinkCreationPaths>
-            <DomainPath>ExampleModelHasElements.Elements</DomainPath>
-          </LinkCreationPaths>
-        </ElementMergeDirective>
-      </ElementMergeDirectives>
-    </DomainClass>
-    <DomainClass Id="8c122e70-869f-4311-b59f-e591d77cc426" Description="Elements embedded in the model. Appear as boxes on the diagram." Name="ExampleElement" DisplayName="Example Element" Namespace="MVCVisualDesigner">
+    <DomainClass Id="404ac32b-b3af-4662-bd2e-14f13a17562b" Description="Description for MVCVisualDesigner.VDWidget" Name="VDWidget" DisplayName="VDWidget" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true">
       <Properties>
-        <DomainProperty Id="c5cf12b3-ba98-4e27-80ee-ecfc39bbd5ff" Description="Description for MVCVisualDesigner.ExampleElement.Name" Name="Name" DisplayName="Name" DefaultValue="" IsElementName="true">
+        <DomainProperty Id="b3bf12d3-bb09-40bd-85d0-a868753c0d3f" Description="Description for MVCVisualDesigner.VDWidget.Name" Name="Name" DisplayName="Name" IsElementName="true">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
       </Properties>
+      <ElementMergeDirectives>
+        <ElementMergeDirective>
+          <Index>
+            <DomainClassMoniker Name="VDWidget" />
+          </Index>
+          <LinkCreationPaths>
+            <DomainPath>WidgetHasChildren.Children</DomainPath>
+          </LinkCreationPaths>
+        </ElementMergeDirective>
+        <ElementMergeDirective>
+          <Index>
+            <DomainClassMoniker Name="VDWidgetTitle" />
+          </Index>
+          <LinkCreationPaths>
+            <DomainPath>WidgetHasTitle.Title</DomainPath>
+          </LinkCreationPaths>
+        </ElementMergeDirective>
+      </ElementMergeDirectives>
     </DomainClass>
+    <DomainClass Id="7c91a0ff-d5ec-467a-b0b8-705ad9049330" Description="Description for MVCVisualDesigner.VDView" Name="VDView" DisplayName="VDView" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="db6a631c-6a2e-494c-b56d-a4f048c50743" Description="Description for MVCVisualDesigner.VDSection" Name="VDSection" DisplayName="VDSection" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="f9e27ebe-1427-48d9-bba0-b1dfa993ee87" Description="Description for MVCVisualDesigner.VDWidgetTitle" Name="VDWidgetTitle" DisplayName="VDWidget Title" Namespace="MVCVisualDesigner" />
   </Classes>
   <Relationships>
-    <DomainRelationship Id="6bfa0496-8f2e-4378-8176-c3a31f97030a" Description="Embedding relationship between the Model and Elements" Name="ExampleModelHasElements" DisplayName="Example Model Has Elements" Namespace="MVCVisualDesigner" IsEmbedding="true">
+    <DomainRelationship Id="8491408d-7160-4a47-9979-e0dab01d52b3" Description="Description for MVCVisualDesigner.WidgetHasChildren" Name="WidgetHasChildren" DisplayName="Widget Has Children" Namespace="MVCVisualDesigner" IsEmbedding="true">
       <Source>
-        <DomainRole Id="de8029cb-c1cc-4404-b47c-39999950ce4a" Description="" Name="ExampleModel" DisplayName="Example Model" PropertyName="Elements" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Elements">
+        <DomainRole Id="223507db-ce6c-4fe1-87aa-33d1adcb6555" Description="Description for MVCVisualDesigner.WidgetHasChildren.SourceVDWidget" Name="SourceVDWidget" DisplayName="Source VDWidget" PropertyName="Children" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Children">
           <RolePlayer>
-            <DomainClassMoniker Name="ExampleModel" />
+            <DomainClassMoniker Name="VDWidget" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="f57195f2-f044-469c-a421-adba18b69ac5" Description="" Name="Element" DisplayName="Element" PropertyName="ExampleModel" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Example Model">
+        <DomainRole Id="c0aff184-c06b-475e-b78b-0854c9f15199" Description="Description for MVCVisualDesigner.WidgetHasChildren.TargetVDWidget" Name="TargetVDWidget" DisplayName="Target VDWidget" PropertyName="Parent" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Parent">
           <RolePlayer>
-            <DomainClassMoniker Name="ExampleElement" />
+            <DomainClassMoniker Name="VDWidget" />
           </RolePlayer>
         </DomainRole>
       </Target>
     </DomainRelationship>
-    <DomainRelationship Id="fed6cfa2-a447-4d51-8609-ce68ce03a66b" Description="Reference relationship between Elements." Name="ExampleElementReferencesTargets" DisplayName="Example Element References Targets" Namespace="MVCVisualDesigner">
+    <DomainRelationship Id="c2d0e6ff-0c0d-4a7d-8ca7-94d2bc2a088c" Description="Description for MVCVisualDesigner.WidgetHasTitle" Name="WidgetHasTitle" DisplayName="Widget Has Title" Namespace="MVCVisualDesigner" IsEmbedding="true">
       <Source>
-        <DomainRole Id="6c2a29c9-334b-434e-b338-316407c09a78" Description="Description for MVCVisualDesigner.ExampleRelationship.Target" Name="Source" DisplayName="Source" PropertyName="Targets" PropertyDisplayName="Targets">
+        <DomainRole Id="bdb03725-26b0-460b-92ad-c74d0e68d858" Description="Description for MVCVisualDesigner.WidgetHasTitle.VDWidget" Name="VDWidget" DisplayName="VDWidget" PropertyName="Title" Multiplicity="ZeroOne" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Title">
           <RolePlayer>
-            <DomainClassMoniker Name="ExampleElement" />
+            <DomainClassMoniker Name="VDWidget" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="7a6a3c77-0210-4718-8dba-8c85a32a95f1" Description="Description for MVCVisualDesigner.ExampleRelationship.Source" Name="Target" DisplayName="Target" PropertyName="Sources" PropertyDisplayName="Sources">
+        <DomainRole Id="3e997446-1b1d-4306-b258-b373deba3ada" Description="Description for MVCVisualDesigner.WidgetHasTitle.VDWidgetTitle" Name="VDWidgetTitle" DisplayName="VDWidget Title" PropertyName="Widget" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Widget">
           <RolePlayer>
-            <DomainClassMoniker Name="ExampleElement" />
+            <DomainClassMoniker Name="VDWidgetTitle" />
           </RolePlayer>
         </DomainRole>
       </Target>
@@ -74,124 +90,128 @@
     <ExternalType Name="Guid" Namespace="System" />
     <ExternalType Name="Boolean" Namespace="System" />
     <ExternalType Name="Char" Namespace="System" />
+    <ExternalType Name="Image" Namespace="System.Drawing" />
   </Types>
   <Shapes>
-    <GeometryShape Id="f56ee614-5b46-409f-b1db-716f669e90fe" Description="Shape used to represent ExampleElements on a Diagram." Name="ExampleShape" DisplayName="Example Shape" Namespace="MVCVisualDesigner" FixedTooltipText="Example Shape" FillColor="242, 239, 229" OutlineColor="113, 111, 110" InitialWidth="2" InitialHeight="0.75" OutlineThickness="0.01" Geometry="Rectangle">
-      <Notes>The shape has a text decorator used to display the Name property of the mapped ExampleElement.</Notes>
-      <ShapeHasDecorators Position="Center" HorizontalOffset="0" VerticalOffset="0">
-        <TextDecorator Name="NameDecorator" DisplayName="Name Decorator" DefaultText="NameDecorator" />
-      </ShapeHasDecorators>
+    <GeometryShape Id="e3f0af00-12a6-4223-861d-180f9ed7f7c3" Description="Description for MVCVisualDesigner.VDWidgetShape" Name="VDWidgetShape" DisplayName="VDWidget Shape" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner" FixedTooltipText="VDWidget Shape" InitialHeight="1" Geometry="Rectangle">
+      <Properties>
+        <DomainProperty Id="58f89d0b-35cb-4f92-aecd-348184bff87c" Description="" Name="m_disabled" DisplayName="M_disabled" Kind="CustomStorage" Category="Internal States">
+          <Type>
+            <ExternalTypeMoniker Name="/System/Boolean" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="d974e6e0-adbc-4b2c-bc4d-cce5d6d87290" Description="" Name="m_pin" DisplayName="M_pin" Category="Internal States">
+          <Type>
+            <ExternalTypeMoniker Name="/System/Boolean" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="29d8d234-51c6-433f-881f-b5b9b722ad5a" Description="" Name="m_titleText" DisplayName="M_title Text" Kind="Calculated" Category="Internal States">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="dbf4b4ff-482e-4779-b81a-4107eecf2d05" Description="" Name="m_titleIcon" DisplayName="M_title Icon" Kind="Calculated" Category="Internal States">
+          <Type>
+            <ExternalTypeMoniker Name="/System.Drawing/Image" />
+          </Type>
+        </DomainProperty>
+      </Properties>
     </GeometryShape>
+    <GeometryShape Id="4842b8a8-4cb9-429d-ad01-a6d400e0676b" Description="Description for MVCVisualDesigner.VDSectionShape" Name="VDSectionShape" DisplayName="VDSection Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDSection Shape" InitialHeight="1" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
+    <Port Id="407d285a-e203-4917-a395-730505e148c5" Description="Description for MVCVisualDesigner.VDWidgetTitlePort" Name="VDWidgetTitlePort" DisplayName="VDWidget Title Port" Namespace="MVCVisualDesigner" FixedTooltipText="VDWidget Title Port" InitialWidth="0.5" InitialHeight="0.5" Geometry="Rectangle" />
   </Shapes>
-  <Connectors>
-    <Connector Id="4f2ef826-74a2-4acd-a44e-4ee980975f04" Description="Connector between the ExampleShapes. Represents ExampleRelationships on the Diagram." Name="ExampleConnector" DisplayName="Example Connector" Namespace="MVCVisualDesigner" FixedTooltipText="Example Connector" Color="113, 111, 110" TargetEndStyle="EmptyArrow" Thickness="0.01" />
-  </Connectors>
   <XmlSerializationBehavior Name="MVCVisualDesignerSerializationBehavior" Namespace="MVCVisualDesigner">
     <ClassData>
-      <XmlClassData TypeName="ExampleModel" MonikerAttributeName="" SerializeId="true" MonikerElementName="exampleModelMoniker" ElementName="exampleModel" MonikerTypeName="ExampleModelMoniker">
-        <DomainClassMoniker Name="ExampleModel" />
-        <ElementData>
-          <XmlRelationshipData RoleElementName="elements">
-            <DomainRelationshipMoniker Name="ExampleModelHasElements" />
-          </XmlRelationshipData>
-        </ElementData>
+      <XmlClassData TypeName="VDDiagram" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDDiagramMoniker" ElementName="vDDiagram" MonikerTypeName="VDDiagramMoniker">
+        <DiagramMoniker Name="VDDiagram" />
       </XmlClassData>
-      <XmlClassData TypeName="ExampleElement" MonikerAttributeName="name" SerializeId="true" MonikerElementName="exampleElementMoniker" ElementName="exampleElement" MonikerTypeName="ExampleElementMoniker">
-        <DomainClassMoniker Name="ExampleElement" />
+      <XmlClassData TypeName="VDWidget" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDWidgetMoniker" ElementName="vDWidget" MonikerTypeName="VDWidgetMoniker">
+        <DomainClassMoniker Name="VDWidget" />
         <ElementData>
-          <XmlPropertyData XmlName="name" IsMonikerKey="true">
-            <DomainPropertyMoniker Name="ExampleElement/Name" />
+          <XmlRelationshipData UseFullForm="true" RoleElementName="children">
+            <DomainRelationshipMoniker Name="WidgetHasChildren" />
+          </XmlRelationshipData>
+          <XmlPropertyData XmlName="name">
+            <DomainPropertyMoniker Name="VDWidget/Name" />
           </XmlPropertyData>
-          <XmlRelationshipData RoleElementName="targets">
-            <DomainRelationshipMoniker Name="ExampleElementReferencesTargets" />
+          <XmlRelationshipData UseFullForm="true" RoleElementName="title">
+            <DomainRelationshipMoniker Name="WidgetHasTitle" />
           </XmlRelationshipData>
         </ElementData>
       </XmlClassData>
-      <XmlClassData TypeName="ExampleModelHasElements" MonikerAttributeName="" SerializeId="true" MonikerElementName="exampleModelHasElementsMoniker" ElementName="exampleModelHasElements" MonikerTypeName="ExampleModelHasElementsMoniker">
-        <DomainRelationshipMoniker Name="ExampleModelHasElements" />
+      <XmlClassData TypeName="VDView" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDViewMoniker" ElementName="vDView" MonikerTypeName="VDViewMoniker">
+        <DomainClassMoniker Name="VDView" />
       </XmlClassData>
-      <XmlClassData TypeName="ExampleElementReferencesTargets" MonikerAttributeName="" SerializeId="true" MonikerElementName="exampleElementReferencesTargetsMoniker" ElementName="exampleElementReferencesTargets" MonikerTypeName="ExampleElementReferencesTargetsMoniker">
-        <DomainRelationshipMoniker Name="ExampleElementReferencesTargets" />
+      <XmlClassData TypeName="VDSection" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDSectionMoniker" ElementName="vDSection" MonikerTypeName="VDSectionMoniker">
+        <DomainClassMoniker Name="VDSection" />
       </XmlClassData>
-      <XmlClassData TypeName="ExampleShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="exampleShapeMoniker" ElementName="exampleShape" MonikerTypeName="ExampleShapeMoniker">
-        <GeometryShapeMoniker Name="ExampleShape" />
+      <XmlClassData TypeName="WidgetHasChildren" MonikerAttributeName="" SerializeId="true" MonikerElementName="widgetHasChildrenMoniker" ElementName="widgetHasChildren" MonikerTypeName="WidgetHasChildrenMoniker">
+        <DomainRelationshipMoniker Name="WidgetHasChildren" />
       </XmlClassData>
-      <XmlClassData TypeName="ExampleConnector" MonikerAttributeName="" SerializeId="true" MonikerElementName="exampleConnectorMoniker" ElementName="exampleConnector" MonikerTypeName="ExampleConnectorMoniker">
-        <ConnectorMoniker Name="ExampleConnector" />
+      <XmlClassData TypeName="VDWidgetShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDWidgetShapeMoniker" ElementName="vDWidgetShape" MonikerTypeName="VDWidgetShapeMoniker">
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+        <ElementData>
+          <XmlPropertyData XmlName="m_disabled">
+            <DomainPropertyMoniker Name="VDWidgetShape/m_disabled" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="m_pin">
+            <DomainPropertyMoniker Name="VDWidgetShape/m_pin" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="m_titleText" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDWidgetShape/m_titleText" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="m_titleIcon" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDWidgetShape/m_titleIcon" />
+          </XmlPropertyData>
+        </ElementData>
       </XmlClassData>
-      <XmlClassData TypeName="MVCVisualDesignerDiagram" MonikerAttributeName="" SerializeId="true" MonikerElementName="mVCVisualDesignerDiagramMoniker" ElementName="mVCVisualDesignerDiagram" MonikerTypeName="MVCVisualDesignerDiagramMoniker">
-        <DiagramMoniker Name="MVCVisualDesignerDiagram" />
+      <XmlClassData TypeName="VDSectionShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDSectionShapeMoniker" ElementName="vDSectionShape" MonikerTypeName="VDSectionShapeMoniker">
+        <GeometryShapeMoniker Name="VDSectionShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDWidgetTitle" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDWidgetTitleMoniker" ElementName="vDWidgetTitle" MonikerTypeName="VDWidgetTitleMoniker">
+        <DomainClassMoniker Name="VDWidgetTitle" />
+      </XmlClassData>
+      <XmlClassData TypeName="WidgetHasTitle" MonikerAttributeName="" SerializeId="true" MonikerElementName="widgetHasTitleMoniker" ElementName="widgetHasTitle" MonikerTypeName="WidgetHasTitleMoniker">
+        <DomainRelationshipMoniker Name="WidgetHasTitle" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDWidgetTitlePort" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDWidgetTitlePortMoniker" ElementName="vDWidgetTitlePort" MonikerTypeName="VDWidgetTitlePortMoniker">
+        <PortMoniker Name="VDWidgetTitlePort" />
       </XmlClassData>
     </ClassData>
   </XmlSerializationBehavior>
   <ExplorerBehavior Name="MVCVisualDesignerExplorer" />
-  <ConnectionBuilders>
-    <ConnectionBuilder Name="ExampleElementReferencesTargetsBuilder">
-      <Notes>Provides for the creation of an ExampleRelationship by pointing at two ExampleElements.</Notes>
-      <LinkConnectDirective>
-        <DomainRelationshipMoniker Name="ExampleElementReferencesTargets" />
-        <SourceDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="ExampleElement" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </SourceDirectives>
-        <TargetDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="ExampleElement" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </TargetDirectives>
-      </LinkConnectDirective>
-    </ConnectionBuilder>
-  </ConnectionBuilders>
-  <Diagram Id="1fd11f50-969f-48aa-af5b-31b4277c4671" Description="Description for MVCVisualDesigner.MVCVisualDesignerDiagram" Name="MVCVisualDesignerDiagram" DisplayName="Minimal Language Diagram" Namespace="MVCVisualDesigner">
+  <Diagram Id="1fd11f50-969f-48aa-af5b-31b4277c4671" Description="Description for MVCVisualDesigner.VDDiagram" Name="VDDiagram" DisplayName="Minimal Language Diagram" Namespace="MVCVisualDesigner">
     <Class>
-      <DomainClassMoniker Name="ExampleModel" />
+      <DomainClassMoniker Name="VDView" />
     </Class>
     <ShapeMaps>
-      <ShapeMap>
-        <DomainClassMoniker Name="ExampleElement" />
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDSection" />
+        <GeometryShapeMoniker Name="VDSectionShape" />
+      </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDWidgetTitle" />
         <ParentElementPath>
-          <DomainPath>ExampleModelHasElements.ExampleModel/!ExampleModel</DomainPath>
+          <DomainPath>WidgetHasTitle.Widget/!VDWidget</DomainPath>
         </ParentElementPath>
-        <DecoratorMap>
-          <TextDecoratorMoniker Name="ExampleShape/NameDecorator" />
-          <PropertyDisplayed>
-            <PropertyPath>
-              <DomainPropertyMoniker Name="ExampleElement/Name" />
-            </PropertyPath>
-          </PropertyDisplayed>
-        </DecoratorMap>
-        <GeometryShapeMoniker Name="ExampleShape" />
+        <PortMoniker Name="VDWidgetTitlePort" />
       </ShapeMap>
     </ShapeMaps>
-    <ConnectorMaps>
-      <ConnectorMap>
-        <ConnectorMoniker Name="ExampleConnector" />
-        <DomainRelationshipMoniker Name="ExampleElementReferencesTargets" />
-      </ConnectorMap>
-    </ConnectorMaps>
   </Diagram>
   <Designer CopyPasteGeneration="CopyPasteOnly" FileExtension="amvd" EditorGuid="061c971a-6960-4ef9-9c30-8a8a6543b9f7">
     <RootClass>
-      <DomainClassMoniker Name="ExampleModel" />
+      <DomainClassMoniker Name="VDView" />
     </RootClass>
     <XmlSerializationDefinition CustomPostLoad="false">
       <XmlSerializationBehaviorMoniker Name="MVCVisualDesignerSerializationBehavior" />
     </XmlSerializationDefinition>
-    <ToolboxTab TabText="MVC Visual Designer">
-      <ElementTool Name="ExampleElement" ToolboxIcon="resources\exampleshapetoolbitmap.bmp" Caption="ExampleElement" Tooltip="Create an ExampleElement" HelpKeyword="CreateExampleClassF1Keyword">
-        <DomainClassMoniker Name="ExampleElement" />
-      </ElementTool>
-      <ConnectionTool Name="ExampleRelationship" ToolboxIcon="resources\exampleconnectortoolbitmap.bmp" Caption="ExampleRelationship" Tooltip="Drag between ExampleElements to create an ExampleRelationship" HelpKeyword="ConnectExampleRelationF1Keyword">
-        <ConnectionBuilderMoniker Name="MVCVisualDesigner/ExampleElementReferencesTargetsBuilder" />
-      </ConnectionTool>
-    </ToolboxTab>
+    <ToolboxTab TabText="MVC Visual Designer" />
     <Validation UsesMenu="false" UsesOpen="false" UsesSave="false" UsesLoad="false" />
-    <DiagramMoniker Name="MVCVisualDesignerDiagram" />
+    <DiagramMoniker Name="VDDiagram" />
   </Designer>
   <Explorer ExplorerGuid="a88f64c9-f30b-4d4a-825d-009ceed441ad" Title="MVC Visual Designer Explorer">
     <ExplorerBehaviorMoniker Name="MVCVisualDesigner/MVCVisualDesignerExplorer" />
