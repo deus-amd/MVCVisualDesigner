@@ -14,5 +14,33 @@
   <Extern href="DSLToolsCmdID.h"/>
   <Include href="GeneratedCode\GeneratedVsct.vsct"/>
   <Commands package="guidPkg">
+    <Buttons>
+      <Button guid="guidCmdSet" id="cmdidShowModelWindow" priority="0x0100" type="Button">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1"/>
+        <CommandFlag>DefaultDisabled</CommandFlag>
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <ButtonText>MVC Visual Designer Model</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidCmdSet" id="cmdidShowDeployWindow" priority="0x0100" type="Button">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1"/>
+        <CommandFlag>DefaultDisabled</CommandFlag>
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <ButtonText>MVC Visual Designer Deployment</ButtonText>
+        </Strings>
+      </Button>
+    </Buttons>
   </Commands>
+  <Symbols>
+    <GuidSymbol name="guidPkg" value="{2318dda0-8eed-4398-b67d-2e85e627224d}" />
+    <GuidSymbol name="guidCmdSet" value="{a2e2b034-d188-472a-a085-e85316f93e29}" >
+      <IDSymbol name="cmdidShowModelWindow" value="0x0002"/>
+      <IDSymbol name="cmdidShowDeployWindow" value="0x0003"/>
+    </GuidSymbol>
+    <GuidSymbol name="guidEditor" value="{061c971a-6960-4ef9-9c30-8a8a6543b9f7}" />
+</Symbols>
 </CommandTable>
