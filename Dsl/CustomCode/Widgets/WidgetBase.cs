@@ -67,15 +67,8 @@ namespace MVCVisualDesigner
 {
     public partial class VDWidgetShape
     {
-        public T GetMEL<T>() where T : VDWidget
-        {
-            if (this.ModelElement != null)
-            {
-                return this.ModelElement as T;
-            }
-            return null;
-        }
-
+        ////////////////////////////////////////////////////////////////////////////////
+#region UI customization
         public override bool HasHighlighting { get { return false; } }
 
         public override bool HasShadow { get { return false; } }
@@ -111,14 +104,60 @@ namespace MVCVisualDesigner
             }
         }
 
-        // disabled property
+        // set clip to make sure child shapes will not overlap parent shape
+        public override void OnPaintShape(DiagramPaintEventArgs e)
+        {
+            if (this.ParentShape != null && !(this.ParentShape is Microsoft.VisualStudio.Modeling.Diagrams.Diagram))
+            {
+                RectangleD clipRect = this.ParentShape.AbsoluteBoundingBox;
+                clipRect.Inflate(new SizeD(-this.ParentShape.OutlinePenWidth, -this.ParentShape.OutlinePenWidth));
+
+                RectangleD thisRect = this.AbsoluteBoundingBox;
+                thisRect.Inflate(new SizeD(this.ParentShape.OutlinePenWidth, this.ParentShape.OutlinePenWidth));
+
+                clipRect.Intersect(thisRect);
+
+                Region clip = e.Graphics.Clip;
+                e.Graphics.SetClip(RectangleD.ToRectangleF(clipRect), CombineMode.Intersect);
+
+                base.OnPaintShape(e);
+
+                e.Graphics.Clip = clip;
+            }
+            else
+                base.OnPaintShape(e);
+        }
+#endregion
+
+        ////////////////////////////////////////////////////////////////////////////////
+#region Padding & Margin
+        /// <summary>
+        /// if AllowsChildrenToShrinkParent is true, DefaultContainerMargin is the margin on the right and bottom
+        /// </summary>
+        public override SizeD DefaultContainerMargin { get { return new SizeD(PaddingRight, PaddingBottom); } }
+
+        /// <summary>
+        /// NestedShapesMargin is the margin on the left and top
+        /// </summary>
+        public override SizeD NestedShapesMargin { get { return new SizeD(PaddingLeft, PaddingTop); } }
+
+        public virtual double PaddingAll { get { return 0.0; } }
+        public virtual double PaddingLeft { get { return PaddingAll; } }
+        public virtual double PaddingTop { get { return PaddingAll; } }
+        public virtual double PaddingRight { get { return PaddingAll; } }
+        public virtual double PaddingBottom { get { return PaddingAll; } }
+#endregion
+
+        ////////////////////////////////////////////////////////////////////////////////
+#region disabled property
         protected bool m_disabledValue;
-        protected bool Getm_disabledValue()
+        protected internal bool GetdisabledValue()
         {
             return m_disabledValue;
         }
 
-        protected void Setm_disabledValue(bool newval)
+        // change the display to reflect it's disabled
+        protected internal void SetdisabledValue(bool newval)
         {
             if (newval == m_disabledValue) return;
 
@@ -154,47 +193,28 @@ namespace MVCVisualDesigner
                 this.Invalidate();
             }
         }
+#endregion
 
-        //
-        public List<T> GetChildShapes<T>(Predicate<T> condition = null) where T : ShapeElement
+#region Widget Title Port
+
+        virtual public bool HasWidgetTitleIcon { get { return false; } }
+
+        protected virtual string getTitleText()
         {
-            List<T> children = new List<T>();
-            foreach (var s in this.NestedChildShapes)
-            {
-                if (s is T)
-                {
-                    if (condition != null && !condition((T)s)) continue;
-
-                    children.Add((T)s);
-                }
-            }
-            return children;
-        }
-
-        // set clip to make sure child shapes will not overlap parent shape
-        public override void OnPaintShape(DiagramPaintEventArgs e)
-        {
-            if (this.ParentShape != null && !(this.ParentShape is Microsoft.VisualStudio.Modeling.Diagrams.Diagram))
-            {
-                RectangleD clipRect = this.ParentShape.AbsoluteBoundingBox;
-                clipRect.Inflate(new SizeD(-this.ParentShape.OutlinePenWidth, -this.ParentShape.OutlinePenWidth));
-
-                RectangleD thisRect = this.AbsoluteBoundingBox;
-                thisRect.Inflate(new SizeD(this.ParentShape.OutlinePenWidth, this.ParentShape.OutlinePenWidth));
-
-                clipRect.Intersect(thisRect);
-
-                Region clip = e.Graphics.Clip;
-                e.Graphics.SetClip(RectangleD.ToRectangleF(clipRect), CombineMode.Intersect);
-
-                base.OnPaintShape(e);
-
-                e.Graphics.Clip = clip;
-            }
+            if (this.ModelElement != null)
+                return this.GetMEL<VDWidget>().WidgetType.ToString();
             else
-                base.OnPaintShape(e);
+                return string.Empty;
         }
 
+        protected virtual Image getTitleIcon()
+        {
+            return null;
+        }
+
+        // calculated domain properties
+        protected internal string GettitleTextValue() { return this.getTitleText(); }
+        protected internal Image GettitleIconValue() { return this.getTitleIcon(); }
 
         /// <summary>
         /// Sometimes port placement will resize parent shape, but for TitlePort, its position is fixed,
@@ -206,21 +226,6 @@ namespace MVCVisualDesigner
             {
                 base.ConfiguredChildPortShape(child, childWasPlaced);
             }
-        }
-
-        virtual public bool HasWidgetTitleIcon { get { return false; } }
-
-        public virtual string Getm_titleTextValue()
-        {
-            if (this.ModelElement != null)
-                return this.GetMEL<VDWidget>().WidgetType.ToString();
-            else
-                return string.Empty;
-        }
-
-        public virtual Image Getm_titleIconValue()
-        {
-            return null;
         }
 
         protected Image getImageFromResource(string resourceName)
@@ -240,9 +245,7 @@ namespace MVCVisualDesigner
             }
         }
 
-        ////////////////////////////////////////////////////////////////////////////////
         // pin & unpin handling -- begin
-
         // ### make sure no side effect for EVAACodeSnippetShape (reference mode)
         public bool SelectUnpinedParentShape(DiagramItem item, DiagramClientView view)
         {
@@ -251,7 +254,7 @@ namespace MVCVisualDesigner
             // find top-most unpined predecessor
             VDWidgetShape shape = this;
             bool bReSelect = false;
-            while (shape.m_pin && shape.ParentShape != null && shape.ParentShape is VDWidgetShape)
+            while (shape.isPinned && shape.ParentShape != null && shape.ParentShape is VDWidgetShape)
             {
                 shape = shape.ParentShape as VDWidgetShape;
                 bReSelect = true;
@@ -276,25 +279,33 @@ namespace MVCVisualDesigner
                 base.CoerceSelection(item, view, isAddition);
             }
         }
-        // pin & unpin handling -- end
-        ////////////////////////////////////////////////////////////////////////////////
+#endregion
 
         /////////////////////////////////////////////////////////////////////////////////
-        // Padding
-        /// <summary>
-        /// if AllowsChildrenToShrinkParent is true, DefaultContainerMargin is the margin on the right and bottom
-        /// </summary>
-        public override SizeD DefaultContainerMargin { get { return new SizeD(PaddingRight, PaddingBottom); } }
-        /// <summary>
-        /// NestedShapesMargin is the margin on the left and top
-        /// </summary>
-        public override SizeD NestedShapesMargin { get { return new SizeD(PaddingLeft, PaddingTop); } }
+#region utilities
+        public T GetMEL<T>() where T : VDWidget
+        {
+            if (this.ModelElement != null)
+            {
+                return this.ModelElement as T;
+            }
+            return null;
+        }
 
-        public virtual double PaddingAll { get { return 0.0; } }
-        public virtual double PaddingLeft { get { return PaddingAll; } }
-        public virtual double PaddingTop { get { return PaddingAll; } }
-        public virtual double PaddingRight { get { return PaddingAll; } }
-        public virtual double PaddingBottom { get { return PaddingAll; } }
-        /////////////////////////////////////////////////////////////////////////////////
+        public List<T> GetChildShapes<T>(Predicate<T> condition = null) where T : ShapeElement
+        {
+            List<T> children = new List<T>();
+            foreach (var s in this.NestedChildShapes)
+            {
+                if (s is T)
+                {
+                    if (condition != null && !condition((T)s)) continue;
+
+                    children.Add((T)s);
+                }
+            }
+            return children;
+        }
+#endregion
     }
 }

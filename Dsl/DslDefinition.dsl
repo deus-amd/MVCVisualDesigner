@@ -95,22 +95,22 @@
   <Shapes>
     <GeometryShape Id="e3f0af00-12a6-4223-861d-180f9ed7f7c3" Description="Description for MVCVisualDesigner.VDWidgetShape" Name="VDWidgetShape" DisplayName="VDWidget Shape" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner" FixedTooltipText="VDWidget Shape" InitialHeight="1" Geometry="Rectangle">
       <Properties>
-        <DomainProperty Id="58f89d0b-35cb-4f92-aecd-348184bff87c" Description="" Name="m_disabled" DisplayName="M_disabled" Kind="CustomStorage" Category="Internal States">
+        <DomainProperty Id="58f89d0b-35cb-4f92-aecd-348184bff87c" Description="" Name="disabled" DisplayName="Disabled" Kind="CustomStorage" Category="Internal States" GetterAccessModifier="FamilyOrAssembly" SetterAccessModifier="FamilyOrAssembly">
           <Type>
             <ExternalTypeMoniker Name="/System/Boolean" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="d974e6e0-adbc-4b2c-bc4d-cce5d6d87290" Description="" Name="m_pin" DisplayName="M_pin" Category="Internal States">
+        <DomainProperty Id="d974e6e0-adbc-4b2c-bc4d-cce5d6d87290" Description="" Name="isPinned" DisplayName="Is Pinned" Category="Internal States" GetterAccessModifier="FamilyOrAssembly" SetterAccessModifier="FamilyOrAssembly">
           <Type>
             <ExternalTypeMoniker Name="/System/Boolean" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="29d8d234-51c6-433f-881f-b5b9b722ad5a" Description="" Name="m_titleText" DisplayName="M_title Text" Kind="Calculated" Category="Internal States">
+        <DomainProperty Id="29d8d234-51c6-433f-881f-b5b9b722ad5a" Description="" Name="titleText" DisplayName="Title Text" Kind="Calculated" Category="Internal States" GetterAccessModifier="FamilyOrAssembly" SetterAccessModifier="FamilyOrAssembly">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="dbf4b4ff-482e-4779-b81a-4107eecf2d05" Description="" Name="m_titleIcon" DisplayName="M_title Icon" Kind="Calculated" Category="Internal States">
+        <DomainProperty Id="dbf4b4ff-482e-4779-b81a-4107eecf2d05" Description="" Name="titleIcon" DisplayName="Title Icon" Kind="Calculated" Category="Internal States" GetterAccessModifier="FamilyOrAssembly" SetterAccessModifier="FamilyOrAssembly">
           <Type>
             <ExternalTypeMoniker Name="/System.Drawing/Image" />
           </Type>
@@ -155,17 +155,17 @@
       <XmlClassData TypeName="VDWidgetShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDWidgetShapeMoniker" ElementName="vDWidgetShape" MonikerTypeName="VDWidgetShapeMoniker">
         <GeometryShapeMoniker Name="VDWidgetShape" />
         <ElementData>
-          <XmlPropertyData XmlName="m_disabled">
-            <DomainPropertyMoniker Name="VDWidgetShape/m_disabled" />
+          <XmlPropertyData XmlName="disabled">
+            <DomainPropertyMoniker Name="VDWidgetShape/disabled" />
           </XmlPropertyData>
-          <XmlPropertyData XmlName="m_pin">
-            <DomainPropertyMoniker Name="VDWidgetShape/m_pin" />
+          <XmlPropertyData XmlName="isPinned">
+            <DomainPropertyMoniker Name="VDWidgetShape/isPinned" />
           </XmlPropertyData>
-          <XmlPropertyData XmlName="m_titleText" Representation="Ignore">
-            <DomainPropertyMoniker Name="VDWidgetShape/m_titleText" />
+          <XmlPropertyData XmlName="titleText" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDWidgetShape/titleText" />
           </XmlPropertyData>
-          <XmlPropertyData XmlName="m_titleIcon" Representation="Ignore">
-            <DomainPropertyMoniker Name="VDWidgetShape/m_titleIcon" />
+          <XmlPropertyData XmlName="titleIcon" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDWidgetShape/titleIcon" />
           </XmlPropertyData>
         </ElementData>
       </XmlClassData>
@@ -184,7 +184,7 @@
     </ClassData>
   </XmlSerializationBehavior>
   <ExplorerBehavior Name="MVCVisualDesignerExplorer" />
-  <Diagram Id="1fd11f50-969f-48aa-af5b-31b4277c4671" Description="Description for MVCVisualDesigner.VDDiagram" Name="VDDiagram" DisplayName="Minimal Language Diagram" Namespace="MVCVisualDesigner">
+  <Diagram Id="1fd11f50-969f-48aa-af5b-31b4277c4671" Description="Description for MVCVisualDesigner.VDDiagram" Name="VDDiagram" DisplayName="Minimal Language Diagram" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true">
     <Class>
       <DomainClassMoniker Name="VDView" />
     </Class>

@@ -31,7 +31,7 @@ namespace MVCVisualDesigner
                 VDWidgetShape widget = title.ParentShape as VDWidgetShape;
                 using (Transaction transaction = title.Store.TransactionManager.BeginTransaction("Pin/Unpin"))
                 {
-                    widget.m_pin = !widget.m_pin;
+                    widget.isPinned = !widget.isPinned;
                     transaction.Commit();
                 }
 
