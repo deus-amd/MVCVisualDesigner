@@ -102,7 +102,7 @@
     <Compile Include="CustomCode\ShapeFields\ImageField.cs" />
     <Compile Include="CustomCode\ShapeFields\PinButtonField.cs" />
     <Compile Include="CustomCode\Widgets\Section.cs" />
-    <Compile Include="CustomCode\Widgets\Widget.cs" />
+    <Compile Include="CustomCode\Widgets\WidgetBase.cs" />
     <Compile Include="CustomCode\Widgets\WidgetTitle.cs" />
     <Compile Include="CustomCode\WidgetType.cs">
       <AutoGen>True</AutoGen>
