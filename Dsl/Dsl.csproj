@@ -75,11 +75,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomCode\Diagram.cs" />
+    <Compile Include="CustomCode\Diagram_BindFields.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Diagram_BindFields.tt</DependentUpon>
+    </Compile>
     <Compile Include="Resources\MVDResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MVDResources.resx</DependentUpon>
     </Compile>
+    <None Include="CustomCode\Diagram_BindFields.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Diagram_BindFields.cs</LastGenOutput>
+    </None>
     <None Include="CustomCode\FixUpDiagram.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>FixUpDiagram.cs</LastGenOutput>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.Modeling.Diagrams;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,11 @@ namespace MVCVisualDesigner
         protected override void InitializeShapeFields(IList<Microsoft.VisualStudio.Modeling.Diagrams.ShapeField> shapeFields)
         {
             base.InitializeShapeFields(shapeFields);
+
+            VDWidgetTitlePort.DecoratorsInitialized += VDWidgetTitlePort.BindShapeFields;
+
+            // bind other shape fields
+            this.BindShapeFieldsToDomainProperties();
         } 
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.VisualStudio.Modeling.Diagrams;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using Microsoft.VisualStudio.Modeling;
 
 
 // Model
@@ -75,9 +76,54 @@ namespace MVCVisualDesigner
         /// creates shape fields for outer decorators, because these are not part of the shape fields collection
         /// associated with the shape, so they must be created here rather than in InitializeShapeFields.
         /// </summary>
-        protected override void InitializeDecorators(global::System.Collections.Generic.IList<ShapeField> shapeFields, global::System.Collections.Generic.IList<Decorator> decorators)
+        //protected override void InitializeDecorators(global::System.Collections.Generic.IList<ShapeField> shapeFields, global::System.Collections.Generic.IList<Decorator> decorators)
+        //{
+        //    base.InitializeDecorators(shapeFields, decorators);
+        //}
+
+        internal static void BindShapeFields(object sender, EventArgs e)
         {
-            base.InitializeDecorators(shapeFields, decorators);
+            ShapeElement shape = (ShapeElement)sender;
+
+            ShapeElement.FindShapeField(shape.ShapeFields, "WidgetTitleText").AssociateValueWith(shape.Store,
+                    new AssociatedPropertyInfo(
+                        VDWidgetShape.titleTextDomainPropertyId,
+                        new PresentationDomainNavigator(presentationToDomain),
+                        new DomainPresentationNavigator(domainToRelativePresentation)) { IsShapeProperty = true }
+                    );
+
+            ShapeElement.FindShapeField(shape.ShapeFields, "WidgetTitleIcon").AssociateValueWith(shape.Store,
+                new AssociatedPropertyInfo(
+                    VDWidgetShape.titleIconDomainPropertyId,
+                    new PresentationDomainNavigator(presentationToDomain),
+                    new DomainPresentationNavigator(domainToRelativePresentation)) { IsShapeProperty = true }
+                );
+
+            ShapeElement.FindShapeField(shape.ShapeFields, "WidgetTitlePinIcon").AssociateValueWith(shape.Store,
+                new AssociatedPropertyInfo(
+                    VDWidgetShape.isPinnedDomainPropertyId,
+                    new PresentationDomainNavigator(presentationToDomain),
+                    new DomainPresentationNavigator(domainToRelativePresentation)) { IsShapeProperty = true }
+                );
+        }
+
+        // utilities for binding fields and domain properties
+        private static ModelElement presentationToDomain(PresentationElement presentation)
+        {
+            // presentation is WidgetTitle
+            return ((NodeShape)presentation).ParentShape;
+        }
+
+        private static ICollection<PresentationElement> domainToRelativePresentation(ModelElement modelElement)
+        {
+            // modelElement is WidgetBaseShape
+            VDWidgetShape widgetShape = modelElement as VDWidgetShape;
+            if (widgetShape != null)
+            {
+                var port = widgetShape.RelativeChildShapes.Find(x => x is VDWidgetTitlePort);
+                if (port != null) return new List<PresentationElement>() { port };
+            }
+            return null;
         }
 #endregion
 

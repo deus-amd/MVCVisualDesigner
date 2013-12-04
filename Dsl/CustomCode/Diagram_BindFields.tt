@@ -1,0 +1,52 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@ include file="WidgetList.t4" #>
+using System;
+using System.Collections.Generic;
+using System.Text;
+namespace MVCVisualDesigner
+{
+    public partial class VDDiagram
+    {
+        private void BindShapeFieldsToDomainProperties()
+        {
+<#
+    foreach(string MEL in AllWidgets)
+    {
+        if (MEL != "VDView")
+        {
+#>
+            <#= MEL #>Shape.DecoratorsInitialized += <#= MEL #>Shape.BindShapeFields;
+<#
+        }
+    }
+#>
+        }
+    }
+
+
+<#
+    // generate shape classes
+    foreach(string MEL in AllWidgets)
+    {
+        if (MEL != "VDView")
+        {
+#>
+    public partial class <#= MEL #>Shape
+    {
+        internal static void BindShapeFields(object sender, EventArgs e)
+        {
+            onBindShapeFields(sender, e);	
+        }
+
+        static partial void onBindShapeFields(object sender, EventArgs e);
+    }
+<#
+        }
+    }
+#>
+}
