@@ -25,10 +25,10 @@ namespace MVCVisualDesigner
             // create section title and body
             sourceElement.Head = this.Store.ElementFactory.CreateElement(VDSectionHead.DomainClassId) as VDSectionHead;
             sourceElement.Body = this.Store.ElementFactory.CreateElement(VDSectionBody.DomainClassId) as VDSectionBody;
-            //HorizonalSeparator hSeparator = this.Store.ElementFactory.CreateElement(HorizonalSeparator.DomainClassId) as HorizonalSeparator;
-            //hSeparator.TopWidget = sourceElement.Title;
-            //hSeparator.BottomWidget = sourceElement.Body;
-            //sourceElement.HorizonalSeparators.Add(hSeparator);
+            VDHoriSeparator hSeparator = this.Store.ElementFactory.CreateElement(VDHoriSeparator.DomainClassId) as VDHoriSeparator;
+            hSeparator.TopWidget = sourceElement.Head;
+            hSeparator.BottomWidget = sourceElement.Body;
+            sourceElement.Children.Add(hSeparator);
         }
 
         protected void MergeDisconnectVDSection(VDSection sourceElement)

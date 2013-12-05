@@ -80,6 +80,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Diagram_BindFields.tt</DependentUpon>
     </Compile>
+    <Compile Include="CustomCode\Widgets\Separator.cs" />
     <Compile Include="Resources\MVDResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

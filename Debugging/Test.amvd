@@ -1,2 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<exampleModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="0.0.0.1" Id="5a547f6f-f73b-4d16-97cf-05b93ef35d61" xmlns="http://schemas.microsoft.com/dsltools/MVCVisualDesigner" />
+<vDView xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="0.0.0.1" Id="2ac8b01a-8c74-418e-90b3-69fd0015b983" xmlns="http://schemas.microsoft.com/dsltools/MVCVisualDesigner">
+  <children>
+    <widgetHasChildren Id="177c0c5c-9c21-4afd-aa78-dbdd5e2b29c4">
+      <vDSection Id="43681e5b-fe11-4dab-94ef-c4f1d1e2071f" name="VDSection1">
+        <children>
+          <sectionHasHead Id="c91a3f36-4c97-44a3-a716-64f593967d22">
+            <vDSectionHead Id="8e5188fc-e289-4590-98c1-7df6bf08505c" />
+          </sectionHasHead>
+          <sectionHasBody Id="ec69414c-6806-4c5c-a659-f03d7eb4647c">
+            <vDSectionBody Id="b35830a5-8820-47c5-8626-ec0ae34897a2" />
+          </sectionHasBody>
+          <widgetHasChildren Id="4bb616a6-1935-4aad-be4c-9be80592a7f3">
+            <vDHoriSeparator Id="f7d236f5-a5f4-4f35-8aa1-5d13b9040aec" topMargin="0" bottomMargin="0">
+              <topWidget>
+                <separatorRefersTopWidget Id="505465f9-0079-413c-837e-b6c87c61f321">
+                  <vDSectionHeadMoniker Id="8e5188fc-e289-4590-98c1-7df6bf08505c" />
+                </separatorRefersTopWidget>
+              </topWidget>
+              <bottomWidget>
+                <separatorRefersBottomWidget Id="bd18e4bc-7429-45c9-8cf5-b36775e12892">
+                  <vDSectionBodyMoniker Id="b35830a5-8820-47c5-8626-ec0ae34897a2" />
+                </separatorRefersBottomWidget>
+              </bottomWidget>
+            </vDHoriSeparator>
+          </widgetHasChildren>
+        </children>
+        <title>
+          <widgetHasTitle Id="fdc984dc-a13c-4c82-b018-178e3ffc9f90">
+            <vDWidgetTitle Id="d1ea66ba-944d-4e55-9290-8ad59acd0e22" />
+          </widgetHasTitle>
+        </title>
+      </vDSection>
+    </widgetHasChildren>
+  </children>
+</vDView>

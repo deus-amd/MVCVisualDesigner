@@ -1,4 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<mVCVisualDesignerDiagram dslVersion="0.0.0.1" Id="b5878891-f2fc-4999-9ed2-79bc49ca9b55" absoluteBounds="0, 0, 11, 8.5" name="Test">
-  <exampleModelMoniker Id="5a547f6f-f73b-4d16-97cf-05b93ef35d61" />
-</mVCVisualDesignerDiagram>
+<vDDiagram dslVersion="0.0.0.1" Id="4c8c15ed-410b-41af-9c5b-d59dace7d8db" absoluteBounds="0, 0, 11, 8.5" name="Test">
+  <vDViewMoniker Id="2ac8b01a-8c74-418e-90b3-69fd0015b983" />
+  <nestedChildShapes>
+    <vDSectionShape Id="00ec3e90-f723-4c51-b8bf-abba8563350a" absoluteBounds="4.0200000000000005, 1.41, 4.9999999999999991, 3" disabled="false" isPinned="false">
+      <vDSectionMoniker Id="43681e5b-fe11-4dab-94ef-c4f1d1e2071f" />
+      <relativeChildShapes>
+        <vDWidgetTitlePort Id="34100de2-6248-4511-becf-ccba82a5e895" absoluteBounds="4.0200000000000005, 1.2100000004470348, 0.87850503563880911, 0.18">
+          <vDWidgetTitleMoniker Id="d1ea66ba-944d-4e55-9290-8ad59acd0e22" />
+        </vDWidgetTitlePort>
+      </relativeChildShapes>
+      <nestedChildShapes>
+        <vDSectionHeadShape Id="a185dd48-99a8-48e2-8f88-29b47c1ed7c4" absoluteBounds="4.0200000000000005, 1.41, 4.9999999999999991, 0.56" disabled="false" isPinned="false">
+          <vDSectionHeadMoniker Id="8e5188fc-e289-4590-98c1-7df6bf08505c" />
+        </vDSectionHeadShape>
+        <vDSectionBodyShape Id="64f1df09-beba-4ef6-a00f-8a5687902094" absoluteBounds="4.0200000000000005, 2.02, 4.9999999999999991, 2.3899999999999997" disabled="false" isPinned="false">
+          <vDSectionBodyMoniker Id="b35830a5-8820-47c5-8626-ec0ae34897a2" />
+        </vDSectionBodyShape>
+        <vDHoriSeparatorShape Id="36f6fb44-8e84-41b3-a4b9-d021fe92257b" absoluteBounds="4.0200000000000005, 1.97, 4.9999999999999991, 0.05" disabled="false" isPinned="false">
+          <vDHoriSeparatorMoniker Id="f7d236f5-a5f4-4f35-8aa1-5d13b9040aec" />
+        </vDHoriSeparatorShape>
+      </nestedChildShapes>
+    </vDSectionShape>
+  </nestedChildShapes>
+</vDDiagram>
