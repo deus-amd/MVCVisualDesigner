@@ -26,6 +26,11 @@
             <DomainPath>WidgetHasTitle.Title</DomainPath>
           </LinkCreationPaths>
         </ElementMergeDirective>
+        <ElementMergeDirective UsesCustomMerge="true">
+          <Index>
+            <DomainClassMoniker Name="VDSection" />
+          </Index>
+        </ElementMergeDirective>
       </ElementMergeDirectives>
     </DomainClass>
     <DomainClass Id="7c91a0ff-d5ec-467a-b0b8-705ad9049330" Description="Description for MVCVisualDesigner.VDView" Name="VDView" DisplayName="VDView" Namespace="MVCVisualDesigner">
@@ -33,12 +38,79 @@
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
     </DomainClass>
-    <DomainClass Id="db6a631c-6a2e-494c-b56d-a4f048c50743" Description="Description for MVCVisualDesigner.VDSection" Name="VDSection" DisplayName="VDSection" Namespace="MVCVisualDesigner">
+    <DomainClass Id="db6a631c-6a2e-494c-b56d-a4f048c50743" Description="" Name="VDSection" DisplayName="Section" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
+      <ElementMergeDirectives>
+        <ElementMergeDirective>
+          <Index>
+            <DomainClassMoniker Name="VDSectionHead" />
+          </Index>
+          <LinkCreationPaths>
+            <DomainPath>SectionHasHead.Head</DomainPath>
+          </LinkCreationPaths>
+        </ElementMergeDirective>
+        <ElementMergeDirective>
+          <Index>
+            <DomainClassMoniker Name="VDSectionBody" />
+          </Index>
+          <LinkCreationPaths>
+            <DomainPath>SectionHasBody.Body</DomainPath>
+          </LinkCreationPaths>
+        </ElementMergeDirective>
+      </ElementMergeDirectives>
+    </DomainClass>
+    <DomainClass Id="f9e27ebe-1427-48d9-bba0-b1dfa993ee87" Description="Description for MVCVisualDesigner.VDWidgetTitle" Name="VDWidgetTitle" DisplayName="VDWidget Title" Namespace="MVCVisualDesigner" />
+    <DomainClass Id="c5bcbb13-6519-4896-9e8e-2cda89a5c3f6" Description="" Name="VDSectionHead" DisplayName="Section Head" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
     </DomainClass>
-    <DomainClass Id="f9e27ebe-1427-48d9-bba0-b1dfa993ee87" Description="Description for MVCVisualDesigner.VDWidgetTitle" Name="VDWidgetTitle" DisplayName="VDWidget Title" Namespace="MVCVisualDesigner" />
+    <DomainClass Id="b39ae87a-6919-4e1d-a310-83dda7754090" Description="" Name="VDSectionBody" DisplayName="Section Body" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="2500aa65-1d54-460f-a7d5-278035a0f8e3" Description="Description for MVCVisualDesigner.VDSeparator" Name="VDSeparator" DisplayName="VDSeparator" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="c761d8da-76c8-4ae9-a268-8d81a7f9fd69" Description="Description for MVCVisualDesigner.VDHoriSeparator" Name="VDHoriSeparator" DisplayName="VDHori Separator" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDSeparator" />
+      </BaseClass>
+      <Properties>
+        <DomainProperty Id="733dc445-5f13-4eea-8922-2ac8229684e0" Description="" Name="TopMargin" DisplayName="Top Margin">
+          <Type>
+            <ExternalTypeMoniker Name="/System/Double" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="ee89b0a4-c89c-4397-8c71-bfb58a862f2b" Description="" Name="BottomMargin" DisplayName="Bottom Margin">
+          <Type>
+            <ExternalTypeMoniker Name="/System/Double" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+    </DomainClass>
+    <DomainClass Id="913509e8-33d0-462f-aa85-bd5f4148d3e7" Description="Description for MVCVisualDesigner.VDVertSeparator" Name="VDVertSeparator" DisplayName="VDVert Separator" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDSeparator" />
+      </BaseClass>
+      <Properties>
+        <DomainProperty Id="b5931904-4f5c-4409-8189-a7abfb03c28c" Description="" Name="LeftMargin" DisplayName="Left Margin">
+          <Type>
+            <ExternalTypeMoniker Name="/System/Double" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="89c67701-70d5-4090-8a5e-947b33f38e17" Description="" Name="RightMargin" DisplayName="Right Margin">
+          <Type>
+            <ExternalTypeMoniker Name="/System/Double" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+    </DomainClass>
   </Classes>
   <Relationships>
     <DomainRelationship Id="8491408d-7160-4a47-9979-e0dab01d52b3" Description="Description for MVCVisualDesigner.WidgetHasChildren" Name="WidgetHasChildren" DisplayName="Widget Has Children" Namespace="MVCVisualDesigner" IsEmbedding="true">
@@ -69,6 +141,108 @@
         <DomainRole Id="3e997446-1b1d-4306-b258-b373deba3ada" Description="Description for MVCVisualDesigner.WidgetHasTitle.VDWidgetTitle" Name="VDWidgetTitle" DisplayName="VDWidget Title" PropertyName="Widget" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Widget">
           <RolePlayer>
             <DomainClassMoniker Name="VDWidgetTitle" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="60c511f9-a11f-40e7-9cab-542425f90fe3" Description="Description for MVCVisualDesigner.SectionHasHead" Name="SectionHasHead" DisplayName="Section Has Head" Namespace="MVCVisualDesigner" IsEmbedding="true">
+      <BaseRelationship>
+        <DomainRelationshipMoniker Name="WidgetHasChildren" />
+      </BaseRelationship>
+      <Source>
+        <DomainRole Id="b5841c7c-52eb-4e63-8d04-5826d66991fb" Description="Description for MVCVisualDesigner.SectionHasHead.VDSection" Name="VDSection" DisplayName="VDSection" PropertyName="Head" Multiplicity="ZeroOne" PropagatesDelete="true" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Head">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDSection" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="3d2e888c-20b9-4c74-83ba-13231124b279" Description="Description for MVCVisualDesigner.SectionHasHead.VDSectionHead" Name="VDSectionHead" DisplayName="VDSection Head" PropertyName="Section" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Section">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDSectionHead" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="2003e7b1-fa16-47a1-99a1-61d79247a057" Description="Description for MVCVisualDesigner.SectionHasBody" Name="SectionHasBody" DisplayName="Section Has Body" Namespace="MVCVisualDesigner" IsEmbedding="true">
+      <BaseRelationship>
+        <DomainRelationshipMoniker Name="WidgetHasChildren" />
+      </BaseRelationship>
+      <Source>
+        <DomainRole Id="022e1990-52a9-48bc-ab8a-9c7bb72f9367" Description="Description for MVCVisualDesigner.SectionHasBody.VDSection" Name="VDSection" DisplayName="VDSection" PropertyName="Body" Multiplicity="ZeroOne" PropagatesDelete="true" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Body">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDSection" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="988773ea-649c-4f8d-b7e2-05a5c4f55edd" Description="Description for MVCVisualDesigner.SectionHasBody.VDSectionBody" Name="VDSectionBody" DisplayName="VDSection Body" PropertyName="Section" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Section">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDSectionBody" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="ab5a4903-7e60-4c67-a237-5f61f0654e46" Description="Description for MVCVisualDesigner.SeparatorRefersTopWidget" Name="SeparatorRefersTopWidget" DisplayName="Separator Refers Top Widget" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="3d142754-17c4-448b-aaa3-261fd13e25c5" Description="Description for MVCVisualDesigner.SeparatorRefersTopWidget.VDHoriSeparator" Name="VDHoriSeparator" DisplayName="VDHori Separator" PropertyName="TopWidget" Multiplicity="ZeroOne" PropertyDisplayName="Top Widget">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDHoriSeparator" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="968b8f56-745c-4610-b37e-0e34a8060fff" Description="Description for MVCVisualDesigner.SeparatorRefersTopWidget.VDWidget" Name="VDWidget" DisplayName="VDWidget" PropertyName="BottomSeparator" Multiplicity="ZeroOne" PropertyDisplayName="Bottom Separator">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDWidget" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="5fa5d01c-b9ce-45dc-8a43-60139b0e0c7b" Description="Description for MVCVisualDesigner.SeparatorRefersBottomWidget" Name="SeparatorRefersBottomWidget" DisplayName="Separator Refers Bottom Widget" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="0411c536-af87-467a-b66a-173791f724d0" Description="Description for MVCVisualDesigner.SeparatorRefersBottomWidget.VDHoriSeparator" Name="VDHoriSeparator" DisplayName="VDHori Separator" PropertyName="BottomWidget" Multiplicity="ZeroOne" PropertyDisplayName="Bottom Widget">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDHoriSeparator" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="6ba23e40-16ee-47d5-a195-ee3939bbcacd" Description="Description for MVCVisualDesigner.SeparatorRefersBottomWidget.VDWidget" Name="VDWidget" DisplayName="VDWidget" PropertyName="TopSeparator" Multiplicity="ZeroOne" PropertyDisplayName="Top Separator">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDWidget" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="2d6b812d-fc42-4b4c-99c5-a66e10169b1a" Description="Description for MVCVisualDesigner.SeparatorRefersLeftWidget" Name="SeparatorRefersLeftWidget" DisplayName="Separator Refers Left Widget" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="975d491c-2e71-4131-bf82-a4dcc85fc012" Description="Description for MVCVisualDesigner.SeparatorRefersLeftWidget.VDVertSeparator" Name="VDVertSeparator" DisplayName="VDVert Separator" PropertyName="LeftWidget" Multiplicity="ZeroOne" PropertyDisplayName="Left Widget">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDVertSeparator" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="16ddd36d-f8d5-4e77-9a9f-0e6a2a54cbce" Description="Description for MVCVisualDesigner.SeparatorRefersLeftWidget.VDWidget" Name="VDWidget" DisplayName="VDWidget" PropertyName="RightSeparator" Multiplicity="ZeroOne" PropertyDisplayName="Right Separator">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDWidget" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="f47ff5c7-3744-4c53-af5c-c48cc1f348bc" Description="Description for MVCVisualDesigner.SeparatorRefersRightWidget" Name="SeparatorRefersRightWidget" DisplayName="Separator Refers Right Widget" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="18c0cf98-a4df-48da-bb8a-4735141d8d42" Description="Description for MVCVisualDesigner.SeparatorRefersRightWidget.VDVertSeparator" Name="VDVertSeparator" DisplayName="VDVert Separator" PropertyName="RightWidget" Multiplicity="ZeroOne" PropertyDisplayName="Right Widget">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDVertSeparator" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="81a7b620-7815-4c64-b004-154cb2f1804d" Description="Description for MVCVisualDesigner.SeparatorRefersRightWidget.VDWidget" Name="VDWidget" DisplayName="VDWidget" PropertyName="LeftSeparator" Multiplicity="ZeroOne" PropertyDisplayName="Left Separator">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDWidget" />
           </RolePlayer>
         </DomainRole>
       </Target>
@@ -117,12 +291,32 @@
         </DomainProperty>
       </Properties>
     </GeometryShape>
-    <GeometryShape Id="4842b8a8-4cb9-429d-ad01-a6d400e0676b" Description="Description for MVCVisualDesigner.VDSectionShape" Name="VDSectionShape" DisplayName="VDSection Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDSection Shape" InitialHeight="1" Geometry="Rectangle">
+    <GeometryShape Id="4842b8a8-4cb9-429d-ad01-a6d400e0676b" Description="" Name="VDSectionShape" DisplayName="VDSection Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDSection Shape" InitialWidth="5" InitialHeight="3" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <Port Id="407d285a-e203-4917-a395-730505e148c5" Description="Description for MVCVisualDesigner.VDWidgetTitlePort" Name="VDWidgetTitlePort" DisplayName="VDWidget Title Port" Namespace="MVCVisualDesigner" FixedTooltipText="VDWidget Title Port" InitialWidth="0.5" InitialHeight="0.5" Geometry="Rectangle" />
+    <Port Id="407d285a-e203-4917-a395-730505e148c5" Description="" Name="VDWidgetTitlePort" DisplayName="Widget Title Port" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="Widget Title Port" TextColor="White" FillColor="DarkBlue" OutlineColor="DarkBlue" InitialWidth="1" InitialHeight="0.18" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle" />
+    <GeometryShape Id="36e435cc-7626-4bb3-a4aa-b529b7cdfea4" Description="" Name="VDSectionHeadShape" DisplayName="VDSection Head Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDSection Head Shape" FillColor="SkyBlue" OutlineColor="Transparent" InitialWidth="5" InitialHeight="0.3" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
+    <GeometryShape Id="498d7617-e998-4ceb-9cc7-257e76f1d134" Description="" Name="VDSectionBodyShape" DisplayName="VDSection Body Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDSection Body Shape" FillColor="Gainsboro" OutlineColor="Transparent" InitialWidth="5" InitialHeight="2.7" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
+    <GeometryShape Id="b44e3be4-49b9-4846-9947-9cb59c525a31" Description="" Name="VDHoriSeparatorShape" DisplayName="Horizontal Separator Shape" Namespace="MVCVisualDesigner" FixedTooltipText="Horizontal Separator Shape" FillColor="Gray" OutlineColor="Transparent" InitialHeight="0.05" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
+    <GeometryShape Id="07c13f52-86d8-4883-830a-821b16c4bf78" Description="" Name="VDVertSeparatorShape" DisplayName="Vertical Separator Shape" Namespace="MVCVisualDesigner" FixedTooltipText="Vertical Separator Shape" FillColor="Gray" OutlineColor="Transparent" InitialWidth="0.05" InitialHeight="1" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
   </Shapes>
   <XmlSerializationBehavior Name="MVCVisualDesignerSerializationBehavior" Namespace="MVCVisualDesigner">
     <ClassData>
@@ -148,6 +342,14 @@
       </XmlClassData>
       <XmlClassData TypeName="VDSection" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDSectionMoniker" ElementName="vDSection" MonikerTypeName="VDSectionMoniker">
         <DomainClassMoniker Name="VDSection" />
+        <ElementData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="head">
+            <DomainRelationshipMoniker Name="SectionHasHead" />
+          </XmlRelationshipData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="body">
+            <DomainRelationshipMoniker Name="SectionHasBody" />
+          </XmlRelationshipData>
+        </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="WidgetHasChildren" MonikerAttributeName="" SerializeId="true" MonikerElementName="widgetHasChildrenMoniker" ElementName="widgetHasChildren" MonikerTypeName="WidgetHasChildrenMoniker">
         <DomainRelationshipMoniker Name="WidgetHasChildren" />
@@ -181,9 +383,160 @@
       <XmlClassData TypeName="VDWidgetTitlePort" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDWidgetTitlePortMoniker" ElementName="vDWidgetTitlePort" MonikerTypeName="VDWidgetTitlePortMoniker">
         <PortMoniker Name="VDWidgetTitlePort" />
       </XmlClassData>
+      <XmlClassData TypeName="VDSectionHead" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDSectionHeadMoniker" ElementName="vDSectionHead" MonikerTypeName="VDSectionHeadMoniker">
+        <DomainClassMoniker Name="VDSectionHead" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDSectionBody" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDSectionBodyMoniker" ElementName="vDSectionBody" MonikerTypeName="VDSectionBodyMoniker">
+        <DomainClassMoniker Name="VDSectionBody" />
+      </XmlClassData>
+      <XmlClassData TypeName="SectionHasHead" MonikerAttributeName="" SerializeId="true" MonikerElementName="sectionHasHeadMoniker" ElementName="sectionHasHead" MonikerTypeName="SectionHasHeadMoniker">
+        <DomainRelationshipMoniker Name="SectionHasHead" />
+      </XmlClassData>
+      <XmlClassData TypeName="SectionHasBody" MonikerAttributeName="" SerializeId="true" MonikerElementName="sectionHasBodyMoniker" ElementName="sectionHasBody" MonikerTypeName="SectionHasBodyMoniker">
+        <DomainRelationshipMoniker Name="SectionHasBody" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDSectionHeadShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDSectionHeadShapeMoniker" ElementName="vDSectionHeadShape" MonikerTypeName="VDSectionHeadShapeMoniker">
+        <GeometryShapeMoniker Name="VDSectionHeadShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDSectionBodyShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDSectionBodyShapeMoniker" ElementName="vDSectionBodyShape" MonikerTypeName="VDSectionBodyShapeMoniker">
+        <GeometryShapeMoniker Name="VDSectionBodyShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDSeparator" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDSeparatorMoniker" ElementName="vDSeparator" MonikerTypeName="VDSeparatorMoniker">
+        <DomainClassMoniker Name="VDSeparator" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDHoriSeparator" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDHoriSeparatorMoniker" ElementName="vDHoriSeparator" MonikerTypeName="VDHoriSeparatorMoniker">
+        <DomainClassMoniker Name="VDHoriSeparator" />
+        <ElementData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="topWidget">
+            <DomainRelationshipMoniker Name="SeparatorRefersTopWidget" />
+          </XmlRelationshipData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="bottomWidget">
+            <DomainRelationshipMoniker Name="SeparatorRefersBottomWidget" />
+          </XmlRelationshipData>
+          <XmlPropertyData XmlName="topMargin">
+            <DomainPropertyMoniker Name="VDHoriSeparator/TopMargin" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="bottomMargin">
+            <DomainPropertyMoniker Name="VDHoriSeparator/BottomMargin" />
+          </XmlPropertyData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="VDVertSeparator" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDVertSeparatorMoniker" ElementName="vDVertSeparator" MonikerTypeName="VDVertSeparatorMoniker">
+        <DomainClassMoniker Name="VDVertSeparator" />
+        <ElementData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="leftWidget">
+            <DomainRelationshipMoniker Name="SeparatorRefersLeftWidget" />
+          </XmlRelationshipData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="rightWidget">
+            <DomainRelationshipMoniker Name="SeparatorRefersRightWidget" />
+          </XmlRelationshipData>
+          <XmlPropertyData XmlName="leftMargin">
+            <DomainPropertyMoniker Name="VDVertSeparator/LeftMargin" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="rightMargin">
+            <DomainPropertyMoniker Name="VDVertSeparator/RightMargin" />
+          </XmlPropertyData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="SeparatorRefersTopWidget" MonikerAttributeName="" SerializeId="true" MonikerElementName="separatorRefersTopWidgetMoniker" ElementName="separatorRefersTopWidget" MonikerTypeName="SeparatorRefersTopWidgetMoniker">
+        <DomainRelationshipMoniker Name="SeparatorRefersTopWidget" />
+      </XmlClassData>
+      <XmlClassData TypeName="SeparatorRefersBottomWidget" MonikerAttributeName="" SerializeId="true" MonikerElementName="separatorRefersBottomWidgetMoniker" ElementName="separatorRefersBottomWidget" MonikerTypeName="SeparatorRefersBottomWidgetMoniker">
+        <DomainRelationshipMoniker Name="SeparatorRefersBottomWidget" />
+      </XmlClassData>
+      <XmlClassData TypeName="SeparatorRefersLeftWidget" MonikerAttributeName="" SerializeId="true" MonikerElementName="separatorRefersLeftWidgetMoniker" ElementName="separatorRefersLeftWidget" MonikerTypeName="SeparatorRefersLeftWidgetMoniker">
+        <DomainRelationshipMoniker Name="SeparatorRefersLeftWidget" />
+      </XmlClassData>
+      <XmlClassData TypeName="SeparatorRefersRightWidget" MonikerAttributeName="" SerializeId="true" MonikerElementName="separatorRefersRightWidgetMoniker" ElementName="separatorRefersRightWidget" MonikerTypeName="SeparatorRefersRightWidgetMoniker">
+        <DomainRelationshipMoniker Name="SeparatorRefersRightWidget" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDHoriSeparatorShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDHoriSeparatorShapeMoniker" ElementName="vDHoriSeparatorShape" MonikerTypeName="VDHoriSeparatorShapeMoniker">
+        <GeometryShapeMoniker Name="VDHoriSeparatorShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDVertSeparatorShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDVertSeparatorShapeMoniker" ElementName="vDVertSeparatorShape" MonikerTypeName="VDVertSeparatorShapeMoniker">
+        <GeometryShapeMoniker Name="VDVertSeparatorShape" />
+      </XmlClassData>
     </ClassData>
   </XmlSerializationBehavior>
   <ExplorerBehavior Name="MVCVisualDesignerExplorer" />
+  <ConnectionBuilders>
+    <ConnectionBuilder Name="SeparatorRefersTopWidgetBuilder">
+      <LinkConnectDirective>
+        <DomainRelationshipMoniker Name="SeparatorRefersTopWidget" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDHoriSeparator" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDWidget" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
+    <ConnectionBuilder Name="SeparatorRefersBottomWidgetBuilder">
+      <LinkConnectDirective>
+        <DomainRelationshipMoniker Name="SeparatorRefersBottomWidget" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDHoriSeparator" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDWidget" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
+    <ConnectionBuilder Name="SeparatorRefersLeftWidgetBuilder">
+      <LinkConnectDirective>
+        <DomainRelationshipMoniker Name="SeparatorRefersLeftWidget" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDVertSeparator" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDWidget" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
+    <ConnectionBuilder Name="SeparatorRefersRightWidgetBuilder">
+      <LinkConnectDirective>
+        <DomainRelationshipMoniker Name="SeparatorRefersRightWidget" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDVertSeparator" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDWidget" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
+  </ConnectionBuilders>
   <Diagram Id="1fd11f50-969f-48aa-af5b-31b4277c4671" Description="Description for MVCVisualDesigner.VDDiagram" Name="VDDiagram" DisplayName="Minimal Language Diagram" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true">
     <Class>
       <DomainClassMoniker Name="VDView" />
@@ -200,6 +553,28 @@
         </ParentElementPath>
         <PortMoniker Name="VDWidgetTitlePort" />
       </ShapeMap>
+      <ShapeMap>
+        <DomainClassMoniker Name="VDSectionHead" />
+        <ParentElementPath>
+          <DomainPath>SectionHasHead.Section/!VDSection</DomainPath>
+        </ParentElementPath>
+        <GeometryShapeMoniker Name="VDSectionHeadShape" />
+      </ShapeMap>
+      <ShapeMap>
+        <DomainClassMoniker Name="VDSectionBody" />
+        <ParentElementPath>
+          <DomainPath>SectionHasBody.Section/!VDSection</DomainPath>
+        </ParentElementPath>
+        <GeometryShapeMoniker Name="VDSectionBodyShape" />
+      </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDHoriSeparator" />
+        <GeometryShapeMoniker Name="VDHoriSeparatorShape" />
+      </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDVertSeparator" />
+        <GeometryShapeMoniker Name="VDVertSeparatorShape" />
+      </ShapeMap>
     </ShapeMaps>
   </Diagram>
   <Designer CopyPasteGeneration="CopyPasteOnly" FileExtension="amvd" EditorGuid="061c971a-6960-4ef9-9c30-8a8a6543b9f7">
@@ -209,7 +584,11 @@
     <XmlSerializationDefinition CustomPostLoad="false">
       <XmlSerializationBehaviorMoniker Name="MVCVisualDesignerSerializationBehavior" />
     </XmlSerializationDefinition>
-    <ToolboxTab TabText="MVC Visual Designer" />
+    <ToolboxTab TabText="MVC Visual Designer">
+      <ElementTool Name="SectionTool" ToolboxIcon="Resources\SectionIcon.bmp" Caption="Section" Tooltip="" HelpKeyword="SectionTool">
+        <DomainClassMoniker Name="VDSection" />
+      </ElementTool>
+    </ToolboxTab>
     <Validation UsesMenu="false" UsesOpen="false" UsesSave="false" UsesLoad="false" />
     <DiagramMoniker Name="VDDiagram" />
   </Designer>

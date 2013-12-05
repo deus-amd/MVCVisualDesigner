@@ -197,6 +197,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\SectionIcon.bmp" />
     <None Include="DslDefinition.dsl.diagram">
       <DependentUpon>DslDefinition.dsl</DependentUpon>
     </None>

@@ -14,14 +14,16 @@ string[] WidgetList = new string[]{
 	//"VDSubmit",
 	//"VDInput",
 	//"VDSelect",
+	"VDHoriSeparator",
+	"VDVertSeparator",
 };
 
 // the widgets needn't to specify parent (alreay specified in DSL definition)
 string[] SubWidgetList = new string[] {
 	//"VDGridLayoutCell",
 	//"VDGridLayoutHeadCell",
-	//"VDSectionTitle",
-	//"VDSectionBody",
+	"VDSectionHead",
+	"VDSectionBody",
 	//"VDSelectOption",
 };
 

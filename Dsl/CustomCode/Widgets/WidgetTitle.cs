@@ -116,7 +116,7 @@ namespace MVCVisualDesigner
 
         private static ICollection<PresentationElement> domainToRelativePresentation(ModelElement modelElement)
         {
-            // modelElement is WidgetBaseShape
+            // modelElement is VDWidgetShape
             VDWidgetShape widgetShape = modelElement as VDWidgetShape;
             if (widgetShape != null)
             {

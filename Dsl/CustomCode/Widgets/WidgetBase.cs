@@ -15,26 +15,26 @@ using System.Threading.Tasks;
 //
 namespace MVCVisualDesigner
 {
-    //public partial class VDWidgetBase
-    //{
-        //protected void MergeRelateMVDSection(VDSection sourceElement, ElementGroup elementGroup)
-        //{
-            //// Create link for path WidgetHasChildren.Children
-            //this.Children.Add(sourceElement);
+    public partial class VDWidgetBase
+    {
+        protected void MergeRelateVDSection(VDSection sourceElement, ElementGroup elementGroup)
+        {
+            // Create link for path WidgetHasChildren.Children
+            this.Children.Add(sourceElement);
 
-            //// create section title and body
-            //sourceElement.Title = this.Store.ElementFactory.CreateElement(MVDSectionTitle.DomainClassId) as MVDSectionTitle;
-            //sourceElement.Body = this.Store.ElementFactory.CreateElement(MVDSectionBody.DomainClassId) as MVDSectionBody;
+            // create section title and body
+            sourceElement.Head = this.Store.ElementFactory.CreateElement(VDSectionHead.DomainClassId) as VDSectionHead;
+            sourceElement.Body = this.Store.ElementFactory.CreateElement(VDSectionBody.DomainClassId) as VDSectionBody;
             //HorizonalSeparator hSeparator = this.Store.ElementFactory.CreateElement(HorizonalSeparator.DomainClassId) as HorizonalSeparator;
             //hSeparator.TopWidget = sourceElement.Title;
             //hSeparator.BottomWidget = sourceElement.Body;
             //sourceElement.HorizonalSeparators.Add(hSeparator);
-        //}
+        }
 
-        //protected void MergeDisconnectMVDSection(VDSection sourceElement)
-        //{
-        //}
-    //}
+        protected void MergeDisconnectVDSection(VDSection sourceElement)
+        {
+        }
+    }
 
     public partial class VDWidget
     {
@@ -195,6 +195,7 @@ namespace MVCVisualDesigner
         }
 #endregion
 
+        ////////////////////////////////////////////////////////////////////////////////
 #region Widget Title Port
 
         virtual public bool HasWidgetTitleIcon { get { return false; } }
