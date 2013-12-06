@@ -74,13 +74,17 @@
     <Reference Include="Microsoft.VisualStudio.TextTemplating.Interfaces.12.0" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomCode\CodeGen\ICodeData.cs" />
+    <Compile Include="CustomCode\CodeGen\ICodeGenerator.cs" />
     <Compile Include="CustomCode\Diagram.cs" />
     <Compile Include="CustomCode\Diagram_BindFields.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Diagram_BindFields.tt</DependentUpon>
     </Compile>
+    <Compile Include="CustomCode\CodeGen\ICodeGeneratorFactory.cs" />
     <Compile Include="CustomCode\Widgets\Separator.cs" />
+    <Compile Include="CustomCode\WidgetTreeWalker.cs" />
     <Compile Include="Resources\MVDResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

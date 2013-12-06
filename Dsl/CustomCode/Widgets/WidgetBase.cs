@@ -36,7 +36,7 @@ namespace MVCVisualDesigner
         }
     }
 
-    public partial class VDWidget
+    public partial class VDWidget : ICodeData
     {
         abstract public WidgetType WidgetType { get; }
 
@@ -55,6 +55,12 @@ namespace MVCVisualDesigner
             }
 
             base.MergeRelate(sourceElement, elementGroup);
+        }
+
+        // ICodeData
+        public string GenerateCode(ICodeGeneratorFactory cGFactory, IWidgetTreeWalkerFactory walkerFactory)
+        {
+            return cGFactory.GetCodeGenerator(this).GenerateCode(cGFactory, walkerFactory);
         }
     }
 }

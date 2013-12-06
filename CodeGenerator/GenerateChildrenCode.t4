@@ -1,0 +1,12 @@
+﻿<#
+this.PushIndent("    ");
+var walker = this.WalkerFactory.CreateWalker(this.Widget);
+foreach(VDWidget child in walker)
+{
+    var cg = this.CodeGeneratorFactory.GetCodeGenerator(child);
+#>
+<#= cg.GenerateCode(this.CodeGeneratorFactory, this.WalkerFactory) #>
+<#
+}
+this.PopIndent();
+#>

@@ -192,6 +192,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CodeGenerator\CodeGenerator.csproj">
+      <Project>{e9732795-2394-4e8a-989a-a627abbf0c0c}</Project>
+      <Name>CodeGenerator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dsl\Dsl.csproj">
       <Project>{66b04662-8499-4a39-8e97-bb62277e725f}</Project>
       <Name>Dsl</Name>
@@ -243,6 +247,7 @@
     </None>
     <VSCTCompile Include="Commands.vsct">
       <ResourceName>1000.ctmenu</ResourceName>
+      <SubType>Designer</SubType>
     </VSCTCompile>
     <None Include="GeneratedCode\CommandSet.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

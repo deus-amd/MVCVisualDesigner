@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E9732795-2394-4E8A-989A-A627ABBF0C0C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MVCVisualDesigner.CodeGenerator</RootNamespace>
+    <AssemblyName>CodeGenerator</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\Key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.Modeling.Sdk.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interface\IJSCodeGenerator.cs" />
+    <Compile Include="Interface\IRazorCodeGenerator.cs" />
+    <Compile Include="Interface\IModelCodeGenerator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RazorCodeGenerator\RazorCodeGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RazorCodeGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RazorCodeGenerator\VDVertSeparatorRazorCodeGeneratorImpl.cs">
+      <DependentUpon>VDVertSeparatorRazorCodeGeneratorImpl.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="RazorCodeGenerator\VDSectionRazorCodeGeneratorImpl.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VDSectionRazorCodeGeneratorImpl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RazorCodeGenerator\VDHoriSeparatorRazorCodeGeneratorImpl.cs">
+      <DependentUpon>VDHoriSeparatorRazorCodeGeneratorImpl.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="RazorCodeGenerator\VDSectionBodyRazorCodeGeneratorImpl.cs">
+      <DependentUpon>VDSectionBodyRazorCodeGeneratorImpl.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="RazorCodeGenerator\VDSectionHeadRazorCodeGeneratorImpl.cs">
+      <DependentUpon>VDSectionHeadRazorCodeGeneratorImpl.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="RazorCodeGenerator\VDViewRazorCodeGeneratorImpl.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VDViewRazorCodeGeneratorImpl.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dsl\Dsl.csproj">
+      <Project>{66b04662-8499-4a39-8e97-bb62277e725f}</Project>
+      <Name>Dsl</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="RazorCodeGenerator\RazorCodeGenerator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RazorCodeGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="RazorCodeGenerator\VDVertSeparatorRazorCodeGeneratorImpl.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>VDVertSeparatorRazorCodeGeneratorImpl.cs</LastGenOutput>
+      <CustomToolNamespace>MVCVisualDesigner.CodeGenerator</CustomToolNamespace>
+    </None>
+    <None Include="RazorCodeGenerator\VDSectionRazorCodeGeneratorImpl.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>VDSectionRazorCodeGeneratorImpl.cs</LastGenOutput>
+      <CustomToolNamespace>MVCVisualDesigner.CodeGenerator</CustomToolNamespace>
+    </None>
+    <None Include="RazorCodeGenerator\VDHoriSeparatorRazorCodeGeneratorImpl.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>VDHoriSeparatorRazorCodeGeneratorImpl.cs</LastGenOutput>
+      <CustomToolNamespace>MVCVisualDesigner.CodeGenerator</CustomToolNamespace>
+    </None>
+    <None Include="RazorCodeGenerator\VDSectionBodyRazorCodeGeneratorImpl.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>VDSectionBodyRazorCodeGeneratorImpl.cs</LastGenOutput>
+      <CustomToolNamespace>MVCVisualDesigner.CodeGenerator</CustomToolNamespace>
+    </None>
+    <None Include="RazorCodeGenerator\VDSectionHeadRazorCodeGeneratorImpl.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>VDSectionHeadRazorCodeGeneratorImpl.cs</LastGenOutput>
+      <CustomToolNamespace>MVCVisualDesigner.CodeGenerator</CustomToolNamespace>
+    </None>
+    <None Include="RazorCodeGenerator\VDViewRazorCodeGeneratorImpl.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>VDViewRazorCodeGeneratorImpl.cs</LastGenOutput>
+      <CustomToolNamespace>MVCVisualDesigner.CodeGenerator</CustomToolNamespace>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GenerateChildrenCode.t4" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

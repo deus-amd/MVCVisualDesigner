@@ -48,3 +48,9 @@
 
 
 /DslPackage/*.user
+
+/CodeGenerator/bin/
+/CodeGenerator/obj/
+
+/CodeGenerator/RazorCodeGenerator/RazorCodeGenerator.cs
+/CodeGenerator/RazorCodeGenerator/VD*Impl.cs

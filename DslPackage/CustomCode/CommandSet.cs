@@ -10,8 +10,9 @@ namespace MVCVisualDesigner
 {
     internal partial class MVCVisualDesignerCommandSet
     {
-        private static readonly CommandID ShowModelWindowCommand = new CommandID(new Guid(Constants.MVCVisualDesignerCommandSetId), 0x0002);
-        private static readonly CommandID ShowDeployWindowCommand = new CommandID(new Guid(Constants.MVCVisualDesignerCommandSetId), 0x0003);
+        private static readonly CommandID generateCodeCommand = new CommandID(new Guid(Constants.MVCVisualDesignerCommandSetId), 0x3001);
+        private static readonly CommandID ShowModelWindowCommand = new CommandID(new Guid(Constants.MVCVisualDesignerCommandSetId), 0x3002);
+        private static readonly CommandID ShowDeployWindowCommand = new CommandID(new Guid(Constants.MVCVisualDesignerCommandSetId), 0x3003);
 
         protected override IList<MenuCommand> GetMenuCommands()
         {
@@ -30,6 +31,14 @@ namespace MVCVisualDesigner
                 this.ServiceProvider,
                 (sender, e) => { if (this.DeployToolWindow != null) this.DeployToolWindow.Show(); },
                 ShowDeployWindowCommand,
+                typeof(MVCVisualDesignerEditorFactory).GUID);
+            commands.Add(menuCommand);
+
+            // generate code command
+            menuCommand = new CommandContextBoundMenuCommand(
+                this.ServiceProvider,
+                onGenerateCodeCommand,
+                generateCodeCommand,
                 typeof(MVCVisualDesignerEditorFactory).GUID);
             commands.Add(menuCommand);
 
@@ -69,6 +78,33 @@ namespace MVCVisualDesigner
                 }
 
                 return window;
+            }
+        }
+
+
+        // generate code
+        protected void onGenerateCodeCommand(object sender, EventArgs args)
+        {
+            System.Windows.Forms.SaveFileDialog dlg = new System.Windows.Forms.SaveFileDialog();
+            if ( dlg.ShowDialog()!= System.Windows.Forms.DialogResult.OK)
+            {
+                return;
+            }
+
+            if (this.CurrentMVCVisualDesignerDocData != null 
+                && this.CurrentMVCVisualDesignerDocData.RootElement != null
+                && this.CurrentMVCVisualDesignerDocData.RootElement is VDView)
+            {
+                ICodeGeneratorFactory cgFactory = new MVCVisualDesigner.CodeGenerator.RazorCodeGeneratorFactory();
+                //IWidgetTreeWalkerFactory walkerFactory = new LayoutWalkerFactory();
+                IWidgetTreeWalkerFactory walkerFactory = new WidgetTreeWalkerFactory();
+                VDView view = this.CurrentMVCVisualDesignerDocData.RootElement as VDView;
+                string razorCode = view.GenerateCode(cgFactory, walkerFactory);
+
+                using (System.IO.StreamWriter w = new System.IO.StreamWriter(dlg.FileName))
+                {
+                    w.Write(razorCode);
+                }
             }
         }
     }

@@ -14,33 +14,89 @@
   <Extern href="DSLToolsCmdID.h"/>
   <Include href="GeneratedCode\GeneratedVsct.vsct"/>
   <Commands package="guidPkg">
+
+    <Menus>
+      <Menu guid="guidCmdSet" id="menuidMVCDesignerMenu" priority="0xF000" type="Menu">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_MM_TOOLSADDINS" />
+        <Strings>
+          <ButtonText>MVC Designer</ButtonText>
+          <CommandName>MVC Designer</CommandName>
+        </Strings>
+      </Menu>
+    </Menus>
+
+    <Groups>
+      <Group guid="guidCmdSet" id="grpidMVCDesigner" priority="0xF600">
+        <Parent guid="guidCmdSet" id="menuidMVCDesignerMenu"/>
+      </Group>
+    </Groups>
+
     <Buttons>
-      <Button guid="guidCmdSet" id="cmdidShowModelWindow" priority="0x0100" type="Button">
-        <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1"/>
+      <Button guid="guidCmdSet" id="cmdidGenerateCode" priority="0x0100" type="Button">
+        <Parent guid="guidCmdSet" id="grpidMVCDesigner"/>
+        <Icon guid="guidImageGenerateCode" id="1"/>
         <CommandFlag>DefaultDisabled</CommandFlag>
         <CommandFlag>DefaultInvisible</CommandFlag>
         <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
-          <ButtonText>MVC Visual Designer Model</ButtonText>
+          <ButtonText>Generate Code</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidCmdSet" id="cmdidShowModelWindow" priority="0x0100" type="Button">
+        <Parent guid="guidCmdSet" id="grpidMVCDesigner"/>
+        <Icon guid="guidImageShowModelWin" id="1"/>
+        <CommandFlag>DefaultDisabled</CommandFlag>
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <ButtonText>Model Window</ButtonText>
         </Strings>
       </Button>
       <Button guid="guidCmdSet" id="cmdidShowDeployWindow" priority="0x0100" type="Button">
-        <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1"/>
+        <Parent guid="guidCmdSet" id="grpidMVCDesigner"/>
+        <Icon guid="guidImageShowDeployWin" id="1"/>
         <CommandFlag>DefaultDisabled</CommandFlag>
         <CommandFlag>DefaultInvisible</CommandFlag>
         <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
-          <ButtonText>MVC Visual Designer Deployment</ButtonText>
+          <ButtonText>Deployment Window</ButtonText>
         </Strings>
       </Button>
     </Buttons>
+
+    <Bitmaps>
+      <Bitmap guid="guidImageGenerateCode" href="Resources\FileExplorer32.bmp"/>
+      <Bitmap guid="guidImageShowModelWin" href="Resources\FileExplorer32.bmp"/>
+      <Bitmap guid="guidImageShowDeployWin" href="Resources\FileExplorer32.bmp"/>
+    </Bitmaps>
+
   </Commands>
+
+  
+  <VisibilityConstraints>
+    <VisibilityItem guid="guidCmdSet" id ="menuidMVCDesignerMenu" context="UICONTEXT_SolutionExists"/>
+    <VisibilityItem guid="guidCmdSet" id ="menuidMVCDesignerMenu" context="UICONTEXT_DesignMode"/>
+  </VisibilityConstraints>
+
+
   <Symbols>
     <GuidSymbol name="guidPkg" value="{2318dda0-8eed-4398-b67d-2e85e627224d}" />
     <GuidSymbol name="guidCmdSet" value="{a2e2b034-d188-472a-a085-e85316f93e29}" >
-      <IDSymbol name="cmdidShowModelWindow" value="0x0002"/>
-      <IDSymbol name="cmdidShowDeployWindow" value="0x0003"/>
+      <IDSymbol name="menuidMVCDesignerMenu" value="0x2001"/> 
+
+      <IDSymbol name="cmdidGenerateCode" value="0x3001"/>
+      <IDSymbol name="cmdidShowModelWindow" value="0x3002"/>
+      <IDSymbol name="cmdidShowDeployWindow" value="0x3003"/>
+
+      <IDSymbol name="grpidMVCDesigner" value="0x4001"/>
     </GuidSymbol>
     <GuidSymbol name="guidEditor" value="{061c971a-6960-4ef9-9c30-8a8a6543b9f7}" />
-</Symbols>
+
+    <!-- IDs for images-->
+    <GuidSymbol name="guidImageGenerateCode" value="{6A55F035-90D9-4C83-B2C9-5F0739C16B5C}"/>
+    <GuidSymbol name="guidImageShowModelWin" value="{EDDCDE09-B16F-4466-B3B5-1DE28388BDA9}"/>
+    <GuidSymbol name="guidImageShowDeployWin" value="{007ADBA1-026B-41C8-AEED-D6423BBCB611}"/>
+
+  </Symbols>
+  
 </CommandTable>

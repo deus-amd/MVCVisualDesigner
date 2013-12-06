@@ -1,0 +1,102 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@ include file="../../Dsl/CustomCode/WidgetList.t4" #>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+// Razor Code Generator Factory
+namespace MVCVisualDesigner.CodeGenerator
+{
+    public class RazorCodeGeneratorFactory : ICodeGeneratorFactory
+    {
+        public ICodeGenerator GetCodeGenerator(VDWidget widget)
+        {
+<#
+    foreach (string widgetName in AllWidgets)
+    {
+#>
+            if (widget.WidgetType == WidgetType.<#= widgetName.Substring(2) #>)
+                return new <#= widgetName #>RazorCodeGenerator(widget);
+
+<#
+    }
+#>
+            throw new NotImplementedException();
+        }
+    }
+}
+
+
+namespace MVCVisualDesigner.CodeGenerator
+{
+<#
+    foreach (string widgetName in AllWidgets)
+    {
+#>
+    public class <#= widgetName #>RazorCodeGeneratorBase : IRazorCodeGenerator
+    {
+        protected VDWidget m_widget;
+
+        public <#= widgetName #>RazorCodeGeneratorBase(VDWidget widget)
+        {
+            m_widget = widget;
+        }
+
+        public VDWidget Widget { get { return m_widget; } }
+
+        public virtual string GenerateCode(ICodeGeneratorFactory cGFactory, IWidgetTreeWalkerFactory walkerFactory)
+        {
+            var impl = new <#= widgetName #>RazorCodeGeneratorImpl(this.Widget, cGFactory, walkerFactory);
+            return impl.TransformText();
+        }
+    }
+
+    public partial class <#= widgetName #>RazorCodeGenerator : <#= widgetName #>RazorCodeGeneratorBase
+    {
+        public <#= widgetName #>RazorCodeGenerator(VDWidget widget) 
+            : base(widget)
+        {
+        }
+    }
+
+
+<#
+    }
+#>
+}
+
+namespace MVCVisualDesigner.CodeGenerator
+{
+<#
+    foreach (string widgetName in AllWidgets)
+    {
+#>
+    public partial class <#= widgetName #>RazorCodeGeneratorImpl
+    {
+        public <#= widgetName #>RazorCodeGeneratorImpl(VDWidget widget, ICodeGeneratorFactory cGFactory, IWidgetTreeWalkerFactory walkerFactory)
+        {
+            m_widget = widget as <#= widgetName #>;
+            m_cGFactory = cGFactory;
+            m_walkerFactory = walkerFactory;		
+        }
+
+        protected <#= widgetName #> m_widget;
+        public <#= widgetName #> Widget { get { return m_widget; } }
+
+        protected ICodeGeneratorFactory m_cGFactory;
+        public ICodeGeneratorFactory CodeGeneratorFactory { get { return m_cGFactory; } }
+
+        protected IWidgetTreeWalkerFactory m_walkerFactory;
+        public IWidgetTreeWalkerFactory WalkerFactory { get { return m_walkerFactory; } }
+    }
+
+<#
+    }
+#>
+}
