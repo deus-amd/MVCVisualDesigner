@@ -236,6 +236,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>VisualBasic.tt</DependentUpon>
     </VSItemTemplate>
+    <Content Include="Preview.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="Resources\File.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>

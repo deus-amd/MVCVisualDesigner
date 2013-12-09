@@ -28,7 +28,7 @@
     <Description><#= this.Dsl.Description #></Description>
     <License>lgpl-3.0.txt</License>
     <Icon>Resources\File.ico</Icon>
-    <PreviewImage>ModelExplorerToolWindowBitmaps.bmp</PreviewImage>
+    <PreviewImage>Preview.png</PreviewImage>
   </Metadata>
   <Installation InstalledByMsi="false">
     <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="12.0" />

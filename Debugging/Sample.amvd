@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<exampleModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="0.0.0.1" Id="2a38f7da-25cf-4b11-a329-74f6174dd24e" xmlns="http://schemas.microsoft.com/dsltools/MVCVisualDesigner">
+<exampleModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="0.0.1.0" Id="2a38f7da-25cf-4b11-a329-74f6174dd24e" xmlns="http://schemas.microsoft.com/dsltools/MVCVisualDesigner">
   <elements>
     <exampleElement Id="8c29a9ce-4e78-4232-aadc-2c2accce94a9" name="ExampleElement1">
       <targets>
