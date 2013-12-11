@@ -8,12 +8,12 @@ string[] WidgetList = new string[]{
 	"VDSection",
 	//"VDButton",
 	//"VDGridLayout",
-	//"VDForm",
-	//"VDRadio",
-	//"VDCheckBox",
-	//"VDSubmit",
-	//"VDInput",
-	//"VDSelect",
+	"VDForm",
+	"VDRadio",
+	"VDCheckBox",
+	"VDSubmit",
+	"VDInput",
+	"VDSelect",
 	"VDHoriSeparator",
 	"VDVertSeparator",
 };
@@ -24,7 +24,7 @@ string[] SubWidgetList = new string[] {
 	//"VDGridLayoutHeadCell",
 	"VDSectionHead",
 	"VDSectionBody",
-	//"VDSelectOption",
+	"VDSelectOption",
 };
 
 System.Collections.Generic.List<string> AllWidgets = new System.Collections.Generic.List<string>();

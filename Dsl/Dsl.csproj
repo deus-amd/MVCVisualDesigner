@@ -83,6 +83,7 @@
       <DependentUpon>Diagram_BindFields.tt</DependentUpon>
     </Compile>
     <Compile Include="CustomCode\CodeGen\ICodeGeneratorFactory.cs" />
+    <Compile Include="CustomCode\Widgets\Form.cs" />
     <Compile Include="CustomCode\Widgets\Separator.cs" />
     <Compile Include="CustomCode\WidgetTreeWalker.cs" />
     <Compile Include="Resources\MVDResources.Designer.cs">
