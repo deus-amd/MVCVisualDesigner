@@ -2,13 +2,6 @@
 <Dsl xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="8f2ca638-e08f-4b6f-96a1-ea046a25c190" Description="An open source visual designer for ASP.NET MVC framework. (Prototype version, and more features will be implemented soon)" Name="MVCVisualDesigner" DisplayName="MVC Visual Designer" Namespace="MVCVisualDesigner" MajorVersion="0" Build="1" ProductName="MVC Visual Designer" CompanyName="Jun Wang" PackageGuid="2318dda0-8eed-4398-b67d-2e85e627224d" PackageNamespace="MVCVisualDesigner" xmlns="http://schemas.microsoft.com/VisualStudio/2005/DslTools/DslDefinitionModel">
   <Classes>
     <DomainClass Id="404ac32b-b3af-4662-bd2e-14f13a17562b" Description="Description for MVCVisualDesigner.VDWidget" Name="VDWidget" DisplayName="VDWidget" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true">
-      <Properties>
-        <DomainProperty Id="b3bf12d3-bb09-40bd-85d0-a868753c0d3f" Description="Description for MVCVisualDesigner.VDWidget.Name" Name="Name" DisplayName="Name" IsElementName="true">
-          <Type>
-            <ExternalTypeMoniker Name="/System/String" />
-          </Type>
-        </DomainProperty>
-      </Properties>
       <ElementMergeDirectives>
         <ElementMergeDirective>
           <Index>
@@ -115,6 +108,33 @@
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
+      <Properties>
+        <DomainProperty Id="103d62c4-78cd-4e72-9346-a3f9dd2941af" Description="" Name="name" DisplayName="name" Category="HTML Attribute">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="cb742391-b33e-4946-b1e6-88f6fd2c92b2" Description="" Name="action" DisplayName="action" Category="HTML Attribute">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="6bede762-2d29-4de9-90b8-214471e1bebe" Description="" Name="method" DisplayName="method" Category="HTML Attribute">
+          <Type>
+            <DomainEnumerationMoniker Name="E_HTTPRequestMethod" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="0047a667-f98d-46b8-b9bf-47c2d1c95ade" Description="" Name="target" DisplayName="target" Category="HTML Attribute">
+          <Type>
+            <DomainEnumerationMoniker Name="E_FormTarget" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="d2dde7a1-4c92-4bad-bfb2-97f90fcc099a" Description="" Name="enctype" DisplayName="enctype" Category="HTML Attribute">
+          <Type>
+            <DomainEnumerationMoniker Name="E_FormEncType" />
+          </Type>
+        </DomainProperty>
+      </Properties>
     </DomainClass>
     <DomainClass Id="d05ac9e5-6c3f-402b-a967-1e48ff769811" Description="Description for MVCVisualDesigner.VDSubmit" Name="VDSubmit" DisplayName="VDSubmit" Namespace="MVCVisualDesigner">
       <BaseClass>
@@ -150,6 +170,28 @@
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
+      <Properties>
+        <DomainProperty Id="1f32c526-411b-42b1-b3cc-0cf125a81036" Description="" Name="name" DisplayName="name" Category="HTML Attribute">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="57e39616-b2b8-40a2-9f5b-14e8661d3043" Description="" Name="type" DisplayName="type" Category="HTML Attribute">
+          <Type>
+            <DomainEnumerationMoniker Name="E_InputType" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="909eba16-a948-426d-b86b-3f287ca9e259" Description="" Name="value" DisplayName="value" Category="HTML Attribute">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="e184679e-8ac6-4d73-b9c7-1022c63a54a8" Description="" Name="maxlength" DisplayName="maxlength" Category="HTML Attribute">
+          <Type>
+            <ExternalTypeMoniker Name="/System/UInt32" />
+          </Type>
+        </DomainProperty>
+      </Properties>
     </DomainClass>
     <DomainClass Id="7efdaa9f-896e-40b4-8028-706bb6d7b001" Description="Description for MVCVisualDesigner.VDSelectOption" Name="VDSelectOption" DisplayName="VDSelect Option" Namespace="MVCVisualDesigner">
       <BaseClass>
@@ -329,6 +371,56 @@
     <ExternalType Name="Boolean" Namespace="System" />
     <ExternalType Name="Char" Namespace="System" />
     <ExternalType Name="Image" Namespace="System.Drawing" />
+    <DomainEnumeration Name="E_HTTPRequestMethod" Namespace="MVCVisualDesigner" Description="">
+      <Literals>
+        <EnumerationLiteral Description="" Name="Get" Value="0" />
+        <EnumerationLiteral Description="" Name="Post" Value="1" />
+      </Literals>
+    </DomainEnumeration>
+    <DomainEnumeration Name="E_FormTarget" Namespace="MVCVisualDesigner" Description="">
+      <Literals>
+        <EnumerationLiteral Description="" Name="_blank" Value="" />
+        <EnumerationLiteral Description="" Name="_self" Value="" />
+        <EnumerationLiteral Description="" Name="_parent" Value="" />
+        <EnumerationLiteral Description="" Name="_top" Value="" />
+        <EnumerationLiteral Description="Description for MVCVisualDesigner.E_FormTarget.NotSpecified" Name="NotSpecified" Value="" />
+      </Literals>
+    </DomainEnumeration>
+    <DomainEnumeration Name="E_FormEncType" Namespace="MVCVisualDesigner" Description="">
+      <Literals>
+        <EnumerationLiteral Description="application/x-www-form-urlencoded" Name="application_x_www_form_urlencoded" Value="" />
+        <EnumerationLiteral Description="multipart/form-data" Name="multipart_form_data" Value="" />
+        <EnumerationLiteral Description="text/plain" Name="text_plain" Value="" />
+        <EnumerationLiteral Description="" Name="NotSpecified" Value="" />
+      </Literals>
+    </DomainEnumeration>
+    <DomainEnumeration Name="E_InputType" Namespace="MVCVisualDesigner" Description="">
+      <Literals>
+        <EnumerationLiteral Description="" Name="button" Value="" />
+        <EnumerationLiteral Description="" Name="checkbox" Value="" />
+        <EnumerationLiteral Description="" Name="color" Value="" />
+        <EnumerationLiteral Description="" Name="date" Value="" />
+        <EnumerationLiteral Description="" Name="file" Value="" />
+        <EnumerationLiteral Description="" Name="image" Value="" />
+        <EnumerationLiteral Description="" Name="month" Value="" />
+        <EnumerationLiteral Description="" Name="number" Value="" />
+        <EnumerationLiteral Description="" Name="password" Value="" />
+        <EnumerationLiteral Description="" Name="radio" Value="" />
+        <EnumerationLiteral Description="" Name="range" Value="" />
+        <EnumerationLiteral Description="" Name="reset" Value="" />
+        <EnumerationLiteral Description="" Name="datetime" Value="" />
+        <EnumerationLiteral Description="datetime-local" Name="datetime_local" Value="" />
+        <EnumerationLiteral Description="" Name="email" Value="" />
+        <EnumerationLiteral Description="" Name="hidden" Value="" />
+        <EnumerationLiteral Description="" Name="search" Value="" />
+        <EnumerationLiteral Description="" Name="submit" Value="" />
+        <EnumerationLiteral Description="" Name="text" Value="" />
+        <EnumerationLiteral Description="" Name="time" Value="" />
+        <EnumerationLiteral Description="" Name="tel" Value="" />
+        <EnumerationLiteral Description="" Name="url" Value="" />
+        <EnumerationLiteral Description="" Name="week" Value="" />
+      </Literals>
+    </DomainEnumeration>
   </Types>
   <Shapes>
     <GeometryShape Id="e3f0af00-12a6-4223-861d-180f9ed7f7c3" Description="Description for MVCVisualDesigner.VDWidgetShape" Name="VDWidgetShape" DisplayName="VDWidget Shape" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner" FixedTooltipText="VDWidget Shape" InitialHeight="1" Geometry="Rectangle">
@@ -428,9 +520,6 @@
           <XmlRelationshipData UseFullForm="true" RoleElementName="children">
             <DomainRelationshipMoniker Name="WidgetHasChildren" />
           </XmlRelationshipData>
-          <XmlPropertyData XmlName="name">
-            <DomainPropertyMoniker Name="VDWidget/Name" />
-          </XmlPropertyData>
           <XmlRelationshipData UseFullForm="true" RoleElementName="title">
             <DomainRelationshipMoniker Name="WidgetHasTitle" />
           </XmlRelationshipData>
@@ -557,6 +646,23 @@
       </XmlClassData>
       <XmlClassData TypeName="VDForm" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDFormMoniker" ElementName="vDForm" MonikerTypeName="VDFormMoniker">
         <DomainClassMoniker Name="VDForm" />
+        <ElementData>
+          <XmlPropertyData XmlName="name">
+            <DomainPropertyMoniker Name="VDForm/name" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="action">
+            <DomainPropertyMoniker Name="VDForm/action" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="method">
+            <DomainPropertyMoniker Name="VDForm/method" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="target">
+            <DomainPropertyMoniker Name="VDForm/target" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="enctype">
+            <DomainPropertyMoniker Name="VDForm/enctype" />
+          </XmlPropertyData>
+        </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDSubmit" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDSubmitMoniker" ElementName="vDSubmit" MonikerTypeName="VDSubmitMoniker">
         <DomainClassMoniker Name="VDSubmit" />
@@ -577,6 +683,20 @@
       </XmlClassData>
       <XmlClassData TypeName="VDInput" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDInputMoniker" ElementName="vDInput" MonikerTypeName="VDInputMoniker">
         <DomainClassMoniker Name="VDInput" />
+        <ElementData>
+          <XmlPropertyData XmlName="name">
+            <DomainPropertyMoniker Name="VDInput/name" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="type">
+            <DomainPropertyMoniker Name="VDInput/type" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="value">
+            <DomainPropertyMoniker Name="VDInput/value" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="maxlength">
+            <DomainPropertyMoniker Name="VDInput/maxlength" />
+          </XmlPropertyData>
+        </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDSelectOption" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDSelectOptionMoniker" ElementName="vDSelectOption" MonikerTypeName="VDSelectOptionMoniker">
         <DomainClassMoniker Name="VDSelectOption" />
