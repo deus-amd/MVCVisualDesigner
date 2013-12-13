@@ -2,6 +2,13 @@
 <Dsl xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="8f2ca638-e08f-4b6f-96a1-ea046a25c190" Description="An open source visual designer for ASP.NET MVC framework. (Prototype version, and more features will be implemented soon)" Name="MVCVisualDesigner" DisplayName="MVC Visual Designer" Namespace="MVCVisualDesigner" MajorVersion="0" Build="1" ProductName="MVC Visual Designer" CompanyName="Jun Wang" PackageGuid="2318dda0-8eed-4398-b67d-2e85e627224d" PackageNamespace="MVCVisualDesigner" xmlns="http://schemas.microsoft.com/VisualStudio/2005/DslTools/DslDefinitionModel">
   <Classes>
     <DomainClass Id="404ac32b-b3af-4662-bd2e-14f13a17562b" Description="Description for MVCVisualDesigner.VDWidget" Name="VDWidget" DisplayName="VDWidget" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true">
+      <Properties>
+        <DomainProperty Id="16811f57-2684-4aa9-8695-4f5e2435b04e" Description="" Name="HTMLAttributes" DisplayName="HTMLAttributes" DefaultValue="" Category="Custom HTML Attribute">
+          <Type>
+            <ExternalTypeMoniker Name="/System.Collections.Generic/Dictionary&lt;System.String, System.String&gt;" />
+          </Type>
+        </DomainProperty>
+      </Properties>
       <ElementMergeDirectives>
         <ElementMergeDirective>
           <Index>
@@ -109,27 +116,27 @@
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
       <Properties>
-        <DomainProperty Id="103d62c4-78cd-4e72-9346-a3f9dd2941af" Description="" Name="name" DisplayName="name" Category="HTML Attribute">
+        <DomainProperty Id="103d62c4-78cd-4e72-9346-a3f9dd2941af" Description="" Name="Name" DisplayName="name" Category="HTML Attribute">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="cb742391-b33e-4946-b1e6-88f6fd2c92b2" Description="" Name="action" DisplayName="action" Category="HTML Attribute">
+        <DomainProperty Id="cb742391-b33e-4946-b1e6-88f6fd2c92b2" Description="" Name="Action" DisplayName="action" Category="HTML Attribute">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="6bede762-2d29-4de9-90b8-214471e1bebe" Description="" Name="method" DisplayName="method" Category="HTML Attribute">
+        <DomainProperty Id="6bede762-2d29-4de9-90b8-214471e1bebe" Description="" Name="Method" DisplayName="method" Category="HTML Attribute">
           <Type>
             <DomainEnumerationMoniker Name="E_HTTPRequestMethod" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="0047a667-f98d-46b8-b9bf-47c2d1c95ade" Description="" Name="target" DisplayName="target" Category="HTML Attribute">
+        <DomainProperty Id="0047a667-f98d-46b8-b9bf-47c2d1c95ade" Description="" Name="Target" DisplayName="target" Category="HTML Attribute">
           <Type>
             <DomainEnumerationMoniker Name="E_FormTarget" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="d2dde7a1-4c92-4bad-bfb2-97f90fcc099a" Description="" Name="enctype" DisplayName="enctype" Category="HTML Attribute">
+        <DomainProperty Id="d2dde7a1-4c92-4bad-bfb2-97f90fcc099a" Description="" Name="EncType" DisplayName="enctype" Category="HTML Attribute">
           <Type>
             <DomainEnumerationMoniker Name="E_FormEncType" />
           </Type>
@@ -171,24 +178,49 @@
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
       <Properties>
-        <DomainProperty Id="1f32c526-411b-42b1-b3cc-0cf125a81036" Description="" Name="name" DisplayName="name" Category="HTML Attribute">
+        <DomainProperty Id="1f32c526-411b-42b1-b3cc-0cf125a81036" Description="Specifies the name of an &lt;input&gt; element" Name="Name" DisplayName="name" Category="HTML Attribute">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="57e39616-b2b8-40a2-9f5b-14e8661d3043" Description="" Name="type" DisplayName="type" Category="HTML Attribute">
+        <DomainProperty Id="57e39616-b2b8-40a2-9f5b-14e8661d3043" Description="Specifies the type &lt;input&gt; element to display" Name="Type" DisplayName="type" Category="HTML Attribute">
           <Type>
             <DomainEnumerationMoniker Name="E_InputType" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="909eba16-a948-426d-b86b-3f287ca9e259" Description="" Name="value" DisplayName="value" Category="HTML Attribute">
+        <DomainProperty Id="909eba16-a948-426d-b86b-3f287ca9e259" Description="Specifies the value of an &lt;input&gt; element" Name="Value" DisplayName="value" Category="HTML Attribute">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="e184679e-8ac6-4d73-b9c7-1022c63a54a8" Description="" Name="maxlength" DisplayName="maxlength" Category="HTML Attribute">
+        <DomainProperty Id="e184679e-8ac6-4d73-b9c7-1022c63a54a8" Description="Specifies the maximum number of characters allowed in an &lt;input&gt; element" Name="MaxLength" DisplayName="maxlength" Category="HTML Attribute">
           <Type>
             <ExternalTypeMoniker Name="/System/UInt32" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="3741f758-502a-4f14-a73b-d663f16583bb" Description="Specifies the types of files that the server accepts (only for type=&quot;file&quot;)" Name="Accept" DisplayName="accept" Category="HTML Attribute">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="a994bbc4-7d59-4917-aa81-ddcdfc04a08d" Description="Specifies an alternate text for images (only for type=&quot;image&quot;)" Name="Alt" DisplayName="alt" Category="HTML Attribute">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="173cf5c2-e89c-4600-b37c-f7288c573586" Description="Specifies the width, in characters, of an &lt;input&gt; element" Name="Size" DisplayName="size" Category="HTML Attribute">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="3b058df9-e96e-4412-93e6-506aa022e255" Description="Specifies that an &lt;input&gt; element should be pre-selected when the page loads (for type=&quot;checkbox&quot; or type=&quot;radio&quot;)" Name="Checked" DisplayName="checked" Category="HTML Attribute">
+          <Type>
+            <DomainEnumerationMoniker Name="E_TripleState" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="2a73c5e2-e71d-4b66-b77a-3768982d80fc" Description="Specifies that an &lt;input&gt; element should be disabled" Name="Disabled" DisplayName="disabled" Category="HTML Attribute">
+          <Type>
+            <DomainEnumerationMoniker Name="E_TripleState" />
           </Type>
         </DomainProperty>
       </Properties>
@@ -421,6 +453,14 @@
         <EnumerationLiteral Description="" Name="week" Value="" />
       </Literals>
     </DomainEnumeration>
+    <DomainEnumeration Name="E_TripleState" Namespace="MVCVisualDesigner" Description="">
+      <Literals>
+        <EnumerationLiteral Description="" Name="TRUE" Value="2" />
+        <EnumerationLiteral Description="" Name="FALSE" Value="1" />
+        <EnumerationLiteral Description="" Name="NONE" Value="0" />
+      </Literals>
+    </DomainEnumeration>
+    <ExternalType Name="Dictionary&lt;System.String, System.String&gt;" Namespace="System.Collections.Generic" />
   </Types>
   <Shapes>
     <GeometryShape Id="e3f0af00-12a6-4223-861d-180f9ed7f7c3" Description="Description for MVCVisualDesigner.VDWidgetShape" Name="VDWidgetShape" DisplayName="VDWidget Shape" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner" FixedTooltipText="VDWidget Shape" InitialHeight="1" Geometry="Rectangle">
@@ -523,6 +563,9 @@
           <XmlRelationshipData UseFullForm="true" RoleElementName="title">
             <DomainRelationshipMoniker Name="WidgetHasTitle" />
           </XmlRelationshipData>
+          <XmlPropertyData XmlName="hTMLAttributes">
+            <DomainPropertyMoniker Name="VDWidget/HTMLAttributes" />
+          </XmlPropertyData>
         </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDView" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDViewMoniker" ElementName="vDView" MonikerTypeName="VDViewMoniker">
@@ -648,19 +691,19 @@
         <DomainClassMoniker Name="VDForm" />
         <ElementData>
           <XmlPropertyData XmlName="name">
-            <DomainPropertyMoniker Name="VDForm/name" />
+            <DomainPropertyMoniker Name="VDForm/Name" />
           </XmlPropertyData>
           <XmlPropertyData XmlName="action">
-            <DomainPropertyMoniker Name="VDForm/action" />
+            <DomainPropertyMoniker Name="VDForm/Action" />
           </XmlPropertyData>
           <XmlPropertyData XmlName="method">
-            <DomainPropertyMoniker Name="VDForm/method" />
+            <DomainPropertyMoniker Name="VDForm/Method" />
           </XmlPropertyData>
           <XmlPropertyData XmlName="target">
-            <DomainPropertyMoniker Name="VDForm/target" />
+            <DomainPropertyMoniker Name="VDForm/Target" />
           </XmlPropertyData>
-          <XmlPropertyData XmlName="enctype">
-            <DomainPropertyMoniker Name="VDForm/enctype" />
+          <XmlPropertyData XmlName="encType">
+            <DomainPropertyMoniker Name="VDForm/EncType" />
           </XmlPropertyData>
         </ElementData>
       </XmlClassData>
@@ -685,16 +728,31 @@
         <DomainClassMoniker Name="VDInput" />
         <ElementData>
           <XmlPropertyData XmlName="name">
-            <DomainPropertyMoniker Name="VDInput/name" />
+            <DomainPropertyMoniker Name="VDInput/Name" />
           </XmlPropertyData>
           <XmlPropertyData XmlName="type">
-            <DomainPropertyMoniker Name="VDInput/type" />
+            <DomainPropertyMoniker Name="VDInput/Type" />
           </XmlPropertyData>
           <XmlPropertyData XmlName="value">
-            <DomainPropertyMoniker Name="VDInput/value" />
+            <DomainPropertyMoniker Name="VDInput/Value" />
           </XmlPropertyData>
-          <XmlPropertyData XmlName="maxlength">
-            <DomainPropertyMoniker Name="VDInput/maxlength" />
+          <XmlPropertyData XmlName="maxLength">
+            <DomainPropertyMoniker Name="VDInput/MaxLength" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="accept">
+            <DomainPropertyMoniker Name="VDInput/Accept" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="alt">
+            <DomainPropertyMoniker Name="VDInput/Alt" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="size">
+            <DomainPropertyMoniker Name="VDInput/Size" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="checked">
+            <DomainPropertyMoniker Name="VDInput/Checked" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="disabled">
+            <DomainPropertyMoniker Name="VDInput/Disabled" />
           </XmlPropertyData>
         </ElementData>
       </XmlClassData>
