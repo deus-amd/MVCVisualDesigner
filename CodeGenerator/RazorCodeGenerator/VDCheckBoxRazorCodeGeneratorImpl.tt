@@ -3,3 +3,18 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="MVCVisualDesigner" #>
+<input type='checkbox' <#
+    if (!string.IsNullOrWhiteSpace(this.Widget.Name)) {
+        #>name='<#= this.Widget.Name #>' <#
+    }
+    if (!string.IsNullOrWhiteSpace(this.Widget.Value)) {
+        #>value='<#= this.Widget.Value #>' <#
+    }
+    if (this.Widget.Disabled == E_TripleState.TRUE) {
+        #>disabled='disabled' <#
+    }
+    if (this.Widget.Checked == E_TripleState.TRUE) {
+        #>checked='checked' <#
+    }
+#>>

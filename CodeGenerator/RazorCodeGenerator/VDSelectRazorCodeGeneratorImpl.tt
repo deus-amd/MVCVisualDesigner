@@ -3,3 +3,21 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="MVCVisualDesigner" #>
+<select <#
+    if (!string.IsNullOrWhiteSpace(this.Widget.Name)) {
+        #>name='<#= this.Widget.Name #>' <#
+    }
+    if (this.Widget.Size > 0) {
+        #>size='<#= this.Widget.Size #>' <#
+    }
+    if (this.Widget.Multiple == E_TripleState.TRUE) {
+        #>multiple <#
+    }
+    if (this.Widget.Disabled == E_TripleState.TRUE) {
+        #>disabled='disabled' <#
+    }
+#>>
+<# /* generate code for children */ #>
+<#@ include file="../GenerateChildrenCode.t4" #>
+</select>

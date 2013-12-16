@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<vDView xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="0.0.1.0" Id="2ac8b01a-8c74-418e-90b3-69fd0015b983" xmlns="http://schemas.microsoft.com/dsltools/MVCVisualDesigner">
+<vDView xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="0.0.2.0" Id="2ac8b01a-8c74-418e-90b3-69fd0015b983" xmlns="http://schemas.microsoft.com/dsltools/MVCVisualDesigner">
   <children>
     <widgetHasChildren Id="344259df-5949-4dbd-bea9-33e519e52937">
       <vDSection Id="d9682589-abe4-455a-bdec-b0150f165fbb" name="VDSection1">

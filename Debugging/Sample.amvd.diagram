@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<mVCVisualDesignerDiagram dslVersion="0.0.1.0" Id="b3214b62-95ab-4700-8a25-2fb30f9f01a4" absoluteBounds="0, 0, 11, 8.5" name="Sample">
+<mVCVisualDesignerDiagram dslVersion="0.0.2.0" Id="b3214b62-95ab-4700-8a25-2fb30f9f01a4" absoluteBounds="0, 0, 11, 8.5" name="Sample">
   <exampleModelMoniker Id="2a38f7da-25cf-4b11-a329-74f6174dd24e" />
   <nestedChildShapes>
     <exampleShape Id="dd6b8314-fe15-4914-9c9a-d8bdd0f28916" absoluteBounds="0.5, 1.75, 2, 0.75">

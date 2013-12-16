@@ -3,3 +3,21 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="MVCVisualDesigner" #>
+<form <# 
+	if (!string.IsNullOrWhiteSpace(this.Widget.Name)) { 
+		#>name='<#= this.Widget.Name #>' <#
+	} 
+	if (!string.IsNullOrWhiteSpace(this.Widget.Action)) { 
+		#>action='<#= this.Widget.Action #>' <#
+	}
+	#>method='<#= this.Widget.Method.ToString().ToLower() #>' <# 
+	if (this.Widget.Target != E_FormTarget.NotSpecified) { 
+		#>target='<#= this.Widget.Target #>' <#
+	}
+	if (this.Widget.EncType != E_FormEncType.NotSpecified) { 
+		#>target='<#= this.Widget.EncType #>' <#
+	}#>>
+<# /* generate code for children */ #>
+<#@ include file="../GenerateChildrenCode.t4" #>
+</form> 

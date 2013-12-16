@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<vDDiagram dslVersion="0.0.1.0" Id="4c8c15ed-410b-41af-9c5b-d59dace7d8db" absoluteBounds="0, 0, 11, 8.5" name="Test">
+<vDDiagram dslVersion="0.0.2.0" Id="4c8c15ed-410b-41af-9c5b-d59dace7d8db" absoluteBounds="0, 0, 11, 8.5" name="Test">
   <vDViewMoniker Id="2ac8b01a-8c74-418e-90b3-69fd0015b983" />
   <nestedChildShapes>
     <vDSectionShape Id="fc2a73be-d95f-4ba8-a2af-6ca6f7bf037f" absoluteBounds="0.62, 0.5, 5, 3" disabled="false" isPinned="false">

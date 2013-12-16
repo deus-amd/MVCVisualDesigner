@@ -3,3 +3,30 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="MVCVisualDesigner" #>
+<input type='<#= this.Widget.Type.ToString() #>' <#
+    if (!string.IsNullOrWhiteSpace(this.Widget.Name)) {
+        #>name='<#= this.Widget.Name #>' <#
+    }
+    if (!string.IsNullOrWhiteSpace(this.Widget.Value)) {
+        #>value='<#= this.Widget.Value #>' <#
+    }
+    if (!string.IsNullOrEmpty(this.Widget.Alt) && this.Widget.Type == E_InputType.image) {
+        #>alt='<#= this.Widget.Alt #>' <#
+    }
+    if (this.Widget.MaxLength > 0) {
+        #>maxlength='<#= this.Widget.MaxLength #>' <#
+    }
+    if (!string.IsNullOrWhiteSpace(this.Widget.Accept) && this.Widget.Type == E_InputType.file) {
+        #>accept='<#= this.Widget.Accept #>' <#
+    }
+    if (this.Widget.Size > 0) {
+        #>size='<#= this.Widget.Size #>' <#
+    }
+    if (this.Widget.Disabled == E_TripleState.TRUE) {
+        #>disabled='disabled' <#
+    }
+    if (this.Widget.Checked == E_TripleState.TRUE && (this.Widget.Type == E_InputType.checkbox || this.Widget.Type == E_InputType.radio)) {
+        #>checked='checked' <#
+    }
+#>>
