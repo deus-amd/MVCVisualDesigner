@@ -28,9 +28,10 @@
     <Description><#= this.Dsl.Description #></Description>
     <MoreInfo>https://github.com/junvwang/MVCVisualDesigner</MoreInfo>
     <License>lgpl-3.0.txt</License>
+    <GettingStartedGuide>getting_started_guide.rtf</GettingStartedGuide>
     <Icon>Resources\File.ico</Icon>
     <PreviewImage>Preview.png</PreviewImage>
-    <Tags>MVC, Visual Designer, Open Source</Tags>
+    <Tags>MVC, Visual, Designer, Open Source</Tags>
   </Metadata>
   <Installation InstalledByMsi="false">
     <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="12.0" />

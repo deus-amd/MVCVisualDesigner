@@ -115,6 +115,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CommandSet.tt</DependentUpon>
     </Compile>
+    <Content Include="getting_started_guide.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <None Include="source.extension.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>source.extension.vsixmanifest</LastGenOutput>
