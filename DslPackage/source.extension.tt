@@ -26,7 +26,7 @@
     <Identity Id="<#= this.Dsl.PackageGuid #>" Version="<#= this.Dsl.MajorVersion #>.<#= this.Dsl.MinorVersion #>.<#= this.Dsl.Build #>.<#= this.Dsl.Revision #>" Language="<#= language #>" Publisher="<#= string.IsNullOrEmpty(this.Dsl.CompanyName) ? "Anon" : this.Dsl.CompanyName #>" />
     <DisplayName><#= this.Dsl.DisplayName #></DisplayName>
     <Description><#= this.Dsl.Description #></Description>
-    <MoreInfo>https://github.com/junvwang/MVCVisualDesigner</MoreInfo>
+    <MoreInfo>http://visualstudiogallery.msdn.microsoft.com/6b6d4e4c-b417-40e1-a6ac-d96737b4be47</MoreInfo>
     <License>lgpl-3.0.txt</License>
     <GettingStartedGuide>getting_started_guide.rtf</GettingStartedGuide>
     <Icon>Resources\File.ico</Icon>
