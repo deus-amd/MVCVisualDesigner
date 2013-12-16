@@ -63,6 +63,7 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Windows.Forms" />
@@ -83,6 +84,8 @@
       <DependentUpon>Diagram_BindFields.tt</DependentUpon>
     </Compile>
     <Compile Include="CustomCode\CodeGen\ICodeGeneratorFactory.cs" />
+    <Compile Include="CustomCode\HTMLAttribute.cs" />
+    <Compile Include="CustomCode\PropertyEditors\VDCollectionEditor.cs" />
     <Compile Include="CustomCode\Widgets\Form.cs" />
     <Compile Include="CustomCode\Widgets\Separator.cs" />
     <Compile Include="CustomCode\WidgetTreeWalker.cs" />

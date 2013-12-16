@@ -3,9 +3,17 @@
   <Classes>
     <DomainClass Id="404ac32b-b3af-4662-bd2e-14f13a17562b" Description="Description for MVCVisualDesigner.VDWidget" Name="VDWidget" DisplayName="VDWidget" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true">
       <Properties>
-        <DomainProperty Id="16811f57-2684-4aa9-8695-4f5e2435b04e" Description="" Name="HTMLAttributes" DisplayName="HTMLAttributes" DefaultValue="" Category="Custom HTML Attribute">
+        <DomainProperty Id="16811f57-2684-4aa9-8695-4f5e2435b04e" Description="" Name="MoreHTMLAttributes" DisplayName="MoreHTMLAttributes" DefaultValue="" Kind="CustomStorage" Category="Custom HTML Attribute">
+          <Attributes>
+            <ClrAttribute Name="System.ComponentModel.EditorAttribute">
+              <Parameters>
+                <AttributeParameter Value="typeof(MVCVisualDesigner.VDCollectionEditor)" />
+                <AttributeParameter Value="typeof(System.Drawing.Design.UITypeEditor)" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
-            <ExternalTypeMoniker Name="/System.Collections.Generic/Dictionary&lt;System.String, System.String&gt;" />
+            <ExternalTypeMoniker Name="/System.Collections.Generic/List&lt;MVCVisualDesigner.HTMLAttribute&gt;" />
           </Type>
         </DomainProperty>
       </Properties>
@@ -461,6 +469,7 @@
       </Literals>
     </DomainEnumeration>
     <ExternalType Name="Dictionary&lt;System.String, System.String&gt;" Namespace="System.Collections.Generic" />
+    <ExternalType Name="List&lt;MVCVisualDesigner.HTMLAttribute&gt;" Namespace="System.Collections.Generic" />
   </Types>
   <Shapes>
     <GeometryShape Id="e3f0af00-12a6-4223-861d-180f9ed7f7c3" Description="Description for MVCVisualDesigner.VDWidgetShape" Name="VDWidgetShape" DisplayName="VDWidget Shape" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner" FixedTooltipText="VDWidget Shape" InitialHeight="1" Geometry="Rectangle">
@@ -563,8 +572,8 @@
           <XmlRelationshipData UseFullForm="true" RoleElementName="title">
             <DomainRelationshipMoniker Name="WidgetHasTitle" />
           </XmlRelationshipData>
-          <XmlPropertyData XmlName="hTMLAttributes">
-            <DomainPropertyMoniker Name="VDWidget/HTMLAttributes" />
+          <XmlPropertyData XmlName="moreHTMLAttributes">
+            <DomainPropertyMoniker Name="VDWidget/MoreHTMLAttributes" />
           </XmlPropertyData>
         </ElementData>
       </XmlClassData>

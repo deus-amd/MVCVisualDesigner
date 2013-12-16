@@ -34,6 +34,19 @@ namespace MVCVisualDesigner
         protected void MergeDisconnectVDSection(VDSection sourceElement)
         {
         }
+
+        // init MoreHtmlAttributes property
+        protected List<HTMLAttribute> m_moreHTMLAttribtes;
+        public List<HTMLAttribute> GetMoreHTMLAttributesValue()
+        {
+            if (m_moreHTMLAttribtes == null)
+                m_moreHTMLAttribtes = new List<HTMLAttribute>();
+            return m_moreHTMLAttribtes; 
+        }
+        public void SetMoreHTMLAttributesValue(List<HTMLAttribute> newValue)
+        {
+            m_moreHTMLAttribtes = newValue;
+        }
     }
 
     public partial class VDWidget : ICodeData
