@@ -116,27 +116,27 @@
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
       <Properties>
-        <DomainProperty Id="103d62c4-78cd-4e72-9346-a3f9dd2941af" Description="" Name="Name" DisplayName="name" Category="HTML Attribute">
+        <DomainProperty Id="103d62c4-78cd-4e72-9346-a3f9dd2941af" Description="Specifies the name of a form" Name="Name" DisplayName="name" Category="HTML Attribute">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="cb742391-b33e-4946-b1e6-88f6fd2c92b2" Description="" Name="Action" DisplayName="action" Category="HTML Attribute">
+        <DomainProperty Id="cb742391-b33e-4946-b1e6-88f6fd2c92b2" Description="Specifies where to send the form-data when a form is submitted" Name="Action" DisplayName="action" Category="HTML Attribute">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="6bede762-2d29-4de9-90b8-214471e1bebe" Description="" Name="Method" DisplayName="method" Category="HTML Attribute">
+        <DomainProperty Id="6bede762-2d29-4de9-90b8-214471e1bebe" Description="Specifies the HTTP method to use when sending form-data" Name="Method" DisplayName="method" Category="HTML Attribute">
           <Type>
             <DomainEnumerationMoniker Name="E_HTTPRequestMethod" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="0047a667-f98d-46b8-b9bf-47c2d1c95ade" Description="" Name="Target" DisplayName="target" Category="HTML Attribute">
+        <DomainProperty Id="0047a667-f98d-46b8-b9bf-47c2d1c95ade" Description="Specifies where to display the response that is received after submitting the form" Name="Target" DisplayName="target" Category="HTML Attribute">
           <Type>
             <DomainEnumerationMoniker Name="E_FormTarget" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="d2dde7a1-4c92-4bad-bfb2-97f90fcc099a" Description="" Name="EncType" DisplayName="enctype" Category="HTML Attribute">
+        <DomainProperty Id="d2dde7a1-4c92-4bad-bfb2-97f90fcc099a" Description="Specifies how the form-data should be encoded when submitting it to the server (only for method=&quot;post&quot;)" Name="EncType" DisplayName="enctype" Category="HTML Attribute">
           <Type>
             <DomainEnumerationMoniker Name="E_FormEncType" />
           </Type>
@@ -145,23 +145,45 @@
     </DomainClass>
     <DomainClass Id="d05ac9e5-6c3f-402b-a967-1e48ff769811" Description="Description for MVCVisualDesigner.VDSubmit" Name="VDSubmit" DisplayName="VDSubmit" Namespace="MVCVisualDesigner">
       <BaseClass>
-        <DomainClassMoniker Name="VDWidget" />
+        <DomainClassMoniker Name="VDInput" />
       </BaseClass>
     </DomainClass>
     <DomainClass Id="ba0a564c-ece1-4141-8024-9b50274b7e8a" Description="Description for MVCVisualDesigner.VDRadio" Name="VDRadio" DisplayName="VDRadio" Namespace="MVCVisualDesigner">
       <BaseClass>
-        <DomainClassMoniker Name="VDWidget" />
+        <DomainClassMoniker Name="VDInput" />
       </BaseClass>
     </DomainClass>
     <DomainClass Id="b70cd577-5d7d-42ce-bec7-50a936feb032" Description="Description for MVCVisualDesigner.VDCheckBox" Name="VDCheckBox" DisplayName="VDCheck Box" Namespace="MVCVisualDesigner">
       <BaseClass>
-        <DomainClassMoniker Name="VDWidget" />
+        <DomainClassMoniker Name="VDInput" />
       </BaseClass>
     </DomainClass>
     <DomainClass Id="e0dbe157-96a1-4519-9d74-082478bddf00" Description="Description for MVCVisualDesigner.VDSelect" Name="VDSelect" DisplayName="VDSelect" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
+      <Properties>
+        <DomainProperty Id="c3239d80-aecf-4608-a9d7-bc139fba1563" Description="Defines a name for the drop-down list" Name="Name" DisplayName="name" Category="HTML Attribute">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="1f17ad15-707c-4653-a778-8686df3bcf94" Description="Specifies that a drop-down list should be disabled" Name="Disabled" DisplayName="disabled" Category="HTML Attribute">
+          <Type>
+            <DomainEnumerationMoniker Name="E_TripleState" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="25d7186f-4e8e-4f04-bf4f-f126ec8c705e" Description=" Specifies that multiple options can be selected at once" Name="Multiple" DisplayName="multiple" Category="HTML Attribute">
+          <Type>
+            <DomainEnumerationMoniker Name="E_TripleState" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="55d51255-91d8-40cb-b4cc-51d277232dd8" Description="Defines the number of visible options in a drop-down list" Name="Size" DisplayName="size" Category="HTML Attribute">
+          <Type>
+            <ExternalTypeMoniker Name="/System/UInt32" />
+          </Type>
+        </DomainProperty>
+      </Properties>
       <ElementMergeDirectives>
         <ElementMergeDirective>
           <Index>
@@ -210,7 +232,7 @@
         </DomainProperty>
         <DomainProperty Id="173cf5c2-e89c-4600-b37c-f7288c573586" Description="Specifies the width, in characters, of an &lt;input&gt; element" Name="Size" DisplayName="size" Category="HTML Attribute">
           <Type>
-            <ExternalTypeMoniker Name="/System/String" />
+            <ExternalTypeMoniker Name="/System/UInt32" />
           </Type>
         </DomainProperty>
         <DomainProperty Id="3b058df9-e96e-4412-93e6-506aa022e255" Description="Specifies that an &lt;input&gt; element should be pre-selected when the page loads (for type=&quot;checkbox&quot; or type=&quot;radio&quot;)" Name="Checked" DisplayName="checked" Category="HTML Attribute">
@@ -229,6 +251,28 @@
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
+      <Properties>
+        <DomainProperty Id="bbd20202-1e1b-4c95-97ff-650e7932b631" Description="Specifies the value to be sent to a server" Name="Value" DisplayName="value" Category="HTML Attribute">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="2283af80-b312-4ed9-94f2-a5e8dc84644d" Description="Specifies that an option should be pre-selected when the page loads" Name="Selected" DisplayName="selected" Category="HTML Attribute">
+          <Type>
+            <DomainEnumerationMoniker Name="E_TripleState" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="7910839d-f88b-4fc5-8ff3-72898795f093" Description="Specifies a shorter label for an option" Name="Label" DisplayName="label" Category="HTML Attribute">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="d8c29f2a-b3ab-4fbb-ad0d-1b973cded29f" Description="Specifies that an option should be disabled" Name="Disabled" DisplayName="disabled" Category="HTML Attribute">
+          <Type>
+            <DomainEnumerationMoniker Name="E_TripleState" />
+          </Type>
+        </DomainProperty>
+      </Properties>
     </DomainClass>
   </Classes>
   <Relationships>
@@ -411,19 +455,19 @@
     </DomainEnumeration>
     <DomainEnumeration Name="E_FormTarget" Namespace="MVCVisualDesigner" Description="">
       <Literals>
-        <EnumerationLiteral Description="" Name="_blank" Value="" />
-        <EnumerationLiteral Description="" Name="_self" Value="" />
-        <EnumerationLiteral Description="" Name="_parent" Value="" />
-        <EnumerationLiteral Description="" Name="_top" Value="" />
-        <EnumerationLiteral Description="Description for MVCVisualDesigner.E_FormTarget.NotSpecified" Name="NotSpecified" Value="" />
+        <EnumerationLiteral Description="" Name="_blank" Value="1" />
+        <EnumerationLiteral Description="" Name="_self" Value="3" />
+        <EnumerationLiteral Description="" Name="_parent" Value="2" />
+        <EnumerationLiteral Description="" Name="_top" Value="4" />
+        <EnumerationLiteral Description="Description for MVCVisualDesigner.E_FormTarget.NotSpecified" Name="NotSpecified" Value="0" />
       </Literals>
     </DomainEnumeration>
     <DomainEnumeration Name="E_FormEncType" Namespace="MVCVisualDesigner" Description="">
       <Literals>
-        <EnumerationLiteral Description="application/x-www-form-urlencoded" Name="application_x_www_form_urlencoded" Value="" />
-        <EnumerationLiteral Description="multipart/form-data" Name="multipart_form_data" Value="" />
-        <EnumerationLiteral Description="text/plain" Name="text_plain" Value="" />
-        <EnumerationLiteral Description="" Name="NotSpecified" Value="" />
+        <EnumerationLiteral Description="application/x-www-form-urlencoded" Name="application_x_www_form_urlencoded" Value="1" />
+        <EnumerationLiteral Description="multipart/form-data" Name="multipart_form_data" Value="2" />
+        <EnumerationLiteral Description="text/plain" Name="text_plain" Value="3" />
+        <EnumerationLiteral Description="" Name="NotSpecified" Value="0" />
       </Literals>
     </DomainEnumeration>
     <DomainEnumeration Name="E_InputType" Namespace="MVCVisualDesigner" Description="">
@@ -722,6 +766,18 @@
           <XmlRelationshipData UseFullForm="true" RoleElementName="options">
             <DomainRelationshipMoniker Name="SelectHasOptions" />
           </XmlRelationshipData>
+          <XmlPropertyData XmlName="name">
+            <DomainPropertyMoniker Name="VDSelect/Name" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="disabled">
+            <DomainPropertyMoniker Name="VDSelect/Disabled" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="multiple">
+            <DomainPropertyMoniker Name="VDSelect/Multiple" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="size">
+            <DomainPropertyMoniker Name="VDSelect/Size" />
+          </XmlPropertyData>
         </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDInput" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDInputMoniker" ElementName="vDInput" MonikerTypeName="VDInputMoniker">
@@ -758,6 +814,20 @@
       </XmlClassData>
       <XmlClassData TypeName="VDSelectOption" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDSelectOptionMoniker" ElementName="vDSelectOption" MonikerTypeName="VDSelectOptionMoniker">
         <DomainClassMoniker Name="VDSelectOption" />
+        <ElementData>
+          <XmlPropertyData XmlName="value">
+            <DomainPropertyMoniker Name="VDSelectOption/Value" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="selected">
+            <DomainPropertyMoniker Name="VDSelectOption/Selected" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="label">
+            <DomainPropertyMoniker Name="VDSelectOption/Label" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="disabled">
+            <DomainPropertyMoniker Name="VDSelectOption/Disabled" />
+          </XmlPropertyData>
+        </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDFormShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDFormShapeMoniker" ElementName="vDFormShape" MonikerTypeName="VDFormShapeMoniker">
         <GeometryShapeMoniker Name="VDFormShape" />
