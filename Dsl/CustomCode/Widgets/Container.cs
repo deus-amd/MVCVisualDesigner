@@ -37,20 +37,6 @@ namespace MVCVisualDesigner
 
             // trigger bounds rules of children
             this.relayoutChildren = true;            
-
-            //foreach(var s in this.NestedChildShapes)
-            //{
-            //    VDWidgetShape childShape = s as VDWidgetShape;
-            //    if (childShape != null)
-            //    {
-            //        childShape.Bounds = new RectangleD(childShape.Bounds.Location, new SizeD(childShape.Bounds.Width, 0));
-            //    }
-            //}
-        }
-
-        protected override void OnChildConfiguring(ShapeElement child, bool createdDuringViewFixup)
-        {
-            base.OnChildConfiguring(child, createdDuringViewFixup);
         }
     }
 
@@ -65,15 +51,6 @@ namespace MVCVisualDesigner
 
             // trigger bounds rules of children
             this.relayoutChildren = true;            
-
-            //foreach(var s in this.nestedchildshapes)
-            //{
-            //    vdwidgetshape childshape = s as vdwidgetshape;
-            //    if (childshape != null)
-            //    {
-            //        childshape.size = new sized(0, childshape.size.height);
-            //    }
-            //}
         }
     }
 }

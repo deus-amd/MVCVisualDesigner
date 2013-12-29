@@ -282,7 +282,8 @@ namespace MVCVisualDesigner
             // find top-most unpined predecessor
             VDWidgetShape shape = this;
             bool bReSelect = false;
-            while (shape.isPinned && shape.ParentShape != null && shape.ParentShape is VDWidgetShape)
+            while ((shape.isPinned || shape is VDHoriContainerShape || shape is VDVertContainerShape) /* avoid selecting container */
+                && shape.ParentShape != null && shape.ParentShape is VDWidgetShape)
             {
                 shape = shape.ParentShape as VDWidgetShape;
                 bReSelect = true;
@@ -297,6 +298,7 @@ namespace MVCVisualDesigner
                 view.Selection.FocusedItem = item;
                 return true;
             }
+
             return false;
         }
 
@@ -304,17 +306,6 @@ namespace MVCVisualDesigner
         {
             if (!SelectUnpinedParentShape(item, view))
             {
-                // avoid to select container shapes
-                if ((this is VDHoriContainerShape || this is VDVertContainerShape) &&
-                    this.ParentShape != null && this.ParentShape is VDWidgetShape)
-                {
-                    item.SetItem(this.ParentShape);
-                    view.Selection.Clear();
-                    view.Selection.Add(item);
-                    view.Selection.PrimaryItem = item;
-                    view.Selection.FocusedItem = item;
-                }
-
                 base.CoerceSelection(item, view, isAddition);
             }
         }

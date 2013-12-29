@@ -79,10 +79,12 @@ namespace MVCVisualDesigner
         {
             base.OnChildConfiguring(child, createdDuringViewFixup);
 
-            if (createdDuringViewFixup && child is VDHoriContainerShape)
+            if (child is VDHoriContainerShape)
             {
                 VDHoriContainerShape pel = child as VDHoriContainerShape;
-                VDHoriContainer mel = pel.ModelElement as VDHoriContainer;
+                if (pel.Anchoring.HasLeftAnchor) return;
+
+                VDHoriContainer mel = child.ModelElement as VDHoriContainer;
                 if (mel != null)
                 {
                     if (mel.Tag == "Heads")
@@ -105,12 +107,6 @@ namespace MVCVisualDesigner
         {
             base.OnChildConfigured(child, childWasPlaced, createdDuringViewFixup);
         }
-
-        protected override void SetAbsoluteBoundsValue(RectangleD newValue)
-        {
-            base.SetAbsoluteBoundsValue(newValue);
-            //PerformShapeAnchoringRule();
-        }
     }
 
     public partial class VDTabHeadShape
@@ -121,24 +117,6 @@ namespace MVCVisualDesigner
         {
             base.OnShapeInserted();
         }
-
-        //public override BoundsRules BoundsRules { get { return TabHeadBoundsRules.Instance; } }
-
-        //class TabHeadBoundsRules : BoundsRules
-        //{
-        //    internal static readonly TabHeadBoundsRules Instance = new TabHeadBoundsRules();
-
-        //    public override RectangleD GetCompliantBounds(ShapeElement shape, RectangleD proposedBounds)
-        //    {
-        //        proposedBounds = DefaultBoundsRules.Instance.GetCompliantBounds(shape, proposedBounds);
-
-        //        PointD loc = proposedBounds.Location;
-        //        if (loc.Y > 0.001) loc.Y = 0;
-
-        //        proposedBounds = new RectangleD(loc, proposedBounds.Size);
-        //        return proposedBounds;
-        //    }
-        //}
     }
 
     public partial class VDTabBodyShape
