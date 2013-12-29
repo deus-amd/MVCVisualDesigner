@@ -226,6 +226,10 @@ namespace MVCVisualDesigner
 #region Widget Title Port
 
         virtual public bool HasWidgetTitleIcon { get { return false; } }
+        /// <summary> Has additional title icon </summary>
+        /// <param name="idx">index:0-4</param>
+        /// <returns></returns>
+        virtual public bool HasAdditionalWidgetTitleIcon(int idx) { return false; }
 
         protected virtual string getTitleText()
         {
@@ -240,9 +244,23 @@ namespace MVCVisualDesigner
             return null;
         }
 
+        /// <summary> Get image for additional title icon </summary>
+        /// <param name="idx">index:0-4</param>
+        /// <returns></returns>
+        protected virtual Image getAdditionalTitleIcon(int idx)
+        {
+            return null;
+        }
+
         // calculated domain properties
         protected internal string GettitleTextValue() { return this.getTitleText(); }
         protected internal Image GettitleIconValue() { return this.getTitleIcon(); }
+
+        protected internal Image GettitleIcon1Value() { return this.getAdditionalTitleIcon(0); }
+        protected internal Image GettitleIcon2Value() { return this.getAdditionalTitleIcon(1); }
+        protected internal Image GettitleIcon3Value() { return this.getAdditionalTitleIcon(2); }
+        protected internal Image GettitleIcon4Value() { return this.getAdditionalTitleIcon(3); }
+        protected internal Image GettitleIcon5Value() { return this.getAdditionalTitleIcon(4); }
 
         /// <summary>
         /// Sometimes port placement will resize parent shape, but for TitlePort, its position is fixed,

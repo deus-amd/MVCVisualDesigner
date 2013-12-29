@@ -63,6 +63,19 @@ namespace MVCVisualDesigner
             titleTextField.DefaultFontId = new StyleSetResourceId(string.Empty, "ShapeTextBold9");			
             shapeFields.Add(titleTextField);
 
+            // more title icons
+            ShapeField leftSibling = titleTextField;
+            for (int i = 0; i < 5; i++)
+            {
+                ImageField moreTitleIconField = new ImageField("WidgetTitleIcon" + i);
+                moreTitleIconField.DefaultSelectable = false;
+                moreTitleIconField.DefaultFocusable = false;
+                moreTitleIconField.AnchoringBehavior.SetTopAnchor(AnchoringBehavior.Edge.Top, 0.02);
+                moreTitleIconField.AnchoringBehavior.SetLeftAnchor(leftSibling, AnchoringBehavior.Edge.Right, 0.02);
+                shapeFields.Add(moreTitleIconField);
+                leftSibling = moreTitleIconField;
+            }
+
             PinButtonField pinField = new PinButtonField("WidgetTitlePinIcon");
             pinField.AnchoringBehavior.SetTopAnchor(AnchoringBehavior.Edge.Top, 0.02);
             pinField.AnchoringBehavior.SetRightAnchor(AnchoringBehavior.Edge.Right, 0.02);
@@ -198,6 +211,15 @@ namespace MVCVisualDesigner
                 if (parentShape.HasWidgetTitleIcon)
                 {
                     size.Width += size.Height; // add more space for icon
+                }
+
+                for (int i = 0; i < 5; i++)
+                {
+                    // add more space for additional title icon
+                    if (parentShape.HasAdditionalWidgetTitleIcon(i))
+                    {
+                        size.Width += size.Height;
+                    }
                 }
 
                 // should be smaller than parent shape

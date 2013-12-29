@@ -652,10 +652,40 @@
             <ExternalTypeMoniker Name="/System.Drawing/Image" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="91f2119d-4c85-4c5e-a912-0203903aae28" Description="" Name="relayoutChildren" DisplayName="Relayout Children" IsBrowsable="false">
+        <DomainProperty Id="91f2119d-4c85-4c5e-a912-0203903aae28" Description="" Name="relayoutChildren" DisplayName="Relayout Children" Category="Internal States" IsBrowsable="false">
           <Notes>trigger a rule to relayout child shapes (trigger children's bounds rules)</Notes>
           <Type>
             <ExternalTypeMoniker Name="/System/Boolean" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="7663b994-2374-423c-a603-31c4fefb1525" Description="Additional title icon 1" Name="titleIcon1" DisplayName="Title Icon1" Kind="Calculated" Category="Internal States">
+          <Notes>Additional title icon 1</Notes>
+          <Type>
+            <ExternalTypeMoniker Name="/System.Drawing/Image" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="6aa48c0e-b0ed-4ac8-8659-acf47b580910" Description="Additional title icon 2" Name="titleIcon2" DisplayName="Title Icon2" Kind="Calculated" Category="Internal States">
+          <Notes>Additional title icon 2</Notes>
+          <Type>
+            <ExternalTypeMoniker Name="/System.Drawing/Image" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="5a60bdaf-4e7e-40e5-8a45-c5b4b1043ff4" Description="Additional title icon 3" Name="titleIcon3" DisplayName="Title Icon3" Kind="Calculated" Category="Internal States">
+          <Notes>Additional title icon 3</Notes>
+          <Type>
+            <ExternalTypeMoniker Name="/System.Drawing/Image" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="68110094-f002-4c9a-84ea-1b7303f4e04e" Description="Additional title icon 4" Name="titleIcon4" DisplayName="Title Icon4" Kind="Calculated" Category="Internal States">
+          <Notes>Additional title icon 4</Notes>
+          <Type>
+            <ExternalTypeMoniker Name="/System.Drawing/Image" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="9afb2bd4-9248-459b-a586-6b65197fa283" Description="Additional title icon 5" Name="titleIcon5" DisplayName="Title Icon5" Kind="Calculated" Category="Internal States" IsBrowsable="false">
+          <Notes>Additional title icon 5</Notes>
+          <Type>
+            <ExternalTypeMoniker Name="/System.Drawing/Image" />
           </Type>
         </DomainProperty>
       </Properties>
@@ -800,6 +830,21 @@
           </XmlPropertyData>
           <XmlPropertyData XmlName="relayoutChildren">
             <DomainPropertyMoniker Name="VDWidgetShape/relayoutChildren" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="titleIcon1" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDWidgetShape/titleIcon1" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="titleIcon2" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDWidgetShape/titleIcon2" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="titleIcon3" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDWidgetShape/titleIcon3" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="titleIcon4" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDWidgetShape/titleIcon4" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="titleIcon5" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDWidgetShape/titleIcon5" />
           </XmlPropertyData>
         </ElementData>
       </XmlClassData>

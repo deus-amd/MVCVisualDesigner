@@ -70,6 +70,20 @@ namespace MVCVisualDesigner
             return this.getImageFromResource("TabToolToolboxBitmap");
         }
 
+        public override bool HasAdditionalWidgetTitleIcon(int idx)
+        {
+            return idx == 0;
+        }
+
+        protected override Image getAdditionalTitleIcon(int idx)
+        {
+            if (idx == 0)
+            {
+                return this.getImageFromResource("TabToolToolboxBitmap");
+            }
+            return null;
+        }
+
         public override ShapeElement FixUpChildShapes(ModelElement childElement)
         {
             return base.FixUpChildShapes(childElement);
