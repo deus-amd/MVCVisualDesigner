@@ -9,5 +9,9 @@ namespace MVCVisualDesigner
 {
     public partial class MVCVisualDesignerDomainModel : DomainModel
     {
+        protected override Type[] GetCustomDomainModelTypes()
+        {
+            return new Type[] { typeof(VDRelayoutChildrenShapeRule) };
+        }
     }
 }

@@ -85,9 +85,12 @@
     </Compile>
     <Compile Include="CustomCode\CodeGen\ICodeGeneratorFactory.cs" />
     <Compile Include="CustomCode\HTMLAttribute.cs" />
+    <Compile Include="CustomCode\ICustomMerge.cs" />
     <Compile Include="CustomCode\PropertyEditors\VDCollectionEditor.cs" />
+    <Compile Include="CustomCode\Widgets\Container.cs" />
     <Compile Include="CustomCode\Widgets\Form.cs" />
     <Compile Include="CustomCode\Widgets\Separator.cs" />
+    <Compile Include="CustomCode\Widgets\Tab.cs" />
     <Compile Include="CustomCode\WidgetTreeWalker.cs" />
     <Compile Include="Resources\MVDResources.Designer.cs">
       <AutoGen>True</AutoGen>

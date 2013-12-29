@@ -82,7 +82,7 @@
     </DomainClass>
     <DomainClass Id="2500aa65-1d54-460f-a7d5-278035a0f8e3" Description="Description for MVCVisualDesigner.VDSeparator" Name="VDSeparator" DisplayName="VDSeparator" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner">
       <BaseClass>
-        <DomainClassMoniker Name="VDWidget" />
+        <DomainClassMoniker Name="VDInternalUtility" />
       </BaseClass>
     </DomainClass>
     <DomainClass Id="c761d8da-76c8-4ae9-a268-8d81a7f9fd69" Description="Description for MVCVisualDesigner.VDHoriSeparator" Name="VDHoriSeparator" DisplayName="VDHori Separator" Namespace="MVCVisualDesigner">
@@ -286,24 +286,6 @@
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
-      <ElementMergeDirectives>
-        <ElementMergeDirective>
-          <Index>
-            <DomainClassMoniker Name="VDTabHead" />
-          </Index>
-          <LinkCreationPaths>
-            <DomainPath>TabHasHeads.Heads</DomainPath>
-          </LinkCreationPaths>
-        </ElementMergeDirective>
-        <ElementMergeDirective>
-          <Index>
-            <DomainClassMoniker Name="VDTabBody" />
-          </Index>
-          <LinkCreationPaths>
-            <DomainPath>TabHasBodys.Bodys</DomainPath>
-          </LinkCreationPaths>
-        </ElementMergeDirective>
-      </ElementMergeDirectives>
     </DomainClass>
     <DomainClass Id="3f8b9105-4256-41d7-9b71-105eb811de69" Description="Description for MVCVisualDesigner.VDTabHead" Name="VDTabHead" DisplayName="VDTab Head" Namespace="MVCVisualDesigner">
       <BaseClass>
@@ -320,6 +302,34 @@
     <DomainClass Id="00cba80b-0bdb-448e-8175-a56ba36ecec7" Description="Description for MVCVisualDesigner.VDTabBody" Name="VDTabBody" DisplayName="VDTab Body" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="0a40e8a3-96af-49a5-92e6-778959d485f7" Description="Description for MVCVisualDesigner.VDInternalUtility" Name="VDInternalUtility" DisplayName="VDInternal Utility" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner">
+      <Notes>Used for internal usage, not listed on Toolbox, and not used by users directly</Notes>
+      <BaseClass>
+        <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="4556e526-61ff-4c5b-a7b6-99a133648f37" Description="Description for MVCVisualDesigner.VDContainer" Name="VDContainer" DisplayName="VDContainer" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDInternalUtility" />
+      </BaseClass>
+      <Properties>
+        <DomainProperty Id="d9c712b6-610d-493c-ad0b-f2e02fc92694" Description="Description for MVCVisualDesigner.VDContainer.Tag" Name="Tag" DisplayName="Tag">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+    </DomainClass>
+    <DomainClass Id="80f528f7-1be6-49e2-9916-0c76bd52d4dc" Description="Description for MVCVisualDesigner.VDHoriContainer" Name="VDHoriContainer" DisplayName="VDHori Container" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDContainer" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="5eec1f97-bb5a-4251-8334-8146cf522c8e" Description="Description for MVCVisualDesigner.VDVertContainer" Name="VDVertContainer" DisplayName="VDVert Container" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDContainer" />
       </BaseClass>
     </DomainClass>
   </Classes>
@@ -477,44 +487,6 @@
         </DomainRole>
       </Target>
     </DomainRelationship>
-    <DomainRelationship Id="a6bb20b5-355c-4cac-9c29-270250c837ec" Description="Description for MVCVisualDesigner.TabHasHeads" Name="TabHasHeads" DisplayName="Tab Has Heads" Namespace="MVCVisualDesigner" IsEmbedding="true">
-      <BaseRelationship>
-        <DomainRelationshipMoniker Name="WidgetHasChildren" />
-      </BaseRelationship>
-      <Source>
-        <DomainRole Id="e02907c5-2429-4d1d-aa86-74c4e4338ee1" Description="Description for MVCVisualDesigner.TabHasHeads.VDTab" Name="VDTab" DisplayName="VDTab" PropertyName="Heads" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Heads">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDTab" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="da4237a3-f2d3-41bf-8ba4-bfbe18df1128" Description="Description for MVCVisualDesigner.TabHasHeads.VDTabHead" Name="VDTabHead" DisplayName="VDTab Head" PropertyName="Tab" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Tab">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDTabHead" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
-    <DomainRelationship Id="94c8db8c-cf39-4a58-b39c-bdfdbe892cd7" Description="Description for MVCVisualDesigner.TabHasBodys" Name="TabHasBodys" DisplayName="Tab Has Bodys" Namespace="MVCVisualDesigner" IsEmbedding="true">
-      <BaseRelationship>
-        <DomainRelationshipMoniker Name="WidgetHasChildren" />
-      </BaseRelationship>
-      <Source>
-        <DomainRole Id="e9aa725d-57dc-4fed-a517-17f6e65d299c" Description="Description for MVCVisualDesigner.TabHasBodys.VDTab" Name="VDTab" DisplayName="VDTab" PropertyName="Bodys" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Bodys">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDTab" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="a08e0e8b-8a52-4067-b923-3d7996a4ab83" Description="Description for MVCVisualDesigner.TabHasBodys.VDTabBody" Name="VDTabBody" DisplayName="VDTab Body" PropertyName="Tab" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Tab">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDTabBody" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
     <DomainRelationship Id="4b2fbdee-3fdd-4820-92de-21ef54305338" Description="Description for MVCVisualDesigner.HeadLinksToBody" Name="HeadLinksToBody" DisplayName="Head Links To Body" Namespace="MVCVisualDesigner">
       <Source>
         <DomainRole Id="b6d6a6c0-2b49-4156-81fe-f4992eb13373" Description="Description for MVCVisualDesigner.HeadLinksToBody.VDTabHead" Name="VDTabHead" DisplayName="VDTab Head" PropertyName="Body" Multiplicity="One" PropertyDisplayName="Body">
@@ -565,7 +537,7 @@
     </DomainRelationship>
     <DomainRelationship Id="56752e05-f310-4846-92c2-e53e80b2302f" Description="Description for MVCVisualDesigner.TabHasActiveHead" Name="TabHasActiveHead" DisplayName="Tab Has Active Head" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="f64854c2-8069-4bb9-985e-cec212283f71" Description="Description for MVCVisualDesigner.TabHasActiveHead.VDTab" Name="VDTab" DisplayName="VDTab" PropertyName="ActiveHead" PropertyDisplayName="Active Head">
+        <DomainRole Id="f64854c2-8069-4bb9-985e-cec212283f71" Description="Description for MVCVisualDesigner.TabHasActiveHead.VDTab" Name="VDTab" DisplayName="VDTab" PropertyName="ActiveHead" Multiplicity="ZeroOne" PropertyDisplayName="Active Head">
           <RolePlayer>
             <DomainClassMoniker Name="VDTab" />
           </RolePlayer>
@@ -680,6 +652,12 @@
             <ExternalTypeMoniker Name="/System.Drawing/Image" />
           </Type>
         </DomainProperty>
+        <DomainProperty Id="91f2119d-4c85-4c5e-a912-0203903aae28" Description="" Name="relayoutChildren" DisplayName="Relayout Children" IsBrowsable="false">
+          <Notes>trigger a rule to relayout child shapes (trigger children's bounds rules)</Notes>
+          <Type>
+            <ExternalTypeMoniker Name="/System/Boolean" />
+          </Type>
+        </DomainProperty>
       </Properties>
     </GeometryShape>
     <GeometryShape Id="4842b8a8-4cb9-429d-ad01-a6d400e0676b" Description="" Name="VDSectionShape" DisplayName="VDSection Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDSection Shape" InitialWidth="5" InitialHeight="3" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
@@ -743,17 +721,27 @@
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="b597256a-1a2b-4816-912e-a69f2c2f8aa8" Description="Description for MVCVisualDesigner.VDTabShape" Name="VDTabShape" DisplayName="VDTab Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTab Shape" InitialHeight="1" Geometry="Rectangle">
+    <GeometryShape Id="b597256a-1a2b-4816-912e-a69f2c2f8aa8" Description="" Name="VDTabShape" DisplayName="Tab" Namespace="MVCVisualDesigner" FixedTooltipText="" InitialWidth="5" InitialHeight="3" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="d08c9444-73e2-47ae-93e3-0b6c2a59765b" Description="Description for MVCVisualDesigner.VDTabHeadShape" Name="VDTabHeadShape" DisplayName="VDTab Head Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTab Head Shape" InitialHeight="1" Geometry="Rectangle">
+    <GeometryShape Id="d08c9444-73e2-47ae-93e3-0b6c2a59765b" Description="" Name="VDTabHeadShape" DisplayName="Tab Head" Namespace="MVCVisualDesigner" FixedTooltipText="" InitialWidth="2" InitialHeight="0.5" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="737b8598-0d13-407e-bcf4-8b369752adbf" Description="Description for MVCVisualDesigner.VDTabBodyShape" Name="VDTabBodyShape" DisplayName="VDTab Body Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTab Body Shape" InitialHeight="1" Geometry="Rectangle">
+    <GeometryShape Id="737b8598-0d13-407e-bcf4-8b369752adbf" Description="" Name="VDTabBodyShape" DisplayName="Tab Body" Namespace="MVCVisualDesigner" FixedTooltipText="" OutlineColor="Transparent" InitialWidth="5" InitialHeight="2.5" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
+    <GeometryShape Id="bce84a85-292d-46e2-b0ad-4e2a5c9e5e20" Description="Description for MVCVisualDesigner.VDHoriContainerShape" Name="VDHoriContainerShape" DisplayName="VDHori Container Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDHori Container Shape" FillColor="Gray" OutlineColor="Transparent" InitialHeight="1" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
+    <GeometryShape Id="f32fc824-9b8a-4785-ab9c-1204b7fe7aa7" Description="Description for MVCVisualDesigner.VDVertContainerShape" Name="VDVertContainerShape" DisplayName="VDVert Container Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDVert Container Shape" FillColor="Gray" OutlineColor="Transparent" InitialHeight="1" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
@@ -809,6 +797,9 @@
           </XmlPropertyData>
           <XmlPropertyData XmlName="titleIcon" Representation="Ignore">
             <DomainPropertyMoniker Name="VDWidgetShape/titleIcon" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="relayoutChildren">
+            <DomainPropertyMoniker Name="VDWidgetShape/relayoutChildren" />
           </XmlPropertyData>
         </ElementData>
       </XmlClassData>
@@ -1022,12 +1013,6 @@
       <XmlClassData TypeName="VDTab" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTabMoniker" ElementName="vDTab" MonikerTypeName="VDTabMoniker">
         <DomainClassMoniker Name="VDTab" />
         <ElementData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="heads">
-            <DomainRelationshipMoniker Name="TabHasHeads" />
-          </XmlRelationshipData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="bodys">
-            <DomainRelationshipMoniker Name="TabHasBodys" />
-          </XmlRelationshipData>
           <XmlRelationshipData UseFullForm="true" RoleElementName="firstHead">
             <DomainRelationshipMoniker Name="TabHasFirstHead" />
           </XmlRelationshipData>
@@ -1053,12 +1038,6 @@
       <XmlClassData TypeName="VDTabBody" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTabBodyMoniker" ElementName="vDTabBody" MonikerTypeName="VDTabBodyMoniker">
         <DomainClassMoniker Name="VDTabBody" />
       </XmlClassData>
-      <XmlClassData TypeName="TabHasHeads" MonikerAttributeName="" SerializeId="true" MonikerElementName="tabHasHeadsMoniker" ElementName="tabHasHeads" MonikerTypeName="TabHasHeadsMoniker">
-        <DomainRelationshipMoniker Name="TabHasHeads" />
-      </XmlClassData>
-      <XmlClassData TypeName="TabHasBodys" MonikerAttributeName="" SerializeId="true" MonikerElementName="tabHasBodysMoniker" ElementName="tabHasBodys" MonikerTypeName="TabHasBodysMoniker">
-        <DomainRelationshipMoniker Name="TabHasBodys" />
-      </XmlClassData>
       <XmlClassData TypeName="HeadLinksToBody" MonikerAttributeName="" SerializeId="true" MonikerElementName="headLinksToBodyMoniker" ElementName="headLinksToBody" MonikerTypeName="HeadLinksToBodyMoniker">
         <DomainRelationshipMoniker Name="HeadLinksToBody" />
       </XmlClassData>
@@ -1079,6 +1058,29 @@
       </XmlClassData>
       <XmlClassData TypeName="VDTabBodyShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTabBodyShapeMoniker" ElementName="vDTabBodyShape" MonikerTypeName="VDTabBodyShapeMoniker">
         <GeometryShapeMoniker Name="VDTabBodyShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDInternalUtility" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDInternalUtilityMoniker" ElementName="vDInternalUtility" MonikerTypeName="VDInternalUtilityMoniker">
+        <DomainClassMoniker Name="VDInternalUtility" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDContainer" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDContainerMoniker" ElementName="vDContainer" MonikerTypeName="VDContainerMoniker">
+        <DomainClassMoniker Name="VDContainer" />
+        <ElementData>
+          <XmlPropertyData XmlName="tag">
+            <DomainPropertyMoniker Name="VDContainer/Tag" />
+          </XmlPropertyData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="VDHoriContainer" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDHoriContainerMoniker" ElementName="vDHoriContainer" MonikerTypeName="VDHoriContainerMoniker">
+        <DomainClassMoniker Name="VDHoriContainer" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDVertContainer" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDVertContainerMoniker" ElementName="vDVertContainer" MonikerTypeName="VDVertContainerMoniker">
+        <DomainClassMoniker Name="VDVertContainer" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDHoriContainerShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDHoriContainerShapeMoniker" ElementName="vDHoriContainerShape" MonikerTypeName="VDHoriContainerShapeMoniker">
+        <GeometryShapeMoniker Name="VDHoriContainerShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDVertContainerShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDVertContainerShapeMoniker" ElementName="vDVertContainerShape" MonikerTypeName="VDVertContainerShapeMoniker">
+        <GeometryShapeMoniker Name="VDVertContainerShape" />
       </XmlClassData>
     </ClassData>
   </XmlSerializationBehavior>
@@ -1310,19 +1312,21 @@
         <DomainClassMoniker Name="VDTab" />
         <GeometryShapeMoniker Name="VDTabShape" />
       </ShapeMap>
-      <ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
         <DomainClassMoniker Name="VDTabHead" />
-        <ParentElementPath>
-          <DomainPath>TabHasHeads.Tab/!VDTab</DomainPath>
-        </ParentElementPath>
         <GeometryShapeMoniker Name="VDTabHeadShape" />
       </ShapeMap>
-      <ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
         <DomainClassMoniker Name="VDTabBody" />
-        <ParentElementPath>
-          <DomainPath>TabHasBodys.Tab/!VDTab</DomainPath>
-        </ParentElementPath>
         <GeometryShapeMoniker Name="VDTabBodyShape" />
+      </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDHoriContainer" />
+        <GeometryShapeMoniker Name="VDHoriContainerShape" />
+      </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDVertContainer" />
+        <GeometryShapeMoniker Name="VDVertContainerShape" />
       </ShapeMap>
     </ShapeMaps>
   </Diagram>
@@ -1336,6 +1340,9 @@
     <ToolboxTab TabText="Widget">
       <ElementTool Name="SectionTool" ToolboxIcon="Resources\SectionIcon.bmp" Caption="Section" Tooltip="" HelpKeyword="SectionTool">
         <DomainClassMoniker Name="VDSection" />
+      </ElementTool>
+      <ElementTool Name="TabTool" ToolboxIcon="Resources\ExampleShapeToolBitmap.bmp" Caption="Tab" Tooltip="" HelpKeyword="TabTool">
+        <DomainClassMoniker Name="VDTab" />
       </ElementTool>
     </ToolboxTab>
     <ToolboxTab TabText="Form">

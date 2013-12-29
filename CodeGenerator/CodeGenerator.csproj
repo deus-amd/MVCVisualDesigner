@@ -55,6 +55,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RazorCodeGenerator.tt</DependentUpon>
     </Compile>
+    <Compile Include="RazorCodeGenerator\VDHoriContainerRazorCodeGeneratorImpl.cs">
+      <DependentUpon>VDHoriContainerRazorCodeGeneratorImpl.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="RazorCodeGenerator\VDTabBodyRazorCodeGeneratorImpl.cs">
       <DependentUpon>VDTabBodyRazorCodeGeneratorImpl.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -62,6 +67,11 @@
     </Compile>
     <Compile Include="RazorCodeGenerator\VDTabHeadRazorCodeGeneratorImpl.cs">
       <DependentUpon>VDTabHeadRazorCodeGeneratorImpl.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="RazorCodeGenerator\VDVertContainerRazorCodeGeneratorImpl.cs">
+      <DependentUpon>VDVertContainerRazorCodeGeneratorImpl.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -147,6 +157,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RazorCodeGenerator.cs</LastGenOutput>
     </None>
+    <None Include="RazorCodeGenerator\VDHoriContainerRazorCodeGeneratorImpl.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>VDHoriContainerRazorCodeGeneratorImpl.cs</LastGenOutput>
+      <CustomToolNamespace>MVCVisualDesigner.CodeGenerator</CustomToolNamespace>
+    </None>
     <None Include="RazorCodeGenerator\VDTabBodyRazorCodeGeneratorImpl.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>VDTabBodyRazorCodeGeneratorImpl.cs</LastGenOutput>
@@ -155,6 +170,11 @@
     <None Include="RazorCodeGenerator\VDTabHeadRazorCodeGeneratorImpl.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>VDTabHeadRazorCodeGeneratorImpl.cs</LastGenOutput>
+      <CustomToolNamespace>MVCVisualDesigner.CodeGenerator</CustomToolNamespace>
+    </None>
+    <None Include="RazorCodeGenerator\VDVertContainerRazorCodeGeneratorImpl.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>VDVertContainerRazorCodeGeneratorImpl.cs</LastGenOutput>
       <CustomToolNamespace>MVCVisualDesigner.CodeGenerator</CustomToolNamespace>
     </None>
     <None Include="RazorCodeGenerator\VDVertSeparatorRazorCodeGeneratorImpl.tt">

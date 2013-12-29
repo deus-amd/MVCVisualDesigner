@@ -57,6 +57,7 @@ namespace MVCVisualDesigner
 
         protected override void MergeRelate(ModelElement sourceElement, ElementGroup elementGroup)
         {
+            // setup title
             if (sourceElement != null && sourceElement is VDWidget &&
                 ((VDWidget)sourceElement).WidgetType != WidgetType.View)
             {
@@ -65,6 +66,13 @@ namespace MVCVisualDesigner
                 {
                     widget.Title = this.Store.ElementFactory.CreateElement(VDWidgetTitle.DomainClassId) as VDWidgetTitle;
                 }
+            }
+
+            // custom merge relate
+            if (sourceElement != null && sourceElement is ICustomMerge)
+            {
+                ((ICustomMerge)sourceElement).CustomMergeRelate(this, (VDWidget)sourceElement, elementGroup);
+                return;
             }
 
             base.MergeRelate(sourceElement, elementGroup);
@@ -296,7 +304,61 @@ namespace MVCVisualDesigner
         {
             if (!SelectUnpinedParentShape(item, view))
             {
+                // avoid to select container shapes
+                if ((this is VDHoriContainerShape || this is VDVertContainerShape) &&
+                    this.ParentShape != null && this.ParentShape is VDWidgetShape)
+                {
+                    item.SetItem(this.ParentShape);
+                    view.Selection.Clear();
+                    view.Selection.Add(item);
+                    view.Selection.PrimaryItem = item;
+                    view.Selection.FocusedItem = item;
+                }
+
                 base.CoerceSelection(item, view, isAddition);
+            }
+        }
+#endregion
+
+
+/////////////////////////////////////////////////////////////////////////////////
+#region Bounds Rules
+        public override BoundsRules BoundsRules { get { return VDDefaultBoundsRules.Instance; } }
+
+        class VDDefaultBoundsRules : BoundsRules
+        {
+            internal static readonly VDDefaultBoundsRules Instance = new VDDefaultBoundsRules();
+
+            public VDDefaultBoundsRules()
+            {
+            }
+
+            public override RectangleD GetCompliantBounds(ShapeElement shape, RectangleD proposedBounds)
+            {
+                proposedBounds = DefaultBoundsRules.Instance.GetCompliantBounds(shape, proposedBounds);
+
+                VDWidgetShape parent = shape.ParentShape as VDWidgetShape;
+                if (parent != null)
+                {
+                    if (parent is VDHoriContainerShape)
+                    {
+                        if (proposedBounds.Location.Y != 0 || proposedBounds.Size.Height != parent.Bounds.Height)
+                        {
+                            proposedBounds = new RectangleD(new PointD(proposedBounds.Location.X, 0),
+                                        new SizeD(proposedBounds.Size.Width, parent.Bounds.Height));
+                        }
+                    }
+                    else if (parent is VDVertContainerShape)
+                    {
+                        if (proposedBounds.Location.X != 0 || proposedBounds.Size.Width != parent.Bounds.Width)
+                        {
+                            proposedBounds = new RectangleD(new PointD(0, proposedBounds.Location.Y),
+                                        new SizeD(parent.Bounds.Width, proposedBounds.Size.Height));
+                        }
+                    }
+                }
+
+                return proposedBounds;
             }
         }
 #endregion
@@ -327,5 +389,32 @@ namespace MVCVisualDesigner
             return children;
         }
 #endregion
+    }
+
+    [RuleOn(typeof(VDWidgetShape), FireTime = TimeToFire.TopLevelCommit, Priority = 0x7FFFFFFF)]
+    public class VDRelayoutChildrenShapeRule : ChangeRule
+    {
+        public override void ElementPropertyChanged(ElementPropertyChangedEventArgs e)
+        {
+            base.ElementPropertyChanged(e);
+
+            if (e.ModelElement == null || e.DomainProperty == null) return;
+
+            VDWidgetShape shape = e.ModelElement as VDWidgetShape;
+
+            // 
+            if ((e.DomainProperty.Id == VDWidgetShape.relayoutChildrenDomainPropertyId) && ((bool)e.NewValue))
+            {
+                shape.relayoutChildren = false;
+                foreach (var childShape in shape.NestedChildShapes)
+                {
+                    VDWidgetShape ws = childShape as VDWidgetShape;
+                    if (ws != null)
+                    {
+                        ws.OnBoundsFixup(BoundsFixupState.ViewFixup, 1, false);
+                    }
+                }
+            }
+        }
     }
 }

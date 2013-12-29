@@ -14,9 +14,15 @@ string[] WidgetList = new string[]{
 	"VDSubmit",
 	"VDInput",
 	"VDSelect",
+	"VDTab",
+	"VDTabHead",
+	"VDTabBody",
+
+	// Utilities
 	"VDHoriSeparator",
 	"VDVertSeparator",
-	"VDTab",
+	"VDHoriContainer",
+	"VDVertContainer",
 };
 
 // the widgets needn't to specify parent (alreay specified in DSL definition)
@@ -26,8 +32,6 @@ string[] SubWidgetList = new string[] {
 	"VDSectionHead",
 	"VDSectionBody",
 	"VDSelectOption",
-	"VDTabHead",
-	"VDTabBody",
 };
 
 System.Collections.Generic.List<string> AllWidgets = new System.Collections.Generic.List<string>();

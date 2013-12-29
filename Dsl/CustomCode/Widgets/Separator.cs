@@ -52,6 +52,10 @@ namespace MVCVisualDesigner
                 PointD location = proposedBounds.Location;
                 SizeD size = proposedBounds.Size;
 
+                // anchor to parent widget
+                if (!separatorShape.Anchoring.HasLeftAnchor) separatorShape.Anchoring.SetLeftAnchor(0);
+                if (!separatorShape.Anchoring.HasRightAnchor) separatorShape.Anchoring.SetRightAnchor(1);
+                
                 // anchor to top widget
                 if (model.TopWidget != null)
                 {
@@ -60,16 +64,15 @@ namespace MVCVisualDesigner
                     {
                         if (!topWidgetShape.Anchoring.HasBottomAnchor)
                             topWidgetShape.Anchoring.SetBottomAnchor(separatorShape, AnchoringBehavior.Edge.Top, model.TopMargin);
-                        if (!separatorShape.Anchoring.HasLeftAnchor)
-                            separatorShape.Anchoring.SetLeftAnchor(topWidgetShape, AnchoringBehavior.Edge.Left, 0);
-                        if (!separatorShape.Anchoring.HasRightAnchor)
-                            separatorShape.Anchoring.SetRightAnchor(topWidgetShape, AnchoringBehavior.Edge.Right, 0);
+                        //if (!separatorShape.Anchoring.HasLeftAnchor)
+                        //    separatorShape.Anchoring.SetLeftAnchor(topWidgetShape, AnchoringBehavior.Edge.Left, 0);
+                        //if (!separatorShape.Anchoring.HasRightAnchor)
+                        //    separatorShape.Anchoring.SetRightAnchor(topWidgetShape, AnchoringBehavior.Edge.Right, 0);
 
                         // set bounds of HorizonalSeparator according to top widget
-                        location.X = topWidgetShape.Bounds.Left;
+                        //location.X = topWidgetShape.Bounds.Left;
                         if (location.Y < 0.05 || location.Y + size.Height + 0.05 > parentShape.Bounds.Height)
                             location.Y = topWidgetShape.Bounds.Bottom + model.TopMargin;
-                        size.Width = topWidgetShape.Bounds.Width;
                         bFlagBoundsSet = true;
                     }
                 }
@@ -80,20 +83,19 @@ namespace MVCVisualDesigner
                     NodeShape bottomWidgetShape = parentShape.NestedChildShapes.Find(c => c.ModelElement == model.BottomWidget) as NodeShape;
                     if (bottomWidgetShape != null)
                     {
-                        if (!bottomWidgetShape.Anchoring.HasBottomAnchor)
+                        if (!bottomWidgetShape.Anchoring.HasTopAnchor)
                             bottomWidgetShape.Anchoring.SetTopAnchor(separatorShape, AnchoringBehavior.Edge.Bottom, model.BottomMargin);
-                        if (!separatorShape.Anchoring.HasLeftAnchor)
-                            separatorShape.Anchoring.SetLeftAnchor(bottomWidgetShape, AnchoringBehavior.Edge.Left, 0);
-                        if (!separatorShape.Anchoring.HasRightAnchor)
-                            separatorShape.Anchoring.SetRightAnchor(bottomWidgetShape, AnchoringBehavior.Edge.Right, 0);
+                        //if (!separatorShape.Anchoring.HasLeftAnchor)
+                        //    separatorShape.Anchoring.SetLeftAnchor(bottomWidgetShape, AnchoringBehavior.Edge.Left, 0);
+                        //if (!separatorShape.Anchoring.HasRightAnchor)
+                        //    separatorShape.Anchoring.SetRightAnchor(bottomWidgetShape, AnchoringBehavior.Edge.Right, 0);
 
                         // set bounds of handle according to bottom widget
                         if (!bFlagBoundsSet)
                         {
-                            location.X = bottomWidgetShape.Bounds.Left;
+                            //location.X = bottomWidgetShape.Bounds.Left;
                             if (location.Y < 0.05 || location.Y + size.Height + 0.05 > parentShape.Bounds.Height)
                                 location.Y = bottomWidgetShape.Bounds.Top - size.Height - model.BottomMargin;
-                            size.Width = bottomWidgetShape.Bounds.Width;
                         }
                     }
                 }
@@ -134,6 +136,10 @@ namespace MVCVisualDesigner
                 PointD location = proposedBounds.Location;
                 SizeD size = proposedBounds.Size;
 
+                // anchor to parent 
+                if (!separatorShape.Anchoring.HasTopAnchor) separatorShape.Anchoring.SetTopAnchor(0);
+                if (!separatorShape.Anchoring.HasBottomAnchor) separatorShape.Anchoring.SetBottomAnchor(1);
+
                 // anchor to left widget
                 if (model.LeftWidget != null)
                 {
@@ -142,16 +148,15 @@ namespace MVCVisualDesigner
                     {
                         if (!leftWidgetShape.Anchoring.HasRightAnchor)
                             leftWidgetShape.Anchoring.SetRightAnchor(separatorShape, AnchoringBehavior.Edge.Left, model.LeftMargin);
-                        if (!separatorShape.Anchoring.HasTopAnchor)
-                            separatorShape.Anchoring.SetTopAnchor(leftWidgetShape, AnchoringBehavior.Edge.Top, 0);
-                        if (!separatorShape.Anchoring.HasBottomAnchor)
-                            separatorShape.Anchoring.SetBottomAnchor(leftWidgetShape, AnchoringBehavior.Edge.Bottom, 0);
+                        //if (!separatorShape.Anchoring.HasTopAnchor)
+                        //    separatorShape.Anchoring.SetTopAnchor(leftWidgetShape, AnchoringBehavior.Edge.Top, 0);
+                        //if (!separatorShape.Anchoring.HasBottomAnchor)
+                        //    separatorShape.Anchoring.SetBottomAnchor(leftWidgetShape, AnchoringBehavior.Edge.Bottom, 0);
 
                         // set bounds of separator according to left widget
                         if (location.X < 0.05 || location.X + size.Width + 0.05 > parentShape.Bounds.Width)
                             location.X = leftWidgetShape.Bounds.Right + model.LeftMargin;
-                        location.Y = leftWidgetShape.Bounds.Top;
-                        size.Height = leftWidgetShape.Bounds.Height;
+                        //location.Y = leftWidgetShape.Bounds.Top;
                         bFlagBoundsSet = true;
                     }
                 }
@@ -164,18 +169,17 @@ namespace MVCVisualDesigner
                     {
                         if (!rightWidgetShape.Anchoring.HasLeftAnchor)
                             rightWidgetShape.Anchoring.SetLeftAnchor(separatorShape, AnchoringBehavior.Edge.Right, model.RightMargin);
-                        if (!separatorShape.Anchoring.HasTopAnchor)
-                            separatorShape.Anchoring.SetTopAnchor(rightWidgetShape, AnchoringBehavior.Edge.Top, 0);
-                        if (!separatorShape.Anchoring.HasBottomAnchor)
-                            separatorShape.Anchoring.SetBottomAnchor(rightWidgetShape, AnchoringBehavior.Edge.Bottom, 0);
+                        //if (!separatorShape.Anchoring.HasTopAnchor)
+                        //    separatorShape.Anchoring.SetTopAnchor(rightWidgetShape, AnchoringBehavior.Edge.Top, 0);
+                        //if (!separatorShape.Anchoring.HasBottomAnchor)
+                        //    separatorShape.Anchoring.SetBottomAnchor(rightWidgetShape, AnchoringBehavior.Edge.Bottom, 0);
 
                         // set bounds of handle according to bottom widget
                         if (!bFlagBoundsSet)
                         {
                             if (location.X < 0.05 || location.X + size.Width + 0.05 > parentShape.Bounds.Width)
                                 location.X = rightWidgetShape.Bounds.Left - size.Width - model.RightMargin; ;
-                            location.Y = rightWidgetShape.Bounds.Top; 
-                            size.Height = rightWidgetShape.Bounds.Height;
+                            //location.Y = rightWidgetShape.Bounds.Top; 
                         }
                     }
                 }
