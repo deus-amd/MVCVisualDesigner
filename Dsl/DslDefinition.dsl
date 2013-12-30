@@ -503,38 +503,6 @@
         </DomainRole>
       </Target>
     </DomainRelationship>
-    <DomainRelationship Id="f636ef29-7d1c-4b1d-b5e8-4c72f6f85ded" Description="Description for MVCVisualDesigner.HasNextHead" Name="HasNextHead" DisplayName="Has Next Head" Namespace="MVCVisualDesigner">
-      <Source>
-        <DomainRole Id="093aacc7-9107-436f-b66c-27f0f61815e0" Description="Description for MVCVisualDesigner.HasNextHead.SourceVDTabHead" Name="SourceVDTabHead" DisplayName="Source VDTab Head" PropertyName="Next" Multiplicity="ZeroOne" PropertyDisplayName="Next">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDTabHead" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="ce3484e0-263c-479e-86a5-6cef5919f3f5" Description="Description for MVCVisualDesigner.HasNextHead.TargetVDTabHead" Name="TargetVDTabHead" DisplayName="Target VDTab Head" PropertyName="Previous" Multiplicity="ZeroOne" PropertyDisplayName="Previous">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDTabHead" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
-    <DomainRelationship Id="36c04320-75c3-490c-8e1c-1df6efe7487d" Description="Description for MVCVisualDesigner.TabHasFirstHead" Name="TabHasFirstHead" DisplayName="Tab Has First Head" Namespace="MVCVisualDesigner">
-      <Source>
-        <DomainRole Id="c84e5508-2b60-4805-a154-e3b591bd4ae0" Description="Description for MVCVisualDesigner.TabHasFirstHead.VDTab" Name="VDTab" DisplayName="VDTab" PropertyName="FirstHead" Multiplicity="ZeroOne" PropertyDisplayName="First Head">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDTab" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="74d16f0c-0d49-4117-9cb2-7062c8fb9a01" Description="Description for MVCVisualDesigner.TabHasFirstHead.VDTabHead" Name="VDTabHead" DisplayName="VDTab Head" PropertyName="Tab" Multiplicity="One" IsPropertyGenerator="false" PropertyDisplayName="Tab">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDTabHead" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
     <DomainRelationship Id="56752e05-f310-4846-92c2-e53e80b2302f" Description="Description for MVCVisualDesigner.TabHasActiveHead" Name="TabHasActiveHead" DisplayName="Tab Has Active Head" Namespace="MVCVisualDesigner">
       <Source>
         <DomainRole Id="f64854c2-8069-4bb9-985e-cec212283f71" Description="Description for MVCVisualDesigner.TabHasActiveHead.VDTab" Name="VDTab" DisplayName="VDTab" PropertyName="ActiveHead" Multiplicity="ZeroOne" PropertyDisplayName="Active Head">
@@ -658,32 +626,32 @@
             <ExternalTypeMoniker Name="/System/Boolean" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="7663b994-2374-423c-a603-31c4fefb1525" Description="Additional title icon 1" Name="titleIcon1" DisplayName="Title Icon1" Kind="Calculated" Category="Internal States">
+        <DomainProperty Id="7663b994-2374-423c-a603-31c4fefb1525" Description="Additional title icon 0" Name="titleIcon0" DisplayName="Title Icon0" Kind="Calculated" Category="Internal States">
+          <Notes>Additional title icon 0</Notes>
+          <Type>
+            <ExternalTypeMoniker Name="/System.Drawing/Image" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="6aa48c0e-b0ed-4ac8-8659-acf47b580910" Description="Additional title icon 1" Name="titleIcon1" DisplayName="Title Icon1" Kind="Calculated" Category="Internal States">
           <Notes>Additional title icon 1</Notes>
           <Type>
             <ExternalTypeMoniker Name="/System.Drawing/Image" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="6aa48c0e-b0ed-4ac8-8659-acf47b580910" Description="Additional title icon 2" Name="titleIcon2" DisplayName="Title Icon2" Kind="Calculated" Category="Internal States">
+        <DomainProperty Id="5a60bdaf-4e7e-40e5-8a45-c5b4b1043ff4" Description="Additional title icon 2" Name="titleIcon2" DisplayName="Title Icon2" Kind="Calculated" Category="Internal States">
           <Notes>Additional title icon 2</Notes>
           <Type>
             <ExternalTypeMoniker Name="/System.Drawing/Image" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="5a60bdaf-4e7e-40e5-8a45-c5b4b1043ff4" Description="Additional title icon 3" Name="titleIcon3" DisplayName="Title Icon3" Kind="Calculated" Category="Internal States">
+        <DomainProperty Id="68110094-f002-4c9a-84ea-1b7303f4e04e" Description="Additional title icon 3" Name="titleIcon3" DisplayName="Title Icon3" Kind="Calculated" Category="Internal States">
           <Notes>Additional title icon 3</Notes>
           <Type>
             <ExternalTypeMoniker Name="/System.Drawing/Image" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="68110094-f002-4c9a-84ea-1b7303f4e04e" Description="Additional title icon 4" Name="titleIcon4" DisplayName="Title Icon4" Kind="Calculated" Category="Internal States">
+        <DomainProperty Id="9afb2bd4-9248-459b-a586-6b65197fa283" Description="Additional title icon 4" Name="titleIcon4" DisplayName="Title Icon4" Kind="Calculated" Category="Internal States" IsBrowsable="false">
           <Notes>Additional title icon 4</Notes>
-          <Type>
-            <ExternalTypeMoniker Name="/System.Drawing/Image" />
-          </Type>
-        </DomainProperty>
-        <DomainProperty Id="9afb2bd4-9248-459b-a586-6b65197fa283" Description="Additional title icon 5" Name="titleIcon5" DisplayName="Title Icon5" Kind="Calculated" Category="Internal States" IsBrowsable="false">
-          <Notes>Additional title icon 5</Notes>
           <Type>
             <ExternalTypeMoniker Name="/System.Drawing/Image" />
           </Type>
@@ -831,6 +799,9 @@
           <XmlPropertyData XmlName="relayoutChildren">
             <DomainPropertyMoniker Name="VDWidgetShape/relayoutChildren" />
           </XmlPropertyData>
+          <XmlPropertyData XmlName="titleIcon0" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDWidgetShape/titleIcon0" />
+          </XmlPropertyData>
           <XmlPropertyData XmlName="titleIcon1" Representation="Ignore">
             <DomainPropertyMoniker Name="VDWidgetShape/titleIcon1" />
           </XmlPropertyData>
@@ -842,9 +813,6 @@
           </XmlPropertyData>
           <XmlPropertyData XmlName="titleIcon4" Representation="Ignore">
             <DomainPropertyMoniker Name="VDWidgetShape/titleIcon4" />
-          </XmlPropertyData>
-          <XmlPropertyData XmlName="titleIcon5" Representation="Ignore">
-            <DomainPropertyMoniker Name="VDWidgetShape/titleIcon5" />
           </XmlPropertyData>
         </ElementData>
       </XmlClassData>
@@ -1058,9 +1026,6 @@
       <XmlClassData TypeName="VDTab" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTabMoniker" ElementName="vDTab" MonikerTypeName="VDTabMoniker">
         <DomainClassMoniker Name="VDTab" />
         <ElementData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="firstHead">
-            <DomainRelationshipMoniker Name="TabHasFirstHead" />
-          </XmlRelationshipData>
           <XmlRelationshipData UseFullForm="true" RoleElementName="activeHead">
             <DomainRelationshipMoniker Name="TabHasActiveHead" />
           </XmlRelationshipData>
@@ -1072,9 +1037,6 @@
           <XmlRelationshipData UseFullForm="true" RoleElementName="body">
             <DomainRelationshipMoniker Name="HeadLinksToBody" />
           </XmlRelationshipData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="next">
-            <DomainRelationshipMoniker Name="HasNextHead" />
-          </XmlRelationshipData>
           <XmlPropertyData XmlName="tabTitle">
             <DomainPropertyMoniker Name="VDTabHead/TabTitle" />
           </XmlPropertyData>
@@ -1085,12 +1047,6 @@
       </XmlClassData>
       <XmlClassData TypeName="HeadLinksToBody" MonikerAttributeName="" SerializeId="true" MonikerElementName="headLinksToBodyMoniker" ElementName="headLinksToBody" MonikerTypeName="HeadLinksToBodyMoniker">
         <DomainRelationshipMoniker Name="HeadLinksToBody" />
-      </XmlClassData>
-      <XmlClassData TypeName="HasNextHead" MonikerAttributeName="" SerializeId="true" MonikerElementName="hasNextHeadMoniker" ElementName="hasNextHead" MonikerTypeName="HasNextHeadMoniker">
-        <DomainRelationshipMoniker Name="HasNextHead" />
-      </XmlClassData>
-      <XmlClassData TypeName="TabHasFirstHead" MonikerAttributeName="" SerializeId="true" MonikerElementName="tabHasFirstHeadMoniker" ElementName="tabHasFirstHead" MonikerTypeName="TabHasFirstHeadMoniker">
-        <DomainRelationshipMoniker Name="TabHasFirstHead" />
       </XmlClassData>
       <XmlClassData TypeName="TabHasActiveHead" MonikerAttributeName="" SerializeId="true" MonikerElementName="tabHasActiveHeadMoniker" ElementName="tabHasActiveHead" MonikerTypeName="TabHasActiveHeadMoniker">
         <DomainRelationshipMoniker Name="TabHasActiveHead" />
@@ -1226,44 +1182,6 @@
         </TargetDirectives>
       </LinkConnectDirective>
     </ConnectionBuilder>
-    <ConnectionBuilder Name="HasNextHeadBuilder">
-      <LinkConnectDirective>
-        <DomainRelationshipMoniker Name="HasNextHead" />
-        <SourceDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDTabHead" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </SourceDirectives>
-        <TargetDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDTabHead" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </TargetDirectives>
-      </LinkConnectDirective>
-    </ConnectionBuilder>
-    <ConnectionBuilder Name="TabHasFirstHeadBuilder">
-      <LinkConnectDirective>
-        <DomainRelationshipMoniker Name="TabHasFirstHead" />
-        <SourceDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDTab" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </SourceDirectives>
-        <TargetDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDTabHead" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </TargetDirectives>
-      </LinkConnectDirective>
-    </ConnectionBuilder>
     <ConnectionBuilder Name="TabHasActiveHeadBuilder">
       <LinkConnectDirective>
         <DomainRelationshipMoniker Name="TabHasActiveHead" />
@@ -1386,7 +1304,7 @@
       <ElementTool Name="SectionTool" ToolboxIcon="Resources\SectionIcon.bmp" Caption="Section" Tooltip="" HelpKeyword="SectionTool">
         <DomainClassMoniker Name="VDSection" />
       </ElementTool>
-      <ElementTool Name="TabTool" ToolboxIcon="Resources\ExampleShapeToolBitmap.bmp" Caption="Tab" Tooltip="" HelpKeyword="TabTool">
+      <ElementTool Name="TabTool" ToolboxIcon="Resources\TabIcon.bmp" Caption="Tab" Tooltip="" HelpKeyword="TabTool">
         <DomainClassMoniker Name="VDTab" />
       </ElementTool>
     </ToolboxTab>

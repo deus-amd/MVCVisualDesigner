@@ -1,4 +1,33 @@
-﻿//namespace MVCViewDesigner
+﻿using Microsoft.VisualStudio.Modeling.Diagrams;
+using System.Windows.Forms;
+namespace MVCVisualDesigner
+{
+    public class VDTitleImageField : ImageField
+    {
+        public VDTitleImageField(string fieldName, int index)
+            : base(fieldName)
+        {
+            m_index = index;
+        }
+
+        private int m_index;
+        public int Index { get { return m_index; } }
+
+        public override MouseAction GetPotentialMouseAction(MouseButtons mouseButtons, PointD point, DiagramHitTestInfo hitTestInfo)
+        {
+            DiagramItem hitDiagramItem = hitTestInfo.HitDiagramItem;
+            Diagram diagram = (hitDiagramItem != null) ? hitDiagramItem.Diagram : null;
+            if (diagram == null)
+            {
+                return null;
+            }
+            return diagram.SelectAction;
+        }
+    }
+
+}
+
+//namespace MVCVisualDesigner
 //{
 //    using System;
 //    using System.Drawing;

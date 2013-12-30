@@ -256,11 +256,15 @@ namespace MVCVisualDesigner
         protected internal string GettitleTextValue() { return this.getTitleText(); }
         protected internal Image GettitleIconValue() { return this.getTitleIcon(); }
 
-        protected internal Image GettitleIcon1Value() { return this.getAdditionalTitleIcon(0); }
-        protected internal Image GettitleIcon2Value() { return this.getAdditionalTitleIcon(1); }
-        protected internal Image GettitleIcon3Value() { return this.getAdditionalTitleIcon(2); }
-        protected internal Image GettitleIcon4Value() { return this.getAdditionalTitleIcon(3); }
-        protected internal Image GettitleIcon5Value() { return this.getAdditionalTitleIcon(4); }
+        protected internal Image GettitleIcon0Value() { return this.getAdditionalTitleIcon(0); }
+        protected internal Image GettitleIcon1Value() { return this.getAdditionalTitleIcon(1); }
+        protected internal Image GettitleIcon2Value() { return this.getAdditionalTitleIcon(2); }
+        protected internal Image GettitleIcon3Value() { return this.getAdditionalTitleIcon(3); }
+        protected internal Image GettitleIcon4Value() { return this.getAdditionalTitleIcon(4); }
+
+        public virtual void OnClickAdditionalTitleIcon(int idx)
+        {
+        }
 
         /// <summary>
         /// Sometimes port placement will resize parent shape, but for TitlePort, its position is fixed,

@@ -304,6 +304,9 @@
     <CodeAnalysisDictionary Include="..\CodeAnalysisDictionary.xml">
       <Link>CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
+    <None Include="Resources\add.png" />
+    <None Include="Resources\add2.png" />
+    <None Include="Resources\add3.png" />
     <Content Include="Resources\ExampleConnectorToolBitmap.bmp" />
     <Content Include="Resources\ExampleShapeToolBitmap.bmp" />
     <EmbeddedResource Include="Resources\ConnectorSourceSearch.cur" />

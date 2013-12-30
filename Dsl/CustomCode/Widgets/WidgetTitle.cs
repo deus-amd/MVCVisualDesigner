@@ -20,6 +20,9 @@ namespace MVCVisualDesigner
     public partial class VDWidgetTitlePort
     {
 #region Resource/Fields/Decorators
+
+        public const int ADDITIONAL_TITLE_ICON_COUNT = 5;
+
         /// <summary>
         /// Initializes style set resources for this shape type
         /// </summary>
@@ -65,9 +68,9 @@ namespace MVCVisualDesigner
 
             // more title icons
             ShapeField leftSibling = titleTextField;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < ADDITIONAL_TITLE_ICON_COUNT; i++)
             {
-                ImageField moreTitleIconField = new ImageField("WidgetTitleIcon" + i);
+                VDTitleImageField moreTitleIconField = new VDTitleImageField("WidgetTitleIcon" + i, i);
                 moreTitleIconField.DefaultSelectable = false;
                 moreTitleIconField.DefaultFocusable = false;
                 moreTitleIconField.AnchoringBehavior.SetTopAnchor(AnchoringBehavior.Edge.Top, 0.02);
@@ -111,6 +114,25 @@ namespace MVCVisualDesigner
                     new PresentationDomainNavigator(presentationToDomain),
                     new DomainPresentationNavigator(domainToRelativePresentation)) { IsShapeProperty = true }
                 );
+
+            Guid[] propIds = 
+            { 
+                VDWidgetShape.titleIcon0DomainPropertyId,
+                VDWidgetShape.titleIcon1DomainPropertyId,
+                VDWidgetShape.titleIcon2DomainPropertyId,
+                VDWidgetShape.titleIcon3DomainPropertyId,
+                VDWidgetShape.titleIcon4DomainPropertyId,
+            };
+
+            for (int i = 0; i < VDWidgetTitlePort.ADDITIONAL_TITLE_ICON_COUNT; i++ )
+            {
+                ShapeElement.FindShapeField(shape.ShapeFields, "WidgetTitleIcon" + i).AssociateValueWith(shape.Store,
+                    new AssociatedPropertyInfo(
+                        propIds[i],
+                        new PresentationDomainNavigator(presentationToDomain),
+                        new DomainPresentationNavigator(domainToRelativePresentation)) { IsShapeProperty = true }
+                    );
+            }
 
             ShapeElement.FindShapeField(shape.ShapeFields, "WidgetTitlePinIcon").AssociateValueWith(shape.Store,
                 new AssociatedPropertyInfo(
@@ -182,6 +204,22 @@ namespace MVCVisualDesigner
                 base.OnPaintShape(e);
         }
 
+
+        public override void OnClick(DiagramPointEventArgs e)
+        {
+            if (e!= null && e.HitDiagramItem != null && e.HitDiagramItem.Field != null 
+                && e.HitDiagramItem.Field is VDTitleImageField)
+            {
+                VDTitleImageField field = e.HitDiagramItem.Field as VDTitleImageField;
+                VDWidgetShape parentShape = this.ParentShape as VDWidgetShape;
+                if (parentShape != null)
+                {
+                    parentShape.OnClickAdditionalTitleIcon(field.Index);
+                }
+            }
+            base.OnClick(e);
+        }
+
         internal class WidgetTitlePortBoundsRules : BoundsRules
         {
             internal static readonly WidgetTitlePortBoundsRules Instance = new WidgetTitlePortBoundsRules();
@@ -210,15 +248,15 @@ namespace MVCVisualDesigner
                 }
                 if (parentShape.HasWidgetTitleIcon)
                 {
-                    size.Width += size.Height; // add more space for icon
+                    size.Width += size.Height + 0.02; // add more space for icon
                 }
 
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < ADDITIONAL_TITLE_ICON_COUNT; i++)
                 {
                     // add more space for additional title icon
                     if (parentShape.HasAdditionalWidgetTitleIcon(i))
                     {
-                        size.Width += size.Height;
+                        size.Width += size.Height + 0.02;
                     }
                 }
 
