@@ -49,6 +49,27 @@ namespace MVCVisualDesigner
                 bodyContainer.Children.Add(body);
             }
         }
+
+        public VDHoriContainer HeadContainer
+        {
+            get
+            {
+                var x = this.Children.Find(w => w is VDHoriContainer 
+                    && ((VDHoriContainer)w).Tag == VDTab.HEADS_CONTAINER_TAG) as VDHoriContainer;
+                return x;
+            }
+        }
+
+        public VDHoriContainer BodyContainer
+        {
+            get
+            {
+                var x = this.Children.Find(w => w is VDHoriContainer 
+                    && ((VDHoriContainer)w).Tag == VDTab.BODYS_CONTAINER_TAG) as VDHoriContainer;
+                return x;
+            }
+        }
+
     }
 
     public partial class VDTabHead
@@ -90,22 +111,35 @@ namespace MVCVisualDesigner
             return null;
         }
 
+        public VDHoriContainerShape HeadContainerShape
+        {
+            get
+            {
+                VDHoriContainerShape s = this.NestedChildShapes.Find(cs => cs is VDHoriContainerShape 
+                    && cs.ModelElement != null 
+                    && ((VDHoriContainer)cs.ModelElement).Tag == VDTab.HEADS_CONTAINER_TAG) as VDHoriContainerShape;
+                return s;
+            }
+        }
+
+        public VDHoriContainerShape BodyContainerShape
+        {
+            get
+            {
+                VDHoriContainerShape s = this.NestedChildShapes.Find(cs => cs is VDHoriContainerShape 
+                    && cs.ModelElement != null 
+                    && ((VDHoriContainer)cs.ModelElement).Tag == VDTab.BODYS_CONTAINER_TAG) as VDHoriContainerShape;
+                return s;
+            }
+        }
+
         public override void OnClickAdditionalTitleIcon(int idx)
         {
             if (idx == ICON_INDEX_ADD_TAB) // addd new tab
             {
                 VDTab tab = this.ModelElement as VDTab;
-                if (tab == null) return;
-
-                VDHoriContainer headContainer =
-                    tab.Children.Find(w => w is VDHoriContainer && ((VDHoriContainer)w).Tag == VDTab.HEADS_CONTAINER_TAG) 
-                        as VDHoriContainer;
-                if (headContainer == null) return;
-
-                VDHoriContainer bodyContainer =
-                    tab.Children.Find(w => w is VDHoriContainer && ((VDHoriContainer)w).Tag == VDTab.BODYS_CONTAINER_TAG) 
-                        as VDHoriContainer;
-                if (bodyContainer == null) return;
+                if (tab == null || tab.HeadContainer == null || tab.BodyContainer == null)
+                    return;
 
                 using (Transaction t = this.Store.TransactionManager.BeginTransaction("Add new tab page"))
                 {
@@ -115,21 +149,57 @@ namespace MVCVisualDesigner
                     VDTabBody body = this.Store.ElementFactory.CreateElement(VDTabBody.DomainClassId) as VDTabBody;
                     head.Body = body;
                     tab.ActiveHead = head;
-                    headContainer.Children.Add(head);
-                    bodyContainer.Children.Add(body);
+                    tab.HeadContainer.Children.Add(head);
+                    tab.BodyContainer.Children.Add(body);
+
+                    this.relayoutChildren = true; // only show active tab's body shape, hide other body shapes
+
                     t.Commit();
                 }
             }
         }
 
-        protected override void OnAssociatedPropertyChanged(PropertyChangedEventArgs e)
+        public override void OnRelayoutChildShapes()
         {
-            base.OnAssociatedPropertyChanged(e);
-        }
+            if (this.BodyContainerShape == null) return;
 
-        public override ShapeElement FixUpChildShapes(ModelElement childElement)
-        {
-            return base.FixUpChildShapes(childElement);
+            VDTab tab = this.ModelElement as VDTab;
+            if (tab == null) return;
+
+            // only show active tab's body shape, hide other body shapes
+            foreach(var w in this.BodyContainerShape.NestedChildShapes)
+            {
+                VDTabBodyShape bodyShape = w as VDTabBodyShape;
+                if (bodyShape != null)
+                {
+                    VDTabBody body = bodyShape.ModelElement as VDTabBody;
+                    if (body == null || body.Head == null || body.Head != tab.ActiveHead)
+                    {
+                        bodyShape.Hide(); 
+                    }
+                    else
+                    {
+                        bodyShape.Show();
+                    }
+                }
+            }
+
+            // set head background for active tab
+            if (this.HeadContainerShape == null) return;
+            foreach (var w in this.HeadContainerShape.NestedChildShapes)
+            {
+                VDTabHeadShape headShape = w as VDTabHeadShape;
+                if (headShape != null)
+                {
+                    VDTabHead head = headShape.ModelElement as VDTabHead;
+                    if (head == null || tab.ActiveHead != head)
+                        headShape.isActiveTab = false;
+                    else
+                        headShape.isActiveTab = true;
+                }
+            }
+
+            //this.BodyContainerShape.relayoutChildren = true; // trigger body shapes' bounds rules
         }
 
         protected override void OnChildConfiguring(ShapeElement child, bool createdDuringViewFixup)
@@ -159,20 +229,94 @@ namespace MVCVisualDesigner
                 }
             }
         }
-
-        protected override void OnChildConfigured(ShapeElement child, bool childWasPlaced, bool createdDuringViewFixup)
-        {
-            base.OnChildConfigured(child, childWasPlaced, createdDuringViewFixup);
-        }
     }
 
     public partial class VDTabHeadShape
     {
         public override NodeSides ResizableSides { get { return NodeSides.Horizontal; } }
 
+        public override void OnClick(DiagramPointEventArgs e)
+        {
+            if (this.ParentShape == null || this.ParentShape.ParentShape == null) return;
+
+            VDTabShape tabShape = this.ParentShape.ParentShape as VDTabShape;
+            if (tabShape == null) return;
+
+            VDTab tab = tabShape.ModelElement as VDTab;
+            if (tab == null) return;
+
+            VDTabHead curHead = this.ModelElement as VDTabHead;
+            if (curHead == null) return;
+
+            if (tab.ActiveHead != curHead)
+            {
+                using(Transaction t = this.Store.TransactionManager.BeginTransaction("Set active tab"))
+                {
+                    tab.ActiveHead = curHead;
+
+                    tabShape.relayoutChildren = true; // only show active tab's body shape, hide other body shapes
+
+                    t.Commit();
+                }
+            }
+        }
+
         public override void OnShapeInserted()
         {
             base.OnShapeInserted();
+        }
+
+        public override void OnBoundsFixup(BoundsFixupState fixupState, int iteration, bool createdDuringViewFixup)
+        {
+            base.OnBoundsFixup(fixupState, iteration, createdDuringViewFixup);
+
+            // be sure the isActiveTab property is set for Active Tab
+            VDTabHead tabHead = this.ModelElement as VDTabHead;
+            if (tabHead != null && tabHead.Parent != null && tabHead.Parent.Parent != null)
+            {
+                VDTab tab = tabHead.Parent.Parent as VDTab;
+                if (tab != null && tab.ActiveHead == tabHead)
+                {
+                    this.isActiveTab = true;
+                }
+            }
+        }
+
+        protected StyleSetResourceId m_backgroundBrushId = new StyleSetResourceId("MVCVisualDesignr", "tab head background brush");
+        protected override void InitializeResources(StyleSet classStyleSet)
+        {
+            base.InitializeResources(classStyleSet);
+            classStyleSet.AddBrush(m_backgroundBrushId, m_backgroundBrushId, new BrushSettings() { Color = Color.PeachPuff });
+        }
+
+        private const string FIELD_NAME_ACTIVE_TAB_BACKGROUND = "Active_Background";
+        protected override void InitializeShapeFields(IList<ShapeField> shapeFields)
+        {
+            base.InitializeShapeFields(shapeFields);
+
+            AreaField bkg = this.CreateBackgroundGradientField(FIELD_NAME_ACTIVE_TAB_BACKGROUND);
+            bkg.DefaultFocusable = false;
+            bkg.DefaultSelectable = false;
+            bkg.DefaultVisibility = true;
+            bkg.DrawBorder = false;
+            bkg.FillBackground = true;
+            bkg.DefaultBackgroundBrushId = m_backgroundBrushId;
+            bkg.AnchoringBehavior.SetTopAnchor(AnchoringBehavior.Edge.Top, 0.0);
+            bkg.AnchoringBehavior.SetLeftAnchor(AnchoringBehavior.Edge.Left, 0.0);
+            bkg.AnchoringBehavior.SetRightAnchor(AnchoringBehavior.Edge.Right, 0.0);
+            bkg.AnchoringBehavior.SetBottomAnchor(AnchoringBehavior.Edge.Bottom, 0.0);
+            shapeFields.Add(bkg);
+        }
+
+        static partial void onBindShapeFields(object sender, EventArgs e)
+        {
+            ShapeElement shape = (ShapeElement)sender;
+
+            AssociatedPropertyInfo propInfo = new AssociatedPropertyInfo(VDTabHeadShape.isActiveTabDomainPropertyId);
+            propInfo.IsShapeProperty = true;
+            propInfo.FilteringValues.Add(true);
+
+            ShapeElement.FindShapeField(shape.ShapeFields, FIELD_NAME_ACTIVE_TAB_BACKGROUND).AssociateVisibilityWith(shape.Store, propInfo);
         }
     }
 

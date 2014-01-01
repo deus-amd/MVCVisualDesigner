@@ -134,25 +134,29 @@ namespace MVCVisualDesigner
         // set clip to make sure child shapes will not overlap parent shape
         public override void OnPaintShape(DiagramPaintEventArgs e)
         {
-            if (this.ParentShape != null && !(this.ParentShape is Microsoft.VisualStudio.Modeling.Diagrams.Diagram))
+            ShapeElement parentShape = this.ParentShape;
+            if (parentShape == null || (parentShape is Diagram))
             {
-                RectangleD clipRect = this.ParentShape.AbsoluteBoundingBox;
-                clipRect.Inflate(new SizeD(-this.ParentShape.OutlinePenWidth, -this.ParentShape.OutlinePenWidth));
-
-                RectangleD thisRect = this.AbsoluteBoundingBox;
-                thisRect.Inflate(new SizeD(this.ParentShape.OutlinePenWidth, this.ParentShape.OutlinePenWidth));
-
-                clipRect.Intersect(thisRect);
-
-                Region clip = e.Graphics.Clip;
-                e.Graphics.SetClip(RectangleD.ToRectangleF(clipRect), CombineMode.Intersect);
-
                 base.OnPaintShape(e);
-
-                e.Graphics.Clip = clip;
+                return;
             }
-            else
-                base.OnPaintShape(e);
+
+            RectangleD thisRect = this.AbsoluteBoundingBox;
+            thisRect.Inflate(new SizeD(this.OutlinePenWidth, this.OutlinePenWidth));
+            while (parentShape != null && !(parentShape is Diagram))
+            {
+                RectangleD clipRect = parentShape.AbsoluteBoundingBox;
+                clipRect.Inflate(new SizeD(-parentShape.OutlinePenWidth, -parentShape.OutlinePenWidth));
+
+                thisRect.Intersect(clipRect);
+
+                parentShape = parentShape.ParentShape;
+            }
+
+            Region clip = e.Graphics.Clip;
+            e.Graphics.SetClip(RectangleD.ToRectangleF(thisRect), CombineMode.Intersect);
+            base.OnPaintShape(e);
+            e.Graphics.Clip = clip;
         }
 #endregion
 
@@ -376,6 +380,11 @@ namespace MVCVisualDesigner
         }
 #endregion
 
+        // trigger by set relayoutChildren domain property, and called by VDRelayoutChildrenShapeRule
+        public virtual void OnRelayoutChildShapes()
+        {
+        }
+
         /////////////////////////////////////////////////////////////////////////////////
 #region utilities
         public T GetMEL<T>() where T : VDWidget
@@ -419,14 +428,7 @@ namespace MVCVisualDesigner
             if ((e.DomainProperty.Id == VDWidgetShape.relayoutChildrenDomainPropertyId) && ((bool)e.NewValue))
             {
                 shape.relayoutChildren = false;
-                foreach (var childShape in shape.NestedChildShapes)
-                {
-                    VDWidgetShape ws = childShape as VDWidgetShape;
-                    if (ws != null)
-                    {
-                        ws.OnBoundsFixup(BoundsFixupState.ViewFixup, 1, false);
-                    }
-                }
+                shape.OnRelayoutChildShapes();
             }
         }
     }

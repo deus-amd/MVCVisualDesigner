@@ -406,7 +406,7 @@
     </DomainRelationship>
     <DomainRelationship Id="ab5a4903-7e60-4c67-a237-5f61f0654e46" Description="Description for MVCVisualDesigner.SeparatorRefersTopWidget" Name="SeparatorRefersTopWidget" DisplayName="Separator Refers Top Widget" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="3d142754-17c4-448b-aaa3-261fd13e25c5" Description="Description for MVCVisualDesigner.SeparatorRefersTopWidget.VDHoriSeparator" Name="VDHoriSeparator" DisplayName="VDHori Separator" PropertyName="TopWidget" Multiplicity="ZeroOne" PropertyDisplayName="Top Widget">
+        <DomainRole Id="3d142754-17c4-448b-aaa3-261fd13e25c5" Description="Description for MVCVisualDesigner.SeparatorRefersTopWidget.VDHoriSeparator" Name="VDHoriSeparator" DisplayName="VDHori Separator" PropertyName="TopWidget" Multiplicity="ZeroOne" PropagatesDelete="true" PropertyDisplayName="Top Widget">
           <RolePlayer>
             <DomainClassMoniker Name="VDHoriSeparator" />
           </RolePlayer>
@@ -422,7 +422,7 @@
     </DomainRelationship>
     <DomainRelationship Id="5fa5d01c-b9ce-45dc-8a43-60139b0e0c7b" Description="Description for MVCVisualDesigner.SeparatorRefersBottomWidget" Name="SeparatorRefersBottomWidget" DisplayName="Separator Refers Bottom Widget" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="0411c536-af87-467a-b66a-173791f724d0" Description="Description for MVCVisualDesigner.SeparatorRefersBottomWidget.VDHoriSeparator" Name="VDHoriSeparator" DisplayName="VDHori Separator" PropertyName="BottomWidget" Multiplicity="ZeroOne" PropertyDisplayName="Bottom Widget">
+        <DomainRole Id="0411c536-af87-467a-b66a-173791f724d0" Description="Description for MVCVisualDesigner.SeparatorRefersBottomWidget.VDHoriSeparator" Name="VDHoriSeparator" DisplayName="VDHori Separator" PropertyName="BottomWidget" Multiplicity="ZeroOne" PropagatesDelete="true" PropertyDisplayName="Bottom Widget">
           <RolePlayer>
             <DomainClassMoniker Name="VDHoriSeparator" />
           </RolePlayer>
@@ -438,7 +438,7 @@
     </DomainRelationship>
     <DomainRelationship Id="2d6b812d-fc42-4b4c-99c5-a66e10169b1a" Description="Description for MVCVisualDesigner.SeparatorRefersLeftWidget" Name="SeparatorRefersLeftWidget" DisplayName="Separator Refers Left Widget" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="975d491c-2e71-4131-bf82-a4dcc85fc012" Description="Description for MVCVisualDesigner.SeparatorRefersLeftWidget.VDVertSeparator" Name="VDVertSeparator" DisplayName="VDVert Separator" PropertyName="LeftWidget" Multiplicity="ZeroOne" PropertyDisplayName="Left Widget">
+        <DomainRole Id="975d491c-2e71-4131-bf82-a4dcc85fc012" Description="Description for MVCVisualDesigner.SeparatorRefersLeftWidget.VDVertSeparator" Name="VDVertSeparator" DisplayName="VDVert Separator" PropertyName="LeftWidget" Multiplicity="ZeroOne" PropagatesDelete="true" PropertyDisplayName="Left Widget">
           <RolePlayer>
             <DomainClassMoniker Name="VDVertSeparator" />
           </RolePlayer>
@@ -454,7 +454,7 @@
     </DomainRelationship>
     <DomainRelationship Id="f47ff5c7-3744-4c53-af5c-c48cc1f348bc" Description="Description for MVCVisualDesigner.SeparatorRefersRightWidget" Name="SeparatorRefersRightWidget" DisplayName="Separator Refers Right Widget" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="18c0cf98-a4df-48da-bb8a-4735141d8d42" Description="Description for MVCVisualDesigner.SeparatorRefersRightWidget.VDVertSeparator" Name="VDVertSeparator" DisplayName="VDVert Separator" PropertyName="RightWidget" Multiplicity="ZeroOne" PropertyDisplayName="Right Widget">
+        <DomainRole Id="18c0cf98-a4df-48da-bb8a-4735141d8d42" Description="Description for MVCVisualDesigner.SeparatorRefersRightWidget.VDVertSeparator" Name="VDVertSeparator" DisplayName="VDVert Separator" PropertyName="RightWidget" Multiplicity="ZeroOne" PropagatesDelete="true" PropertyDisplayName="Right Widget">
           <RolePlayer>
             <DomainClassMoniker Name="VDVertSeparator" />
           </RolePlayer>
@@ -489,14 +489,14 @@
     </DomainRelationship>
     <DomainRelationship Id="4b2fbdee-3fdd-4820-92de-21ef54305338" Description="Description for MVCVisualDesigner.HeadLinksToBody" Name="HeadLinksToBody" DisplayName="Head Links To Body" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="b6d6a6c0-2b49-4156-81fe-f4992eb13373" Description="Description for MVCVisualDesigner.HeadLinksToBody.VDTabHead" Name="VDTabHead" DisplayName="VDTab Head" PropertyName="Body" Multiplicity="One" PropertyDisplayName="Body">
+        <DomainRole Id="b6d6a6c0-2b49-4156-81fe-f4992eb13373" Description="Description for MVCVisualDesigner.HeadLinksToBody.VDTabHead" Name="VDTabHead" DisplayName="VDTab Head" PropertyName="Body" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Body">
           <RolePlayer>
             <DomainClassMoniker Name="VDTabHead" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="b77b31c5-ecc3-4ea7-8792-760caabb6d58" Description="Description for MVCVisualDesigner.HeadLinksToBody.VDTabBody" Name="VDTabBody" DisplayName="VDTab Body" PropertyName="Head" Multiplicity="One" PropertyDisplayName="Head">
+        <DomainRole Id="b77b31c5-ecc3-4ea7-8792-760caabb6d58" Description="Description for MVCVisualDesigner.HeadLinksToBody.VDTabBody" Name="VDTabBody" DisplayName="VDTab Body" PropertyName="Head" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Head">
           <RolePlayer>
             <DomainClassMoniker Name="VDTabBody" />
           </RolePlayer>
@@ -724,10 +724,17 @@
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="d08c9444-73e2-47ae-93e3-0b6c2a59765b" Description="" Name="VDTabHeadShape" DisplayName="Tab Head" Namespace="MVCVisualDesigner" FixedTooltipText="" InitialWidth="2" InitialHeight="0.5" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+    <GeometryShape Id="d08c9444-73e2-47ae-93e3-0b6c2a59765b" Description="" Name="VDTabHeadShape" DisplayName="Tab Head" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="" InitialWidth="2" InitialHeight="0.5" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
+      <Properties>
+        <DomainProperty Id="3dfb9d57-a9b7-409f-9268-18ea43a018bc" Description="Description for MVCVisualDesigner.VDTabHeadShape.Is Active Tab" Name="isActiveTab" DisplayName="Is Active Tab" Category="Internal States">
+          <Type>
+            <ExternalTypeMoniker Name="/System/Boolean" />
+          </Type>
+        </DomainProperty>
+      </Properties>
     </GeometryShape>
     <GeometryShape Id="737b8598-0d13-407e-bcf4-8b369752adbf" Description="" Name="VDTabBodyShape" DisplayName="Tab Body" Namespace="MVCVisualDesigner" FixedTooltipText="" OutlineColor="Transparent" InitialWidth="5" InitialHeight="2.5" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
@@ -1056,6 +1063,11 @@
       </XmlClassData>
       <XmlClassData TypeName="VDTabHeadShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTabHeadShapeMoniker" ElementName="vDTabHeadShape" MonikerTypeName="VDTabHeadShapeMoniker">
         <GeometryShapeMoniker Name="VDTabHeadShape" />
+        <ElementData>
+          <XmlPropertyData XmlName="isActiveTab">
+            <DomainPropertyMoniker Name="VDTabHeadShape/isActiveTab" />
+          </XmlPropertyData>
+        </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDTabBodyShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTabBodyShapeMoniker" ElementName="vDTabBodyShape" MonikerTypeName="VDTabBodyShapeMoniker">
         <GeometryShapeMoniker Name="VDTabBodyShape" />

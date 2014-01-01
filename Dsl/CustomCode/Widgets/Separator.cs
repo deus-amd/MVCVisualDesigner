@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 // Model
 namespace MVCVisualDesigner
 {
+    public partial class VDSeparator
+    {
+    }
+
     public partial class VDHoriSeparator
     {
     }

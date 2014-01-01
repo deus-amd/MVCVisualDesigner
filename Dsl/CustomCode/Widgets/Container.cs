@@ -38,6 +38,18 @@ namespace MVCVisualDesigner
             // trigger bounds rules of children
             this.relayoutChildren = true;            
         }
+
+        public override void OnRelayoutChildShapes()
+        {
+            foreach (var childShape in NestedChildShapes)
+            {
+                VDWidgetShape ws = childShape as VDWidgetShape;
+                if (ws != null)
+                {
+                    ws.OnBoundsFixup(BoundsFixupState.ViewFixup, 1, false);
+                }
+            }
+        }
     }
 
     public partial class VDVertContainerShape
@@ -51,6 +63,18 @@ namespace MVCVisualDesigner
 
             // trigger bounds rules of children
             this.relayoutChildren = true;            
+        }
+
+        public override void OnRelayoutChildShapes()
+        {
+            foreach (var childShape in NestedChildShapes)
+            {
+                VDWidgetShape ws = childShape as VDWidgetShape;
+                if (ws != null)
+                {
+                    ws.OnBoundsFixup(BoundsFixupState.ViewFixup, 1, false);
+                }
+            }
         }
     }
 }
