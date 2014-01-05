@@ -342,7 +342,7 @@ namespace MVCVisualDesigner
 #region Bounds Rules
         public override BoundsRules BoundsRules { get { return VDDefaultBoundsRules.Instance; } }
 
-        class VDDefaultBoundsRules : BoundsRules
+        public class VDDefaultBoundsRules : BoundsRules
         {
             internal static readonly VDDefaultBoundsRules Instance = new VDDefaultBoundsRules();
 
@@ -373,6 +373,10 @@ namespace MVCVisualDesigner
                                         new SizeD(parent.Bounds.Width, proposedBounds.Size.Height));
                         }
                     }
+                    else if (parent is VDFullFilledContainerShape)
+                    {
+                        proposedBounds = new RectangleD(PointD.Empty, parent.Bounds.Size);
+                    }
                 }
 
                 return proposedBounds;
@@ -392,6 +396,17 @@ namespace MVCVisualDesigner
             if (this.ModelElement != null)
             {
                 return this.ModelElement as T;
+            }
+            return null;
+        }
+
+        // get a child shape which ModelElemnt is childMEL
+        public T GetChildShape<T>(VDWidget childMEL) where T : ShapeElement
+        {
+            foreach(var s in this.NestedChildShapes)
+            {
+                if (s.ModelElement == childMEL)
+                    return (T)s;
             }
             return null;
         }

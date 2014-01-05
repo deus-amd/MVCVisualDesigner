@@ -27,9 +27,15 @@ namespace MVCVisualDesigner
                 // the order of creating children is import, why??
                 // first children, then grand-children???
                 VDHoriContainer headContainer = this.Store.ElementFactory.CreateElement(VDHoriContainer.DomainClassId,
-                    new PropertyAssignment(VDContainer.TagDomainPropertyId, HEADS_CONTAINER_TAG)) as VDHoriContainer;
-                VDHoriContainer bodyContainer = this.Store.ElementFactory.CreateElement(VDHoriContainer.DomainClassId,
-                    new PropertyAssignment(VDContainer.TagDomainPropertyId, BODYS_CONTAINER_TAG)) as VDHoriContainer;
+                    new PropertyAssignment(VDContainer.TagDomainPropertyId, HEADS_CONTAINER_TAG),
+                    new PropertyAssignment(VDContainer.HasLeftAnchorDomainPropertyId, true),
+                    new PropertyAssignment(VDContainer.HasRightAnchorDomainPropertyId, true),
+                    new PropertyAssignment(VDContainer.HasTopAnchorDomainPropertyId, true)) as VDHoriContainer;
+                VDFullFilledContainer bodyContainer = this.Store.ElementFactory.CreateElement(VDFullFilledContainer.DomainClassId,
+                    new PropertyAssignment(VDContainer.TagDomainPropertyId, BODYS_CONTAINER_TAG),
+                    new PropertyAssignment(VDContainer.HasLeftAnchorDomainPropertyId, true),
+                    new PropertyAssignment(VDContainer.HasRightAnchorDomainPropertyId, true),
+                    new PropertyAssignment(VDContainer.HasBottomAnchorDomainPropertyId, true)) as VDFullFilledContainer;
 
                 VDHoriSeparator hSeparator = this.Store.ElementFactory.CreateElement(VDHoriSeparator.DomainClassId) as VDHoriSeparator;
                 hSeparator.TopWidget = headContainer;
@@ -50,22 +56,22 @@ namespace MVCVisualDesigner
             }
         }
 
-        public VDHoriContainer HeadContainer
+        public VDContainer HeadContainer
         {
             get
             {
-                var x = this.Children.Find(w => w is VDHoriContainer 
-                    && ((VDHoriContainer)w).Tag == VDTab.HEADS_CONTAINER_TAG) as VDHoriContainer;
+                var x = this.Children.Find(w => w is VDHoriContainer
+                    && ((VDHoriContainer)w).Tag == VDTab.HEADS_CONTAINER_TAG) as VDContainer;
                 return x;
             }
         }
 
-        public VDHoriContainer BodyContainer
+        public VDContainer BodyContainer
         {
             get
             {
-                var x = this.Children.Find(w => w is VDHoriContainer 
-                    && ((VDHoriContainer)w).Tag == VDTab.BODYS_CONTAINER_TAG) as VDHoriContainer;
+                var x = this.Children.Find(w => w is VDFullFilledContainer
+                    && ((VDContainer)w).Tag == VDTab.BODYS_CONTAINER_TAG) as VDContainer;
                 return x;
             }
         }
@@ -111,24 +117,24 @@ namespace MVCVisualDesigner
             return null;
         }
 
-        public VDHoriContainerShape HeadContainerShape
+        public VDContainerBaseShape HeadContainerShape
         {
             get
             {
-                VDHoriContainerShape s = this.NestedChildShapes.Find(cs => cs is VDHoriContainerShape 
-                    && cs.ModelElement != null 
-                    && ((VDHoriContainer)cs.ModelElement).Tag == VDTab.HEADS_CONTAINER_TAG) as VDHoriContainerShape;
+                VDContainerBaseShape s = this.NestedChildShapes.Find(cs => cs is VDHoriContainerShape 
+                    && cs.ModelElement != null
+                    && ((VDContainer)cs.ModelElement).Tag == VDTab.HEADS_CONTAINER_TAG) as VDContainerBaseShape;
                 return s;
             }
         }
 
-        public VDHoriContainerShape BodyContainerShape
+        public VDContainerBaseShape BodyContainerShape
         {
             get
             {
-                VDHoriContainerShape s = this.NestedChildShapes.Find(cs => cs is VDHoriContainerShape 
-                    && cs.ModelElement != null 
-                    && ((VDHoriContainer)cs.ModelElement).Tag == VDTab.BODYS_CONTAINER_TAG) as VDHoriContainerShape;
+                VDContainerBaseShape s = this.NestedChildShapes.Find(cs => cs is VDFullFilledContainerShape 
+                    && cs.ModelElement != null
+                    && ((VDContainer)cs.ModelElement).Tag == VDTab.BODYS_CONTAINER_TAG) as VDContainerBaseShape;
                 return s;
             }
         }
@@ -202,33 +208,33 @@ namespace MVCVisualDesigner
             //this.BodyContainerShape.relayoutChildren = true; // trigger body shapes' bounds rules
         }
 
-        protected override void OnChildConfiguring(ShapeElement child, bool createdDuringViewFixup)
-        {
-            base.OnChildConfiguring(child, createdDuringViewFixup);
+        //protected override void OnChildConfiguring(ShapeElement child, bool createdDuringViewFixup)
+        //{
+        //    base.OnChildConfiguring(child, createdDuringViewFixup);
 
-            if (child is VDHoriContainerShape)
-            {
-                VDHoriContainerShape pel = child as VDHoriContainerShape;
-                if (pel.Anchoring.HasLeftAnchor) return;
+        //    if (child is VDHoriContainerShape)
+        //    {
+        //        VDHoriContainerShape pel = child as VDHoriContainerShape;
+        //        if (pel.Anchoring.HasLeftAnchor) return;
 
-                VDHoriContainer mel = child.ModelElement as VDHoriContainer;
-                if (mel != null)
-                {
-                    if (mel.Tag == VDTab.HEADS_CONTAINER_TAG)
-                    {
-                        if (!pel.Anchoring.HasLeftAnchor) pel.Anchoring.SetLeftAnchor(0);
-                        if (!pel.Anchoring.HasRightAnchor) pel.Anchoring.SetRightAnchor(1.0);
-                        if (!pel.Anchoring.HasTopAnchor) pel.Anchoring.SetTopAnchor(0);
-                    }
-                    else if (mel.Tag == VDTab.BODYS_CONTAINER_TAG)
-                    {
-                        if (!pel.Anchoring.HasLeftAnchor) pel.Anchoring.SetLeftAnchor(0);
-                        if (!pel.Anchoring.HasRightAnchor) pel.Anchoring.SetRightAnchor(1.0);
-                        if (!pel.Anchoring.HasBottomAnchor) pel.Anchoring.SetBottomAnchor(1.0);
-                    }
-                }
-            }
-        }
+        //        VDHoriContainer mel = child.ModelElement as VDHoriContainer;
+        //        if (mel != null)
+        //        {
+        //            if (mel.Tag == VDTab.HEADS_CONTAINER_TAG)
+        //            {
+        //                if (!pel.Anchoring.HasLeftAnchor) pel.Anchoring.SetLeftAnchor(0);
+        //                if (!pel.Anchoring.HasRightAnchor) pel.Anchoring.SetRightAnchor(1.0);
+        //                if (!pel.Anchoring.HasTopAnchor) pel.Anchoring.SetTopAnchor(0);
+        //            }
+        //            else if (mel.Tag == VDTab.BODYS_CONTAINER_TAG)
+        //            {
+        //                if (!pel.Anchoring.HasLeftAnchor) pel.Anchoring.SetLeftAnchor(0);
+        //                if (!pel.Anchoring.HasRightAnchor) pel.Anchoring.SetRightAnchor(1.0);
+        //                if (!pel.Anchoring.HasBottomAnchor) pel.Anchoring.SetBottomAnchor(1.0);
+        //            }
+        //        }
+        //    }
+        //}
     }
 
     public partial class VDTabHeadShape
@@ -325,12 +331,12 @@ namespace MVCVisualDesigner
         public override bool CanMove { get { return false; } }
         public override NodeSides ResizableSides { get { return NodeSides.None; } }
 
-        public override void OnShapeInserted()
-        {
-            base.OnShapeInserted();
+        //public override void OnShapeInserted()
+        //{
+        //    base.OnShapeInserted();
 
-            this.Anchoring.SetLeftAnchor(0);
-            this.Anchoring.SetRightAnchor(1.0);
-        }
+        //    this.Anchoring.SetLeftAnchor(0);
+        //    this.Anchoring.SetRightAnchor(1.0);
+        //}
     }
 }

@@ -17,12 +17,17 @@ string[] WidgetList = new string[]{
 	"VDTab",
 	"VDTabHead",
 	"VDTabBody",
+	"VDTable",
+	"VDTableHead",
+	"VDTableBody",
+	"VDTableFoot",
 
 	// Utilities
 	"VDHoriSeparator",
 	"VDVertSeparator",
 	"VDHoriContainer",
 	"VDVertContainer",
+	"VDFullFilledContainer",
 };
 
 // the widgets needn't to specify parent (alreay specified in DSL definition)
