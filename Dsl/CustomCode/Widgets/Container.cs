@@ -107,12 +107,12 @@ namespace MVCVisualDesigner
                             thisMEL.BottomSibling, AnchoringBehavior.Edge.Bottom);
                     }
 
-                    if (thisMEL is VDHoriContainer && ((VDHoriContainer)thisMEL).FixedHeight > 0.0001)
+                    if (thisMEL is VDHoriContainer && ((VDHoriContainer)thisMEL).FixedHeight > VDConstants.DOUBLE_DIFF)
                     {
                         proposedBounds = new RectangleD(proposedBounds.Location,
                             new SizeD(proposedBounds.Width, ((VDHoriContainer)thisMEL).FixedHeight));
                     }
-                    else if (thisMEL is VDVertContainer && ((VDVertContainer)thisMEL).FixedWidth > 0.0001)
+                    else if (thisMEL is VDVertContainer && ((VDVertContainer)thisMEL).FixedWidth > VDConstants.DOUBLE_DIFF)
                     {
                         proposedBounds = new RectangleD(proposedBounds.Location,
                             new SizeD(((VDVertContainer)thisMEL).FixedWidth, proposedBounds.Height));

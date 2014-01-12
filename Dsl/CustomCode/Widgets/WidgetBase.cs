@@ -428,7 +428,7 @@ namespace MVCVisualDesigner
             return null;
         }
 
-        // get a child shape which ModelElemnt is childMEL
+        /// <summary>Get a child shape which ModelElemnt is childMEL</summary>
         public T GetChildShape<T>(VDWidget childMEL) where T : ShapeElement
         {
             foreach(var s in this.NestedChildShapes)
@@ -439,17 +439,28 @@ namespace MVCVisualDesigner
             return null;
         }
 
-        public List<T> GetChildShapes<T>(Predicate<T> condition = null) where T : ShapeElement
+        public T GetChildShape<T>(Predicate<T> predicate = null) where T : VDWidgetShape
+        {
+            T child = null;
+            if (predicate == null)
+                child = this.NestedChildShapes.Find(c => c is T) as T;
+            else
+                child = this.NestedChildShapes.Find(c => c is T && predicate((T)c)) as T;
+            return child;
+        }
+
+        public List<T> GetChildShapes<T>(Predicate<T> predicate = null) where T : VDWidgetShape
         {
             List<T> children = new List<T>();
-            foreach (var s in this.NestedChildShapes)
+            if (predicate == null)
             {
-                if (s is T)
-                {
-                    if (condition != null && !condition((T)s)) continue;
-
-                    children.Add((T)s);
-                }
+                List<ShapeElement> list = this.NestedChildShapes.FindAll(c => c is T);
+                if (list != null && list.Count > 0) list.ForEach(c => children.Add((T)c));
+            }
+            else
+            {
+                List<ShapeElement> list = this.NestedChildShapes.FindAll(c => c is T && predicate((T)c));
+                if (list != null && list.Count > 0) list.ForEach(c => children.Add((T)c));
             }
             return children;
         }

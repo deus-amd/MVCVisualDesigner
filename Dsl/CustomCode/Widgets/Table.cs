@@ -12,12 +12,13 @@ namespace MVCVisualDesigner
     public class TableConstants
     {
         public const double TITLE_SIZE = 0.1;
-        public const double MIN_ROW_WIDTH = 1.0;
-        public const double MIN_COL_HEIGHT = 0.4;
+        public const double MIN_COL_WIDTH = 1.0;
+        public const double MIN_ROW_HEIGHT = 0.4;
     }
 
     ////////////////////////////////////////////////////////////////////////////////
     // MEL
+    ////////////////////////////////////////////////////////////////////////////////
     public partial class VDTable : ICustomMerge
     {
         public const string TITLE_CONTAINER_TAG = "Column Title";
@@ -38,23 +39,23 @@ namespace MVCVisualDesigner
                 new PropertyAssignment(VDContainer.HasTopAnchorDomainPropertyId, true),
                 new PropertyAssignment(VDHoriContainer.FixedHeightDomainPropertyId, TableConstants.TITLE_SIZE)) as VDHoriContainer;
 
-            VDFullFilledContainer headContainer = this.Store.ElementFactory.CreateElement(VDFullFilledContainer.DomainClassId,
+            VDVertContainer headContainer = this.Store.ElementFactory.CreateElement(VDVertContainer.DomainClassId,
                 new PropertyAssignment(VDContainer.TagDomainPropertyId, TABLE_HEAD_CONTAINER_TAG),
                 new PropertyAssignment(VDContainer.HasLeftAnchorDomainPropertyId, true),
                 new PropertyAssignment(VDContainer.HasRightAnchorDomainPropertyId, true),
-                new PropertyAssignment(VDContainer.HasTopAnchorDomainPropertyId, true)) as VDFullFilledContainer;
+                new PropertyAssignment(VDContainer.HasTopAnchorDomainPropertyId, true)) as VDVertContainer;
             headContainer.TopSibling = titleContainer;
 
-            VDFullFilledContainer bodyContainer = this.Store.ElementFactory.CreateElement(VDFullFilledContainer.DomainClassId,
+            VDVertContainer bodyContainer = this.Store.ElementFactory.CreateElement(VDVertContainer.DomainClassId,
                 new PropertyAssignment(VDContainer.TagDomainPropertyId, TABLE_BODY_CONTAINER_TAG),
                 new PropertyAssignment(VDContainer.HasLeftAnchorDomainPropertyId, true),
-                new PropertyAssignment(VDContainer.HasRightAnchorDomainPropertyId, true)) as VDFullFilledContainer;
+                new PropertyAssignment(VDContainer.HasRightAnchorDomainPropertyId, true)) as VDVertContainer;
 
-            VDFullFilledContainer footContainer = this.Store.ElementFactory.CreateElement(VDFullFilledContainer.DomainClassId,
+            VDVertContainer footContainer = this.Store.ElementFactory.CreateElement(VDVertContainer.DomainClassId,
                 new PropertyAssignment(VDContainer.TagDomainPropertyId, TABLE_FOOT_CONTAINER_TAG),
                 new PropertyAssignment(VDContainer.HasLeftAnchorDomainPropertyId, true),
                 new PropertyAssignment(VDContainer.HasRightAnchorDomainPropertyId, true),
-                new PropertyAssignment(VDContainer.HasBottomAnchorDomainPropertyId, true)) as VDFullFilledContainer;
+                new PropertyAssignment(VDContainer.HasBottomAnchorDomainPropertyId, true)) as VDVertContainer;
 
             this.Children.Add(titleContainer);
             this.Children.Add(headContainer);
@@ -73,14 +74,6 @@ namespace MVCVisualDesigner
             hSeparator.TopWidget = bodyContainer;
             hSeparator.BottomWidget = footContainer;
             this.Children.Add(hSeparator);
-
-            //
-            VDTableHead head = this.Store.ElementFactory.CreateElement(VDTableHead.DomainClassId) as VDTableHead;
-            VDTableBody body = this.Store.ElementFactory.CreateElement(VDTableBody.DomainClassId) as VDTableBody;
-            VDTableFoot foot = this.Store.ElementFactory.CreateElement(VDTableFoot.DomainClassId) as VDTableFoot;
-            headContainer.Children.Add(head);
-            bodyContainer.Children.Add(body);
-            footContainer.Children.Add(foot);
         }
 
         // utilities
@@ -97,7 +90,7 @@ namespace MVCVisualDesigner
         {
             get
             {
-                VDContainer container = GetChild<VDFullFilledContainer>(c => c.Tag == TABLE_HEAD_CONTAINER_TAG);
+                VDContainer container = GetChild<VDVertContainer>(c => c.Tag == TABLE_HEAD_CONTAINER_TAG);
                 return container;
             }
         }
@@ -106,7 +99,7 @@ namespace MVCVisualDesigner
         {
             get
             {
-                VDContainer container = GetChild<VDFullFilledContainer>(c => c.Tag == TABLE_BODY_CONTAINER_TAG);
+                VDContainer container = GetChild<VDVertContainer>(c => c.Tag == TABLE_BODY_CONTAINER_TAG);
                 return container;
             }
         }
@@ -115,7 +108,7 @@ namespace MVCVisualDesigner
         {
             get
             {
-                VDContainer container = GetChild<VDFullFilledContainer>(c => c.Tag == TABLE_FOOT_CONTAINER_TAG);
+                VDContainer container = GetChild<VDVertContainer>(c => c.Tag == TABLE_FOOT_CONTAINER_TAG);
                 return container;
             }
         }
@@ -153,24 +146,95 @@ namespace MVCVisualDesigner
         }
     }
 
+    public partial class VDTableRowWrapper
+    {
+        public override bool HasWidgetTitle { get { return true; } }
+    }
+
     public partial class VDTableRow : ICustomMerge
     {
         public void MergeTo(VDWidget targetWidget, ElementGroup elementGroup)
         {
-            targetWidget.Children.Add(this);
+            VDWidget parent = targetWidget;
+            bool bIsInTable = false;
+            while (parent != null)
+            {
+                if (parent is VDTable)
+                {
+                    bIsInTable = true;
+                    break;
+                }
+                else
+                {
+                    parent = parent.Parent;
+                }
+            }
 
-            VDVertContainer titleContainer = this.Store.ElementFactory.CreateElement(VDVertContainer.DomainClassId,
-                new PropertyAssignment(VDContainer.TagDomainPropertyId, VDTable.TITLE_CONTAINER_TAG),
-                new PropertyAssignment(VDContainer.HasTopAnchorDomainPropertyId, true),
-                new PropertyAssignment(VDContainer.HasBottomAnchorDomainPropertyId, true),
-                new PropertyAssignment(VDContainer.HasLeftAnchorDomainPropertyId, true),
-                new PropertyAssignment(VDVertContainer.FixedWidthDomainPropertyId, TableConstants.TITLE_SIZE)) as VDVertContainer;
-            this.Children.Add(titleContainer);
+            if (bIsInTable)
+            {
+                targetWidget.Children.Add(this);
+                VDTable table = parent as VDTable;
+                this.ColCount = table.ColCount;
+                this.RowCount = 1; // default row count
+            }
+            else
+            {
+                // if Row widget is not inserted in to a table, create a wrapper to include it
+                VDTableRowWrapper wrapper = this.Store.ElementFactory.CreateElement(VDTableRowWrapper.DomainClassId) as VDTableRowWrapper;
+
+                // create title
+                wrapper.Title = this.Store.ElementFactory.CreateElement(VDWidgetTitle.DomainClassId) as VDWidgetTitle;
+
+                VDHoriContainer titleContainer = this.Store.ElementFactory.CreateElement(VDHoriContainer.DomainClassId,
+                    new PropertyAssignment(VDContainer.TagDomainPropertyId, VDTable.TITLE_CONTAINER_TAG),
+                    new PropertyAssignment(VDContainer.HasLeftAnchorDomainPropertyId, true),
+                    new PropertyAssignment(VDContainer.HasRightAnchorDomainPropertyId, true),
+                    new PropertyAssignment(VDContainer.HasTopAnchorDomainPropertyId, true),
+                    new PropertyAssignment(VDHoriContainer.FixedHeightDomainPropertyId, TableConstants.TITLE_SIZE)) as VDHoriContainer;
+
+                VDVertContainer bodyContainer = this.Store.ElementFactory.CreateElement(VDVertContainer.DomainClassId,
+                    new PropertyAssignment(VDContainer.TagDomainPropertyId, VDTable.TABLE_BODY_CONTAINER_TAG),
+                    new PropertyAssignment(VDContainer.HasLeftAnchorDomainPropertyId, true),
+                    new PropertyAssignment(VDContainer.HasRightAnchorDomainPropertyId, true),
+                    new PropertyAssignment(VDContainer.HasTopAnchorDomainPropertyId, true),
+                    new PropertyAssignment(VDContainer.HasBottomAnchorDomainPropertyId, true)) as VDVertContainer;
+                bodyContainer.TopSibling = titleContainer;
+                wrapper.Children.Add(titleContainer);
+                wrapper.Children.Add(bodyContainer);
+
+                // !!
+                // have to create a new TableRow instead of using 'this', otherwise the table 
+                // row shape can not be created, why ????
+                VDTableRow row = this.Store.ElementFactory.CreateElement(VDTableRow.DomainClassId) as VDTableRow;
+                bodyContainer.Children.Add(row);
+                //bodyContainer.Children.Add(this);
+                targetWidget.Children.Add(wrapper);
+                row.RowCount = 1;
+            }
+        }
+
+        public VDTable Table
+        {
+            get
+            {
+                VDTable table = null;
+                if (this.Parent != null && this.Parent.Parent != null)
+                {
+                    table = this.Parent.Parent as VDTable;
+                }
+                return table;
+            }
         }
     }
 
+    public partial class VDTableCell
+    {
+        public uint LastCol { get { return this.Col + this.ColSpan - 1; } }
+        public uint LastRow { get { return this.Row + this.RowSpan - 1; } }
+    }
+
     // rules
-    [RuleOn(typeof(VDTable), FireTime = TimeToFire.TopLevelCommit, Priority = 0x6FFFFFFE)]
+    [RuleOn(typeof(VDTable), FireTime = TimeToFire.TopLevelCommit, Priority = 0x6FFFFFF0)]
     public class VDTableColCountFixupRule : ChangeRule
     {
         public override void ElementPropertyChanged(ElementPropertyChangedEventArgs e)
@@ -181,29 +245,145 @@ namespace MVCVisualDesigner
 
                 VDTable table = e.ModelElement as VDTable;
                 VDContainer colTitleContainer = table.ColTitleContainer;
-                int oldColCount = (int)((uint)e.OldValue);
-                int newColCount = (int)((uint)e.NewValue);
+                uint oldColCount = (uint)e.OldValue;
+                uint newColCount = (uint)e.NewValue;
 
                 if (e.DomainProperty.Id == VDTable.ColCountDomainPropertyId && colTitleContainer != null)
                 {
-                    if (oldColCount > newColCount) // remove columns
+                    if (oldColCount > newColCount) // remove column titles
                     {
-                        List<VDTableColTitle> toDelList = new List<VDTableColTitle>();
-                        foreach (VDTableColTitle t in colTitleContainer.GetChildren<VDTableColTitle>())
-                        {
-                            if (t.Index + 1 > newColCount)
-                            {
-                                toDelList.Add(t);
-                            }
-                        }
+                        List<VDTableColTitle> toDelList = colTitleContainer.GetChildren<VDTableColTitle>(t => t.Index + 1 > newColCount);
                         toDelList.ForEach(cell => cell.Delete());
                     }
-                    else if (oldColCount < newColCount) // add columns
+                    else if (oldColCount < newColCount) // add column titles
                     {
-                        for (int idxToAdd = oldColCount; idxToAdd < newColCount; ++idxToAdd)
+                        for (uint idxToAdd = oldColCount; idxToAdd < newColCount; ++idxToAdd)
                         {
-                            colTitleContainer.Children.Add(new VDTableColTitle(
-                                    table.Partition, new PropertyAssignment(VDTableColTitle.IndexDomainPropertyId, (uint)idxToAdd)));
+                            colTitleContainer.Children.Add(new VDTableColTitle(table.Partition, 
+                                new PropertyAssignment(VDTableColTitle.IndexDomainPropertyId, idxToAdd)));
+                        }
+                    }
+
+                    // adjust ColCount for TableHead, TableBody and TableFoot
+                    if (table.TableHeadContainer != null)
+                    {
+                        foreach(VDTableRow row in table.TableHeadContainer.GetChildren<VDTableRow>())
+                        {
+                            row.ColCount = newColCount;
+                        }
+                    }
+
+                    if (table.TableBodyContainer != null)
+                    {
+                        foreach(VDTableRow row in table.TableBodyContainer.GetChildren<VDTableRow>())
+                        {
+                            row.ColCount = newColCount;
+                        }
+                    }
+
+                    if (table.TableFootContainer != null)
+                    {
+                        foreach(VDTableRow row in table.TableFootContainer.GetChildren<VDTableRow>())
+                        {
+                            row.ColCount = newColCount;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // to add and remove TableRowTitle when RowCount property changed
+    [RuleOn(typeof(VDTableRow), FireTime = TimeToFire.TopLevelCommit, Priority = 0x6FFFFFFA)]
+    public class VDTableRowCountFixupRule_ForRowTitle: ChangeRule
+    {
+        public override void ElementPropertyChanged(ElementPropertyChangedEventArgs e)
+        {
+            if (e.ModelElement != null && e.ModelElement is VDTableRow && e.DomainProperty != null)
+            {
+                if (e.ModelElement.Store.InSerializationTransaction) return;
+
+                VDTableRow tableRow = e.ModelElement as VDTableRow;
+                int oldRowCount = (int)((uint)e.OldValue);
+                int newRowCount = (int)((uint)e.NewValue);
+
+                if (e.DomainProperty.Id == VDTableRow.RowCountDomainPropertyId)
+                {
+                    if (oldRowCount > newRowCount) // remove row titles
+                    {
+                        List<VDTableRowTitle> toDelList = tableRow.GetChildren<VDTableRowTitle>(t => t.Index + 1 > newRowCount);
+                        toDelList.ForEach(cell => cell.Delete());
+                    }
+                    else if (oldRowCount < newRowCount) // add row titles
+                    {
+                        for (int idxToAdd = oldRowCount; idxToAdd < newRowCount; ++idxToAdd)
+                        {
+                            tableRow.Children.Add(new VDTableRowTitle(
+                                    tableRow.Partition, new PropertyAssignment(VDTableRowTitle.IndexDomainPropertyId, (uint)idxToAdd)));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // to add and remove TableCell when RowCount/ColCount property changed, this is done after TableColTitle is fixed (above rule)
+    [RuleOn(typeof(VDTableRow), FireTime = TimeToFire.TopLevelCommit, Priority = 0x6FFFFFFF/*lower priority then above rule*/)] 
+    public class VDTableRowCountFixupRule_ForTableCell : ChangeRule
+    {
+        public override void ElementPropertyChanged(ElementPropertyChangedEventArgs e)
+        {
+            if (e.ModelElement != null && e.ModelElement is VDTableRow && e.DomainProperty != null)
+            {
+                if (e.ModelElement.Store.InSerializationTransaction) return;
+                
+                VDTableRow tableRow = e.ModelElement as VDTableRow;
+                VDTable table = tableRow.Table;
+                if (table == null) return;
+
+                if (e.DomainProperty.Id == VDTableRow.RowCountDomainPropertyId)
+                {
+                    uint oldRowCount = (uint)e.OldValue;
+                    uint newRowCount = (uint)e.NewValue;
+
+                    if (oldRowCount > newRowCount) // remove row cells
+                    {
+                        List<VDTableCell> toDelList = tableRow.GetChildren<VDTableCell>(c => c.Row + 1 > newRowCount);
+                        toDelList.ForEach(cell => cell.Delete());
+                    }
+                    else if (oldRowCount < newRowCount) // add row cells
+                    {
+                        for (uint row = oldRowCount; row < newRowCount; ++row)
+                        {
+                            for (uint col = 0; col < table.ColCount; ++col)
+                            {
+                                tableRow.Children.Add(new VDTableCell( tableRow.Partition, 
+                                    new PropertyAssignment(VDTableCell.RowDomainPropertyId, row),
+                                    new PropertyAssignment(VDTableCell.ColDomainPropertyId, col)));
+                            }
+                        }
+                    }
+                }
+                else if (e.DomainProperty.Id == VDTableRow.ColCountDomainPropertyId)
+                {
+                    uint oldColCount = (uint)e.OldValue;
+                    uint newColCount = (uint)e.NewValue;
+
+                    if (oldColCount > newColCount) // remove row cells
+                    {
+                        List<VDTableCell> toDelList = tableRow.GetChildren<VDTableCell>(c => c.Col + 1 > newColCount);
+                        toDelList.ForEach(cell => cell.Delete());
+                    }
+                    else if (oldColCount < newColCount) // add row cells
+                    {
+                        for (uint row = 0; row < tableRow.RowCount; ++row)
+                        {
+                            for (uint col = oldColCount; col < newColCount; ++col)
+                            {
+                                tableRow.Children.Add(new VDTableCell(tableRow.Partition,
+                                    new PropertyAssignment(VDTableCell.RowDomainPropertyId, row),
+                                    new PropertyAssignment(VDTableCell.ColDomainPropertyId, col)));
+                            }
                         }
                     }
                 }
@@ -220,28 +400,153 @@ namespace MVCVisualDesigner
     {
         public override bool HasWidgetTitleIcon { get { return true; } }
 
-        protected override Image getTitleIcon()
+        protected override Image getTitleIcon() { return this.getImageFromResource("TableToolToolboxBitmap"); }
+
+        // utilies
+        public VDHoriContainerShape ColTitleContainerShape
         {
-            return this.getImageFromResource("TableToolToolboxBitmap");
+            get
+            {
+                VDHoriContainerShape titleContainerShape = this.GetChildShape<VDHoriContainerShape>(
+                    c => c.ModelElement != null && ((VDContainer)c.ModelElement).Tag == VDTable.TITLE_CONTAINER_TAG);
+                return titleContainerShape;
+            }
+        }
+
+        public VDVertContainerShape TableHeadShape
+        {
+            get
+            {
+                VDVertContainerShape headContainerShape = this.GetChildShape<VDVertContainerShape>(
+                    c => c.ModelElement != null && ((VDContainer)c.ModelElement).Tag == VDTable.TABLE_HEAD_CONTAINER_TAG);
+                return headContainerShape;
+            }
+        }
+
+        public VDVertContainerShape TableBodyShape
+        {
+            get
+            {
+                VDVertContainerShape bodyContainerShape = this.GetChildShape<VDVertContainerShape>(
+                    c => c.ModelElement != null && ((VDContainer)c.ModelElement).Tag == VDTable.TABLE_BODY_CONTAINER_TAG);
+                return bodyContainerShape;
+            }
+        }
+
+        public VDVertContainerShape TableFootShape
+        {
+            get
+            {
+                VDVertContainerShape footContainerShape = this.GetChildShape<VDVertContainerShape>(
+                    c => c.ModelElement != null && ((VDContainer)c.ModelElement).Tag == VDTable.TABLE_FOOT_CONTAINER_TAG);
+                return footContainerShape;
+            }
+        }
+
+        public List<VDTableColTitleShape> ColTitleList
+        {
+            get
+            {
+                if (this.ColTitleContainerShape != null)
+                {
+                    List<VDTableColTitleShape> titles = this.ColTitleContainerShape.GetChildShapes<VDTableColTitleShape>();
+                    return titles;
+                }
+                return null;
+            }
+        }
+
+        public List<VDTableRowShape> HeadRowShapes
+        {
+            get
+            {
+                List<VDTableRowShape> rows = new List<VDTableRowShape>();
+                findTableRowRecursively(this.TableHeadShape, rows);
+                return rows;
+            }
+        }
+
+        public List<VDTableRowShape> BodyRowShapes
+        {
+            get
+            {
+                List<VDTableRowShape> rows = new List<VDTableRowShape>();
+                findTableRowRecursively(this.TableBodyShape, rows);
+                return rows;
+            }
+        }
+
+        public List<VDTableRowShape> FootRowShapes
+        {
+            get
+            {
+                List<VDTableRowShape> rows = new List<VDTableRowShape>();
+                findTableRowRecursively(this.TableFootShape, rows);
+                return rows;
+            }
+        }
+
+        private void findTableRowRecursively(VDWidgetShape parent, List<VDTableRowShape> rows)
+        {
+            if (parent == null) return;
+            foreach(var w in parent.NestedChildShapes)
+            {
+                if (w is VDTableRowShape)
+                    rows.Add((VDTableRowShape)w);
+                else if (w is VDTableShape) // stop recursion when met table
+                    continue;
+                else if (w is VDWidgetShape)
+                    findTableRowRecursively((VDWidgetShape)w, rows);
+            }
+        }
+
+        public List<VDTableCellShape> HeadCellShapes
+        {
+            get
+            {
+                List<VDTableCellShape> cells = new List<VDTableCellShape>();
+                if (HeadRowShapes != null)
+                {
+                    HeadRowShapes.ForEach(row => cells.AddRange(row.GetChildShapes<VDTableCellShape>()));
+                }
+                return cells;
+            }
+        }
+
+        public List<VDTableCellShape> BodyCellShapes
+        {
+            get
+            {
+                List<VDTableCellShape> cells = new List<VDTableCellShape>();
+                if (BodyRowShapes != null)
+                {
+                    BodyRowShapes.ForEach(row => cells.AddRange(row.GetChildShapes<VDTableCellShape>()));
+                }
+                return cells;
+            }
+        }
+
+        public List<VDTableCellShape> FootCellShapes
+        {
+            get
+            {
+                List<VDTableCellShape> cells = new List<VDTableCellShape>();
+                if (FootRowShapes != null)
+                {
+                    FootRowShapes.ForEach(row => cells.AddRange(row.GetChildShapes<VDTableCellShape>()));
+                }
+                return cells;
+            }
         }
     }
 
-    public partial class VDTableHeadShape
+    public partial class VDTableRowWrapperShape
     {
-        public override bool CanMove { get { return false; } }
-        public override NodeSides ResizableSides { get { return NodeSides.None; } }
-    }
+        public override bool HasWidgetTitleIcon { get { return true; } }
 
-    public partial class VDTableBodyShape
-    {
-        public override bool CanMove { get { return false; } }
-        public override NodeSides ResizableSides { get { return NodeSides.None; } }
-    }
+        protected override Image getTitleIcon() { return this.getImageFromResource("TableRowsToolToolboxBitmap"); }
 
-    public partial class VDTableFootShape
-    {
-        public override bool CanMove { get { return false; } }
-        public override NodeSides ResizableSides { get { return NodeSides.None; } }
+        protected override string getTitleText() { return "Table Rows"; }
     }
 
     public partial class VDTableRowShape
@@ -267,12 +572,113 @@ namespace MVCVisualDesigner
                 RectangleD compliantBounds = VDDefaultBoundsRules.Instance.GetCompliantBounds(shape, proposedBounds);
 
                 VDTableRowShape rowShape = shape as VDTableRowShape;
-                if (rowShape != null && rowShape.ParentShape != null)
+                VDWidgetShape parentShape = rowShape.ParentShape as VDWidgetShape;
+
+                if (rowShape != null && parentShape != null)
                 {
                     if (Math.Abs(compliantBounds.X) > VDConstants.DOUBLE_DIFF ||
-                        Math.Abs(compliantBounds.Width - rowShape.ParentShape.BoundingBox.Width) > VDConstants.DOUBLE_DIFF)
+                        Math.Abs(compliantBounds.Width - parentShape.BoundingBox.Width) > VDConstants.DOUBLE_DIFF)
                     {
-                        compliantBounds = new RectangleD(0, compliantBounds.Y, rowShape.ParentShape.BoundingBox.Width, compliantBounds.Height);
+                        compliantBounds = new RectangleD(0, compliantBounds.Y, parentShape.BoundingBox.Width, compliantBounds.Height);
+                    }
+                }
+
+                return compliantBounds;
+            }
+        }
+
+        public VDTableShape TableShape
+        {
+            get
+            {
+                if (this.ParentShape != null && this.ParentShape.ParentShape !=null)
+                {
+                    VDWidgetShape parent = this.ParentShape.ParentShape as VDWidgetShape;
+                    while (parent != null && !(parent is VDTableShape))
+                    {
+                        parent = parent.ParentShape as VDWidgetShape;
+                    }
+
+                    VDTableShape tableShape = parent as VDTableShape;
+                    return tableShape;
+                }
+                return null;
+            }
+        }
+
+        public List<VDTableRowTitleShape> RowTitleList
+        {
+            get
+            {
+                List<VDTableRowTitleShape> titles = this.GetChildShapes<VDTableRowTitleShape>();
+                return titles;
+            }
+        }
+
+        public List<VDTableCellShape> CellList
+        {
+            get
+            {
+                List<VDTableCellShape> cells = this.GetChildShapes<VDTableCellShape>();
+                return cells;
+            }
+        }
+    }
+
+    public partial class VDTableCellShape
+    {
+        public override bool CanMove { get { return false; } }
+
+        public override NodeSides ResizableSides { get { return NodeSides.None; } }
+
+        public override BoundsRules BoundsRules { get { return TableCellBoundsRules.Instance; } }
+
+        class TableCellBoundsRules : BoundsRules
+        {
+            private static TableCellBoundsRules _instance;
+            public static TableCellBoundsRules Instance
+            {
+                get
+                {
+                    if (_instance == null) _instance = new TableCellBoundsRules();
+                    return _instance;
+                }
+            }
+
+            public override RectangleD GetCompliantBounds(ShapeElement shape, RectangleD proposedBounds)
+            {
+                RectangleD compliantBounds = VDDefaultBoundsRules.Instance.GetCompliantBounds(shape, proposedBounds);
+
+                VDTableCellShape cellShape = shape as VDTableCellShape;
+                VDTableRowShape rowShape = cellShape.ParentShape as VDTableRowShape;
+
+                if (cellShape != null && rowShape != null )
+                {
+                    VDTableShape tableShape = rowShape.TableShape;
+                    VDTableCell cell = cellShape.GetMEL<VDTableCell>();
+
+                    if (tableShape != null && cell != null)
+                    {
+                        List<VDTableColTitleShape> colTitles = tableShape.ColTitleList;
+                        List<VDTableRowTitleShape> rowTitles = rowShape.RowTitleList;
+
+                        if (colTitles != null && rowTitles != null && cell.Row < rowTitles.Count && cell.Col < colTitles.Count)
+                        {
+                            compliantBounds.X = colTitles[(int)cell.Col].Location.X;
+                            compliantBounds.Y = rowTitles[(int)cell.Row].Location.Y;
+
+                            // calculated width and height based on SPAN values
+                            double width = 0, height = 0;
+                            for (int i = (int)cell.Col; i < cell.Col + cell.ColSpan; i++) width += colTitles[i].Size.Width;
+                            for (int i = (int)cell.Row; i < cell.Row + cell.RowSpan; i++) height += rowTitles[i].Size.Height;
+                            compliantBounds.Width = width;
+                            compliantBounds.Height = height;
+
+                            if (compliantBounds.Width < TableConstants.MIN_COL_WIDTH)
+                                compliantBounds.Width = TableConstants.MIN_COL_WIDTH;
+                            if (compliantBounds.Height < TableConstants.MIN_ROW_HEIGHT)
+                                compliantBounds.Height = TableConstants.MIN_ROW_HEIGHT;
+                        }
                     }
                 }
 
@@ -281,22 +687,22 @@ namespace MVCVisualDesigner
         }
     }
 
-    partial class VDTableColTitleShape
+    public partial class VDTableColTitleShape
     {
         public override NodeSides ResizableSides { get { return NodeSides.Right; } }
 
         public override bool CanMove { get { return false; } }
 
-        public override BoundsRules BoundsRules { get { return HeadCellBoundsRules.Instance; } }
+        public override BoundsRules BoundsRules { get { return ColTitleBoundsRules.Instance; } }
 
-        public class HeadCellBoundsRules : BoundsRules
+        public class ColTitleBoundsRules : BoundsRules
         {
-            private static HeadCellBoundsRules _instance;
-            public static HeadCellBoundsRules Instance
+            private static ColTitleBoundsRules _instance;
+            public static ColTitleBoundsRules Instance
             {
                 get
                 {
-                    if (_instance == null) _instance = new HeadCellBoundsRules();
+                    if (_instance == null) _instance = new ColTitleBoundsRules();
                     return _instance;
                 }
             }
@@ -313,8 +719,8 @@ namespace MVCVisualDesigner
                         compliantBounds.X = TableConstants.TITLE_SIZE;
                     compliantBounds.Y = 0;
                     compliantBounds.Height = TableConstants.TITLE_SIZE;
-                    if (compliantBounds.Width < TableConstants.MIN_ROW_WIDTH)
-                        compliantBounds.Width = TableConstants.MIN_ROW_WIDTH;
+                    if (compliantBounds.Width < TableConstants.MIN_COL_WIDTH)
+                        compliantBounds.Width = TableConstants.MIN_COL_WIDTH;
 
                     if (title.Index > 0)
                     {
@@ -339,6 +745,62 @@ namespace MVCVisualDesigner
         }
     }
 
+    public partial class VDTableRowTitleShape
+    {
+        public override NodeSides ResizableSides { get { return NodeSides.Bottom; } }
+
+        public override bool CanMove { get { return false; } }
+
+        public override BoundsRules BoundsRules { get { return RowTitleBoundsRules.Instance; } }
+
+        public class RowTitleBoundsRules : BoundsRules
+        {
+            private static RowTitleBoundsRules _instance;
+            public static RowTitleBoundsRules Instance
+            {
+                get
+                {
+                    if (_instance == null) _instance = new RowTitleBoundsRules();
+                    return _instance;
+                }
+            }
+
+            public override RectangleD GetCompliantBounds(ShapeElement shape, RectangleD proposedBounds)
+            {
+                RectangleD compliantBounds = VDDefaultBoundsRules.Instance.GetCompliantBounds(shape, proposedBounds);
+
+                VDTableRowTitleShape titleShape = shape as VDTableRowTitleShape;
+                VDTableRowTitle title = titleShape.GetMEL<VDTableRowTitle>();
+                if (titleShape != null && title != null)
+                {
+                    compliantBounds.X = 0;
+                    if (compliantBounds.Y < 0) compliantBounds.Y = 0;
+                    compliantBounds.Width = TableConstants.TITLE_SIZE;
+                    if (compliantBounds.Height < TableConstants.MIN_ROW_HEIGHT)
+                        compliantBounds.Height = TableConstants.MIN_ROW_HEIGHT;
+
+                    if (title.Index > 0)
+                    {
+                        VDTableRowShape parentShape = titleShape.ParentShape as VDTableRowShape;
+                        if (parentShape != null)
+                        {
+                            List<VDTableRowTitleShape> rowTitles = parentShape.GetChildShapes<VDTableRowTitleShape>();
+                            if (rowTitles.Count >= title.Index)
+                            {
+                                compliantBounds.Y = rowTitles[(int)(title.Index - 1)].Bounds.Bottom;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        compliantBounds.Y = 0;
+                    }
+                }
+
+                return compliantBounds;
+            }
+        }
+    }
 
     // rules
     [RuleOn(typeof(VDTableColTitleShape), FireTime = TimeToFire.TopLevelCommit, Priority = 0x7FFFFFFF)]
@@ -352,10 +814,16 @@ namespace MVCVisualDesigner
 
             VDTableColTitleShape titleShape = e.ModelElement as VDTableColTitleShape;
             VDTableColTitle title = titleShape.GetMEL<VDTableColTitle>();
+            if (title == null) return;
+
+            if (titleShape.ParentShape == null) return;
             VDHoriContainerShape titleContainerShape = titleShape.ParentShape as VDHoriContainerShape;
 
+            if (titleContainerShape.ParentShape == null) return;
+            VDTableShape tableShape = titleContainerShape.ParentShape as VDTableShape;
+
             // when bounds changed, adjust 
-            //      1) other head cells position
+            //      1) other title cells position
             //      2) related data cells size/position
             if (e.DomainProperty.Id == VDTableColTitleShape.AbsoluteBoundsDomainPropertyId)
             {
@@ -363,39 +831,84 @@ namespace MVCVisualDesigner
                 RectangleD newRect = (RectangleD)e.NewValue;
 
                 // just moved, no need to adjust
-                if (Math.Abs(oldRect.Width - newRect.Width) < 0.001) return;
+                if (Math.Abs(oldRect.Width - newRect.Width) < VDConstants.DOUBLE_DIFF) return;
 
                 if (title != null && titleContainerShape != null)
                 {
-                    // 1) fix head cells position
+                    // 1) fix title cells position
                     List<VDTableColTitleShape> titleShapeList = titleContainerShape.GetChildShapes<VDTableColTitleShape>();
                     titleShapeList = (from x in titleShapeList
-                           where x.ModelElement != null && x.GetMEL<VDTableColTitle>().Index > title.Index
-                           orderby x.GetMEL<VDTableColTitle>().Index
-                           select x).ToList();
+                                      where x.ModelElement != null && x.GetMEL<VDTableColTitle>().Index > title.Index
+                                      orderby x.GetMEL<VDTableColTitle>().Index
+                                      select x).ToList();
                     titleShapeList.ForEach(c => c.Size = SizeD.Empty); // trigger bounds rules
 
-                    //// 2) fix data cells size/position
-                    ////List<MVDGridLayoutCellShape> dcs = gridShape.GetChildShapes<MVDGridLayoutCellShape>();
-                    ////if (headCellMEL.HeadType == GridLayoutHeadCellType.ColHead)
-                    ////{
-                    ////    dcs = (from x in dcs
-                    ////           where x.ModelElement != null && x.GetMEL<MVDGridLayoutCell>().LastCol >= headCellMEL.Index
-                    ////           orderby x.GetMEL<MVDGridLayoutCell>().Row
-                    ////           orderby x.GetMEL<MVDGridLayoutCell>().Col
-                    ////           select x).ToList();
-                    ////}
-                    ////else
-                    ////{
-                    ////    dcs = (from x in dcs
-                    ////           where x.ModelElement != null && x.GetMEL<MVDGridLayoutCell>().LastRow >= headCellMEL.Index
-                    ////           orderby x.GetMEL<MVDGridLayoutCell>().Row
-                    ////           orderby x.GetMEL<MVDGridLayoutCell>().Col
-                    ////           select x).ToList();
-
-                    ////}
-                    ////dcs.ForEach(c => c.Size = SizeD.Empty); // trigger bounds rules
+                    // 2) fix data cells size/position
+                    List<VDTableCellShape> cells = new List<VDTableCellShape>();
+                    cells.AddRange(tableShape.HeadCellShapes);
+                    cells.AddRange(tableShape.BodyCellShapes);
+                    cells.AddRange(tableShape.FootCellShapes);
+                    cells = (from x in cells
+                             where x.ModelElement != null && x.GetMEL<VDTableCell>().LastCol >= title.Index
+                             orderby x.GetMEL<VDTableCell>().Row
+                             orderby x.GetMEL<VDTableCell>().Col
+                             select x).ToList();
+                    cells.ForEach(c => c.Size = SizeD.Empty); // trigger bounds rules
                 }
+            }
+        }
+    }
+
+    [RuleOn(typeof(VDTableRowTitleShape), FireTime = TimeToFire.TopLevelCommit, Priority = 0x7FFFFFFF)]
+    public class VDTableRowTitleShape_BoundsFixupRule : ChangeRule
+    {
+        public override void ElementPropertyChanged(ElementPropertyChangedEventArgs e)
+        {
+            base.ElementPropertyChanged(e);
+
+            if (e.ModelElement == null || e.DomainProperty == null) return;
+
+            VDTableRowTitleShape titleShape = e.ModelElement as VDTableRowTitleShape;
+
+            VDTableRowTitle title = titleShape.GetMEL<VDTableRowTitle>();
+            if (title == null) return;
+
+            if (titleShape.ParentShape == null) return;
+            VDTableRowShape rowShape = titleShape.ParentShape as VDTableRowShape;
+
+            VDTableShape tableShape = rowShape.TableShape;
+            if (tableShape == null) return;
+
+            // when bounds changed, adjust 
+            //      1) other head cells position
+            //      2) related data cells size/position
+            if (e.DomainProperty.Id == VDTableRowTitleShape.AbsoluteBoundsDomainPropertyId)
+            {
+                RectangleD oldRect = (RectangleD)e.OldValue;
+                RectangleD newRect = (RectangleD)e.NewValue;
+
+                // just moved, no need to adjust
+                if (Math.Abs(oldRect.Height - newRect.Height) < VDConstants.DOUBLE_DIFF) return;
+
+                // 1) fix head cells position
+                List<VDTableRowTitleShape> titleShapeList = rowShape.GetChildShapes<VDTableRowTitleShape>();
+                titleShapeList = (from x in titleShapeList
+                                  where x.ModelElement != null && x.GetMEL<VDTableRowTitle>().Index > title.Index
+                                  orderby x.GetMEL<VDTableRowTitle>().Index
+                                  select x).ToList();
+                titleShapeList.ForEach(c => c.Size = SizeD.Empty); // trigger bounds rules
+
+                // 2) fix data cells size/position
+                List<VDTableCellShape> cells = new List<VDTableCellShape>();
+                cells.AddRange(tableShape.HeadCellShapes);
+                cells.AddRange(tableShape.BodyCellShapes);
+                cells.AddRange(tableShape.FootCellShapes);
+                cells = (from x in cells
+                         where x.ModelElement != null && x.GetMEL<VDTableCell>().LastRow >= title.Index
+                         orderby x.GetMEL<VDTableCell>().Row
+                         orderby x.GetMEL<VDTableCell>().Col
+                         select x).ToList();
+                cells.ForEach(c => c.Size = SizeD.Empty); // trigger bounds rules
             }
         }
     }

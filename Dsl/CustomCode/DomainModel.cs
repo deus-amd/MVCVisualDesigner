@@ -15,6 +15,9 @@ namespace MVCVisualDesigner
                 typeof(VDRelayoutChildrenShapeRule),
                 typeof(VDTableColCountFixupRule),
                 typeof(VDTableColTitleShape_BoundsFixupRule),
+                typeof(VDTableRowTitleShape_BoundsFixupRule),
+                typeof(VDTableRowCountFixupRule_ForRowTitle),
+                typeof(VDTableRowCountFixupRule_ForTableCell),
             };
         }
     }
