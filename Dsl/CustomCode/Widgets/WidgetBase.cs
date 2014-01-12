@@ -71,7 +71,7 @@ namespace MVCVisualDesigner
             // custom merge relate
             if (sourceElement != null && sourceElement is ICustomMerge)
             {
-                ((ICustomMerge)sourceElement).CustomMergeRelate(this, (VDWidget)sourceElement, elementGroup);
+                ((ICustomMerge)sourceElement).MergeTo(this, elementGroup);
                 return;
             }
 
@@ -82,6 +82,34 @@ namespace MVCVisualDesigner
         public string GenerateCode(ICodeGeneratorFactory cGFactory, IWidgetTreeWalkerFactory walkerFactory)
         {
             return cGFactory.GetCodeGenerator(this).GenerateCode(cGFactory, walkerFactory);
+        }
+
+
+        // utilities
+        public T GetChild<T>(Predicate<T> predicate = null)  where T : VDWidget
+        {
+            T child;
+            if (predicate == null)
+                child = this.Children.Find(c => c is T) as T;
+            else
+                child = this.Children.Find(c => (c is T) && predicate((T)c)) as T;
+            return child;
+        }
+
+        public List<T> GetChildren<T>(Predicate<T> predicate = null) where T : VDWidget
+        {
+            List<T> children = new List<T>();;
+            if (predicate == null)
+            {
+                List<VDWidget> widgets = this.Children.FindAll(c => c is T);
+                if (widgets != null && widgets.Count > 0) widgets.ForEach(w => children.Add((T)w));
+            }
+            else
+            {
+                List<VDWidget> widgets = this.Children.FindAll(c => (c is T) && predicate((T)c));
+                if (widgets != null && widgets.Count > 0) widgets.ForEach(w => children.Add((T)w));
+            }
+            return children;
         }
     }
 }

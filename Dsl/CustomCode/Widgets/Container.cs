@@ -106,6 +106,17 @@ namespace MVCVisualDesigner
                         setAnchor(parentShape, thisMEL, thisPEL, thisMEL.HasBottomAnchor && !thisPEL.Anchoring.HasBottomAnchor, 
                             thisMEL.BottomSibling, AnchoringBehavior.Edge.Bottom);
                     }
+
+                    if (thisMEL is VDHoriContainer && ((VDHoriContainer)thisMEL).FixedHeight > 0.0001)
+                    {
+                        proposedBounds = new RectangleD(proposedBounds.Location,
+                            new SizeD(proposedBounds.Width, ((VDHoriContainer)thisMEL).FixedHeight));
+                    }
+                    else if (thisMEL is VDVertContainer && ((VDVertContainer)thisMEL).FixedWidth > 0.0001)
+                    {
+                        proposedBounds = new RectangleD(proposedBounds.Location,
+                            new SizeD(((VDVertContainer)thisMEL).FixedWidth, proposedBounds.Height));
+                    }
                 }
 
                 return proposedBounds;

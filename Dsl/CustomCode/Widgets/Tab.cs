@@ -17,43 +17,39 @@ namespace MVCVisualDesigner
 
         public override bool HasWidgetTitle { get { return true; } }
 
-        public void CustomMergeRelate(VDWidget targetWidget, VDWidget sourceElement, ElementGroup elementGroup)
+        public void MergeTo(VDWidget targetWidget, ElementGroup elementGroup)
         {
-            targetWidget.Children.Add(sourceElement);
+            targetWidget.Children.Add(this);
 
-            VDTab tab = sourceElement as VDTab;
-            if (tab != null)
-            {
-                // the order of creating children is import, why??
-                // first children, then grand-children???
-                VDHoriContainer headContainer = this.Store.ElementFactory.CreateElement(VDHoriContainer.DomainClassId,
-                    new PropertyAssignment(VDContainer.TagDomainPropertyId, HEADS_CONTAINER_TAG),
-                    new PropertyAssignment(VDContainer.HasLeftAnchorDomainPropertyId, true),
-                    new PropertyAssignment(VDContainer.HasRightAnchorDomainPropertyId, true),
-                    new PropertyAssignment(VDContainer.HasTopAnchorDomainPropertyId, true)) as VDHoriContainer;
-                VDFullFilledContainer bodyContainer = this.Store.ElementFactory.CreateElement(VDFullFilledContainer.DomainClassId,
-                    new PropertyAssignment(VDContainer.TagDomainPropertyId, BODYS_CONTAINER_TAG),
-                    new PropertyAssignment(VDContainer.HasLeftAnchorDomainPropertyId, true),
-                    new PropertyAssignment(VDContainer.HasRightAnchorDomainPropertyId, true),
-                    new PropertyAssignment(VDContainer.HasBottomAnchorDomainPropertyId, true)) as VDFullFilledContainer;
+            // the order of creating children is import, why??
+            // first children, then grand-children???
+            VDHoriContainer headContainer = this.Store.ElementFactory.CreateElement(VDHoriContainer.DomainClassId,
+                new PropertyAssignment(VDContainer.TagDomainPropertyId, HEADS_CONTAINER_TAG),
+                new PropertyAssignment(VDContainer.HasLeftAnchorDomainPropertyId, true),
+                new PropertyAssignment(VDContainer.HasRightAnchorDomainPropertyId, true),
+                new PropertyAssignment(VDContainer.HasTopAnchorDomainPropertyId, true)) as VDHoriContainer;
+            VDFullFilledContainer bodyContainer = this.Store.ElementFactory.CreateElement(VDFullFilledContainer.DomainClassId,
+                new PropertyAssignment(VDContainer.TagDomainPropertyId, BODYS_CONTAINER_TAG),
+                new PropertyAssignment(VDContainer.HasLeftAnchorDomainPropertyId, true),
+                new PropertyAssignment(VDContainer.HasRightAnchorDomainPropertyId, true),
+                new PropertyAssignment(VDContainer.HasBottomAnchorDomainPropertyId, true)) as VDFullFilledContainer;
 
-                VDHoriSeparator hSeparator = this.Store.ElementFactory.CreateElement(VDHoriSeparator.DomainClassId) as VDHoriSeparator;
-                hSeparator.TopWidget = headContainer;
-                hSeparator.BottomWidget = bodyContainer;
+            VDHoriSeparator hSeparator = this.Store.ElementFactory.CreateElement(VDHoriSeparator.DomainClassId) as VDHoriSeparator;
+            hSeparator.TopWidget = headContainer;
+            hSeparator.BottomWidget = bodyContainer;
 
-                tab.Children.Add(headContainer);
-                tab.Children.Add(bodyContainer);
-                tab.Children.Add(hSeparator);
+            this.Children.Add(headContainer);
+            this.Children.Add(bodyContainer);
+            this.Children.Add(hSeparator);
 
-                VDTabHead head = this.Store.ElementFactory.CreateElement(
-                    VDTabHead.DomainClassId,
-                    new PropertyAssignment(VDTabHead.TabTitleDomainPropertyId, "New Tab")) as VDTabHead;
-                VDTabBody body = this.Store.ElementFactory.CreateElement(VDTabBody.DomainClassId) as VDTabBody;
-                tab.ActiveHead = head;
-                head.Body = body;
-                headContainer.Children.Add(head);
-                bodyContainer.Children.Add(body);
-            }
+            VDTabHead head = this.Store.ElementFactory.CreateElement(
+                VDTabHead.DomainClassId,
+                new PropertyAssignment(VDTabHead.TabTitleDomainPropertyId, "New Tab")) as VDTabHead;
+            VDTabBody body = this.Store.ElementFactory.CreateElement(VDTabBody.DomainClassId) as VDTabBody;
+            this.ActiveHead = head;
+            head.Body = body;
+            headContainer.Children.Add(head);
+            bodyContainer.Children.Add(body);
         }
 
         public VDContainer HeadContainer

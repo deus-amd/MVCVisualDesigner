@@ -9,6 +9,6 @@ namespace MVCVisualDesigner
 {
     public interface ICustomMerge
     {
-        void CustomMergeRelate(VDWidget targetWidget, VDWidget sourceElement, ElementGroup elementGroup);
+        void MergeTo(VDWidget targetWidget, ElementGroup elementGroup);
     }
 }

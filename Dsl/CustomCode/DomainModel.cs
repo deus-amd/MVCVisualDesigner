@@ -11,7 +11,11 @@ namespace MVCVisualDesigner
     {
         protected override Type[] GetCustomDomainModelTypes()
         {
-            return new Type[] { typeof(VDRelayoutChildrenShapeRule) };
+            return new Type[] { 
+                typeof(VDRelayoutChildrenShapeRule),
+                typeof(VDTableColCountFixupRule),
+                typeof(VDTableColTitleShape_BoundsFixupRule),
+            };
         }
     }
 }

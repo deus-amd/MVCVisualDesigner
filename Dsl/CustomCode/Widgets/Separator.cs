@@ -30,7 +30,10 @@ namespace MVCVisualDesigner
         protected override void SetAbsoluteBoundsValue(RectangleD newValue)
         {
             base.SetAbsoluteBoundsValue(newValue);
-            this.PerformShapeAnchoringRule();
+            if (!this.Store.InUndoRedoOrRollback)
+            {
+                this.PerformShapeAnchoringRule();
+            }
         }
 
         public override NodeSides ResizableSides { get { return NodeSides.None; } }
@@ -75,7 +78,7 @@ namespace MVCVisualDesigner
 
                         // set bounds of HorizonalSeparator according to top widget
                         //location.X = topWidgetShape.Bounds.Left;
-                        if (location.Y < 0.05 || location.Y + size.Height + 0.05 > parentShape.Bounds.Height)
+                        if (location.Y < VDConstants.DOUBLE_DIFF || location.Y + size.Height + VDConstants.DOUBLE_DIFF > parentShape.Bounds.Height)
                             location.Y = topWidgetShape.Bounds.Bottom + model.TopMargin;
                         bFlagBoundsSet = true;
                     }
@@ -98,10 +101,17 @@ namespace MVCVisualDesigner
                         if (!bFlagBoundsSet)
                         {
                             //location.X = bottomWidgetShape.Bounds.Left;
-                            if (location.Y < 0.05 || location.Y + size.Height + 0.05 > parentShape.Bounds.Height)
+                            if (location.Y < VDConstants.DOUBLE_DIFF || location.Y + size.Height + VDConstants.DOUBLE_DIFF > parentShape.Bounds.Height)
                                 location.Y = bottomWidgetShape.Bounds.Top - size.Height - model.BottomMargin;
                         }
                     }
+                }
+
+                // set initial Y position
+                if (model.DefaultY >= 0)
+                {
+                    location.Y = model.DefaultY;
+                    model.DefaultY = -1;
                 }
 
                 return new RectangleD(location, size);
@@ -158,7 +168,7 @@ namespace MVCVisualDesigner
                         //    separatorShape.Anchoring.SetBottomAnchor(leftWidgetShape, AnchoringBehavior.Edge.Bottom, 0);
 
                         // set bounds of separator according to left widget
-                        if (location.X < 0.05 || location.X + size.Width + 0.05 > parentShape.Bounds.Width)
+                        if (location.X < VDConstants.DOUBLE_DIFF || location.X + size.Width + VDConstants.DOUBLE_DIFF > parentShape.Bounds.Width)
                             location.X = leftWidgetShape.Bounds.Right + model.LeftMargin;
                         //location.Y = leftWidgetShape.Bounds.Top;
                         bFlagBoundsSet = true;
@@ -181,11 +191,18 @@ namespace MVCVisualDesigner
                         // set bounds of handle according to bottom widget
                         if (!bFlagBoundsSet)
                         {
-                            if (location.X < 0.05 || location.X + size.Width + 0.05 > parentShape.Bounds.Width)
+                            if (location.X < VDConstants.DOUBLE_DIFF || location.X + size.Width + VDConstants.DOUBLE_DIFF > parentShape.Bounds.Width)
                                 location.X = rightWidgetShape.Bounds.Left - size.Width - model.RightMargin; ;
                             //location.Y = rightWidgetShape.Bounds.Top; 
                         }
                     }
+                }
+
+                // set initial Y position
+                if (model.DefaultX >= 0)
+                {
+                    location.Y = model.DefaultX;
+                    model.DefaultX = -1;
                 }
 
                 return new RectangleD(location, size);

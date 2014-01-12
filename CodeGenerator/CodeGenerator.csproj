@@ -75,8 +75,28 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="RazorCodeGenerator\VDTableCellRazorCodeGeneratorImpl.cs">
+      <DependentUpon>VDTableCellRazorCodeGeneratorImpl.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="RazorCodeGenerator\VDTableRowRazorCodeGeneratorImpl.cs">
+      <DependentUpon>VDTableRowRazorCodeGeneratorImpl.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="RazorCodeGenerator\VDTableRowTitleRazorCodeGeneratorImpl.cs">
+      <DependentUpon>VDTableRowTitleRazorCodeGeneratorImpl.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="RazorCodeGenerator\VDTableFootRazorCodeGeneratorImpl.cs">
       <DependentUpon>VDTableFootRazorCodeGeneratorImpl.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="RazorCodeGenerator\VDTableColTitleRazorCodeGeneratorImpl.cs">
+      <DependentUpon>VDTableColTitleRazorCodeGeneratorImpl.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -202,9 +222,29 @@
       <LastGenOutput>VDTableBodyRazorCodeGeneratorImpl.cs</LastGenOutput>
       <CustomToolNamespace>MVCVisualDesigner.CodeGenerator</CustomToolNamespace>
     </None>
+    <None Include="RazorCodeGenerator\VDTableCellRazorCodeGeneratorImpl.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>VDTableCellRazorCodeGeneratorImpl.cs</LastGenOutput>
+      <CustomToolNamespace>MVCVisualDesigner.CodeGenerator</CustomToolNamespace>
+    </None>
+    <None Include="RazorCodeGenerator\VDTableRowRazorCodeGeneratorImpl.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>VDTableRowRazorCodeGeneratorImpl.cs</LastGenOutput>
+      <CustomToolNamespace>MVCVisualDesigner.CodeGenerator</CustomToolNamespace>
+    </None>
+    <None Include="RazorCodeGenerator\VDTableRowTitleRazorCodeGeneratorImpl.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>VDTableRowTitleRazorCodeGeneratorImpl.cs</LastGenOutput>
+      <CustomToolNamespace>MVCVisualDesigner.CodeGenerator</CustomToolNamespace>
+    </None>
     <None Include="RazorCodeGenerator\VDTableFootRazorCodeGeneratorImpl.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>VDTableFootRazorCodeGeneratorImpl.cs</LastGenOutput>
+      <CustomToolNamespace>MVCVisualDesigner.CodeGenerator</CustomToolNamespace>
+    </None>
+    <None Include="RazorCodeGenerator\VDTableColTitleRazorCodeGeneratorImpl.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>VDTableColTitleRazorCodeGeneratorImpl.cs</LastGenOutput>
       <CustomToolNamespace>MVCVisualDesigner.CodeGenerator</CustomToolNamespace>
     </None>
     <None Include="RazorCodeGenerator\VDTableHeadRazorCodeGeneratorImpl.tt">

@@ -100,6 +100,11 @@
             <ExternalTypeMoniker Name="/System/Double" />
           </Type>
         </DomainProperty>
+        <DomainProperty Id="a4cc57f6-51b1-40b2-b2bf-18ca9e2e5a42" Description="Description for MVCVisualDesigner.VDHoriSeparator.Default Y" Name="DefaultY" DisplayName="Default Y" DefaultValue="-1">
+          <Type>
+            <ExternalTypeMoniker Name="/System/Double" />
+          </Type>
+        </DomainProperty>
       </Properties>
     </DomainClass>
     <DomainClass Id="913509e8-33d0-462f-aa85-bd5f4148d3e7" Description="Description for MVCVisualDesigner.VDVertSeparator" Name="VDVertSeparator" DisplayName="VDVert Separator" Namespace="MVCVisualDesigner">
@@ -113,6 +118,11 @@
           </Type>
         </DomainProperty>
         <DomainProperty Id="89c67701-70d5-4090-8a5e-947b33f38e17" Description="" Name="RightMargin" DisplayName="Right Margin">
+          <Type>
+            <ExternalTypeMoniker Name="/System/Double" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="7a122e6b-d488-4c5c-8623-84a6f94d473d" Description="Description for MVCVisualDesigner.VDVertSeparator.Default X" Name="DefaultX" DisplayName="Default X" DefaultValue="-1">
           <Type>
             <ExternalTypeMoniker Name="/System/Double" />
           </Type>
@@ -366,16 +376,37 @@
       <BaseClass>
         <DomainClassMoniker Name="VDContainer" />
       </BaseClass>
+      <Properties>
+        <DomainProperty Id="c7c2b84a-9a5a-4e0d-b2cf-fe7e87991a15" Description="Description for MVCVisualDesigner.VDHoriContainer.Fixed Height" Name="FixedHeight" DisplayName="Fixed Height" DefaultValue="0">
+          <Type>
+            <ExternalTypeMoniker Name="/System/Double" />
+          </Type>
+        </DomainProperty>
+      </Properties>
     </DomainClass>
     <DomainClass Id="5eec1f97-bb5a-4251-8334-8146cf522c8e" Description="Description for MVCVisualDesigner.VDVertContainer" Name="VDVertContainer" DisplayName="VDVert Container" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDContainer" />
       </BaseClass>
+      <Properties>
+        <DomainProperty Id="00e90a5e-d53a-4d9d-90ee-a4d07f23280c" Description="Description for MVCVisualDesigner.VDVertContainer.Fixed Width" Name="FixedWidth" DisplayName="Fixed Width" DefaultValue="0">
+          <Type>
+            <ExternalTypeMoniker Name="/System/Double" />
+          </Type>
+        </DomainProperty>
+      </Properties>
     </DomainClass>
     <DomainClass Id="446a5ca6-117e-4604-acca-a0ad19fdf6db" Description="Description for MVCVisualDesigner.VDTable" Name="VDTable" DisplayName="VDTable" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
+      <Properties>
+        <DomainProperty Id="73034a9e-3769-4dcc-bc16-36b52ba6a978" Description="Column count of table" Name="ColCount" DisplayName="Column Count" Category="Table">
+          <Type>
+            <ExternalTypeMoniker Name="/System/UInt32" />
+          </Type>
+        </DomainProperty>
+      </Properties>
     </DomainClass>
     <DomainClass Id="4144beea-c44c-4cb5-b6eb-f11d455d9821" Description="Description for MVCVisualDesigner.VDFullFilledContainer" Name="VDFullFilledContainer" DisplayName="VDFull Filled Container" Namespace="MVCVisualDesigner">
       <BaseClass>
@@ -396,6 +427,59 @@
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
+    </DomainClass>
+    <DomainClass Id="3a6364ee-f9d1-41c2-894b-2f48613eeb0b" Description="Description for MVCVisualDesigner.VDTableColTitle" Name="VDTableColTitle" DisplayName="VDTable Col Title" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
+      <Properties>
+        <DomainProperty Id="c38e06b6-dae8-4fda-95bd-1c5d775d5b1a" Description="Description for MVCVisualDesigner.VDTableColTitle.Index" Name="Index" DisplayName="Index">
+          <Type>
+            <ExternalTypeMoniker Name="/System/UInt32" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+    </DomainClass>
+    <DomainClass Id="8dd89d6b-e16f-44e2-bdd6-2f5f1678586d" Description="Description for MVCVisualDesigner.VDTableRowTitle" Name="VDTableRowTitle" DisplayName="VDTable Row Title" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
+      <Properties>
+        <DomainProperty Id="4bdc91e9-7bff-4337-9fa4-202ca1dd4e0e" Description="" Name="Index" DisplayName="Index" Category="Table" IsUIReadOnly="true">
+          <Type>
+            <ExternalTypeMoniker Name="/System/UInt32" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+    </DomainClass>
+    <DomainClass Id="0b864f89-2761-4419-8b16-d1f9493d20cb" Description="Description for MVCVisualDesigner.VDTableRow" Name="VDTableRow" DisplayName="VDTable Row" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
+      <Properties>
+        <DomainProperty Id="1697ed28-542e-4b22-ab88-ed829dce1298" Description="Row count" Name="RowCount" DisplayName="Row Count" DefaultValue="1" Category="Table">
+          <Type>
+            <ExternalTypeMoniker Name="/System/UInt32" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+    </DomainClass>
+    <DomainClass Id="a309dce3-c14b-443c-b18f-17901f6892e3" Description="Description for MVCVisualDesigner.VDTableCell" Name="VDTableCell" DisplayName="VDTable Cell" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
+      <Properties>
+        <DomainProperty Id="a7e3e2f3-c746-47ac-8c9a-2b714caebe7b" Description="" Name="Col" DisplayName="Col" Category="Table">
+          <Type>
+            <ExternalTypeMoniker Name="/System/UInt32" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="20f0d7c0-723a-4bdd-9fcf-8291e2371e72" Description="" Name="Row" DisplayName="Row" Category="Table">
+          <Type>
+            <ExternalTypeMoniker Name="/System/UInt32" />
+          </Type>
+        </DomainProperty>
+      </Properties>
     </DomainClass>
   </Classes>
   <Relationships>
@@ -895,7 +979,7 @@
         <GeometryShapeMoniker Name="VDContainerBaseShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="7bc35063-02ca-4067-893a-01c61c5dd0f8" Description="Description for MVCVisualDesigner.VDTableHeadShape" Name="VDTableHeadShape" DisplayName="VDTable Head Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Head Shape" OutlineColor="Transparent" InitialWidth="4" InitialHeight="0" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
+    <GeometryShape Id="7bc35063-02ca-4067-893a-01c61c5dd0f8" Description="Description for MVCVisualDesigner.VDTableHeadShape" Name="VDTableHeadShape" DisplayName="VDTable Head Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Head Shape" FillColor="Gainsboro" OutlineColor="Transparent" InitialWidth="4" InitialHeight="3" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
@@ -905,7 +989,27 @@
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="f09c62d5-18a8-47a9-b099-d3a4b6b5820d" Description="Description for MVCVisualDesigner.VDTableFootShape" Name="VDTableFootShape" DisplayName="VDTable Foot Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Foot Shape" OutlineColor="Transparent" InitialWidth="4" InitialHeight="0" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
+    <GeometryShape Id="f09c62d5-18a8-47a9-b099-d3a4b6b5820d" Description="Description for MVCVisualDesigner.VDTableFootShape" Name="VDTableFootShape" DisplayName="VDTable Foot Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Foot Shape" FillColor="Gainsboro" OutlineColor="Transparent" InitialWidth="4" InitialHeight="3" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
+    <GeometryShape Id="e1875ec2-c68a-4fe6-89ff-1c84492568d7" Description="Description for MVCVisualDesigner.VDTableColTitleShape" Name="VDTableColTitleShape" DisplayName="VDTable Col Title Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Col Title Shape" FillColor="DarkBlue" OutlineColor="White" InitialWidth="0.2" InitialHeight="0.2" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
+    <GeometryShape Id="8aea2aa1-05e2-4eb1-94c8-0d2c41409c7b" Description="Description for MVCVisualDesigner.VDTableRowTitleShape" Name="VDTableRowTitleShape" DisplayName="VDTable Row Title Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Row Title Shape" FillColor="DarkBlue" OutlineColor="White" InitialWidth="0.2" InitialHeight="0.2" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
+    <GeometryShape Id="9785269d-3ecc-49dd-b93d-0775ca4383ed" Description="Description for MVCVisualDesigner.VDTableRowShape" Name="VDTableRowShape" DisplayName="VDTable Row Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Row Shape" FillColor="LightGray" OutlineColor="Transparent" InitialHeight="1" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
+    <GeometryShape Id="a53c8579-f624-4ce8-999f-3429d9013df2" Description="Description for MVCVisualDesigner.VDTableCellShape" Name="VDTableCellShape" DisplayName="VDTable Cell Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Cell Shape" OutlineColor="RoyalBlue" InitialHeight="1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
@@ -1030,6 +1134,9 @@
           <XmlPropertyData XmlName="bottomMargin">
             <DomainPropertyMoniker Name="VDHoriSeparator/BottomMargin" />
           </XmlPropertyData>
+          <XmlPropertyData XmlName="defaultY">
+            <DomainPropertyMoniker Name="VDHoriSeparator/DefaultY" />
+          </XmlPropertyData>
         </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDVertSeparator" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDVertSeparatorMoniker" ElementName="vDVertSeparator" MonikerTypeName="VDVertSeparatorMoniker">
@@ -1046,6 +1153,9 @@
           </XmlPropertyData>
           <XmlPropertyData XmlName="rightMargin">
             <DomainPropertyMoniker Name="VDVertSeparator/RightMargin" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="defaultX">
+            <DomainPropertyMoniker Name="VDVertSeparator/DefaultX" />
           </XmlPropertyData>
         </ElementData>
       </XmlClassData>
@@ -1280,9 +1390,19 @@
       </XmlClassData>
       <XmlClassData TypeName="VDHoriContainer" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDHoriContainerMoniker" ElementName="vDHoriContainer" MonikerTypeName="VDHoriContainerMoniker">
         <DomainClassMoniker Name="VDHoriContainer" />
+        <ElementData>
+          <XmlPropertyData XmlName="fixedHeight">
+            <DomainPropertyMoniker Name="VDHoriContainer/FixedHeight" />
+          </XmlPropertyData>
+        </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDVertContainer" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDVertContainerMoniker" ElementName="vDVertContainer" MonikerTypeName="VDVertContainerMoniker">
         <DomainClassMoniker Name="VDVertContainer" />
+        <ElementData>
+          <XmlPropertyData XmlName="fixedWidth">
+            <DomainPropertyMoniker Name="VDVertContainer/FixedWidth" />
+          </XmlPropertyData>
+        </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDHoriContainerShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDHoriContainerShapeMoniker" ElementName="vDHoriContainerShape" MonikerTypeName="VDHoriContainerShapeMoniker">
         <GeometryShapeMoniker Name="VDHoriContainerShape" />
@@ -1307,6 +1427,11 @@
       </XmlClassData>
       <XmlClassData TypeName="VDTable" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTableMoniker" ElementName="vDTable" MonikerTypeName="VDTableMoniker">
         <DomainClassMoniker Name="VDTable" />
+        <ElementData>
+          <XmlPropertyData XmlName="colCount">
+            <DomainPropertyMoniker Name="VDTable/ColCount" />
+          </XmlPropertyData>
+        </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDTableShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTableShapeMoniker" ElementName="vDTableShape" MonikerTypeName="VDTableShapeMoniker">
         <GeometryShapeMoniker Name="VDTableShape" />
@@ -1334,6 +1459,53 @@
       </XmlClassData>
       <XmlClassData TypeName="VDTableFootShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTableFootShapeMoniker" ElementName="vDTableFootShape" MonikerTypeName="VDTableFootShapeMoniker">
         <GeometryShapeMoniker Name="VDTableFootShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDTableColTitle" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTableColTitleMoniker" ElementName="vDTableColTitle" MonikerTypeName="VDTableColTitleMoniker">
+        <DomainClassMoniker Name="VDTableColTitle" />
+        <ElementData>
+          <XmlPropertyData XmlName="index">
+            <DomainPropertyMoniker Name="VDTableColTitle/Index" />
+          </XmlPropertyData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="VDTableRowTitle" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTableRowTitleMoniker" ElementName="vDTableRowTitle" MonikerTypeName="VDTableRowTitleMoniker">
+        <DomainClassMoniker Name="VDTableRowTitle" />
+        <ElementData>
+          <XmlPropertyData XmlName="index">
+            <DomainPropertyMoniker Name="VDTableRowTitle/Index" />
+          </XmlPropertyData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="VDTableColTitleShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTableColTitleShapeMoniker" ElementName="vDTableColTitleShape" MonikerTypeName="VDTableColTitleShapeMoniker">
+        <GeometryShapeMoniker Name="VDTableColTitleShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDTableRowTitleShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTableRowTitleShapeMoniker" ElementName="vDTableRowTitleShape" MonikerTypeName="VDTableRowTitleShapeMoniker">
+        <GeometryShapeMoniker Name="VDTableRowTitleShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDTableRow" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTableRowMoniker" ElementName="vDTableRow" MonikerTypeName="VDTableRowMoniker">
+        <DomainClassMoniker Name="VDTableRow" />
+        <ElementData>
+          <XmlPropertyData XmlName="rowCount">
+            <DomainPropertyMoniker Name="VDTableRow/RowCount" />
+          </XmlPropertyData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="VDTableRowShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTableRowShapeMoniker" ElementName="vDTableRowShape" MonikerTypeName="VDTableRowShapeMoniker">
+        <GeometryShapeMoniker Name="VDTableRowShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDTableCell" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTableCellMoniker" ElementName="vDTableCell" MonikerTypeName="VDTableCellMoniker">
+        <DomainClassMoniker Name="VDTableCell" />
+        <ElementData>
+          <XmlPropertyData XmlName="col">
+            <DomainPropertyMoniker Name="VDTableCell/Col" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="row">
+            <DomainPropertyMoniker Name="VDTableCell/Row" />
+          </XmlPropertyData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="VDTableCellShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTableCellShapeMoniker" ElementName="vDTableCellShape" MonikerTypeName="VDTableCellShapeMoniker">
+        <GeometryShapeMoniker Name="VDTableCellShape" />
       </XmlClassData>
     </ClassData>
   </XmlSerializationBehavior>
@@ -1639,6 +1811,22 @@
         <DomainClassMoniker Name="VDTableFoot" />
         <GeometryShapeMoniker Name="VDTableFootShape" />
       </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDTableColTitle" />
+        <GeometryShapeMoniker Name="VDTableColTitleShape" />
+      </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDTableRowTitle" />
+        <GeometryShapeMoniker Name="VDTableRowTitleShape" />
+      </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDTableRow" />
+        <GeometryShapeMoniker Name="VDTableRowShape" />
+      </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDTableCell" />
+        <GeometryShapeMoniker Name="VDTableCellShape" />
+      </ShapeMap>
     </ShapeMaps>
   </Diagram>
   <Designer CopyPasteGeneration="CopyPasteOnly" FileExtension="amvd" EditorGuid="061c971a-6960-4ef9-9c30-8a8a6543b9f7">
@@ -1657,6 +1845,9 @@
       </ElementTool>
       <ElementTool Name="TableTool" ToolboxIcon="Resources\Table.bmp" Caption="Table" Tooltip="" HelpKeyword="TableTool">
         <DomainClassMoniker Name="VDTable" />
+      </ElementTool>
+      <ElementTool Name="TableRowsTool" ToolboxIcon="Resources\GridLayoutIcon2.bmp" Caption="Table Rows" Tooltip="" HelpKeyword="TableRowsTool">
+        <DomainClassMoniker Name="VDTableRow" />
       </ElementTool>
     </ToolboxTab>
     <ToolboxTab TabText="Form">

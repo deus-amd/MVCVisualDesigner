@@ -18,11 +18,16 @@ namespace MVCVisualDesigner
         protected override void OnDeleted()
         {
             base.OnDeleted();
-            if (m_parentToDel != null)
+            if (m_parentToDel != null && this.Store.TransactionManager.InTransaction)
             {
                 m_parentToDel.Delete();
                 m_parentToDel = null;
             }
         }
+    }
+
+    public static class VDConstants
+    {
+        public const double DOUBLE_DIFF = 0.0001;
     }
 }
