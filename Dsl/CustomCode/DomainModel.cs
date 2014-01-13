@@ -18,6 +18,7 @@ namespace MVCVisualDesigner
                 typeof(VDTableRowTitleShape_BoundsFixupRule),
                 typeof(VDTableRowCountFixupRule_ForRowTitle),
                 typeof(VDTableRowCountFixupRule_ForTableCell),
+                typeof(VDTableCellSpanFixupRule),
             };
         }
     }

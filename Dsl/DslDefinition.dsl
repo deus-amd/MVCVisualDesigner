@@ -469,12 +469,12 @@
             <ExternalTypeMoniker Name="/System/UInt32" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="54089c2c-ccdd-4afe-8597-6025780bd931" Description="" Name="ColSpan" DisplayName="Column Span" DefaultValue="1" Category="Table">
+        <DomainProperty Id="54089c2c-ccdd-4afe-8597-6025780bd931" Description="" Name="ColSpan" DisplayName="Column Span" DefaultValue="1" Category="Table" IsBrowsable="false">
           <Type>
             <ExternalTypeMoniker Name="/System/UInt32" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="9dced70f-3124-4f8c-934a-19b7b154edfa" Description="" Name="RowSpan" DisplayName="Row Span" DefaultValue="1" Category="Table">
+        <DomainProperty Id="9dced70f-3124-4f8c-934a-19b7b154edfa" Description="" Name="RowSpan" DisplayName="Row Span" DefaultValue="1" Category="Table" IsBrowsable="false">
           <Type>
             <ExternalTypeMoniker Name="/System/UInt32" />
           </Type>
@@ -1003,6 +1003,18 @@
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
+      <Properties>
+        <DomainProperty Id="68037fe6-76a2-4a11-bd68-9e48ad4cb728" Description="" Name="ColSpan" DisplayName="Column Span" Kind="CustomStorage" Category="Table">
+          <Type>
+            <ExternalTypeMoniker Name="/System/UInt32" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="e83956f9-5649-4dae-bfaa-85f6e06dc63c" Description="" Name="RowSpan" DisplayName="Row Span" Kind="CustomStorage" Category="Table">
+          <Type>
+            <ExternalTypeMoniker Name="/System/UInt32" />
+          </Type>
+        </DomainProperty>
+      </Properties>
     </GeometryShape>
     <GeometryShape Id="7c066626-676c-439b-bba4-cc8adb2d2c75" Description="Description for MVCVisualDesigner.VDTableRowWrapperShape" Name="VDTableRowWrapperShape" DisplayName="VDTable Row Wrapper Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Row Wrapper Shape" FillColor="Silver" InitialWidth="4" InitialHeight="0.6" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
@@ -1492,6 +1504,14 @@
       </XmlClassData>
       <XmlClassData TypeName="VDTableCellShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTableCellShapeMoniker" ElementName="vDTableCellShape" MonikerTypeName="VDTableCellShapeMoniker">
         <GeometryShapeMoniker Name="VDTableCellShape" />
+        <ElementData>
+          <XmlPropertyData XmlName="colSpan">
+            <DomainPropertyMoniker Name="VDTableCellShape/ColSpan" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="rowSpan">
+            <DomainPropertyMoniker Name="VDTableCellShape/RowSpan" />
+          </XmlPropertyData>
+        </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDTableRowWrapper" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTableRowWrapperMoniker" ElementName="vDTableRowWrapper" MonikerTypeName="VDTableRowWrapperMoniker">
         <DomainClassMoniker Name="VDTableRowWrapper" />

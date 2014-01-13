@@ -113,35 +113,75 @@ namespace MVCVisualDesigner
             }
         }
 
+        public List<VDTableRow> HeadRows
+        {
+            get
+            {
+                List<VDTableRow> rows = new List<VDTableRow>();
+                findTableRowsRecursively(this.TableHeadContainer, rows);
+                return rows;
+            }
+        }
+
+        public List<VDTableRow> BodyRows
+        {
+            get
+            {
+                List<VDTableRow> rows = new List<VDTableRow>();
+                findTableRowsRecursively(this.TableBodyContainer, rows);
+                return rows;
+            }
+        }
+
+        public List<VDTableRow> FootRows
+        {
+            get
+            {
+                List<VDTableRow> rows = new List<VDTableRow>();
+                findTableRowsRecursively(this.TableFootContainer, rows);
+                return rows;
+            }
+        }
+
+        private void findTableRowsRecursively(VDWidget parent, List<VDTableRow> rows)
+        {
+            if (parent == null) return;
+            foreach (var w in parent.Children)
+            {
+                if (w is VDTableRow)
+                    rows.Add((VDTableRow)w);
+                else if (w is VDTable) // stop recursion when met table
+                    continue;
+                else if (w is VDWidget)
+                    findTableRowsRecursively((VDWidget)w, rows);
+            }
+        }
+
+        // 
         // property handler
         internal sealed partial class ColCountPropertyHandler : DomainPropertyValueHandler<VDTable, UInt32>
         {
-            protected override void OnValueChanging(VDTable element, uint oldValue, uint newValue)
+            protected override void OnValueChanging(VDTable table, uint oldValue, uint newValue)
             {
-                if (oldValue > newValue) // delete columns, in following case deleting columns is forbidden
+                if (oldValue > newValue)
                 {
-                //    uint lastCol = newValue;
+                    uint lastCol = newValue;
 
-                //    // don't allow to delete columns if there are cells crossing the delete columns (colspan > 1)
-                //    VDTableColTitle cell = element.Cells.Find(c => c.Col < lastCol && c.LastCol >= lastCol);
-                //    if (cell != null)
-                //    {
-                //        throw new Exception(string.Format("Cell[{0},{1}] can not be deleted, please split it first", cell.Row, cell.Col));
-                //    }
+                    // don't allow to delete columns if there are cells crossing the delete columns (colspan > 1)
+                    //VDTableCell cell = table.HeadRows.Find(c => c.Col < lastCol && c.LastCol >= lastCol);
+                    //if (cell != null)
+                    //{
+                    //    throw new Exception(string.Format("Cell[{0},{1}] can not be deleted, please split it first", cell.Row, cell.Col));
+                    //}
 
-                //    // don't allow to delete cells which are not empty
-                //    cell = element.Cells.Find(c => c.Col >= lastCol && c.Children.Count > 0);
-                //    if (cell != null)
-                //    {
-                //        throw new Exception(string.Format("Cell[{0},{1}] can not be deleted because it is not empty", cell.Row, cell.Col));
-                //    }
+                    //// don't allow to delete cells which are not empty
+                    //cell = table.Cells.Find(c => c.Col >= lastCol && c.Children.Count > 0);
+                    //if (cell != null)
+                    //{
+                    //    throw new Exception(string.Format("Cell[{0},{1}] can not be deleted because it is not empty", cell.Row, cell.Col));
+                    //}
                 }
-                base.OnValueChanging(element, oldValue, newValue);
-            }
-
-            protected override void OnValueChanged(VDTable element, uint oldValue, uint newValue)
-            {
-                base.OnValueChanged(element, oldValue, newValue);
+                base.OnValueChanging(table, oldValue, newValue);
             }
         }
     }
@@ -220,7 +260,12 @@ namespace MVCVisualDesigner
                 VDTable table = null;
                 if (this.Parent != null && this.Parent.Parent != null)
                 {
-                    table = this.Parent.Parent as VDTable;
+                    VDWidget parent = this.Parent.Parent as VDWidget;
+                    while (parent != null && !(parent is VDTable))
+                    {
+                        parent = parent.Parent as VDWidget;
+                    }
+                    table = parent as VDTable;
                 }
                 return table;
             }
@@ -265,29 +310,9 @@ namespace MVCVisualDesigner
                     }
 
                     // adjust ColCount for TableHead, TableBody and TableFoot
-                    if (table.TableHeadContainer != null)
-                    {
-                        foreach(VDTableRow row in table.TableHeadContainer.GetChildren<VDTableRow>())
-                        {
-                            row.ColCount = newColCount;
-                        }
-                    }
-
-                    if (table.TableBodyContainer != null)
-                    {
-                        foreach(VDTableRow row in table.TableBodyContainer.GetChildren<VDTableRow>())
-                        {
-                            row.ColCount = newColCount;
-                        }
-                    }
-
-                    if (table.TableFootContainer != null)
-                    {
-                        foreach(VDTableRow row in table.TableFootContainer.GetChildren<VDTableRow>())
-                        {
-                            row.ColCount = newColCount;
-                        }
-                    }
+                    foreach (VDTableRow row in table.HeadRows) { row.ColCount = newColCount; }
+                    foreach (VDTableRow row in table.BodyRows) { row.ColCount = newColCount; }
+                    foreach (VDTableRow row in table.FootRows) { row.ColCount = newColCount; }
                 }
             }
         }
@@ -391,6 +416,74 @@ namespace MVCVisualDesigner
         }
     }
 
+    [RuleOn(typeof(VDTableCell), FireTime = TimeToFire.TopLevelCommit, Priority = 0x6FFFFFFF)]
+    public class VDTableCellSpanFixupRule : ChangeRule
+    {
+        public override void ElementPropertyChanged(ElementPropertyChangedEventArgs e)
+        {
+            if (e.ModelElement == null || !(e.ModelElement is VDTableCell) || e.DomainProperty == null) return;
+
+            if (e.ModelElement.Store.InSerializationTransaction) return;
+
+            VDTableCell cell = e.ModelElement as VDTableCell;
+            VDTableRow row = cell.Parent as VDTableRow;
+            if (row == null) return;
+    
+            int oldSpan = (int)((uint)e.OldValue);
+            int newSpan = (int)((uint)e.NewValue);
+
+                if (e.DomainProperty.Id == VDTableCell.RowSpanDomainPropertyId)
+                {
+                    if (oldSpan > newSpan) // decrease rowspan value,  fill with new cells
+                    {
+                        for (int iRow = (int)(cell.Row + newSpan); iRow < cell.Row + oldSpan; iRow++)
+                        {
+                            for (int iCol = (int)cell.Col; iCol < cell.Col + cell.ColSpan; iCol++)
+                            {
+                                row.Children.Add(new VDTableCell(
+                                    cell.Partition,
+                                    new PropertyAssignment(VDTableCell.RowDomainPropertyId, (uint)iRow),
+                                    new PropertyAssignment(VDTableCell.ColDomainPropertyId, (uint)iCol)
+                                ));
+                            }
+                        }
+                    }
+                    else if (oldSpan < newSpan) // increase rowspan value, delete neighbour cells
+                    {
+                        List<VDTableCell> cellsToDel = row.GetChildren<VDTableCell>(x => x.Row >= (cell.Row + oldSpan)
+                                                                                      && x.Row < (cell.Row + newSpan)
+                                                                                      && x.Col >= cell.Col
+                                                                                      && x.LastCol <= cell.LastCol);
+                        cellsToDel.ForEach(x => x.Delete());
+                    }
+                }
+                else if (e.DomainProperty.Id == VDTableCell.ColSpanDomainPropertyId)
+                {
+                    if (oldSpan > newSpan) // decrease colspan value,  fill with new cells
+                    {
+                        for (int iCol = (int)(cell.Col + newSpan); iCol < cell.Col + oldSpan; iCol++)
+                        {
+                            for (int iRow = (int)cell.Row; iRow < cell.Row + cell.RowSpan; iRow++)
+                            {
+                                row.Children.Add(new VDTableCell(
+                                    cell.Partition,
+                                    new PropertyAssignment(VDTableCell.RowDomainPropertyId, (uint)iRow),
+                                    new PropertyAssignment(VDTableCell.ColDomainPropertyId, (uint)iCol)
+                                ));
+                            }
+                        }
+                    }
+                    else if (oldSpan < newSpan) // increase colspan value, delete neighbour cells
+                    {
+                        List<VDTableCell> cellsToDel = row.GetChildren<VDTableCell>(x => x.Col >= (cell.Col + oldSpan)
+                                                                                      && x.Col < (cell.Col + newSpan)
+                                                                                      && x.Row >= cell.Row
+                                                                                      && x.LastRow <= cell.LastRow);
+                        cellsToDel.ForEach(x => x.Delete());
+                    }
+                }
+        }
+    }
 
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -627,6 +720,49 @@ namespace MVCVisualDesigner
 
     public partial class VDTableCellShape
     {
+        public uint GetColSpanValue()
+        {
+            return this.ModelElement != null ? this.GetMEL<VDTableCell>().ColSpan : 1;
+        }
+
+        public void SetColSpanValue(uint newvalue)
+        {
+            if (this.ModelElement != null) { this.GetMEL<VDTableCell>().ColSpan = newvalue; }
+        }
+
+        internal sealed partial class ColSpanPropertyHandler : DomainPropertyValueHandler<VDTableCellShape, UInt32>
+        {
+            protected override void OnValueChanged(VDTableCellShape element, uint oldValue, uint newValue)
+            {
+                base.OnValueChanged(element, oldValue, newValue);
+
+                // trigger bounds rules
+                element.OnBoundsFixup(BoundsFixupState.ViewFixup, 0, false);
+            }
+        }
+
+        public uint GetRowSpanValue()
+        {
+            return this.ModelElement != null ? this.GetMEL<VDTableCell>().RowSpan : 1;
+        }
+
+        public void SetRowSpanValue(uint newvalue)
+        {
+            if (this.ModelElement != null) { this.GetMEL<VDTableCell>().RowSpan = newvalue; }
+        }
+
+        internal sealed partial class RowSpanPropertyHandler : DomainPropertyValueHandler<VDTableCellShape, UInt32>
+        {
+            protected override void OnValueChanged(VDTableCellShape element, uint oldValue, uint newValue)
+            {
+                base.OnValueChanged(element, oldValue, newValue);
+
+                //element.Size = SizeD.Empty; // trigger bounds rules
+                // trigger bounds rules
+                element.OnBoundsFixup(BoundsFixupState.ViewFixup, 0, false);
+            }
+        }
+
         public override bool CanMove { get { return false; } }
 
         public override NodeSides ResizableSides { get { return NodeSides.None; } }
