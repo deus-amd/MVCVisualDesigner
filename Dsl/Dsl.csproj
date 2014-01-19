@@ -87,8 +87,10 @@
     <Compile Include="CustomCode\HTMLAttribute.cs" />
     <Compile Include="CustomCode\ICustomMerge.cs" />
     <Compile Include="CustomCode\PropertyEditors\VDCollectionEditor.cs" />
+    <Compile Include="CustomCode\StateMachine.cs" />
     <Compile Include="CustomCode\Widgets\Container.cs" />
     <Compile Include="CustomCode\Widgets\Form.cs" />
+    <Compile Include="CustomCode\Widgets\HTMLTag.cs" />
     <Compile Include="CustomCode\Widgets\Separator.cs" />
     <Compile Include="CustomCode\Widgets\Tab.cs" />
     <Compile Include="CustomCode\Widgets\Table.cs" />

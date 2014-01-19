@@ -486,6 +486,53 @@
         <DomainClassMoniker Name="VDTable" />
       </BaseClass>
     </DomainClass>
+    <DomainClass Id="d2eb75f8-be1c-4160-9469-a4990c0519ad" Description="Description for MVCVisualDesigner.VDHTMLTag" Name="VDHTMLTag" DisplayName="VDHTMLTag" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
+      <Properties>
+        <DomainProperty Id="10769bdc-e4a4-46ea-88ac-c0d4431728d9" Description="" Name="TagName" DisplayName="Tag Name" DefaultValue="div" Category="HTML Tag">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="7241768d-6738-414c-bcf1-4e6fbd1ecfdf" Description="" Name="TagText" DisplayName="Tag Text" Category="HTML Tag">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="d683ec97-5e2f-4201-8da8-3a829fd7b33e" Description="" Name="_OpenTagStr" DisplayName="_ Open Tag Str" Kind="CustomStorage" Category="Internal States">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="66b4e205-23d6-495b-b430-53c80a1e19d6" Description="" Name="_CloseTagStr" DisplayName="_ Close Tag Str" Kind="Calculated" Category="Internal States">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="dce3e4ad-8eb7-4df2-b6ef-f04c88dc6f6b" Description="" Name="_IsCloseTagVisibleInHeader" DisplayName="_ Is Close Tag Visible In Header" Kind="Calculated" Category="Internal States">
+          <Type>
+            <ExternalTypeMoniker Name="/System/Boolean" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="01bceba4-4074-440a-8a32-702e30d5935b" Description="" Name="_IsCloseTagVisibleInFooter" DisplayName="_ Is Close Tag Visible In Footer" Kind="Calculated" Category="Internal States">
+          <Type>
+            <ExternalTypeMoniker Name="/System/Boolean" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="2e3f8058-1111-4f82-9ea6-b9affe7c4771" Description="" Name="_HasTagText" DisplayName="_ Has Tag Text" Kind="Calculated" Category="Internal States">
+          <Type>
+            <ExternalTypeMoniker Name="/System/Boolean" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+    </DomainClass>
+    <DomainClass Id="842eea95-9ac3-4745-973e-92fa0fd8a2e4" Description="Description for MVCVisualDesigner.VDCodeSnippet" Name="VDCodeSnippet" DisplayName="VDCode Snippet" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
+    </DomainClass>
   </Classes>
   <Relationships>
     <DomainRelationship Id="8491408d-7160-4a47-9979-e0dab01d52b3" Description="Description for MVCVisualDesigner.WidgetHasChildren" Name="WidgetHasChildren" DisplayName="Widget Has Children" Namespace="MVCVisualDesigner" IsEmbedding="true">
@@ -1021,6 +1068,16 @@
         <GeometryShapeMoniker Name="VDTableShape" />
       </BaseGeometryShape>
     </GeometryShape>
+    <GeometryShape Id="8a6fe8e1-602e-4c0d-85b7-634f603b253f" Description="Description for MVCVisualDesigner.VDHTMLTagShape" Name="VDHTMLTagShape" DisplayName="VDHTMLTag Shape" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="VDHTMLTag Shape" InitialHeight="1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
+    <GeometryShape Id="af958aed-29f3-42fc-a7b6-b58bfdf8d83e" Description="Description for MVCVisualDesigner.VDCodeSnippetShape" Name="VDCodeSnippetShape" DisplayName="VDCode Snippet Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDCode Snippet Shape" InitialHeight="1" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
   </Shapes>
   <XmlSerializationBehavior Name="MVCVisualDesignerSerializationBehavior" Namespace="MVCVisualDesigner">
     <ClassData>
@@ -1519,6 +1576,41 @@
       <XmlClassData TypeName="VDTableRowWrapperShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTableRowWrapperShapeMoniker" ElementName="vDTableRowWrapperShape" MonikerTypeName="VDTableRowWrapperShapeMoniker">
         <GeometryShapeMoniker Name="VDTableRowWrapperShape" />
       </XmlClassData>
+      <XmlClassData TypeName="VDHTMLTag" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDHTMLTagMoniker" ElementName="vDHTMLTag" MonikerTypeName="VDHTMLTagMoniker">
+        <DomainClassMoniker Name="VDHTMLTag" />
+        <ElementData>
+          <XmlPropertyData XmlName="tagName">
+            <DomainPropertyMoniker Name="VDHTMLTag/TagName" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="tagText">
+            <DomainPropertyMoniker Name="VDHTMLTag/TagText" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="_OpenTagStr">
+            <DomainPropertyMoniker Name="VDHTMLTag/_OpenTagStr" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="_CloseTagStr" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDHTMLTag/_CloseTagStr" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="_IsCloseTagVisibleInHeader" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDHTMLTag/_IsCloseTagVisibleInHeader" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="_IsCloseTagVisibleInFooter" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDHTMLTag/_IsCloseTagVisibleInFooter" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="_HasTagText" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDHTMLTag/_HasTagText" />
+          </XmlPropertyData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="VDHTMLTagShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDHTMLTagShapeMoniker" ElementName="vDHTMLTagShape" MonikerTypeName="VDHTMLTagShapeMoniker">
+        <GeometryShapeMoniker Name="VDHTMLTagShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDCodeSnippetShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDCodeSnippetShapeMoniker" ElementName="vDCodeSnippetShape" MonikerTypeName="VDCodeSnippetShapeMoniker">
+        <GeometryShapeMoniker Name="VDCodeSnippetShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDCodeSnippet" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDCodeSnippetMoniker" ElementName="vDCodeSnippet" MonikerTypeName="VDCodeSnippetMoniker">
+        <DomainClassMoniker Name="VDCodeSnippet" />
+      </XmlClassData>
     </ClassData>
   </XmlSerializationBehavior>
   <ExplorerBehavior Name="MVCVisualDesignerExplorer" />
@@ -1831,6 +1923,14 @@
         <DomainClassMoniker Name="VDTableRowWrapper" />
         <GeometryShapeMoniker Name="VDTableRowWrapperShape" />
       </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDHTMLTag" />
+        <GeometryShapeMoniker Name="VDHTMLTagShape" />
+      </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDCodeSnippet" />
+        <GeometryShapeMoniker Name="VDCodeSnippetShape" />
+      </ShapeMap>
     </ShapeMaps>
   </Diagram>
   <Designer CopyPasteGeneration="CopyPasteOnly" FileExtension="amvd" EditorGuid="061c971a-6960-4ef9-9c30-8a8a6543b9f7">
@@ -1852,6 +1952,9 @@
       </ElementTool>
       <ElementTool Name="TableRowsTool" ToolboxIcon="Resources\GridLayoutIcon2.bmp" Caption="Table Rows" Tooltip="" HelpKeyword="TableRowsTool">
         <DomainClassMoniker Name="VDTableRow" />
+      </ElementTool>
+      <ElementTool Name="HTMLTagTool" ToolboxIcon="Resources\HtmlTagIcon.bmp" Caption="HTML Tag" Tooltip="" HelpKeyword="HTMLTagTool">
+        <DomainClassMoniker Name="VDHTMLTag" />
       </ElementTool>
     </ToolboxTab>
     <ToolboxTab TabText="Form">

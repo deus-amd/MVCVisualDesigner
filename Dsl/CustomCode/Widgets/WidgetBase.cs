@@ -111,6 +111,17 @@ namespace MVCVisualDesigner
             }
             return children;
         }
+
+        // More HTML Attributes
+        public string GetMoreHtmlAttributeString()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach(HTMLAttribute attr in this.MoreHTMLAttributes)
+            {
+                sb.Append(attr.ToString()).Append(" ");
+            }
+            return sb.ToString();
+        }
     }
 }
 
@@ -463,6 +474,53 @@ namespace MVCVisualDesigner
                 if (list != null && list.Count > 0) list.ForEach(c => children.Add((T)c));
             }
             return children;
+        }
+
+        /// <summary>Associate shape field's content and visibility with IMS properties</summary>
+        /// <param name="shape">The shape containing the shape field</param>
+        /// <param name="fieldname">Field name</param>
+        /// <param name="valuePropertyId">property to associate with the content of shape field</param>
+        /// <param name="isValuePropertyOfShape">does 'valuePropertyId' belong to a shape object (PEL, not MEL)</param>
+        /// <param name="visibilityPropertyId">property to associate with the visibility of shape field</param>
+        /// <param name="isVisibilityPropOfShape">does 'visibilityPropertyId' belong to a shape object, instead of a MEL</param>
+        /// <param name="visibilityFiltervalues">values to filter the visibility</param>
+        static protected void associateProperty(ShapeElement shape, string fieldname, 
+                Guid valuePropertyId, bool isValuePropertyOfShape,  /* associate value */
+                Guid visibilityPropertyId, bool isVisibilityPropOfShape, params object[] visibilityFiltervalues) /* associate visibility*/
+        {
+            if (valuePropertyId != Guid.Empty)
+            {
+                AssociatedPropertyInfo propertyInfo = new AssociatedPropertyInfo(valuePropertyId);
+                propertyInfo.IsShapeProperty = isValuePropertyOfShape;
+                ShapeElement.FindShapeField(shape.ShapeFields, fieldname).AssociateValueWith(shape.Store, propertyInfo);
+            }
+
+            if (visibilityPropertyId != Guid.Empty)
+            {
+                AssociatedPropertyInfo propertyInfo = new AssociatedPropertyInfo(visibilityPropertyId);
+                propertyInfo.IsShapeProperty = isVisibilityPropOfShape;
+                if (visibilityFiltervalues != null)
+                {
+                    for (int i = 0; i < visibilityFiltervalues.Length; i++)
+                    {
+                        propertyInfo.FilteringValues.Add(visibilityFiltervalues[i]);
+                    }
+                }
+                ShapeElement.FindShapeField(shape.ShapeFields, fieldname).AssociateVisibilityWith(shape.Store, propertyInfo);
+            }
+        }
+
+        /// <summary>Associate shape field's content and visibility with IMS properties</summary>
+         /// <param name="shape">The shape containing the shape field</param>
+        /// <param name="fieldname">Field name</param>
+        /// <param name="valuePropertyId">property to associate with the content of shape field</param>
+        /// <param name="visibilityPropertyId">property to associate with the visibility of shape field</param>
+        /// <param name="visibilityFiltervalues">values to filter the visibility</param>
+        static protected void associateProperty(ShapeElement shape, string fieldname, 
+            Guid valuePropertyId, 
+            Guid visibilityPropertyId, params object[] visibilityFiltervalues)
+        {
+            associateProperty(shape, fieldname, valuePropertyId, false, visibilityPropertyId, false, visibilityFiltervalues);
         }
 #endregion
     }

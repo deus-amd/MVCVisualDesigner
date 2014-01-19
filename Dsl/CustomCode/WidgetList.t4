@@ -3,8 +3,6 @@
 string[] WidgetList = new string[]{
 	//"VDPartialView",
 	"VDView",
-	//"VDHtmlTag",
-	//"VDCodeSnippet",
 	"VDSection",
 	//"VDButton",
 	"VDForm",
@@ -22,6 +20,8 @@ string[] WidgetList = new string[]{
 	"VDTableCell",
 	"VDTableColTitle",
 	"VDTableRowTitle",
+	"VDHTMLTag",
+	"VDCodeSnippet",
 
 	// Utilities
 	"VDHoriSeparator",
