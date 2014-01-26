@@ -84,10 +84,15 @@
       <DependentUpon>Diagram_BindFields.tt</DependentUpon>
     </Compile>
     <Compile Include="CustomCode\CodeGen\ICodeGeneratorFactory.cs" />
+    <Compile Include="CustomCode\DomainElementListEditor.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CustomCode\HTMLAttribute.cs" />
     <Compile Include="CustomCode\ICustomMerge.cs" />
     <Compile Include="CustomCode\PropertyEditors\VDCollectionEditor.cs" />
+    <Compile Include="CustomCode\ShapeFields\MultiLineTextField.cs" />
     <Compile Include="CustomCode\StateMachine.cs" />
+    <Compile Include="CustomCode\Widgets\CodeSnippet.cs" />
     <Compile Include="CustomCode\Widgets\Container.cs" />
     <Compile Include="CustomCode\Widgets\Form.cs" />
     <Compile Include="CustomCode\Widgets\HTMLTag.cs" />
@@ -316,5 +321,10 @@
     <EmbeddedResource Include="Resources\ConnectorSourceSearch.cur" />
     <EmbeddedResource Include="Resources\ConnectorTargetSearch.cur" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{54036d22-8f50-4725-b3bf-d373ad15ebf4}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

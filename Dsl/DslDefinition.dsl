@@ -16,6 +16,16 @@
             <ExternalTypeMoniker Name="/System.Collections.Generic/List&lt;MVCVisualDesigner.HTMLAttribute&gt;" />
           </Type>
         </DomainProperty>
+        <DomainProperty Id="8d3d89da-d2cf-49dd-b090-c98bfc4c22d7" Description="Code snippet surrounding this widget" Name="CodeSnippet" DisplayName="Code Snippet" Category="Coding" IsUIReadOnly="true">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="2262ee8c-8983-4d6b-b640-6321f3358337" Description="Widget Name, can be empty and duplicated?" Name="WidgetName" DisplayName="Widget Name" Category="Definition" IsElementName="true">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
       </Properties>
       <ElementMergeDirectives>
         <ElementMergeDirective>
@@ -532,6 +542,49 @@
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
+      <CustomTypeDescriptor>
+        <DomainTypeDescriptor CustomCoded="true" />
+      </CustomTypeDescriptor>
+      <Properties>
+        <DomainProperty Id="2e85ad6d-23e5-4f75-8210-7b6049949cc4" Description="Code defined in this widget or defined in referenced widget" Name="CodeSnippet2" DisplayName="Code Snippet" Kind="CustomStorage" Category="Coding">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="c55d7868-ea01-4004-bd7d-1374763a6814" Description="" Name="_PreCodeSnippet" DisplayName=" Pre Code Snippet" Kind="CustomStorage" Category="Internal States">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="48891ffb-c52a-4f6a-9cee-b25ddf981cfe" Description="" Name="_PostCodeSnippet" DisplayName="Post Code Snippet" Kind="Calculated" Category="Internal States">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="179cf308-be95-4a85-84fd-a75aed94bf71" Description="" Name="_HasPostCodeSnippet" DisplayName="_ Has Post Code Snippet" Kind="Calculated" Category="Internal States">
+          <Type>
+            <ExternalTypeMoniker Name="/System/Boolean" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="f522b877-6553-4b25-b4c1-b838830c4ce4" Description="Selected widget in the linked widget list" Name="ActiveLinkedWidgetName" DisplayName="Active Linked Widget" Kind="CustomStorage" Category="Coding">
+          <Attributes>
+            <ClrAttribute Name="System.ComponentModel.Editor">
+              <Parameters>
+                <AttributeParameter Value="typeof(ActiveLinkedWidgetNamePropEditor)" />
+                <AttributeParameter Value="typeof(System.Drawing.Design.UITypeEditor)" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="ecd24f9d-fb26-400c-954f-a71f5f77fd8c" Description="" Name="_Mode" DisplayName="_ Mode" Kind="Calculated" Category="Internal States">
+          <Type>
+            <DomainEnumerationMoniker Name="E_CodeSnippetMode" />
+          </Type>
+        </DomainProperty>
+      </Properties>
     </DomainClass>
   </Classes>
   <Relationships>
@@ -784,6 +837,38 @@
         </DomainRole>
       </Target>
     </DomainRelationship>
+    <DomainRelationship Id="bf90afdf-16e8-4120-87b4-ca04c594f434" Description="Description for MVCVisualDesigner.EditCodeSnippetOn" Name="EditCodeSnippetOn" DisplayName="Edit Code Snippet On" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="9d6c9153-59cc-4dbc-9a49-c4ae94dcb9c2" Description="Description for MVCVisualDesigner.EditCodeSnippetOn.VDWidget" Name="VDWidget" DisplayName="VDWidget" PropertyName="CodeSnippetEditor" Multiplicity="ZeroOne" Category="Coding" PropertyDisplayName="Code Snippet Editor">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDWidget" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="d9431403-ca29-4f32-8e71-7862ba356f63" Description="Description for MVCVisualDesigner.EditCodeSnippetOn.VDCodeSnippet" Name="VDCodeSnippet" DisplayName="VDCode Snippet" PropertyName="LinkedWidgets" IsPropertyBrowsable="false" PropertyDisplayName="Linked Widgets">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDCodeSnippet" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="37c3daf4-d6c0-4bf6-a50f-ccacec37d015" Description="Description for MVCVisualDesigner.CodeSnippetHasActiveLinkedWidget" Name="CodeSnippetHasActiveLinkedWidget" DisplayName="Code Snippet Has Active Linked Widget" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="eaaebd07-171e-40a7-afab-03ddd9f6e78e" Description="Description for MVCVisualDesigner.CodeSnippetHasActiveLinkedWidget.VDCodeSnippet" Name="VDCodeSnippet" DisplayName="VDCode Snippet" PropertyName="ActiveLinkedWidget" Multiplicity="ZeroOne" PropertyDisplayName="Active Linked Widget">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDCodeSnippet" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="850225a3-4607-479b-b1c4-961f1bff668f" Description="Description for MVCVisualDesigner.CodeSnippetHasActiveLinkedWidget.VDWidget" Name="VDWidget" DisplayName="VDWidget" PropertyName="VDCodeSnippet" Multiplicity="ZeroOne" IsPropertyGenerator="false" IsPropertyBrowsable="false" PropertyDisplayName="VDCode Snippet">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDWidget" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
   </Relationships>
   <Types>
     <ExternalType Name="DateTime" Namespace="System" />
@@ -861,6 +946,14 @@
     </DomainEnumeration>
     <ExternalType Name="Dictionary&lt;System.String, System.String&gt;" Namespace="System.Collections.Generic" />
     <ExternalType Name="List&lt;MVCVisualDesigner.HTMLAttribute&gt;" Namespace="System.Collections.Generic" />
+    <DomainEnumeration Name="E_CodeSnippetMode" Namespace="MVCVisualDesigner" IsFlags="true" Description="Description for MVCVisualDesigner.E_CodeSnippetMode">
+      <Literals>
+        <EnumerationLiteral Description="Description for MVCVisualDesigner.E_CodeSnippetMode.Definition" Name="Definition" Value="8" />
+        <EnumerationLiteral Description="Description for MVCVisualDesigner.E_CodeSnippetMode.Reference_Has_ActiveLinkedWidget" Name="Reference_Has_ActiveLinkedWidget" Value="5" />
+        <EnumerationLiteral Description="Description for MVCVisualDesigner.E_CodeSnippetMode.Reference_No_ActiveLinkedWidget" Name="Reference_No_ActiveLinkedWidget" Value="6" />
+        <EnumerationLiteral Description="Description for MVCVisualDesigner.E_CodeSnippetMode.Reference" Name="Reference" Value="4" />
+      </Literals>
+    </DomainEnumeration>
   </Types>
   <Shapes>
     <GeometryShape Id="e3f0af00-12a6-4223-861d-180f9ed7f7c3" Description="Description for MVCVisualDesigner.VDWidgetShape" Name="VDWidgetShape" DisplayName="VDWidget Shape" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner" FixedTooltipText="VDWidget Shape" InitialHeight="1" Geometry="Rectangle">
@@ -1073,7 +1166,7 @@
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="af958aed-29f3-42fc-a7b6-b58bfdf8d83e" Description="Description for MVCVisualDesigner.VDCodeSnippetShape" Name="VDCodeSnippetShape" DisplayName="VDCode Snippet Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDCode Snippet Shape" InitialHeight="1" Geometry="Rectangle">
+    <GeometryShape Id="af958aed-29f3-42fc-a7b6-b58bfdf8d83e" Description="Description for MVCVisualDesigner.VDCodeSnippetShape" Name="VDCodeSnippetShape" DisplayName="VDCode Snippet Shape" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="VDCode Snippet Shape" InitialHeight="1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
@@ -1095,6 +1188,15 @@
           </XmlRelationshipData>
           <XmlPropertyData XmlName="moreHTMLAttributes">
             <DomainPropertyMoniker Name="VDWidget/MoreHTMLAttributes" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="codeSnippet">
+            <DomainPropertyMoniker Name="VDWidget/CodeSnippet" />
+          </XmlPropertyData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="codeSnippetEditor">
+            <DomainRelationshipMoniker Name="EditCodeSnippetOn" />
+          </XmlRelationshipData>
+          <XmlPropertyData XmlName="widgetName">
+            <DomainPropertyMoniker Name="VDWidget/WidgetName" />
           </XmlPropertyData>
         </ElementData>
       </XmlClassData>
@@ -1610,6 +1712,35 @@
       </XmlClassData>
       <XmlClassData TypeName="VDCodeSnippet" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDCodeSnippetMoniker" ElementName="vDCodeSnippet" MonikerTypeName="VDCodeSnippetMoniker">
         <DomainClassMoniker Name="VDCodeSnippet" />
+        <ElementData>
+          <XmlPropertyData XmlName="codeSnippet2">
+            <DomainPropertyMoniker Name="VDCodeSnippet/CodeSnippet2" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="_PreCodeSnippet">
+            <DomainPropertyMoniker Name="VDCodeSnippet/_PreCodeSnippet" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="_PostCodeSnippet" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDCodeSnippet/_PostCodeSnippet" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="_HasPostCodeSnippet" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDCodeSnippet/_HasPostCodeSnippet" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="activeLinkedWidgetName">
+            <DomainPropertyMoniker Name="VDCodeSnippet/ActiveLinkedWidgetName" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="_Mode" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDCodeSnippet/_Mode" />
+          </XmlPropertyData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="activeLinkedWidget">
+            <DomainRelationshipMoniker Name="CodeSnippetHasActiveLinkedWidget" />
+          </XmlRelationshipData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="EditCodeSnippetOn" MonikerAttributeName="" SerializeId="true" MonikerElementName="editCodeSnippetOnMoniker" ElementName="editCodeSnippetOn" MonikerTypeName="EditCodeSnippetOnMoniker">
+        <DomainRelationshipMoniker Name="EditCodeSnippetOn" />
+      </XmlClassData>
+      <XmlClassData TypeName="CodeSnippetHasActiveLinkedWidget" MonikerAttributeName="" SerializeId="true" MonikerElementName="codeSnippetHasActiveLinkedWidgetMoniker" ElementName="codeSnippetHasActiveLinkedWidget" MonikerTypeName="CodeSnippetHasActiveLinkedWidgetMoniker">
+        <DomainRelationshipMoniker Name="CodeSnippetHasActiveLinkedWidget" />
       </XmlClassData>
     </ClassData>
   </XmlSerializationBehavior>
@@ -1805,6 +1936,44 @@
         </TargetDirectives>
       </LinkConnectDirective>
     </ConnectionBuilder>
+    <ConnectionBuilder Name="EditCodeSnippetOnBuilder">
+      <LinkConnectDirective>
+        <DomainRelationshipMoniker Name="EditCodeSnippetOn" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDWidget" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDCodeSnippet" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
+    <ConnectionBuilder Name="CodeSnippetHasActiveLinkedWidgetBuilder">
+      <LinkConnectDirective>
+        <DomainRelationshipMoniker Name="CodeSnippetHasActiveLinkedWidget" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDCodeSnippet" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDWidget" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
   </ConnectionBuilders>
   <Diagram Id="1fd11f50-969f-48aa-af5b-31b4277c4671" Description="" Name="VDDiagram" DisplayName="Minimal Language Diagram" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true">
     <Class>
@@ -1955,6 +2124,9 @@
       </ElementTool>
       <ElementTool Name="HTMLTagTool" ToolboxIcon="Resources\HtmlTagIcon.bmp" Caption="HTML Tag" Tooltip="" HelpKeyword="HTMLTagTool">
         <DomainClassMoniker Name="VDHTMLTag" />
+      </ElementTool>
+      <ElementTool Name="CodeSnippetTool" ToolboxIcon="Resources\CodeSnippetIcon.bmp" Caption="Code Snippet" Tooltip="" HelpKeyword="CodeSnippetTool">
+        <DomainClassMoniker Name="VDCodeSnippet" />
       </ElementTool>
     </ToolboxTab>
     <ToolboxTab TabText="Form">

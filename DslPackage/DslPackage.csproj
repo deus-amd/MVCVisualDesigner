@@ -110,6 +110,7 @@
       <DependentUpon>ModelToolWindowForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomCode\Package.cs" />
+    <Compile Include="CustomCode\DocView.cs" />
     <Compile Include="GeneratedCode\CommandSet.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
