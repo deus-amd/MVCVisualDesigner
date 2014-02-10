@@ -8,19 +8,26 @@ namespace MVCVisualDesigner
     using Microsoft.VisualStudio.Modeling.Design;
     using Microsoft.VisualStudio.Modeling.Diagrams;
 
-    public partial class VDCodeSnippet
+    public partial class VDCodeSnippet : ICustomMerge
     {
         //todo: read it from settings
         public string CodeSnippetDelimiter { get { return "\r\n\r\n\r\n"; } }
 
         public override bool HasWidgetTitle { get { return true; } }
 
+        public void MergeTo(VDWidget targetWidget, ElementGroup elementGroup)
+        {
+            targetWidget.Children.Add(this);
+            VDCodeSnippetBody body = this.Store.ElementFactory.CreateElement(VDCodeSnippetBody.DomainClassId) as VDCodeSnippetBody;
+            this.Body = body;
+        }
+
 #region IMS Properties
-        
+
         //
         // custom and calculated properties
         //
-        
+
         public string GetActiveLinkedWidgetNameValue()
         {
             if (this.ActiveLinkedWidget != null)
@@ -211,55 +218,31 @@ namespace MVCVisualDesigner
 
         protected override System.Drawing.Image getTitleIcon()
         {
-            return this.getImageFromResource("CodeSnippetToolToolboxBitmap"); 
+            return this.getImageFromResource("CodeSnippetToolToolboxBitmap");
         }
 
-        protected StyleSetResourceId _brushId = new StyleSetResourceId("MVDesigner", "CodeSnippetBrush");
-        protected StyleSetResourceId _FontId = new StyleSetResourceId("MVDesigner", "CodeSnippetFont");
+        protected StyleSetResourceId m_brushId = new StyleSetResourceId("MVDesigner", "CodeSnippetBrush");
+        protected StyleSetResourceId m_FontId = new StyleSetResourceId("MVDesigner", "CodeSnippetFont");
         protected override void InitializeResources(StyleSet classStyleSet)
         {
             base.InitializeResources(classStyleSet);
-            classStyleSet.AddBrush(_brushId, _brushId, new BrushSettings() { Color = Color.PapayaWhip });
+            classStyleSet.AddBrush(m_brushId, m_brushId, new BrushSettings() { Color = Color.PapayaWhip });
 
             FontSettings fontSettings = new FontSettings();
             fontSettings.Style = System.Drawing.FontStyle.Bold;
             fontSettings.Size = 8 / 72.0F;
-            classStyleSet.AddFont(_FontId, DiagramFonts.ShapeText, fontSettings);
+            classStyleSet.AddFont(m_FontId, DiagramFonts.ShapeText, fontSettings);
 
             // set text color for fields
             BrushSettings textBrush = new BrushSettings();
             textBrush.Color = Color.FromKnownColor(KnownColor.Maroon);
             classStyleSet.OverrideBrush(DiagramBrushes.ShapeText, textBrush);
             classStyleSet.OverrideBrush(DiagramBrushes.ShapeTextSelected, textBrush);
-
-        //    //EVAACodeSnippetShape.AssociateValueWith(this.Store, EVAACodeSnippet.CodeSnippet2DomainPropertyId);
-        //    //VDCodeSnippetShape.AssociateValueWith(this.Store, VDCodeSnippet.ActiveLinkedWidgetNameDomainPropertyId);
         }
 
-        //protected override void OnAssociatedPropertyChanged(Microsoft.VisualStudio.Modeling.Diagrams.PropertyChangedEventArgs e)
-        //{
-        //    base.OnAssociatedPropertyChanged(e);
-
-        //    //if (e.PropertyName == "ActiveLinkedWidgetName")
-        //    //{
-        //    //    this.Invalidate();
-        //    //}
-        //    ////else if (e.PropertyName == "CodeSnippet2")
-        //    ////{
-        //    ////    using (Transaction t = this.Store.TransactionManager.BeginTransaction("Layout shapes"))
-        //    ////    {
-        //    ////        this.PerformResizeParentRule(true, this);
-        //    ////        //this.PerformResizeParentRule();
-        //    ////        this.PerformShapeAnchoringRule();
-        //    ////        t.Commit();
-        //    ////    }
-        //    ////    this.Invalidate();
-        //    ////}
-        //}
-
         private const double MARGIN = 0.02;
-        private const string FieldName_PreContent = "PreContent";
-        private const string FieldName_PostContent = "PostContent";
+        public const string FieldName_PreContent = "PreContent";
+        public const string FieldName_PostContent = "PostContent";
         protected override void InitializeShapeFields(IList<ShapeField> shapeFields)
         {
             // ++ PreContent ++
@@ -280,8 +263,8 @@ namespace MVCVisualDesigner
             precontent.DefaultCommitOnEscape = true;
             precontent.DefaultMultipleLine = true;
             //
-            precontent.DefaultBackgroundBrushId = _brushId;
-            precontent.DefaultFontId = _FontId;
+            precontent.DefaultBackgroundBrushId = m_brushId;
+            precontent.DefaultFontId = m_FontId;
             precontent.DefaultStringFormat.Alignment = System.Drawing.StringAlignment.Near;
             precontent.DefaultStringFormat.FormatFlags |= System.Drawing.StringFormatFlags.NoWrap;
             shapeFields.Add(precontent);
@@ -304,8 +287,8 @@ namespace MVCVisualDesigner
             //postcontent.DefaultCommitOnEscape = true;
             postcontent.DefaultMultipleLine = true;
             //
-            postcontent.DefaultBackgroundBrushId = _brushId;
-            postcontent.DefaultFontId = _FontId;
+            postcontent.DefaultBackgroundBrushId = m_brushId;
+            postcontent.DefaultFontId = m_FontId;
             postcontent.DefaultStringFormat.Alignment = System.Drawing.StringAlignment.Near;
             postcontent.DefaultStringFormat.FormatFlags |= System.Drawing.StringFormatFlags.NoWrap;
             shapeFields.Add(postcontent);
@@ -317,7 +300,7 @@ namespace MVCVisualDesigner
         static partial void onBindShapeFields(object sender, EventArgs e)
         {
             ShapeElement shape = (ShapeElement)sender;
-            associateProperty(shape, 
+            associateProperty(shape,
                 VDCodeSnippetShape.FieldName_PreContent, VDCodeSnippet._PreCodeSnippetDomainPropertyId, Guid.Empty);
             associateProperty(shape,
                 VDCodeSnippetShape.FieldName_PostContent, VDCodeSnippet._PostCodeSnippetDomainPropertyId,
@@ -326,172 +309,110 @@ namespace MVCVisualDesigner
 
         public override ShapeField DefaultShapeField { get { return this.FindShapeField(FieldName_PreContent); } }
 
-        //public override double MinWidth { get { return 0.4; } }
-
-        //public override double MinHeight { get { return 0.25; } }
-
-        public override double PaddingLeft { get { return MARGIN; } }
-
-        public override double PaddingRight { get { return MARGIN; } }
-
-        public override double PaddingTop
+        public override void OnEndEdit(DiagramItemEventArgs e)
         {
-            get
+            base.OnEndEdit(e);
+            if (e != null && e.DiagramClientView != null && e.DiagramItem.Field != null && e.DiagramItem.Field is CodeSnippetTextField)
             {
-                TextField field = this.FindShapeField(FieldName_PreContent) as TextField;
-                if (field != null)
+                using (Transaction t = this.Store.TransactionManager.BeginTransaction("Adjust bounds of codesnippet children shapes"))
                 {
-                    SizeD size = field.GetMinimumSize(this);
-                    return size.Height + 0.1;
+                    this.relayoutChildren = true;
+                    t.Commit();
                 }
-                return 0.25;
             }
         }
 
-        public override double PaddingBottom
+        protected override void SetAbsoluteBoundsValue(RectangleD newValue)
         {
-            get
+            base.SetAbsoluteBoundsValue(newValue);
+            this.relayoutChildren = true;
+        }
+
+        public override void OnRelayoutChildShapes()
+        {
+            // trigger bounds rules
+            var bodyShape = this.GetChildShape<VDCodeSnippetBodyShape>();
+            if (bodyShape != null)
             {
-                TextField field = this.FindShapeField(FieldName_PostContent) as TextField;
-                if (field != null && field.GetVisible(this))
-                {
-                    SizeD size = field.GetMinimumSize(this);
-                    return size.Height + 0.1;
-                }
-                return 0.05;
+                bodyShape.OnBoundsFixup(BoundsFixupState.ViewFixup, 0, false);
             }
         }
-
-        private bool hasChildern
-        {
-            get
-            {
-                VDWidget widget = ModelElement as VDWidget;
-                return widget != null && widget.Children != null && widget.Children.Count > 0;
-            }
-        }
-
-        public override bool AllowsChildrenToResizeParent { get { return true; } }
-
-        public override void OnBeginEdit(DiagramItemEventArgs e)
-        {
-            base.OnBeginEdit(e);
-        }
-
-        //public override void OnEndEdit(DiagramItemEventArgs e)
-        //{
-        //    base.OnEndEdit(e);
-        //    if (e != null && e.DiagramClientView != null && e.DiagramItem.Field != null && e.DiagramItem.Field is CodeSnippetTextField)
-        //    {
-        //        using (Transaction t = this.Store.TransactionManager.BeginTransaction("Layout shapes"))
-        //        {
-        //            this.PerformResizeParentRule(true, this);
-        //            t.Commit();
-        //        }
-        //    }
-        //}
-
-        //public void OnRequireRepositionChildren(double yOffset)
-        //{
-        //    using (Transaction t = this.Store.TransactionManager.BeginTransaction("Reposition child shapes"))
-        //    {
-        //        this.VerticalOffsetOfChildrenShape = yOffset;
-        //        t.Commit();
-        //    }
-        //}
-
-        //public SizeD CalcMinSize()
-        //{
-        //    SizeD size = this.CalculateMinimumSizeBasedOnChildren();
-
-        //    // when no child shape, the CalculateMinimumSizeBasedOnChildren method doesn't count in the margin size
-        //    if (this.NestedChildShapes == null || this.NestedChildShapes.Count == 0)
-        //    {
-        //        size.Height += this.PaddingBottom;
-
-        //        // implementation of DefaultContainerMargin() doesn't count in the top padding
-        //        size.Height += this.PaddingTop - 0.05;
-        //    }
-        //    else
-        //    {
-        //        // check if the pre snippet and any child overlaped.
-        //        double verticalOffset = 0.0;
-        //        double paddingtop = this.PaddingTop;
-        //        foreach (ShapeElement nc in this.NestedChildShapes)
-        //        {
-        //            NodeShape child = nc as NodeShape;
-        //            if (child != null)
-        //            {
-        //                if (child.Location.Y < paddingtop)
-        //                    verticalOffset = Math.Max(verticalOffset, paddingtop - child.Location.Y);
-        //            }
-        //        }
-        //        if (verticalOffset > 0.01)
-        //        {
-        //            size.Height += verticalOffset;
-        //            //this.OnRequireRepositionChildren(verticalOffset);
-        //        }
-        //    }
-
-        //    //if (size.Width < this.MinWidth) size.Width = this.MinWidth;
-        //    //if (size.Height < this.MinHeight) size.Height = this.MinHeight;
-
-        //    return size;
-        //}
-
-        //public override BoundsRules BoundsRules { get { return CodeSnippetBoundsRules.Instance; } }
-
-        //class CodeSnippetBoundsRules : BoundsRules
-        //{
-        //    public override RectangleD GetCompliantBounds(ShapeElement shape, RectangleD proposedBounds)
-        //    {
-        //        RectangleD compliantBounds = VDDefaultBoundsRules.Instance.GetCompliantBounds(shape, proposedBounds);
-        //        VDCodeSnippetShape codeShape = shape as VDCodeSnippetShape;
-        //        if (codeShape != null)
-        //        {
-        //            SizeD size = codeShape.CalcMinSize();
-        //            if (size.Height > compliantBounds.Height) compliantBounds.Height = size.Height;
-        //        }
-        //        return compliantBounds;
-        //    }
-
-        //    private static CodeSnippetBoundsRules _instance;
-        //    public static CodeSnippetBoundsRules Instance
-        //    {
-        //        get
-        //        {
-        //            if (_instance == null) _instance = new CodeSnippetBoundsRules();
-        //            return _instance;
-        //        }
-        //    }
-        //}
     }
 
-    //[RuleOn(typeof(VDCodeSnippetShape), FireTime = TimeToFire.TopLevelCommit, Priority = 0x7FFFFFFF)]
-    //public class CodeSnippetShapeRule : ChangeRule
-    //{
-    //    public override void ElementPropertyChanged(ElementPropertyChangedEventArgs e)
-    //    {
-    //        if (e.DomainProperty != null && e.DomainProperty.Id == VDCodeSnippetShape.VerticalOffsetOfChildrenShapeDomainPropertyId && (double)e.NewValue > 0.01)
-    //        {
-    //            VDCodeSnippetShape shape = e.ModelElement as VDCodeSnippetShape;
-    //            if (shape != null)
-    //            {
-    //                double yOffset = (double)e.NewValue;
-    //                shape.VerticalOffsetOfChildrenShape = 0.0;
+    public partial class VDCodeSnippetBodyShape
+    {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="store">Store where new element is to be created.</param>
+        /// <param name="propertyAssignments">List of domain property id/value pairs to set once the element is created.</param>
+        public VDCodeSnippetBodyShape(Store store, params PropertyAssignment[] propertyAssignments)
+            : this(store != null ? store.DefaultPartitionForClass(DomainClassId) : null, propertyAssignments)
+        {
+        }
 
-    //                foreach (ShapeElement nc in shape.NestedChildShapes)
-    //                {
-    //                    NodeShape child = nc as NodeShape;
-    //                    if (child != null)
-    //                    {
-    //                        child.Location = new PointD(child.Location.X, child.Location.Y + yOffset);
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="partition">Partition where new element is to be created.</param>
+        /// <param name="propertyAssignments">List of domain property id/value pairs to set once the element is created.</param>
+        public VDCodeSnippetBodyShape(Partition partition, params PropertyAssignment[] propertyAssignments)
+            : base(partition, propertyAssignments)
+        {
+            this.isPinned = true;
+        }
+
+        public override bool CanMove { get { return false; } }
+
+        public override NodeSides ResizableSides { get { return NodeSides.None; } }
+
+        public override BoundsRules BoundsRules { get { return CodeSnippetBodyBoundsRules.Instance; } }
+
+        class CodeSnippetBodyBoundsRules : BoundsRules
+        {
+            private static CodeSnippetBodyBoundsRules _instance;
+            public static CodeSnippetBodyBoundsRules Instance
+            {
+                get
+                {
+                    if (_instance == null) _instance = new CodeSnippetBodyBoundsRules();
+                    return _instance;
+                }
+            }
+
+            public override RectangleD GetCompliantBounds(ShapeElement shape, RectangleD proposedBounds)
+            {
+                RectangleD compliantBounds = VDDefaultBoundsRules.Instance.GetCompliantBounds(shape, proposedBounds);
+
+                VDCodeSnippetBodyShape bodyShape = shape as VDCodeSnippetBodyShape;
+                if (bodyShape == null) return compliantBounds;
+
+                VDCodeSnippetShape parentShape = bodyShape.ParentShape as VDCodeSnippetShape;
+                if (parentShape == null) return compliantBounds;
+
+                compliantBounds.Size = parentShape.Bounds.Size;
+                compliantBounds.X = 0;
+
+                TextField field = parentShape.FindShapeField(VDCodeSnippetShape.FieldName_PreContent) as TextField;
+                if (field != null)
+                {
+                    SizeD size = field.GetMinimumSize(parentShape);
+                    compliantBounds.Y = size.Height;
+                    compliantBounds.Height -= size.Height;
+                }
+
+                field = parentShape.FindShapeField(VDCodeSnippetShape.FieldName_PostContent) as TextField;
+                if (field != null)
+                {
+                    SizeD size = field.GetMinimumSize(parentShape);
+                    compliantBounds.Height -= size.Height;
+                }
+
+                return compliantBounds;
+            }
+        }
+    }
+
 
     class CodeSnippetTextField : VDMultiLineTextField
     {
@@ -517,12 +438,6 @@ namespace MVCVisualDesigner
             }
 
             return base.GetValue(parentShape);
-        }
-
-        public override System.Windows.Forms.Control GetActiveInPlaceEditor(ShapeElement parentShape, DiagramClientView view)
-        {
-            var x= base.GetActiveInPlaceEditor(parentShape, view);
-            return x;
         }
     }
 }

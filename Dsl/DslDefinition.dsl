@@ -585,6 +585,21 @@
           </Type>
         </DomainProperty>
       </Properties>
+      <ElementMergeDirectives>
+        <ElementMergeDirective>
+          <Index>
+            <DomainClassMoniker Name="VDCodeSnippetBody" />
+          </Index>
+          <LinkCreationPaths>
+            <DomainPath>CodeSnippetHasBody.Body</DomainPath>
+          </LinkCreationPaths>
+        </ElementMergeDirective>
+      </ElementMergeDirectives>
+    </DomainClass>
+    <DomainClass Id="c021c724-d776-45f9-8dce-7825cec0dc29" Description="Description for MVCVisualDesigner.VDCodeSnippetBody" Name="VDCodeSnippetBody" DisplayName="VDCode Snippet Body" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
     </DomainClass>
   </Classes>
   <Relationships>
@@ -865,6 +880,25 @@
         <DomainRole Id="850225a3-4607-479b-b1c4-961f1bff668f" Description="Description for MVCVisualDesigner.CodeSnippetHasActiveLinkedWidget.VDWidget" Name="VDWidget" DisplayName="VDWidget" PropertyName="VDCodeSnippet" Multiplicity="ZeroOne" IsPropertyGenerator="false" IsPropertyBrowsable="false" PropertyDisplayName="VDCode Snippet">
           <RolePlayer>
             <DomainClassMoniker Name="VDWidget" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="69b03de7-c4f1-49d5-b58a-972c68604147" Description="Description for MVCVisualDesigner.CodeSnippetHasBody" Name="CodeSnippetHasBody" DisplayName="Code Snippet Has Body" Namespace="MVCVisualDesigner" IsEmbedding="true">
+      <BaseRelationship>
+        <DomainRelationshipMoniker Name="WidgetHasChildren" />
+      </BaseRelationship>
+      <Source>
+        <DomainRole Id="38ebbc96-cdc2-477b-9544-5b1d4dd94ca2" Description="Description for MVCVisualDesigner.CodeSnippetHasBody.VDCodeSnippet" Name="VDCodeSnippet" DisplayName="VDCode Snippet" PropertyName="Body" Multiplicity="ZeroOne" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Body">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDCodeSnippet" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="38a0351d-de8a-4c9f-926e-fb7160247695" Description="Description for MVCVisualDesigner.CodeSnippetHasBody.VDCodeSnippetBody" Name="VDCodeSnippetBody" DisplayName="VDCode Snippet Body" PropertyName="ParentCodeSnippet" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Parent Code Snippet">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDCodeSnippetBody" />
           </RolePlayer>
         </DomainRole>
       </Target>
@@ -1167,6 +1201,11 @@
       </BaseGeometryShape>
     </GeometryShape>
     <GeometryShape Id="af958aed-29f3-42fc-a7b6-b58bfdf8d83e" Description="Description for MVCVisualDesigner.VDCodeSnippetShape" Name="VDCodeSnippetShape" DisplayName="VDCode Snippet Shape" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="VDCode Snippet Shape" InitialHeight="1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
+    <GeometryShape Id="42a451f3-1690-4294-ba75-db6651885882" Description="Description for MVCVisualDesigner.VDCodeSnippetBodyShape" Name="VDCodeSnippetBodyShape" DisplayName="VDCode Snippet Body Shape" Namespace="MVCVisualDesigner" HasCustomConstructor="true" FixedTooltipText="VDCode Snippet Body Shape" FillColor="Transparent" OutlineColor="Transparent" InitialHeight="0.7" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
@@ -1734,6 +1773,9 @@
           <XmlRelationshipData UseFullForm="true" RoleElementName="activeLinkedWidget">
             <DomainRelationshipMoniker Name="CodeSnippetHasActiveLinkedWidget" />
           </XmlRelationshipData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="body">
+            <DomainRelationshipMoniker Name="CodeSnippetHasBody" />
+          </XmlRelationshipData>
         </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="EditCodeSnippetOn" MonikerAttributeName="" SerializeId="true" MonikerElementName="editCodeSnippetOnMoniker" ElementName="editCodeSnippetOn" MonikerTypeName="EditCodeSnippetOnMoniker">
@@ -1741,6 +1783,15 @@
       </XmlClassData>
       <XmlClassData TypeName="CodeSnippetHasActiveLinkedWidget" MonikerAttributeName="" SerializeId="true" MonikerElementName="codeSnippetHasActiveLinkedWidgetMoniker" ElementName="codeSnippetHasActiveLinkedWidget" MonikerTypeName="CodeSnippetHasActiveLinkedWidgetMoniker">
         <DomainRelationshipMoniker Name="CodeSnippetHasActiveLinkedWidget" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDCodeSnippetBody" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDCodeSnippetBodyMoniker" ElementName="vDCodeSnippetBody" MonikerTypeName="VDCodeSnippetBodyMoniker">
+        <DomainClassMoniker Name="VDCodeSnippetBody" />
+      </XmlClassData>
+      <XmlClassData TypeName="CodeSnippetHasBody" MonikerAttributeName="" SerializeId="true" MonikerElementName="codeSnippetHasBodyMoniker" ElementName="codeSnippetHasBody" MonikerTypeName="CodeSnippetHasBodyMoniker">
+        <DomainRelationshipMoniker Name="CodeSnippetHasBody" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDCodeSnippetBodyShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDCodeSnippetBodyShapeMoniker" ElementName="vDCodeSnippetBodyShape" MonikerTypeName="VDCodeSnippetBodyShapeMoniker">
+        <GeometryShapeMoniker Name="VDCodeSnippetBodyShape" />
       </XmlClassData>
     </ClassData>
   </XmlSerializationBehavior>
@@ -2099,6 +2150,13 @@
       <ShapeMap HasCustomParentElement="true">
         <DomainClassMoniker Name="VDCodeSnippet" />
         <GeometryShapeMoniker Name="VDCodeSnippetShape" />
+      </ShapeMap>
+      <ShapeMap>
+        <DomainClassMoniker Name="VDCodeSnippetBody" />
+        <ParentElementPath>
+          <DomainPath>CodeSnippetHasBody.ParentCodeSnippet/!VDCodeSnippet</DomainPath>
+        </ParentElementPath>
+        <GeometryShapeMoniker Name="VDCodeSnippetBodyShape" />
       </ShapeMap>
     </ShapeMaps>
   </Diagram>

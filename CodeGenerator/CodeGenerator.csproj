@@ -55,6 +55,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RazorCodeGenerator.tt</DependentUpon>
     </Compile>
+    <Compile Include="RazorCodeGenerator\VDCodeSnippetBodyRazorCodeGeneratorImpl.cs">
+      <DependentUpon>VDCodeSnippetBodyRazorCodeGeneratorImpl.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="RazorCodeGenerator\VDHoriContainerRazorCodeGeneratorImpl.cs">
       <DependentUpon>VDHoriContainerRazorCodeGeneratorImpl.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -201,6 +206,11 @@
     <None Include="RazorCodeGenerator\RazorCodeGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RazorCodeGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="RazorCodeGenerator\VDCodeSnippetBodyRazorCodeGeneratorImpl.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>VDCodeSnippetBodyRazorCodeGeneratorImpl.cs</LastGenOutput>
+      <CustomToolNamespace>MVCVisualDesigner.CodeGenerator</CustomToolNamespace>
     </None>
     <None Include="RazorCodeGenerator\VDHoriContainerRazorCodeGeneratorImpl.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

@@ -129,13 +129,16 @@ namespace MVCVisualDesigner
         public override SizeD GetMaximumInPlaceEditorSize(ShapeElement parentShape)
         {
             SizeD maxsize = this.SizeHelper(parentShape, 75.0, true);
-            if (maxsize.Width < parentShape.BoundingBox.Width * 0.8)
-                maxsize.Width = parentShape.BoundingBox.Width * 0.8;
+            if (maxsize.Width < parentShape.BoundingBox.Width * 0.99)
+                maxsize.Width = parentShape.BoundingBox.Width * 0.99;
 
-            float fontheight = this.GetFontHeight(parentShape);
-            maxsize.Height += fontheight;
-            if (maxsize.Height < fontheight * 3.5)
-                maxsize.Height = fontheight * 3.5;
+            if (maxsize.Height < parentShape.BoundingBox.Height * 0.99)
+                maxsize.Height = parentShape.BoundingBox.Height * 0.99;
+
+            //float fontheight = this.GetFontHeight(parentShape);
+            //maxsize.Height += fontheight;
+            //if (maxsize.Height < fontheight * 3.5)
+            //    maxsize.Height = fontheight * 3.5;
             return maxsize;
         }
 
@@ -145,13 +148,16 @@ namespace MVCVisualDesigner
         public override SizeD GetMinimumInPlaceEditorSize(ShapeElement parentShape)
         {
             SizeD minsize = this.SizeHelper(parentShape, this.AnchoringBehavior.MinimumWidthInCharacters, true);
-            if (minsize.Width < parentShape.BoundingBox.Width * 0.8)
-                minsize.Width = parentShape.BoundingBox.Width * 0.8;
+            if (minsize.Width < parentShape.BoundingBox.Width * 0.99)
+                minsize.Width = parentShape.BoundingBox.Width * 0.99;
 
-            float fontheight = this.GetFontHeight(parentShape);
-            minsize.Height += fontheight;
-            if (minsize.Height < fontheight * 3.5)
-                minsize.Height = fontheight * 3.5;
+            if (minsize.Height < parentShape.BoundingBox.Height * 0.99)
+                minsize.Height = parentShape.BoundingBox.Height * 0.99;
+
+            //float fontheight = this.GetFontHeight(parentShape);
+            //minsize.Height += fontheight;
+            //if (minsize.Height < fontheight * 3.5)
+            //    minsize.Height = fontheight * 3.5;
             return minsize;
         }
 

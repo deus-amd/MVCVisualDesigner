@@ -38,6 +38,7 @@ string[] SubWidgetList = new string[] {
 	"VDSectionHead",
 	"VDSectionBody",
 	"VDSelectOption",
+	"VDCodeSnippetBody",
 };
 
 System.Collections.Generic.List<string> AllWidgets = new System.Collections.Generic.List<string>();

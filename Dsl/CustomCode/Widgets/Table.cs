@@ -284,7 +284,8 @@ namespace MVCVisualDesigner
     {
         public override void ElementPropertyChanged(ElementPropertyChangedEventArgs e)
         {
-            if (e.ModelElement != null && e.ModelElement is VDTable && e.DomainProperty != null)
+            if (e.ModelElement != null && e.ModelElement is VDTable && e.DomainProperty != null 
+                && e.DomainProperty.Id == VDTable.ColCountDomainPropertyId)
             {
                 if (e.ModelElement.Store.InSerializationTransaction) return;
 
@@ -293,7 +294,7 @@ namespace MVCVisualDesigner
                 uint oldColCount = (uint)e.OldValue;
                 uint newColCount = (uint)e.NewValue;
 
-                if (e.DomainProperty.Id == VDTable.ColCountDomainPropertyId && colTitleContainer != null)
+                if (colTitleContainer != null)
                 {
                     if (oldColCount > newColCount) // remove column titles
                     {
