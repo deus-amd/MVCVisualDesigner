@@ -4,5 +4,6 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 
-<# /* generate code for children */ #>
-<#@ include file="../GenerateChildrenCode.t4" #>
+<# 
+	// body is transparent, no need to indent	
+	 this.PopIndent(); #><#@ include file="../GenerateChildrenCode.t4" #><# this.PushIndent("    "); #>

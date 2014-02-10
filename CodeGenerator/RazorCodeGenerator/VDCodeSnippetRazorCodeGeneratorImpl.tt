@@ -3,6 +3,21 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-
-<# /* generate code for children */ #>
+<#@ import namespace="MVCVisualDesigner" #>
+<# 
+    // only output the code snippet when it's in Definition mode 
+    VDCodeSnippet cs = (VDCodeSnippet)this.Widget;
+    if (cs._Mode.HasFlag(E_CodeSnippetMode.Definition))
+    {
+#>
+<#= cs._PreCodeSnippet #>
 <#@ include file="../GenerateChildrenCode.t4" #>
+<#= cs._PostCodeSnippet #><#
+    }
+    else
+    {
+#>
+<#@ include file="../GenerateChildrenCode.t4" #>
+<#
+    }
+#>

@@ -3,3 +3,19 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="MVCVisualDesigner" #>
+<#
+	VDHTMLTag tag = (VDHTMLTag)this.Widget;
+	if (tag._IsCloseTagVisibleInHeader)
+    {
+#><<#= tag.TagName #>><#= tag.TagText #></<#= tag.TagName #>><#
+    }
+	else if (tag._IsCloseTagVisibleInFooter)
+    {
+#><<#= tag.TagName #>><#= tag._HasTagText ? tag.TagText : string.Empty #><#@ include file="../GenerateChildrenCode.t4" #></<#= tag.TagName #>><#
+    }
+	else
+    {
+#><<#= tag.TagName #>/><#
+    }
+#>
