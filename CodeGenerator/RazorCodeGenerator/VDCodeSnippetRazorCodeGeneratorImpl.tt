@@ -9,10 +9,23 @@
     VDCodeSnippet cs = (VDCodeSnippet)this.Widget;
     if (cs._Mode.HasFlag(E_CodeSnippetMode.Definition))
     {
+        string preCodeSnippet = cs._PreCodeSnippet;
+        string postCodeSnippet = cs._PostCodeSnippet;
+        if (!string.IsNullOrEmpty(preCodeSnippet))
+        {
 #>
 <#= cs._PreCodeSnippet #>
+<#
+        }
+#>
 <#@ include file="../GenerateChildrenCode.t4" #>
-<#= cs._PostCodeSnippet #><#
+<#
+        if (!string.IsNullOrEmpty(postCodeSnippet))
+        {
+#>
+<#= cs._PostCodeSnippet #>
+<#
+        }
     }
     else
     {

@@ -206,18 +206,18 @@ namespace MVCVisualDesigner
                 return base.getTitleText();
         }
 
-        protected StyleSetResourceId _headFootBrushId = new StyleSetResourceId("MVDesigner", "HTMLTagHeadFootBrush");
-        protected StyleSetResourceId _FontId = new StyleSetResourceId("MVDesigner", "HTMLTagFont");
+        protected StyleSetResourceId m_headFootBrushId = new StyleSetResourceId("MVDesigner", "HTMLTagHeadFootBrush");
+        protected StyleSetResourceId m_FontId = new StyleSetResourceId("MVDesigner", "HTMLTagFont");
 
         protected override void InitializeResources(StyleSet classStyleSet)
         {
             base.InitializeResources(classStyleSet);
-            classStyleSet.AddBrush(_headFootBrushId, _headFootBrushId, new BrushSettings() { Color = Color.Azure });
+            classStyleSet.AddBrush(m_headFootBrushId, m_headFootBrushId, new BrushSettings() { Color = Color.Azure });
 
             FontSettings fontSettings = new FontSettings();
             fontSettings.Style = System.Drawing.FontStyle.Bold;
             fontSettings.Size = 8 / 72.0F;
-            classStyleSet.AddFont(_FontId, DiagramFonts.ShapeText, fontSettings);
+            classStyleSet.AddFont(m_FontId, DiagramFonts.ShapeText, fontSettings);
 
             // set text color for fields
             BrushSettings textBrush = new BrushSettings();
@@ -260,7 +260,7 @@ namespace MVCVisualDesigner
             head.DrawBorder = false;
             head.FillBackground = true;
             //head.GradientEndingColor = Color;
-            head.DefaultBackgroundBrushId = _headFootBrushId;
+            head.DefaultBackgroundBrushId = m_headFootBrushId;
             head.AnchoringBehavior.SetTopAnchor(AnchoringBehavior.Edge.Top, marginToParent);
             head.AnchoringBehavior.SetLeftAnchor(AnchoringBehavior.Edge.Left, marginToParent);
             head.AnchoringBehavior.SetRightAnchor(AnchoringBehavior.Edge.Right, marginToParent);
@@ -280,7 +280,7 @@ namespace MVCVisualDesigner
             openTag.AnchoringBehavior.SetLeftAnchor(AnchoringBehavior.Edge.Left, marginToParent);
             openTag.AnchoringBehavior.MinimumHeightInLines = 1;
             openTag.AnchoringBehavior.MinimumWidthInCharacters = 1;
-            openTag.DefaultFontId = _FontId;
+            openTag.DefaultFontId = m_FontId;
             shapeFields.Add(openTag);
 
             // ++ Text ++
@@ -311,7 +311,7 @@ namespace MVCVisualDesigner
             closeTag.AnchoringBehavior.InvisibleCollapseFlags = InvisibleCollapseFlags.HorizontallyToLeft;
             closeTag.AnchoringBehavior.MinimumHeightInLines = 1;
             //closeTag.AnchoringBehavior.MinimumWidthInCharacters = 1;
-            closeTag.DefaultFontId = _FontId;
+            closeTag.DefaultFontId = m_FontId;
             shapeFields.Add(closeTag);
 
             // ++ Foot ++
@@ -322,7 +322,7 @@ namespace MVCVisualDesigner
             footer.DrawBorder = false;
             footer.FillBackground = true;
             //item.GradientEndingColor = Color.Red;
-            footer.DefaultBackgroundBrushId = _headFootBrushId;
+            footer.DefaultBackgroundBrushId = m_headFootBrushId;
             //item.AnchoringBehavior.SetBottomAnchor(AnchoringBehavior.Edge.Bottom, 0.0); //!!!! this doesn't work!!, user negative top anchor to bypass
             footer.AnchoringBehavior.SetTopAnchor(AnchoringBehavior.Edge.Bottom, -0.2);
             footer.AnchoringBehavior.SetLeftAnchor(AnchoringBehavior.Edge.Left, marginToParent);
@@ -342,7 +342,7 @@ namespace MVCVisualDesigner
             closeTag2.AnchoringBehavior.SetLeftAnchor(AnchoringBehavior.Edge.Left, marginToParent);
             closeTag2.AnchoringBehavior.MinimumHeightInLines = 1;
             closeTag2.AnchoringBehavior.MinimumWidthInCharacters = 1;
-            closeTag2.DefaultFontId = _FontId;
+            closeTag2.DefaultFontId = m_FontId;
             shapeFields.Add(closeTag2);
 
             base.InitializeShapeFields(shapeFields);

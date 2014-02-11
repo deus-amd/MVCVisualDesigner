@@ -17,4 +17,4 @@
     if (this.Widget.Checked == E_TripleState.TRUE) {
         #>checked='checked' <#
     }
-#>>
+#>/>

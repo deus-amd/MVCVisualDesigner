@@ -274,7 +274,9 @@ namespace MVCVisualDesigner
 
     public partial class VDTableCell
     {
+        [CLSCompliant(false)]
         public uint LastCol { get { return this.Col + this.ColSpan - 1; } }
+        [CLSCompliant(false)]
         public uint LastRow { get { return this.Row + this.RowSpan - 1; } }
     }
 
@@ -721,11 +723,13 @@ namespace MVCVisualDesigner
 
     public partial class VDTableCellShape
     {
+        [CLSCompliant(false)]
         public uint GetColSpanValue()
         {
             return this.ModelElement != null ? this.GetMEL<VDTableCell>().ColSpan : 1;
         }
 
+        [CLSCompliant(false)]
         public void SetColSpanValue(uint newvalue)
         {
             if (this.ModelElement != null) { this.GetMEL<VDTableCell>().ColSpan = newvalue; }
@@ -742,11 +746,13 @@ namespace MVCVisualDesigner
             }
         }
 
+        [CLSCompliant(false)]
         public uint GetRowSpanValue()
         {
             return this.ModelElement != null ? this.GetMEL<VDTableCell>().RowSpan : 1;
         }
 
+        [CLSCompliant(false)]
         public void SetRowSpanValue(uint newvalue)
         {
             if (this.ModelElement != null) { this.GetMEL<VDTableCell>().RowSpan = newvalue; }

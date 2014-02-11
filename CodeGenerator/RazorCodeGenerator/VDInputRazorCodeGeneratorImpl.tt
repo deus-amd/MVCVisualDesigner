@@ -29,4 +29,4 @@
     if (this.Widget.Checked == E_TripleState.TRUE && (this.Widget.Type == E_InputType.checkbox || this.Widget.Type == E_InputType.radio)) {
         #>checked='checked' <#
     }
-#>>
+#>/>

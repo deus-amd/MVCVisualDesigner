@@ -18,6 +18,13 @@
         #>disabled='disabled' <#
     }
 #>>
-<# /* generate code for children */ #>
+<# 
+    /* generate code for children */ 
+    this.PushIndent("    ");
+#>
 <#@ include file="../GenerateChildrenCode.t4" #>
+<#
+    this.PopIndent();
+#>
+
 </select>

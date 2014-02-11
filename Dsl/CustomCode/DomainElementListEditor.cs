@@ -30,10 +30,10 @@ namespace MVCVisualDesigner
 
             if (!(value is TValue)) return value;
 
-            return editValue(editorService, mel, context, provider, (TValue)value);
+            return internalEditValue(editorService, mel, context, provider, (TValue)value);
         }
 
-        protected virtual TValue editValue(IWindowsFormsEditorService editorService, ModelElement mel,
+        protected virtual TValue internalEditValue(IWindowsFormsEditorService editorService, ModelElement mel,
             ITypeDescriptorContext context, IServiceProvider provider, TValue value)
         {
             ListBoxControl<TValue> control = new ListBoxControl<TValue>(editorService, this.hasNoneListItem);

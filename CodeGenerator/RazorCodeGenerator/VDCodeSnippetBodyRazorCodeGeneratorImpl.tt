@@ -3,7 +3,5 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-
-<# 
-	// body is transparent, no need to indent	
-	 this.PopIndent(); #><#@ include file="../GenerateChildrenCode.t4" #><# this.PushIndent("    "); #>
+<# /* body is transparent, no need to indent */ #>
+<#@ include file="../GenerateChildrenCode.t4" #>

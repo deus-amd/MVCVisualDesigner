@@ -84,7 +84,6 @@ namespace MVCVisualDesigner
             return cGFactory.GetCodeGenerator(this).GenerateCode(cGFactory, walkerFactory);
         }
 
-
         // utilities
         public T GetChild<T>(Predicate<T> predicate = null)  where T : VDWidget
         {
@@ -121,6 +120,31 @@ namespace MVCVisualDesigner
                 sb.Append(attr.ToString()).Append(" ");
             }
             return sb.ToString();
+        }
+
+        // 
+        //todo: read it from settings
+        public static string CodeSnippetDelimiter { get { return "\r\n\r\n\r\n"; } }
+        public static string GetPreCodeSnippet(string codeSnippet)
+        {
+            if (string.IsNullOrWhiteSpace(codeSnippet)) return string.Empty;
+
+            int idx = codeSnippet.LastIndexOf(CodeSnippetDelimiter);
+            if (idx > 0)
+                return codeSnippet.Substring(0, idx);
+            else
+                return codeSnippet;
+        }
+        public static string GetPostCodeSnippet(string codeSnippet)
+        {
+            if (string.IsNullOrWhiteSpace(codeSnippet)) return string.Empty;
+
+            int idx = codeSnippet.LastIndexOf(CodeSnippetDelimiter);
+            if (idx > 0 && idx < codeSnippet.Length - CodeSnippetDelimiter.Length)
+            {
+                return codeSnippet.Substring(idx + CodeSnippetDelimiter.Length);
+            }
+            return string.Empty;
         }
     }
 }

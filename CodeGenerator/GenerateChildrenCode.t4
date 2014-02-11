@@ -1,12 +1,20 @@
 ﻿<#
-this.PushIndent("    ");
 var walker = this.WalkerFactory.CreateWalker(this.Widget);
 foreach(VDWidget child in walker)
 {
+    // pre code
+    if (!(child is VDCodeSnippet))
+    {
+        #><#= VDWidget.GetPreCodeSnippet(child.CodeSnippet) #><#
+    }
+
     var cg = this.CodeGeneratorFactory.GetCodeGenerator(child);
-#>
-<#= cg.GenerateCode(this.CodeGeneratorFactory, this.WalkerFactory) #>
-<#
+#><#= cg.GenerateCode(this.CodeGeneratorFactory, this.WalkerFactory) #><#
+
+    // post code
+    if (!(child is VDCodeSnippet))
+    {
+        #><#= VDWidget.GetPostCodeSnippet(child.CodeSnippet) #><#
+    }
 }
-this.PopIndent();
 #>

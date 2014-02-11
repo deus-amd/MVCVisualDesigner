@@ -4,6 +4,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="MVCVisualDesigner" #>
+
 <form <# 
 	if (!string.IsNullOrWhiteSpace(this.Widget.Name)) { 
 		#>name='<#= this.Widget.Name #>' <#
@@ -18,6 +19,12 @@
 	if (this.Widget.EncType != E_FormEncType.NotSpecified) { 
 		#>target='<#= this.Widget.EncType #>' <#
 	}#>>
-<# /* generate code for children */ #>
+<# 
+	/* generate code for children */ 
+	this.PushIndent("    ");
+#>
 <#@ include file="../GenerateChildrenCode.t4" #>
+<# 
+	this.PopIndent();
+#>
 </form> 

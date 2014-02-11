@@ -29,7 +29,7 @@ namespace MVCVisualDesigner
     public abstract partial class VDContainerBaseShape
     {
         public override NodeSides ResizableSides { get { return NodeSides.None; } }
-        public override bool CanMove { get { return false; } }
+        //public override bool CanMove { get { return false; } }
 
         protected override void SetAbsoluteBoundsValue(RectangleD newValue)
         {

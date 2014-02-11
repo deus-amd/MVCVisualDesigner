@@ -63,7 +63,7 @@
                             break;
 
                         default:
-                            glyphOverhangPadding = glyphOverhangPadding;
+                            //glyphOverhangPadding = glyphOverhangPadding;
                             break;
                     }
                     switch (format.LineAlignment)
@@ -77,7 +77,7 @@
                             break;
 
                         default:
-                            glyphOverhangPadding = glyphOverhangPadding;
+                            //glyphOverhangPadding = glyphOverhangPadding;
                             break;
                     }
                     switch (format.Trimming)

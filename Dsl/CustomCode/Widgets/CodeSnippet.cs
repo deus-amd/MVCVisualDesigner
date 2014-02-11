@@ -10,9 +10,6 @@ namespace MVCVisualDesigner
 
     public partial class VDCodeSnippet : ICustomMerge
     {
-        //todo: read it from settings
-        public string CodeSnippetDelimiter { get { return "\r\n\r\n\r\n"; } }
-
         public override bool HasWidgetTitle { get { return true; } }
 
         public void MergeTo(VDWidget targetWidget, ElementGroup elementGroup)
@@ -92,14 +89,7 @@ namespace MVCVisualDesigner
 
         public string Get_PreCodeSnippetValue()
         {
-            string wholeCodeSnippet = this.CodeSnippet2;
-            if (string.IsNullOrWhiteSpace(wholeCodeSnippet)) return string.Empty;
-
-            int idx = wholeCodeSnippet.LastIndexOf(CodeSnippetDelimiter);
-            if (idx > 0)
-                return wholeCodeSnippet.Substring(0, idx);
-            else
-                return wholeCodeSnippet;
+            return GetPreCodeSnippet(this.CodeSnippet2);
         }
 
         public void Set_PreCodeSnippetValue(string newval)
@@ -109,16 +99,7 @@ namespace MVCVisualDesigner
 
         public string Get_PostCodeSnippetValue()
         {
-            string wholeCodeSnippet = this.CodeSnippet2;
-            if (string.IsNullOrWhiteSpace(wholeCodeSnippet)) return string.Empty;
-
-            int idx = wholeCodeSnippet.LastIndexOf(CodeSnippetDelimiter);
-            if (idx > 0 && idx < wholeCodeSnippet.Length - CodeSnippetDelimiter.Length)
-            {
-                return wholeCodeSnippet.Substring(idx + CodeSnippetDelimiter.Length);
-            }
-
-            return string.Empty;
+            return GetPostCodeSnippet(this.CodeSnippet2);
         }
 
         public bool Get_HasPostCodeSnippetValue()
@@ -362,7 +343,7 @@ namespace MVCVisualDesigner
             this.isPinned = true;
         }
 
-        public override bool CanMove { get { return false; } }
+        //public override bool CanMove { get { return false; } }
 
         public override NodeSides ResizableSides { get { return NodeSides.None; } }
 

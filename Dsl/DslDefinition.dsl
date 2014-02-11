@@ -207,6 +207,13 @@
           </Type>
         </DomainProperty>
         <DomainProperty Id="55d51255-91d8-40cb-b4cc-51d277232dd8" Description="Defines the number of visible options in a drop-down list" Name="Size" DisplayName="size" Category="HTML Attribute">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/UInt32" />
           </Type>
@@ -412,6 +419,13 @@
       </BaseClass>
       <Properties>
         <DomainProperty Id="73034a9e-3769-4dcc-bc16-36b52ba6a978" Description="Column count of table" Name="ColCount" DisplayName="Column Count" Category="Table">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/UInt32" />
           </Type>
@@ -453,11 +467,25 @@
       </BaseClass>
       <Properties>
         <DomainProperty Id="1697ed28-542e-4b22-ab88-ed829dce1298" Description="Row count" Name="RowCount" DisplayName="Row Count" DefaultValue="0" Category="Table">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/UInt32" />
           </Type>
         </DomainProperty>
         <DomainProperty Id="9cc9f008-7928-418d-87bb-279662e51353" Description="Column count" Name="ColCount" DisplayName="Col Count" Category="Table" IsUIReadOnly="true">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/UInt32" />
           </Type>
@@ -470,21 +498,49 @@
       </BaseClass>
       <Properties>
         <DomainProperty Id="a7e3e2f3-c746-47ac-8c9a-2b714caebe7b" Description="" Name="Col" DisplayName="Column" Category="Table" IsUIReadOnly="true">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/UInt32" />
           </Type>
         </DomainProperty>
         <DomainProperty Id="20f0d7c0-723a-4bdd-9fcf-8291e2371e72" Description="" Name="Row" DisplayName="Row" Category="Table" IsUIReadOnly="true">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/UInt32" />
           </Type>
         </DomainProperty>
         <DomainProperty Id="54089c2c-ccdd-4afe-8597-6025780bd931" Description="" Name="ColSpan" DisplayName="Column Span" DefaultValue="1" Category="Table" IsBrowsable="false">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/UInt32" />
           </Type>
         </DomainProperty>
         <DomainProperty Id="9dced70f-3124-4f8c-934a-19b7b154edfa" Description="" Name="RowSpan" DisplayName="Row Span" DefaultValue="1" Category="Table" IsBrowsable="false">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/UInt32" />
           </Type>
@@ -1179,11 +1235,25 @@
       </BaseGeometryShape>
       <Properties>
         <DomainProperty Id="68037fe6-76a2-4a11-bd68-9e48ad4cb728" Description="" Name="ColSpan" DisplayName="Column Span" Kind="CustomStorage" Category="Table">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/UInt32" />
           </Type>
         </DomainProperty>
         <DomainProperty Id="e83956f9-5649-4dae-bfaa-85f6e06dc63c" Description="" Name="RowSpan" DisplayName="Row Span" Kind="CustomStorage" Category="Table">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/UInt32" />
           </Type>

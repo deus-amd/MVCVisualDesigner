@@ -4,4 +4,50 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="MVCVisualDesigner" #>
-<#@ include file="../GenerateChildrenCode.t4" #>
+
+<div>
+    <ul>
+<#
+    VDTab tab = (VDTab)this.Widget;
+    for(int i=0; i < tab.HeadContainer.Children.Count; i++)
+    {
+        VDTabHead head = tab.HeadContainer.Children[i] as VDTabHead;
+        if (head != null)
+        {
+            string tabid = head.WidgetName;
+            if (string.IsNullOrEmpty(tabid)) tabid = "tab-" + i;
+#>
+        <li><a href='#<#= tabid #>'><#= tabid #><#
+            this.PushIndent("        ");
+            ICodeGenerator headCG = this.CodeGeneratorFactory.GetCodeGenerator(head);
+#><#= headCG.GenerateCode(this.CodeGeneratorFactory, this.WalkerFactory) #><#
+            this.PopIndent();
+        #></a></li>
+<#
+        }
+    }
+#>
+    </ul>
+<#
+    for(int i=0; i < tab.HeadContainer.Children.Count; i++)
+    {
+        VDTabHead head = tab.HeadContainer.Children[i] as VDTabHead;
+        if (head != null)
+        {
+            string tabid = head.WidgetName;
+            if (string.IsNullOrEmpty(tabid)) tabid = "tab-" + i;
+#>
+        <div id='<#= tabid #>'>
+<#
+            this.PushIndent("        ");
+            ICodeGenerator bodyCG = this.CodeGeneratorFactory.GetCodeGenerator(head.Body);
+#><#= bodyCG.GenerateCode(this.CodeGeneratorFactory, this.WalkerFactory) #><#
+            this.PopIndent(); 
+#>
+
+        </div>
+<#
+        }
+    }
+#>
+</div>
