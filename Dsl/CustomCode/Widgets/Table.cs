@@ -105,7 +105,7 @@ namespace MVCVisualDesigner
             }
         }
 
-        public VDContainer TableBodyContainer
+        public virtual VDContainer TableBodyContainer
         {
             get
             {
@@ -257,11 +257,21 @@ namespace MVCVisualDesigner
     public partial class VDTableRowWrapper
     {
         public override bool HasWidgetTitle { get { return true; } }
+
+        public const string TABLE_ROWS = "Table Rows";
+
+        public override VDContainer TableBodyContainer
+        {
+            get
+            {
+                VDContainer container = GetChild<VDVertContainer>(c => c.Tag == TABLE_ROWS);
+                return container;
+            }
+        }
     }
 
     public partial class VDTableRow : ICustomMerge
     {
-        private const string TABLE_ROWS = "Table Rows";
         public void MergeTo(VDWidget targetWidget, ElementGroup elementGroup)
         {
             VDWidget parent = targetWidget;
@@ -315,7 +325,7 @@ namespace MVCVisualDesigner
                     new PropertyAssignment(VDHoriContainer.FixedHeightDomainPropertyId, TableConstants.TITLE_SIZE)) as VDHoriContainer;
 
                 VDVertContainer bodyContainer = this.Store.ElementFactory.CreateElement(VDVertContainer.DomainClassId,
-                    new PropertyAssignment(VDContainer.TagDomainPropertyId, TABLE_ROWS),
+                    new PropertyAssignment(VDContainer.TagDomainPropertyId, VDTableRowWrapper.TABLE_ROWS),
                     new PropertyAssignment(VDContainer.HasLeftAnchorDomainPropertyId, true),
                     new PropertyAssignment(VDContainer.HasRightAnchorDomainPropertyId, true),
                     new PropertyAssignment(VDContainer.HasTopAnchorDomainPropertyId, true),
@@ -367,7 +377,7 @@ namespace MVCVisualDesigner
         {
             if (parentWidget != null && this.Store.TransactionManager.InTransaction
                    && parentWidget is VDContainer 
-                   && ((VDContainer)parentWidget).Tag == TABLE_ROWS)
+                   && ((VDContainer)parentWidget).Tag == VDTableRowWrapper.TABLE_ROWS)
             {
                 VDContainer container = parentWidget as VDContainer;
                 if (container.GetChildren<VDTableRow>().Count < 1)
@@ -756,7 +766,7 @@ namespace MVCVisualDesigner
             }
         }
 
-        public VDVertContainerShape TableFootShape
+        public virtual VDVertContainerShape TableFootShape
         {
             get
             {
@@ -870,6 +880,16 @@ namespace MVCVisualDesigner
         protected override Image getTitleIcon() { return this.getImageFromResource("TableRowsToolToolboxBitmap"); }
 
         protected override string getTitleText() { return "Table Rows"; }
+
+        public override VDVertContainerShape TableFootShape
+        {
+            get
+            {
+                VDVertContainerShape footContainerShape = this.GetChildShape<VDVertContainerShape>(
+                    c => c.ModelElement != null && ((VDContainer)c.ModelElement).Tag == VDTableRowWrapper.TABLE_ROWS);
+                return footContainerShape;
+            }
+        }
     }
 
     public partial class VDTableRowShape
