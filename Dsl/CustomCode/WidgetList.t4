@@ -26,6 +26,7 @@ string[] WidgetList = new string[]{
 	// Utilities
 	"VDHoriSeparator",
 	"VDVertSeparator",
+	"VDContainer",
 	"VDHoriContainer",
 	"VDVertContainer",
 	"VDFullFilledContainer",

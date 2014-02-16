@@ -4,4 +4,24 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="MVCVisualDesigner" #>
-<#@ include file="../GenerateChildrenCode.t4" #>
+<#
+    VDTableRow row = (VDTableRow)this.Widget;
+
+    for( int i=0; i < row.RowCount; i++)
+    {
+#>
+<tr>
+<#
+        List<VDTableCell> cells = row.GetCellsInRow(i);
+        foreach(var cell in cells)
+        {
+            ICodeGenerator cellCG = this.CodeGeneratorFactory.GetCodeGenerator(cell);
+            this.PushIndent("    "); 
+#><#= cellCG.GenerateCode(this.CodeGeneratorFactory, this.WalkerFactory) #><#
+            this.PopIndent(); 
+        }
+#>
+</tr>
+<#
+    }
+#>

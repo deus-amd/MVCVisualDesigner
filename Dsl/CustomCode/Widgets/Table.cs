@@ -76,6 +76,16 @@ namespace MVCVisualDesigner
             this.Children.Add(hSeparator);
         }
 
+        internal override bool internalCanMerge(VDWidget origianlTargetWidget, ProtoElementBase sourceRootElement, ElementGroupPrototype elementGroupPrototype)
+        {
+            // title container can not merge any element
+            if (origianlTargetWidget != null && origianlTargetWidget is VDContainer 
+                && ((VDContainer)origianlTargetWidget).Tag == VDTable.TITLE_CONTAINER_TAG)
+                return false;
+            else
+                return base.internalCanMerge(origianlTargetWidget, sourceRootElement, elementGroupPrototype);
+        }
+
         // utilities
         public VDContainer ColTitleContainer
         {
@@ -197,6 +207,7 @@ namespace MVCVisualDesigner
         {
             VDWidget parent = targetWidget;
             bool bIsInTable = false;
+            E_RowType rowType = E_RowType.BodyRow;
             while (parent != null)
             {
                 if (parent is VDTable)
@@ -206,6 +217,17 @@ namespace MVCVisualDesigner
                 }
                 else
                 {
+                    if (parent is VDVertContainer)
+                    {
+                        string tagName = ((VDVertContainer)parent).Tag;
+                        if (string.Compare(tagName, VDTable.TABLE_HEAD_CONTAINER_TAG) == 0)
+                            rowType = E_RowType.HeadRow;
+                        else if (string.Compare(tagName, VDTable.TABLE_BODY_CONTAINER_TAG) == 0)
+                            rowType = E_RowType.BodyRow;
+                        else if (string.Compare(tagName, VDTable.TABLE_FOOT_CONTAINER_TAG) == 0)
+                            rowType = E_RowType.FootRow;
+                    }
+
                     parent = parent.Parent;
                 }
             }
@@ -214,6 +236,7 @@ namespace MVCVisualDesigner
             {
                 targetWidget.Children.Add(this);
                 VDTable table = parent as VDTable;
+                this.RowType = rowType;
                 this.ColCount = table.ColCount;
                 this.RowCount = 1; // default row count
             }
@@ -233,7 +256,7 @@ namespace MVCVisualDesigner
                     new PropertyAssignment(VDHoriContainer.FixedHeightDomainPropertyId, TableConstants.TITLE_SIZE)) as VDHoriContainer;
 
                 VDVertContainer bodyContainer = this.Store.ElementFactory.CreateElement(VDVertContainer.DomainClassId,
-                    new PropertyAssignment(VDContainer.TagDomainPropertyId, VDTable.TABLE_BODY_CONTAINER_TAG),
+                    new PropertyAssignment(VDContainer.TagDomainPropertyId, "Table Rows"),
                     new PropertyAssignment(VDContainer.HasLeftAnchorDomainPropertyId, true),
                     new PropertyAssignment(VDContainer.HasRightAnchorDomainPropertyId, true),
                     new PropertyAssignment(VDContainer.HasTopAnchorDomainPropertyId, true),
@@ -270,6 +293,13 @@ namespace MVCVisualDesigner
                 return table;
             }
         }
+
+        public List<VDTableCell> GetCellsInRow(int rowIndex)
+        {
+            List<VDTableCell> cells = this.GetChildren<VDTableCell>(c => c.Row == (uint)rowIndex);
+            cells.Sort((a, b) => (int)(a.Col - b.Col));
+            return cells;
+        }
     }
 
     public partial class VDTableCell
@@ -278,6 +308,28 @@ namespace MVCVisualDesigner
         public uint LastCol { get { return this.Col + this.ColSpan - 1; } }
         [CLSCompliant(false)]
         public uint LastRow { get { return this.Row + this.RowSpan - 1; } }
+
+        public VDTableRow ParentRow
+        {
+            get
+            {
+                if (this.Parent is VDTableRow) 
+                    return (VDTableRow)this.Parent;
+                else
+                    return null;
+            }
+        }
+
+        public bool IsTableHeadCell
+        {
+            get
+            {
+                if (this.ParentRow != null)
+                    return this.ParentRow.RowType == E_RowType.HeadRow;
+                else
+                    return false;
+            }
+        }
     }
 
     // rules
@@ -286,7 +338,7 @@ namespace MVCVisualDesigner
     {
         public override void ElementPropertyChanged(ElementPropertyChangedEventArgs e)
         {
-            if (e.ModelElement != null && e.ModelElement is VDTable && e.DomainProperty != null 
+            if (e.ModelElement != null && e.ModelElement is VDTable && e.DomainProperty != null
                 && e.DomainProperty.Id == VDTable.ColCountDomainPropertyId)
             {
                 if (e.ModelElement.Store.InSerializationTransaction) return;
@@ -307,7 +359,7 @@ namespace MVCVisualDesigner
                     {
                         for (uint idxToAdd = oldColCount; idxToAdd < newColCount; ++idxToAdd)
                         {
-                            colTitleContainer.Children.Add(new VDTableColTitle(table.Partition, 
+                            colTitleContainer.Children.Add(new VDTableColTitle(table.Partition,
                                 new PropertyAssignment(VDTableColTitle.IndexDomainPropertyId, idxToAdd)));
                         }
                     }
@@ -323,7 +375,7 @@ namespace MVCVisualDesigner
 
     // to add and remove TableRowTitle when RowCount property changed
     [RuleOn(typeof(VDTableRow), FireTime = TimeToFire.TopLevelCommit, Priority = 0x6FFFFFFA)]
-    public class VDTableRowCountFixupRule_ForRowTitle: ChangeRule
+    public class VDTableRowCountFixupRule_ForRowTitle : ChangeRule
     {
         public override void ElementPropertyChanged(ElementPropertyChangedEventArgs e)
         {
@@ -331,12 +383,12 @@ namespace MVCVisualDesigner
             {
                 if (e.ModelElement.Store.InSerializationTransaction) return;
 
-                VDTableRow tableRow = e.ModelElement as VDTableRow;
-                int oldRowCount = (int)((uint)e.OldValue);
-                int newRowCount = (int)((uint)e.NewValue);
-
                 if (e.DomainProperty.Id == VDTableRow.RowCountDomainPropertyId)
                 {
+                    VDTableRow tableRow = e.ModelElement as VDTableRow;
+                    int oldRowCount = (int)((uint)e.OldValue);
+                    int newRowCount = (int)((uint)e.NewValue);
+
                     if (oldRowCount > newRowCount) // remove row titles
                     {
                         List<VDTableRowTitle> toDelList = tableRow.GetChildren<VDTableRowTitle>(t => t.Index + 1 > newRowCount);
@@ -356,7 +408,7 @@ namespace MVCVisualDesigner
     }
 
     // to add and remove TableCell when RowCount/ColCount property changed, this is done after TableColTitle is fixed (above rule)
-    [RuleOn(typeof(VDTableRow), FireTime = TimeToFire.TopLevelCommit, Priority = 0x6FFFFFFF/*lower priority then above rule*/)] 
+    [RuleOn(typeof(VDTableRow), FireTime = TimeToFire.TopLevelCommit, Priority = 0x6FFFFFFF/*lower priority then above rule*/)]
     public class VDTableRowCountFixupRule_ForTableCell : ChangeRule
     {
         public override void ElementPropertyChanged(ElementPropertyChangedEventArgs e)
@@ -364,7 +416,7 @@ namespace MVCVisualDesigner
             if (e.ModelElement != null && e.ModelElement is VDTableRow && e.DomainProperty != null)
             {
                 if (e.ModelElement.Store.InSerializationTransaction) return;
-                
+
                 VDTableRow tableRow = e.ModelElement as VDTableRow;
                 VDTable table = tableRow.Table;
                 if (table == null) return;
@@ -373,6 +425,10 @@ namespace MVCVisualDesigner
                 {
                     uint oldRowCount = (uint)e.OldValue;
                     uint newRowCount = (uint)e.NewValue;
+
+                    if (newRowCount == tableRow.RowCount 
+                        && tableRow.RowCount * tableRow.ColCount == tableRow.GetChildren<VDTableCell>().Count)
+                        return;
 
                     if (oldRowCount > newRowCount) // remove row cells
                     {
@@ -385,7 +441,7 @@ namespace MVCVisualDesigner
                         {
                             for (uint col = 0; col < table.ColCount; ++col)
                             {
-                                tableRow.Children.Add(new VDTableCell( tableRow.Partition, 
+                                tableRow.Children.Add(new VDTableCell(tableRow.Partition,
                                     new PropertyAssignment(VDTableCell.RowDomainPropertyId, row),
                                     new PropertyAssignment(VDTableCell.ColDomainPropertyId, col)));
                             }
@@ -396,6 +452,10 @@ namespace MVCVisualDesigner
                 {
                     uint oldColCount = (uint)e.OldValue;
                     uint newColCount = (uint)e.NewValue;
+
+                    if (newColCount == tableRow.ColCount 
+                        && tableRow.RowCount * tableRow.ColCount == tableRow.GetChildren<VDTableCell>().Count)
+                        return;
 
                     if (oldColCount > newColCount) // remove row cells
                     {
@@ -431,60 +491,60 @@ namespace MVCVisualDesigner
             VDTableCell cell = e.ModelElement as VDTableCell;
             VDTableRow row = cell.Parent as VDTableRow;
             if (row == null) return;
-    
+
             int oldSpan = (int)((uint)e.OldValue);
             int newSpan = (int)((uint)e.NewValue);
 
-                if (e.DomainProperty.Id == VDTableCell.RowSpanDomainPropertyId)
+            if (e.DomainProperty.Id == VDTableCell.RowSpanDomainPropertyId)
+            {
+                if (oldSpan > newSpan) // decrease rowspan value,  fill with new cells
                 {
-                    if (oldSpan > newSpan) // decrease rowspan value,  fill with new cells
+                    for (int iRow = (int)(cell.Row + newSpan); iRow < cell.Row + oldSpan; iRow++)
                     {
-                        for (int iRow = (int)(cell.Row + newSpan); iRow < cell.Row + oldSpan; iRow++)
+                        for (int iCol = (int)cell.Col; iCol < cell.Col + cell.ColSpan; iCol++)
                         {
-                            for (int iCol = (int)cell.Col; iCol < cell.Col + cell.ColSpan; iCol++)
-                            {
-                                row.Children.Add(new VDTableCell(
-                                    cell.Partition,
-                                    new PropertyAssignment(VDTableCell.RowDomainPropertyId, (uint)iRow),
-                                    new PropertyAssignment(VDTableCell.ColDomainPropertyId, (uint)iCol)
-                                ));
-                            }
+                            row.Children.Add(new VDTableCell(
+                                cell.Partition,
+                                new PropertyAssignment(VDTableCell.RowDomainPropertyId, (uint)iRow),
+                                new PropertyAssignment(VDTableCell.ColDomainPropertyId, (uint)iCol)
+                            ));
                         }
                     }
-                    else if (oldSpan < newSpan) // increase rowspan value, delete neighbour cells
-                    {
-                        List<VDTableCell> cellsToDel = row.GetChildren<VDTableCell>(x => x.Row >= (cell.Row + oldSpan)
-                                                                                      && x.Row < (cell.Row + newSpan)
-                                                                                      && x.Col >= cell.Col
-                                                                                      && x.LastCol <= cell.LastCol);
-                        cellsToDel.ForEach(x => x.Delete());
-                    }
                 }
-                else if (e.DomainProperty.Id == VDTableCell.ColSpanDomainPropertyId)
+                else if (oldSpan < newSpan) // increase rowspan value, delete neighbour cells
                 {
-                    if (oldSpan > newSpan) // decrease colspan value,  fill with new cells
+                    List<VDTableCell> cellsToDel = row.GetChildren<VDTableCell>(x => x.Row >= (cell.Row + oldSpan)
+                                                                                  && x.Row < (cell.Row + newSpan)
+                                                                                  && x.Col >= cell.Col
+                                                                                  && x.LastCol <= cell.LastCol);
+                    cellsToDel.ForEach(x => x.Delete());
+                }
+            }
+            else if (e.DomainProperty.Id == VDTableCell.ColSpanDomainPropertyId)
+            {
+                if (oldSpan > newSpan) // decrease colspan value,  fill with new cells
+                {
+                    for (int iCol = (int)(cell.Col + newSpan); iCol < cell.Col + oldSpan; iCol++)
                     {
-                        for (int iCol = (int)(cell.Col + newSpan); iCol < cell.Col + oldSpan; iCol++)
+                        for (int iRow = (int)cell.Row; iRow < cell.Row + cell.RowSpan; iRow++)
                         {
-                            for (int iRow = (int)cell.Row; iRow < cell.Row + cell.RowSpan; iRow++)
-                            {
-                                row.Children.Add(new VDTableCell(
-                                    cell.Partition,
-                                    new PropertyAssignment(VDTableCell.RowDomainPropertyId, (uint)iRow),
-                                    new PropertyAssignment(VDTableCell.ColDomainPropertyId, (uint)iCol)
-                                ));
-                            }
+                            row.Children.Add(new VDTableCell(
+                                cell.Partition,
+                                new PropertyAssignment(VDTableCell.RowDomainPropertyId, (uint)iRow),
+                                new PropertyAssignment(VDTableCell.ColDomainPropertyId, (uint)iCol)
+                            ));
                         }
                     }
-                    else if (oldSpan < newSpan) // increase colspan value, delete neighbour cells
-                    {
-                        List<VDTableCell> cellsToDel = row.GetChildren<VDTableCell>(x => x.Col >= (cell.Col + oldSpan)
-                                                                                      && x.Col < (cell.Col + newSpan)
-                                                                                      && x.Row >= cell.Row
-                                                                                      && x.LastRow <= cell.LastRow);
-                        cellsToDel.ForEach(x => x.Delete());
-                    }
                 }
+                else if (oldSpan < newSpan) // increase colspan value, delete neighbour cells
+                {
+                    List<VDTableCell> cellsToDel = row.GetChildren<VDTableCell>(x => x.Col >= (cell.Col + oldSpan)
+                                                                                  && x.Col < (cell.Col + newSpan)
+                                                                                  && x.Row >= cell.Row
+                                                                                  && x.LastRow <= cell.LastRow);
+                    cellsToDel.ForEach(x => x.Delete());
+                }
+            }
         }
     }
 
@@ -585,7 +645,7 @@ namespace MVCVisualDesigner
         private void findTableRowRecursively(VDWidgetShape parent, List<VDTableRowShape> rows)
         {
             if (parent == null) return;
-            foreach(var w in parent.NestedChildShapes)
+            foreach (var w in parent.NestedChildShapes)
             {
                 if (w is VDTableRowShape)
                     rows.Add((VDTableRowShape)w);
@@ -687,7 +747,7 @@ namespace MVCVisualDesigner
         {
             get
             {
-                if (this.ParentShape != null && this.ParentShape.ParentShape !=null)
+                if (this.ParentShape != null && this.ParentShape.ParentShape != null)
                 {
                     VDWidgetShape parent = this.ParentShape.ParentShape as VDWidgetShape;
                     while (parent != null && !(parent is VDTableShape))
@@ -795,7 +855,7 @@ namespace MVCVisualDesigner
                 VDTableCellShape cellShape = shape as VDTableCellShape;
                 VDTableRowShape rowShape = cellShape.ParentShape as VDTableRowShape;
 
-                if (cellShape != null && rowShape != null )
+                if (cellShape != null && rowShape != null)
                 {
                     VDTableShape tableShape = rowShape.TableShape;
                     VDTableCell cell = cellShape.GetMEL<VDTableCell>();

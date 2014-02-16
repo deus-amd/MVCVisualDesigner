@@ -1,0 +1,22 @@
+﻿<#+
+        // the following widgets don't generate code
+        public static HashSet<string> NotGeneratorWidgets = new HashSet<string>() 
+        { 
+            "VDContainer",
+            "VDTableColTitle",
+            "VDTableRowTitle",
+            "VDVertSeparator",
+            "VDHoriSeparator",
+        };
+
+        public static HashSet<string> DefaultGenerators = new HashSet<string>()
+        {
+            "VDCodeSnippetBody",
+            "VDVertContainer",
+            "VDHoriContainer",
+            "VDFullFilledContainer",
+            "VDTabHead",
+            "VDTabBody",
+            "VDTableRowWrapper",
+        };
+#>

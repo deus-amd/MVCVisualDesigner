@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Dsl xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="8f2ca638-e08f-4b6f-96a1-ea046a25c190" Description="An open source visual designer for ASP.NET MVC framework. (Prototype version, and more features will be implemented soon)" Name="MVCVisualDesigner" DisplayName="MVC Visual Designer" Namespace="MVCVisualDesigner" MajorVersion="0" Build="2" ProductName="MVC Visual Designer" CompanyName="Jun Wang" PackageGuid="2318dda0-8eed-4398-b67d-2e85e627224d" PackageNamespace="MVCVisualDesigner" xmlns="http://schemas.microsoft.com/VisualStudio/2005/DslTools/DslDefinitionModel">
   <Classes>
-    <DomainClass Id="404ac32b-b3af-4662-bd2e-14f13a17562b" Description="Description for MVCVisualDesigner.VDWidget" Name="VDWidget" DisplayName="VDWidget" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true">
+    <DomainClass Id="404ac32b-b3af-4662-bd2e-14f13a17562b" Description="" Name="VDWidget" DisplayName="Widget" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true">
       <Properties>
         <DomainProperty Id="16811f57-2684-4aa9-8695-4f5e2435b04e" Description="" Name="MoreHTMLAttributes" DisplayName="MoreHTMLAttributes" DefaultValue="" Kind="CustomStorage" Category="Custom HTML Attribute">
           <Attributes>
@@ -51,7 +51,7 @@
         </ElementMergeDirective>
       </ElementMergeDirectives>
     </DomainClass>
-    <DomainClass Id="7c91a0ff-d5ec-467a-b0b8-705ad9049330" Description="Description for MVCVisualDesigner.VDView" Name="VDView" DisplayName="VDView" Namespace="MVCVisualDesigner">
+    <DomainClass Id="7c91a0ff-d5ec-467a-b0b8-705ad9049330" Description="" Name="VDView" DisplayName="View" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
@@ -95,7 +95,7 @@
         <DomainClassMoniker Name="VDInternalUtility" />
       </BaseClass>
     </DomainClass>
-    <DomainClass Id="c761d8da-76c8-4ae9-a268-8d81a7f9fd69" Description="Description for MVCVisualDesigner.VDHoriSeparator" Name="VDHoriSeparator" DisplayName="VDHori Separator" Namespace="MVCVisualDesigner">
+    <DomainClass Id="c761d8da-76c8-4ae9-a268-8d81a7f9fd69" Description="" Name="VDHoriSeparator" DisplayName="Horizontal Separator" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDSeparator" />
       </BaseClass>
@@ -117,7 +117,7 @@
         </DomainProperty>
       </Properties>
     </DomainClass>
-    <DomainClass Id="913509e8-33d0-462f-aa85-bd5f4148d3e7" Description="Description for MVCVisualDesigner.VDVertSeparator" Name="VDVertSeparator" DisplayName="VDVert Separator" Namespace="MVCVisualDesigner">
+    <DomainClass Id="913509e8-33d0-462f-aa85-bd5f4148d3e7" Description="" Name="VDVertSeparator" DisplayName="Vertical Separator" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDSeparator" />
       </BaseClass>
@@ -139,7 +139,7 @@
         </DomainProperty>
       </Properties>
     </DomainClass>
-    <DomainClass Id="e1d13ded-42d6-4a10-b240-74e54767ea36" Description="Description for MVCVisualDesigner.VDForm" Name="VDForm" DisplayName="VDForm" Namespace="MVCVisualDesigner">
+    <DomainClass Id="e1d13ded-42d6-4a10-b240-74e54767ea36" Description="" Name="VDForm" DisplayName="Form" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
@@ -186,7 +186,7 @@
         <DomainClassMoniker Name="VDInput" />
       </BaseClass>
     </DomainClass>
-    <DomainClass Id="e0dbe157-96a1-4519-9d74-082478bddf00" Description="Description for MVCVisualDesigner.VDSelect" Name="VDSelect" DisplayName="VDSelect" Namespace="MVCVisualDesigner">
+    <DomainClass Id="e0dbe157-96a1-4519-9d74-082478bddf00" Description="" Name="VDSelect" DisplayName="Select" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
@@ -230,7 +230,7 @@
         </ElementMergeDirective>
       </ElementMergeDirectives>
     </DomainClass>
-    <DomainClass Id="576f41c9-9810-4cad-bf99-ee63eccf6822" Description="Description for MVCVisualDesigner.VDInput" Name="VDInput" DisplayName="VDInput" Namespace="MVCVisualDesigner">
+    <DomainClass Id="576f41c9-9810-4cad-bf99-ee63eccf6822" Description="" Name="VDInput" DisplayName="Input" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
@@ -282,7 +282,7 @@
         </DomainProperty>
       </Properties>
     </DomainClass>
-    <DomainClass Id="7efdaa9f-896e-40b4-8028-706bb6d7b001" Description="Description for MVCVisualDesigner.VDSelectOption" Name="VDSelectOption" DisplayName="VDSelect Option" Namespace="MVCVisualDesigner">
+    <DomainClass Id="7efdaa9f-896e-40b4-8028-706bb6d7b001" Description="" Name="VDSelectOption" DisplayName="Select Option" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
@@ -309,12 +309,12 @@
         </DomainProperty>
       </Properties>
     </DomainClass>
-    <DomainClass Id="340a4898-ada1-49d1-bb0c-6b43963ff357" Description="Description for MVCVisualDesigner.VDTab" Name="VDTab" DisplayName="VDTab" Namespace="MVCVisualDesigner">
+    <DomainClass Id="340a4898-ada1-49d1-bb0c-6b43963ff357" Description="" Name="VDTab" DisplayName="Tab" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
     </DomainClass>
-    <DomainClass Id="3f8b9105-4256-41d7-9b71-105eb811de69" Description="Description for MVCVisualDesigner.VDTabHead" Name="VDTabHead" DisplayName="VDTab Head" Namespace="MVCVisualDesigner">
+    <DomainClass Id="3f8b9105-4256-41d7-9b71-105eb811de69" Description="" Name="VDTabHead" DisplayName="Tab Head" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
@@ -326,7 +326,7 @@
         </DomainProperty>
       </Properties>
     </DomainClass>
-    <DomainClass Id="00cba80b-0bdb-448e-8175-a56ba36ecec7" Description="Description for MVCVisualDesigner.VDTabBody" Name="VDTabBody" DisplayName="VDTab Body" Namespace="MVCVisualDesigner">
+    <DomainClass Id="00cba80b-0bdb-448e-8175-a56ba36ecec7" Description="" Name="VDTabBody" DisplayName="Tab Body" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
@@ -337,7 +337,7 @@
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
     </DomainClass>
-    <DomainClass Id="4556e526-61ff-4c5b-a7b6-99a133648f37" Description="Description for MVCVisualDesigner.VDContainer" Name="VDContainer" DisplayName="VDContainer" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner">
+    <DomainClass Id="4556e526-61ff-4c5b-a7b6-99a133648f37" Description="Description for MVCVisualDesigner.VDContainer" Name="VDContainer" DisplayName="VDContainer" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDInternalUtility" />
       </BaseClass>
@@ -389,7 +389,7 @@
         </DomainProperty>
       </Properties>
     </DomainClass>
-    <DomainClass Id="80f528f7-1be6-49e2-9916-0c76bd52d4dc" Description="Description for MVCVisualDesigner.VDHoriContainer" Name="VDHoriContainer" DisplayName="VDHori Container" Namespace="MVCVisualDesigner">
+    <DomainClass Id="80f528f7-1be6-49e2-9916-0c76bd52d4dc" Description="Description for MVCVisualDesigner.VDHoriContainer" Name="VDHoriContainer" DisplayName="Horizontal Container" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDContainer" />
       </BaseClass>
@@ -401,7 +401,7 @@
         </DomainProperty>
       </Properties>
     </DomainClass>
-    <DomainClass Id="5eec1f97-bb5a-4251-8334-8146cf522c8e" Description="Description for MVCVisualDesigner.VDVertContainer" Name="VDVertContainer" DisplayName="VDVert Container" Namespace="MVCVisualDesigner">
+    <DomainClass Id="5eec1f97-bb5a-4251-8334-8146cf522c8e" Description="Description for MVCVisualDesigner.VDVertContainer" Name="VDVertContainer" DisplayName="Vertical  Container" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDContainer" />
       </BaseClass>
@@ -413,7 +413,7 @@
         </DomainProperty>
       </Properties>
     </DomainClass>
-    <DomainClass Id="446a5ca6-117e-4604-acca-a0ad19fdf6db" Description="Description for MVCVisualDesigner.VDTable" Name="VDTable" DisplayName="VDTable" Namespace="MVCVisualDesigner">
+    <DomainClass Id="446a5ca6-117e-4604-acca-a0ad19fdf6db" Description="" Name="VDTable" DisplayName="Table" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
@@ -432,12 +432,12 @@
         </DomainProperty>
       </Properties>
     </DomainClass>
-    <DomainClass Id="4144beea-c44c-4cb5-b6eb-f11d455d9821" Description="Description for MVCVisualDesigner.VDFullFilledContainer" Name="VDFullFilledContainer" DisplayName="VDFull Filled Container" Namespace="MVCVisualDesigner">
+    <DomainClass Id="4144beea-c44c-4cb5-b6eb-f11d455d9821" Description="Description for MVCVisualDesigner.VDFullFilledContainer" Name="VDFullFilledContainer" DisplayName="Full Filled Container" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDContainer" />
       </BaseClass>
     </DomainClass>
-    <DomainClass Id="3a6364ee-f9d1-41c2-894b-2f48613eeb0b" Description="Description for MVCVisualDesigner.VDTableColTitle" Name="VDTableColTitle" DisplayName="VDTable Col Title" Namespace="MVCVisualDesigner">
+    <DomainClass Id="3a6364ee-f9d1-41c2-894b-2f48613eeb0b" Description="" Name="VDTableColTitle" DisplayName="Table Column Title" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
@@ -449,7 +449,7 @@
         </DomainProperty>
       </Properties>
     </DomainClass>
-    <DomainClass Id="8dd89d6b-e16f-44e2-bdd6-2f5f1678586d" Description="Description for MVCVisualDesigner.VDTableRowTitle" Name="VDTableRowTitle" DisplayName="VDTable Row Title" Namespace="MVCVisualDesigner">
+    <DomainClass Id="8dd89d6b-e16f-44e2-bdd6-2f5f1678586d" Description="" Name="VDTableRowTitle" DisplayName="Table Row Title" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
@@ -461,7 +461,7 @@
         </DomainProperty>
       </Properties>
     </DomainClass>
-    <DomainClass Id="0b864f89-2761-4419-8b16-d1f9493d20cb" Description="Description for MVCVisualDesigner.VDTableRow" Name="VDTableRow" DisplayName="VDTable Row" Namespace="MVCVisualDesigner">
+    <DomainClass Id="0b864f89-2761-4419-8b16-d1f9493d20cb" Description="" Name="VDTableRow" DisplayName="Table Row" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
@@ -490,9 +490,14 @@
             <ExternalTypeMoniker Name="/System/UInt32" />
           </Type>
         </DomainProperty>
+        <DomainProperty Id="877d78be-e9eb-4d6d-81a7-ed797581a25b" Description="Description for MVCVisualDesigner.VDTableRow.Row Type" Name="RowType" DisplayName="Row Type" DefaultValue="BodyRow">
+          <Type>
+            <DomainEnumerationMoniker Name="E_RowType" />
+          </Type>
+        </DomainProperty>
       </Properties>
     </DomainClass>
-    <DomainClass Id="a309dce3-c14b-443c-b18f-17901f6892e3" Description="Description for MVCVisualDesigner.VDTableCell" Name="VDTableCell" DisplayName="VDTable Cell" Namespace="MVCVisualDesigner">
+    <DomainClass Id="a309dce3-c14b-443c-b18f-17901f6892e3" Description="" Name="VDTableCell" DisplayName="Table Cell" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
@@ -547,12 +552,12 @@
         </DomainProperty>
       </Properties>
     </DomainClass>
-    <DomainClass Id="35e864fe-69ac-4e40-92f3-b2b4dacdce46" Description="Description for MVCVisualDesigner.VDTableRowWrapper" Name="VDTableRowWrapper" DisplayName="VDTable Row Wrapper" Namespace="MVCVisualDesigner">
+    <DomainClass Id="35e864fe-69ac-4e40-92f3-b2b4dacdce46" Description="" Name="VDTableRowWrapper" DisplayName="Table Rows" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDTable" />
       </BaseClass>
     </DomainClass>
-    <DomainClass Id="d2eb75f8-be1c-4160-9469-a4990c0519ad" Description="Description for MVCVisualDesigner.VDHTMLTag" Name="VDHTMLTag" DisplayName="VDHTMLTag" Namespace="MVCVisualDesigner">
+    <DomainClass Id="d2eb75f8-be1c-4160-9469-a4990c0519ad" Description="" Name="VDHTMLTag" DisplayName="HTML Tag" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
@@ -594,7 +599,7 @@
         </DomainProperty>
       </Properties>
     </DomainClass>
-    <DomainClass Id="842eea95-9ac3-4745-973e-92fa0fd8a2e4" Description="Description for MVCVisualDesigner.VDCodeSnippet" Name="VDCodeSnippet" DisplayName="VDCode Snippet" Namespace="MVCVisualDesigner">
+    <DomainClass Id="842eea95-9ac3-4745-973e-92fa0fd8a2e4" Description="" Name="VDCodeSnippet" DisplayName="Code Snippet" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
@@ -652,7 +657,7 @@
         </ElementMergeDirective>
       </ElementMergeDirectives>
     </DomainClass>
-    <DomainClass Id="c021c724-d776-45f9-8dce-7825cec0dc29" Description="Description for MVCVisualDesigner.VDCodeSnippetBody" Name="VDCodeSnippetBody" DisplayName="VDCode Snippet Body" Namespace="MVCVisualDesigner">
+    <DomainClass Id="c021c724-d776-45f9-8dce-7825cec0dc29" Description="" Name="VDCodeSnippetBody" DisplayName="Code Snippet Body" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
@@ -821,7 +826,7 @@
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="b77b31c5-ecc3-4ea7-8792-760caabb6d58" Description="Description for MVCVisualDesigner.HeadLinksToBody.VDTabBody" Name="VDTabBody" DisplayName="VDTab Body" PropertyName="Head" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Head">
+        <DomainRole Id="b77b31c5-ecc3-4ea7-8792-760caabb6d58" Description="" Name="VDTabBody" DisplayName="Tab Body" PropertyName="Head" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Head">
           <RolePlayer>
             <DomainClassMoniker Name="VDTabBody" />
           </RolePlayer>
@@ -945,7 +950,7 @@
         <DomainRelationshipMoniker Name="WidgetHasChildren" />
       </BaseRelationship>
       <Source>
-        <DomainRole Id="38ebbc96-cdc2-477b-9544-5b1d4dd94ca2" Description="Description for MVCVisualDesigner.CodeSnippetHasBody.VDCodeSnippet" Name="VDCodeSnippet" DisplayName="VDCode Snippet" PropertyName="Body" Multiplicity="ZeroOne" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Body">
+        <DomainRole Id="38ebbc96-cdc2-477b-9544-5b1d4dd94ca2" Description="Description for MVCVisualDesigner.CodeSnippetHasBody.VDCodeSnippet" Name="VDCodeSnippet" DisplayName="VDCode Snippet" PropertyName="Body" Multiplicity="ZeroOne" PropagatesDelete="true" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Body">
           <RolePlayer>
             <DomainClassMoniker Name="VDCodeSnippet" />
           </RolePlayer>
@@ -1042,6 +1047,13 @@
         <EnumerationLiteral Description="Description for MVCVisualDesigner.E_CodeSnippetMode.Reference_Has_ActiveLinkedWidget" Name="Reference_Has_ActiveLinkedWidget" Value="5" />
         <EnumerationLiteral Description="Description for MVCVisualDesigner.E_CodeSnippetMode.Reference_No_ActiveLinkedWidget" Name="Reference_No_ActiveLinkedWidget" Value="6" />
         <EnumerationLiteral Description="Description for MVCVisualDesigner.E_CodeSnippetMode.Reference" Name="Reference" Value="4" />
+      </Literals>
+    </DomainEnumeration>
+    <DomainEnumeration Name="E_RowType" Namespace="MVCVisualDesigner" Description="Description for MVCVisualDesigner.E_RowType">
+      <Literals>
+        <EnumerationLiteral Description="Description for MVCVisualDesigner.E_RowType.HeadRow" Name="HeadRow" Value="" />
+        <EnumerationLiteral Description="Description for MVCVisualDesigner.E_RowType.FootRow" Name="FootRow" Value="" />
+        <EnumerationLiteral Description="Description for MVCVisualDesigner.E_RowType.BodyRow" Name="BodyRow" Value="" />
       </Literals>
     </DomainEnumeration>
   </Types>
@@ -1172,7 +1184,7 @@
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="d08c9444-73e2-47ae-93e3-0b6c2a59765b" Description="" Name="VDTabHeadShape" DisplayName="Tab Head" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="" InitialWidth="2" InitialHeight="0.5" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+    <GeometryShape Id="d08c9444-73e2-47ae-93e3-0b6c2a59765b" Description="" Name="VDTabHeadShape" DisplayName="Tab Head" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="" InitialHeight="0.3" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
@@ -1184,34 +1196,44 @@
         </DomainProperty>
       </Properties>
     </GeometryShape>
-    <GeometryShape Id="737b8598-0d13-407e-bcf4-8b369752adbf" Description="" Name="VDTabBodyShape" DisplayName="Tab Body" Namespace="MVCVisualDesigner" FixedTooltipText="" OutlineColor="Transparent" InitialWidth="5" InitialHeight="2.5" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
+    <GeometryShape Id="737b8598-0d13-407e-bcf4-8b369752adbf" Description="" Name="VDTabBodyShape" DisplayName="Tab Body" Namespace="MVCVisualDesigner" FixedTooltipText="" OutlineColor="Transparent" InitialWidth="5" InitialHeight="2.7" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="bce84a85-292d-46e2-b0ad-4e2a5c9e5e20" Description="Description for MVCVisualDesigner.VDHoriContainerShape" Name="VDHoriContainerShape" DisplayName="VDHori Container Shape" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="VDHori Container Shape" FillColor="Gray" OutlineColor="Transparent" InitialHeight="1" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
+    <GeometryShape Id="bce84a85-292d-46e2-b0ad-4e2a5c9e5e20" Description="Description for MVCVisualDesigner.VDHoriContainerShape" Name="VDHoriContainerShape" DisplayName="VDHori Container Shape" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="VDHori Container Shape" TextColor="LightGray" FillColor="Gray" OutlineColor="Transparent" InitialHeight="1" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
-        <GeometryShapeMoniker Name="VDContainerBaseShape" />
+        <GeometryShapeMoniker Name="VDContainerShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="f32fc824-9b8a-4785-ab9c-1204b7fe7aa7" Description="Description for MVCVisualDesigner.VDVertContainerShape" Name="VDVertContainerShape" DisplayName="VDVert Container Shape" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="VDVert Container Shape" FillColor="Gray" OutlineColor="Transparent" InitialHeight="1" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
+    <GeometryShape Id="f32fc824-9b8a-4785-ab9c-1204b7fe7aa7" Description="Description for MVCVisualDesigner.VDVertContainerShape" Name="VDVertContainerShape" DisplayName="VDVert Container Shape" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="VDVert Container Shape" TextColor="LightGray" FillColor="Gray" OutlineColor="Transparent" InitialHeight="1" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
-        <GeometryShapeMoniker Name="VDContainerBaseShape" />
+        <GeometryShapeMoniker Name="VDContainerShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="a8e7d751-858a-45b8-b0d5-46aa4c3914a0" Description="Description for MVCVisualDesigner.VDContainerBaseShape" Name="VDContainerBaseShape" DisplayName="VDContainer Base Shape" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner" FixedTooltipText="VDContainer Base Shape" FillColor="Gray" OutlineColor="Transparent" InitialHeight="1" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
+    <GeometryShape Id="a8e7d751-858a-45b8-b0d5-46aa4c3914a0" Description="Description for MVCVisualDesigner.VDContainerShape" Name="VDContainerShape" DisplayName="VDContainer Shape" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="VDContainer Shape" FillColor="Gray" OutlineColor="Transparent" InitialHeight="1" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
+      <Properties>
+        <DomainProperty Id="2b709425-7335-423a-99a2-ca4ecc8bb95a" Description="Description for MVCVisualDesigner.VDContainerShape.Is Tag Decorator Visible" Name="isTagDecoratorVisible" DisplayName="Is Tag Decorator Visible" Kind="Calculated" IsBrowsable="false">
+          <Type>
+            <ExternalTypeMoniker Name="/System/Boolean" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+      <ShapeHasDecorators Position="Center" HorizontalOffset="0" VerticalOffset="0">
+        <TextDecorator Name="TagDecorator" DisplayName="Tag" DefaultText="" FontStyle="Bold" FontSize="18" />
+      </ShapeHasDecorators>
     </GeometryShape>
     <GeometryShape Id="806cf407-c3ea-4911-a70d-b1e51f2b8f67" Description="Description for MVCVisualDesigner.VDTableShape" Name="VDTableShape" DisplayName="VDTable Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Shape" FillColor="Silver" InitialWidth="4" InitialHeight="3" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="15c37d43-52f6-466e-9a25-96a892f25e70" Description="Description for MVCVisualDesigner.VDFullFilledContainerShape" Name="VDFullFilledContainerShape" DisplayName="VDFull Filled Container Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDFull Filled Container Shape" FillColor="Gray" OutlineColor="Transparent" InitialHeight="1" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
+    <GeometryShape Id="15c37d43-52f6-466e-9a25-96a892f25e70" Description="Description for MVCVisualDesigner.VDFullFilledContainerShape" Name="VDFullFilledContainerShape" DisplayName="VDFull Filled Container Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDFull Filled Container Shape" TextColor="LightGray" FillColor="Gray" OutlineColor="Transparent" InitialHeight="1" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
-        <GeometryShapeMoniker Name="VDContainerBaseShape" />
+        <GeometryShapeMoniker Name="VDContainerShape" />
       </BaseGeometryShape>
     </GeometryShape>
     <GeometryShape Id="e1875ec2-c68a-4fe6-89ff-1c84492568d7" Description="Description for MVCVisualDesigner.VDTableColTitleShape" Name="VDTableColTitleShape" DisplayName="VDTable Col Title Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Col Title Shape" FillColor="DarkBlue" OutlineColor="White" InitialWidth="0.2" InitialHeight="0.2" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
@@ -1685,8 +1707,13 @@
       <XmlClassData TypeName="VDVertContainerShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDVertContainerShapeMoniker" ElementName="vDVertContainerShape" MonikerTypeName="VDVertContainerShapeMoniker">
         <GeometryShapeMoniker Name="VDVertContainerShape" />
       </XmlClassData>
-      <XmlClassData TypeName="VDContainerBaseShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDContainerBaseShapeMoniker" ElementName="vDContainerBaseShape" MonikerTypeName="VDContainerBaseShapeMoniker">
-        <GeometryShapeMoniker Name="VDContainerBaseShape" />
+      <XmlClassData TypeName="VDContainerShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDContainerShapeMoniker" ElementName="vDContainerShape" MonikerTypeName="VDContainerShapeMoniker">
+        <GeometryShapeMoniker Name="VDContainerShape" />
+        <ElementData>
+          <XmlPropertyData XmlName="isTagDecoratorVisible" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDContainerShape/isTagDecoratorVisible" />
+          </XmlPropertyData>
+        </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="ContainerHasTopSibling" MonikerAttributeName="" SerializeId="true" MonikerElementName="containerHasTopSiblingMoniker" ElementName="containerHasTopSibling" MonikerTypeName="ContainerHasTopSiblingMoniker">
         <DomainRelationshipMoniker Name="ContainerHasTopSibling" />
@@ -1747,6 +1774,9 @@
           </XmlPropertyData>
           <XmlPropertyData XmlName="colCount">
             <DomainPropertyMoniker Name="VDTableRow/ColCount" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="rowType">
+            <DomainPropertyMoniker Name="VDTableRow/RowType" />
           </XmlPropertyData>
         </ElementData>
       </XmlClassData>
@@ -1865,7 +1895,164 @@
       </XmlClassData>
     </ClassData>
   </XmlSerializationBehavior>
-  <ExplorerBehavior Name="MVCVisualDesignerExplorer" />
+  <ExplorerBehavior Name="MVCVisualDesignerExplorer">
+    <CustomNodeSettings>
+      <ExplorerNodeSettings IconToDisplay="Resources\TabIcon.bmp" ShowsDomainClass="true">
+        <Class>
+          <DomainClassMoniker Name="VDTab" />
+        </Class>
+        <PropertyDisplayed>
+          <PropertyPath>
+            <DomainPropertyMoniker Name="VDWidget/WidgetName" />
+            <DomainPath />
+          </PropertyPath>
+        </PropertyDisplayed>
+      </ExplorerNodeSettings>
+      <ExplorerNodeSettings IconToDisplay="Resources\Table.bmp" ShowsDomainClass="true">
+        <Class>
+          <DomainClassMoniker Name="VDTable" />
+        </Class>
+        <PropertyDisplayed>
+          <PropertyPath>
+            <DomainPropertyMoniker Name="VDWidget/WidgetName" />
+            <DomainPath />
+          </PropertyPath>
+        </PropertyDisplayed>
+      </ExplorerNodeSettings>
+      <ExplorerNodeSettings IconToDisplay="Resources\CheckBoxIcon.bmp" ShowsDomainClass="true">
+        <Class>
+          <DomainClassMoniker Name="VDCheckBox" />
+        </Class>
+      </ExplorerNodeSettings>
+      <ExplorerNodeSettings IconToDisplay="Resources\HtmlTagIcon.bmp" ShowsDomainClass="true">
+        <Class>
+          <DomainClassMoniker Name="VDHTMLTag" />
+        </Class>
+        <PropertyDisplayed>
+          <PropertyPath>
+            <DomainPropertyMoniker Name="VDWidget/WidgetName" />
+            <DomainPath />
+          </PropertyPath>
+        </PropertyDisplayed>
+      </ExplorerNodeSettings>
+      <ExplorerNodeSettings IconToDisplay="Resources\FormIcon.bmp" ShowsDomainClass="true">
+        <Class>
+          <DomainClassMoniker Name="VDForm" />
+        </Class>
+        <PropertyDisplayed>
+          <PropertyPath>
+            <DomainPropertyMoniker Name="VDWidget/WidgetName" />
+            <DomainPath />
+          </PropertyPath>
+        </PropertyDisplayed>
+      </ExplorerNodeSettings>
+      <ExplorerNodeSettings IconToDisplay="Resources\CodeSnippetIcon.bmp" ShowsDomainClass="true">
+        <Class>
+          <DomainClassMoniker Name="VDCodeSnippet" />
+        </Class>
+        <PropertyDisplayed>
+          <PropertyPath>
+            <DomainPropertyMoniker Name="VDWidget/WidgetName" />
+            <DomainPath />
+          </PropertyPath>
+        </PropertyDisplayed>
+      </ExplorerNodeSettings>
+      <ExplorerNodeSettings IconToDisplay="Resources\InputIcon.bmp" ShowsDomainClass="true">
+        <Class>
+          <DomainClassMoniker Name="VDInput" />
+        </Class>
+        <PropertyDisplayed>
+          <PropertyPath>
+            <DomainPropertyMoniker Name="VDWidget/WidgetName" />
+            <DomainPath />
+          </PropertyPath>
+        </PropertyDisplayed>
+      </ExplorerNodeSettings>
+      <ExplorerNodeSettings IconToDisplay="Resources\RadioIcon.bmp" ShowsDomainClass="true">
+        <Class>
+          <DomainClassMoniker Name="VDRadio" />
+        </Class>
+      </ExplorerNodeSettings>
+      <ExplorerNodeSettings IconToDisplay="Resources\SectionIcon.bmp" ShowsDomainClass="true">
+        <Class>
+          <DomainClassMoniker Name="VDSection" />
+        </Class>
+        <PropertyDisplayed>
+          <PropertyPath>
+            <DomainPropertyMoniker Name="VDWidget/WidgetName" />
+            <DomainPath />
+          </PropertyPath>
+        </PropertyDisplayed>
+      </ExplorerNodeSettings>
+      <ExplorerNodeSettings IconToDisplay="Resources\SelectIcon.bmp" ShowsDomainClass="true">
+        <Class>
+          <DomainClassMoniker Name="VDSelect" />
+        </Class>
+        <PropertyDisplayed>
+          <PropertyPath>
+            <DomainPropertyMoniker Name="VDWidget/WidgetName" />
+            <DomainPath />
+          </PropertyPath>
+        </PropertyDisplayed>
+      </ExplorerNodeSettings>
+      <ExplorerNodeSettings IconToDisplay="Resources\ButtonIcon.bmp" ShowsDomainClass="true">
+        <Class>
+          <DomainClassMoniker Name="VDSubmit" />
+        </Class>
+      </ExplorerNodeSettings>
+      <ExplorerNodeSettings IconToDisplay="Resources\ViewIcon.bmp" ShowsDomainClass="true">
+        <Class>
+          <DomainClassMoniker Name="VDView" />
+        </Class>
+      </ExplorerNodeSettings>
+      <ExplorerNodeSettings IconToDisplay="Resources\HoriSeparator.bmp" ShowsDomainClass="true">
+        <Class>
+          <DomainClassMoniker Name="VDHoriSeparator" />
+        </Class>
+      </ExplorerNodeSettings>
+      <ExplorerNodeSettings IconToDisplay="Resources\VertSeparator.bmp" ShowsDomainClass="true">
+        <Class>
+          <DomainClassMoniker Name="VDVertSeparator" />
+        </Class>
+      </ExplorerNodeSettings>
+      <ExplorerNodeSettings IconToDisplay="Resources\FillRight.bmp" ShowsDomainClass="true">
+        <Class>
+          <DomainClassMoniker Name="VDHoriContainer" />
+        </Class>
+        <PropertyDisplayed>
+          <PropertyPath>
+            <DomainPropertyMoniker Name="VDContainer/Tag" />
+            <DomainPath />
+          </PropertyPath>
+        </PropertyDisplayed>
+      </ExplorerNodeSettings>
+      <ExplorerNodeSettings IconToDisplay="Resources\FillDown.bmp" ShowsDomainClass="true">
+        <Class>
+          <DomainClassMoniker Name="VDVertContainer" />
+        </Class>
+        <PropertyDisplayed>
+          <PropertyPath>
+            <DomainPropertyMoniker Name="VDContainer/Tag" />
+            <DomainPath />
+          </PropertyPath>
+        </PropertyDisplayed>
+      </ExplorerNodeSettings>
+      <ExplorerNodeSettings IconToDisplay="Resources\FullFilledContainer.bmp" ShowsDomainClass="true">
+        <Class>
+          <DomainClassMoniker Name="VDFullFilledContainer" />
+        </Class>
+        <PropertyDisplayed>
+          <PropertyPath>
+            <DomainPropertyMoniker Name="VDContainer/Tag" />
+            <DomainPath />
+          </PropertyPath>
+        </PropertyDisplayed>
+      </ExplorerNodeSettings>
+    </CustomNodeSettings>
+    <HiddenNodes>
+      <DomainPath>WidgetHasTitle.Title</DomainPath>
+    </HiddenNodes>
+  </ExplorerBehavior>
   <ConnectionBuilders>
     <ConnectionBuilder Name="SeparatorRefersTopWidgetBuilder">
       <LinkConnectDirective>
@@ -2227,6 +2414,24 @@
           <DomainPath>CodeSnippetHasBody.ParentCodeSnippet/!VDCodeSnippet</DomainPath>
         </ParentElementPath>
         <GeometryShapeMoniker Name="VDCodeSnippetBodyShape" />
+      </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDContainer" />
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDContainerShape/TagDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="VDContainer/Tag" />
+            </PropertyPath>
+          </PropertyDisplayed>
+          <VisibilityPropertyPath>
+            <DomainPropertyMoniker Name="VDContainerShape/isTagDecoratorVisible" />
+            <PropertyFilters>
+              <PropertyFilter FilteringValue="True" />
+            </PropertyFilters>
+          </VisibilityPropertyPath>
+        </DecoratorMap>
+        <GeometryShapeMoniker Name="VDContainerShape" />
       </ShapeMap>
     </ShapeMaps>
   </Diagram>

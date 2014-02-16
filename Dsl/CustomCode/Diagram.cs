@@ -15,7 +15,7 @@ namespace MVCVisualDesigner
             set { }
         }
 
-        protected override void InitializeShapeFields(IList<Microsoft.VisualStudio.Modeling.Diagrams.ShapeField> shapeFields)
+        protected override void InitializeShapeFields(IList<ShapeField> shapeFields)
         {
             base.InitializeShapeFields(shapeFields);
 

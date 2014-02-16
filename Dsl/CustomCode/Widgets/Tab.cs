@@ -12,8 +12,8 @@ namespace MVCVisualDesigner
 {
     public partial class VDTab : ICustomMerge
     {
-        public const string HEADS_CONTAINER_TAG = "Heads";
-        public const string BODYS_CONTAINER_TAG = "Bodys";
+        public const string HEADS_CONTAINER_TAG = "Tab Head";
+        public const string BODYS_CONTAINER_TAG = "Tab Body";
 
         public override bool HasWidgetTitle { get { return true; } }
 
@@ -34,7 +34,8 @@ namespace MVCVisualDesigner
                 new PropertyAssignment(VDContainer.HasRightAnchorDomainPropertyId, true),
                 new PropertyAssignment(VDContainer.HasBottomAnchorDomainPropertyId, true)) as VDFullFilledContainer;
 
-            VDHoriSeparator hSeparator = this.Store.ElementFactory.CreateElement(VDHoriSeparator.DomainClassId) as VDHoriSeparator;
+            VDHoriSeparator hSeparator = this.Store.ElementFactory.CreateElement(VDHoriSeparator.DomainClassId,
+                new PropertyAssignment(VDHoriSeparator.DefaultYDomainPropertyId, 0.5)) as VDHoriSeparator;
             hSeparator.TopWidget = headContainer;
             hSeparator.BottomWidget = bodyContainer;
 
@@ -113,24 +114,24 @@ namespace MVCVisualDesigner
             return null;
         }
 
-        public VDContainerBaseShape HeadContainerShape
+        public VDContainerShape HeadContainerShape
         {
             get
             {
-                VDContainerBaseShape s = this.NestedChildShapes.Find(cs => cs is VDHoriContainerShape 
+                VDContainerShape s = this.NestedChildShapes.Find(cs => cs is VDHoriContainerShape 
                     && cs.ModelElement != null
-                    && ((VDContainer)cs.ModelElement).Tag == VDTab.HEADS_CONTAINER_TAG) as VDContainerBaseShape;
+                    && ((VDContainer)cs.ModelElement).Tag == VDTab.HEADS_CONTAINER_TAG) as VDContainerShape;
                 return s;
             }
         }
 
-        public VDContainerBaseShape BodyContainerShape
+        public VDContainerShape BodyContainerShape
         {
             get
             {
-                VDContainerBaseShape s = this.NestedChildShapes.Find(cs => cs is VDFullFilledContainerShape 
+                VDContainerShape s = this.NestedChildShapes.Find(cs => cs is VDFullFilledContainerShape 
                     && cs.ModelElement != null
-                    && ((VDContainer)cs.ModelElement).Tag == VDTab.BODYS_CONTAINER_TAG) as VDContainerBaseShape;
+                    && ((VDContainer)cs.ModelElement).Tag == VDTab.BODYS_CONTAINER_TAG) as VDContainerShape;
                 return s;
             }
         }

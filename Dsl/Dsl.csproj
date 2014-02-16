@@ -89,6 +89,7 @@
     </Compile>
     <Compile Include="CustomCode\HTMLAttribute.cs" />
     <Compile Include="CustomCode\ICustomMerge.cs" />
+    <Compile Include="CustomCode\MergeMananger.cs" />
     <Compile Include="CustomCode\PropertyEditors\VDCollectionEditor.cs" />
     <Compile Include="CustomCode\ShapeFields\MultiLineTextField.cs" />
     <Compile Include="CustomCode\StateMachine.cs" />

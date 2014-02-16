@@ -11,14 +11,15 @@ namespace MVCVisualDesigner
 {
     public partial class VDContainer
     {
-    }
-
-    public partial class VDHoriContainer
-    {
-    }
-
-    public partial class VDVertContainer
-    {
+        protected override bool CanMerge(ProtoElementBase rootElement, ElementGroupPrototype elementGroupPrototype)
+        {
+            if (this.Parent != null) 
+            {
+                // forward to parent
+                return this.Parent.internalCanMerge(this, rootElement, elementGroupPrototype);
+            }
+            return base.CanMerge(rootElement, elementGroupPrototype);
+        }
     }
 }
 
@@ -26,10 +27,31 @@ namespace MVCVisualDesigner
 // Shape
 namespace MVCVisualDesigner
 {
-    public abstract partial class VDContainerBaseShape
+    public partial class VDContainerShapeBase
     {
+        public bool GetisTagDecoratorVisibleValue()
+        {
+            if (this.BoundingBox.Height > 0.3)
+                return true;
+            else
+                return false;
+        }
+    }
+
+    public partial class VDContainerShape
+    {
+        protected override void InitializeShapeFields(IList<ShapeField> shapeFields)
+        {
+            base.InitializeShapeFields(shapeFields);
+            TextField tagField = shapeFields.FirstOrDefault(f => f.Name == "TagDecorator") as TextField;
+            if (tagField != null)
+            {
+                tagField.DefaultFocusable = false;
+                tagField.DefaultSelectable = false;
+            }
+        }
+
         public override NodeSides ResizableSides { get { return NodeSides.None; } }
-        //public override bool CanMove { get { return false; } }
 
         protected override void SetAbsoluteBoundsValue(RectangleD newValue)
         {
@@ -68,7 +90,7 @@ namespace MVCVisualDesigner
 
                 VDWidgetShape parentShape = shape.ParentShape as VDWidgetShape;
                 VDContainer thisMEL = shape.ModelElement as VDContainer;
-                VDContainerBaseShape thisPEL = shape as VDContainerBaseShape;
+                VDContainerShape thisPEL = shape as VDContainerShape;
 
                 //
                 if (parentShape != null && thisMEL != null && thisPEL != null)
@@ -122,7 +144,7 @@ namespace MVCVisualDesigner
                 return proposedBounds;
             }
 
-            private static void setAnchor(VDWidgetShape parentShape, VDContainer thisMEL, VDContainerBaseShape thisPEL, 
+            private static void setAnchor(VDWidgetShape parentShape, VDContainer thisMEL, VDContainerShape thisPEL, 
                 bool setAnchor, VDWidget sibling, AnchoringBehavior.Edge edge)
             {
                 if (!setAnchor) return;

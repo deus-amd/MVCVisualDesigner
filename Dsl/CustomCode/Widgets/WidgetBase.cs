@@ -55,6 +55,38 @@ namespace MVCVisualDesigner
 
         virtual public bool HasWidgetTitle { get { return false; } }
 
+        /// <summary>
+        /// Returns a value indicating whether the source element represented by the
+        /// specified root ProtoElement can be added to this element.
+        /// </summary>
+        /// <param name="rootElement">
+        /// The root ProtoElement representing a source element.  This can be null, 
+        /// in which case the ElementGroupPrototype does not contain an ProtoElements
+        /// and the code should inspect the ElementGroupPrototype context information.
+        /// </param>
+        /// <param name="elementGroupPrototype">The ElementGroupPrototype that contains the root ProtoElement.</param>
+        /// <returns>true if the source element represented by the ProtoElement can be added to this target element.</returns>
+        protected override bool CanMerge(ProtoElementBase rootElement, ElementGroupPrototype elementGroupPrototype)
+        {
+            return internalCanMerge(this, rootElement, elementGroupPrototype);
+        }
+
+        internal virtual bool internalCanMerge(VDWidget origianlTargetWidget, ProtoElementBase sourceRootElement, ElementGroupPrototype elementGroupPrototype)
+        {
+            if (elementGroupPrototype == null) throw new ArgumentNullException("elementGroupPrototype");
+
+            if (sourceRootElement != null)
+            {
+                DomainClassInfo rootElementDomainInfo = this.Partition.DomainDataDirectory.GetDomainClass(sourceRootElement.DomainClassId);
+                if (rootElementDomainInfo.IsDerivedFrom(VDWidget.DomainClassId))
+                {
+                    return MergeManager.Instance.CanMerge(rootElementDomainInfo.Id, this.GetDomainClass().Id);
+                }
+            }
+
+            return base.CanMerge(sourceRootElement, elementGroupPrototype);
+        }
+
         protected override void MergeRelate(ModelElement sourceElement, ElementGroup elementGroup)
         {
             // setup title

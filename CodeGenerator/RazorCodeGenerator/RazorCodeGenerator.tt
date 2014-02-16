@@ -20,6 +20,7 @@ namespace MVCVisualDesigner.CodeGenerator
 <#
     foreach (string widgetName in AllWidgets)
     {
+        if (NotGeneratorWidgets.Contains(widgetName)) continue;
 #>
             if (widget.WidgetType == WidgetType.<#= widgetName.Substring(2) #>)
                 return new <#= widgetName #>RazorCodeGenerator(widget);
@@ -38,6 +39,7 @@ namespace MVCVisualDesigner.CodeGenerator
 <#
     foreach (string widgetName in AllWidgets)
     {
+        if (NotGeneratorWidgets.Contains(widgetName)) continue;
 #>
     public class <#= widgetName #>RazorCodeGeneratorBase : IRazorCodeGenerator
     {
@@ -52,7 +54,20 @@ namespace MVCVisualDesigner.CodeGenerator
 
         public virtual string GenerateCode(ICodeGeneratorFactory cGFactory, IWidgetTreeWalkerFactory walkerFactory)
         {
+<#
+        if (!DefaultGenerators.Contains(widgetName))
+        {
+#>
             var impl = new <#= widgetName #>RazorCodeGeneratorImpl(this.Widget, cGFactory, walkerFactory);
+<#
+        }
+        else
+        {
+#>
+            var impl = new DefaultRazorCodeGeneratorImpl(this.Widget, cGFactory, walkerFactory);
+<#
+        }
+#>
             return impl.TransformText();
         }
     }
@@ -76,6 +91,7 @@ namespace MVCVisualDesigner.CodeGenerator
 <#
     foreach (string widgetName in AllWidgets)
     {
+        if (NotGeneratorWidgets.Contains(widgetName)) continue;
 #>
     public partial class <#= widgetName #>RazorCodeGeneratorImpl
     {
@@ -99,4 +115,25 @@ namespace MVCVisualDesigner.CodeGenerator
 <#
     }
 #>
+
+    public partial class DefaultRazorCodeGeneratorImpl
+    {
+        public DefaultRazorCodeGeneratorImpl(VDWidget widget, ICodeGeneratorFactory cGFactory, IWidgetTreeWalkerFactory walkerFactory)
+        {
+            m_widget = widget;
+            m_cGFactory = cGFactory;
+            m_walkerFactory = walkerFactory;		
+        }
+
+        protected VDWidget m_widget;
+        public VDWidget Widget { get { return m_widget; } }
+
+        protected ICodeGeneratorFactory m_cGFactory;
+        public ICodeGeneratorFactory CodeGeneratorFactory { get { return m_cGFactory; } }
+
+        protected IWidgetTreeWalkerFactory m_walkerFactory;
+        public IWidgetTreeWalkerFactory WalkerFactory { get { return m_walkerFactory; } }
+    }
 }
+
+<#@ include file="../ExcludeList.t4" #>

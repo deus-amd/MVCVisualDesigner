@@ -4,4 +4,23 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="MVCVisualDesigner" #>
-<#@ include file="../GenerateChildrenCode.t4" #>
+<#
+    VDTableCell cell = (VDTableCell)this.Widget;
+
+    string spanAttributes = string.Empty;
+    if (cell.RowSpan > 1) spanAttributes += string.Format("rowspan='{0}' ", cell.RowSpan);
+    if (cell.ColSpan > 1) spanAttributes += string.Format("colspan='{0}' ", cell.ColSpan);
+
+    if (cell.IsTableHeadCell) 
+    {
+#>
+<th <#= spanAttributes #>><#@ include file="../GenerateChildrenCode.t4" #></th>
+<#
+    }
+    else
+    {
+#>
+<td <#= spanAttributes #>><#@ include file="../GenerateChildrenCode.t4" #></td>
+<#
+    }
+#>

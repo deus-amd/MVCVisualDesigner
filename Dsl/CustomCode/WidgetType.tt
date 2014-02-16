@@ -32,4 +32,21 @@ namespace MVCVisualDesigner
 <#
     }
 #>
+
+
+    public partial class MVCVisualDesignerDomainModel
+    {
+        public static System.Collections.Generic.HashSet<System.Guid> AllClassDomainIDs 
+            = new System.Collections.Generic.HashSet<System.Guid>
+        {
+<#
+    foreach(string MEL in AllWidgets)
+    {
+#>
+            <#= MEL #>.DomainClassId,	
+<#
+    }
+#>
+        };
+    }
 }

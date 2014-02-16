@@ -4,4 +4,67 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="MVCVisualDesigner" #>
-<#@ include file="../GenerateChildrenCode.t4" #>
+<#
+    VDTable table = (VDTable)this.Widget;
+    List<VDTableRow> headRows = table.HeadRows;
+    List<VDTableRow> bodyRows = table.BodyRows;
+    List<VDTableRow> footRows = table.FootRows;
+#>
+
+<table>
+<#
+    if (headRows.Count > 0)
+    {
+#>
+    <thead>
+<#
+        foreach(VDTableRow row in headRows)
+        {
+            ICodeGenerator rowCG = this.CodeGeneratorFactory.GetCodeGenerator(row);
+            this.PushIndent("        ");
+#><#= rowCG.GenerateCode(this.CodeGeneratorFactory, this.WalkerFactory) #><#
+            this.PopIndent();
+        }
+#>
+
+    </thead>
+<#
+    }
+
+    if (bodyRows.Count > 0)
+    {
+#>
+    <tbody>
+<#
+        foreach(VDTableRow row in bodyRows)
+        {
+            ICodeGenerator rowCG = this.CodeGeneratorFactory.GetCodeGenerator(row);
+            this.PushIndent("        ");
+#><#= rowCG.GenerateCode(this.CodeGeneratorFactory, this.WalkerFactory) #><#
+            this.PopIndent();
+        }
+#>
+    
+    </tbody>
+<#
+    }
+
+    if (footRows.Count > 0)
+    {
+#>
+    <tfoot>
+<#
+        foreach(VDTableRow row in footRows)
+        {
+            ICodeGenerator rowCG = this.CodeGeneratorFactory.GetCodeGenerator(row);
+            this.PushIndent("        ");
+#><#= rowCG.GenerateCode(this.CodeGeneratorFactory, this.WalkerFactory) #><#
+            this.PopIndent();
+        }
+#>
+ 
+    </tfoot>
+<#
+    }
+#>
+</table>
