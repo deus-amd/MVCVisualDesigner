@@ -8,22 +8,7 @@ namespace MVCVisualDesigner
 {
     public partial class VDInternalUtility
     {
-        private VDWidget m_parentToDel;
-        protected override void OnDeleting()
-        {
-            m_parentToDel = this.Parent;
-            base.OnDeleting();
-        }
-
-        protected override void OnDeleted()
-        {
-            base.OnDeleted();
-            if (m_parentToDel != null && this.Store.TransactionManager.InTransaction)
-            {
-                m_parentToDel.Delete();
-                m_parentToDel = null;
-            }
-        }
+        protected override bool PropagateDeletingToParent { get { return true; } }
     }
 
     public static class VDConstants

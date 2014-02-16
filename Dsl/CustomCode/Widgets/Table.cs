@@ -173,23 +173,81 @@ namespace MVCVisualDesigner
         {
             protected override void OnValueChanging(VDTable table, uint oldValue, uint newValue)
             {
+                if (table.Store.InUndoRedoOrRollback)
+                {
+                    base.OnValueChanging(table, oldValue, newValue);
+                    return;
+                }
+
+                if (newValue == 0) throw new Exception("Column count should be greater than 0.");
+
                 if (oldValue > newValue)
                 {
                     uint lastCol = newValue;
 
                     // don't allow to delete columns if there are cells crossing the delete columns (colspan > 1)
-                    //VDTableCell cell = table.HeadRows.Find(c => c.Col < lastCol && c.LastCol >= lastCol);
-                    //if (cell != null)
-                    //{
-                    //    throw new Exception(string.Format("Cell[{0},{1}] can not be deleted, please split it first", cell.Row, cell.Col));
-                    //}
+                    // head rows
+                    foreach(var row in table.HeadRows)
+                    {
+                        var cell = row.GetChild<VDTableCell>(c => c.Col < lastCol && c.LastCol >= lastCol);
+                        if (cell != null)
+                        {
+                            throw new Exception(string.Format("Cell[{0},{1}] in row {2} of table head can not be deleted, please split it first",
+                                cell.Row, cell.Col, row.WidgetName ?? string.Empty));
+                        }
+                    }
+                    // body rows
+                    foreach (var row in table.BodyRows)
+                    {
+                        var cell = row.GetChild<VDTableCell>(c => c.Col < lastCol && c.LastCol >= lastCol);
+                        if (cell != null)
+                        {
+                            throw new Exception(string.Format("Cell[{0},{1}] in row {2} of table body can not be deleted, please split it first",
+                                cell.Row, cell.Col, row.WidgetName ?? string.Empty));
+                        }
+                    }
+                    // foot rows
+                    foreach (var row in table.FootRows)
+                    {
+                        var cell = row.GetChild<VDTableCell>(c => c.Col < lastCol && c.LastCol >= lastCol);
+                        if (cell != null)
+                        {
+                            throw new Exception(string.Format("Cell[{0},{1}] in row {2} of table foot can not be deleted, please split it first",
+                                cell.Row, cell.Col, row.WidgetName ?? string.Empty));
+                        }
+                    }
 
-                    //// don't allow to delete cells which are not empty
-                    //cell = table.Cells.Find(c => c.Col >= lastCol && c.Children.Count > 0);
-                    //if (cell != null)
-                    //{
-                    //    throw new Exception(string.Format("Cell[{0},{1}] can not be deleted because it is not empty", cell.Row, cell.Col));
-                    //}
+                    // don't allow to delete cells which are not empty
+                    // head rows
+                    foreach (var row in table.HeadRows)
+                    {
+                        var cell = row.GetChild<VDTableCell>(c => c.Col >= lastCol && c.Children.Count > 0);
+                        if (cell != null)
+                        {
+                            throw new Exception(string.Format("Cell[{0},{1}] in row {2} of table head can not be deleted because it is not empty",
+                                cell.Row, cell.Col, row.WidgetName ?? string.Empty));
+                        }
+                    }
+                    // body rows
+                    foreach (var row in table.BodyRows)
+                    {
+                        var cell = row.GetChild<VDTableCell>(c => c.Col >= lastCol && c.Children.Count > 0);
+                        if (cell != null)
+                        {
+                            throw new Exception(string.Format("Cell[{0},{1}] in row {2} of table body can not be deleted because it is not empty",
+                                cell.Row, cell.Col, row.WidgetName ?? string.Empty));
+                        }
+                    }
+                    // foot rows
+                    foreach (var row in table.FootRows)
+                    {
+                        var cell = row.GetChild<VDTableCell>(c => c.Col >= lastCol && c.Children.Count > 0);
+                        if (cell != null)
+                        {
+                            throw new Exception(string.Format("Cell[{0},{1}] in row {2} of table foot can not be deleted because it is not empty",
+                                cell.Row, cell.Col, row.WidgetName ?? string.Empty));
+                        }
+                    }
                 }
                 base.OnValueChanging(table, oldValue, newValue);
             }
@@ -203,6 +261,7 @@ namespace MVCVisualDesigner
 
     public partial class VDTableRow : ICustomMerge
     {
+        private const string TABLE_ROWS = "Table Rows";
         public void MergeTo(VDWidget targetWidget, ElementGroup elementGroup)
         {
             VDWidget parent = targetWidget;
@@ -256,7 +315,7 @@ namespace MVCVisualDesigner
                     new PropertyAssignment(VDHoriContainer.FixedHeightDomainPropertyId, TableConstants.TITLE_SIZE)) as VDHoriContainer;
 
                 VDVertContainer bodyContainer = this.Store.ElementFactory.CreateElement(VDVertContainer.DomainClassId,
-                    new PropertyAssignment(VDContainer.TagDomainPropertyId, "Table Rows"),
+                    new PropertyAssignment(VDContainer.TagDomainPropertyId, TABLE_ROWS),
                     new PropertyAssignment(VDContainer.HasLeftAnchorDomainPropertyId, true),
                     new PropertyAssignment(VDContainer.HasRightAnchorDomainPropertyId, true),
                     new PropertyAssignment(VDContainer.HasTopAnchorDomainPropertyId, true),
@@ -273,6 +332,7 @@ namespace MVCVisualDesigner
                 //bodyContainer.Children.Add(this);
                 targetWidget.Children.Add(wrapper);
                 row.RowCount = 1;
+                this.Delete();
             }
         }
 
@@ -299,6 +359,61 @@ namespace MVCVisualDesigner
             List<VDTableCell> cells = this.GetChildren<VDTableCell>(c => c.Row == (uint)rowIndex);
             cells.Sort((a, b) => (int)(a.Col - b.Col));
             return cells;
+        }
+
+        // propagate deleting parent
+        protected override bool PropagateDeletingToParent { get { return true; } }
+        protected override bool onPropagateDeletingParent(VDWidget parentWidget)
+        {
+            if (parentWidget != null && this.Store.TransactionManager.InTransaction
+                   && parentWidget is VDContainer 
+                   && ((VDContainer)parentWidget).Tag == TABLE_ROWS)
+            {
+                VDContainer container = parentWidget as VDContainer;
+                if (container.GetChildren<VDTableRow>().Count < 1)
+                {
+                    parentWidget.Delete();
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        internal sealed partial class RowCountPropertyHandler : DomainPropertyValueHandler<VDTableRow, UInt32>
+        {
+            protected override void OnValueChanging(VDTableRow tableRow, uint oldValue, uint newValue)
+            {
+                if (tableRow.Store.InUndoRedoOrRollback)
+                {
+                    base.OnValueChanging(tableRow, oldValue, newValue);
+                    return;
+                }
+
+                if (newValue == 0) throw new Exception("Row count should be greater than 0.");
+
+                if (oldValue > newValue)
+                {
+                    uint lastRow = newValue;
+
+                    // don't allow to delete columns if there are cells crossing the delete columns (colspan > 1)
+                    var cell = tableRow.GetChild<VDTableCell>(c => c.Row < lastRow && c.LastRow >= lastRow);
+                    if (cell != null)
+                    {
+                        throw new Exception(string.Format("Cell[{0},{1}] in row {2} can not be deleted, please split it first",
+                            cell.Row, cell.Col, tableRow.WidgetName ?? string.Empty));
+                    }
+
+                    // don't allow to delete cells which are not empty
+                    cell = tableRow.GetChild<VDTableCell>(c => c.Row >= lastRow && c.Children.Count > 0);
+                    if (cell != null)
+                    {
+                        throw new Exception(string.Format("Cell[{0},{1}] in row {2} can not be deleted because it is not empty",
+                            cell.Row, cell.Col, tableRow.WidgetName ?? string.Empty));
+                    }
+                }
+                base.OnValueChanging(tableRow, oldValue, newValue);
+            }
         }
     }
 
@@ -330,6 +445,58 @@ namespace MVCVisualDesigner
                     return false;
             }
         }
+
+        protected override bool PropagateDeletingToParent { get { return true; } }
+
+        internal sealed partial class RowSpanPropertyHandler : DomainPropertyValueHandler<VDTableCell, UInt32>
+        {
+            protected override void OnValueChanging(VDTableCell tableCell, uint oldValue, uint newValue)
+            {
+                if (tableCell.Store.InUndoRedoOrRollback)
+                {
+                    base.OnValueChanging(tableCell, oldValue, newValue);
+                    return;
+                }
+
+                if (newValue == 0) throw new Exception("Row span should be greater than 0.");
+
+                if (newValue + tableCell.Row > tableCell.ParentRow.RowCount)
+                    throw new Exception(string.Format("Row span of cell[{0},{1}] in row {2} is too big",
+                            tableCell.Row, tableCell.Col, tableCell.ParentRow.WidgetName ?? string.Empty));
+
+                base.OnValueChanging(tableCell, oldValue, newValue);
+            }
+        }
+
+        internal sealed partial class ColSpanPropertyHandler : DomainPropertyValueHandler<VDTableCell, UInt32>
+        {
+            protected override void OnValueChanging(VDTableCell tableCell, uint oldValue, uint newValue)
+            {
+                if (tableCell.Store.InUndoRedoOrRollback)
+                {
+                    base.OnValueChanging(tableCell, oldValue, newValue);
+                    return;
+                }
+
+                if (newValue == 0) throw new Exception("Col span should be greater than 0.");
+
+                if (newValue + tableCell.Col > tableCell.ParentRow.ColCount)
+                    throw new Exception(string.Format("Row span of cell[{0},{1}] in row {2} is too big",
+                            tableCell.Row, tableCell.Col, tableCell.ParentRow.WidgetName ?? string.Empty));
+
+                base.OnValueChanging(tableCell, oldValue, newValue);
+            }
+        }
+    }
+
+    public partial class VDTableColTitle
+    {
+        protected override bool PropagateDeletingToParent { get { return true; } }
+    }
+
+    public partial class VDTableRowTitle
+    {
+        protected override bool PropagateDeletingToParent { get { return true; } }
     }
 
     // rules
@@ -353,7 +520,7 @@ namespace MVCVisualDesigner
                     if (oldColCount > newColCount) // remove column titles
                     {
                         List<VDTableColTitle> toDelList = colTitleContainer.GetChildren<VDTableColTitle>(t => t.Index + 1 > newColCount);
-                        toDelList.ForEach(cell => cell.Delete());
+                        toDelList.ForEach(cell => cell.DeleteWithoutPropagating());
                     }
                     else if (oldColCount < newColCount) // add column titles
                     {
@@ -392,7 +559,7 @@ namespace MVCVisualDesigner
                     if (oldRowCount > newRowCount) // remove row titles
                     {
                         List<VDTableRowTitle> toDelList = tableRow.GetChildren<VDTableRowTitle>(t => t.Index + 1 > newRowCount);
-                        toDelList.ForEach(cell => cell.Delete());
+                        toDelList.ForEach(cell => cell.DeleteWithoutPropagating());
                     }
                     else if (oldRowCount < newRowCount) // add row titles
                     {
@@ -433,7 +600,7 @@ namespace MVCVisualDesigner
                     if (oldRowCount > newRowCount) // remove row cells
                     {
                         List<VDTableCell> toDelList = tableRow.GetChildren<VDTableCell>(c => c.Row + 1 > newRowCount);
-                        toDelList.ForEach(cell => cell.Delete());
+                        toDelList.ForEach(cell => cell.DeleteWithoutPropagating());
                     }
                     else if (oldRowCount < newRowCount) // add row cells
                     {
@@ -460,7 +627,7 @@ namespace MVCVisualDesigner
                     if (oldColCount > newColCount) // remove row cells
                     {
                         List<VDTableCell> toDelList = tableRow.GetChildren<VDTableCell>(c => c.Col + 1 > newColCount);
-                        toDelList.ForEach(cell => cell.Delete());
+                        toDelList.ForEach(cell => cell.DeleteWithoutPropagating());
                     }
                     else if (oldColCount < newColCount) // add row cells
                     {
@@ -517,7 +684,7 @@ namespace MVCVisualDesigner
                                                                                   && x.Row < (cell.Row + newSpan)
                                                                                   && x.Col >= cell.Col
                                                                                   && x.LastCol <= cell.LastCol);
-                    cellsToDel.ForEach(x => x.Delete());
+                    cellsToDel.ForEach(x => x.DeleteWithoutPropagating());
                 }
             }
             else if (e.DomainProperty.Id == VDTableCell.ColSpanDomainPropertyId)
@@ -542,7 +709,7 @@ namespace MVCVisualDesigner
                                                                                   && x.Col < (cell.Col + newSpan)
                                                                                   && x.Row >= cell.Row
                                                                                   && x.LastRow <= cell.LastRow);
-                    cellsToDel.ForEach(x => x.Delete());
+                    cellsToDel.ForEach(x => x.DeleteWithoutPropagating());
                 }
             }
         }
@@ -792,6 +959,7 @@ namespace MVCVisualDesigner
         [CLSCompliant(false)]
         public void SetColSpanValue(uint newvalue)
         {
+            if (this.Store.InUndoRedoOrRollback) return;
             if (this.ModelElement != null) { this.GetMEL<VDTableCell>().ColSpan = newvalue; }
         }
 
@@ -800,6 +968,8 @@ namespace MVCVisualDesigner
             protected override void OnValueChanged(VDTableCellShape element, uint oldValue, uint newValue)
             {
                 base.OnValueChanged(element, oldValue, newValue);
+
+                if (element.Store.InUndoRedoOrRollback) return;
 
                 // trigger bounds rules
                 element.OnBoundsFixup(BoundsFixupState.ViewFixup, 0, false);
@@ -815,6 +985,7 @@ namespace MVCVisualDesigner
         [CLSCompliant(false)]
         public void SetRowSpanValue(uint newvalue)
         {
+            if (this.Store.InUndoRedoOrRollback) return;
             if (this.ModelElement != null) { this.GetMEL<VDTableCell>().RowSpan = newvalue; }
         }
 
@@ -824,7 +995,8 @@ namespace MVCVisualDesigner
             {
                 base.OnValueChanged(element, oldValue, newValue);
 
-                //element.Size = SizeD.Empty; // trigger bounds rules
+                if (element.Store.InUndoRedoOrRollback) return;
+
                 // trigger bounds rules
                 element.OnBoundsFixup(BoundsFixupState.ViewFixup, 0, false);
             }

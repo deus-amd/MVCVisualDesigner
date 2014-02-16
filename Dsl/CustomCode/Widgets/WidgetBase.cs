@@ -116,6 +116,43 @@ namespace MVCVisualDesigner
             return cGFactory.GetCodeGenerator(this).GenerateCode(cGFactory, walkerFactory);
         }
 
+        // Deleting Propagate
+        private VDWidget m_parentToDel;
+        protected override void OnDeleting()
+        {
+            m_parentToDel = this.Parent;
+            base.OnDeleting();
+        }
+
+        protected override void OnDeleted()
+        {
+            base.OnDeleted();
+
+            if (m_deleteWithoutPropagating) return;
+
+            if (PropagateDeletingToParent && m_parentToDel != null && this.Store.TransactionManager.InTransaction)
+            {
+                onPropagateDeletingParent(m_parentToDel);
+                m_parentToDel = null;
+            }
+        }
+
+        private bool m_deleteWithoutPropagating = false;
+        internal protected void DeleteWithoutPropagating()
+        {
+            m_deleteWithoutPropagating = true;
+            Delete();
+            m_deleteWithoutPropagating = false;
+        }
+
+        protected virtual bool PropagateDeletingToParent { get { return false; } }
+
+        protected virtual bool onPropagateDeletingParent(VDWidget parentWidget)
+        {
+            parentWidget.Delete();
+            return true;
+        }
+
         // utilities
         public T GetChild<T>(Predicate<T> predicate = null)  where T : VDWidget
         {
