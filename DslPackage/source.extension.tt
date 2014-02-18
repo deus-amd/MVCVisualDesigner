@@ -29,6 +29,7 @@
     <MoreInfo>http://visualstudiogallery.msdn.microsoft.com/6b6d4e4c-b417-40e1-a6ac-d96737b4be47</MoreInfo>
     <License>lgpl-3.0.txt</License>
     <GettingStartedGuide>getting_started_guide.rtf</GettingStartedGuide>
+    <ReleaseNotes>change.txt</ReleaseNotes>
     <Icon>Resources\File.ico</Icon>
     <PreviewImage>Preview.png</PreviewImage>
     <Tags>MVC, Visual, Designer, Open Source</Tags>

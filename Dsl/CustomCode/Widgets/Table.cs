@@ -474,6 +474,27 @@ namespace MVCVisualDesigner
                     throw new Exception(string.Format("Row span of cell[{0},{1}] in row {2} is too big",
                             tableCell.Row, tableCell.Col, tableCell.ParentRow.WidgetName ?? string.Empty));
 
+                if (newValue > oldValue)
+                {
+                    var cell = tableCell.ParentRow.GetChild<VDTableCell>(
+                        c => (c.RowSpan > 1 || c.ColSpan > 1 || c.Children.Count > 0)
+                            && ((c.Col >= tableCell.Col && c.Col <= tableCell.LastCol) || (c.LastCol >= tableCell.Col && c.LastCol <= tableCell.LastCol))
+                            && c.Row < newValue + tableCell.Row && c.Row >= tableCell.Row + oldValue);
+                    if (cell != null)
+                    {
+                        if (cell.Children.Count > 0)
+                        {
+                            throw new Exception(string.Format("Cell[{0},{1}] in row {2} is not empty.",
+                                cell.Row, cell.Col, tableCell.ParentRow.WidgetName ?? string.Empty));
+                        }
+                        else
+                        {
+                            throw new Exception(string.Format("Please split cell[{0},{1}] in row {2} first.",
+                                cell.Row, cell.Col, tableCell.ParentRow.WidgetName ?? string.Empty));
+                        }
+                    }
+                }
+
                 base.OnValueChanging(tableCell, oldValue, newValue);
             }
         }
@@ -493,6 +514,27 @@ namespace MVCVisualDesigner
                 if (newValue + tableCell.Col > tableCell.ParentRow.ColCount)
                     throw new Exception(string.Format("Row span of cell[{0},{1}] in row {2} is too big",
                             tableCell.Row, tableCell.Col, tableCell.ParentRow.WidgetName ?? string.Empty));
+
+                if (newValue > oldValue)
+                {
+                    var cell = tableCell.ParentRow.GetChild<VDTableCell>(
+                        c => (c.RowSpan > 1 || c.ColSpan > 1 || c.Children.Count > 0)
+                            && ((c.Row >= tableCell.Row && c.Row <= tableCell.LastRow) || (c.LastRow >= tableCell.Row && c.LastRow <= tableCell.LastRow))
+                            && c.Col < newValue + tableCell.Col && c.Col >= tableCell.Col + oldValue);
+                    if (cell != null)
+                    {
+                        if (cell.Children.Count > 0)
+                        {
+                            throw new Exception(string.Format("Cell[{0},{1}] in row {2} is not empty.",
+                                cell.Row, cell.Col, tableCell.ParentRow.WidgetName ?? string.Empty));
+                        }
+                        else
+                        {
+                            throw new Exception(string.Format("Please split cell[{0},{1}] in row {2} first.",
+                                cell.Row, cell.Col, tableCell.ParentRow.WidgetName ?? string.Empty));
+                        }
+                    }
+                }
 
                 base.OnValueChanging(tableCell, oldValue, newValue);
             }

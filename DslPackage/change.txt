@@ -1,0 +1,8 @@
+0.03
+add Tab, Table, HTML Tag, Code snippet widgets
+
+0.02
+add form related widgets
+
+0.01
+Initial version
