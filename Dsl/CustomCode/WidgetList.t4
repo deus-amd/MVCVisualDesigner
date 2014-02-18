@@ -22,6 +22,7 @@ string[] WidgetList = new string[]{
 	"VDTableRowTitle",
 	"VDHTMLTag",
 	"VDCodeSnippet",
+	"VDText",
 
 	// Utilities
 	"VDHoriSeparator",

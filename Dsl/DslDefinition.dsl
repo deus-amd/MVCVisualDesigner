@@ -662,6 +662,24 @@
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
     </DomainClass>
+    <DomainClass Id="d3dba629-0d5a-4609-98d8-daa4521deb45" Description="Description for MVCVisualDesigner.VDText" Name="VDText" DisplayName="VDText" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
+      <Properties>
+        <DomainProperty Id="4ad5dcd1-d6af-41fc-9bc7-58128317a4de" Description="" Name="Content" DisplayName="Content" Category="Definition">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="f4ade2f6-2c83-48ff-bc73-ca4ecb15b35e" Description="" Name="Encoding" DisplayName="Encoding" Category="Definition">
+          <Notes>TODO: add URLEncode(...) etc</Notes>
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+    </DomainClass>
   </Classes>
   <Relationships>
     <DomainRelationship Id="8491408d-7160-4a47-9979-e0dab01d52b3" Description="Description for MVCVisualDesigner.WidgetHasChildren" Name="WidgetHasChildren" DisplayName="Widget Has Children" Namespace="MVCVisualDesigner" IsEmbedding="true">
@@ -1302,6 +1320,14 @@
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
+    <GeometryShape Id="5aacc010-0fa7-4799-ac15-5bea4e5bb706" Description="Description for MVCVisualDesigner.VDTextShape" Name="VDTextShape" DisplayName="VDText Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDText Shape" TextColor="DarkBlue" OutlineColor="Transparent" InitialWidth="0.8" InitialHeight="0.25" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+      <ShapeHasDecorators Position="InnerMiddleLeft" HorizontalOffset="0" VerticalOffset="0">
+        <TextDecorator Name="ContentDecorator" DisplayName="Content Decorator" DefaultText="ContentDecorator" />
+      </ShapeHasDecorators>
+    </GeometryShape>
   </Shapes>
   <XmlSerializationBehavior Name="MVCVisualDesignerSerializationBehavior" Namespace="MVCVisualDesigner">
     <ClassData>
@@ -1893,6 +1919,20 @@
       <XmlClassData TypeName="VDCodeSnippetBodyShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDCodeSnippetBodyShapeMoniker" ElementName="vDCodeSnippetBodyShape" MonikerTypeName="VDCodeSnippetBodyShapeMoniker">
         <GeometryShapeMoniker Name="VDCodeSnippetBodyShape" />
       </XmlClassData>
+      <XmlClassData TypeName="VDText" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTextMoniker" ElementName="vDText" MonikerTypeName="VDTextMoniker">
+        <DomainClassMoniker Name="VDText" />
+        <ElementData>
+          <XmlPropertyData XmlName="content">
+            <DomainPropertyMoniker Name="VDText/Content" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="encoding">
+            <DomainPropertyMoniker Name="VDText/Encoding" />
+          </XmlPropertyData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="VDTextShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTextShapeMoniker" ElementName="vDTextShape" MonikerTypeName="VDTextShapeMoniker">
+        <GeometryShapeMoniker Name="VDTextShape" />
+      </XmlClassData>
     </ClassData>
   </XmlSerializationBehavior>
   <ExplorerBehavior Name="MVCVisualDesignerExplorer">
@@ -2433,6 +2473,18 @@
         </DecoratorMap>
         <GeometryShapeMoniker Name="VDContainerShape" />
       </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDText" />
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDTextShape/ContentDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="VDText/Content" />
+            </PropertyPath>
+          </PropertyDisplayed>
+        </DecoratorMap>
+        <GeometryShapeMoniker Name="VDTextShape" />
+      </ShapeMap>
     </ShapeMaps>
   </Diagram>
   <Designer CopyPasteGeneration="CopyPasteOnly" FileExtension="amvd" EditorGuid="061c971a-6960-4ef9-9c30-8a8a6543b9f7">
@@ -2460,6 +2512,9 @@
       </ElementTool>
       <ElementTool Name="CodeSnippetTool" ToolboxIcon="Resources\CodeSnippetIcon.bmp" Caption="Code Snippet" Tooltip="" HelpKeyword="CodeSnippetTool">
         <DomainClassMoniker Name="VDCodeSnippet" />
+      </ElementTool>
+      <ElementTool Name="TextTool" ToolboxIcon="Resources\FontDialog.bmp" Caption="Text" Tooltip="" HelpKeyword="TextTool">
+        <DomainClassMoniker Name="VDText" />
       </ElementTool>
     </ToolboxTab>
     <ToolboxTab TabText="Form">
