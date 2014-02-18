@@ -1320,7 +1320,7 @@
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="5aacc010-0fa7-4799-ac15-5bea4e5bb706" Description="Description for MVCVisualDesigner.VDTextShape" Name="VDTextShape" DisplayName="VDText Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDText Shape" TextColor="DarkBlue" OutlineColor="Transparent" InitialWidth="0.8" InitialHeight="0.25" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
+    <GeometryShape Id="5aacc010-0fa7-4799-ac15-5bea4e5bb706" Description="Description for MVCVisualDesigner.VDTextShape" Name="VDTextShape" DisplayName="VDText Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDText Shape" TextColor="Navy" FillColor="Azure" OutlineColor="Transparent" InitialWidth="0.8" InitialHeight="0.2" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
