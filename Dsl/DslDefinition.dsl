@@ -84,6 +84,13 @@
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
+      <Properties>
+        <DomainProperty Id="5b347ca5-bd3b-420c-ab6e-b2bff08e1773" Description="" Name="Text" DisplayName="Text" Category="Definition">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
     </DomainClass>
     <DomainClass Id="b39ae87a-6919-4e1d-a310-83dda7754090" Description="" Name="VDSectionBody" DisplayName="Section Body" Namespace="MVCVisualDesigner">
       <BaseClass>
@@ -548,6 +555,11 @@
           </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/UInt32" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="98c2f914-330d-459a-acc5-d238106173cd" Description="Description for MVCVisualDesigner.VDTableCell.Text" Name="Text" DisplayName="Text">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
       </Properties>
@@ -1142,10 +1154,13 @@
       </BaseGeometryShape>
     </GeometryShape>
     <Port Id="407d285a-e203-4917-a395-730505e148c5" Description="" Name="VDWidgetTitlePort" DisplayName="Widget Title Port" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="Widget Title Port" TextColor="White" FillColor="DarkBlue" OutlineColor="DarkBlue" InitialWidth="1" InitialHeight="0.18" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle" />
-    <GeometryShape Id="36e435cc-7626-4bb3-a4aa-b529b7cdfea4" Description="" Name="VDSectionHeadShape" DisplayName="VDSection Head Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDSection Head Shape" FillColor="SkyBlue" OutlineColor="Transparent" InitialWidth="5" InitialHeight="0.3" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
+    <GeometryShape Id="36e435cc-7626-4bb3-a4aa-b529b7cdfea4" Description="" Name="VDSectionHeadShape" DisplayName="VDSection Head Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDSection Head Shape" TextColor="Navy" FillColor="SkyBlue" OutlineColor="Transparent" InitialWidth="5" InitialHeight="0.3" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
+      <ShapeHasDecorators Position="InnerMiddleLeft" HorizontalOffset="0" VerticalOffset="0">
+        <TextDecorator Name="TextDecorator" DisplayName="Text Decorator" DefaultText="TextDecorator" FontStyle="Bold" FontSize="10" />
+      </ShapeHasDecorators>
     </GeometryShape>
     <GeometryShape Id="498d7617-e998-4ceb-9cc7-257e76f1d134" Description="" Name="VDSectionBodyShape" DisplayName="VDSection Body Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDSection Body Shape" FillColor="Gainsboro" OutlineColor="Transparent" InitialWidth="5" InitialHeight="2.7" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
@@ -1202,7 +1217,7 @@
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="d08c9444-73e2-47ae-93e3-0b6c2a59765b" Description="" Name="VDTabHeadShape" DisplayName="Tab Head" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="" InitialHeight="0.3" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+    <GeometryShape Id="d08c9444-73e2-47ae-93e3-0b6c2a59765b" Description="" Name="VDTabHeadShape" DisplayName="Tab Head" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="" TextColor="Navy" InitialHeight="0.3" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
@@ -1213,6 +1228,9 @@
           </Type>
         </DomainProperty>
       </Properties>
+      <ShapeHasDecorators Position="InnerMiddleLeft" HorizontalOffset="0" VerticalOffset="0">
+        <TextDecorator Name="TabTitleDecorator" DisplayName="Tab Title Decorator" DefaultText="TabTitleDecorator" FontStyle="Bold" FontSize="10" />
+      </ShapeHasDecorators>
     </GeometryShape>
     <GeometryShape Id="737b8598-0d13-407e-bcf4-8b369752adbf" Description="" Name="VDTabBodyShape" DisplayName="Tab Body" Namespace="MVCVisualDesigner" FixedTooltipText="" OutlineColor="Transparent" InitialWidth="5" InitialHeight="2.7" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
@@ -1254,15 +1272,21 @@
         <GeometryShapeMoniker Name="VDContainerShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="e1875ec2-c68a-4fe6-89ff-1c84492568d7" Description="Description for MVCVisualDesigner.VDTableColTitleShape" Name="VDTableColTitleShape" DisplayName="VDTable Col Title Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Col Title Shape" FillColor="DarkBlue" OutlineColor="White" InitialWidth="0.2" InitialHeight="0.2" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+    <GeometryShape Id="e1875ec2-c68a-4fe6-89ff-1c84492568d7" Description="Description for MVCVisualDesigner.VDTableColTitleShape" Name="VDTableColTitleShape" DisplayName="VDTable Col Title Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Col Title Shape" TextColor="White" FillColor="DarkBlue" OutlineColor="White" InitialWidth="0.2" InitialHeight="0.2" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
+      <ShapeHasDecorators Position="InnerTopCenter" HorizontalOffset="0" VerticalOffset="-0.05">
+        <TextDecorator Name="IndexDecorator" DisplayName="Index Decorator" DefaultText="IndexDecorator" FontSize="6" />
+      </ShapeHasDecorators>
     </GeometryShape>
-    <GeometryShape Id="8aea2aa1-05e2-4eb1-94c8-0d2c41409c7b" Description="Description for MVCVisualDesigner.VDTableRowTitleShape" Name="VDTableRowTitleShape" DisplayName="VDTable Row Title Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Row Title Shape" FillColor="DarkBlue" OutlineColor="White" InitialWidth="0.2" InitialHeight="0.2" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+    <GeometryShape Id="8aea2aa1-05e2-4eb1-94c8-0d2c41409c7b" Description="Description for MVCVisualDesigner.VDTableRowTitleShape" Name="VDTableRowTitleShape" DisplayName="VDTable Row Title Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Row Title Shape" TextColor="White" FillColor="DarkBlue" OutlineColor="White" InitialWidth="0.2" InitialHeight="0.2" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
+      <ShapeHasDecorators Position="InnerMiddleLeft" HorizontalOffset="-0.02" VerticalOffset="0">
+        <TextDecorator Name="IndexDecorator" DisplayName="Index Decorator" DefaultText="IndexDecorator" FontSize="6" />
+      </ShapeHasDecorators>
     </GeometryShape>
     <GeometryShape Id="9785269d-3ecc-49dd-b93d-0775ca4383ed" Description="Description for MVCVisualDesigner.VDTableRowShape" Name="VDTableRowShape" DisplayName="VDTable Row Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Row Shape" FillColor="LightGray" OutlineColor="Transparent" InitialHeight="0.5" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
@@ -1299,6 +1323,9 @@
           </Type>
         </DomainProperty>
       </Properties>
+      <ShapeHasDecorators Position="InnerMiddleLeft" HorizontalOffset="0" VerticalOffset="0">
+        <TextDecorator Name="TextDecorator" DisplayName="Text Decorator" DefaultText="TextDecorator" />
+      </ShapeHasDecorators>
     </GeometryShape>
     <GeometryShape Id="7c066626-676c-439b-bba4-cc8adb2d2c75" Description="Description for MVCVisualDesigner.VDTableRowWrapperShape" Name="VDTableRowWrapperShape" DisplayName="VDTable Row Wrapper Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Row Wrapper Shape" FillColor="Silver" InitialWidth="4" InitialHeight="0.6" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
@@ -1423,6 +1450,11 @@
       </XmlClassData>
       <XmlClassData TypeName="VDSectionHead" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDSectionHeadMoniker" ElementName="vDSectionHead" MonikerTypeName="VDSectionHeadMoniker">
         <DomainClassMoniker Name="VDSectionHead" />
+        <ElementData>
+          <XmlPropertyData XmlName="text">
+            <DomainPropertyMoniker Name="VDSectionHead/Text" />
+          </XmlPropertyData>
+        </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDSectionBody" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDSectionBodyMoniker" ElementName="vDSectionBody" MonikerTypeName="VDSectionBodyMoniker">
         <DomainClassMoniker Name="VDSectionBody" />
@@ -1823,6 +1855,9 @@
           </XmlPropertyData>
           <XmlPropertyData XmlName="rowSpan">
             <DomainPropertyMoniker Name="VDTableCell/RowSpan" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="text">
+            <DomainPropertyMoniker Name="VDTableCell/Text" />
           </XmlPropertyData>
         </ElementData>
       </XmlClassData>
@@ -2344,6 +2379,14 @@
         <ParentElementPath>
           <DomainPath>SectionHasHead.Section/!VDSection</DomainPath>
         </ParentElementPath>
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDSectionHeadShape/TextDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="VDSectionHead/Text" />
+            </PropertyPath>
+          </PropertyDisplayed>
+        </DecoratorMap>
         <GeometryShapeMoniker Name="VDSectionHeadShape" />
       </ShapeMap>
       <ShapeMap>
@@ -2398,6 +2441,14 @@
       </ShapeMap>
       <ShapeMap HasCustomParentElement="true">
         <DomainClassMoniker Name="VDTabHead" />
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDTabHeadShape/TabTitleDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="VDTabHead/TabTitle" />
+            </PropertyPath>
+          </PropertyDisplayed>
+        </DecoratorMap>
         <GeometryShapeMoniker Name="VDTabHeadShape" />
       </ShapeMap>
       <ShapeMap HasCustomParentElement="true">
@@ -2422,10 +2473,42 @@
       </ShapeMap>
       <ShapeMap HasCustomParentElement="true">
         <DomainClassMoniker Name="VDTableColTitle" />
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDTableColTitleShape/IndexDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="VDTableColTitle/Index" />
+            </PropertyPath>
+          </PropertyDisplayed>
+        </DecoratorMap>
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDTableRowTitleShape/IndexDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="VDTableColTitle/Index" />
+            </PropertyPath>
+          </PropertyDisplayed>
+        </DecoratorMap>
         <GeometryShapeMoniker Name="VDTableColTitleShape" />
       </ShapeMap>
       <ShapeMap HasCustomParentElement="true">
         <DomainClassMoniker Name="VDTableRowTitle" />
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDTableColTitleShape/IndexDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="VDTableRowTitle/Index" />
+            </PropertyPath>
+          </PropertyDisplayed>
+        </DecoratorMap>
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDTableRowTitleShape/IndexDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="VDTableRowTitle/Index" />
+            </PropertyPath>
+          </PropertyDisplayed>
+        </DecoratorMap>
         <GeometryShapeMoniker Name="VDTableRowTitleShape" />
       </ShapeMap>
       <ShapeMap HasCustomParentElement="true">
@@ -2434,6 +2517,14 @@
       </ShapeMap>
       <ShapeMap HasCustomParentElement="true">
         <DomainClassMoniker Name="VDTableCell" />
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDTableCellShape/TextDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="VDTableCell/Text" />
+            </PropertyPath>
+          </PropertyDisplayed>
+        </DecoratorMap>
         <GeometryShapeMoniker Name="VDTableCellShape" />
       </ShapeMap>
       <ShapeMap HasCustomParentElement="true">

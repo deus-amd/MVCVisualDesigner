@@ -100,6 +100,7 @@
     <Compile Include="CustomCode\Widgets\Separator.cs" />
     <Compile Include="CustomCode\Widgets\Tab.cs" />
     <Compile Include="CustomCode\Widgets\Table.cs" />
+    <Compile Include="CustomCode\Widgets\Text.cs" />
     <Compile Include="CustomCode\Widgets\VDInternalUtility.cs" />
     <Compile Include="CustomCode\WidgetTreeWalker.cs" />
     <Compile Include="Resources\MVDResources.Designer.cs">

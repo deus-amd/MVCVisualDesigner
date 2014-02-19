@@ -711,11 +711,11 @@ namespace MVCVisualDesigner
             VDTableRow row = cell.Parent as VDTableRow;
             if (row == null) return;
 
-            int oldSpan = (int)((uint)e.OldValue);
-            int newSpan = (int)((uint)e.NewValue);
-
             if (e.DomainProperty.Id == VDTableCell.RowSpanDomainPropertyId)
             {
+                int oldSpan = (int)((uint)e.OldValue);
+                int newSpan = (int)((uint)e.NewValue);
+
                 if (oldSpan > newSpan) // decrease rowspan value,  fill with new cells
                 {
                     for (int iRow = (int)(cell.Row + newSpan); iRow < cell.Row + oldSpan; iRow++)
@@ -741,6 +741,9 @@ namespace MVCVisualDesigner
             }
             else if (e.DomainProperty.Id == VDTableCell.ColSpanDomainPropertyId)
             {
+                int oldSpan = (int)((uint)e.OldValue);
+                int newSpan = (int)((uint)e.NewValue);
+
                 if (oldSpan > newSpan) // decrease colspan value,  fill with new cells
                 {
                     for (int iCol = (int)(cell.Col + newSpan); iCol < cell.Col + oldSpan; iCol++)

@@ -25,7 +25,7 @@ namespace MVCVisualDesigner
             target(VDSubmit.DomainClassId).AcceptNone();
             target(VDInput.DomainClassId).AcceptNone();
             target(VDSelect.DomainClassId).Accept(VDSelectOption.DomainClassId, VDCodeSnippet.DomainClassId);
-            target(VDSelectOption.DomainClassId).Accept(VDCodeSnippet.DomainClassId, VDHTMLTag.DomainClassId);
+            target(VDSelectOption.DomainClassId).Accept(VDCodeSnippet.DomainClassId, VDHTMLTag.DomainClassId, VDText.DomainClassId);
 
             // section
             target(VDSection.DomainClassId).AcceptNone();
@@ -52,6 +52,9 @@ namespace MVCVisualDesigner
             target(VDTableColTitle.DomainClassId).AcceptNone();	
             target(VDTableRowTitle.DomainClassId).AcceptNone();	
 
+            // VDText
+            target(VDText.DomainClassId).AcceptNone();
+
             // CanMerge() implementation of container classes are forwarded to their Parent object
             target(VDHoriContainer.DomainClassId).AcceptNone();
             target(VDVertContainer.DomainClassId).AcceptNone();
@@ -60,7 +63,6 @@ namespace MVCVisualDesigner
             // Separators
             target(VDHoriSeparator.DomainClassId).AcceptNone();
             target(VDVertSeparator.DomainClassId).AcceptNone();
-
         }
 
         private static MergeManager s_instance = null;
