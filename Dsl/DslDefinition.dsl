@@ -1284,7 +1284,7 @@
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
-      <ShapeHasDecorators Position="InnerMiddleLeft" HorizontalOffset="-0.02" VerticalOffset="0">
+      <ShapeHasDecorators Position="InnerMiddleLeft" HorizontalOffset="-0.03" VerticalOffset="0">
         <TextDecorator Name="IndexDecorator" DisplayName="Index Decorator" DefaultText="IndexDecorator" FontSize="6" />
       </ShapeHasDecorators>
     </GeometryShape>
