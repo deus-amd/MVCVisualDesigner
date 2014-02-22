@@ -47,6 +47,41 @@ namespace MVCVisualDesigner
         {
             m_moreHTMLAttribtes = newValue;
         }
+
+        protected T getHTMLAttr<T>(string attrName, T defaultValue = default(T))
+        {
+            List<HTMLAttribute> attrs = GetMoreHTMLAttributesValue();
+            HTMLAttribute attr = attrs.Find(a => string.Compare(a.AttributeName, attrName/*, true*/) == 0);
+            if (attr != null)
+            {
+                System.ComponentModel.TypeConverter converter 
+                    = System.ComponentModel.TypeDescriptor.GetConverter(typeof(T));
+                if (converter != null)
+                {
+                    return (T)(converter.ConvertFromString(attr.AttributeValue));
+                }
+            }
+
+            return defaultValue;
+        }
+
+        protected void setHTMLAttr<T>(string attrName, T newValue)
+        {
+            List<HTMLAttribute> attrs = GetMoreHTMLAttributesValue();
+            HTMLAttribute attr = attrs.Find(a => string.Compare(a.AttributeName, attrName/*, true*/) == 0);
+            if (attr != null)
+                attr.AttributeValue = newValue.ToString();
+            else
+                attrs.Add(new HTMLAttribute(attrName, newValue.ToString()));
+        }
+
+        public string GetIDAttributeValue() { return getHTMLAttr<string>("id", string.Empty); }
+
+        public void SetIDAttributeValue(string newID) { setHTMLAttr<string>("id", newID); }
+
+        public string GetClassAttributeValue() { return getHTMLAttr("class", string.Empty); }
+
+        public void SetClassAttributeValue(string newClass) { setHTMLAttr<string>("class", newClass); }
     }
 
     public partial class VDWidget : ICodeData
@@ -181,13 +216,34 @@ namespace MVCVisualDesigner
         }
 
         // More HTML Attributes
-        public string GetMoreHtmlAttributeString()
+        public string GetMoreHtmlAttributeString(params string[] ignoreList)
         {
-            StringBuilder sb = new StringBuilder();
-            foreach(HTMLAttribute attr in this.MoreHTMLAttributes)
+            return GetMoreHtmlAttributeString(new string[] { }, ignoreList);
+        }
+
+        public string GetMoreHtmlAttributeString(string[] additionalClasses, params string[] ignoreList)
+        {
+            HashSet<string> ignoreHash = new HashSet<string>(ignoreList);
+
+            HashSet<string> classHash = new HashSet<string>();
+            foreach (string cls in additionalClasses)
             {
+                if (!classHash.Contains(cls)) classHash.Add(cls);
+            }
+
+            StringBuilder sb = new StringBuilder();
+            foreach (HTMLAttribute attr in this.MoreHTMLAttributes)
+            {
+                if (string.IsNullOrEmpty(attr.AttributeValue)) continue;
+                if (ignoreHash.Contains(attr.AttributeName)) continue;
+                if (attr.AttributeName == "class" && !classHash.Contains(attr.AttributeValue))
+                    classHash.Add(attr.AttributeName);
+
                 sb.Append(attr.ToString()).Append(" ");
             }
+
+            if (classHash.Count > 0) sb.Append("class='" + string.Join(" ", classHash) + "'");
+
             return sb.ToString();
         }
 

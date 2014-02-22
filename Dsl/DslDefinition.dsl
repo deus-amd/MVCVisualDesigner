@@ -3,7 +3,7 @@
   <Classes>
     <DomainClass Id="404ac32b-b3af-4662-bd2e-14f13a17562b" Description="" Name="VDWidget" DisplayName="Widget" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true">
       <Properties>
-        <DomainProperty Id="16811f57-2684-4aa9-8695-4f5e2435b04e" Description="" Name="MoreHTMLAttributes" DisplayName="MoreHTMLAttributes" DefaultValue="" Kind="CustomStorage" Category="Custom HTML Attribute">
+        <DomainProperty Id="16811f57-2684-4aa9-8695-4f5e2435b04e" Description="" Name="MoreHTMLAttributes" DisplayName="More Attributes" DefaultValue="" Kind="CustomStorage" Category="HTML Attribute">
           <Attributes>
             <ClrAttribute Name="System.ComponentModel.EditorAttribute">
               <Parameters>
@@ -22,6 +22,16 @@
           </Type>
         </DomainProperty>
         <DomainProperty Id="2262ee8c-8983-4d6b-b640-6321f3358337" Description="Widget Name, can be empty and duplicated?" Name="WidgetName" DisplayName="Widget Name" Category="Definition" IsElementName="true">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="59e2ce19-9704-404c-a830-9e584f5b1881" Description="class HTML attribute" Name="ClassAttribute" DisplayName="class" Kind="CustomStorage" Category="HTML Attribute">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="a037d942-1e00-49bb-b8ac-3827d1263126" Description="id HTML attribute" Name="IDAttribute" DisplayName="id" Kind="CustomStorage" Category="HTML Attribute">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
@@ -151,27 +161,27 @@
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
       <Properties>
-        <DomainProperty Id="103d62c4-78cd-4e72-9346-a3f9dd2941af" Description="Specifies the name of a form" Name="Name" DisplayName="name" Category="HTML Attribute">
+        <DomainProperty Id="103d62c4-78cd-4e72-9346-a3f9dd2941af" Description="Specifies the name of a form" Name="Name" DisplayName="name" Kind="CustomStorage" Category="HTML Attribute">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="cb742391-b33e-4946-b1e6-88f6fd2c92b2" Description="Specifies where to send the form-data when a form is submitted" Name="Action" DisplayName="action" Category="HTML Attribute">
+        <DomainProperty Id="cb742391-b33e-4946-b1e6-88f6fd2c92b2" Description="Specifies where to send the form-data when a form is submitted" Name="Action" DisplayName="action" Kind="CustomStorage" Category="HTML Attribute">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="6bede762-2d29-4de9-90b8-214471e1bebe" Description="Specifies the HTTP method to use when sending form-data" Name="Method" DisplayName="method" Category="HTML Attribute">
+        <DomainProperty Id="6bede762-2d29-4de9-90b8-214471e1bebe" Description="Specifies the HTTP method to use when sending form-data" Name="Method" DisplayName="method" Kind="CustomStorage" Category="HTML Attribute">
           <Type>
             <DomainEnumerationMoniker Name="E_HTTPRequestMethod" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="0047a667-f98d-46b8-b9bf-47c2d1c95ade" Description="Specifies where to display the response that is received after submitting the form" Name="Target" DisplayName="target" Category="HTML Attribute">
+        <DomainProperty Id="0047a667-f98d-46b8-b9bf-47c2d1c95ade" Description="Specifies where to display the response that is received after submitting the form" Name="Target" DisplayName="target" Kind="CustomStorage" Category="HTML Attribute">
           <Type>
             <DomainEnumerationMoniker Name="E_FormTarget" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="d2dde7a1-4c92-4bad-bfb2-97f90fcc099a" Description="Specifies how the form-data should be encoded when submitting it to the server (only for method=&quot;post&quot;)" Name="EncType" DisplayName="enctype" Category="HTML Attribute">
+        <DomainProperty Id="d2dde7a1-4c92-4bad-bfb2-97f90fcc099a" Description="Specifies how the form-data should be encoded when submitting it to the server (only for method=&quot;post&quot;)" Name="EncType" DisplayName="enctype" Kind="CustomStorage" Category="HTML Attribute">
           <Type>
             <DomainEnumerationMoniker Name="E_FormEncType" />
           </Type>
@@ -198,22 +208,22 @@
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
       <Properties>
-        <DomainProperty Id="c3239d80-aecf-4608-a9d7-bc139fba1563" Description="Defines a name for the drop-down list" Name="Name" DisplayName="name" Category="HTML Attribute">
+        <DomainProperty Id="c3239d80-aecf-4608-a9d7-bc139fba1563" Description="Defines a name for the drop-down list" Name="Name" DisplayName="name" Kind="CustomStorage" Category="HTML Attribute">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="1f17ad15-707c-4653-a778-8686df3bcf94" Description="Specifies that a drop-down list should be disabled" Name="Disabled" DisplayName="disabled" Category="HTML Attribute">
+        <DomainProperty Id="1f17ad15-707c-4653-a778-8686df3bcf94" Description="Specifies that a drop-down list should be disabled" Name="Disabled" DisplayName="disabled" Kind="CustomStorage" Category="HTML Attribute">
           <Type>
             <DomainEnumerationMoniker Name="E_TripleState" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="25d7186f-4e8e-4f04-bf4f-f126ec8c705e" Description=" Specifies that multiple options can be selected at once" Name="Multiple" DisplayName="multiple" Category="HTML Attribute">
+        <DomainProperty Id="25d7186f-4e8e-4f04-bf4f-f126ec8c705e" Description=" Specifies that multiple options can be selected at once" Name="Multiple" DisplayName="multiple" Kind="CustomStorage" Category="HTML Attribute">
           <Type>
             <DomainEnumerationMoniker Name="E_TripleState" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="55d51255-91d8-40cb-b4cc-51d277232dd8" Description="Defines the number of visible options in a drop-down list" Name="Size" DisplayName="size" Category="HTML Attribute">
+        <DomainProperty Id="55d51255-91d8-40cb-b4cc-51d277232dd8" Description="Defines the number of visible options in a drop-down list" Name="Size" DisplayName="size" Kind="CustomStorage" Category="HTML Attribute">
           <Attributes>
             <ClrAttribute Name="System.CLSCompliant">
               <Parameters>
@@ -242,47 +252,61 @@
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
       <Properties>
-        <DomainProperty Id="1f32c526-411b-42b1-b3cc-0cf125a81036" Description="Specifies the name of an &lt;input&gt; element" Name="Name" DisplayName="name" Category="HTML Attribute">
+        <DomainProperty Id="1f32c526-411b-42b1-b3cc-0cf125a81036" Description="Specifies the name of an &lt;input&gt; element" Name="Name" DisplayName="name" Kind="CustomStorage" Category="HTML Attribute">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="57e39616-b2b8-40a2-9f5b-14e8661d3043" Description="Specifies the type &lt;input&gt; element to display" Name="Type" DisplayName="type" Category="HTML Attribute">
+        <DomainProperty Id="57e39616-b2b8-40a2-9f5b-14e8661d3043" Description="Specifies the type &lt;input&gt; element to display" Name="Type" DisplayName="type" Kind="CustomStorage" Category="HTML Attribute">
           <Type>
             <DomainEnumerationMoniker Name="E_InputType" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="909eba16-a948-426d-b86b-3f287ca9e259" Description="Specifies the value of an &lt;input&gt; element" Name="Value" DisplayName="value" Category="HTML Attribute">
+        <DomainProperty Id="909eba16-a948-426d-b86b-3f287ca9e259" Description="Specifies the value of an &lt;input&gt; element" Name="Value" DisplayName="value" Kind="CustomStorage" Category="HTML Attribute">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="e184679e-8ac6-4d73-b9c7-1022c63a54a8" Description="Specifies the maximum number of characters allowed in an &lt;input&gt; element" Name="MaxLength" DisplayName="maxlength" Category="HTML Attribute">
+        <DomainProperty Id="e184679e-8ac6-4d73-b9c7-1022c63a54a8" Description="Specifies the maximum number of characters allowed in an &lt;input&gt; element" Name="MaxLength" DisplayName="maxlength" Kind="CustomStorage" Category="HTML Attribute">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/UInt32" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="3741f758-502a-4f14-a73b-d663f16583bb" Description="Specifies the types of files that the server accepts (only for type=&quot;file&quot;)" Name="Accept" DisplayName="accept" Category="HTML Attribute">
+        <DomainProperty Id="3741f758-502a-4f14-a73b-d663f16583bb" Description="Specifies the types of files that the server accepts (only for type=&quot;file&quot;)" Name="Accept" DisplayName="accept" Kind="CustomStorage" Category="HTML Attribute">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="a994bbc4-7d59-4917-aa81-ddcdfc04a08d" Description="Specifies an alternate text for images (only for type=&quot;image&quot;)" Name="Alt" DisplayName="alt" Category="HTML Attribute">
+        <DomainProperty Id="a994bbc4-7d59-4917-aa81-ddcdfc04a08d" Description="Specifies an alternate text for images (only for type=&quot;image&quot;)" Name="Alt" DisplayName="alt" Kind="CustomStorage" Category="HTML Attribute">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="173cf5c2-e89c-4600-b37c-f7288c573586" Description="Specifies the width, in characters, of an &lt;input&gt; element" Name="Size" DisplayName="size" Category="HTML Attribute">
+        <DomainProperty Id="173cf5c2-e89c-4600-b37c-f7288c573586" Description="Specifies the width, in characters, of an &lt;input&gt; element" Name="Size" DisplayName="size" Kind="CustomStorage" Category="HTML Attribute">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/UInt32" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="3b058df9-e96e-4412-93e6-506aa022e255" Description="Specifies that an &lt;input&gt; element should be pre-selected when the page loads (for type=&quot;checkbox&quot; or type=&quot;radio&quot;)" Name="Checked" DisplayName="checked" Category="HTML Attribute">
+        <DomainProperty Id="3b058df9-e96e-4412-93e6-506aa022e255" Description="Specifies that an &lt;input&gt; element should be pre-selected when the page loads (for type=&quot;checkbox&quot; or type=&quot;radio&quot;)" Name="Checked" DisplayName="checked" Kind="CustomStorage" Category="HTML Attribute">
           <Type>
             <DomainEnumerationMoniker Name="E_TripleState" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="2a73c5e2-e71d-4b66-b77a-3768982d80fc" Description="Specifies that an &lt;input&gt; element should be disabled" Name="Disabled" DisplayName="disabled" Category="HTML Attribute">
+        <DomainProperty Id="2a73c5e2-e71d-4b66-b77a-3768982d80fc" Description="Specifies that an &lt;input&gt; element should be disabled" Name="Disabled" DisplayName="disabled" Kind="CustomStorage" Category="HTML Attribute">
           <Type>
             <DomainEnumerationMoniker Name="E_TripleState" />
           </Type>
@@ -294,22 +318,22 @@
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
       <Properties>
-        <DomainProperty Id="bbd20202-1e1b-4c95-97ff-650e7932b631" Description="Specifies the value to be sent to a server" Name="Value" DisplayName="value" Category="HTML Attribute">
+        <DomainProperty Id="bbd20202-1e1b-4c95-97ff-650e7932b631" Description="Specifies the value to be sent to a server" Name="Value" DisplayName="value" Kind="CustomStorage" Category="HTML Attribute">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="2283af80-b312-4ed9-94f2-a5e8dc84644d" Description="Specifies that an option should be pre-selected when the page loads" Name="Selected" DisplayName="selected" Category="HTML Attribute">
+        <DomainProperty Id="2283af80-b312-4ed9-94f2-a5e8dc84644d" Description="Specifies that an option should be pre-selected when the page loads" Name="Selected" DisplayName="selected" Kind="CustomStorage" Category="HTML Attribute">
           <Type>
             <DomainEnumerationMoniker Name="E_TripleState" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="7910839d-f88b-4fc5-8ff3-72898795f093" Description="Specifies a shorter label for an option" Name="Label" DisplayName="label" Category="HTML Attribute">
+        <DomainProperty Id="7910839d-f88b-4fc5-8ff3-72898795f093" Description="Specifies a shorter label for an option" Name="Label" DisplayName="label" Kind="CustomStorage" Category="HTML Attribute">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="d8c29f2a-b3ab-4fbb-ad0d-1b973cded29f" Description="Specifies that an option should be disabled" Name="Disabled" DisplayName="disabled" Category="HTML Attribute">
+        <DomainProperty Id="d8c29f2a-b3ab-4fbb-ad0d-1b973cded29f" Description="Specifies that an option should be disabled" Name="Disabled" DisplayName="disabled" Kind="CustomStorage" Category="HTML Attribute">
           <Type>
             <DomainEnumerationMoniker Name="E_TripleState" />
           </Type>
@@ -449,7 +473,14 @@
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
       <Properties>
-        <DomainProperty Id="c38e06b6-dae8-4fda-95bd-1c5d775d5b1a" Description="Description for MVCVisualDesigner.VDTableColTitle.Index" Name="Index" DisplayName="Index">
+        <DomainProperty Id="c38e06b6-dae8-4fda-95bd-1c5d775d5b1a" Description="Description for MVCVisualDesigner.VDTableColTitle.Index" Name="Index" DisplayName="Index" IsUIReadOnly="true">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/UInt32" />
           </Type>
@@ -462,6 +493,13 @@
       </BaseClass>
       <Properties>
         <DomainProperty Id="4bdc91e9-7bff-4337-9fa4-202ca1dd4e0e" Description="" Name="Index" DisplayName="Index" Category="Table" IsUIReadOnly="true">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/UInt32" />
           </Type>
@@ -533,7 +571,7 @@
             <ExternalTypeMoniker Name="/System/UInt32" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="54089c2c-ccdd-4afe-8597-6025780bd931" Description="" Name="ColSpan" DisplayName="Column Span" DefaultValue="1" Category="Table" IsBrowsable="false">
+        <DomainProperty Id="54089c2c-ccdd-4afe-8597-6025780bd931" Description="" Name="ColSpan" DisplayName="Column Span" DefaultValue="1" Kind="CustomStorage" Category="Table" IsBrowsable="false">
           <Attributes>
             <ClrAttribute Name="System.CLSCompliant">
               <Parameters>
@@ -545,7 +583,7 @@
             <ExternalTypeMoniker Name="/System/UInt32" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="9dced70f-3124-4f8c-934a-19b7b154edfa" Description="" Name="RowSpan" DisplayName="Row Span" DefaultValue="1" Category="Table" IsBrowsable="false">
+        <DomainProperty Id="9dced70f-3124-4f8c-934a-19b7b154edfa" Description="" Name="RowSpan" DisplayName="Row Span" DefaultValue="1" Kind="CustomStorage" Category="Table" IsBrowsable="false">
           <Attributes>
             <ClrAttribute Name="System.CLSCompliant">
               <Parameters>
@@ -585,26 +623,61 @@
           </Type>
         </DomainProperty>
         <DomainProperty Id="d683ec97-5e2f-4201-8da8-3a829fd7b33e" Description="" Name="_OpenTagStr" DisplayName="_ Open Tag Str" Kind="CustomStorage" Category="Internal States">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
         <DomainProperty Id="66b4e205-23d6-495b-b430-53c80a1e19d6" Description="" Name="_CloseTagStr" DisplayName="_ Close Tag Str" Kind="Calculated" Category="Internal States">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
         <DomainProperty Id="dce3e4ad-8eb7-4df2-b6ef-f04c88dc6f6b" Description="" Name="_IsCloseTagVisibleInHeader" DisplayName="_ Is Close Tag Visible In Header" Kind="Calculated" Category="Internal States">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/Boolean" />
           </Type>
         </DomainProperty>
         <DomainProperty Id="01bceba4-4074-440a-8a32-702e30d5935b" Description="" Name="_IsCloseTagVisibleInFooter" DisplayName="_ Is Close Tag Visible In Footer" Kind="Calculated" Category="Internal States">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/Boolean" />
           </Type>
         </DomainProperty>
         <DomainProperty Id="2e3f8058-1111-4f82-9ea6-b9affe7c4771" Description="" Name="_HasTagText" DisplayName="_ Has Tag Text" Kind="Calculated" Category="Internal States">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/Boolean" />
           </Type>
@@ -625,16 +698,37 @@
           </Type>
         </DomainProperty>
         <DomainProperty Id="c55d7868-ea01-4004-bd7d-1374763a6814" Description="" Name="_PreCodeSnippet" DisplayName=" Pre Code Snippet" Kind="CustomStorage" Category="Internal States">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
         <DomainProperty Id="48891ffb-c52a-4f6a-9cee-b25ddf981cfe" Description="" Name="_PostCodeSnippet" DisplayName="Post Code Snippet" Kind="Calculated" Category="Internal States">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
         <DomainProperty Id="179cf308-be95-4a85-84fd-a75aed94bf71" Description="" Name="_HasPostCodeSnippet" DisplayName="_ Has Post Code Snippet" Kind="Calculated" Category="Internal States">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/Boolean" />
           </Type>
@@ -653,6 +747,13 @@
           </Type>
         </DomainProperty>
         <DomainProperty Id="ecd24f9d-fb26-400c-954f-a71f5f77fd8c" Description="" Name="_Mode" DisplayName="_ Mode" Kind="Calculated" Category="Internal States">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <DomainEnumerationMoniker Name="E_CodeSnippetMode" />
           </Type>
@@ -766,14 +867,14 @@
     </DomainRelationship>
     <DomainRelationship Id="ab5a4903-7e60-4c67-a237-5f61f0654e46" Description="Description for MVCVisualDesigner.SeparatorRefersTopWidget" Name="SeparatorRefersTopWidget" DisplayName="Separator Refers Top Widget" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="3d142754-17c4-448b-aaa3-261fd13e25c5" Description="Description for MVCVisualDesigner.SeparatorRefersTopWidget.VDHoriSeparator" Name="VDHoriSeparator" DisplayName="VDHori Separator" PropertyName="TopWidget" Multiplicity="ZeroOne" PropagatesDelete="true" PropertyDisplayName="Top Widget">
+        <DomainRole Id="3d142754-17c4-448b-aaa3-261fd13e25c5" Description="" Name="VDHoriSeparator" DisplayName="VDHori Separator" PropertyName="TopWidget" Multiplicity="ZeroOne" PropagatesDelete="true" Category="Internal Statues" PropertyDisplayName="Top Widget">
           <RolePlayer>
             <DomainClassMoniker Name="VDHoriSeparator" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="968b8f56-745c-4610-b37e-0e34a8060fff" Description="Description for MVCVisualDesigner.SeparatorRefersTopWidget.VDWidget" Name="VDWidget" DisplayName="VDWidget" PropertyName="BottomSeparator" Multiplicity="ZeroOne" PropertyDisplayName="Bottom Separator">
+        <DomainRole Id="968b8f56-745c-4610-b37e-0e34a8060fff" Description="" Name="VDWidget" DisplayName="VDWidget" PropertyName="BottomSeparator" Multiplicity="ZeroOne" Category="Internal States" PropertyDisplayName="Bottom Separator">
           <RolePlayer>
             <DomainClassMoniker Name="VDWidget" />
           </RolePlayer>
@@ -782,14 +883,14 @@
     </DomainRelationship>
     <DomainRelationship Id="5fa5d01c-b9ce-45dc-8a43-60139b0e0c7b" Description="Description for MVCVisualDesigner.SeparatorRefersBottomWidget" Name="SeparatorRefersBottomWidget" DisplayName="Separator Refers Bottom Widget" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="0411c536-af87-467a-b66a-173791f724d0" Description="Description for MVCVisualDesigner.SeparatorRefersBottomWidget.VDHoriSeparator" Name="VDHoriSeparator" DisplayName="VDHori Separator" PropertyName="BottomWidget" Multiplicity="ZeroOne" PropagatesDelete="true" PropertyDisplayName="Bottom Widget">
+        <DomainRole Id="0411c536-af87-467a-b66a-173791f724d0" Description="" Name="VDHoriSeparator" DisplayName="VDHori Separator" PropertyName="BottomWidget" Multiplicity="ZeroOne" PropagatesDelete="true" Category="Internal States" PropertyDisplayName="Bottom Widget">
           <RolePlayer>
             <DomainClassMoniker Name="VDHoriSeparator" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="6ba23e40-16ee-47d5-a195-ee3939bbcacd" Description="Description for MVCVisualDesigner.SeparatorRefersBottomWidget.VDWidget" Name="VDWidget" DisplayName="VDWidget" PropertyName="TopSeparator" Multiplicity="ZeroOne" PropertyDisplayName="Top Separator">
+        <DomainRole Id="6ba23e40-16ee-47d5-a195-ee3939bbcacd" Description="" Name="VDWidget" DisplayName="VDWidget" PropertyName="TopSeparator" Multiplicity="ZeroOne" Category="Internal States" PropertyDisplayName="Top Separator">
           <RolePlayer>
             <DomainClassMoniker Name="VDWidget" />
           </RolePlayer>
@@ -798,14 +899,14 @@
     </DomainRelationship>
     <DomainRelationship Id="2d6b812d-fc42-4b4c-99c5-a66e10169b1a" Description="Description for MVCVisualDesigner.SeparatorRefersLeftWidget" Name="SeparatorRefersLeftWidget" DisplayName="Separator Refers Left Widget" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="975d491c-2e71-4131-bf82-a4dcc85fc012" Description="Description for MVCVisualDesigner.SeparatorRefersLeftWidget.VDVertSeparator" Name="VDVertSeparator" DisplayName="VDVert Separator" PropertyName="LeftWidget" Multiplicity="ZeroOne" PropagatesDelete="true" PropertyDisplayName="Left Widget">
+        <DomainRole Id="975d491c-2e71-4131-bf82-a4dcc85fc012" Description="" Name="VDVertSeparator" DisplayName="VDVert Separator" PropertyName="LeftWidget" Multiplicity="ZeroOne" PropagatesDelete="true" Category="Internal States" PropertyDisplayName="Left Widget">
           <RolePlayer>
             <DomainClassMoniker Name="VDVertSeparator" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="16ddd36d-f8d5-4e77-9a9f-0e6a2a54cbce" Description="Description for MVCVisualDesigner.SeparatorRefersLeftWidget.VDWidget" Name="VDWidget" DisplayName="VDWidget" PropertyName="RightSeparator" Multiplicity="ZeroOne" PropertyDisplayName="Right Separator">
+        <DomainRole Id="16ddd36d-f8d5-4e77-9a9f-0e6a2a54cbce" Description="" Name="VDWidget" DisplayName="VDWidget" PropertyName="RightSeparator" Multiplicity="ZeroOne" Category="Internal States" PropertyDisplayName="Right Separator">
           <RolePlayer>
             <DomainClassMoniker Name="VDWidget" />
           </RolePlayer>
@@ -814,14 +915,14 @@
     </DomainRelationship>
     <DomainRelationship Id="f47ff5c7-3744-4c53-af5c-c48cc1f348bc" Description="Description for MVCVisualDesigner.SeparatorRefersRightWidget" Name="SeparatorRefersRightWidget" DisplayName="Separator Refers Right Widget" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="18c0cf98-a4df-48da-bb8a-4735141d8d42" Description="Description for MVCVisualDesigner.SeparatorRefersRightWidget.VDVertSeparator" Name="VDVertSeparator" DisplayName="VDVert Separator" PropertyName="RightWidget" Multiplicity="ZeroOne" PropagatesDelete="true" PropertyDisplayName="Right Widget">
+        <DomainRole Id="18c0cf98-a4df-48da-bb8a-4735141d8d42" Description="" Name="VDVertSeparator" DisplayName="VDVert Separator" PropertyName="RightWidget" Multiplicity="ZeroOne" PropagatesDelete="true" Category="Internal States" PropertyDisplayName="Right Widget">
           <RolePlayer>
             <DomainClassMoniker Name="VDVertSeparator" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="81a7b620-7815-4c64-b004-154cb2f1804d" Description="Description for MVCVisualDesigner.SeparatorRefersRightWidget.VDWidget" Name="VDWidget" DisplayName="VDWidget" PropertyName="LeftSeparator" Multiplicity="ZeroOne" PropertyDisplayName="Left Separator">
+        <DomainRole Id="81a7b620-7815-4c64-b004-154cb2f1804d" Description="" Name="VDWidget" DisplayName="VDWidget" PropertyName="LeftSeparator" Multiplicity="ZeroOne" Category="Internal States" PropertyDisplayName="Left Separator">
           <RolePlayer>
             <DomainClassMoniker Name="VDWidget" />
           </RolePlayer>
@@ -881,14 +982,14 @@
     </DomainRelationship>
     <DomainRelationship Id="00a0d878-6987-4a37-b1d3-219b9f6bceb0" Description="Description for MVCVisualDesigner.ContainerHasTopSibling" Name="ContainerHasTopSibling" DisplayName="Container Has Top Sibling" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="1b188c6c-4171-4814-9f61-f7913461b22c" Description="Description for MVCVisualDesigner.ContainerHasTopSibling.VDContainer" Name="VDContainer" DisplayName="VDContainer" PropertyName="TopSibling" Multiplicity="ZeroOne" PropertyDisplayName="Top Sibling">
+        <DomainRole Id="1b188c6c-4171-4814-9f61-f7913461b22c" Description="" Name="VDContainer" DisplayName="VDContainer" PropertyName="TopSibling" Multiplicity="ZeroOne" Category="Internal States" PropertyDisplayName="Top Sibling">
           <RolePlayer>
             <DomainClassMoniker Name="VDContainer" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="c9c2063d-e475-4374-a20f-ea41785de8fe" Description="Description for MVCVisualDesigner.ContainerHasTopSibling.VDWidget" Name="VDWidget" DisplayName="VDWidget" PropertyName="VDContainer" Multiplicity="ZeroOne" IsPropertyGenerator="false" PropertyDisplayName="VDContainer">
+        <DomainRole Id="c9c2063d-e475-4374-a20f-ea41785de8fe" Description="" Name="VDWidget" DisplayName="VDWidget" PropertyName="VDContainer" Multiplicity="ZeroOne" IsPropertyGenerator="false" Category="Internal States" PropertyDisplayName="VDContainer">
           <RolePlayer>
             <DomainClassMoniker Name="VDWidget" />
           </RolePlayer>
@@ -897,14 +998,14 @@
     </DomainRelationship>
     <DomainRelationship Id="e75eb47c-4365-460d-8bdb-b3eb2d3f8f24" Description="Description for MVCVisualDesigner.ContainerHasRightSibling" Name="ContainerHasRightSibling" DisplayName="Container Has Right Sibling" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="a16dcadc-1adb-442e-9e36-e31f35550f79" Description="Description for MVCVisualDesigner.ContainerHasRightSibling.VDContainer" Name="VDContainer" DisplayName="VDContainer" PropertyName="RightSibling" Multiplicity="ZeroOne" PropertyDisplayName="Right Sibling">
+        <DomainRole Id="a16dcadc-1adb-442e-9e36-e31f35550f79" Description="" Name="VDContainer" DisplayName="VDContainer" PropertyName="RightSibling" Multiplicity="ZeroOne" Category="Internal States" PropertyDisplayName="Right Sibling">
           <RolePlayer>
             <DomainClassMoniker Name="VDContainer" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="cda9dd91-5d2f-4628-bacf-df437b47aa94" Description="Description for MVCVisualDesigner.ContainerHasRightSibling.VDWidget" Name="VDWidget" DisplayName="VDWidget" PropertyName="VDContainer" Multiplicity="ZeroOne" IsPropertyGenerator="false" PropertyDisplayName="VDContainer">
+        <DomainRole Id="cda9dd91-5d2f-4628-bacf-df437b47aa94" Description="" Name="VDWidget" DisplayName="VDWidget" PropertyName="VDContainer" Multiplicity="ZeroOne" IsPropertyGenerator="false" Category="Internal States" PropertyDisplayName="VDContainer">
           <RolePlayer>
             <DomainClassMoniker Name="VDWidget" />
           </RolePlayer>
@@ -913,14 +1014,14 @@
     </DomainRelationship>
     <DomainRelationship Id="f7c7c9ab-23db-4a9a-9e5c-a1646aabbc17" Description="Description for MVCVisualDesigner.ContainerHasBottomSibling" Name="ContainerHasBottomSibling" DisplayName="Container Has Bottom Sibling" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="1b9610e5-64d8-4b1a-9a15-c32d19e9587e" Description="Description for MVCVisualDesigner.ContainerHasBottomSibling.VDContainer" Name="VDContainer" DisplayName="VDContainer" PropertyName="BottomSibling" Multiplicity="ZeroOne" PropertyDisplayName="Bottom Sibling">
+        <DomainRole Id="1b9610e5-64d8-4b1a-9a15-c32d19e9587e" Description="" Name="VDContainer" DisplayName="VDContainer" PropertyName="BottomSibling" Multiplicity="ZeroOne" Category="Internal States" PropertyDisplayName="Bottom Sibling">
           <RolePlayer>
             <DomainClassMoniker Name="VDContainer" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="fb2ffb25-e094-4745-a317-ebfd4a60b4c4" Description="Description for MVCVisualDesigner.ContainerHasBottomSibling.VDWidget" Name="VDWidget" DisplayName="VDWidget" PropertyName="VDContainer" Multiplicity="ZeroOne" IsPropertyGenerator="false" PropertyDisplayName="VDContainer">
+        <DomainRole Id="fb2ffb25-e094-4745-a317-ebfd4a60b4c4" Description="" Name="VDWidget" DisplayName="VDWidget" PropertyName="VDContainer" Multiplicity="ZeroOne" IsPropertyGenerator="false" Category="Internal States" PropertyDisplayName="VDContainer">
           <RolePlayer>
             <DomainClassMoniker Name="VDWidget" />
           </RolePlayer>
@@ -929,14 +1030,14 @@
     </DomainRelationship>
     <DomainRelationship Id="9d82c810-0c90-4035-9ace-573fc5454799" Description="Description for MVCVisualDesigner.ContainerHasLeftSibling" Name="ContainerHasLeftSibling" DisplayName="Container Has Left Sibling" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="8b86ca4e-9b2c-4b40-ac7f-e2a0aa3c2b89" Description="Description for MVCVisualDesigner.ContainerHasLeftSibling.VDContainer" Name="VDContainer" DisplayName="VDContainer" PropertyName="LeftSibling" Multiplicity="ZeroOne" PropertyDisplayName="Left Sibling">
+        <DomainRole Id="8b86ca4e-9b2c-4b40-ac7f-e2a0aa3c2b89" Description="" Name="VDContainer" DisplayName="VDContainer" PropertyName="LeftSibling" Multiplicity="ZeroOne" Category="Internal States" PropertyDisplayName="Left Sibling">
           <RolePlayer>
             <DomainClassMoniker Name="VDContainer" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="fed608aa-abb8-42b5-805e-0b00eec90a0f" Description="Description for MVCVisualDesigner.ContainerHasLeftSibling.VDWidget" Name="VDWidget" DisplayName="VDWidget" PropertyName="VDContainer" Multiplicity="ZeroOne" IsPropertyGenerator="false" PropertyDisplayName="VDContainer">
+        <DomainRole Id="fed608aa-abb8-42b5-805e-0b00eec90a0f" Description="" Name="VDWidget" DisplayName="VDWidget" PropertyName="VDContainer" Multiplicity="ZeroOne" IsPropertyGenerator="false" Category="Internal States" PropertyDisplayName="VDContainer">
           <RolePlayer>
             <DomainClassMoniker Name="VDWidget" />
           </RolePlayer>
@@ -968,7 +1069,7 @@
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="850225a3-4607-479b-b1c4-961f1bff668f" Description="Description for MVCVisualDesigner.CodeSnippetHasActiveLinkedWidget.VDWidget" Name="VDWidget" DisplayName="VDWidget" PropertyName="VDCodeSnippet" Multiplicity="ZeroOne" IsPropertyGenerator="false" IsPropertyBrowsable="false" PropertyDisplayName="VDCode Snippet">
+        <DomainRole Id="850225a3-4607-479b-b1c4-961f1bff668f" Description="" Name="VDWidget" DisplayName="VDWidget" PropertyName="VDCodeSnippet" Multiplicity="ZeroOne" IsPropertyGenerator="false" Category="Internal States" IsPropertyBrowsable="false" PropertyDisplayName="VDCode Snippet">
           <RolePlayer>
             <DomainClassMoniker Name="VDWidget" />
           </RolePlayer>
@@ -980,14 +1081,14 @@
         <DomainRelationshipMoniker Name="WidgetHasChildren" />
       </BaseRelationship>
       <Source>
-        <DomainRole Id="38ebbc96-cdc2-477b-9544-5b1d4dd94ca2" Description="Description for MVCVisualDesigner.CodeSnippetHasBody.VDCodeSnippet" Name="VDCodeSnippet" DisplayName="VDCode Snippet" PropertyName="Body" Multiplicity="ZeroOne" PropagatesDelete="true" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Body">
+        <DomainRole Id="38ebbc96-cdc2-477b-9544-5b1d4dd94ca2" Description="" Name="VDCodeSnippet" DisplayName="VDCode Snippet" PropertyName="Body" Multiplicity="ZeroOne" PropagatesDelete="true" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" Category="Internal States" PropertyDisplayName="Body">
           <RolePlayer>
             <DomainClassMoniker Name="VDCodeSnippet" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="38a0351d-de8a-4c9f-926e-fb7160247695" Description="Description for MVCVisualDesigner.CodeSnippetHasBody.VDCodeSnippetBody" Name="VDCodeSnippetBody" DisplayName="VDCode Snippet Body" PropertyName="ParentCodeSnippet" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Parent Code Snippet">
+        <DomainRole Id="38a0351d-de8a-4c9f-926e-fb7160247695" Description="" Name="VDCodeSnippetBody" DisplayName="VDCode Snippet Body" PropertyName="ParentCodeSnippet" Multiplicity="One" PropagatesDelete="true" Category="Internal States" PropertyDisplayName="Parent Code Snippet">
           <RolePlayer>
             <DomainClassMoniker Name="VDCodeSnippetBody" />
           </RolePlayer>
@@ -1020,10 +1121,42 @@
     </DomainEnumeration>
     <DomainEnumeration Name="E_FormTarget" Namespace="MVCVisualDesigner" Description="">
       <Literals>
-        <EnumerationLiteral Description="" Name="_blank" Value="1" />
-        <EnumerationLiteral Description="" Name="_self" Value="3" />
-        <EnumerationLiteral Description="" Name="_parent" Value="2" />
-        <EnumerationLiteral Description="" Name="_top" Value="4" />
+        <EnumerationLiteral Description="" Name="_blank" Value="1">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
+        </EnumerationLiteral>
+        <EnumerationLiteral Description="" Name="_self" Value="3">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
+        </EnumerationLiteral>
+        <EnumerationLiteral Description="" Name="_parent" Value="2">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
+        </EnumerationLiteral>
+        <EnumerationLiteral Description="" Name="_top" Value="4">
+          <Attributes>
+            <ClrAttribute Name="System.CLSCompliant">
+              <Parameters>
+                <AttributeParameter Value="false" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
+        </EnumerationLiteral>
         <EnumerationLiteral Description="Description for MVCVisualDesigner.E_FormTarget.NotSpecified" Name="NotSpecified" Value="0" />
       </Literals>
     </DomainEnumeration>
@@ -1207,10 +1340,13 @@
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="f923f0b5-a39f-4a9a-94fc-2f4d373abacc" Description="" Name="VDSelectOptionShape" DisplayName="Select Option" Namespace="MVCVisualDesigner" FixedTooltipText="Select Option" InitialWidth="1.2" InitialHeight="0.2" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+    <GeometryShape Id="f923f0b5-a39f-4a9a-94fc-2f4d373abacc" Description="" Name="VDSelectOptionShape" DisplayName="Select Option" Namespace="MVCVisualDesigner" FixedTooltipText="Select Option" TextColor="Navy" InitialWidth="1.2" InitialHeight="0.2" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
+      <ShapeHasDecorators Position="InnerMiddleLeft" HorizontalOffset="0" VerticalOffset="0">
+        <TextDecorator Name="LabelDecorator" DisplayName="Label Decorator" DefaultText="LabelDecorator" />
+      </ShapeHasDecorators>
     </GeometryShape>
     <GeometryShape Id="b597256a-1a2b-4816-912e-a69f2c2f8aa8" Description="" Name="VDTabShape" DisplayName="Tab" Namespace="MVCVisualDesigner" FixedTooltipText="" InitialWidth="5" InitialHeight="3" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
@@ -1222,7 +1358,7 @@
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
       <Properties>
-        <DomainProperty Id="3dfb9d57-a9b7-409f-9268-18ea43a018bc" Description="Description for MVCVisualDesigner.VDTabHeadShape.Is Active Tab" Name="isActiveTab" DisplayName="Is Active Tab" Category="Internal States">
+        <DomainProperty Id="3dfb9d57-a9b7-409f-9268-18ea43a018bc" Description="" Name="isActiveTab" DisplayName="Is Active Tab" Category="Internal States">
           <Type>
             <ExternalTypeMoniker Name="/System/Boolean" />
           </Type>
@@ -1252,7 +1388,7 @@
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
       <Properties>
-        <DomainProperty Id="2b709425-7335-423a-99a2-ca4ecc8bb95a" Description="Description for MVCVisualDesigner.VDContainerShape.Is Tag Decorator Visible" Name="isTagDecoratorVisible" DisplayName="Is Tag Decorator Visible" Kind="Calculated" IsBrowsable="false">
+        <DomainProperty Id="2b709425-7335-423a-99a2-ca4ecc8bb95a" Description="" Name="isTagDecoratorVisible" DisplayName="Is Tag Decorator Visible" Kind="Calculated" Category="Internal States" IsBrowsable="false">
           <Type>
             <ExternalTypeMoniker Name="/System/Boolean" />
           </Type>
@@ -1284,7 +1420,7 @@
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
-      <ShapeHasDecorators Position="InnerMiddleLeft" HorizontalOffset="-0.03" VerticalOffset="0">
+      <ShapeHasDecorators Position="InnerMiddleLeft" HorizontalOffset="-0.04" VerticalOffset="0">
         <TextDecorator Name="IndexDecorator" DisplayName="Index Decorator" DefaultText="IndexDecorator" FontSize="6" />
       </ShapeHasDecorators>
     </GeometryShape>
@@ -1381,6 +1517,12 @@
           </XmlRelationshipData>
           <XmlPropertyData XmlName="widgetName">
             <DomainPropertyMoniker Name="VDWidget/WidgetName" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="classAttribute">
+            <DomainPropertyMoniker Name="VDWidget/ClassAttribute" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="iDAttribute">
+            <DomainPropertyMoniker Name="VDWidget/IDAttribute" />
           </XmlPropertyData>
         </ElementData>
       </XmlClassData>
@@ -2433,6 +2575,14 @@
         <ParentElementPath>
           <DomainPath>SelectHasOptions.Select/!VDSelect</DomainPath>
         </ParentElementPath>
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDSelectOptionShape/LabelDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="VDSelectOption/Label" />
+            </PropertyPath>
+          </PropertyDisplayed>
+        </DecoratorMap>
         <GeometryShapeMoniker Name="VDSelectOptionShape" />
       </ShapeMap>
       <ShapeMap HasCustomParentElement="true">

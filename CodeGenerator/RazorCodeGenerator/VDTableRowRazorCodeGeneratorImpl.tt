@@ -10,7 +10,7 @@
     for( int i=0; i < row.RowCount; i++)
     {
 #>
-<tr>
+<tr <#= this.Widget.GetMoreHtmlAttributeString() #>>
 <#
         List<VDTableCell> cells = row.GetCellsInRow(i);
         foreach(var cell in cells)

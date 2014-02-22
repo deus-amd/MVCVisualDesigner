@@ -430,6 +430,16 @@ namespace MVCVisualDesigner
     public partial class VDTableCell
     {
         [CLSCompliant(false)]
+        public uint GetColSpanValue() { return getHTMLAttr<uint>("colspan", 1); }
+        [CLSCompliant(false)]
+        public void SetColSpanValue(uint newValue) { setHTMLAttr<uint>("colspan", newValue); }
+
+        [CLSCompliant(false)]
+        public uint GetRowSpanValue() { return getHTMLAttr<uint>("rowspan", 1); }
+        [CLSCompliant(false)]
+        public void SetRowSpanValue(uint newValue) { setHTMLAttr<uint>("rowspan", newValue); }
+
+        [CLSCompliant(false)]
         public uint LastCol { get { return this.Col + this.ColSpan - 1; } }
         [CLSCompliant(false)]
         public uint LastRow { get { return this.Row + this.RowSpan - 1; } }

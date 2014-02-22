@@ -4,10 +4,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="MVCVisualDesigner" #>
-<option <#
-    if (!string.IsNullOrWhiteSpace(this.Widget.Value)) {
-        #>value='<#= this.Widget.Value #>' <#
-    }
+<option <#= this.Widget.GetMoreHtmlAttributeString("disabled", "checked")#><#
     if (this.Widget.Disabled == E_TripleState.TRUE) {
         #>disabled='disabled' <#
     }

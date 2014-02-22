@@ -5,14 +5,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="MVCVisualDesigner" #>
 
-<form <# 
-	if (!string.IsNullOrWhiteSpace(this.Widget.Name)) { 
-		#>name='<#= this.Widget.Name #>' <#
-	} 
-	if (!string.IsNullOrWhiteSpace(this.Widget.Action)) { 
-		#>action='<#= this.Widget.Action #>' <#
-	}
-	#>method='<#= this.Widget.Method.ToString().ToLower() #>' <# 
+<form <#= this.Widget.GetMoreHtmlAttributeString("method", "target", "enctype")#> method='<#= this.Widget.Method.ToString().ToLower() #>' <# 
 	if (this.Widget.Target != E_FormTarget.NotSpecified) { 
 		#>target='<#= this.Widget.Target #>' <#
 	}
@@ -27,4 +20,5 @@
 <# 
 	this.PopIndent();
 #>
+
 </form> 

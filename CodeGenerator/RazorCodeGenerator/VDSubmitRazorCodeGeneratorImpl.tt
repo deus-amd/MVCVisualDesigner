@@ -4,13 +4,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="MVCVisualDesigner" #>
-<input type='<#= this.Widget.Type.ToString() #>' <#
-    if (!string.IsNullOrWhiteSpace(this.Widget.Name)) {
-        #>name='<#= this.Widget.Name #>' <#
-    }
-    if (!string.IsNullOrWhiteSpace(this.Widget.Value)) {
-        #>value='<#= this.Widget.Value #>' <#
-    }
+<input <#= this.Widget.GetMoreHtmlAttributeString("disabled")#><#
     if (this.Widget.Disabled == E_TripleState.TRUE) {
         #>disabled='disabled' <#
     }

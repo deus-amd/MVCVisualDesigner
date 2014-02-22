@@ -14,13 +14,13 @@
     if (cell.IsTableHeadCell) 
     {
 #>
-<th <#= spanAttributes #>><#@ include file="../GenerateChildrenCode.t4" #></th>
+<th <#= spanAttributes #> <#= this.Widget.GetMoreHtmlAttributeString("rowspan", "colspan") #>><#@ include file="../GenerateChildrenCode.t4" #></th>
 <#
     }
     else
     {
 #>
-<td <#= spanAttributes #>><#@ include file="../GenerateChildrenCode.t4" #></td>
+<td <#= spanAttributes #> <#= this.Widget.GetMoreHtmlAttributeString("rowspan", "colspan") #>><#@ include file="../GenerateChildrenCode.t4" #></td>
 <#
     }
 #>

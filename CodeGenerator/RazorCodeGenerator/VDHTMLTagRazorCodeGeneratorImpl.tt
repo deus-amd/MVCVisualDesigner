@@ -8,15 +8,15 @@
     VDHTMLTag tag = (VDHTMLTag)this.Widget;
     if (tag._IsCloseTagVisibleInHeader)
     {
-#><<#= tag.TagName #>><#= tag.TagText #></<#= tag.TagName #>><#
+#><<#= tag.TagName #> <#= this.Widget.GetMoreHtmlAttributeString()#>><#= tag.TagText #></<#= tag.TagName #>><#
     }
     else if (tag._IsCloseTagVisibleInFooter)
     {
-#><<#= tag.TagName #>><#= tag._HasTagText ? tag.TagText : string.Empty #><#
+#><<#= tag.TagName #> <#= this.Widget.GetMoreHtmlAttributeString()#>><#= tag._HasTagText ? tag.TagText : string.Empty #><#
         this.PushIndent("    ");
 #>
 <#@ include file="../GenerateChildrenCode.t4" #>
-</<#= tag.TagName #>>
+</<#= tag.TagName #> <#= this.Widget.GetMoreHtmlAttributeString()#>>
 <#
         this.PopIndent();
     }

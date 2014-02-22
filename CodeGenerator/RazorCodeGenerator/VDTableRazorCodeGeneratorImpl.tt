@@ -11,7 +11,7 @@
     List<VDTableRow> footRows = table.FootRows;
 #>
 
-<table>
+<table <#= this.Widget.GetMoreHtmlAttributeString() #>>
 <#
     if (headRows.Count > 0)
     {

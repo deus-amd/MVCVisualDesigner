@@ -4,13 +4,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="MVCVisualDesigner" #>
-<input type='radio' <#
-    if (!string.IsNullOrWhiteSpace(this.Widget.Name)) {
-        #>name='<#= this.Widget.Name #>' <#
-    }
-    if (!string.IsNullOrWhiteSpace(this.Widget.Value)) {
-        #>value='<#= this.Widget.Value #>' <#
-    }
+<input type='radio' <#= this.Widget.GetMoreHtmlAttributeString("type", "disabled", "checked")#> <#
     if (this.Widget.Disabled == E_TripleState.TRUE) {
         #>disabled='disabled' <#
     }

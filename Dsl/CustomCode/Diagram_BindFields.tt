@@ -20,7 +20,7 @@ namespace MVCVisualDesigner
         if (MEL != "VDView")
         {
 #>
-            <#= MEL #>Shape.DecoratorsInitialized += <#= MEL #>Shape.BindShapeFields;
+            <#= MEL #>Shape.DecoratorsInitialized += <#= MEL #>Shape.Bind<#= MEL #>ShapeFields;
 <#
         }
     }
@@ -38,7 +38,7 @@ namespace MVCVisualDesigner
 #>
     public partial class <#= MEL #>Shape
     {
-        internal static void BindShapeFields(object sender, EventArgs e)
+        internal static void Bind<#= MEL #>ShapeFields(object sender, EventArgs e)
         {
             onBindShapeFields(sender, e);	
         }

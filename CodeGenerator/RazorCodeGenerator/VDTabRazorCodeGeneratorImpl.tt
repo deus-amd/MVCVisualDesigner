@@ -5,7 +5,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="MVCVisualDesigner" #>
 
-<div>
+<div <#= this.Widget.GetMoreHtmlAttributeString() #>>
     <ul>
 <#
     VDTab tab = (VDTab)this.Widget;

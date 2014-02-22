@@ -3,7 +3,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-<div class='section_body'>
+<div <#= this.Widget.GetMoreHtmlAttributeString(new string[]{"section_head"}) #>>
 <# 
 	/* generate code for children */ 
 	this.PushIndent("    ");

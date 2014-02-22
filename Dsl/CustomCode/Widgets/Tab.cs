@@ -295,8 +295,6 @@ namespace MVCVisualDesigner
         private const string FIELD_NAME_ACTIVE_TAB_BACKGROUND = "Active_Background";
         protected override void InitializeShapeFields(IList<ShapeField> shapeFields)
         {
-            base.InitializeShapeFields(shapeFields);
-
             AreaField bkg = this.CreateBackgroundGradientField(FIELD_NAME_ACTIVE_TAB_BACKGROUND);
             bkg.DefaultFocusable = false;
             bkg.DefaultSelectable = false;
@@ -309,6 +307,8 @@ namespace MVCVisualDesigner
             bkg.AnchoringBehavior.SetRightAnchor(AnchoringBehavior.Edge.Right, 0.0);
             bkg.AnchoringBehavior.SetBottomAnchor(AnchoringBehavior.Edge.Bottom, 0.0);
             shapeFields.Add(bkg);
+
+            base.InitializeShapeFields(shapeFields);
         }
 
         static partial void onBindShapeFields(object sender, EventArgs e)
