@@ -425,7 +425,7 @@
         <DomainClassMoniker Name="VDContainer" />
       </BaseClass>
       <Properties>
-        <DomainProperty Id="c7c2b84a-9a5a-4e0d-b2cf-fe7e87991a15" Description="Description for MVCVisualDesigner.VDHoriContainer.Fixed Height" Name="FixedHeight" DisplayName="Fixed Height" DefaultValue="0">
+        <DomainProperty Id="c7c2b84a-9a5a-4e0d-b2cf-fe7e87991a15" Description="" Name="FixedHeight" DisplayName="Fixed Height" DefaultValue="0" Category="Internal States">
           <Type>
             <ExternalTypeMoniker Name="/System/Double" />
           </Type>
@@ -437,7 +437,7 @@
         <DomainClassMoniker Name="VDContainer" />
       </BaseClass>
       <Properties>
-        <DomainProperty Id="00e90a5e-d53a-4d9d-90ee-a4d07f23280c" Description="Description for MVCVisualDesigner.VDVertContainer.Fixed Width" Name="FixedWidth" DisplayName="Fixed Width" DefaultValue="0">
+        <DomainProperty Id="00e90a5e-d53a-4d9d-90ee-a4d07f23280c" Description="" Name="FixedWidth" DisplayName="Fixed Width" DefaultValue="0" Category="Internal States">
           <Type>
             <ExternalTypeMoniker Name="/System/Double" />
           </Type>
@@ -797,14 +797,14 @@
   <Relationships>
     <DomainRelationship Id="8491408d-7160-4a47-9979-e0dab01d52b3" Description="Description for MVCVisualDesigner.WidgetHasChildren" Name="WidgetHasChildren" DisplayName="Widget Has Children" Namespace="MVCVisualDesigner" IsEmbedding="true">
       <Source>
-        <DomainRole Id="223507db-ce6c-4fe1-87aa-33d1adcb6555" Description="Description for MVCVisualDesigner.WidgetHasChildren.SourceVDWidget" Name="SourceVDWidget" DisplayName="Source VDWidget" PropertyName="Children" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Children">
+        <DomainRole Id="223507db-ce6c-4fe1-87aa-33d1adcb6555" Description="" Name="SourceVDWidget" DisplayName="Source VDWidget" PropertyName="Children" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" Category="Internal States" PropertyDisplayName="Children">
           <RolePlayer>
             <DomainClassMoniker Name="VDWidget" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="c0aff184-c06b-475e-b78b-0854c9f15199" Description="Description for MVCVisualDesigner.WidgetHasChildren.TargetVDWidget" Name="TargetVDWidget" DisplayName="Target VDWidget" PropertyName="Parent" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Parent">
+        <DomainRole Id="c0aff184-c06b-475e-b78b-0854c9f15199" Description="" Name="TargetVDWidget" DisplayName="Target VDWidget" PropertyName="Parent" Multiplicity="One" PropagatesDelete="true" Category="Internal States" PropertyDisplayName="Parent">
           <RolePlayer>
             <DomainClassMoniker Name="VDWidget" />
           </RolePlayer>
@@ -813,14 +813,14 @@
     </DomainRelationship>
     <DomainRelationship Id="c2d0e6ff-0c0d-4a7d-8ca7-94d2bc2a088c" Description="Description for MVCVisualDesigner.WidgetHasTitle" Name="WidgetHasTitle" DisplayName="Widget Has Title" Namespace="MVCVisualDesigner" IsEmbedding="true">
       <Source>
-        <DomainRole Id="bdb03725-26b0-460b-92ad-c74d0e68d858" Description="Description for MVCVisualDesigner.WidgetHasTitle.VDWidget" Name="VDWidget" DisplayName="VDWidget" PropertyName="Title" Multiplicity="ZeroOne" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Title">
+        <DomainRole Id="bdb03725-26b0-460b-92ad-c74d0e68d858" Description="" Name="VDWidget" DisplayName="VDWidget" PropertyName="Title" Multiplicity="ZeroOne" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" Category="Internal States" PropertyDisplayName="Title">
           <RolePlayer>
             <DomainClassMoniker Name="VDWidget" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="3e997446-1b1d-4306-b258-b373deba3ada" Description="Description for MVCVisualDesigner.WidgetHasTitle.VDWidgetTitle" Name="VDWidgetTitle" DisplayName="VDWidget Title" PropertyName="Widget" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Widget">
+        <DomainRole Id="3e997446-1b1d-4306-b258-b373deba3ada" Description="" Name="VDWidgetTitle" DisplayName="VDWidget Title" PropertyName="Widget" Multiplicity="One" PropagatesDelete="true" Category="Internal States" PropertyDisplayName="Widget">
           <RolePlayer>
             <DomainClassMoniker Name="VDWidgetTitle" />
           </RolePlayer>
@@ -832,14 +832,14 @@
         <DomainRelationshipMoniker Name="WidgetHasChildren" />
       </BaseRelationship>
       <Source>
-        <DomainRole Id="b5841c7c-52eb-4e63-8d04-5826d66991fb" Description="Description for MVCVisualDesigner.SectionHasHead.VDSection" Name="VDSection" DisplayName="VDSection" PropertyName="Head" Multiplicity="ZeroOne" PropagatesDelete="true" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Head">
+        <DomainRole Id="b5841c7c-52eb-4e63-8d04-5826d66991fb" Description="" Name="VDSection" DisplayName="VDSection" PropertyName="Head" Multiplicity="ZeroOne" PropagatesDelete="true" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" Category="Internal States" PropertyDisplayName="Head">
           <RolePlayer>
             <DomainClassMoniker Name="VDSection" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="3d2e888c-20b9-4c74-83ba-13231124b279" Description="Description for MVCVisualDesigner.SectionHasHead.VDSectionHead" Name="VDSectionHead" DisplayName="VDSection Head" PropertyName="Section" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Section">
+        <DomainRole Id="3d2e888c-20b9-4c74-83ba-13231124b279" Description="" Name="VDSectionHead" DisplayName="VDSection Head" PropertyName="Section" Multiplicity="One" PropagatesDelete="true" Category="Internal States" PropertyDisplayName="Section">
           <RolePlayer>
             <DomainClassMoniker Name="VDSectionHead" />
           </RolePlayer>
@@ -851,14 +851,14 @@
         <DomainRelationshipMoniker Name="WidgetHasChildren" />
       </BaseRelationship>
       <Source>
-        <DomainRole Id="022e1990-52a9-48bc-ab8a-9c7bb72f9367" Description="Description for MVCVisualDesigner.SectionHasBody.VDSection" Name="VDSection" DisplayName="VDSection" PropertyName="Body" Multiplicity="ZeroOne" PropagatesDelete="true" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Body">
+        <DomainRole Id="022e1990-52a9-48bc-ab8a-9c7bb72f9367" Description="" Name="VDSection" DisplayName="VDSection" PropertyName="Body" Multiplicity="ZeroOne" PropagatesDelete="true" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" Category="Internal States" PropertyDisplayName="Body">
           <RolePlayer>
             <DomainClassMoniker Name="VDSection" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="988773ea-649c-4f8d-b7e2-05a5c4f55edd" Description="Description for MVCVisualDesigner.SectionHasBody.VDSectionBody" Name="VDSectionBody" DisplayName="VDSection Body" PropertyName="Section" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Section">
+        <DomainRole Id="988773ea-649c-4f8d-b7e2-05a5c4f55edd" Description="" Name="VDSectionBody" DisplayName="VDSection Body" PropertyName="Section" Multiplicity="One" PropagatesDelete="true" Category="Internal States" PropertyDisplayName="Section">
           <RolePlayer>
             <DomainClassMoniker Name="VDSectionBody" />
           </RolePlayer>
@@ -950,14 +950,14 @@
     </DomainRelationship>
     <DomainRelationship Id="4b2fbdee-3fdd-4820-92de-21ef54305338" Description="Description for MVCVisualDesigner.HeadLinksToBody" Name="HeadLinksToBody" DisplayName="Head Links To Body" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="b6d6a6c0-2b49-4156-81fe-f4992eb13373" Description="Description for MVCVisualDesigner.HeadLinksToBody.VDTabHead" Name="VDTabHead" DisplayName="VDTab Head" PropertyName="Body" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Body">
+        <DomainRole Id="b6d6a6c0-2b49-4156-81fe-f4992eb13373" Description="" Name="VDTabHead" DisplayName="VDTab Head" PropertyName="Body" Multiplicity="One" PropagatesDelete="true" Category="Internal States" PropertyDisplayName="Body">
           <RolePlayer>
             <DomainClassMoniker Name="VDTabHead" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="b77b31c5-ecc3-4ea7-8792-760caabb6d58" Description="" Name="VDTabBody" DisplayName="Tab Body" PropertyName="Head" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Head">
+        <DomainRole Id="b77b31c5-ecc3-4ea7-8792-760caabb6d58" Description="" Name="VDTabBody" DisplayName="Tab Body" PropertyName="Head" Multiplicity="One" PropagatesDelete="true" Category="Internal States" PropertyDisplayName="Head">
           <RolePlayer>
             <DomainClassMoniker Name="VDTabBody" />
           </RolePlayer>
@@ -966,14 +966,14 @@
     </DomainRelationship>
     <DomainRelationship Id="56752e05-f310-4846-92c2-e53e80b2302f" Description="Description for MVCVisualDesigner.TabHasActiveHead" Name="TabHasActiveHead" DisplayName="Tab Has Active Head" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="f64854c2-8069-4bb9-985e-cec212283f71" Description="Description for MVCVisualDesigner.TabHasActiveHead.VDTab" Name="VDTab" DisplayName="VDTab" PropertyName="ActiveHead" Multiplicity="ZeroOne" PropertyDisplayName="Active Head">
+        <DomainRole Id="f64854c2-8069-4bb9-985e-cec212283f71" Description="" Name="VDTab" DisplayName="VDTab" PropertyName="ActiveHead" Multiplicity="ZeroOne" Category="Internal States" PropertyDisplayName="Active Head">
           <RolePlayer>
             <DomainClassMoniker Name="VDTab" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="e09d78e2-8b04-4e25-b80a-8c4dfa75df0d" Description="Description for MVCVisualDesigner.TabHasActiveHead.VDTabHead" Name="VDTabHead" DisplayName="VDTab Head" PropertyName="Tab" Multiplicity="One" IsPropertyGenerator="false" PropertyDisplayName="Tab">
+        <DomainRole Id="e09d78e2-8b04-4e25-b80a-8c4dfa75df0d" Description="" Name="VDTabHead" DisplayName="VDTab Head" PropertyName="Tab" Multiplicity="One" IsPropertyGenerator="false" Category="Internal States" PropertyDisplayName="Tab">
           <RolePlayer>
             <DomainClassMoniker Name="VDTabHead" />
           </RolePlayer>
@@ -1046,14 +1046,14 @@
     </DomainRelationship>
     <DomainRelationship Id="bf90afdf-16e8-4120-87b4-ca04c594f434" Description="Description for MVCVisualDesigner.EditCodeSnippetOn" Name="EditCodeSnippetOn" DisplayName="Edit Code Snippet On" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="9d6c9153-59cc-4dbc-9a49-c4ae94dcb9c2" Description="Description for MVCVisualDesigner.EditCodeSnippetOn.VDWidget" Name="VDWidget" DisplayName="VDWidget" PropertyName="CodeSnippetEditor" Multiplicity="ZeroOne" Category="Coding" PropertyDisplayName="Code Snippet Editor">
+        <DomainRole Id="9d6c9153-59cc-4dbc-9a49-c4ae94dcb9c2" Description="" Name="VDWidget" DisplayName="VDWidget" PropertyName="CodeSnippetEditor" Multiplicity="ZeroOne" Category="Coding" PropertyDisplayName="Code Snippet Editor">
           <RolePlayer>
             <DomainClassMoniker Name="VDWidget" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="d9431403-ca29-4f32-8e71-7862ba356f63" Description="Description for MVCVisualDesigner.EditCodeSnippetOn.VDCodeSnippet" Name="VDCodeSnippet" DisplayName="VDCode Snippet" PropertyName="LinkedWidgets" IsPropertyBrowsable="false" PropertyDisplayName="Linked Widgets">
+        <DomainRole Id="d9431403-ca29-4f32-8e71-7862ba356f63" Description="" Name="VDCodeSnippet" DisplayName="VDCode Snippet" PropertyName="LinkedWidgets" Category="Internal States" IsPropertyBrowsable="false" PropertyDisplayName="Linked Widgets">
           <RolePlayer>
             <DomainClassMoniker Name="VDCodeSnippet" />
           </RolePlayer>
