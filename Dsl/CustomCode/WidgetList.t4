@@ -1,8 +1,8 @@
 ﻿<#
 // the widgets need to set fixup parent relationship
 string[] WidgetList = new string[]{
-	//"VDPartialView",
 	"VDView",
+	"VDPartialView",
 	"VDSection",
 	//"VDButton",
 	"VDForm",

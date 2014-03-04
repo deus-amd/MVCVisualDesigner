@@ -30,6 +30,9 @@ namespace MVCVisualDesigner.CodeGenerator
 #>
             throw new NotImplementedException();
         }
+
+        public string Name { get {return "MVC Razor Generator";} }
+        public string Description { get {return "Generate MVC razor view codes";} }
     }
 }
 

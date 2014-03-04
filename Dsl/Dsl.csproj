@@ -77,6 +77,7 @@
   <ItemGroup>
     <Compile Include="CustomCode\CodeGen\ICodeData.cs" />
     <Compile Include="CustomCode\CodeGen\ICodeGenerator.cs" />
+    <Compile Include="CustomCode\CodeGen\ICodeGeneratorProvider.cs" />
     <Compile Include="CustomCode\Diagram.cs" />
     <Compile Include="CustomCode\Diagram_BindFields.cs">
       <AutoGen>True</AutoGen>
@@ -102,6 +103,7 @@
     <Compile Include="CustomCode\Widgets\Table.cs" />
     <Compile Include="CustomCode\Widgets\Text.cs" />
     <Compile Include="CustomCode\Widgets\VDInternalUtility.cs" />
+    <Compile Include="CustomCode\Widgets\View.cs" />
     <Compile Include="CustomCode\WidgetTreeWalker.cs" />
     <Compile Include="Resources\MVDResources.Designer.cs">
       <AutoGen>True</AutoGen>

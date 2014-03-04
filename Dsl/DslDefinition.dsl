@@ -65,6 +65,13 @@
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
+      <Properties>
+        <DomainProperty Id="867d4cf7-4072-4b54-9e53-fbd3c67b2258" Description="@model directive" Name="Model" DisplayName="Model" Category="Definition">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
     </DomainClass>
     <DomainClass Id="db6a631c-6a2e-494c-b56d-a4f048c50743" Description="" Name="VDSection" DisplayName="Section" Namespace="MVCVisualDesigner">
       <BaseClass>
@@ -793,6 +800,11 @@
         </DomainProperty>
       </Properties>
     </DomainClass>
+    <DomainClass Id="0e1565be-c3d7-4e2c-a736-2f889c6d22f4" Description="Description for MVCVisualDesigner.VDPartialView" Name="VDPartialView" DisplayName="VDPartial View" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDView" />
+      </BaseClass>
+    </DomainClass>
   </Classes>
   <Relationships>
     <DomainRelationship Id="8491408d-7160-4a47-9979-e0dab01d52b3" Description="Description for MVCVisualDesigner.WidgetHasChildren" Name="WidgetHasChildren" DisplayName="Widget Has Children" Namespace="MVCVisualDesigner" IsEmbedding="true">
@@ -1219,6 +1231,8 @@
         <EnumerationLiteral Description="Description for MVCVisualDesigner.E_RowType.BodyRow" Name="BodyRow" Value="" />
       </Literals>
     </DomainEnumeration>
+    <ExternalType Name="Color" Namespace="System.Drawing" />
+    <ExternalType Name="DashStyle" Namespace="System.Drawing.Drawing2D" />
   </Types>
   <Shapes>
     <GeometryShape Id="e3f0af00-12a6-4223-861d-180f9ed7f7c3" Description="Description for MVCVisualDesigner.VDWidgetShape" Name="VDWidgetShape" DisplayName="VDWidget Shape" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner" FixedTooltipText="VDWidget Shape" InitialHeight="1" Geometry="Rectangle">
@@ -1491,6 +1505,38 @@
         <TextDecorator Name="ContentDecorator" DisplayName="Content Decorator" DefaultText="ContentDecorator" />
       </ShapeHasDecorators>
     </GeometryShape>
+    <GeometryShape Id="96718b3d-cbe1-47f6-937f-411ef6bba471" Description="Description for MVCVisualDesigner.VDPartialViewShape" Name="VDPartialViewShape" DisplayName="VDPartial View Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDPartial View Shape" ExposesTextColor="true" InitialHeight="1" OutlineThickness="0.02" FillGradientMode="None" ExposesOutlineColorAsProperty="true" ExposesFillColorAsProperty="true" ExposesOutlineDashStyleAsProperty="true" ExposesOutlineThicknessAsProperty="true" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+      <Properties>
+        <DomainProperty Id="86458131-28ae-40df-8477-1ea16acba0b8" Description="Description for MVCVisualDesigner.VDPartialViewShape.Fill Color" Name="FillColor" DisplayName="Fill Color" Kind="CustomStorage">
+          <Type>
+            <ExternalTypeMoniker Name="/System.Drawing/Color" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="63eb1117-7942-470a-bbfd-b8ae3919305c" Description="Description for MVCVisualDesigner.VDPartialViewShape.Text Color" Name="TextColor" DisplayName="Text Color" Kind="CustomStorage">
+          <Type>
+            <ExternalTypeMoniker Name="/System.Drawing/Color" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="b43057ec-4eac-4a64-ae9f-09900428f8d5" Description="Description for MVCVisualDesigner.VDPartialViewShape.Outline Color" Name="OutlineColor" DisplayName="Outline Color" Kind="CustomStorage">
+          <Type>
+            <ExternalTypeMoniker Name="/System.Drawing/Color" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="59c94f0d-63ae-4d85-b770-47e4a7d33b50" Description="Description for MVCVisualDesigner.VDPartialViewShape.Outline Dash Style" Name="OutlineDashStyle" DisplayName="Outline Dash Style" Kind="CustomStorage">
+          <Type>
+            <ExternalTypeMoniker Name="/System.Drawing.Drawing2D/DashStyle" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="7fd4f1b0-2779-4382-9da0-66df483bcbdc" Description="Description for MVCVisualDesigner.VDPartialViewShape.Outline Thickness" Name="OutlineThickness" DisplayName="Outline Thickness" Kind="CustomStorage">
+          <Type>
+            <ExternalTypeMoniker Name="/System/Single" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+    </GeometryShape>
   </Shapes>
   <XmlSerializationBehavior Name="MVCVisualDesignerSerializationBehavior" Namespace="MVCVisualDesigner">
     <ClassData>
@@ -1528,6 +1574,11 @@
       </XmlClassData>
       <XmlClassData TypeName="VDView" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDViewMoniker" ElementName="vDView" MonikerTypeName="VDViewMoniker">
         <DomainClassMoniker Name="VDView" />
+        <ElementData>
+          <XmlPropertyData XmlName="model">
+            <DomainPropertyMoniker Name="VDView/Model" />
+          </XmlPropertyData>
+        </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDSection" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDSectionMoniker" ElementName="vDSection" MonikerTypeName="VDSectionMoniker">
         <DomainClassMoniker Name="VDSection" />
@@ -2109,6 +2160,29 @@
       </XmlClassData>
       <XmlClassData TypeName="VDTextShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDTextShapeMoniker" ElementName="vDTextShape" MonikerTypeName="VDTextShapeMoniker">
         <GeometryShapeMoniker Name="VDTextShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDPartialView" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDPartialViewMoniker" ElementName="vDPartialView" MonikerTypeName="VDPartialViewMoniker">
+        <DomainClassMoniker Name="VDPartialView" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDPartialViewShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDPartialViewShapeMoniker" ElementName="vDPartialViewShape" MonikerTypeName="VDPartialViewShapeMoniker">
+        <GeometryShapeMoniker Name="VDPartialViewShape" />
+        <ElementData>
+          <XmlPropertyData XmlName="fillColor">
+            <DomainPropertyMoniker Name="VDPartialViewShape/FillColor" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="textColor">
+            <DomainPropertyMoniker Name="VDPartialViewShape/TextColor" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="outlineColor">
+            <DomainPropertyMoniker Name="VDPartialViewShape/OutlineColor" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="outlineDashStyle">
+            <DomainPropertyMoniker Name="VDPartialViewShape/OutlineDashStyle" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="outlineThickness">
+            <DomainPropertyMoniker Name="VDPartialViewShape/OutlineThickness" />
+          </XmlPropertyData>
+        </ElementData>
       </XmlClassData>
     </ClassData>
   </XmlSerializationBehavior>
@@ -2726,6 +2800,10 @@
         </DecoratorMap>
         <GeometryShapeMoniker Name="VDTextShape" />
       </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDPartialView" />
+        <GeometryShapeMoniker Name="VDPartialViewShape" />
+      </ShapeMap>
     </ShapeMaps>
   </Diagram>
   <Designer CopyPasteGeneration="CopyPasteOnly" FileExtension="amvd" EditorGuid="061c971a-6960-4ef9-9c30-8a8a6543b9f7">
@@ -2748,15 +2826,6 @@
       <ElementTool Name="TableRowsTool" ToolboxIcon="Resources\GridLayoutIcon2.bmp" Caption="Table Rows" Tooltip="" HelpKeyword="TableRowsTool">
         <DomainClassMoniker Name="VDTableRow" />
       </ElementTool>
-      <ElementTool Name="HTMLTagTool" ToolboxIcon="Resources\HtmlTagIcon.bmp" Caption="HTML Tag" Tooltip="" HelpKeyword="HTMLTagTool">
-        <DomainClassMoniker Name="VDHTMLTag" />
-      </ElementTool>
-      <ElementTool Name="CodeSnippetTool" ToolboxIcon="Resources\CodeSnippetIcon.bmp" Caption="Code Snippet" Tooltip="" HelpKeyword="CodeSnippetTool">
-        <DomainClassMoniker Name="VDCodeSnippet" />
-      </ElementTool>
-      <ElementTool Name="TextTool" ToolboxIcon="Resources\FontDialog.bmp" Caption="Text" Tooltip="" HelpKeyword="TextTool">
-        <DomainClassMoniker Name="VDText" />
-      </ElementTool>
     </ToolboxTab>
     <ToolboxTab TabText="Form">
       <ElementTool Name="FormTool" ToolboxIcon="Resources\FormIcon.bmp" Caption="Form" Tooltip="" HelpKeyword="FormTool">
@@ -2776,6 +2845,20 @@
       </ElementTool>
       <ElementTool Name="SelectTool" ToolboxIcon="Resources\SelectIcon.bmp" Caption="Select" Tooltip="" HelpKeyword="SelectTool">
         <DomainClassMoniker Name="VDSelect" />
+      </ElementTool>
+    </ToolboxTab>
+    <ToolboxTab TabText="General">
+      <ElementTool Name="HTMLTagTool" ToolboxIcon="Resources\HtmlTagIcon.bmp" Caption="HTML Tag" Tooltip="" HelpKeyword="HTMLTagTool">
+        <DomainClassMoniker Name="VDHTMLTag" />
+      </ElementTool>
+      <ElementTool Name="CodeSnippetTool" ToolboxIcon="Resources\CodeSnippetIcon.bmp" Caption="Code Snippet" Tooltip="" HelpKeyword="CodeSnippetTool">
+        <DomainClassMoniker Name="VDCodeSnippet" />
+      </ElementTool>
+      <ElementTool Name="TextTool" ToolboxIcon="Resources\FontDialog.bmp" Caption="Text" Tooltip="" HelpKeyword="TextTool">
+        <DomainClassMoniker Name="VDText" />
+      </ElementTool>
+      <ElementTool Name="PartialViewTool" ToolboxIcon="Resources\ViewIcon.bmp" Caption="Partial View" Tooltip="" HelpKeyword="PartialViewTool">
+        <DomainClassMoniker Name="VDPartialView" />
       </ElementTool>
     </ToolboxTab>
     <Validation UsesMenu="false" UsesOpen="false" UsesSave="false" UsesLoad="false" />

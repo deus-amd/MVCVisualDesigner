@@ -16,5 +16,13 @@ namespace MVCVisualDesigner
         {
             InitializeComponent();
         }
+
+        public void AddTabPage(string tabTitle, Control tabContent)
+        {
+            TabPage page = new TabPage(tabTitle);
+            page.Controls.Add(tabContent);
+            tabContent.Dock = DockStyle.Fill;
+            this.tabCtrl.TabPages.Add(page);
+        }
     }
 }

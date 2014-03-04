@@ -39,6 +39,8 @@
     <Reference Include="Microsoft.VisualStudio.Modeling.Sdk.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ExcludeList.t4" />
+    <Compile Include="CodeGeneratorProvider.cs" />
     <Compile Include="Interface\IJSCodeGenerator.cs" />
     <Compile Include="Interface\IRazorCodeGenerator.cs" />
     <Compile Include="Interface\IModelCodeGenerator.cs" />
@@ -60,6 +63,12 @@
       <DependentUpon>DefaultRazorCodeGeneratorImpl.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="RazorCodeGenerator\RazorGeneratorOptionUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RazorCodeGenerator\RazorGeneratorOptionUI.Designer.cs">
+      <DependentUpon>RazorGeneratorOptionUI.cs</DependentUpon>
     </Compile>
     <Compile Include="RazorCodeGenerator\VDTableCellRazorCodeGeneratorImpl.cs">
       <DependentUpon>VDTableCellRazorCodeGeneratorImpl.tt</DependentUpon>
@@ -143,6 +152,11 @@
     </Compile>
     <Compile Include="RazorCodeGenerator\VDTextRazorCodeGeneratorImpl.cs">
       <DependentUpon>VDTextRazorCodeGeneratorImpl.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="RazorCodeGenerator\VDPartialViewRazorCodeGeneratorImpl.cs">
+      <DependentUpon>VDPartialViewRazorCodeGeneratorImpl.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -254,6 +268,11 @@
       <LastGenOutput>VDTextRazorCodeGeneratorImpl.cs</LastGenOutput>
       <CustomToolNamespace>MVCVisualDesigner.CodeGenerator</CustomToolNamespace>
     </None>
+    <None Include="RazorCodeGenerator\VDPartialViewRazorCodeGeneratorImpl.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>VDPartialViewRazorCodeGeneratorImpl.cs</LastGenOutput>
+      <CustomToolNamespace>MVCVisualDesigner.CodeGenerator</CustomToolNamespace>
+    </None>
     <None Include="RazorCodeGenerator\VDViewRazorCodeGeneratorImpl.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>VDViewRazorCodeGeneratorImpl.cs</LastGenOutput>
@@ -265,6 +284,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="GenerateChildrenCode.t4" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="RazorCodeGenerator\RazorGeneratorOptionUI.resx">
+      <DependentUpon>RazorGeneratorOptionUI.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
