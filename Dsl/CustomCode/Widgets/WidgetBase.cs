@@ -82,6 +82,19 @@ namespace MVCVisualDesigner
         public string GetClassAttributeValue() { return getHTMLAttr("class", string.Empty); }
 
         public void SetClassAttributeValue(string newClass) { setHTMLAttr<string>("class", newClass); }
+
+        // settings
+        // used to store some additional data, such as settings from all kinds of tool window
+        protected Dictionary<Guid, string> m_settings;
+        public Dictionary<Guid, string> GetsettingsValue()
+        {
+            if (m_settings == null) m_settings = new Dictionary<Guid, string>();
+            return m_settings;
+        }
+        public void SetsettingsValue(Dictionary<Guid, string> newValue)
+        {
+            m_settings = newValue;
+        }
     }
 
     public partial class VDWidget : ICodeData

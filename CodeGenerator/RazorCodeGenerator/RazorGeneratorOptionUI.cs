@@ -16,5 +16,14 @@ namespace MVCVisualDesigner.CodeGenerator.RazorCodeGenerator
         {
             InitializeComponent();
         }
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            DialogResult result = this.folderBrowserDialog.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                this.txtPath.Text = this.folderBrowserDialog.SelectedPath;
+            }
+        }
     }
 }

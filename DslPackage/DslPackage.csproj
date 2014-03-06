@@ -86,6 +86,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -96,6 +97,12 @@
   <ItemGroup>
     <Compile Include="CustomCode\CodeGeneratorOptionPage.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomCode\CodeGeneratorOptionPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomCode\CodeGeneratorOptionPageControl.Designer.cs">
+      <DependentUpon>CodeGeneratorOptionPageControl.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomCode\CommandSet.cs" />
     <Compile Include="CustomCode\DeployToolWindow.cs" />
@@ -114,6 +121,7 @@
     </Compile>
     <Compile Include="CustomCode\Package.cs" />
     <Compile Include="CustomCode\DocView.cs" />
+    <Compile Include="CustomCode\PackageUtility.cs" />
     <Compile Include="GeneratedCode\CommandSet.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -223,6 +231,9 @@
     <Service Include="{508349B6-6B84-4df5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CustomCode\CodeGeneratorOptionPageControl.resx">
+      <DependentUpon>CodeGeneratorOptionPageControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomCode\DeployToolWindowForm.resx">
       <DependentUpon>DeployToolWindowForm.cs</DependentUpon>
     </EmbeddedResource>

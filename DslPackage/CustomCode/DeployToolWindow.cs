@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,6 +24,7 @@ namespace MVCVisualDesigner
                 if (m_form == null)
                 {
                     m_form = new DeployToolWindowForm();
+                    m_form.ToolWindow = this;
                 }
                 return m_form;
             }
@@ -30,11 +32,30 @@ namespace MVCVisualDesigner
 
         public override System.Windows.Forms.IWin32Window Window { get { return DeployForm; } }
 
-        public override string WindowTitle { get { return "Deploy Window"; } }
+        public override string WindowTitle { get { return "Deployment Window"; } }
 
         protected override void OnDocumentWindowChanged(ModelingDocView oldView, ModelingDocView newView)
         {
             base.OnDocumentWindowChanged(oldView, newView);
+
+            MVCVisualDesignerDocView docView = newView as MVCVisualDesignerDocView;
+            if (docView == null) return;
+
+            //if (newView != null)
+            //{
+            //    ShapeElement shape = newView.PrimarySelection as ShapeElement;
+            //    if (shape.ModelElement is QSObject)
+            //    {
+            //        SetPropertyObjecs((QSObject)shape.ModelElement);
+            //        return;
+            //    }
+            //    else if (shape.ModelElement is QSModel)
+            //    {
+            //        SetPropertyObjecs((QSModel)shape.ModelElement);
+            //        return;
+            //    }
+            //    SetPropertyObjecs((QSModel)null);
+            //}
         }
 
         public override int SaveUIState(out System.IO.Stream stateStream)
@@ -50,16 +71,27 @@ namespace MVCVisualDesigner
         protected override void OnToolWindowCreate()
         {
             base.OnToolWindowCreate();
+            InitializeDeployWindowForm();
+        }
 
-            CodeGeneratorProvider p = new CodeGeneratorProvider();
-            List<ICodeGeneratorFactory> gens = p.GetGeneratorList();
-            foreach(var gen in gens)
+        internal void InitializeDeployWindowForm()
+        {
+            if (this.Package == null) return;
+
+            List<string> assemList = this.Package.GetCodeGeneratorAssemblyList();
+            DeployForm.InitializeForm(assemList);
+        }
+
+        private MVCVisualDesignerPackage m_package;
+        private MVCVisualDesignerPackage Package
+        {
+            get
             {
-                var ui = p.GetGeneratorOptionsUI(gen);
-                if (ui != null)
+                if (m_package == null)
                 {
-                    DeployForm.AddTabPage(gen.Name, ui);
+                    m_package = this.GetService(typeof(MVCVisualDesignerPackage)) as MVCVisualDesignerPackage;
                 }
+                return m_package;
             }
         }
     }

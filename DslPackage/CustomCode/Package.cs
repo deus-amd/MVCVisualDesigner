@@ -25,5 +25,19 @@ namespace MVCVisualDesigner
             // Register the model tool window for this DSL.
             this.AddToolWindow(typeof(ModelToolWindow));
         }
+
+        public List<string> GetCodeGeneratorAssemblyList()
+        {
+            List<string> list = new List<string>();
+            CodeGeneratorOptionPage dlg = this.GetDialogPage(typeof(CodeGeneratorOptionPage)) as CodeGeneratorOptionPage;
+            if (dlg != null)
+            {
+                foreach (string relativePath in dlg.CodeGeneratorAssemblyList)
+                {
+                    list.Add(PackageUtility.GetAbsolutePath(relativePath));
+                }
+            }
+            return list;
+        }
     }
 }

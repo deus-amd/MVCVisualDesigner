@@ -36,6 +36,12 @@
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
+        <DomainProperty Id="c81ec4b4-0db1-4f96-8321-de9e9931e810" Description="Description for MVCVisualDesigner.VDWidget.Settings" Name="settings" DisplayName="Settings" Kind="CustomStorage" IsBrowsable="false" IsUIReadOnly="true">
+          <Notes>used in ToolWindows to save additional data to *.mvd files</Notes>
+          <Type>
+            <ExternalTypeMoniker Name="/System.Collections.Generic/Dictionary&lt;System.Guid, System.String&gt;" />
+          </Type>
+        </DomainProperty>
       </Properties>
       <ElementMergeDirectives>
         <ElementMergeDirective>
@@ -1233,6 +1239,7 @@
     </DomainEnumeration>
     <ExternalType Name="Color" Namespace="System.Drawing" />
     <ExternalType Name="DashStyle" Namespace="System.Drawing.Drawing2D" />
+    <ExternalType Name="Dictionary&lt;System.Guid, System.String&gt;" Namespace="System.Collections.Generic" />
   </Types>
   <Shapes>
     <GeometryShape Id="e3f0af00-12a6-4223-861d-180f9ed7f7c3" Description="Description for MVCVisualDesigner.VDWidgetShape" Name="VDWidgetShape" DisplayName="VDWidget Shape" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner" FixedTooltipText="VDWidget Shape" InitialHeight="1" Geometry="Rectangle">
@@ -1569,6 +1576,9 @@
           </XmlPropertyData>
           <XmlPropertyData XmlName="iDAttribute">
             <DomainPropertyMoniker Name="VDWidget/IDAttribute" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="settings">
+            <DomainPropertyMoniker Name="VDWidget/settings" />
           </XmlPropertyData>
         </ElementData>
       </XmlClassData>
