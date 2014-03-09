@@ -9,8 +9,5 @@ namespace MVCVisualDesigner
     public interface ICodeGeneratorFactory
     {
         ICodeGenerator GetCodeGenerator(VDWidget widget);
-
-        string Name { get; }
-        string Description { get; }
     }
 }

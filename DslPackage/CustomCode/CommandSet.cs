@@ -12,7 +12,7 @@ namespace MVCVisualDesigner
     {
         private static readonly CommandID generateCodeCommand = new CommandID(new Guid(Constants.MVCVisualDesignerCommandSetId), 0x3001);
         private static readonly CommandID ShowModelWindowCommand = new CommandID(new Guid(Constants.MVCVisualDesignerCommandSetId), 0x3002);
-        private static readonly CommandID ShowDeployWindowCommand = new CommandID(new Guid(Constants.MVCVisualDesignerCommandSetId), 0x3003);
+        //private static readonly CommandID ShowDeployWindowCommand = new CommandID(new Guid(Constants.MVCVisualDesignerCommandSetId), 0x3003);
 
         protected override IList<MenuCommand> GetMenuCommands()
         {
@@ -23,14 +23,6 @@ namespace MVCVisualDesigner
                 this.ServiceProvider,
                 (sender, e) => { if (this.ModelToolWindow != null) this.ModelToolWindow.Show(); },
                 ShowModelWindowCommand,
-                typeof(MVCVisualDesignerEditorFactory).GUID);
-            commands.Add(menuCommand);
-
-            // show deploy window
-            menuCommand = new CommandContextBoundMenuCommand(
-                this.ServiceProvider,
-                (sender, e) => { if (this.DeployToolWindow != null) this.DeployToolWindow.Show(); },
-                ShowDeployWindowCommand,
                 typeof(MVCVisualDesignerEditorFactory).GUID);
             commands.Add(menuCommand);
 
@@ -63,49 +55,99 @@ namespace MVCVisualDesigner
             }
         }
 
-        /// <summary>
-        /// Returns the deployment tool window.
-        /// </summary>
-        protected DeployToolWindow DeployToolWindow
-        {
-            get
-            {
-                DeployToolWindow window = null;
-                ModelingPackage package = this.ServiceProvider.GetService(typeof(Microsoft.VisualStudio.Shell.Package)) as ModelingPackage;
-                if (package != null)
-                {
-                    window = package.GetToolWindow(typeof(DeployToolWindow), true) as DeployToolWindow;
-                }
-
-                return window;
-            }
-        }
-
-
         // generate code
         protected void onGenerateCodeCommand(object sender, EventArgs args)
         {
-            System.Windows.Forms.SaveFileDialog dlg = new System.Windows.Forms.SaveFileDialog();
-            if ( dlg.ShowDialog()!= System.Windows.Forms.DialogResult.OK)
-            {
-                return;
-            }
+            if (this.Package == null) return;
 
             if (this.CurrentMVCVisualDesignerDocData != null 
                 && this.CurrentMVCVisualDesignerDocData.RootElement != null
                 && this.CurrentMVCVisualDesignerDocData.RootElement is VDView)
             {
-                ICodeGeneratorFactory cgFactory = new MVCVisualDesigner.CodeGenerator.RazorCodeGeneratorFactory();
-                //IWidgetTreeWalkerFactory walkerFactory = new LayoutWalkerFactory();
-                IWidgetTreeWalkerFactory walkerFactory = new WidgetTreeWalkerFactory();
-                VDView view = this.CurrentMVCVisualDesignerDocData.RootElement as VDView;
-                string razorCode = view.GenerateCode(cgFactory, walkerFactory);
-
-                using (System.IO.StreamWriter w = new System.IO.StreamWriter(dlg.FileName))
-                {
-                    w.Write(razorCode);
-                }
+                DeployToolWindowForm deployWin = new DeployToolWindowForm();
+                deployWin.InitializeForm(
+                    this.Package.GetCodeGeneratorAssemblyList(), 
+                    (VDView)(this.CurrentMVCVisualDesignerDocData.RootElement),
+                    this.activeDocumentPath);
+                deployWin.ShowDialog();
             }
         }
+
+        private MVCVisualDesignerPackage m_package;
+        private MVCVisualDesignerPackage Package
+        {
+            get
+            {
+                if (m_package == null)
+                {
+                    m_package = this.ServiceProvider.GetService(typeof(MVCVisualDesignerPackage)) as MVCVisualDesignerPackage;
+                }
+                return m_package;
+            }
+        }
+
+#region Shell Handling
+        private string activeDocumentPath
+        {
+            get
+            {
+                if (this.activeDocument != null) return this.activeDocument.Path;
+                return null;
+            }
+        }
+
+        private bool isProjectOpen
+        {
+            get
+            {
+                if (this.activeDocument != null &&
+                    this.activeDocument.ProjectItem != null &&
+                    this.activeDocument.ProjectItem.ProjectItems != null)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        private EnvDTE.Document activeDocument
+        {
+            get
+            {
+                if (this.dte == null) return null;
+                return dte.ActiveDocument;
+            }
+        }
+
+        private EnvDTE.Project curProject
+        {
+            get
+            {
+                if (this.dte == null) return null;
+
+                object obj = this.dte.ActiveSolutionProjects;
+                if (obj == null) return null;
+
+                object[] projects = (object[])obj;
+
+                if (projects != null && projects.Length > 0)
+                    return projects[0] as EnvDTE.Project;
+                else
+                    return null;
+            }
+        }
+
+        private EnvDTE.DTE m_dte;
+        private EnvDTE.DTE dte
+        {
+            get
+            {
+                if (m_dte == null)
+                {
+                    m_dte = ServiceProvider.GetService(typeof(EnvDTE.DTE)) as EnvDTE.DTE;
+                }
+                return m_dte;
+            }
+        }
+#endregion
     }
 }

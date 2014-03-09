@@ -52,22 +52,11 @@
           <ButtonText>Model Window</ButtonText>
         </Strings>
       </Button>
-      <Button guid="guidCmdSet" id="cmdidShowDeployWindow" priority="0x0100" type="Button">
-        <Parent guid="guidCmdSet" id="grpidMVCDesigner"/>
-        <Icon guid="guidImageShowDeployWin" id="1"/>
-        <CommandFlag>DefaultDisabled</CommandFlag>
-        <CommandFlag>DefaultInvisible</CommandFlag>
-        <CommandFlag>DynamicVisibility</CommandFlag>
-        <Strings>
-          <ButtonText>Deployment Window</ButtonText>
-        </Strings>
-      </Button>
     </Buttons>
 
     <Bitmaps>
-      <Bitmap guid="guidImageGenerateCode" href="Resources\FileExplorer32.bmp"/>
+      <Bitmap guid="guidImageGenerateCode" href="Resources\ResultstoFile_9946_24.bmp"/>
       <Bitmap guid="guidImageShowModelWin" href="Resources\FileExplorer32.bmp"/>
-      <Bitmap guid="guidImageShowDeployWin" href="Resources\FileExplorer32.bmp"/>
     </Bitmaps>
 
   </Commands>
@@ -86,7 +75,6 @@
 
       <IDSymbol name="cmdidGenerateCode" value="0x3001"/>
       <IDSymbol name="cmdidShowModelWindow" value="0x3002"/>
-      <IDSymbol name="cmdidShowDeployWindow" value="0x3003"/>
 
       <IDSymbol name="grpidMVCDesigner" value="0x4001"/>
     </GuidSymbol>
@@ -95,7 +83,6 @@
     <!-- IDs for images-->
     <GuidSymbol name="guidImageGenerateCode" value="{6A55F035-90D9-4C83-B2C9-5F0739C16B5C}"/>
     <GuidSymbol name="guidImageShowModelWin" value="{EDDCDE09-B16F-4466-B3B5-1DE28388BDA9}"/>
-    <GuidSymbol name="guidImageShowDeployWin" value="{007ADBA1-026B-41C8-AEED-D6423BBCB611}"/>
 
   </Symbols>
   
