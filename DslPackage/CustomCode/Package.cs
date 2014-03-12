@@ -28,7 +28,7 @@ namespace MVCVisualDesigner
             {
                 foreach (string relativePath in dlg.CodeGeneratorAssemblyList)
                 {
-                    list.Add(PackageUtility.GetAbsolutePath(relativePath));
+                    list.Add(Utility.PathHelper.GetAbsolutePath(relativePath));
                 }
             }
             return list;

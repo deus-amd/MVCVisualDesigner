@@ -19,7 +19,7 @@ namespace MVCVisualDesigner
             {
                 foreach (string ass in this.OptionPage.CodeGeneratorAssemblyList)
                 {
-                    this.lstAssemblyList.Items.Add(PackageUtility.GetAbsolutePath(ass));
+                    this.lstAssemblyList.Items.Add(Utility.PathHelper.GetAbsolutePath(ass));
                 }
             }
         }
@@ -33,7 +33,7 @@ namespace MVCVisualDesigner
                     if (!isItemInList(fn))
                     {
                         this.lstAssemblyList.Items.Add(fn);
-                        this.OptionPage.CodeGeneratorAssemblyList.Add(PackageUtility.GetRelativePath(fn));
+                        this.OptionPage.CodeGeneratorAssemblyList.Add(Utility.PathHelper.GetRelativePath(fn));
                     }
                 }
             }
@@ -62,7 +62,7 @@ namespace MVCVisualDesigner
 
                 // remove item from list
                 string selectedAssembly = this.lstAssemblyList.SelectedItem as string;
-                selectedAssembly = PackageUtility.GetRelativePath(selectedAssembly);
+                selectedAssembly = Utility.PathHelper.GetRelativePath(selectedAssembly);
                 this.OptionPage.CodeGeneratorAssemblyList.Remove(selectedAssembly);
                 this.lstAssemblyList.Items.RemoveAt(this.lstAssemblyList.SelectedIndex);
 

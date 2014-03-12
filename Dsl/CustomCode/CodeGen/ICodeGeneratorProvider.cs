@@ -15,7 +15,6 @@ namespace MVCVisualDesigner
         // -- controller info --
         string Name { get; }
         string Description { get; }
-        string FileExtension { get; }
 
 
         // -- code generation --
@@ -25,9 +24,9 @@ namespace MVCVisualDesigner
         // -- settings related --
 
         // throw SettingUIValidationException in validation failed on UI
-        void OnSaveSettings(VDWidget widget);
+        void OnSaveSettings(VDView rootView, string rootViewpath);
 
-        void OnLoadSettings(VDWidget widget);
+        void OnLoadSettings(VDView rootView, string rootViewPath);
 
         System.Windows.Forms.Control SettingControl { get; }
     }

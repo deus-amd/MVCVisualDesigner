@@ -26,21 +26,21 @@ namespace MVCVisualDesigner
     {
         public string Name { get { return "MVC Razor Generator"; } }
         public string Description { get { return "Generate MVC razor view codes"; } }
-        public string FileExtension { get { return "cshtml"; } }
 
 
         public void OnGenerateCode(VDView view, string viewPath)
         {
-            List<VDWidget> rootWidgets = new List<VDWidget>();
+            List<VDView> rootWidgets = new List<VDView>();
             rootWidgets.Add(view);
             rootWidgets.AddRange(view.GetChildren<VDView>());
 
             //IWidgetTreeWalkerFactory walkerFactory = new LayoutWalkerFactory();
             IWidgetTreeWalkerFactory walkerFactory = new WidgetTreeWalkerFactory();
             ICodeGeneratorFactory generatorFactory = new RazorCodeGeneratorFactory();
-            foreach(VDWidget v in rootWidgets)
+            foreach(VDView v in rootWidgets)
             {
-                string filePath = v.WidgetName + "." + FileExtension; //todo: get file path
+                string filePath = SettingsHelper.getViewPathFromView(v, viewPath);
+                filePath = System.IO.Path.Combine(filePath, v.WidgetName + ".cshtml");
                 string razorCode = generatorFactory.GetCodeGenerator(v).GenerateCode(generatorFactory, walkerFactory);
                 using (System.IO.StreamWriter w = new System.IO.StreamWriter(filePath))
                 {
@@ -49,24 +49,54 @@ namespace MVCVisualDesigner
             }
         }
 
-
         private RazorGeneratorOptionUI m_settingControl;
-        public Control SettingControl
+        public Control SettingControl { get { return internalSettingControl; } }
+
+        private RazorGeneratorOptionUI internalSettingControl
         {
-            get 
-            { 
+            get
+            {
                 if (m_settingControl == null) m_settingControl = new RazorGeneratorOptionUI();
                 return m_settingControl; 
             }
         }
 
-        public void OnLoadSettings(VDWidget widget)
+        public void OnLoadSettings(VDView rootView, string rootViewPath)
         {
-            // todo: init controls
+            this.internalSettingControl.initTreeView(rootView, rootViewPath);
         }
 
-        public void OnSaveSettings(VDWidget widget)
+        public void OnSaveSettings(VDView rootView, string rootViewPath)
         {
+        }
+    }
+
+    internal static class SettingsHelper
+    {
+        internal static readonly Guid GENERATED_VIEW_PATH = new Guid("6E08C559-1695-4F16-863C-4EF98EBCD143");
+
+        internal static string getViewPathFromView(VDView view, string viewPath)
+        {
+            string path = string.Empty;
+            if (view.settings.ContainsKey(SettingsHelper.GENERATED_VIEW_PATH))
+                path = (string)view.settings[SettingsHelper.GENERATED_VIEW_PATH];
+
+            if (!string.IsNullOrEmpty(viewPath))
+                path = Utility.PathHelper.GetAbsolutePath(path, viewPath);
+
+            return path;
+        }
+
+        internal static void saveViewPathToView(string path, VDView view, string viewPath)
+        {
+            if (!string.IsNullOrEmpty(viewPath))
+                path = Utility.PathHelper.GetRelativePath(path, viewPath);
+
+            using (var trans = view.Store.TransactionManager.BeginTransaction("Update code generation settings"))
+            {
+                view.settings[SettingsHelper.GENERATED_VIEW_PATH] = path;
+                trans.Commit();
+            }
         }
     }
 }

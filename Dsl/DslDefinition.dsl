@@ -78,6 +78,16 @@
           </Type>
         </DomainProperty>
       </Properties>
+      <ElementMergeDirectives>
+        <ElementMergeDirective>
+          <Index>
+            <DomainClassMoniker Name="ViewReference" />
+          </Index>
+          <LinkCreationPaths>
+            <DomainPath>ViewHasReferences.References</DomainPath>
+          </LinkCreationPaths>
+        </ElementMergeDirective>
+      </ElementMergeDirectives>
     </DomainClass>
     <DomainClass Id="db6a631c-6a2e-494c-b56d-a4f048c50743" Description="" Name="VDSection" DisplayName="Section" Namespace="MVCVisualDesigner">
       <BaseClass>
@@ -811,6 +821,40 @@
         <DomainClassMoniker Name="VDView" />
       </BaseClass>
     </DomainClass>
+    <DomainClass Id="0d9e9fd6-15e0-4a38-a5dc-53643c931615" Description="Description for MVCVisualDesigner.ViewReference" Name="ViewReference" DisplayName="View Reference" Namespace="MVCVisualDesigner">
+      <Properties>
+        <DomainProperty Id="28880152-b500-4a72-aa1b-13d5b589b888" Description="Description for MVCVisualDesigner.ViewReference.Config Label" Name="ConfigLabel" DisplayName="Config Label">
+          <Notes>Debug/Release ??</Notes>
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+    </DomainClass>
+    <DomainClass Id="7e9dbe0c-b915-441d-987f-ce28f32593f6" Description="Description for MVCVisualDesigner.Script" Name="Script" DisplayName="Script" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="ViewReference" />
+      </BaseClass>
+      <Properties>
+        <DomainProperty Id="598533d0-a304-4854-963f-23cab1953eb2" Description="Description for MVCVisualDesigner.Script.Src" Name="src" DisplayName="Src">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+    </DomainClass>
+    <DomainClass Id="d6cfa773-d267-4df7-9b74-3ed577e0813b" Description="Description for MVCVisualDesigner.StyleSheet" Name="StyleSheet" DisplayName="Style Sheet" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="ViewReference" />
+      </BaseClass>
+      <Properties>
+        <DomainProperty Id="9ecf40b2-2499-4df4-afa7-d4c152ee61d1" Description="Description for MVCVisualDesigner.StyleSheet.Href" Name="href" DisplayName="Href">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+    </DomainClass>
   </Classes>
   <Relationships>
     <DomainRelationship Id="8491408d-7160-4a47-9979-e0dab01d52b3" Description="Description for MVCVisualDesigner.WidgetHasChildren" Name="WidgetHasChildren" DisplayName="Widget Has Children" Namespace="MVCVisualDesigner" IsEmbedding="true">
@@ -1109,6 +1153,22 @@
         <DomainRole Id="38a0351d-de8a-4c9f-926e-fb7160247695" Description="" Name="VDCodeSnippetBody" DisplayName="VDCode Snippet Body" PropertyName="ParentCodeSnippet" Multiplicity="One" PropagatesDelete="true" Category="Internal States" PropertyDisplayName="Parent Code Snippet">
           <RolePlayer>
             <DomainClassMoniker Name="VDCodeSnippetBody" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="7d351a79-5718-479c-bb5e-8b577bdf5601" Description="Description for MVCVisualDesigner.ViewHasReferences" Name="ViewHasReferences" DisplayName="View Has References" Namespace="MVCVisualDesigner" IsEmbedding="true">
+      <Source>
+        <DomainRole Id="b23a54d3-37e0-4272-a3b3-c921d3973a25" Description="Scripts, Stylesheets etc." Name="VDView" DisplayName="VDView" PropertyName="References" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="References">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDView" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="def68c6f-8c97-4a32-9f31-75f7a2ebb673" Description="Description for MVCVisualDesigner.ViewHasReferences.ViewReference" Name="ViewReference" DisplayName="View Reference" PropertyName="View" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="View">
+          <RolePlayer>
+            <DomainClassMoniker Name="ViewReference" />
           </RolePlayer>
         </DomainRole>
       </Target>
@@ -1588,6 +1648,9 @@
           <XmlPropertyData XmlName="model">
             <DomainPropertyMoniker Name="VDView/Model" />
           </XmlPropertyData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="references">
+            <DomainRelationshipMoniker Name="ViewHasReferences" />
+          </XmlRelationshipData>
         </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDSection" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDSectionMoniker" ElementName="vDSection" MonikerTypeName="VDSectionMoniker">
@@ -2191,6 +2254,33 @@
           </XmlPropertyData>
           <XmlPropertyData XmlName="outlineThickness">
             <DomainPropertyMoniker Name="VDPartialViewShape/OutlineThickness" />
+          </XmlPropertyData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="ViewReference" MonikerAttributeName="" SerializeId="true" MonikerElementName="viewReferenceMoniker" ElementName="viewReference" MonikerTypeName="ViewReferenceMoniker">
+        <DomainClassMoniker Name="ViewReference" />
+        <ElementData>
+          <XmlPropertyData XmlName="configLabel">
+            <DomainPropertyMoniker Name="ViewReference/ConfigLabel" />
+          </XmlPropertyData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="ViewHasReferences" MonikerAttributeName="" SerializeId="true" MonikerElementName="viewHasReferencesMoniker" ElementName="viewHasReferences" MonikerTypeName="ViewHasReferencesMoniker">
+        <DomainRelationshipMoniker Name="ViewHasReferences" />
+      </XmlClassData>
+      <XmlClassData TypeName="Script" MonikerAttributeName="" SerializeId="true" MonikerElementName="scriptMoniker" ElementName="script" MonikerTypeName="ScriptMoniker">
+        <DomainClassMoniker Name="Script" />
+        <ElementData>
+          <XmlPropertyData XmlName="src">
+            <DomainPropertyMoniker Name="Script/src" />
+          </XmlPropertyData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="StyleSheet" MonikerAttributeName="" SerializeId="true" MonikerElementName="styleSheetMoniker" ElementName="styleSheet" MonikerTypeName="StyleSheetMoniker">
+        <DomainClassMoniker Name="StyleSheet" />
+        <ElementData>
+          <XmlPropertyData XmlName="href">
+            <DomainPropertyMoniker Name="StyleSheet/href" />
           </XmlPropertyData>
         </ElementData>
       </XmlClassData>

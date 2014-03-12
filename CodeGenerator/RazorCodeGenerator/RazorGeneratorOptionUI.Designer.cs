@@ -31,10 +31,10 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tvAllViews = new System.Windows.Forms.TreeView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.label1 = new System.Windows.Forms.Label();
             this.txtPath = new System.Windows.Forms.TextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
+            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -133,11 +133,11 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TreeView tvAllViews;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtPath;
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
+        private System.Windows.Forms.TreeView tvAllViews;
+        private System.Windows.Forms.TextBox txtPath;
     }
 }

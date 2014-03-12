@@ -64,12 +64,18 @@ namespace MVCVisualDesigner
                 && this.CurrentMVCVisualDesignerDocData.RootElement != null
                 && this.CurrentMVCVisualDesignerDocData.RootElement is VDView)
             {
-                DeployToolWindowForm deployWin = new DeployToolWindowForm();
+                CodeGenerationForm deployWin = new CodeGenerationForm(this.ServiceProvider);
                 deployWin.InitializeForm(
                     this.Package.GetCodeGeneratorAssemblyList(), 
                     (VDView)(this.CurrentMVCVisualDesignerDocData.RootElement),
                     this.activeDocumentPath);
-                deployWin.ShowDialog();
+
+                if (deployWin.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    deployWin.Close();
+                    System.Windows.Forms.MessageBox.Show("Files are generated successfully", "Message",
+                        System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+                }
             }
         }
 

@@ -171,6 +171,10 @@
       <Project>{66b04662-8499-4a39-8e97-bb62277e725f}</Project>
       <Name>Dsl</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{54036d22-8f50-4725-b3bf-d373ad15ebf4}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="RazorCodeGenerator\RazorCodeGenerator.tt">

@@ -25,7 +25,9 @@ namespace MVCVisualDesigner
             }
             set { m_codeGeneratorAssemblyList = value; } 
         }
-        private List<string> m_codeGeneratorAssemblyList = new List<string>() 
+        private List<string> m_codeGeneratorAssemblyList = null;
+
+        private static readonly List<string> s_defaultAssemblyList = new List<string>()
         {
             "./CodeGenerator.dll" 
         };
@@ -74,6 +76,12 @@ namespace MVCVisualDesigner
 
             if (this.Package == null) return;
             string path = System.IO.Path.Combine(this.Package.UserLocalDataPath, OPTIONS_FILE_NAME);
+            if (!System.IO.File.Exists(path))
+            {
+                this.CodeGeneratorAssemblyList.AddRange(s_defaultAssemblyList);
+                return;
+            }
+
             try
             {
                 XElement elemRoot = XElement.Load(path);

@@ -12,14 +12,17 @@ using System.Windows.Forms;
 
 namespace MVCVisualDesigner
 {
-    public partial class DeployToolWindowForm : Form
+    public partial class CodeGenerationForm : Form
     {
-        public DeployToolWindowForm()
+        private IServiceProvider m_provider;
+        public CodeGenerationForm(IServiceProvider provider)
         {
             InitializeComponent();
+            m_provider = provider;
             this.lvGeneratorList.FullRowSelect = true;
             this.lvGeneratorList.ItemChecked += lvGeneratorList_ItemChecked;
             this.lvGeneratorList.ColumnClick += lvGeneratorList_ColumnClick;
+            this.cmbConfiguration.SelectedIndex = 0;
         }
 
         void lvGeneratorList_ColumnClick(object sender, ColumnClickEventArgs e)
@@ -54,11 +57,13 @@ namespace MVCVisualDesigner
                 ICodeGeneratorController controller = getGeneratorControllerFromItemTag(item);
                 controller.OnGenerateCode(m_rootView, m_rootViewFilePath);
             }
+
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
-            CodeGenerationSettings settingForm = new CodeGenerationSettings(m_rootView);
+            CodeGenerationSettings settingForm = new CodeGenerationSettings(m_rootView, m_rootViewFilePath);
             // init tabs
             foreach (ListViewItem lvi in this.lvGeneratorList.Items)
             {
@@ -86,25 +91,33 @@ namespace MVCVisualDesigner
 
             foreach (string assemPath in generatorAssemblyList)
             {
-                Assembly assGenerator = Assembly.LoadFrom(assemPath);
-                if (assGenerator == null) continue;
-
-                foreach (Type t in assGenerator.GetTypes())
+                try
                 {
-                    if (t.GetInterface("ICodeGeneratorProvider") == null) continue;
+                    Assembly assGenerator = Assembly.LoadFrom(assemPath);
+                    if (assGenerator == null) continue;
 
-                    ICodeGeneratorProvider gp = Activator.CreateInstance(t) as ICodeGeneratorProvider;
-                    if (gp == null) continue;
-
-                    List<ICodeGeneratorController> generatorList = gp.GetGeneratorList();
-                    foreach (ICodeGeneratorController ctrl in generatorList)
+                    foreach (Type t in assGenerator.GetTypes())
                     {
-                        // add an item in the All Generators list view
-                        ListViewItem item = new ListViewItem(new string[] {"", ctrl.Name, Path.GetFileName(assemPath), Path.GetDirectoryName(assemPath), ctrl.Description });
-                        item.Checked = true;
-                        saveGeneratorControllerToItemTag(item, ctrl);
-                        this.lvGeneratorList.Items.Add(item);
+                        if (t.GetInterface("ICodeGeneratorProvider") == null) continue;
+
+                        ICodeGeneratorProvider gp = Activator.CreateInstance(t) as ICodeGeneratorProvider;
+                        if (gp == null) continue;
+
+                        List<ICodeGeneratorController> generatorList = gp.GetGeneratorList();
+                        foreach (ICodeGeneratorController ctrl in generatorList)
+                        {
+                            // add an item in the All Generators list view
+                            ListViewItem item = new ListViewItem(new string[] { "", ctrl.Name, Path.GetFileName(assemPath), Path.GetDirectoryName(assemPath), ctrl.Description });
+                            item.Checked = true;
+                            saveGeneratorControllerToItemTag(item, ctrl);
+                            this.lvGeneratorList.Items.Add(item);
+                        }
                     }
+                }
+                catch (Exception ex)
+                {
+                    Logger logger = new Logger(m_provider);
+                    logger.LogError(ex);
                 }
             }
         }

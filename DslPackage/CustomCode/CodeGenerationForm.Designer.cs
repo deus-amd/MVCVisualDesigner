@@ -1,6 +1,6 @@
 ﻿namespace MVCVisualDesigner
 {
-    partial class DeployToolWindowForm
+    partial class CodeGenerationForm
     {
         /// <summary>
         /// Required designer variable.
@@ -39,6 +39,8 @@
             this.btnGenerate = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
+            this.lblConfiguration = new System.Windows.Forms.Label();
+            this.cmbConfiguration = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,17 +60,20 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
-            this.tableLayoutPanel1.Controls.Add(this.lvGeneratorList, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnGenerate, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnCancel, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnSettings, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lvGeneratorList, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnGenerate, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnCancel, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnSettings, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.cmbConfiguration, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblConfiguration, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(787, 203);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(785, 212);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // lvGeneratorList
@@ -82,9 +87,9 @@
             this.colDesc});
             this.tableLayoutPanel1.SetColumnSpan(this.lvGeneratorList, 4);
             this.lvGeneratorList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvGeneratorList.Location = new System.Drawing.Point(3, 3);
+            this.lvGeneratorList.Location = new System.Drawing.Point(3, 28);
             this.lvGeneratorList.Name = "lvGeneratorList";
-            this.lvGeneratorList.Size = new System.Drawing.Size(781, 167);
+            this.lvGeneratorList.Size = new System.Drawing.Size(779, 151);
             this.lvGeneratorList.TabIndex = 8;
             this.lvGeneratorList.UseCompatibleStateImageBehavior = false;
             this.lvGeneratorList.View = System.Windows.Forms.View.Details;
@@ -117,7 +122,7 @@
             // btnGenerate
             // 
             this.btnGenerate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnGenerate.Location = new System.Drawing.Point(610, 176);
+            this.btnGenerate.Location = new System.Drawing.Point(608, 185);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(84, 24);
             this.btnGenerate.TabIndex = 6;
@@ -129,7 +134,7 @@
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCancel.Location = new System.Drawing.Point(700, 176);
+            this.btnCancel.Location = new System.Drawing.Point(698, 185);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(84, 24);
             this.btnCancel.TabIndex = 7;
@@ -139,7 +144,7 @@
             // btnSettings
             // 
             this.btnSettings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSettings.Location = new System.Drawing.Point(3, 176);
+            this.btnSettings.Location = new System.Drawing.Point(3, 185);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(84, 24);
             this.btnSettings.TabIndex = 9;
@@ -147,21 +152,46 @@
             this.btnSettings.UseVisualStyleBackColor = true;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
-            // DeployToolWindowForm
+            // lblConfiguration
+            // 
+            this.lblConfiguration.AutoSize = true;
+            this.lblConfiguration.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblConfiguration.Location = new System.Drawing.Point(3, 0);
+            this.lblConfiguration.Name = "lblConfiguration";
+            this.lblConfiguration.Size = new System.Drawing.Size(84, 25);
+            this.lblConfiguration.TabIndex = 10;
+            this.lblConfiguration.Text = "Configuration";
+            this.lblConfiguration.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cmbConfiguration
+            // 
+            this.cmbConfiguration.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbConfiguration.FormattingEnabled = true;
+            this.cmbConfiguration.Items.AddRange(new object[] {
+            "(None)",
+            "Debug",
+            "Release"});
+            this.cmbConfiguration.Location = new System.Drawing.Point(93, 3);
+            this.cmbConfiguration.Name = "cmbConfiguration";
+            this.cmbConfiguration.Size = new System.Drawing.Size(156, 21);
+            this.cmbConfiguration.TabIndex = 11;
+            // 
+            // CodeGenerationForm
             // 
             this.AcceptButton = this.btnGenerate;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(787, 203);
+            this.ClientSize = new System.Drawing.Size(785, 212);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Name = "DeployToolWindowForm";
+            this.Name = "CodeGenerationForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Code Generation";
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -180,5 +210,7 @@
         private System.Windows.Forms.ColumnHeader colPath;
         private System.Windows.Forms.ColumnHeader colDesc;
         private System.Windows.Forms.Button btnSettings;
+        private System.Windows.Forms.ComboBox cmbConfiguration;
+        private System.Windows.Forms.Label lblConfiguration;
     }
 }

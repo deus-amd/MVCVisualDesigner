@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MVCVisualDesigner
+namespace MVCVisualDesigner.Utility
 {
-    public class PackageUtility
+    public class PathHelper
     {
         // utility methods
         public static string GetAbsolutePath(string path)
@@ -16,16 +16,28 @@ namespace MVCVisualDesigner
             UriBuilder uri = new UriBuilder(curAssembly.CodeBase);
 
             string curPath = Uri.UnescapeDataString(uri.Path);
-            curPath = Path.GetDirectoryName(curPath);
-            path = Path.Combine(curPath, path);
-            path = Path.GetFullPath(path);
-            return path;
+            return GetAbsolutePath(path, curPath);
         }
 
         public static string GetRelativePath(string path)
         {
             var curAssembly = System.Reflection.Assembly.GetCallingAssembly();
             return MakeRelativePath(curAssembly.CodeBase, path);
+        }
+
+        public static string GetAbsolutePath(string path, string refFilePath)
+        {
+            if (Path.IsPathRooted(path)) return path;
+
+            refFilePath = Path.GetDirectoryName(refFilePath);
+            path = Path.Combine(refFilePath, path);
+            path = Path.GetFullPath(path);
+            return path;
+        }
+
+        public static string GetRelativePath(string path, string refFilePath)
+        {
+            return MakeRelativePath(refFilePath, path);
         }
 
         /// <summary>

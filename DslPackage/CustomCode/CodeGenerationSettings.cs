@@ -13,15 +13,17 @@ namespace MVCVisualDesigner
     public partial class CodeGenerationSettings : Form
     {
         private VDView m_rootView;
-        public CodeGenerationSettings(VDView rootView)
+        private string m_rootViewPath;
+        public CodeGenerationSettings(VDView rootView, string rootViewPath)
         {
             InitializeComponent();
             m_rootView = rootView;
+            m_rootViewPath = rootViewPath;
         }
 
         public void AddTabPage(string tabTitle, ICodeGeneratorController controller)
         {
-            controller.OnLoadSettings(m_rootView);
+            controller.OnLoadSettings(m_rootView, m_rootViewPath);
             controller.SettingControl.Dock = DockStyle.Fill;
 
             TabPage page = new TabPage(tabTitle);
@@ -37,7 +39,7 @@ namespace MVCVisualDesigner
                 try
                 {
                     ICodeGeneratorController controller = getGeneratorControllerFromPageTag(page);
-                    controller.OnSaveSettings(m_rootView);
+                    controller.OnSaveSettings(m_rootView, m_rootViewPath);
                 }
                 catch (SettingUIValidationException ex)
                 {
