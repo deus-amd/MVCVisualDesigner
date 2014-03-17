@@ -855,6 +855,46 @@
         </DomainProperty>
       </Properties>
     </DomainClass>
+    <DomainClass Id="d10f253c-17da-4f6f-b5c6-1108c0232c30" Description="Description for MVCVisualDesigner.VDAlert" Name="VDAlert" DisplayName="VDAlert" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="ace993ce-330b-4636-9036-86133adfb034" Description="Description for MVCVisualDesigner.VDConfirmDialog" Name="VDConfirmDialog" DisplayName="VDConfirm Dialog" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="ccb47c91-47c4-401b-b809-7e95039da58a" Description="Description for MVCVisualDesigner.VDAjax" Name="VDAjax" DisplayName="VDAjax" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="44662fa6-7b51-4e96-bbac-d22ba9ab1c49" Description="Description for MVCVisualDesigner.VDMessagePanel" Name="VDMessagePanel" DisplayName="VDMessage Panel" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="820def11-d2da-4509-a7af-b12b7b2e4f07" Description="Description for MVCVisualDesigner.VDDialog" Name="VDDialog" DisplayName="VDDialog" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="b0d02040-ed79-4497-ad45-cc5503db80ec" Description="Description for MVCVisualDesigner.VDIcon" Name="VDIcon" DisplayName="VDIcon" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="bab25ca6-49ef-4753-a5c0-5faaebc0666e" Description="Description for MVCVisualDesigner.VDEventSource" Name="VDEventSource" DisplayName="VDEvent Source" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="8bbbd38a-b626-470a-8249-28240f6bb9a8" Description="Description for MVCVisualDesigner.VDEventTarget" Name="VDEventTarget" DisplayName="VDEvent Target" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDWidget" />
+      </BaseClass>
+    </DomainClass>
   </Classes>
   <Relationships>
     <DomainRelationship Id="8491408d-7160-4a47-9979-e0dab01d52b3" Description="Description for MVCVisualDesigner.WidgetHasChildren" Name="WidgetHasChildren" DisplayName="Widget Has Children" Namespace="MVCVisualDesigner" IsEmbedding="true">
@@ -1169,6 +1209,22 @@
         <DomainRole Id="def68c6f-8c97-4a32-9f31-75f7a2ebb673" Description="Description for MVCVisualDesigner.ViewHasReferences.ViewReference" Name="ViewReference" DisplayName="View Reference" PropertyName="View" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="View">
           <RolePlayer>
             <DomainClassMoniker Name="ViewReference" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="22a64e4f-ddb6-4281-8230-88b17ebe9c94" Description="Description for MVCVisualDesigner.SourcePerformsActionOnTarget" Name="SourcePerformsActionOnTarget" DisplayName="Source Performs Action On Target" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="ff3afd76-db31-4df3-8cb7-ddb3c1755864" Description="Description for MVCVisualDesigner.SourcePerformsActionOnTarget.SourceVDWidget" Name="SourceVDWidget" DisplayName="Source VDWidget" PropertyName="Sources" PropertyDisplayName="Sources">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDWidget" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="fef34136-11de-40ef-b49a-c80a377ca6b0" Description="Description for MVCVisualDesigner.SourcePerformsActionOnTarget.TargetVDWidget" Name="TargetVDWidget" DisplayName="Target VDWidget" PropertyName="Targets" PropertyDisplayName="Targets">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDWidget" />
           </RolePlayer>
         </DomainRole>
       </Target>
@@ -1604,7 +1660,42 @@
         </DomainProperty>
       </Properties>
     </GeometryShape>
+    <GeometryShape Id="f8b67f3b-cb16-4348-b5f9-2f23ac3e038a" Description="Description for MVCVisualDesigner.VDIconShape" Name="VDIconShape" DisplayName="VDIcon Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDIcon Shape" InitialHeight="1" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
+    <GeometryShape Id="9dd3a3cf-c6de-4123-ae6e-a1b4dc767f5d" Description="Description for MVCVisualDesigner.VDAlertShape" Name="VDAlertShape" DisplayName="VDAlert Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDAlert Shape" InitialHeight="1" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
+    <GeometryShape Id="08c59a36-eebc-4097-8219-97f80873eae5" Description="Description for MVCVisualDesigner.VDConfirmDialogShape" Name="VDConfirmDialogShape" DisplayName="VDConfirm Dialog Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDConfirm Dialog Shape" InitialHeight="1" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
+    <GeometryShape Id="1350d597-ba5f-4ee8-893c-835f089e66dd" Description="Description for MVCVisualDesigner.VDMessagePanelShape" Name="VDMessagePanelShape" DisplayName="VDMessage Panel Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDMessage Panel Shape" InitialHeight="1" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
+    <GeometryShape Id="3a99453d-21f9-47aa-92c7-08ec3e0aedb5" Description="Description for MVCVisualDesigner.VDDialogShape" Name="VDDialogShape" DisplayName="VDDialog Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDDialog Shape" InitialHeight="1" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
+    <GeometryShape Id="56b59d3c-8aab-42fd-84b0-ae9fd7513a85" Description="Description for MVCVisualDesigner.VDAjaxShape" Name="VDAjaxShape" DisplayName="VDAjax Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDAjax Shape" InitialHeight="1" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
+    <Port Id="0d637168-0ce4-4dc1-8148-5209a1173164" Description="Description for MVCVisualDesigner.VDEventSourcePort" Name="VDEventSourcePort" DisplayName="VDEvent Source Port" Namespace="MVCVisualDesigner" FixedTooltipText="VDEvent Source Port" FillColor="Orange" InitialWidth="0.2" InitialHeight="0.2" OutlineThickness="0.01" FillGradientMode="None" Geometry="Circle" />
+    <Port Id="af8c6ce1-1bd2-4d47-9b67-3d7bb3a1367e" Description="Description for MVCVisualDesigner.VDEventTargetPort" Name="VDEventTargetPort" DisplayName="VDEvent Target Port" Namespace="MVCVisualDesigner" FixedTooltipText="VDEvent Target Port" FillColor="Green" InitialWidth="0.2" InitialHeight="0.2" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle" />
   </Shapes>
+  <Connectors>
+    <Connector Id="63c5cc6f-a107-45c2-87c9-2c0a88ac3581" Description="" Name="VDSourcePerformActionOnTargetConnector" DisplayName="Action" Namespace="MVCVisualDesigner" FixedTooltipText="VDSource Perform Action On Target Connector" DashStyle="Dash" TargetEndStyle="EmptyArrow" Thickness="0.01" />
+  </Connectors>
   <XmlSerializationBehavior Name="MVCVisualDesignerSerializationBehavior" Namespace="MVCVisualDesigner">
     <ClassData>
       <XmlClassData TypeName="VDDiagram" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDDiagramMoniker" ElementName="vDDiagram" MonikerTypeName="VDDiagramMoniker">
@@ -1640,6 +1731,9 @@
           <XmlPropertyData XmlName="settings">
             <DomainPropertyMoniker Name="VDWidget/settings" />
           </XmlPropertyData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="sources">
+            <DomainRelationshipMoniker Name="SourcePerformsActionOnTarget" />
+          </XmlRelationshipData>
         </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDView" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDViewMoniker" ElementName="vDView" MonikerTypeName="VDViewMoniker">
@@ -2284,6 +2378,60 @@
           </XmlPropertyData>
         </ElementData>
       </XmlClassData>
+      <XmlClassData TypeName="VDAlert" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDAlertMoniker" ElementName="vDAlert" MonikerTypeName="VDAlertMoniker">
+        <DomainClassMoniker Name="VDAlert" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDConfirmDialog" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDConfirmDialogMoniker" ElementName="vDConfirmDialog" MonikerTypeName="VDConfirmDialogMoniker">
+        <DomainClassMoniker Name="VDConfirmDialog" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDAjax" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDAjaxMoniker" ElementName="vDAjax" MonikerTypeName="VDAjaxMoniker">
+        <DomainClassMoniker Name="VDAjax" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDMessagePanel" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDMessagePanelMoniker" ElementName="vDMessagePanel" MonikerTypeName="VDMessagePanelMoniker">
+        <DomainClassMoniker Name="VDMessagePanel" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDDialog" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDDialogMoniker" ElementName="vDDialog" MonikerTypeName="VDDialogMoniker">
+        <DomainClassMoniker Name="VDDialog" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDIcon" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDIconMoniker" ElementName="vDIcon" MonikerTypeName="VDIconMoniker">
+        <DomainClassMoniker Name="VDIcon" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDEventSource" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDEventSourceMoniker" ElementName="vDEventSource" MonikerTypeName="VDEventSourceMoniker">
+        <DomainClassMoniker Name="VDEventSource" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDEventTarget" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDEventTargetMoniker" ElementName="vDEventTarget" MonikerTypeName="VDEventTargetMoniker">
+        <DomainClassMoniker Name="VDEventTarget" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDIconShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDIconShapeMoniker" ElementName="vDIconShape" MonikerTypeName="VDIconShapeMoniker">
+        <GeometryShapeMoniker Name="VDIconShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDAlertShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDAlertShapeMoniker" ElementName="vDAlertShape" MonikerTypeName="VDAlertShapeMoniker">
+        <GeometryShapeMoniker Name="VDAlertShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDConfirmDialogShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDConfirmDialogShapeMoniker" ElementName="vDConfirmDialogShape" MonikerTypeName="VDConfirmDialogShapeMoniker">
+        <GeometryShapeMoniker Name="VDConfirmDialogShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDMessagePanelShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDMessagePanelShapeMoniker" ElementName="vDMessagePanelShape" MonikerTypeName="VDMessagePanelShapeMoniker">
+        <GeometryShapeMoniker Name="VDMessagePanelShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDDialogShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDDialogShapeMoniker" ElementName="vDDialogShape" MonikerTypeName="VDDialogShapeMoniker">
+        <GeometryShapeMoniker Name="VDDialogShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDAjaxShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDAjaxShapeMoniker" ElementName="vDAjaxShape" MonikerTypeName="VDAjaxShapeMoniker">
+        <GeometryShapeMoniker Name="VDAjaxShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDEventSourcePort" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDEventSourcePortMoniker" ElementName="vDEventSourcePort" MonikerTypeName="VDEventSourcePortMoniker">
+        <PortMoniker Name="VDEventSourcePort" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDEventTargetPort" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDEventTargetPortMoniker" ElementName="vDEventTargetPort" MonikerTypeName="VDEventTargetPortMoniker">
+        <PortMoniker Name="VDEventTargetPort" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDSourcePerformActionOnTargetConnector" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDSourcePerformActionOnTargetConnectorMoniker" ElementName="vDSourcePerformActionOnTargetConnector" MonikerTypeName="VDSourcePerformActionOnTargetConnectorMoniker">
+        <ConnectorMoniker Name="VDSourcePerformActionOnTargetConnector" />
+      </XmlClassData>
+      <XmlClassData TypeName="SourcePerformsActionOnTarget" MonikerAttributeName="" SerializeId="true" MonikerElementName="sourcePerformsActionOnTargetMoniker" ElementName="sourcePerformsActionOnTarget" MonikerTypeName="SourcePerformsActionOnTargetMoniker">
+        <DomainRelationshipMoniker Name="SourcePerformsActionOnTarget" />
+      </XmlClassData>
     </ClassData>
   </XmlSerializationBehavior>
   <ExplorerBehavior Name="MVCVisualDesignerExplorer">
@@ -2673,6 +2821,25 @@
         </TargetDirectives>
       </LinkConnectDirective>
     </ConnectionBuilder>
+    <ConnectionBuilder Name="SourcePerformsActionOnTargetBuilder">
+      <LinkConnectDirective UsesCustomConnect="true">
+        <DomainRelationshipMoniker Name="SourcePerformsActionOnTarget" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true" UsesRoleSpecificCustomConnect="true">
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDWidget" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true" UsesRoleSpecificCustomConnect="true">
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDWidget" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
   </ConnectionBuilders>
   <Diagram Id="1fd11f50-969f-48aa-af5b-31b4277c4671" Description="" Name="VDDiagram" DisplayName="Minimal Language Diagram" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true">
     <Class>
@@ -2904,7 +3071,45 @@
         <DomainClassMoniker Name="VDPartialView" />
         <GeometryShapeMoniker Name="VDPartialViewShape" />
       </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDIcon" />
+        <GeometryShapeMoniker Name="VDIconShape" />
+      </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDAlert" />
+        <GeometryShapeMoniker Name="VDAlertShape" />
+      </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDConfirmDialog" />
+        <GeometryShapeMoniker Name="VDConfirmDialogShape" />
+      </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDMessagePanel" />
+        <GeometryShapeMoniker Name="VDMessagePanelShape" />
+      </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDDialog" />
+        <GeometryShapeMoniker Name="VDDialogShape" />
+      </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDAjax" />
+        <GeometryShapeMoniker Name="VDAjaxShape" />
+      </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDEventSource" />
+        <PortMoniker Name="VDEventSourcePort" />
+      </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDEventTarget" />
+        <PortMoniker Name="VDEventTargetPort" />
+      </ShapeMap>
     </ShapeMaps>
+    <ConnectorMaps>
+      <ConnectorMap ConnectsCustomSource="true" ConnectsCustomTarget="true">
+        <ConnectorMoniker Name="VDSourcePerformActionOnTargetConnector" />
+        <DomainRelationshipMoniker Name="SourcePerformsActionOnTarget" />
+      </ConnectorMap>
+    </ConnectorMaps>
   </Diagram>
   <Designer CopyPasteGeneration="CopyPasteOnly" FileExtension="amvd" EditorGuid="061c971a-6960-4ef9-9c30-8a8a6543b9f7">
     <RootClass>
@@ -2925,6 +3130,15 @@
       </ElementTool>
       <ElementTool Name="TableRowsTool" ToolboxIcon="Resources\GridLayoutIcon2.bmp" Caption="Table Rows" Tooltip="" HelpKeyword="TableRowsTool">
         <DomainClassMoniker Name="VDTableRow" />
+      </ElementTool>
+      <ElementTool Name="DialogTool" ToolboxIcon="Resources\FormIcon.bmp" Caption="Dialog" Tooltip="" HelpKeyword="DialogTool">
+        <DomainClassMoniker Name="VDDialog" />
+      </ElementTool>
+      <ElementTool Name="AlertTool" ToolboxIcon="Resources\AlertDialog.bmp" Caption="Alert Dialog" Tooltip="" HelpKeyword="AlertTool">
+        <DomainClassMoniker Name="VDAlert" />
+      </ElementTool>
+      <ElementTool Name="ConfirmDialogTool" ToolboxIcon="Resources\ConfirmDialog.bmp" Caption="Confirm Dialog" Tooltip="" HelpKeyword="ConfirmDialogTool">
+        <DomainClassMoniker Name="VDConfirmDialog" />
       </ElementTool>
     </ToolboxTab>
     <ToolboxTab TabText="Form">
@@ -2960,6 +3174,15 @@
       <ElementTool Name="PartialViewTool" ToolboxIcon="Resources\ViewIcon.bmp" Caption="Partial View" Tooltip="" HelpKeyword="PartialViewTool">
         <DomainClassMoniker Name="VDPartialView" />
       </ElementTool>
+      <ElementTool Name="IconTool" ToolboxIcon="Resources\DynamicImage_6024_24.bmp" Caption="Icon" Tooltip="" HelpKeyword="IconTool">
+        <DomainClassMoniker Name="VDIcon" />
+      </ElementTool>
+      <ElementTool Name="AjaxTool" ToolboxIcon="Resources\FileFromWeb_6281_24.bmp" Caption="Ajax" Tooltip="" HelpKeyword="AjaxTool">
+        <DomainClassMoniker Name="VDAjax" />
+      </ElementTool>
+      <ConnectionTool Name="ActionTool" ToolboxIcon="Resources\ExampleConnectorToolBitmap.bmp" Caption="Action" Tooltip="" HelpKeyword="ActionTool">
+        <ConnectionBuilderMoniker Name="MVCVisualDesigner/SourcePerformsActionOnTargetBuilder" />
+      </ConnectionTool>
     </ToolboxTab>
     <Validation UsesMenu="false" UsesOpen="false" UsesSave="false" UsesLoad="false" />
     <DiagramMoniker Name="VDDiagram" />

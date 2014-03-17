@@ -17,6 +17,9 @@ namespace MVCVisualDesigner
 <#
     }
 #>
+        
+        EventSource,
+        EventTarget,
         Unknown
     }
 

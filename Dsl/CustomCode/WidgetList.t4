@@ -23,6 +23,12 @@ string[] WidgetList = new string[]{
 	"VDHTMLTag",
 	"VDCodeSnippet",
 	"VDText",
+	"VDIcon",
+	"VDAlert",
+	"VDConfirmDialog",
+	"VDDialog",
+	"VDMessagePanel",
+	"VDAjax",
 
 	// Utilities
 	"VDHoriSeparator",
@@ -35,8 +41,6 @@ string[] WidgetList = new string[]{
 
 // the widgets needn't to specify parent (alreay specified in DSL definition)
 string[] SubWidgetList = new string[] {
-	//"VDGridLayoutCell",
-	//"VDGridLayoutHeadCell",
 	"VDSectionHead",
 	"VDSectionBody",
 	"VDSelectOption",

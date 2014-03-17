@@ -96,6 +96,7 @@
     <Compile Include="CustomCode\StateMachine.cs" />
     <Compile Include="CustomCode\Widgets\CodeSnippet.cs" />
     <Compile Include="CustomCode\Widgets\Container.cs" />
+    <Compile Include="CustomCode\Widgets\Event.cs" />
     <Compile Include="CustomCode\Widgets\Form.cs" />
     <Compile Include="CustomCode\Widgets\HTMLTag.cs" />
     <Compile Include="CustomCode\Widgets\Separator.cs" />
