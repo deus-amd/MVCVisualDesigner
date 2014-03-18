@@ -10,81 +10,95 @@ namespace MVCVisualDesigner
 {
     public partial class VDEventSource
     {
-        public override WidgetType WidgetType
-        {
-            get { return MVCVisualDesigner.WidgetType.EventSource; }
-        }
     }
 
     public partial class VDEventTarget
     {
-        public override WidgetType WidgetType
-        {
-            get { return MVCVisualDesigner.WidgetType.EventTarget; }
-        }
     }
 
-    public partial class VDSourcePerformActionOnTargetConnector
+    public partial class PerformsActionOnBuilder
     {
-        protected override Microsoft.VisualStudio.Modeling.Diagrams.GraphObject.VGRoutingStyle DefaultRoutingStyle
-        {
-            get
-            {
-                return Microsoft.VisualStudio.Modeling.Diagrams.GraphObject.VGRoutingStyle.VGRouteCenterToCenter;
-            }
-        }
-    }
-
-
-    public partial class SourcePerformsActionOnTargetBuilder
-    {
-        private static bool CanAcceptVDWidgetAsSource(VDWidget candidate)
-        {
-            throw new NotImplementedException();
-        }
-
-        private static bool CanAcceptVDWidgetAsTarget(VDWidget candidate)
-        {
-            throw new NotImplementedException();
-        }
-
-        private static bool CanAcceptVDWidgetAndVDWidgetAsSourceAndTarget(VDWidget sourceVDWidget, VDWidget targetVDWidget)
-        {
-            throw new NotImplementedException();
-        }
-
         private static ElementLink ConnectSourceToTarget(ModelElement source, ModelElement target)
         {
-            throw new NotImplementedException();
-        }
-    }
+            VDEventSource eventSource = null;
+            VDEventTarget eventTarget = null;
 
-    public partial class VDDiagramBase
-    {
-        private NodeShape GetSourceShapeForVDSourcePerformActionOnTargetConnector(VDSourcePerformActionOnTargetConnector connector)
-        {
-            if (connector.FromShape is VDDiagram)
-                return null;
-            else
-                return connector.FromShape;
+            if (source is VDViewComponent)
+            {
+                if (target is VDViewComponent)
+                {
+                    VDViewComponent sourceAccepted = (VDViewComponent)source;
+                    eventSource = new VDEventSource(sourceAccepted.Partition);
+                    sourceAccepted.EventSources.Add(eventSource);
+
+                    VDViewComponent targetAccepted = (VDViewComponent)target;
+                    eventTarget = new VDEventTarget(targetAccepted.Partition);
+                    targetAccepted.EventTargets.Add(eventTarget);
+ 
+                }
+                else if (target is VDEventTarget)
+                {
+                    VDViewComponent sourceAccepted = (VDViewComponent)source;
+                    eventSource = new VDEventSource(sourceAccepted.Partition);
+                    sourceAccepted.EventSources.Add(eventSource);
+
+                    eventTarget = (VDEventTarget)target;
+                }
+            }
+            else if (source is VDEventSource)
+            {
+                if (target is VDViewComponent)
+                {
+                    eventSource = (VDEventSource)source;
+
+                    VDViewComponent targetAccepted = (VDViewComponent)target;
+                    eventTarget = new VDEventTarget(targetAccepted.Partition);
+                    targetAccepted.EventTargets.Add(eventTarget);
+                }
+                else if (target is VDEventTarget)
+                {
+                    eventSource = (VDEventSource)source;
+                    eventTarget = (VDEventTarget)target;
+                }
+            }
+
+            if (eventSource != null && eventTarget != null)
+            {
+                ElementLink action = new PerformsActionOn(eventSource, eventTarget);
+                if (DomainClassInfo.HasNameProperty(action))
+                {
+                    DomainClassInfo.SetUniqueName(action);
+                }
+                return action;   
+            }
+
+            System.Diagnostics.Debug.Fail("Having agreed that the connection can be accepted we should never fail to make one.");
+            throw new System.InvalidOperationException();
         }
 
-        private NodeShape GetTargetShapeForVDSourcePerformActionOnTargetConnector(VDSourcePerformActionOnTargetConnector connector)
+        private static bool CanAcceptVDViewComponentAsSource(VDViewComponent candidate)
         {
-            if (connector.ToShape is VDDiagram)
-                return null;
-            else
-                return connector.FromShape;
+            return true;
         }
 
-        private ModelElement GetSourceRolePlayerForLinkMappedByVDSourcePerformActionOnTargetConnector(VDSourcePerformActionOnTargetConnector connector)
+        private static bool CanAcceptVDViewComponentAsTarget(VDViewComponent candidate)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
-        private ModelElement GetTargetRolePlayerForLinkMappedByVDSourcePerformActionOnTargetConnector(VDSourcePerformActionOnTargetConnector connector)
+        private static bool CanAcceptVDViewComponentAndVDViewComponentAsSourceAndTarget(VDViewComponent sourceVDViewComponent, VDViewComponent targetVDViewComponent)
         {
-            throw new NotImplementedException();
+            return true;
+        }
+
+        private static bool CanAcceptVDViewComponentAndVDEventTargetAsSourceAndTarget(VDViewComponent sourceVDViewComponent, VDEventTarget targetVDEventTarget)
+        {
+            return true;
+        }
+
+        private static bool CanAcceptVDEventSourceAndVDViewComponentAsSourceAndTarget(VDEventSource sourceVDEventSource, VDViewComponent targetVDViewComponent)
+        {
+            return true;
         }
     }
 }
