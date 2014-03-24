@@ -8,6 +8,22 @@ using System.Threading.Tasks;
 
 namespace MVCVisualDesigner
 {
+    public partial class VDViewComponent
+    {
+        public virtual bool IsEventSource { get { return true; } }
+        public virtual bool IsEventTarget { get { return true; } }
+
+        protected List<string> m_supportedEvents = new List<string>() 
+        { 
+            "Click",
+            "Change",
+            
+            "OnSuccess",
+            "OnFail",
+        };
+        public virtual List<string> SupportedEvents { get { return m_supportedEvents; } }
+    }
+
     public partial class VDEventSource
     {
     }
@@ -62,14 +78,26 @@ namespace MVCVisualDesigner
                 }
             }
 
-            if (eventSource != null && eventTarget != null)
+            if (eventSource != null && eventTarget != null 
+                && eventSource.Widget != null && eventTarget.Widget != null)
             {
-                ElementLink action = new PerformsActionOn(eventSource, eventTarget);
-                if (DomainClassInfo.HasNameProperty(action))
+                EventSettingDialog dlg = new EventSettingDialog();
+                dlg.SetEventList(eventSource.Widget.SupportedEvents);
+                if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    DomainClassInfo.SetUniqueName(action);
+                    PerformsActionOn action = new PerformsActionOn(eventSource, eventTarget);
+                    action.ActionName = dlg.Action;
+                    eventSource.EventName = dlg.Event;
+                    if (DomainClassInfo.HasNameProperty(action))
+                    {
+                        DomainClassInfo.SetUniqueName(action);
+                    }
+                    return action;   
                 }
-                return action;   
+                else
+                {
+                    return null;
+                }
             }
 
             System.Diagnostics.Debug.Fail("Having agreed that the connection can be accepted we should never fail to make one.");
@@ -78,25 +106,28 @@ namespace MVCVisualDesigner
 
         private static bool CanAcceptVDViewComponentAsSource(VDViewComponent candidate)
         {
-            return true;
+            return candidate.IsEventSource;
         }
 
         private static bool CanAcceptVDViewComponentAsTarget(VDViewComponent candidate)
         {
-            return true;
+            return candidate.IsEventTarget;
         }
 
-        private static bool CanAcceptVDViewComponentAndVDViewComponentAsSourceAndTarget(VDViewComponent sourceVDViewComponent, VDViewComponent targetVDViewComponent)
+        private static bool CanAcceptVDViewComponentAndVDViewComponentAsSourceAndTarget(
+            VDViewComponent sourceVDViewComponent, VDViewComponent targetVDViewComponent)
         {
             return true;
         }
 
-        private static bool CanAcceptVDViewComponentAndVDEventTargetAsSourceAndTarget(VDViewComponent sourceVDViewComponent, VDEventTarget targetVDEventTarget)
+        private static bool CanAcceptVDViewComponentAndVDEventTargetAsSourceAndTarget(
+            VDViewComponent sourceVDViewComponent, VDEventTarget targetVDEventTarget)
         {
             return true;
         }
 
-        private static bool CanAcceptVDEventSourceAndVDViewComponentAsSourceAndTarget(VDEventSource sourceVDEventSource, VDViewComponent targetVDViewComponent)
+        private static bool CanAcceptVDEventSourceAndVDViewComponentAsSourceAndTarget(
+            VDEventSource sourceVDEventSource, VDViewComponent targetVDViewComponent)
         {
             return true;
         }

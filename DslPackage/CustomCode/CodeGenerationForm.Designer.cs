@@ -39,8 +39,8 @@
             this.btnGenerate = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
-            this.lblConfiguration = new System.Windows.Forms.Label();
             this.cmbConfiguration = new System.Windows.Forms.ComboBox();
+            this.lblConfiguration = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -152,17 +152,6 @@
             this.btnSettings.UseVisualStyleBackColor = true;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
-            // lblConfiguration
-            // 
-            this.lblConfiguration.AutoSize = true;
-            this.lblConfiguration.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblConfiguration.Location = new System.Drawing.Point(3, 0);
-            this.lblConfiguration.Name = "lblConfiguration";
-            this.lblConfiguration.Size = new System.Drawing.Size(84, 25);
-            this.lblConfiguration.TabIndex = 10;
-            this.lblConfiguration.Text = "Configuration";
-            this.lblConfiguration.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // cmbConfiguration
             // 
             this.cmbConfiguration.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -175,6 +164,17 @@
             this.cmbConfiguration.Name = "cmbConfiguration";
             this.cmbConfiguration.Size = new System.Drawing.Size(156, 21);
             this.cmbConfiguration.TabIndex = 11;
+            // 
+            // lblConfiguration
+            // 
+            this.lblConfiguration.AutoSize = true;
+            this.lblConfiguration.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblConfiguration.Location = new System.Drawing.Point(3, 0);
+            this.lblConfiguration.Name = "lblConfiguration";
+            this.lblConfiguration.Size = new System.Drawing.Size(84, 25);
+            this.lblConfiguration.TabIndex = 10;
+            this.lblConfiguration.Text = "Configuration";
+            this.lblConfiguration.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // CodeGenerationForm
             // 

@@ -43,11 +43,6 @@
 /Dsl/CustomCode/FixUpDiagram.cs
 /Dsl/CustomCode/WidgetType.cs
 
-/Dsl/Dsl.csproj.user
-
-
-
-/DslPackage/*.user
 
 /CodeGenerator/bin/
 /CodeGenerator/obj/

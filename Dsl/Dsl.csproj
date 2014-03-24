@@ -88,17 +88,29 @@
     <Compile Include="CustomCode\DomainElementListEditor.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CustomCode\EventSettingDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomCode\EventSettingDialog.Designer.cs">
+      <DependentUpon>EventSettingDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomCode\HTMLAttribute.cs" />
     <Compile Include="CustomCode\ICustomMerge.cs" />
     <Compile Include="CustomCode\MergeMananger.cs" />
     <Compile Include="CustomCode\PropertyEditors\VDCollectionEditor.cs" />
     <Compile Include="CustomCode\ShapeFields\MultiLineTextField.cs" />
     <Compile Include="CustomCode\StateMachine.cs" />
+    <Compile Include="CustomCode\Widgets\Ajax.cs" />
+    <Compile Include="CustomCode\Widgets\Alert_Confirm.cs" />
     <Compile Include="CustomCode\Widgets\CodeSnippet.cs" />
     <Compile Include="CustomCode\Widgets\Container.cs" />
+    <Compile Include="CustomCode\Widgets\Dialog.cs" />
     <Compile Include="CustomCode\Widgets\Event.cs" />
     <Compile Include="CustomCode\Widgets\Form.cs" />
     <Compile Include="CustomCode\Widgets\HTMLTag.cs" />
+    <Compile Include="CustomCode\Widgets\Icon.cs" />
+    <Compile Include="CustomCode\Widgets\MessagePanel.cs" />
+    <Compile Include="CustomCode\Widgets\ModelSelector.cs" />
     <Compile Include="CustomCode\Widgets\Separator.cs" />
     <Compile Include="CustomCode\Widgets\Tab.cs" />
     <Compile Include="CustomCode\Widgets\Table.cs" />
@@ -301,6 +313,9 @@
     <Service Include="{508349B6-6B84-4df5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CustomCode\EventSettingDialog.resx">
+      <DependentUpon>EventSettingDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GeneratedCode\DomainModelResx.resx">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

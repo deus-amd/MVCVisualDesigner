@@ -584,6 +584,11 @@ namespace MVCVisualDesigner
         {
         }
 
+        public override void OnDoubleClick(Microsoft.VisualStudio.Modeling.Diagrams.DiagramPointEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("zorder is : {0}", this.ZOrder);
+        }
+
         /////////////////////////////////////////////////////////////////////////////////
 #region utilities
         public T GetMEL<T>() where T : VDWidget
@@ -700,4 +705,5 @@ namespace MVCVisualDesigner
             }
         }
     }
+
 }

@@ -87,6 +87,14 @@
             <DomainPath>ViewHasReferences.References</DomainPath>
           </LinkCreationPaths>
         </ElementMergeDirective>
+        <ElementMergeDirective>
+          <Index>
+            <DomainClassMoniker Name="VDModelSelector" />
+          </Index>
+          <LinkCreationPaths>
+            <DomainPath>ViewHasModelSelector.VDModelSelector</DomainPath>
+          </LinkCreationPaths>
+        </ElementMergeDirective>
       </ElementMergeDirectives>
     </DomainClass>
     <DomainClass Id="db6a631c-6a2e-494c-b56d-a4f048c50743" Description="" Name="VDSection" DisplayName="Section" Namespace="MVCVisualDesigner">
@@ -885,7 +893,15 @@
         <DomainClassMoniker Name="VDViewComponent" />
       </BaseClass>
     </DomainClass>
-    <DomainClass Id="bab25ca6-49ef-4753-a5c0-5faaebc0666e" Description="Description for MVCVisualDesigner.VDEventSource" Name="VDEventSource" DisplayName="VDEvent Source" Namespace="MVCVisualDesigner" />
+    <DomainClass Id="bab25ca6-49ef-4753-a5c0-5faaebc0666e" Description="Description for MVCVisualDesigner.VDEventSource" Name="VDEventSource" DisplayName="VDEvent Source" Namespace="MVCVisualDesigner">
+      <Properties>
+        <DomainProperty Id="04c26ca0-7d1b-44ee-9586-ab251ecbb036" Description="Description for MVCVisualDesigner.VDEventSource.Event Name" Name="EventName" DisplayName="Event Name">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+    </DomainClass>
     <DomainClass Id="8bbbd38a-b626-470a-8249-28240f6bb9a8" Description="Description for MVCVisualDesigner.VDEventTarget" Name="VDEventTarget" DisplayName="VDEvent Target" Namespace="MVCVisualDesigner" />
     <DomainClass Id="8c2cc2f4-f807-4ffc-92b9-d9fab7509503" Description="Description for MVCVisualDesigner.VDViewComponent" Name="VDViewComponent" DisplayName="VDView Component" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner">
       <BaseClass>
@@ -910,6 +926,7 @@
         </ElementMergeDirective>
       </ElementMergeDirectives>
     </DomainClass>
+    <DomainClass Id="0a1eb83b-089c-4a2b-bdeb-7c876724d56d" Description="Description for MVCVisualDesigner.VDModelSelector" Name="VDModelSelector" DisplayName="VDModel Selector" Namespace="MVCVisualDesigner" />
   </Classes>
   <Relationships>
     <DomainRelationship Id="8491408d-7160-4a47-9979-e0dab01d52b3" Description="Description for MVCVisualDesigner.WidgetHasChildren" Name="WidgetHasChildren" DisplayName="Widget Has Children" Namespace="MVCVisualDesigner" IsEmbedding="true">
@@ -1261,6 +1278,13 @@
       </Target>
     </DomainRelationship>
     <DomainRelationship Id="4b4c922e-0e87-423d-a477-7926e5a1f0f9" Description="Description for MVCVisualDesigner.PerformsActionOn" Name="PerformsActionOn" DisplayName="Performs Action On" Namespace="MVCVisualDesigner">
+      <Properties>
+        <DomainProperty Id="2597b0f6-52d4-4ba6-b4c1-ad31302d2989" Description="Description for MVCVisualDesigner.PerformsActionOn.Action Name" Name="ActionName" DisplayName="Action Name">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
       <Source>
         <DomainRole Id="fca9f394-6d3f-4fe0-9886-df85f5762656" Description="Description for MVCVisualDesigner.PerformsActionOn.VDEventSource" Name="VDEventSource" DisplayName="VDEvent Source" PropertyName="EventTargets" PropertyDisplayName="Event Targets">
           <RolePlayer>
@@ -1320,6 +1344,22 @@
         <DomainRole Id="5afe5a39-7121-40b8-ae1e-942a2901d6da" Description="Description for MVCVisualDesigner.PerformsActionOn_3.TargetVDViewComponent" Name="TargetVDViewComponent" DisplayName="Target VDView Component" PropertyName="SourceVDViewComponents" IsPropertyGenerator="false" PropertyDisplayName="Source VDView Components">
           <RolePlayer>
             <DomainClassMoniker Name="VDViewComponent" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="f4a370ce-1a2b-43cb-bf2d-1b68f8e52288" Description="Description for MVCVisualDesigner.ViewHasModelSelector" Name="ViewHasModelSelector" DisplayName="View Has Model Selector" Namespace="MVCVisualDesigner" IsEmbedding="true">
+      <Source>
+        <DomainRole Id="f04aeb7c-be8b-4218-86b9-de016ec6e687" Description="Description for MVCVisualDesigner.ViewHasModelSelector.VDView" Name="VDView" DisplayName="VDView" PropertyName="VDModelSelector" Multiplicity="ZeroOne" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="VDModel Selector">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDView" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="d060f622-fddc-4ae4-bb7e-5b434db0b92b" Description="Description for MVCVisualDesigner.ViewHasModelSelector.VDModelSelector" Name="VDModelSelector" DisplayName="VDModel Selector" PropertyName="View" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="View">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDModelSelector" />
           </RolePlayer>
         </DomainRole>
       </Target>
@@ -1755,41 +1795,50 @@
         </DomainProperty>
       </Properties>
     </GeometryShape>
-    <GeometryShape Id="f8b67f3b-cb16-4348-b5f9-2f23ac3e038a" Description="Description for MVCVisualDesigner.VDIconShape" Name="VDIconShape" DisplayName="VDIcon Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDIcon Shape" InitialHeight="1" Geometry="Rectangle">
+    <GeometryShape Id="f8b67f3b-cb16-4348-b5f9-2f23ac3e038a" Description="Description for MVCVisualDesigner.VDIconShape" Name="VDIconShape" DisplayName="VDIcon Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDIcon Shape" FillColor="Maroon" OutlineColor="Transparent" InitialWidth="0.2" InitialHeight="0.2" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="9dd3a3cf-c6de-4123-ae6e-a1b4dc767f5d" Description="Description for MVCVisualDesigner.VDAlertShape" Name="VDAlertShape" DisplayName="VDAlert Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDAlert Shape" InitialHeight="1" Geometry="Rectangle">
+    <GeometryShape Id="9dd3a3cf-c6de-4123-ae6e-a1b4dc767f5d" Description="Description for MVCVisualDesigner.VDAlertShape" Name="VDAlertShape" DisplayName="VDAlert Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDAlert Shape" OutlineColor="DimGray" InitialHeight="1" OutlineDashStyle="Dash" OutlineThickness="0.01" FillGradientMode="None" Geometry="RoundedRectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="08c59a36-eebc-4097-8219-97f80873eae5" Description="Description for MVCVisualDesigner.VDConfirmDialogShape" Name="VDConfirmDialogShape" DisplayName="VDConfirm Dialog Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDConfirm Dialog Shape" InitialHeight="1" Geometry="Rectangle">
+    <GeometryShape Id="08c59a36-eebc-4097-8219-97f80873eae5" Description="Description for MVCVisualDesigner.VDConfirmDialogShape" Name="VDConfirmDialogShape" DisplayName="VDConfirm Dialog Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDConfirm Dialog Shape" OutlineColor="DimGray" InitialHeight="1" OutlineDashStyle="Dash" OutlineThickness="0.01" FillGradientMode="None" Geometry="RoundedRectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="1350d597-ba5f-4ee8-893c-835f089e66dd" Description="Description for MVCVisualDesigner.VDMessagePanelShape" Name="VDMessagePanelShape" DisplayName="VDMessage Panel Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDMessage Panel Shape" InitialHeight="1" Geometry="Rectangle">
+    <GeometryShape Id="1350d597-ba5f-4ee8-893c-835f089e66dd" Description="Description for MVCVisualDesigner.VDMessagePanelShape" Name="VDMessagePanelShape" DisplayName="VDMessage Panel Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDMessage Panel Shape" InitialHeight="1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="3a99453d-21f9-47aa-92c7-08ec3e0aedb5" Description="Description for MVCVisualDesigner.VDDialogShape" Name="VDDialogShape" DisplayName="VDDialog Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDDialog Shape" InitialHeight="1" Geometry="Rectangle">
+    <GeometryShape Id="3a99453d-21f9-47aa-92c7-08ec3e0aedb5" Description="Description for MVCVisualDesigner.VDDialogShape" Name="VDDialogShape" DisplayName="VDDialog Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDDialog Shape" InitialHeight="1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="56b59d3c-8aab-42fd-84b0-ae9fd7513a85" Description="Description for MVCVisualDesigner.VDAjaxShape" Name="VDAjaxShape" DisplayName="VDAjax Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDAjax Shape" InitialHeight="1" Geometry="Rectangle">
+    <GeometryShape Id="56b59d3c-8aab-42fd-84b0-ae9fd7513a85" Description="Description for MVCVisualDesigner.VDAjaxShape" Name="VDAjaxShape" DisplayName="VDAjax Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDAjax Shape" OutlineColor="DimGray" InitialHeight="1" OutlineDashStyle="Dash" OutlineThickness="0.01" FillGradientMode="None" Geometry="RoundedRectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <Port Id="0d637168-0ce4-4dc1-8148-5209a1173164" Description="Description for MVCVisualDesigner.VDEventSourcePort" Name="VDEventSourcePort" DisplayName="VDEvent Source Port" Namespace="MVCVisualDesigner" FixedTooltipText="VDEvent Source Port" FillColor="Orange" InitialWidth="0.1" InitialHeight="0.1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Circle" />
+    <Port Id="0d637168-0ce4-4dc1-8148-5209a1173164" Description="Description for MVCVisualDesigner.VDEventSourcePort" Name="VDEventSourcePort" DisplayName="VDEvent Source Port" Namespace="MVCVisualDesigner" FixedTooltipText="VDEvent Source Port" FillColor="Orange" InitialWidth="0.1" InitialHeight="0.1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Circle">
+      <ShapeHasDecorators Position="OuterTopCenter" HorizontalOffset="0" VerticalOffset="0">
+        <TextDecorator Name="EventNameDecorator" DisplayName="Event Name Decorator" DefaultText="EventNameDecorator" />
+      </ShapeHasDecorators>
+    </Port>
     <Port Id="af8c6ce1-1bd2-4d47-9b67-3d7bb3a1367e" Description="Description for MVCVisualDesigner.VDEventTargetPort" Name="VDEventTargetPort" DisplayName="VDEvent Target Port" Namespace="MVCVisualDesigner" FixedTooltipText="VDEvent Target Port" FillColor="Green" InitialWidth="0.1" InitialHeight="0.1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle" />
+    <GeometryShape Id="d92d49b3-5d9a-4aef-a43f-a97ccf2aa3ff" Description="Description for MVCVisualDesigner.VDModelSelectorShape" Name="VDModelSelectorShape" DisplayName="VDModel Selector Shape" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="VDModel Selector Shape" OutlineColor="MidnightBlue" InitialHeight="1" OutlineThickness="0.01" Geometry="Rectangle" />
   </Shapes>
   <Connectors>
-    <Connector Id="63c5cc6f-a107-45c2-87c9-2c0a88ac3581" Description="" Name="VDPerformsActionOnConnector" DisplayName="Action" Namespace="MVCVisualDesigner" FixedTooltipText="VDPerforms Action On Connector" Color="DarkOrange" DashStyle="Dash" TargetEndStyle="EmptyArrow" Thickness="0.01" />
+    <Connector Id="63c5cc6f-a107-45c2-87c9-2c0a88ac3581" Description="" Name="VDPerformsActionOnConnector" DisplayName="Action" Namespace="MVCVisualDesigner" FixedTooltipText="VDPerforms Action On Connector" Color="DarkOrange" DashStyle="Dash" TargetEndStyle="EmptyArrow" Thickness="0.01">
+      <ConnectorHasDecorators Position="TargetTop" OffsetFromShape="0" OffsetFromLine="0" isMoveable="true">
+        <TextDecorator Name="ActionNameDecorator" DisplayName="Action Name Decorator" DefaultText="ActionNameDecorator" />
+      </ConnectorHasDecorators>
+    </Connector>
   </Connectors>
   <XmlSerializationBehavior Name="MVCVisualDesignerSerializationBehavior" Namespace="MVCVisualDesigner">
     <ClassData>
@@ -1836,6 +1885,9 @@
           </XmlPropertyData>
           <XmlRelationshipData UseFullForm="true" RoleElementName="references">
             <DomainRelationshipMoniker Name="ViewHasReferences" />
+          </XmlRelationshipData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="vDModelSelector">
+            <DomainRelationshipMoniker Name="ViewHasModelSelector" />
           </XmlRelationshipData>
         </ElementData>
       </XmlClassData>
@@ -2497,6 +2549,9 @@
           <XmlRelationshipData UseFullForm="true" RoleElementName="targetWidgets">
             <DomainRelationshipMoniker Name="PerformsActionOn_1" />
           </XmlRelationshipData>
+          <XmlPropertyData XmlName="eventName">
+            <DomainPropertyMoniker Name="VDEventSource/EventName" />
+          </XmlPropertyData>
         </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDEventTarget" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDEventTargetMoniker" ElementName="vDEventTarget" MonikerTypeName="VDEventTargetMoniker">
@@ -2554,6 +2609,11 @@
       </XmlClassData>
       <XmlClassData TypeName="PerformsActionOn" MonikerAttributeName="" SerializeId="true" MonikerElementName="performsActionOnMoniker" ElementName="performsActionOn" MonikerTypeName="PerformsActionOnMoniker">
         <DomainRelationshipMoniker Name="PerformsActionOn" />
+        <ElementData>
+          <XmlPropertyData XmlName="actionName">
+            <DomainPropertyMoniker Name="PerformsActionOn/ActionName" />
+          </XmlPropertyData>
+        </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="PerformsActionOn_2" MonikerAttributeName="" SerializeId="true" MonikerElementName="performsActionOn_2Moniker" ElementName="performsActionOn_2" MonikerTypeName="PerformsActionOn_2Moniker">
         <DomainRelationshipMoniker Name="PerformsActionOn_2" />
@@ -2563,6 +2623,15 @@
       </XmlClassData>
       <XmlClassData TypeName="PerformsActionOn_3" MonikerAttributeName="" SerializeId="true" MonikerElementName="performsActionOn_3Moniker" ElementName="performsActionOn_3" MonikerTypeName="PerformsActionOn_3Moniker">
         <DomainRelationshipMoniker Name="PerformsActionOn_3" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDModelSelector" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDModelSelectorMoniker" ElementName="vDModelSelector" MonikerTypeName="VDModelSelectorMoniker">
+        <DomainClassMoniker Name="VDModelSelector" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDModelSelectorShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDModelSelectorShapeMoniker" ElementName="vDModelSelectorShape" MonikerTypeName="VDModelSelectorShapeMoniker">
+        <GeometryShapeMoniker Name="VDModelSelectorShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="ViewHasModelSelector" MonikerAttributeName="" SerializeId="true" MonikerElementName="viewHasModelSelectorMoniker" ElementName="viewHasModelSelector" MonikerTypeName="ViewHasModelSelectorMoniker">
+        <DomainRelationshipMoniker Name="ViewHasModelSelector" />
       </XmlClassData>
     </ClassData>
   </XmlSerializationBehavior>
@@ -3283,6 +3352,14 @@
         <ParentElementPath>
           <DomainPath>WidgetHasEventSources.Widget/!VDViewComponent</DomainPath>
         </ParentElementPath>
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDEventSourcePort/EventNameDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="VDEventSource/EventName" />
+            </PropertyPath>
+          </PropertyDisplayed>
+        </DecoratorMap>
         <PortMoniker Name="VDEventSourcePort" />
       </ShapeMap>
       <ShapeMap>
@@ -3292,11 +3369,26 @@
         </ParentElementPath>
         <PortMoniker Name="VDEventTargetPort" />
       </ShapeMap>
+      <ShapeMap>
+        <DomainClassMoniker Name="VDModelSelector" />
+        <ParentElementPath>
+          <DomainPath>ViewHasModelSelector.View/!VDView</DomainPath>
+        </ParentElementPath>
+        <GeometryShapeMoniker Name="VDModelSelectorShape" />
+      </ShapeMap>
     </ShapeMaps>
     <ConnectorMaps>
       <ConnectorMap>
         <ConnectorMoniker Name="VDPerformsActionOnConnector" />
         <DomainRelationshipMoniker Name="PerformsActionOn" />
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDPerformsActionOnConnector/ActionNameDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="PerformsActionOn/ActionName" />
+            </PropertyPath>
+          </PropertyDisplayed>
+        </DecoratorMap>
       </ConnectorMap>
       <ConnectorMap>
         <ConnectorMoniker Name="VDPerformsActionOnConnector" />
@@ -3340,6 +3432,9 @@
       </ElementTool>
       <ElementTool Name="ConfirmDialogTool" ToolboxIcon="Resources\ConfirmDialog.bmp" Caption="Confirm Dialog" Tooltip="" HelpKeyword="ConfirmDialogTool">
         <DomainClassMoniker Name="VDConfirmDialog" />
+      </ElementTool>
+      <ElementTool Name="MessagePanelTool" ToolboxIcon="Resources\List_Bullets.bmp" Caption="Message Panel" Tooltip="" HelpKeyword="MessagePanelTool">
+        <DomainClassMoniker Name="VDMessagePanel" />
       </ElementTool>
     </ToolboxTab>
     <ToolboxTab TabText="Form">
