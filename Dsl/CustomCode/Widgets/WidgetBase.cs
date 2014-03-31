@@ -222,6 +222,40 @@ namespace MVCVisualDesigner
             return children;
         }
 
+        public VDView RootView
+        {
+            get
+            {
+                VDWidget widget = this;
+                while (this.Parent != null) widget = this.Parent;
+
+                if (widget is VDView && widget.WidgetType == MVCVisualDesigner.WidgetType.View)
+                    return (VDView)widget;
+
+                return null;
+            }
+        }
+
+        // Model related
+        public VDModelStore ModelStore { get { return RootView != null ? RootView.ModelStore : null; } }
+
+        /// <summary></summary>
+        /// <returns>true: model is newly created, false: model is already setup or failed to create</returns>
+        public virtual bool SetupModel()
+        {
+            if (this.Model == null)
+            {
+                VDModelStore ms = this.ModelStore;
+                if (ms != null)
+                {
+                    this.Model = new VDModel(this.Partition);
+                    ms.Models.Add(this.Model);
+                    return true;
+                }
+            }
+            return false;
+        }
+
         // More HTML Attributes
         public string GetMoreHtmlAttributeString(params string[] ignoreList)
         {
