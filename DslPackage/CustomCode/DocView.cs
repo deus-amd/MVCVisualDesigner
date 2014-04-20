@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.Modeling;
 using Microsoft.VisualStudio.Modeling.Diagrams;
+using Microsoft.VisualStudio.Modeling.Shell;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace MVCVisualDesigner
             ShapeElement shape = this.PrimarySelection as ShapeElement;
             if (shape != null && shape.ModelElement != null)
             {
+                // set active widget for code snippet
                 VDWidget widget = shape.ModelElement as VDWidget;
                 if (widget != null && !(widget is VDCodeSnippet) && (widget.CodeSnippetEditor != null))
                 {
@@ -26,6 +28,33 @@ namespace MVCVisualDesigner
                         trans.Commit();
                     }
                     return;
+                }
+
+                // update Model Tool Window
+                ModelToolWindow win = this.ModelToolWindow;
+                if (win != null)
+                {
+                    win.ShowNoActivate();
+
+                    if (widget != null)
+                    {
+                        if (widget is VDView)
+                        {
+                            win.ShowViewModel((VDView)widget); 
+                        }
+                        else
+                        {
+                            win.ShowWidgetModel(); 
+                        }
+                    }
+                    else if (shape.ModelElement is PerformsActionOn)
+                    {
+                        win.ShowActionModel();
+                    }
+                    else
+                    {
+                        win.HideWindow();
+                    }
                 }
             }
         }
@@ -96,6 +125,22 @@ namespace MVCVisualDesigner
                     codeEditor2Reset.ActiveLinkedWidget = null;
                     trans.Commit();
                 }
+            }
+        }
+
+
+        protected ModelToolWindow ModelToolWindow
+        {
+            get
+            {
+                ModelToolWindow window = null;
+                MVCVisualDesignerPackage package = this.GetService(typeof(MVCVisualDesignerPackage)) as MVCVisualDesignerPackage;
+                if (package != null)
+                {
+                    window = package.GetToolWindow(typeof(ModelToolWindow), true) as ModelToolWindow;
+                }
+
+                return window;
             }
         }
     }

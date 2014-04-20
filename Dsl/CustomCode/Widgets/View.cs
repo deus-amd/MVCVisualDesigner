@@ -9,6 +9,14 @@ namespace MVCVisualDesigner
 {
     public partial class VDView
     {
+        internal string GetModelTypeValue()
+        {
+            if (this.ModelInstance != null && this.ModelInstance.ModelType != null)
+            {
+                return this.ModelInstance.ModelType.Name;
+            }
+            return string.Empty;
+        }
     }
 
     public partial class VDPartialView

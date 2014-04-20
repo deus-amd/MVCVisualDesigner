@@ -110,6 +110,7 @@
     <Compile Include="CustomCode\Widgets\HTMLTag.cs" />
     <Compile Include="CustomCode\Widgets\Icon.cs" />
     <Compile Include="CustomCode\Widgets\MessagePanel.cs" />
+    <Compile Include="CustomCode\Widgets\Model.cs" />
     <Compile Include="CustomCode\Widgets\ModelSelector.cs" />
     <Compile Include="CustomCode\Widgets\Separator.cs" />
     <Compile Include="CustomCode\Widgets\Tab.cs" />

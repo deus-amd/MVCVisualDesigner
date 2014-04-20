@@ -117,6 +117,7 @@
     <Compile Include="CustomCode\CodeGenerationForm.Designer.cs">
       <DependentUpon>CodeGenerationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomCode\DocData.cs" />
     <Compile Include="CustomCode\Logger.cs" />
     <Compile Include="CustomCode\ModelToolWindow.cs" />
     <Compile Include="CustomCode\ModelToolWindowForm.cs">

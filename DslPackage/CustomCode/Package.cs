@@ -33,5 +33,10 @@ namespace MVCVisualDesigner
             }
             return list;
         }
+
+        public List<string> GetPredefinedTypes()
+        {
+            return null;
+        }
     }
 }

@@ -99,6 +99,28 @@ namespace MVCVisualDesigner
 
     public partial class VDWidget
     {
+#region Constructors
+        // Constructors were not generated for this class because it had HasCustomConstructor
+        // set to true. Please provide the constructors below in a partial class.
+        /// <summary>Constructor.</summary>
+        /// <param name="partition">Partition where new element is to be created.</param>
+        /// <param name="propertyAssignments">List of domain property id/value pairs to set once the element is created.</param>
+        protected VDWidget(Partition partition, PropertyAssignment[] propertyAssignments)
+        	: base(partition, propertyAssignments)
+        {
+            if (!this.Store.InSerializationTransaction)
+            {
+                //if (this.WidgetType == MVCVisualDesigner.WidgetType.View)
+                //{
+                //    // init the model store
+                //    ((VDView)this).ModelStore = new VDModelStore(this.Partition);
+                //}
+            }
+        }
+
+
+#endregion
+
         abstract public WidgetType WidgetType { get; }
 
         virtual public bool HasWidgetTitle { get { return false; } }
@@ -227,7 +249,7 @@ namespace MVCVisualDesigner
             get
             {
                 VDWidget widget = this;
-                while (this.Parent != null) widget = this.Parent;
+                while (widget.Parent != null) widget = this.Parent;
 
                 if (widget is VDView && widget.WidgetType == MVCVisualDesigner.WidgetType.View)
                     return (VDView)widget;
@@ -237,23 +259,9 @@ namespace MVCVisualDesigner
         }
 
         // Model related
-        public VDModelStore ModelStore { get { return RootView != null ? RootView.ModelStore : null; } }
-
-        /// <summary></summary>
-        /// <returns>true: model is newly created, false: model is already setup or failed to create</returns>
-        public virtual bool SetupModel()
-        {
-            if (this.Model == null)
-            {
-                VDModelStore ms = this.ModelStore;
-                if (ms != null)
-                {
-                    this.Model = new VDModel(this.Partition);
-                    ms.Models.Add(this.Model);
-                    return true;
-                }
-            }
-            return false;
+        public VDModelStore GetModelStore() 
+        { 
+            return RootView != null ? RootView.ModelStore : null;
         }
 
         // More HTML Attributes

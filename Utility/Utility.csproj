@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="DiagramRenderTextHelper.cs" />
     <Compile Include="DrawHelper.cs" />
     <Compile Include="NativeMethods.cs" />
