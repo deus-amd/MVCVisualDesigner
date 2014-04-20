@@ -1024,7 +1024,7 @@
         </ElementMergeDirective>
       </ElementMergeDirectives>
     </DomainClass>
-    <DomainClass Id="abe83d67-8610-4cfa-a36d-831b477fd7ba" Description="Description for MVCVisualDesigner.VDSimpleType" Name="VDSimpleType" DisplayName="VDSimple Type" Namespace="MVCVisualDesigner">
+    <DomainClass Id="abe83d67-8610-4cfa-a36d-831b477fd7ba" Description="Description for MVCVisualDesigner.VDPredefinedType" Name="VDPredefinedType" DisplayName="VDPredefined Type" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDModelType" />
       </BaseClass>
@@ -3103,8 +3103,8 @@
           </XmlPropertyData>
         </ElementData>
       </XmlClassData>
-      <XmlClassData TypeName="VDSimpleType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDSimpleTypeMoniker" ElementName="vDSimpleType" MonikerTypeName="VDSimpleTypeMoniker">
-        <DomainClassMoniker Name="VDSimpleType" />
+      <XmlClassData TypeName="VDPredefinedType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDPredefinedTypeMoniker" ElementName="vDPredefinedType" MonikerTypeName="VDPredefinedTypeMoniker">
+        <DomainClassMoniker Name="VDPredefinedType" />
       </XmlClassData>
       <XmlClassData TypeName="VDExternalType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDExternalTypeMoniker" ElementName="vDExternalType" MonikerTypeName="VDExternalTypeMoniker">
         <DomainClassMoniker Name="VDExternalType" />

@@ -94,9 +94,8 @@ namespace MVCVisualDesigner
                 cmbTypeList.DropDownStyle = ComboBoxStyle.DropDown;
                 cmbTypeList.Bounds = e.CellBounds;
                 cmbTypeList.Font = ((ObjectListView)sender).Font;
-                // todo: init list from options
-                List<string> typeList = new List<string> { "int", "string", "long" };
-                cmbTypeList.Items.AddRange(typeList.ToArray());
+                string[] typeList = getAllTypes();
+                cmbTypeList.Items.AddRange(typeList);
                 cmbTypeList.Text = (string)e.Value;
                 cmbTypeList.Tag = e.RowObject; 
                 cmbTypeList.VisibleChanged += m_cmbTypeList_Leave;
@@ -105,6 +104,37 @@ namespace MVCVisualDesigner
 
                 m_cmbTypeList = cmbTypeList;
             }
+        }
+
+        private string[] getAllTypes()
+        {
+            HashSet<string> typeList =new HashSet<string>();
+
+            if(this.modelStore != null)
+            {
+                foreach(var mt in this.modelStore.ModelTypes)
+                {
+                    typeList.Add(mt.FullName);
+                }
+            }
+
+            var package = m_toolWindow.GetPackage();
+            if (package != null)
+            {
+                var typeDescriptors = package.GetPredefinedTypes();
+                foreach(var td in typeDescriptors)
+                {
+                    string fullName = td.ToString();
+                    if (!typeList.Contains(fullName))
+                    {
+                        typeList.Add(fullName);
+                    }
+                }
+            }
+
+            List<string> types = typeList.ToList();
+            types.Sort();
+            return types.ToArray();
         }
 
         void m_cmbTypeList_KeyUp(object sender, KeyEventArgs e)
@@ -136,7 +166,10 @@ namespace MVCVisualDesigner
             {
                 using (var trans = m_currentView.Store.TransactionManager.BeginTransaction("Update model member's type"))
                 {
-                    this.modelStore.ChangeModelMemberType<VDCustomType, VDViewModelMemberInstance>(instance.ModelMemberInfo, typeName);
+                    if (this.isPredefinedType(typeName))
+                        this.modelStore.ChangeModelMemberType<VDPredefinedType, VDViewModelMemberInstance>(instance.ModelMemberInfo, typeName);
+                    else
+                        this.modelStore.ChangeModelMemberType<VDCustomType, VDViewModelMemberInstance>(instance.ModelMemberInfo, typeName);
                     trans.Commit();
                 }
 
@@ -253,7 +286,7 @@ namespace MVCVisualDesigner
                     using (var trans = m_currentView.Store.TransactionManager.BeginTransaction("add model member"))
                     {
                         // todo: select Property or Method from UI
-                        this.modelStore.AddMemberToModelType<VDPropertyInfo, VDCustomType, VDViewModelMemberInstance>(
+                        this.modelStore.AddMemberToModelType<VDPropertyInfo, VDPredefinedType, VDViewModelMemberInstance>(
                             modelType, "NewMember", Utility.Constants.STR_TYPE_STRING);
                         trans.Commit();
                     }
@@ -326,7 +359,12 @@ namespace MVCVisualDesigner
 
                         // if model type exists in ModelStore, create a new model instance of that model type;
                         // else create both model type and model instance
-                        VDModelType modelType = this.modelStore.CreateModelType<VDCustomType>(newModelTypeName);
+                        VDModelType modelType = null;
+                        if (isPredefinedType(newModelTypeName))
+                            modelType = this.modelStore.CreateModelType<VDPredefinedType>(newModelTypeName);
+                        else
+                            modelType = this.modelStore.CreateModelType<VDCustomType>(newModelTypeName);
+
                         if (modelType != null)
                         {
                             VDModelInstance modelInstance = this.modelStore
@@ -343,6 +381,15 @@ namespace MVCVisualDesigner
             }
         }
 #endregion
+
+        private bool isPredefinedType(string fullName)
+        {
+            var package = this.m_toolWindow.GetPackage();
+            if (package != null)
+                return package.IsPredefinedType(fullName);
+            else
+                return false;
+        }
 
         private void RefreshAllItemsForViewModel()
         {
@@ -363,17 +410,15 @@ namespace MVCVisualDesigner
         private CodeDomProvider m_provider = CodeDomProvider.CreateProvider("C#");
         private bool isValidClassName(string clsName)
         {
-            //todo:
-            if (clsName == Utility.Constants.STR_TYPE_INT
-                || clsName == Utility.Constants.STR_TYPE_STRING)
-                return true;
+            if (isPredefinedType(clsName)) return true;
 
+            // todo: regular express
             return m_provider.IsValidIdentifier(clsName);
         }
 
         private bool isValidMemberName(string memberName)
         {
-            // todo:
+            // todo: regular express
             return m_provider.IsValidIdentifier(memberName);
         }
 

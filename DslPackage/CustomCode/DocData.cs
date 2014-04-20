@@ -19,38 +19,16 @@ namespace MVCVisualDesigner
                 if (view.ModelStore == null)
                 {
                     view.ModelStore = new VDModelStore(this.Store);
-                    initModelTypeList(view.ModelStore); // todo: load types from options ??
+                    initModelTypeList(view.ModelStore);
                 }
             }
         }
 
         private void initModelTypeList(VDModelStore modelStore)
         {
-            // todo: be sure "string" type always exists
-
-            // init the type list
-            modelStore.ModelTypes.Add(new VDSimpleType(modelStore.Partition,
-                new PropertyAssignment(VDModelType.NameDomainPropertyId, "long")));
-            modelStore.ModelTypes.Add(new VDSimpleType(modelStore.Partition,
-                new PropertyAssignment(VDModelType.NameDomainPropertyId, Utility.Constants.STR_TYPE_INT)));
-            modelStore.ModelTypes.Add(new VDSimpleType(modelStore.Partition,
-                new PropertyAssignment(VDModelType.NameDomainPropertyId, "short")));
-            modelStore.ModelTypes.Add(new VDSimpleType(modelStore.Partition,
-                new PropertyAssignment(VDModelType.NameDomainPropertyId, "ulong")));
-            modelStore.ModelTypes.Add(new VDSimpleType(modelStore.Partition,
-                new PropertyAssignment(VDModelType.NameDomainPropertyId, "uint")));
-            modelStore.ModelTypes.Add(new VDSimpleType(modelStore.Partition,
-                new PropertyAssignment(VDModelType.NameDomainPropertyId, "ushort")));
-            modelStore.ModelTypes.Add(new VDSimpleType(modelStore.Partition,
-                new PropertyAssignment(VDModelType.NameDomainPropertyId, "byte")));
-            modelStore.ModelTypes.Add(new VDSimpleType(modelStore.Partition,
-                new PropertyAssignment(VDModelType.NameDomainPropertyId, "char")));
-            modelStore.ModelTypes.Add(new VDSimpleType(modelStore.Partition,
-                new PropertyAssignment(VDModelType.NameDomainPropertyId, Utility.Constants.STR_TYPE_STRING)));
-            modelStore.ModelTypes.Add(new VDSimpleType(modelStore.Partition,
-                new PropertyAssignment(VDModelType.NameDomainPropertyId, "DateTime")));
-            modelStore.ModelTypes.Add(new VDSimpleType(modelStore.Partition,
-                new PropertyAssignment(VDModelType.NameDomainPropertyId, "TimeSpan")));
+            // init the type list, be sure "string" type always exists, it's default type
+            modelStore.ModelTypes.Add(new VDPredefinedType(modelStore.Partition,
+                new PropertyAssignment(VDModelType.NameDomainPropertyId, "string")));
         }
     }
 }

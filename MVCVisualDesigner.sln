@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectListView2012", "ObjectListView\ObjectListView2012.csproj", "{18FEDA0C-D147-4286-B39A-01204808106A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeDescriptor", "TypeDescriptor\TypeDescriptor.csproj", "{D5B9DCB5-7933-4E81-9DE7-988AD932BFA8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{18FEDA0C-D147-4286-B39A-01204808106A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18FEDA0C-D147-4286-B39A-01204808106A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18FEDA0C-D147-4286-B39A-01204808106A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5B9DCB5-7933-4E81-9DE7-988AD932BFA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5B9DCB5-7933-4E81-9DE7-988AD932BFA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5B9DCB5-7933-4E81-9DE7-988AD932BFA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5B9DCB5-7933-4E81-9DE7-988AD932BFA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

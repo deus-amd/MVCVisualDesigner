@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.Shell;
+using MVCVisualDesigner.TypeDescriptor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,9 +35,33 @@ namespace MVCVisualDesigner
             return list;
         }
 
-        public List<string> GetPredefinedTypes()
+        //todo: load from options, cache types
+        public List<IMVDTypeDescriptor> GetPredefinedTypes()
         {
-            return null;
+            List<IMVDTypeDescriptor> types = new List<IMVDTypeDescriptor>();
+            types.Add(new MVDIntTypeDescriptor());
+            types.Add(new MVDUIntTypeDescriptor());
+            types.Add(new MVDShortTypeDescriptor());
+            types.Add(new MVDUShortTypeDescriptor());
+            types.Add(new MVDLongTypeDescriptor());
+            types.Add(new MVDULongTypeDescriptor());
+            types.Add(new MVDByteTypeDescriptor());
+            types.Add(new MVDCharTypeDescriptor());
+            types.Add(new MVDStringTypeDescriptor());
+            types.Add(new MVDGenericTypeDescriptor("DateTime", "System"));
+            return types;
+        }
+
+        public bool IsPredefinedType(string nameSpace, string name)
+        {
+            string fullName = string.IsNullOrEmpty(nameSpace) ? name : nameSpace + "." + name;
+            return IsPredefinedType(fullName);
+        }
+
+        public bool IsPredefinedType(string fullName)
+        {
+            List<IMVDTypeDescriptor> types = GetPredefinedTypes();
+            return types.Find(td => td.ToString() == fullName) != null;
         }
     }
 }

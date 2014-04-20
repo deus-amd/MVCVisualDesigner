@@ -11,6 +11,16 @@ namespace MVCVisualDesigner
     {
         public VDModelType GetModelType(string typeName, string nameSpace = null)
         {
+            if (string.IsNullOrEmpty(nameSpace))
+            {
+                int idx = typeName.LastIndexOf('.');
+                if (idx > 0)
+                {
+                    nameSpace = typeName.Substring(0, idx);
+                    typeName = typeName.Substring(idx + 1);
+                }
+            }
+
             foreach(var modelType in this.ModelTypes)
             {
                 if (string.IsNullOrEmpty(nameSpace))
@@ -30,10 +40,20 @@ namespace MVCVisualDesigner
         public VDModelType CreateModelType<TModelType>(string typeName, string nameSpace = null)
             where TModelType : VDModelType
         {
+            if (string.IsNullOrEmpty(nameSpace))
+            {
+                int idx = typeName.LastIndexOf('.');
+                if (idx > 0)
+                {
+                    nameSpace = typeName.Substring(0, idx);
+                    typeName = typeName.Substring(idx + 1);
+                }
+            }
+
             VDModelType type = GetModelType(typeName, nameSpace);
             if (type != null) return type;
 
-            Guid modelTypeID = getDomainClassID<VDModelType>();
+            Guid modelTypeID = getDomainClassID<TModelType>();
             type = this.Store.ElementFactory.CreateElement(modelTypeID, 
                 new PropertyAssignment(VDModelType.NameDomainPropertyId, typeName),
                 new PropertyAssignment(VDModelType.NameSpaceDomainPropertyId, nameSpace)) as VDModelType;
@@ -283,8 +303,8 @@ namespace MVCVisualDesigner
 
             else if (typeof(T) == typeof(VDModelType))
                 return VDModelType.DomainClassId;
-            else if (typeof(T) == typeof(VDSimpleType))
-                return VDSimpleType.DomainClassId;
+            else if (typeof(T) == typeof(VDPredefinedType))
+                return VDPredefinedType.DomainClassId;
             else if (typeof(T) == typeof(VDExternalType))
                 return VDExternalType.DomainClassId;
             else if (typeof(T) == typeof(VDCustomType))
@@ -406,6 +426,15 @@ namespace MVCVisualDesigner
         internal virtual void SetIsReadOnlyValue(bool newValue) { m_bIsReadOnly = newValue; }
 
         //
+        public string FullName
+        {
+            get
+            {
+                return string.IsNullOrEmpty(this.NameSpace) ? this.Name : this.NameSpace + "." + this.Name;
+            }
+        }
+
+        //
         public override int GetHashCode()
         {
             int code = 0;
@@ -426,5 +455,12 @@ namespace MVCVisualDesigner
             }
             return false;
         }
+    }
+
+    public partial class VDPredefinedType
+    {
+        // always read only
+        internal override bool GetIsReadOnlyValue() { return true; }
+        internal override void SetIsReadOnlyValue(bool newValue) { }
     }
 }

@@ -128,6 +128,13 @@
     </Compile>
     <Compile Include="CustomCode\Package.cs" />
     <Compile Include="CustomCode\DocView.cs" />
+    <Compile Include="CustomCode\TypeListOptionPage.cs" />
+    <Compile Include="CustomCode\TypeListOptionPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomCode\TypeListOptionPageControl.Designer.cs">
+      <DependentUpon>TypeListOptionPageControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="GeneratedCode\CommandSet.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -238,6 +245,10 @@
       <Project>{18feda0c-d147-4286-b39a-01204808106a}</Project>
       <Name>ObjectListView2012</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TypeDescriptor\TypeDescriptor.csproj">
+      <Project>{d5b9dcb5-7933-4e81-9de7-988ad932bfa8}</Project>
+      <Name>TypeDescriptor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utility\Utility.csproj">
       <Project>{54036d22-8f50-4725-b3bf-d373ad15ebf4}</Project>
       <Name>Utility</Name>
@@ -258,6 +269,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomCode\ModelToolWindowForm.resx">
       <DependentUpon>ModelToolWindowForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomCode\TypeListOptionPageControl.resx">
+      <DependentUpon>TypeListOptionPageControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VSPackage.resx">
       <SubType>Designer</SubType>

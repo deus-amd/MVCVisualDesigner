@@ -87,6 +87,17 @@ namespace MVCVisualDesigner
 
         private VDWidget m_selectedWidget = null;
 
+        //
+        private MVCVisualDesignerPackage m_package;
+        internal MVCVisualDesignerPackage GetPackage()
+        {
+            if (m_package == null)
+            {
+                m_package = this.GetService(typeof(MVCVisualDesignerPackage)) as MVCVisualDesignerPackage;
+            }
+            return m_package;
+        }
+
         ////////////////////////////////////////////////////////////////////////////////
         private EnvDTE.WindowEvents WindowEvents { get; set; }
         private void WindowEvents_WindowActivated(EnvDTE.Window gotFocusWindow, EnvDTE.Window lostFocusWindow)
