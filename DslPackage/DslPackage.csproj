@@ -101,13 +101,13 @@
     <Compile Include="CustomCode\CodeGenerationSettings.Designer.cs">
       <DependentUpon>CodeGenerationSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomCode\CodeGeneratorOptionPage.cs">
+    <Compile Include="CustomCode\OptionPages\CodeGeneratorOptionPage.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CustomCode\CodeGeneratorOptionPageControl.cs">
+    <Compile Include="CustomCode\OptionPages\CodeGeneratorOptionPageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomCode\CodeGeneratorOptionPageControl.Designer.cs">
+    <Compile Include="CustomCode\OptionPages\CodeGeneratorOptionPageControl.Designer.cs">
       <DependentUpon>CodeGeneratorOptionPageControl.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomCode\CommandSet.cs" />
@@ -128,12 +128,17 @@
     </Compile>
     <Compile Include="CustomCode\Package.cs" />
     <Compile Include="CustomCode\DocView.cs" />
-    <Compile Include="CustomCode\TypeListOptionPage.cs" />
-    <Compile Include="CustomCode\TypeListOptionPageControl.cs">
+    <Compile Include="CustomCode\OptionPages\PredefinedTypeOptionPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomCode\OptionPages\PredefinedTypeOptionPageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomCode\TypeListOptionPageControl.Designer.cs">
-      <DependentUpon>TypeListOptionPageControl.cs</DependentUpon>
+    <Compile Include="CustomCode\OptionPages\PredefinedTypeOptionPageControl.Designer.cs">
+      <DependentUpon>PredefinedTypeOptionPageControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomCode\OptionPages\MVDOptionPageBase.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="GeneratedCode\CommandSet.cs">
       <AutoGen>True</AutoGen>
@@ -212,6 +217,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Package.tt</DependentUpon>
     </Compile>
+    <Compile Include="CustomCode\ModelTypeList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomCode\ModelTypeList.Designer.cs">
+      <DependentUpon>ModelTypeList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="GeneratedCode\EditorFactory.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -261,7 +272,7 @@
     <EmbeddedResource Include="CustomCode\CodeGenerationSettings.resx">
       <DependentUpon>CodeGenerationSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomCode\CodeGeneratorOptionPageControl.resx">
+    <EmbeddedResource Include="CustomCode\OptionPages\CodeGeneratorOptionPageControl.resx">
       <DependentUpon>CodeGeneratorOptionPageControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomCode\CodeGenerationForm.resx">
@@ -270,8 +281,11 @@
     <EmbeddedResource Include="CustomCode\ModelToolWindowForm.resx">
       <DependentUpon>ModelToolWindowForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomCode\TypeListOptionPageControl.resx">
-      <DependentUpon>TypeListOptionPageControl.cs</DependentUpon>
+    <EmbeddedResource Include="CustomCode\OptionPages\PredefinedTypeOptionPageControl.resx">
+      <DependentUpon>PredefinedTypeOptionPageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomCode\ModelTypeList.resx">
+      <DependentUpon>ModelTypeList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VSPackage.resx">
       <SubType>Designer</SubType>

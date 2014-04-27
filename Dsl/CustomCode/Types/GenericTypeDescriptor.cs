@@ -26,6 +26,11 @@ namespace MVCVisualDesigner.TypeDescriptor
             return null;
         }
 
+        public string FullName
+        {
+            get { return string.IsNullOrEmpty(NameSpace) ? Name : NameSpace + "." + Name; }
+        }
+
         public virtual bool TryParseValue(string raw, out object value)
         {
             value = null;
@@ -60,5 +65,6 @@ namespace MVCVisualDesigner.TypeDescriptor
         {
             return string.IsNullOrEmpty(m_nameSpace) ? m_name : m_nameSpace + "." + m_name;
         }
+
     }
 }

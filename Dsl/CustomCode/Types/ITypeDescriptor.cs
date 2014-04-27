@@ -10,6 +10,7 @@ namespace MVCVisualDesigner.TypeDescriptor
     {
         string Name { get; }
         string NameSpace { get; }
+        string FullName { get; }
 
         //
         object ParseValue(string raw);

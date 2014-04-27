@@ -15,12 +15,14 @@ namespace MVCVisualDesigner
     public partial class ModelToolWindowForm : Form
     {
         private ModelToolWindow m_toolWindow;
-        private ComboBox m_cmbTypeList;
+        //private ComboBox m_cmbTypeList;
+        private ModelTypeList m_cmbTypeList;
         public ModelToolWindowForm(ModelToolWindow toolWindow)
         {
             InitializeComponent();
             m_toolWindow = toolWindow;
 
+            // init tree list view
             this.tlvViewModel.RootKeyValue = Guid.Empty;
 
             this.cmbViewModelType.LostFocus += cmbViewModelType_LostFocus;
@@ -35,6 +37,8 @@ namespace MVCVisualDesigner
             tlpWidgetModelLayout.Dock = System.Windows.Forms.DockStyle.Fill;
 
             m_currentView = null;
+
+            // todo: 
         }
 
         public void ShowActionModel()
@@ -45,6 +49,8 @@ namespace MVCVisualDesigner
             tlpActionModelLayout.Dock = System.Windows.Forms.DockStyle.Fill;
 
             m_currentView = null;
+
+            // todo: 
         }
 
         private VDView m_currentView = null;
@@ -54,10 +60,13 @@ namespace MVCVisualDesigner
             tlpViewModelLayout.Visible = true;
             tlpWidgetModelLayout.Visible = false;
             tlpViewModelLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+
+            m_currentView = view;
+
             // set model type
             cmbViewModelType.Text = !string.IsNullOrEmpty(view.ModelType) ? view.ModelType : Utility.Constants.STR_NOT_SPECIFIED;
 
-            m_currentView = view;
+            this.ctrlViewModelType.InitTypeList(getAllTypes(), view.GetModelType());
 
             // init tree list view
             RefreshAllItemsForViewModel();
@@ -90,19 +99,19 @@ namespace MVCVisualDesigner
             string columnName = e.Column.Text;
             if (columnName == COLUMN_TYPE)
             {
-                ComboBox cmbTypeList = new ComboBox();
-                cmbTypeList.DropDownStyle = ComboBoxStyle.DropDown;
-                cmbTypeList.Bounds = e.CellBounds;
-                cmbTypeList.Font = ((ObjectListView)sender).Font;
-                string[] typeList = getAllTypes();
-                cmbTypeList.Items.AddRange(typeList);
-                cmbTypeList.Text = (string)e.Value;
-                cmbTypeList.Tag = e.RowObject; 
-                cmbTypeList.VisibleChanged += m_cmbTypeList_Leave;
-                cmbTypeList.KeyUp += m_cmbTypeList_KeyUp;
-                e.Control = cmbTypeList;
+                //ModelTypeList cmbTypeList = new ModelTypeList();
+                //cmbTypeList.DropDownStyle = ComboBoxStyle.DropDown;
+                //cmbTypeList.Bounds = e.CellBounds;
+                //cmbTypeList.Font = ((ObjectListView)sender).Font;
+                //string[] typeList = getAllTypes();
+                //cmbTypeList.Items.AddRange(typeList);
+                //cmbTypeList.Text = (string)e.Value;
+                //cmbTypeList.Tag = e.RowObject; 
+                //cmbTypeList.VisibleChanged += m_cmbTypeList_Leave;
+                //cmbTypeList.KeyUp += m_cmbTypeList_KeyUp;
+                //e.Control = cmbTypeList;
 
-                m_cmbTypeList = cmbTypeList;
+                //m_cmbTypeList = cmbTypeList;
             }
         }
 
@@ -121,7 +130,7 @@ namespace MVCVisualDesigner
             var package = m_toolWindow.GetPackage();
             if (package != null)
             {
-                var typeDescriptors = package.GetPredefinedTypes();
+                var typeDescriptors = package.GetAllTypeDescriptors();
                 foreach(var td in typeDescriptors)
                 {
                     string fullName = td.ToString();
@@ -228,10 +237,10 @@ namespace MVCVisualDesigner
             else if (columnName == COLUMN_TYPE)
             {
                 // Stop listening for change events
-                ComboBox cmbTypeList = e.Control as ComboBox;
-                cmbTypeList.Leave -= m_cmbTypeList_Leave;
-                cmbTypeList.KeyUp -= m_cmbTypeList_KeyUp;
-                m_cmbTypeList = null;
+                //ModelTypeList cmbTypeList = e.Control as ModelTypeList;
+                //cmbTypeList.Leave -= m_cmbTypeList_Leave;
+                //cmbTypeList.KeyUp -= m_cmbTypeList_KeyUp;
+                //m_cmbTypeList = null;
             }
             else if (columnName == COLUMN_JS_MODEL)
             {
@@ -412,8 +421,14 @@ namespace MVCVisualDesigner
         {
             if (isPredefinedType(clsName)) return true;
 
+            string nameSpace = null;
+            string typeName = null;
+            Utility.Helper.SplitFullName(clsName, out nameSpace, out typeName);
+
             // todo: regular express
-            return m_provider.IsValidIdentifier(clsName);
+            // todo: valid nameSpace
+
+            return m_provider.IsValidIdentifier(typeName);
         }
 
         private bool isValidMemberName(string memberName)

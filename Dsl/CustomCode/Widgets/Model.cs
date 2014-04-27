@@ -9,18 +9,16 @@ namespace MVCVisualDesigner
 {
     public partial class VDModelStore
     {
-        public VDModelType GetModelType(string typeName, string nameSpace = null)
+        public VDModelType GetModelType(string fullTypeName)
         {
-            if (string.IsNullOrEmpty(nameSpace))
-            {
-                int idx = typeName.LastIndexOf('.');
-                if (idx > 0)
-                {
-                    nameSpace = typeName.Substring(0, idx);
-                    typeName = typeName.Substring(idx + 1);
-                }
-            }
+            string typeName = null;
+            string nameSpace = null;
+            Utility.Helper.SplitFullName(fullTypeName, out nameSpace, out typeName);
+            return GetModelType(typeName, nameSpace);
+        }
 
+        public VDModelType GetModelType(string typeName, string nameSpace)
+        {
             foreach(var modelType in this.ModelTypes)
             {
                 if (string.IsNullOrEmpty(nameSpace))
@@ -37,19 +35,20 @@ namespace MVCVisualDesigner
             return null;
         }
 
-        public VDModelType CreateModelType<TModelType>(string typeName, string nameSpace = null)
+
+        public VDModelType CreateModelType<TModelType>(string fullTypeName)
             where TModelType : VDModelType
         {
-            if (string.IsNullOrEmpty(nameSpace))
-            {
-                int idx = typeName.LastIndexOf('.');
-                if (idx > 0)
-                {
-                    nameSpace = typeName.Substring(0, idx);
-                    typeName = typeName.Substring(idx + 1);
-                }
-            }
+            string typeName = null;
+            string nameSpace = null;
+            Utility.Helper.SplitFullName(fullTypeName, out nameSpace, out typeName);
+            return CreateModelType<TModelType>(typeName, nameSpace);
+        }
 
+
+        public VDModelType CreateModelType<TModelType>(string typeName, string nameSpace)
+            where TModelType : VDModelType
+        {
             VDModelType type = GetModelType(typeName, nameSpace);
             if (type != null) return type;
 
@@ -187,10 +186,10 @@ namespace MVCVisualDesigner
 
         // add member to model type and all related mode instances and model instance members
         public void AddMemberToModelType<TModelMemberInfo, TModelMemberType, TModelMemberInstance>(
-                VDModelType modelType, string memberName, string memberTypeName, string memberTypeNameSpace = null
-            )   where TModelMemberInfo : VDModelMemberInfo 
-                where TModelMemberType : VDModelType
-                where TModelMemberInstance : VDModelMemberInstance
+                VDModelType modelType, string memberName, string memberTypeName)
+                    where TModelMemberInfo : VDModelMemberInfo 
+                    where TModelMemberType : VDModelType
+                    where TModelMemberInstance : VDModelMemberInstance
         {
             // not all type can add new member, such as primitive type, external type etc.
             if (modelType.IsReadOnly)
@@ -203,7 +202,7 @@ namespace MVCVisualDesigner
             modelType.ModelMembers.Add(newMemberInfo);
             //
             // set model member type
-            VDModelType newMemberType = this.CreateModelType<TModelMemberType>(memberTypeName, memberTypeNameSpace);
+            VDModelType newMemberType = this.CreateModelType<TModelMemberType>(memberTypeName);
             newMemberInfo.Type = newMemberType;
 
             //
@@ -360,7 +359,7 @@ namespace MVCVisualDesigner
         {
             VDModelType type = GetModelType();
             if (type != null)
-                return type.Name;
+                return type.FullName;
             else
                 return string.Empty;
         }
@@ -431,6 +430,16 @@ namespace MVCVisualDesigner
             get
             {
                 return string.IsNullOrEmpty(this.NameSpace) ? this.Name : this.NameSpace + "." + this.Name;
+            }
+            set
+            {
+                if (string.IsNullOrEmpty(value)) return;
+
+                string ns = null;
+                string nm = null;
+                Utility.Helper.SplitFullName(value, out ns, out nm);
+                this.NameSpace = ns;
+                this.Name = nm;
             }
         }
 

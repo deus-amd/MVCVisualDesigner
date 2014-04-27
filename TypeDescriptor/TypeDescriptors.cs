@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MVCVisualDesigner.TypeDescriptor
 {
 
-    public class MVDTypeDescriptorBase<T> : MVDGenericTypeDescriptor
+    abstract public class MVDTypeDescriptorBase<T> : MVDGenericTypeDescriptor
     {
         public MVDTypeDescriptorBase(string name, string nameSpace)
             : base(name, nameSpace)

@@ -264,6 +264,14 @@ namespace MVCVisualDesigner
             return RootView != null ? RootView.ModelStore : null;
         }
 
+        public VDModelType GetModelType()
+        {
+            if (this.ModelInstance == null) 
+                return null;
+            else 
+                return this.ModelInstance.ModelType;
+        }
+
         // More HTML Attributes
         public string GetMoreHtmlAttributeString(params string[] ignoreList)
         {

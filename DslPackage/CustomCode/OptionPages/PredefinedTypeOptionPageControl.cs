@@ -1,39 +1,53 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualStudio.Shell;
+using MVCVisualDesigner.TypeDescriptor;
 
 namespace MVCVisualDesigner
 {
-    public partial class CodeGeneratorOptionPageControl : UserControl
+    public partial class PredefinedTypeOptionPageControl : MVDOptionPageControlBase
     {
-        public CodeGeneratorOptionPageControl()
+        public PredefinedTypeOptionPageControl()
         {
             InitializeComponent();
         }
 
-        internal CodeGeneratorOptionPage OptionPage { get; set; }
-        
-        internal void Initialize()
+        private PredefinedTypeOptionPage PTOptionPage 
         {
+            get { return (PredefinedTypeOptionPage)OptionPage; } 
+        }
+
+        internal override void Initialize(DialogPage optionPage)
+        {
+            base.Initialize(optionPage);
+
             // init the assembly list box
-            if (this.OptionPage.CodeGeneratorAssemblyList != null)
+            if (this.PTOptionPage.TypeDescriptorAssemblyList != null)
             {
-                foreach (string ass in this.OptionPage.CodeGeneratorAssemblyList)
+                foreach (string ass in this.PTOptionPage.TypeDescriptorAssemblyList)
                 {
                     this.lstAssemblyList.Items.Add(Utility.PathHelper.GetAbsolutePath(ass));
                 }
             }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnAddAssembly_Click(object sender, EventArgs e)
         {
             if (this.openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
-                foreach(string fn in this.openFileDialog.FileNames)
+                foreach (string fn in this.openFileDialog.FileNames)
                 {
                     if (!isItemInList(fn))
                     {
                         this.lstAssemblyList.Items.Add(fn);
-                        this.OptionPage.CodeGeneratorAssemblyList.Add(Utility.PathHelper.GetRelativePath(fn));
+                        this.PTOptionPage.TypeDescriptorAssemblyList.Add(Utility.PathHelper.GetRelativePath(fn));
                     }
                 }
             }
@@ -53,8 +67,7 @@ namespace MVCVisualDesigner
             return false;
         }
 
-        // delete select item from assembly list
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void btnDeleteAssembly_Click(object sender, EventArgs e)
         {
             if (this.lstAssemblyList.SelectedIndex >= 0)
             {
@@ -63,7 +76,7 @@ namespace MVCVisualDesigner
                 // remove item from list
                 string selectedAssembly = this.lstAssemblyList.SelectedItem as string;
                 selectedAssembly = Utility.PathHelper.GetRelativePath(selectedAssembly);
-                this.OptionPage.CodeGeneratorAssemblyList.Remove(selectedAssembly);
+                this.PTOptionPage.TypeDescriptorAssemblyList.Remove(selectedAssembly);
                 this.lstAssemblyList.Items.RemoveAt(this.lstAssemblyList.SelectedIndex);
 
                 // set selected item after deleting
@@ -79,16 +92,28 @@ namespace MVCVisualDesigner
             }
         }
 
-        // enable/disable delete button
         private void lstAssemblyList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.lvTypes.Items.Clear();
+
             if (this.lstAssemblyList.SelectedIndex >= 0)
             {
-                if (!this.btnDelete.Enabled) this.btnDelete.Enabled = true;
+                if (!this.btnDeleteAssembly.Enabled) this.btnDeleteAssembly.Enabled = true;
+
+                // 
+                string selectedPath = this.lstAssemblyList.Text;
+                if (!string.IsNullOrWhiteSpace(selectedPath) && this.PTOptionPage.Package != null)
+                {
+                    List<IMVDTypeDescriptor> tds = this.PTOptionPage.Package.GetTypeDescriptors(selectedPath);
+                    foreach(IMVDTypeDescriptor td in tds)
+                    {
+                        this.lvTypes.Items.Add(new ListViewItem(new string[] { td.Name, td.NameSpace ?? string.Empty }));
+                    }
+                }
             }
             else
             {
-                if (this.btnDelete.Enabled) this.btnDelete.Enabled = false;
+                if (this.btnDeleteAssembly.Enabled) this.btnDeleteAssembly.Enabled = false;
             }
         }
     }

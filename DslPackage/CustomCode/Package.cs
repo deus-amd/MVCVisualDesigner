@@ -3,6 +3,7 @@ using MVCVisualDesigner.TypeDescriptor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +14,7 @@ namespace MVCVisualDesigner
     [ProvideToolWindowVisibility(typeof(ModelToolWindow), Constants.MVCVisualDesignerEditorFactoryId)]
     // options
     [ProvideOptionPage(typeof(CodeGeneratorOptionPage), "MVC Visual Designer", "Code Generators", 0, 0, true)]
+    [ProvideOptionPage(typeof(PredefinedTypeOptionPage), "MVC Visual Designer", "Predefined Types", 0, 0, true)]
     internal abstract partial class MVCVisualDesignerPackageBase
     {
         partial void InitializeExtensions()
@@ -35,21 +37,53 @@ namespace MVCVisualDesigner
             return list;
         }
 
-        //todo: load from options, cache types
-        public List<IMVDTypeDescriptor> GetPredefinedTypes()
+        // load from options, cache types
+        private List<IMVDTypeDescriptor> m_allTypeDescriptors = null;
+        public List<IMVDTypeDescriptor> GetAllTypeDescriptors()
         {
-            List<IMVDTypeDescriptor> types = new List<IMVDTypeDescriptor>();
-            types.Add(new MVDIntTypeDescriptor());
-            types.Add(new MVDUIntTypeDescriptor());
-            types.Add(new MVDShortTypeDescriptor());
-            types.Add(new MVDUShortTypeDescriptor());
-            types.Add(new MVDLongTypeDescriptor());
-            types.Add(new MVDULongTypeDescriptor());
-            types.Add(new MVDByteTypeDescriptor());
-            types.Add(new MVDCharTypeDescriptor());
-            types.Add(new MVDStringTypeDescriptor());
-            types.Add(new MVDGenericTypeDescriptor("DateTime", "System"));
-            return types;
+            if (m_allTypeDescriptors != null && m_allTypeDescriptors.Count > 0) 
+                return m_allTypeDescriptors;
+
+            List<IMVDTypeDescriptor> tdList = new List<IMVDTypeDescriptor>();
+            PredefinedTypeOptionPage dlg = this.GetDialogPage(typeof(PredefinedTypeOptionPage)) as PredefinedTypeOptionPage;
+            if (dlg != null)
+            {
+                foreach(string relativeAssPath in dlg.TypeDescriptorAssemblyList)
+                {
+                    List<IMVDTypeDescriptor> tds = GetTypeDescriptors(relativeAssPath);
+                    tdList.AddRange(tds);
+                }
+            }
+
+            tdList.Sort((x, y) => string.Compare(x.FullName, y.FullName));
+            if (tdList.Count > 0) m_allTypeDescriptors = tdList; // cache the result
+            return tdList;
+        }
+
+        public List<IMVDTypeDescriptor> GetTypeDescriptors(string assemblyPath)
+        {
+            List<IMVDTypeDescriptor> tdList = new List<IMVDTypeDescriptor>();
+            if (string.IsNullOrWhiteSpace(assemblyPath)) return tdList;
+
+            Assembly assem = Assembly.LoadFrom(assemblyPath);
+            if (assem == null) return tdList;
+
+            foreach (Type t in assem.GetTypes())
+            {
+                try
+                {
+                    if (t.IsAbstract || t.GetInterface("IMVDTypeDescriptor") == null) continue;
+
+                    IMVDTypeDescriptor td = Activator.CreateInstance(t) as IMVDTypeDescriptor;
+                    if (td != null) tdList.Add(td);
+                }
+                catch (Exception ex)
+                { 
+                    // output to ErrorList window
+                }
+            }
+            tdList.Sort((x, y) => string.Compare(x.FullName, y.FullName));
+            return tdList;
         }
 
         public bool IsPredefinedType(string nameSpace, string name)
@@ -60,8 +94,8 @@ namespace MVCVisualDesigner
 
         public bool IsPredefinedType(string fullName)
         {
-            List<IMVDTypeDescriptor> types = GetPredefinedTypes();
-            return types.Find(td => td.ToString() == fullName) != null;
+            List<IMVDTypeDescriptor> types = GetAllTypeDescriptors();
+            return types.Find(td => td.FullName == fullName) != null;
         }
     }
 }

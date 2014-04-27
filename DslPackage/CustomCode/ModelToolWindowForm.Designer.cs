@@ -38,6 +38,7 @@
             this.olvIsJSModel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvChildMemberInstances = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.label2 = new System.Windows.Forms.Label();
+            this.ctrlViewModelType = new MVCVisualDesigner.ModelTypeList();
             this.cmbViewModelType = new System.Windows.Forms.ComboBox();
             this.tlpWidgetModelLayout = new System.Windows.Forms.TableLayoutPanel();
             this.tlpActionModelLayout = new System.Windows.Forms.TableLayoutPanel();
@@ -58,11 +59,12 @@
             this.tlpViewModelLayout.ColumnCount = 4;
             this.tlpViewModelLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 72F));
             this.tlpViewModelLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpViewModelLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tlpViewModelLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 101F));
             this.tlpViewModelLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tlpViewModelLayout.Controls.Add(this.tlvViewModel, 0, 1);
             this.tlpViewModelLayout.Controls.Add(this.label2, 0, 0);
-            this.tlpViewModelLayout.Controls.Add(this.cmbViewModelType, 1, 0);
+            this.tlpViewModelLayout.Controls.Add(this.ctrlViewModelType, 1, 0);
+            this.tlpViewModelLayout.Controls.Add(this.cmbViewModelType, 2, 0);
             this.tlpViewModelLayout.Location = new System.Drawing.Point(12, 12);
             this.tlpViewModelLayout.Name = "tlpViewModelLayout";
             this.tlpViewModelLayout.RowCount = 3;
@@ -89,6 +91,7 @@
             this.olvColValidators,
             this.olvIsJSModel});
             this.tlpViewModelLayout.SetColumnSpan(this.tlvViewModel, 4);
+            this.tlvViewModel.Cursor = System.Windows.Forms.Cursors.Default;
             this.tlvViewModel.DataSource = null;
             this.tlvViewModel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlvViewModel.FullRowSelect = true;
@@ -127,8 +130,9 @@
             // 
             this.olvColType.AspectName = "TypeName";
             this.olvColType.CellPadding = null;
+            this.olvColType.MinimumWidth = 150;
             this.olvColType.Text = "Type";
-            this.olvColType.Width = 100;
+            this.olvColType.Width = 150;
             // 
             // olvColDefault
             // 
@@ -168,19 +172,26 @@
             this.label2.Text = "Model Type";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // ctrlViewModelType
+            // 
+            this.ctrlViewModelType.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrlViewModelType.Location = new System.Drawing.Point(74, 3);
+            this.ctrlViewModelType.Margin = new System.Windows.Forms.Padding(2, 3, 2, 2);
+            this.ctrlViewModelType.Name = "ctrlViewModelType";
+            this.ctrlViewModelType.Size = new System.Drawing.Size(458, 21);
+            this.ctrlViewModelType.TabIndex = 5;
+            // 
             // cmbViewModelType
             // 
-            this.cmbViewModelType.Dock = System.Windows.Forms.DockStyle.Left;
             this.cmbViewModelType.FormattingEnabled = true;
             this.cmbViewModelType.Items.AddRange(new object[] {
             "aa",
             "bb",
             "(no)"});
-            this.cmbViewModelType.Location = new System.Drawing.Point(75, 3);
+            this.cmbViewModelType.Location = new System.Drawing.Point(537, 3);
             this.cmbViewModelType.Name = "cmbViewModelType";
-            this.cmbViewModelType.Size = new System.Drawing.Size(441, 21);
-            this.cmbViewModelType.TabIndex = 2;
-            this.cmbViewModelType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbViewModelType_KeyPress);
+            this.cmbViewModelType.Size = new System.Drawing.Size(95, 21);
+            this.cmbViewModelType.TabIndex = 4;
             // 
             // tlpWidgetModelLayout
             // 
@@ -301,10 +312,11 @@
         private System.Windows.Forms.ContextMenuStrip ctxMenuViewModel;
         private System.Windows.Forms.ToolStripMenuItem tsmiAddViewModelMember;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cmbViewModelType;
         private BrightIdeasSoftware.OLVColumn olvIsJSModel;
         private BrightIdeasSoftware.OLVColumn olvChildMemberInstances;
         private System.Windows.Forms.ToolStripMenuItem tsmiDeleteViewModelMember;
+        private ModelTypeList ctrlViewModelType;
+        private System.Windows.Forms.ComboBox cmbViewModelType;
 
     }
 }
