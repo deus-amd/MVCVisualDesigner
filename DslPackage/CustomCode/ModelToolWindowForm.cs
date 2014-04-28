@@ -16,16 +16,16 @@ namespace MVCVisualDesigner
     {
         private ModelToolWindow m_toolWindow;
         //private ComboBox m_cmbTypeList;
-        private ModelTypeList m_cmbTypeList;
+        private ModelTypeListControl m_cmbTypeList;
         public ModelToolWindowForm(ModelToolWindow toolWindow)
         {
             InitializeComponent();
             m_toolWindow = toolWindow;
 
+            this.ctrlViewModelType.ValueChanged += ctrlViewModelType_ValueChanged;
+
             // init tree list view
             this.tlvViewModel.RootKeyValue = Guid.Empty;
-
-            this.cmbViewModelType.LostFocus += cmbViewModelType_LostFocus;
         }
 
 #region "Init Model Window"
@@ -64,8 +64,6 @@ namespace MVCVisualDesigner
             m_currentView = view;
 
             // set model type
-            cmbViewModelType.Text = !string.IsNullOrEmpty(view.ModelType) ? view.ModelType : Utility.Constants.STR_NOT_SPECIFIED;
-
             this.ctrlViewModelType.InitTypeList(getAllTypes(), view.GetModelType());
 
             // init tree list view
@@ -81,10 +79,13 @@ namespace MVCVisualDesigner
             tlvActionModel.DataSource = null;
         }
 
-        public void HideEditingControls()
+        public void OnLostFocus()
         {
+            // hide type list control
             if (m_cmbTypeList != null && m_cmbTypeList.Visible)
                 m_cmbTypeList.Hide();
+
+            //
         }
 #endregion
 
@@ -329,13 +330,14 @@ namespace MVCVisualDesigner
         }
 
         // check View's ModelType property, and create new model if needed (delete old model object if exists)
-        void cmbViewModelType_LostFocus(object sender, EventArgs e)
+        void ctrlViewModelType_ValueChanged(object sender, EventArgs e)
         {
             System.Diagnostics.Debug.Assert(m_currentView != null);
             if (m_currentView == null) return;
             if (this.modelStore == null) return;
 
-            string newModelTypeName = cmbViewModelType.Text;
+            ModelTypeValue newModelType = ctrlViewModelType.GetValue();
+            string newModelTypeName = newModelType.ToString();
 
             // model type is changed
             if (string.Compare(newModelTypeName, m_currentView.ModelType) != 0)
@@ -359,20 +361,19 @@ namespace MVCVisualDesigner
                     }
                     else
                     {
-                        // validate if it's a valid class name
-                        if (!this.isValidClassName(newModelTypeName))
-                        {
-                            MessageBox.Show(newModelTypeName + " is not a valid C# class name.");
-                            return;
-                        }
-
-                        // if model type exists in ModelStore, create a new model instance of that model type;
-                        // else create both model type and model instance
                         VDModelType modelType = null;
-                        if (isPredefinedType(newModelTypeName))
-                            modelType = this.modelStore.CreateModelType<VDPredefinedType>(newModelTypeName);
+                        if (newModelType.CollectionType == E_CollectionType.Dictionary)
+                        {
+                            modelType = this.modelStore.CreateDictionaryModelType(newModelType.KeyType, newModelType.ValueType);
+                        }
+                        else if (newModelType.CollectionType == E_CollectionType.List)
+                        {
+                            modelType = this.modelStore.CreateListModelType(newModelType.ValueType);
+                        }
                         else
-                            modelType = this.modelStore.CreateModelType<VDCustomType>(newModelTypeName);
+                        {
+                            modelType = createModelType(newModelType.ValueType);
+                        }
 
                         if (modelType != null)
                         {
@@ -388,6 +389,27 @@ namespace MVCVisualDesigner
 
                 RefreshAllItemsForViewModel();
             }
+        }
+
+        private VDModelType createModelType(string newModelTypeName)
+        {
+            VDModelType modelType = null;
+
+            // validate if it's a valid class name
+            if (!this.isValidClassName(newModelTypeName))
+            {
+                MessageBox.Show(newModelTypeName + " is not a valid C# class name.");
+                return null;
+            }
+
+            // if model type exists in ModelStore, create a new model instance of that model type;
+            // else create both model type and model instance
+            if (isPredefinedType(newModelTypeName))
+                modelType = this.modelStore.CreateModelType<VDPredefinedType>(newModelTypeName);
+            else
+                modelType = this.modelStore.CreateModelType<VDCustomType>(newModelTypeName);
+
+            return modelType;
         }
 #endregion
 
@@ -427,7 +449,7 @@ namespace MVCVisualDesigner
 
             // todo: regular express
             // todo: valid nameSpace
-
+            // todo: allow Dictionary<T, T> or List<T>
             return m_provider.IsValidIdentifier(typeName);
         }
 

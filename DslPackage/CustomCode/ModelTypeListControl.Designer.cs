@@ -1,6 +1,6 @@
 ﻿namespace MVCVisualDesigner
 {
-    partial class ModelTypeList
+    partial class ModelTypeListControl
     {
         /// <summary> 
         /// Required designer variable.

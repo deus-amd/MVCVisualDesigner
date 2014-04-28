@@ -13,7 +13,7 @@ namespace MVCVisualDesigner
         {
             if (this.ModelInstance != null && this.ModelInstance.ModelType != null)
             {
-                return this.ModelInstance.ModelType.Name;
+                return this.ModelInstance.ModelType.FullName;
             }
             return string.Empty;
         }

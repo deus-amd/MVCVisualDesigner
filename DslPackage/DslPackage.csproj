@@ -217,11 +217,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Package.tt</DependentUpon>
     </Compile>
-    <Compile Include="CustomCode\ModelTypeList.cs">
+    <Compile Include="CustomCode\ModelTypeListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomCode\ModelTypeList.Designer.cs">
-      <DependentUpon>ModelTypeList.cs</DependentUpon>
+    <Compile Include="CustomCode\ModelTypeListControl.Designer.cs">
+      <DependentUpon>ModelTypeListControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="GeneratedCode\EditorFactory.tt">
@@ -284,8 +284,8 @@
     <EmbeddedResource Include="CustomCode\OptionPages\PredefinedTypeOptionPageControl.resx">
       <DependentUpon>PredefinedTypeOptionPageControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomCode\ModelTypeList.resx">
-      <DependentUpon>ModelTypeList.cs</DependentUpon>
+    <EmbeddedResource Include="CustomCode\ModelTypeListControl.resx">
+      <DependentUpon>ModelTypeListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VSPackage.resx">
       <SubType>Designer</SubType>

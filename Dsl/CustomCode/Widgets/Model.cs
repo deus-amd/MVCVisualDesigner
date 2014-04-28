@@ -11,54 +11,118 @@ namespace MVCVisualDesigner
     {
         public VDModelType GetModelType(string fullTypeName)
         {
-            string typeName = null;
-            string nameSpace = null;
-            Utility.Helper.SplitFullName(fullTypeName, out nameSpace, out typeName);
-            return GetModelType(typeName, nameSpace);
-        }
+            if (string.IsNullOrEmpty(fullTypeName)) return null;
 
-        public VDModelType GetModelType(string typeName, string nameSpace)
-        {
             foreach(var modelType in this.ModelTypes)
             {
-                if (string.IsNullOrEmpty(nameSpace))
-                {
-                    if (string.Compare(modelType.Name, typeName) == 0 && string.IsNullOrEmpty(modelType.NameSpace))
-                        return modelType;
-                }
-                else
-                {
-                    if (string.Compare(modelType.Name, typeName) == 0 && string.Compare(modelType.NameSpace, nameSpace) == 0)
-                        return modelType;
-                }
+                if (string.Compare(modelType.FullName, fullTypeName) == 0)
+                    return modelType;
             }
             return null;
         }
 
+        public VDModelType GetModelType(string typeName, string nameSpace)
+        {
+            string fullTypeName;
+            if (string.IsNullOrEmpty(nameSpace))
+            {
+                fullTypeName = typeName;
+            }
+            else
+            {
+                fullTypeName = string.Format("{0}.{1}", nameSpace, typeName);
+            }
+            return GetModelType(fullTypeName);
+        }
 
-        public VDModelType CreateModelType<TModelType>(string fullTypeName)
+        public TModelType CreateModelType<TModelType>(string fullTypeName)
             where TModelType : VDModelType
         {
+
+            TModelType type = GetModelType(fullTypeName) as TModelType;
+            if (type != null) return type;
+
             string typeName = null;
             string nameSpace = null;
             Utility.Helper.SplitFullName(fullTypeName, out nameSpace, out typeName);
-            return CreateModelType<TModelType>(typeName, nameSpace);
-        }
-
-
-        public VDModelType CreateModelType<TModelType>(string typeName, string nameSpace)
-            where TModelType : VDModelType
-        {
-            VDModelType type = GetModelType(typeName, nameSpace);
-            if (type != null) return type;
 
             Guid modelTypeID = getDomainClassID<TModelType>();
             type = this.Store.ElementFactory.CreateElement(modelTypeID, 
                 new PropertyAssignment(VDModelType.NameDomainPropertyId, typeName),
-                new PropertyAssignment(VDModelType.NameSpaceDomainPropertyId, nameSpace)) as VDModelType;
+                new PropertyAssignment(VDModelType.NameSpaceDomainPropertyId, nameSpace)) as TModelType;
             this.ModelTypes.Add(type);
 
             return type;
+        }
+
+        public TModelType CreateModelType<TModelType>(string typeName, string nameSpace)
+            where TModelType : VDModelType
+        {
+            string fullTypeName;
+            if (string.IsNullOrEmpty(nameSpace))
+            {
+                fullTypeName = typeName;
+            }
+            else
+            {
+                fullTypeName = string.Format("{0}.{1}", nameSpace, typeName);
+            }
+            return CreateModelType<TModelType>(fullTypeName);
+        }
+
+        public VDDictionaryType CreateDictionaryModelType(string keyTypeFullName, string valueTypeFullName)
+        {
+            string dictFullName = VDDictionaryType.GetDictionaryFullName(keyTypeFullName, valueTypeFullName);
+            VDDictionaryType dictType = GetModelType(dictFullName) as VDDictionaryType;
+            if (dictType != null) return dictType;
+
+            dictType = this.Store.ElementFactory.CreateElement(VDDictionaryType.DomainClassId,
+                new PropertyAssignment(VDModelType.NameDomainPropertyId, dictFullName),
+                new PropertyAssignment(VDModelType.NameSpaceDomainPropertyId, string.Empty)) as VDDictionaryType;
+            this.ModelTypes.Add(dictType);
+
+            // key member info
+            VDModelType keyType = CreateModelType<VDCustomType>(keyTypeFullName);
+            VDPlaceholderInfo keyMemInfo = this.Store.ElementFactory.CreateElement(
+                    VDPlaceholderInfo.DomainClassId,
+                    new PropertyAssignment(VDModelMemberInfo.NameDomainPropertyId, "Key")) as VDPlaceholderInfo;
+            dictType.ModelMembers.Add(keyMemInfo);
+            dictType.KeyInfo = keyMemInfo;
+            keyMemInfo.Type = keyType;
+
+            // value member info
+            VDModelType valueType = CreateModelType<VDCustomType>(valueTypeFullName);
+            VDPlaceholderInfo valueMemInfo = this.Store.ElementFactory.CreateElement(
+                    VDPlaceholderInfo.DomainClassId,
+                    new PropertyAssignment(VDModelMemberInfo.NameDomainPropertyId, "Value")) as VDPlaceholderInfo;
+            dictType.ModelMembers.Add(valueMemInfo);
+            dictType.ValueInfo = valueMemInfo;
+            valueMemInfo.Type = valueType;
+
+            return dictType;
+        }
+
+        public VDListType CreateListModelType(string valueTypeFullName)
+        {
+            string listFullName = VDListType.GetListFullName(valueTypeFullName);
+            VDListType listType = GetModelType(listFullName) as VDListType;
+            if (listType != null) return listType;
+
+            listType = this.Store.ElementFactory.CreateElement(VDListType.DomainClassId,
+                new PropertyAssignment(VDModelType.NameDomainPropertyId, listFullName),
+                new PropertyAssignment(VDModelType.NameSpaceDomainPropertyId, string.Empty)) as VDListType;
+            this.ModelTypes.Add(listType);
+
+            // value member info
+            VDModelType valueType = CreateModelType<VDCustomType>(valueTypeFullName);
+            VDPlaceholderInfo valueMemInfo = this.Store.ElementFactory.CreateElement(
+                    VDPlaceholderInfo.DomainClassId,
+                    new PropertyAssignment(VDModelMemberInfo.NameDomainPropertyId, "Value")) as VDPlaceholderInfo;
+            listType.ModelMembers.Add(valueMemInfo);
+            listType.ValueInfo = valueMemInfo;
+            valueMemInfo.Type = valueType;
+
+            return listType;
         }
 
         public VDModelInstance CreateModelInstance<TModelMemberInstance>(VDModelType modelType, string modelName) 
@@ -111,6 +175,7 @@ namespace MVCVisualDesigner
                 // create sub members recursivly
                 createChildModelMemberInstances(modelMemberInstance, modelMemberInstanceDomainClassId, superTypes);
             }
+
             superTypes.Pop();
         }
 
@@ -423,24 +488,9 @@ namespace MVCVisualDesigner
         protected bool m_bIsReadOnly = false;
         internal virtual bool GetIsReadOnlyValue() { return m_bIsReadOnly; }
         internal virtual void SetIsReadOnlyValue(bool newValue) { m_bIsReadOnly = newValue; }
-
-        //
-        public string FullName
-        {
-            get
-            {
-                return string.IsNullOrEmpty(this.NameSpace) ? this.Name : this.NameSpace + "." + this.Name;
-            }
-            set
-            {
-                if (string.IsNullOrEmpty(value)) return;
-
-                string ns = null;
-                string nm = null;
-                Utility.Helper.SplitFullName(value, out ns, out nm);
-                this.NameSpace = ns;
-                this.Name = nm;
-            }
+        internal virtual string GetFullNameValue() 
+        {  
+            return string.IsNullOrEmpty(this.NameSpace) ? this.Name : this.NameSpace + "." + this.Name;
         }
 
         //
@@ -459,7 +509,7 @@ namespace MVCVisualDesigner
             if (obj is VDModelType)
             {
                 VDModelType other = (VDModelType)obj;
-                if (string.Compare(this.Name, other.Name) == 0 && string.Compare(this.NameSpace, other.NameSpace) == 0)
+                if (string.Compare(this.FullName, other.FullName) == 0)
                     return true;
             }
             return false;
@@ -471,5 +521,45 @@ namespace MVCVisualDesigner
         // always read only
         internal override bool GetIsReadOnlyValue() { return true; }
         internal override void SetIsReadOnlyValue(bool newValue) { }
+    }
+
+    public partial class VDDictionaryType
+    {
+        // always read only, can not add new members
+        internal override bool GetIsReadOnlyValue() { return true; }
+        internal override void SetIsReadOnlyValue(bool newValue) { }
+
+        internal override string GetFullNameValue()
+        {
+            return GetDictionaryFullName(
+                this.KeyInfo == null || this.KeyInfo.Type == null ? string.Empty : this.KeyInfo.Type.FullName,
+                this.ValueInfo == null || this.ValueInfo.Type == null ? string.Empty : this.ValueInfo.Type.FullName);
+        }
+
+        public static string GetDictionaryFullName(string keyTypeFullName, string valueTypeFullName)
+        {
+            return string.Format("Dictionary<{0}, {1}>", 
+                keyTypeFullName ?? string.Empty, 
+                valueTypeFullName ?? string.Empty);
+        }
+    }
+
+    public partial class VDListType
+    {
+        // always read only, can not add new members
+        internal override bool GetIsReadOnlyValue() { return true; }
+        internal override void SetIsReadOnlyValue(bool newValue) { }
+
+        internal override string GetFullNameValue()
+        {
+            return GetListFullName(
+                this.ValueInfo == null || this.ValueInfo.Type == null ? string.Empty
+                : this.ValueInfo.Type.FullName);
+        }
+
+        public static string GetListFullName(string valueTypeFullName)
+        {
+            return string.Format("List<{0}>", valueTypeFullName ?? string.Empty);
+        }
     }
 }

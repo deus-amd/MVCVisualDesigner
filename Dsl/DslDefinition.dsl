@@ -1012,6 +1012,11 @@
             <ExternalTypeMoniker Name="/System/Boolean" />
           </Type>
         </DomainProperty>
+        <DomainProperty Id="4c40bae9-c0ea-4632-9547-779c4654febc" Description="Description for MVCVisualDesigner.VDModelType.Full Name" Name="FullName" DisplayName="Full Name" Kind="Calculated">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
       </Properties>
       <ElementMergeDirectives>
         <ElementMergeDirective>
@@ -1118,6 +1123,11 @@
     <DomainClass Id="497cdd52-d630-4edd-bc84-5159b768a0f4" Description="Description for MVCVisualDesigner.VDDictionaryType" Name="VDDictionaryType" DisplayName="VDDictionary Type" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDModelType" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="73188b54-34d0-4f11-b6e3-c7edd3410c21" Description="Description for MVCVisualDesigner.VDPlaceholderInfo" Name="VDPlaceholderInfo" DisplayName="VDPlaceholder Info" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDModelMemberInfo" />
       </BaseClass>
     </DomainClass>
   </Classes>
@@ -1669,54 +1679,6 @@
         </DomainRole>
       </Target>
     </DomainRelationship>
-    <DomainRelationship Id="605fba38-2329-49fc-a8bf-80a599437422" Description="Description for MVCVisualDesigner.ListTypeReferencesValueType" Name="ListTypeReferencesValueType" DisplayName="List Type References Value Type" Namespace="MVCVisualDesigner">
-      <Source>
-        <DomainRole Id="c4005f25-ab6d-477a-80fe-c6c835d9bb0f" Description="Description for MVCVisualDesigner.ListTypeReferencesValueType.VDListType" Name="VDListType" DisplayName="VDList Type" PropertyName="ValueType" Multiplicity="ZeroOne" PropertyDisplayName="Value Type">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDListType" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="27671230-361e-4ee5-89aa-45555063c55b" Description="Description for MVCVisualDesigner.ListTypeReferencesValueType.VDModelType" Name="VDModelType" DisplayName="VDModel Type" PropertyName="ListTypesWithValueThisType" PropertyDisplayName="List Types With Value This Type">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDModelType" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
-    <DomainRelationship Id="14d5cf9d-3274-42ed-95f5-770b7247e0a0" Description="Description for MVCVisualDesigner.DictionaryTypeReferencesKeyType" Name="DictionaryTypeReferencesKeyType" DisplayName="Dictionary Type References Key Type" Namespace="MVCVisualDesigner">
-      <Source>
-        <DomainRole Id="b9a85f66-01f1-41ff-ab86-6ce547ba9f90" Description="Description for MVCVisualDesigner.DictionaryTypeReferencesKeyType.VDDictionaryType" Name="VDDictionaryType" DisplayName="VDDictionary Type" PropertyName="KeyType" Multiplicity="ZeroOne" PropertyDisplayName="Key Type">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDDictionaryType" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="5e4de3f4-fec6-4264-85e8-678862b53860" Description="Description for MVCVisualDesigner.DictionaryTypeReferencesKeyType.VDModelType" Name="VDModelType" DisplayName="VDModel Type" PropertyName="DictionaryTypesWithKeyOfThisType" PropertyDisplayName="Dictionary Types With Key Of This Type">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDModelType" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
-    <DomainRelationship Id="5e1f0f71-396f-4160-9f5d-1ccb7a108f20" Description="Description for MVCVisualDesigner.DictionaryTypeReferencesValueType" Name="DictionaryTypeReferencesValueType" DisplayName="Dictionary Type References Value Type" Namespace="MVCVisualDesigner">
-      <Source>
-        <DomainRole Id="229c213e-85a2-4336-9a26-733d9aa21240" Description="Description for MVCVisualDesigner.DictionaryTypeReferencesValueType.VDDictionaryType" Name="VDDictionaryType" DisplayName="VDDictionary Type" PropertyName="ValueType" Multiplicity="ZeroOne" PropertyDisplayName="Value Type">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDDictionaryType" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="ffc28b04-dd32-4592-b648-fc2ab5354a85" Description="Description for MVCVisualDesigner.DictionaryTypeReferencesValueType.VDModelType" Name="VDModelType" DisplayName="VDModel Type" PropertyName="DictionaryTypesWithValueOfThisType" PropertyDisplayName="Dictionary Types With Value Of This Type">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDModelType" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
     <DomainRelationship Id="1a223579-83f9-431b-bdae-6875cbf7b0c3" Description="Description for MVCVisualDesigner.ModelStoreHasModelMemberInstances" Name="ModelStoreHasModelMemberInstances" DisplayName="Model Store Has Model Member Instances" Namespace="MVCVisualDesigner" IsEmbedding="true">
       <Source>
         <DomainRole Id="3badf676-7487-4409-b871-2746e6140030" Description="Description for MVCVisualDesigner.ModelStoreHasModelMemberInstances.VDModelStore" Name="VDModelStore" DisplayName="VDModel Store" PropertyName="ModelMemberInstances" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Model Member Instances">
@@ -1761,6 +1723,54 @@
         <DomainRole Id="b8b86782-71fe-4990-a4a5-00cba57bf022" Description="Description for MVCVisualDesigner.ModelInstanceIsTypeOf.VDModelType" Name="VDModelType" DisplayName="VDModel Type" PropertyName="ModelInstancesOfThisType" PropertyDisplayName="Model Instances Of This Type">
           <RolePlayer>
             <DomainClassMoniker Name="VDModelType" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="f212dddd-0f0f-4800-a9bc-0947ea6a9749" Description="Description for MVCVisualDesigner.VDListTypeReferencesValueInfo" Name="VDListTypeReferencesValueInfo" DisplayName="VDList Type References Value Info" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="262c592e-d3d6-4891-a218-233abdca9ba0" Description="Description for MVCVisualDesigner.VDListTypeReferencesValueInfo.VDListType" Name="VDListType" DisplayName="VDList Type" PropertyName="ValueInfo" Multiplicity="ZeroOne" PropertyDisplayName="Value Info">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDListType" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="76db041d-7aa0-428d-a481-0759809abad9" Description="Description for MVCVisualDesigner.VDListTypeReferencesValueInfo.VDPlaceholderInfo" Name="VDPlaceholderInfo" DisplayName="VDPlaceholder Info" PropertyName="VDListType" Multiplicity="One" IsPropertyGenerator="false" PropertyDisplayName="VDList Type">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDPlaceholderInfo" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="fb4da746-034a-4cbc-89e8-b2815b8eef05" Description="Description for MVCVisualDesigner.VDDictionaryTypeReferencesKeyInfo" Name="VDDictionaryTypeReferencesKeyInfo" DisplayName="VDDictionary Type References Key Info" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="8425da43-657a-4a6d-ac45-b537e06ec8b1" Description="Description for MVCVisualDesigner.VDDictionaryTypeReferencesKeyInfo.VDDictionaryType" Name="VDDictionaryType" DisplayName="VDDictionary Type" PropertyName="KeyInfo" Multiplicity="ZeroOne" PropertyDisplayName="Key Info">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDDictionaryType" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="6962cb3b-340f-4684-af10-633359d2d06e" Description="Description for MVCVisualDesigner.VDDictionaryTypeReferencesKeyInfo.VDPlaceholderInfo" Name="VDPlaceholderInfo" DisplayName="VDPlaceholder Info" PropertyName="VDDictionaryType" Multiplicity="One" IsPropertyGenerator="false" PropertyDisplayName="VDDictionary Type">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDPlaceholderInfo" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="82715056-c6ca-4505-b63e-0e25822dda9c" Description="Description for MVCVisualDesigner.VDDictionaryTypeReferencesValueInfo" Name="VDDictionaryTypeReferencesValueInfo" DisplayName="VDDictionary Type References Value Info" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="95447745-bd50-4973-a64a-b9ce69543547" Description="Description for MVCVisualDesigner.VDDictionaryTypeReferencesValueInfo.VDDictionaryType" Name="VDDictionaryType" DisplayName="VDDictionary Type" PropertyName="ValueInfo" Multiplicity="ZeroOne" PropertyDisplayName="Value Info">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDDictionaryType" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="1f349f73-5686-4d9f-925f-47a2136661a3" Description="Description for MVCVisualDesigner.VDDictionaryTypeReferencesValueInfo.VDPlaceholderInfo" Name="VDPlaceholderInfo" DisplayName="VDPlaceholder Info" PropertyName="VDDictionaryType" Multiplicity="One" IsPropertyGenerator="false" PropertyDisplayName="VDDictionary Type">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDPlaceholderInfo" />
           </RolePlayer>
         </DomainRole>
       </Target>
@@ -3101,6 +3111,9 @@
           <XmlPropertyData XmlName="isReadOnly">
             <DomainPropertyMoniker Name="VDModelType/IsReadOnly" />
           </XmlPropertyData>
+          <XmlPropertyData XmlName="fullName" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDModelType/FullName" />
+          </XmlPropertyData>
         </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDPredefinedType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDPredefinedTypeMoniker" ElementName="vDPredefinedType" MonikerTypeName="VDPredefinedTypeMoniker">
@@ -3189,30 +3202,21 @@
       <XmlClassData TypeName="VDListType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDListTypeMoniker" ElementName="vDListType" MonikerTypeName="VDListTypeMoniker">
         <DomainClassMoniker Name="VDListType" />
         <ElementData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="valueType">
-            <DomainRelationshipMoniker Name="ListTypeReferencesValueType" />
+          <XmlRelationshipData UseFullForm="true" RoleElementName="valueInfo">
+            <DomainRelationshipMoniker Name="VDListTypeReferencesValueInfo" />
           </XmlRelationshipData>
         </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDDictionaryType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDDictionaryTypeMoniker" ElementName="vDDictionaryType" MonikerTypeName="VDDictionaryTypeMoniker">
         <DomainClassMoniker Name="VDDictionaryType" />
         <ElementData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="keyType">
-            <DomainRelationshipMoniker Name="DictionaryTypeReferencesKeyType" />
+          <XmlRelationshipData UseFullForm="true" RoleElementName="keyInfo">
+            <DomainRelationshipMoniker Name="VDDictionaryTypeReferencesKeyInfo" />
           </XmlRelationshipData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="valueType">
-            <DomainRelationshipMoniker Name="DictionaryTypeReferencesValueType" />
+          <XmlRelationshipData UseFullForm="true" RoleElementName="valueInfo">
+            <DomainRelationshipMoniker Name="VDDictionaryTypeReferencesValueInfo" />
           </XmlRelationshipData>
         </ElementData>
-      </XmlClassData>
-      <XmlClassData TypeName="ListTypeReferencesValueType" MonikerAttributeName="" SerializeId="true" MonikerElementName="listTypeReferencesValueTypeMoniker" ElementName="listTypeReferencesValueType" MonikerTypeName="ListTypeReferencesValueTypeMoniker">
-        <DomainRelationshipMoniker Name="ListTypeReferencesValueType" />
-      </XmlClassData>
-      <XmlClassData TypeName="DictionaryTypeReferencesKeyType" MonikerAttributeName="" SerializeId="true" MonikerElementName="dictionaryTypeReferencesKeyTypeMoniker" ElementName="dictionaryTypeReferencesKeyType" MonikerTypeName="DictionaryTypeReferencesKeyTypeMoniker">
-        <DomainRelationshipMoniker Name="DictionaryTypeReferencesKeyType" />
-      </XmlClassData>
-      <XmlClassData TypeName="DictionaryTypeReferencesValueType" MonikerAttributeName="" SerializeId="true" MonikerElementName="dictionaryTypeReferencesValueTypeMoniker" ElementName="dictionaryTypeReferencesValueType" MonikerTypeName="DictionaryTypeReferencesValueTypeMoniker">
-        <DomainRelationshipMoniker Name="DictionaryTypeReferencesValueType" />
       </XmlClassData>
       <XmlClassData TypeName="ModelStoreHasModelMemberInstances" MonikerAttributeName="" SerializeId="true" MonikerElementName="modelStoreHasModelMemberInstancesMoniker" ElementName="modelStoreHasModelMemberInstances" MonikerTypeName="ModelStoreHasModelMemberInstancesMoniker">
         <DomainRelationshipMoniker Name="ModelStoreHasModelMemberInstances" />
@@ -3222,6 +3226,18 @@
       </XmlClassData>
       <XmlClassData TypeName="ModelInstanceIsTypeOf" MonikerAttributeName="" SerializeId="true" MonikerElementName="modelInstanceIsTypeOfMoniker" ElementName="modelInstanceIsTypeOf" MonikerTypeName="ModelInstanceIsTypeOfMoniker">
         <DomainRelationshipMoniker Name="ModelInstanceIsTypeOf" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDPlaceholderInfo" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDPlaceholderInfoMoniker" ElementName="vDPlaceholderInfo" MonikerTypeName="VDPlaceholderInfoMoniker">
+        <DomainClassMoniker Name="VDPlaceholderInfo" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDListTypeReferencesValueInfo" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDListTypeReferencesValueInfoMoniker" ElementName="vDListTypeReferencesValueInfo" MonikerTypeName="VDListTypeReferencesValueInfoMoniker">
+        <DomainRelationshipMoniker Name="VDListTypeReferencesValueInfo" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDDictionaryTypeReferencesKeyInfo" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDDictionaryTypeReferencesKeyInfoMoniker" ElementName="vDDictionaryTypeReferencesKeyInfo" MonikerTypeName="VDDictionaryTypeReferencesKeyInfoMoniker">
+        <DomainRelationshipMoniker Name="VDDictionaryTypeReferencesKeyInfo" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDDictionaryTypeReferencesValueInfo" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDDictionaryTypeReferencesValueInfoMoniker" ElementName="vDDictionaryTypeReferencesValueInfo" MonikerTypeName="VDDictionaryTypeReferencesValueInfoMoniker">
+        <DomainRelationshipMoniker Name="VDDictionaryTypeReferencesValueInfo" />
       </XmlClassData>
     </ClassData>
   </XmlSerializationBehavior>
@@ -3374,6 +3390,17 @@
         <PropertyDisplayed>
           <PropertyPath>
             <DomainPropertyMoniker Name="VDContainer/Tag" />
+            <DomainPath />
+          </PropertyPath>
+        </PropertyDisplayed>
+      </ExplorerNodeSettings>
+      <ExplorerNodeSettings IconToDisplay="Resources\VSObject_Class.bmp">
+        <Class>
+          <DomainClassMoniker Name="VDModelType" />
+        </Class>
+        <PropertyDisplayed>
+          <PropertyPath>
+            <DomainPropertyMoniker Name="VDModelType/FullName" />
             <DomainPath />
           </PropertyPath>
         </PropertyDisplayed>
@@ -3758,63 +3785,6 @@
         </TargetDirectives>
       </LinkConnectDirective>
     </ConnectionBuilder>
-    <ConnectionBuilder Name="ListTypeReferencesValueTypeBuilder">
-      <LinkConnectDirective>
-        <DomainRelationshipMoniker Name="ListTypeReferencesValueType" />
-        <SourceDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDListType" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </SourceDirectives>
-        <TargetDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDModelType" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </TargetDirectives>
-      </LinkConnectDirective>
-    </ConnectionBuilder>
-    <ConnectionBuilder Name="DictionaryTypeReferencesKeyTypeBuilder">
-      <LinkConnectDirective>
-        <DomainRelationshipMoniker Name="DictionaryTypeReferencesKeyType" />
-        <SourceDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDDictionaryType" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </SourceDirectives>
-        <TargetDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDModelType" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </TargetDirectives>
-      </LinkConnectDirective>
-    </ConnectionBuilder>
-    <ConnectionBuilder Name="DictionaryTypeReferencesValueTypeBuilder">
-      <LinkConnectDirective>
-        <DomainRelationshipMoniker Name="DictionaryTypeReferencesValueType" />
-        <SourceDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDDictionaryType" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </SourceDirectives>
-        <TargetDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDModelType" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </TargetDirectives>
-      </LinkConnectDirective>
-    </ConnectionBuilder>
     <ConnectionBuilder Name="ModelStoreHasModelInstancesBuilder">
       <LinkConnectDirective>
         <DomainRelationshipMoniker Name="ModelStoreHasModelInstances" />
@@ -3848,6 +3818,63 @@
           <RolePlayerConnectDirective>
             <AcceptingClass>
               <DomainClassMoniker Name="VDModelType" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
+    <ConnectionBuilder Name="VDListTypeReferencesValueInfoBuilder">
+      <LinkConnectDirective>
+        <DomainRelationshipMoniker Name="VDListTypeReferencesValueInfo" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDListType" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDPlaceholderInfo" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
+    <ConnectionBuilder Name="VDDictionaryTypeReferencesKeyInfoBuilder">
+      <LinkConnectDirective>
+        <DomainRelationshipMoniker Name="VDDictionaryTypeReferencesKeyInfo" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDDictionaryType" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDPlaceholderInfo" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
+    <ConnectionBuilder Name="VDDictionaryTypeReferencesValueInfoBuilder">
+      <LinkConnectDirective>
+        <DomainRelationshipMoniker Name="VDDictionaryTypeReferencesValueInfo" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDDictionaryType" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDPlaceholderInfo" />
             </AcceptingClass>
           </RolePlayerConnectDirective>
         </TargetDirectives>

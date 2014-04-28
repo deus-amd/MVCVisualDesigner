@@ -117,7 +117,7 @@ namespace MVCVisualDesigner
             // Model Window lost focus
             else if (lostFocusWindow != null && string.Compare(lostFocusWindow.ObjectKind, GUID_MODEL_TOOL_WINDOW, true) ==0)
             {
-                if (this.Window != null) m_form.HideEditingControls();
+                if (this.Window != null) m_form.OnLostFocus();
             }
         }
 

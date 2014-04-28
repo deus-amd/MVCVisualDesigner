@@ -38,8 +38,7 @@
             this.olvIsJSModel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvChildMemberInstances = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.label2 = new System.Windows.Forms.Label();
-            this.ctrlViewModelType = new MVCVisualDesigner.ModelTypeList();
-            this.cmbViewModelType = new System.Windows.Forms.ComboBox();
+            this.ctrlViewModelType = new MVCVisualDesigner.ModelTypeListControl();
             this.tlpWidgetModelLayout = new System.Windows.Forms.TableLayoutPanel();
             this.tlpActionModelLayout = new System.Windows.Forms.TableLayoutPanel();
             this.tlvActionModel = new BrightIdeasSoftware.DataTreeListView();
@@ -64,7 +63,6 @@
             this.tlpViewModelLayout.Controls.Add(this.tlvViewModel, 0, 1);
             this.tlpViewModelLayout.Controls.Add(this.label2, 0, 0);
             this.tlpViewModelLayout.Controls.Add(this.ctrlViewModelType, 1, 0);
-            this.tlpViewModelLayout.Controls.Add(this.cmbViewModelType, 2, 0);
             this.tlpViewModelLayout.Location = new System.Drawing.Point(12, 12);
             this.tlpViewModelLayout.Name = "tlpViewModelLayout";
             this.tlpViewModelLayout.RowCount = 3;
@@ -180,18 +178,6 @@
             this.ctrlViewModelType.Name = "ctrlViewModelType";
             this.ctrlViewModelType.Size = new System.Drawing.Size(458, 21);
             this.ctrlViewModelType.TabIndex = 5;
-            // 
-            // cmbViewModelType
-            // 
-            this.cmbViewModelType.FormattingEnabled = true;
-            this.cmbViewModelType.Items.AddRange(new object[] {
-            "aa",
-            "bb",
-            "(no)"});
-            this.cmbViewModelType.Location = new System.Drawing.Point(537, 3);
-            this.cmbViewModelType.Name = "cmbViewModelType";
-            this.cmbViewModelType.Size = new System.Drawing.Size(95, 21);
-            this.cmbViewModelType.TabIndex = 4;
             // 
             // tlpWidgetModelLayout
             // 
@@ -315,8 +301,7 @@
         private BrightIdeasSoftware.OLVColumn olvIsJSModel;
         private BrightIdeasSoftware.OLVColumn olvChildMemberInstances;
         private System.Windows.Forms.ToolStripMenuItem tsmiDeleteViewModelMember;
-        private ModelTypeList ctrlViewModelType;
-        private System.Windows.Forms.ComboBox cmbViewModelType;
+        private ModelTypeListControl ctrlViewModelType;
 
     }
 }

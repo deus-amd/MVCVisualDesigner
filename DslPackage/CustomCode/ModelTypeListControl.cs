@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace MVCVisualDesigner
 {
-    public partial class ModelTypeList : UserControl
+    public partial class ModelTypeListControl : UserControl
     {
         public event EventHandler SelectedIndexChanged;
         public event EventHandler ValueChanged;
 
-        public ModelTypeList()
+        public ModelTypeListControl()
         {
             InitializeComponent();
         }
@@ -48,13 +48,13 @@ namespace MVCVisualDesigner
                 VDDictionaryType dictType = (VDDictionaryType)modelType;
                 this.cmbCollectonType.SelectedIndex = COLLECTION_INDEX_DICT;
 
-                if (dictType.KeyType != null)
-                    this.cmbKeyTypeList.Text = dictType.KeyType.FullName;
+                if (dictType.KeyInfo != null && dictType.KeyInfo.Type != null)
+                    this.cmbKeyTypeList.Text = dictType.KeyInfo.Type.FullName;
                 else
                     this.cmbKeyTypeList.SelectedIndex = TYPE_INDEX_NOT_SPECIFIED;
 
-                if (dictType.ValueType != null)
-                    this.cmbValueTypeList.Text = dictType.ValueType.FullName;
+                if (dictType.ValueInfo != null && dictType.ValueInfo.Type != null)
+                    this.cmbValueTypeList.Text = dictType.ValueInfo.Type.FullName;
                 else
                     this.cmbValueTypeList.SelectedIndex = TYPE_INDEX_NOT_SPECIFIED;
             }
@@ -63,8 +63,8 @@ namespace MVCVisualDesigner
                 VDListType listType = (VDListType)modelType;
                 this.cmbCollectonType.SelectedIndex = COLLECTION_INDEX_LIST;
 
-                if (listType.ValueType != null)
-                    this.cmbValueTypeList.Text = listType.ValueType.FullName;
+                if (listType.ValueInfo != null && listType.ValueInfo.Type != null)
+                    this.cmbValueTypeList.Text = listType.ValueInfo.Type.FullName;
                 else
                     this.cmbValueTypeList.SelectedIndex = TYPE_INDEX_NOT_SPECIFIED;
             }
@@ -133,6 +133,10 @@ namespace MVCVisualDesigner
 
                 this.cmbValueTypeList.Location = new Point(this.cmbCollectonType.Bounds.Right, LOCATION_TOP);
                 this.cmbValueTypeList.Width = this.Width - this.cmbCollectonType.Width;
+
+                // set default value
+                if (this.cmbValueTypeList.SelectedIndex < 0)
+                    this.cmbValueTypeList.Text = Utility.Constants.STR_TYPE_STRING;
             }
             else if (cmbCollectonType.SelectedIndex == 1) // dictionary
             {
@@ -148,6 +152,12 @@ namespace MVCVisualDesigner
                 this.lblComma.Location = new Point(this.cmbKeyTypeList.Bounds.Right, LOCATION_TOP);
                 this.cmbValueTypeList.Location = new Point(this.lblComma.Bounds.Right, LOCATION_TOP);
                 this.lblRightAngleBracket.Location = new Point(this.cmbValueTypeList.Bounds.Right, LOCATION_TOP);
+
+                // set default value
+                if (this.cmbKeyTypeList.SelectedIndex <= 0)
+                    this.cmbKeyTypeList.Text = Utility.Constants.STR_TYPE_STRING;
+                if (this.cmbValueTypeList.SelectedIndex <= 0)
+                    this.cmbValueTypeList.Text = Utility.Constants.STR_TYPE_STRING;
             }
             else // list
             {
@@ -160,10 +170,12 @@ namespace MVCVisualDesigner
                 this.cmbValueTypeList.Width = Math.Max(COLLECTION_TYPE_WIDTH, this.Width - COLLECTION_TYPE_WIDTH - 2 * LABEL_WIDTH);
                 this.cmbValueTypeList.Location = new Point(this.lblLeftAngleBracket.Bounds.Right, LOCATION_TOP);
                 this.lblRightAngleBracket.Location = new Point(this.cmbValueTypeList.Bounds.Right, LOCATION_TOP);
+
+                // set default value
+                if (this.cmbValueTypeList.SelectedIndex <= 0)
+                    this.cmbValueTypeList.Text = Utility.Constants.STR_TYPE_STRING;
             }
 
-            if (this.cmbKeyTypeList.SelectedIndex < 0) this.cmbKeyTypeList.Text = Utility.Constants.STR_TYPE_STRING;
-            if (this.cmbValueTypeList.SelectedIndex < 0) this.cmbKeyTypeList.Text = Utility.Constants.STR_TYPE_STRING;
         }
 
         private void cmbKeyTypeList_KeyPress(object sender, KeyPressEventArgs e)
@@ -187,6 +199,63 @@ namespace MVCVisualDesigner
         private void ModelTypeList_Leave(object sender, EventArgs e)
         {
             if (this.ValueChanged != null) this.ValueChanged(sender, e);
+        }
+
+        //
+        public ModelTypeValue GetValue()
+        {
+            ModelTypeValue value = null;
+            if (this.cmbCollectonType.SelectedIndex == COLLECTION_INDEX_SINGULAR)
+            {
+                value = new ModelTypeValue() { CollectionType = E_CollectionType.Not_Collection, ValueType = this.cmbValueTypeList.Text };
+            }
+            else if (this.cmbCollectonType.SelectedIndex == COLLECTION_INDEX_DICT)
+            {
+                value = new ModelTypeValue() { CollectionType = E_CollectionType.Dictionary, 
+                    KeyType = this.cmbKeyTypeList.Text, 
+                    ValueType = this.cmbValueTypeList.Text };
+            }
+            else if (this.cmbCollectonType.SelectedIndex == COLLECTION_INDEX_LIST)
+            {
+                value = new ModelTypeValue() { CollectionType = E_CollectionType.List, ValueType = this.cmbValueTypeList.Text };
+            }
+            return value;
+        }
+    }
+
+    public enum E_CollectionType
+    {
+        Not_Collection = 0,
+        Dictionary,
+        List
+    }
+
+    public class ModelTypeValue
+    {
+        public E_CollectionType CollectionType { get; set; }
+
+        private string m_key = string.Empty, m_value = string.Empty;
+        public string KeyType
+        { 
+            get { return m_key; }
+            set { m_key = value ?? string.Empty; }
+        }
+        public string ValueType 
+        {
+            get { return m_value; }
+            set { m_value = value ?? string.Empty; }
+        }
+
+        public override string ToString()
+        {
+            string str = string.Empty;
+            if (CollectionType == E_CollectionType.Not_Collection)
+                str = ValueType;
+            else if (CollectionType == E_CollectionType.Dictionary)
+                str = string.Format("Dictionary<{0}, {1}>", this.KeyType, this.ValueType);
+            else if (CollectionType == E_CollectionType.List)
+                str = string.Format("List<{0}>", this.ValueType);
+            return str;
         }
     }
 }
