@@ -1,4 +1,5 @@
 ﻿using BrightIdeasSoftware;
+using MVCVisualDesigner.TypeDescriptor;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -15,8 +16,7 @@ namespace MVCVisualDesigner
     public partial class ModelToolWindowForm : Form
     {
         private ModelToolWindow m_toolWindow;
-        //private ComboBox m_cmbTypeList;
-        private ModelTypeListControl m_cmbTypeList;
+        private ModelTypeListControl m_ctrlTypeList;
         public ModelToolWindowForm(ModelToolWindow toolWindow)
         {
             InitializeComponent();
@@ -26,6 +26,85 @@ namespace MVCVisualDesigner
 
             // init tree list view
             this.tlvViewModel.RootKeyValue = Guid.Empty;
+
+            m_ctrlTypeList = new ModelTypeListControl();
+            m_ctrlTypeList.ValueChanged += TypeListCellEditor_ValueChanged;
+        }
+
+        // cache the predefined type list
+        // todo: when to clear it??
+        private List<IMVDTypeDescriptor> m_predefinedTypes = null;
+        private HashSet<string> m_predefinedTypeNames = null;
+        private List<IMVDTypeDescriptor> PredefinedTypes
+        {
+            get
+            {
+                getPredefinedTypes();
+                return m_predefinedTypes;
+            }
+        }
+
+        private HashSet<string> PredefinedTypeNames
+        {
+            get
+            {
+                if (m_predefinedTypeNames != null && m_predefinedTypeNames.Count > 0)
+                    return m_predefinedTypeNames;
+
+                getPredefinedTypes();
+                return m_predefinedTypeNames;
+            }
+        }
+
+        private void getPredefinedTypes()
+        {
+            if (m_predefinedTypes == null || m_predefinedTypes.Count <= 0)
+            {
+                var package = this.m_toolWindow.GetPackage();
+                if (package != null)
+                {
+                    m_predefinedTypes = package.GetAllTypeDescriptors();
+                    if (m_predefinedTypes != null && m_predefinedTypes.Count > 0)
+                    {
+                        m_predefinedTypeNames = new HashSet<string>();
+                        m_predefinedTypes.ForEach(td =>
+                        {
+                            if (!m_predefinedTypeNames.Contains(td.FullName))
+                                m_predefinedTypeNames.Add(td.FullName);
+                        });
+                    }
+                }
+            }
+        }
+
+        private string[] getAllTypes()
+        {
+            HashSet<string> typeList = new HashSet<string>();
+
+            if (this.modelStore != null)
+            {
+                foreach (var mt in this.modelStore.ModelTypes)
+                {
+                    typeList.Add(mt.FullName);
+                }
+            }
+
+            var typeDescriptors = this.PredefinedTypes;
+            if (typeDescriptors != null)
+            {
+                foreach (var td in typeDescriptors)
+                {
+                    string fullName = td.FullName;
+                    if (!typeList.Contains(fullName))
+                    {
+                        typeList.Add(fullName);
+                    }
+                }
+            }
+
+            List<string> types = typeList.ToList();
+            types.Sort();
+            return types.ToArray();
         }
 
 #region "Init Model Window"
@@ -82,10 +161,8 @@ namespace MVCVisualDesigner
         public void OnLostFocus()
         {
             // hide type list control
-            if (m_cmbTypeList != null && m_cmbTypeList.Visible)
-                m_cmbTypeList.Hide();
-
-            //
+            if (m_ctrlTypeList != null && m_ctrlTypeList.Visible)
+                m_ctrlTypeList.Hide();
         }
 #endregion
 
@@ -100,90 +177,16 @@ namespace MVCVisualDesigner
             string columnName = e.Column.Text;
             if (columnName == COLUMN_TYPE)
             {
-                //ModelTypeList cmbTypeList = new ModelTypeList();
-                //cmbTypeList.DropDownStyle = ComboBoxStyle.DropDown;
-                //cmbTypeList.Bounds = e.CellBounds;
-                //cmbTypeList.Font = ((ObjectListView)sender).Font;
-                //string[] typeList = getAllTypes();
-                //cmbTypeList.Items.AddRange(typeList);
-                //cmbTypeList.Text = (string)e.Value;
-                //cmbTypeList.Tag = e.RowObject; 
-                //cmbTypeList.VisibleChanged += m_cmbTypeList_Leave;
-                //cmbTypeList.KeyUp += m_cmbTypeList_KeyUp;
-                //e.Control = cmbTypeList;
+                string[] typeList = getAllTypes();
+                VDModelMemberInstance instance = (VDViewModelMemberInstance)e.RowObject;
+                m_ctrlTypeList.InitTypeList(typeList, instance == null ? null : instance.GetModelType());
+                m_ctrlTypeList.Bounds = e.CellBounds;
+                m_ctrlTypeList.SetFont(((ObjectListView)sender).Font);
+                m_ctrlTypeList.Tag = e.RowObject;
+                m_ctrlTypeList.Visible = true;
 
-                //m_cmbTypeList = cmbTypeList;
-            }
-        }
-
-        private string[] getAllTypes()
-        {
-            HashSet<string> typeList =new HashSet<string>();
-
-            if(this.modelStore != null)
-            {
-                foreach(var mt in this.modelStore.ModelTypes)
-                {
-                    typeList.Add(mt.FullName);
-                }
-            }
-
-            var package = m_toolWindow.GetPackage();
-            if (package != null)
-            {
-                var typeDescriptors = package.GetAllTypeDescriptors();
-                foreach(var td in typeDescriptors)
-                {
-                    string fullName = td.ToString();
-                    if (!typeList.Contains(fullName))
-                    {
-                        typeList.Add(fullName);
-                    }
-                }
-            }
-
-            List<string> types = typeList.ToList();
-            types.Sort();
-            return types.ToArray();
-        }
-
-        void m_cmbTypeList_KeyUp(object sender, KeyEventArgs e)
-        {
-            ComboBox cb = (ComboBox)sender;
-            if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Tab)
-            {
-                cb.Hide();                
-            }
-        }
-
-        void m_cmbTypeList_Leave(object sender, EventArgs e)
-        {
-            ComboBox cb = (ComboBox)sender;
-            if (cb.Visible) return;
-
-            VDModelMemberInstance instance = (VDViewModelMemberInstance)cb.Tag;
-
-            string typeName = cb.Text;
-            if (string.IsNullOrEmpty(typeName))
-            {
-                MessageBox.Show("Please specify a type.");
-            }
-            else if (!this.isValidClassName(typeName))
-            {
-                MessageBox.Show(typeName + " is not a valid C# class name.");
-            }
-            else if (instance != null && instance.TypeName != typeName)
-            {
-                using (var trans = m_currentView.Store.TransactionManager.BeginTransaction("Update model member's type"))
-                {
-                    if (this.isPredefinedType(typeName))
-                        this.modelStore.ChangeModelMemberType<VDPredefinedType, VDViewModelMemberInstance>(instance.ModelMemberInfo, typeName);
-                    else
-                        this.modelStore.ChangeModelMemberType<VDCustomType, VDViewModelMemberInstance>(instance.ModelMemberInfo, typeName);
-                    trans.Commit();
-                }
-
-                this.RefreshAllItemsForViewModel();
+                e.Control = m_ctrlTypeList;
+                e.AutoDispose = false;
             }
         }
 
@@ -238,7 +241,7 @@ namespace MVCVisualDesigner
             else if (columnName == COLUMN_TYPE)
             {
                 // Stop listening for change events
-                //ModelTypeList cmbTypeList = e.Control as ModelTypeList;
+                ModelTypeListControl ctrlTypeList = e.Control as ModelTypeListControl;
                 //cmbTypeList.Leave -= m_cmbTypeList_Leave;
                 //cmbTypeList.KeyUp -= m_cmbTypeList_KeyUp;
                 //m_cmbTypeList = null;
@@ -250,6 +253,38 @@ namespace MVCVisualDesigner
 
             // Make the list redraw the involved ListViewItem
             ((ObjectListView)sender).RefreshItem(e.ListViewItem);
+        }
+
+        void TypeListCellEditor_ValueChanged(object sender, EventArgs e)
+        {
+            ModelTypeListControl ctrlTypeList = (ModelTypeListControl)sender;
+
+            VDModelMemberInstance instance = (VDViewModelMemberInstance)ctrlTypeList.Tag;
+
+            ModelTypeValue modelTypeValue = ctrlTypeList.GetValue();
+            string typeName = modelTypeValue.ToString();
+
+            if (modelTypeValue.HasUnspecifiedValue)
+            {
+                MessageBox.Show("Please specify a type.");
+            }
+            else if (!modelTypeValue.IsValidName)
+            {
+                MessageBox.Show(typeName + " is not a valid C# class name.");
+            }
+            else if (instance != null && instance.TypeName != typeName)
+            {
+                using (var trans = m_currentView.Store.TransactionManager.BeginTransaction("Update model member's type"))
+                {
+                    if (this.isPredefinedType(typeName))
+                        this.modelStore.ChangeModelMemberType<VDViewModelMemberInstance>(instance.ModelMemberInfo, modelTypeValue, this.PredefinedTypeNames);
+                    else
+                        this.modelStore.ChangeModelMemberType<VDViewModelMemberInstance>(instance.ModelMemberInfo, modelTypeValue, this.PredefinedTypeNames);
+                    trans.Commit();
+                }
+
+                this.RefreshAllItemsForViewModel();
+            }
         }
 #endregion
 
@@ -296,8 +331,8 @@ namespace MVCVisualDesigner
                     using (var trans = m_currentView.Store.TransactionManager.BeginTransaction("add model member"))
                     {
                         // todo: select Property or Method from UI
-                        this.modelStore.AddMemberToModelType<VDPropertyInfo, VDPredefinedType, VDViewModelMemberInstance>(
-                            modelType, "NewMember", Utility.Constants.STR_TYPE_STRING);
+                        this.modelStore.AddMemberToModelType<VDPropertyInfo, VDViewModelMemberInstance>(
+                            modelType, "NewMember", Utility.Constants.STR_TYPE_STRING, this.PredefinedTypeNames);
                         trans.Commit();
                     }
                 }
@@ -364,11 +399,11 @@ namespace MVCVisualDesigner
                         VDModelType modelType = null;
                         if (newModelType.CollectionType == E_CollectionType.Dictionary)
                         {
-                            modelType = this.modelStore.CreateDictionaryModelType(newModelType.KeyType, newModelType.ValueType);
+                            modelType = this.modelStore.CreateDictionaryModelType(newModelType.KeyType, newModelType.ValueType, this.PredefinedTypeNames);
                         }
                         else if (newModelType.CollectionType == E_CollectionType.List)
                         {
-                            modelType = this.modelStore.CreateListModelType(newModelType.ValueType);
+                            modelType = this.modelStore.CreateListModelType(newModelType.ValueType, this.PredefinedTypeNames);
                         }
                         else
                         {
@@ -404,10 +439,7 @@ namespace MVCVisualDesigner
 
             // if model type exists in ModelStore, create a new model instance of that model type;
             // else create both model type and model instance
-            if (isPredefinedType(newModelTypeName))
-                modelType = this.modelStore.CreateModelType<VDPredefinedType>(newModelTypeName);
-            else
-                modelType = this.modelStore.CreateModelType<VDCustomType>(newModelTypeName);
+            modelType = this.modelStore.CreateModelType(newModelTypeName, this.PredefinedTypeNames);
 
             return modelType;
         }
@@ -415,9 +447,8 @@ namespace MVCVisualDesigner
 
         private bool isPredefinedType(string fullName)
         {
-            var package = this.m_toolWindow.GetPackage();
-            if (package != null)
-                return package.IsPredefinedType(fullName);
+            if (this.PredefinedTypeNames != null && this.PredefinedTypeNames.Contains(fullName))
+                return true;
             else
                 return false;
         }

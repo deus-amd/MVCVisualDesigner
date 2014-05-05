@@ -37,13 +37,9 @@ namespace MVCVisualDesigner
             return list;
         }
 
-        // load from options, cache types
-        private List<IMVDTypeDescriptor> m_allTypeDescriptors = null;
+        // load from options
         public List<IMVDTypeDescriptor> GetAllTypeDescriptors()
         {
-            if (m_allTypeDescriptors != null && m_allTypeDescriptors.Count > 0) 
-                return m_allTypeDescriptors;
-
             List<IMVDTypeDescriptor> tdList = new List<IMVDTypeDescriptor>();
             PredefinedTypeOptionPage dlg = this.GetDialogPage(typeof(PredefinedTypeOptionPage)) as PredefinedTypeOptionPage;
             if (dlg != null)
@@ -56,8 +52,20 @@ namespace MVCVisualDesigner
             }
 
             tdList.Sort((x, y) => string.Compare(x.FullName, y.FullName));
-            if (tdList.Count > 0) m_allTypeDescriptors = tdList; // cache the result
             return tdList;
+        }
+
+        public HashSet<string> GetAllTypeDescriptorNames()
+        {
+            List<IMVDTypeDescriptor> tdList = GetAllTypeDescriptors();
+            if (tdList == null || tdList.Count <= 0) return null;
+
+            HashSet<string> names = new HashSet<string>();
+            tdList.ForEach(td => {
+                if (!names.Contains(td.FullName)) names.Add(td.FullName);
+            });
+
+            return names;
         }
 
         public List<IMVDTypeDescriptor> GetTypeDescriptors(string assemblyPath)
@@ -77,9 +85,9 @@ namespace MVCVisualDesigner
                     IMVDTypeDescriptor td = Activator.CreateInstance(t) as IMVDTypeDescriptor;
                     if (td != null) tdList.Add(td);
                 }
-                catch (Exception ex)
+                catch //(Exception ex)
                 { 
-                    // output to ErrorList window
+                    //todo: output to ErrorList window
                 }
             }
             tdList.Sort((x, y) => string.Compare(x.FullName, y.FullName));

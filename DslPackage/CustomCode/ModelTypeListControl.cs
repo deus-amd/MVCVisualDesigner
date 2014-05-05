@@ -32,6 +32,16 @@ namespace MVCVisualDesigner
             SetModelType(modelType);
         }
 
+        public void SetFont(Font font)
+        {
+            this.cmbCollectonType.Font = font;
+            this.cmbKeyTypeList.Font = font;
+            this.cmbValueTypeList.Font = font;
+            this.lblLeftAngleBracket.Font = font;
+            this.lblRightAngleBracket.Font = font;
+            this.lblComma.Font = font;
+        }
+
         private const int TYPE_INDEX_NOT_SPECIFIED = 0;
         private const int COLLECTION_INDEX_SINGULAR = 0;
         private const int COLLECTION_INDEX_DICT = 1;
@@ -78,9 +88,9 @@ namespace MVCVisualDesigner
         private void ModelTypeList_Load(object sender, EventArgs e)
         {
             this.cmbCollectonType.SelectedIndex = 0;
-            if (this.cmbKeyTypeList.Items.Count > 0)
+            if (this.cmbKeyTypeList.Items.Count > 0 && this.cmbValueTypeList.SelectedIndex < 0)
                 this.cmbKeyTypeList.SelectedIndex = 0;
-            if (this.cmbValueTypeList.Items.Count > 0)
+            if (this.cmbValueTypeList.Items.Count > 0 && this.cmbValueTypeList.SelectedIndex < 0)
                 this.cmbValueTypeList.SelectedIndex = 0;
 
             this.cmbCollectonType.Height = this.Height;
@@ -115,7 +125,7 @@ namespace MVCVisualDesigner
         {
             if (this.SelectedIndexChanged != null) this.SelectedIndexChanged(sender, e);
 
-            if (this.ValueChanged != null) this.ValueChanged(sender, e);
+            if (this.ValueChanged != null) this.ValueChanged(this, e);
         }
 
         private const int COLLECTION_TYPE_WIDTH = 40;
@@ -191,14 +201,14 @@ namespace MVCVisualDesigner
         {
             if (e.KeyChar == '\r')
             {
-                if (this.ValueChanged != null) this.ValueChanged(sender, null);
+                if (this.ValueChanged != null) this.ValueChanged(this, null);
                 e.Handled = true;
             }
         }
 
         private void ModelTypeList_Leave(object sender, EventArgs e)
         {
-            if (this.ValueChanged != null) this.ValueChanged(sender, e);
+            if (this.ValueChanged != null) this.ValueChanged(this, e);
         }
 
         //
@@ -220,42 +230,6 @@ namespace MVCVisualDesigner
                 value = new ModelTypeValue() { CollectionType = E_CollectionType.List, ValueType = this.cmbValueTypeList.Text };
             }
             return value;
-        }
-    }
-
-    public enum E_CollectionType
-    {
-        Not_Collection = 0,
-        Dictionary,
-        List
-    }
-
-    public class ModelTypeValue
-    {
-        public E_CollectionType CollectionType { get; set; }
-
-        private string m_key = string.Empty, m_value = string.Empty;
-        public string KeyType
-        { 
-            get { return m_key; }
-            set { m_key = value ?? string.Empty; }
-        }
-        public string ValueType 
-        {
-            get { return m_value; }
-            set { m_value = value ?? string.Empty; }
-        }
-
-        public override string ToString()
-        {
-            string str = string.Empty;
-            if (CollectionType == E_CollectionType.Not_Collection)
-                str = ValueType;
-            else if (CollectionType == E_CollectionType.Dictionary)
-                str = string.Format("Dictionary<{0}, {1}>", this.KeyType, this.ValueType);
-            else if (CollectionType == E_CollectionType.List)
-                str = string.Format("List<{0}>", this.ValueType);
-            return str;
         }
     }
 }

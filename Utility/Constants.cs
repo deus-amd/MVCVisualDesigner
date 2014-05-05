@@ -12,5 +12,8 @@ namespace MVCVisualDesigner.Utility
 
         public const string STR_TYPE_STRING = "string";
         public const string STR_TYPE_INT = "int";
+
+        public const string STR_TYPE_DICTIONARY = "Dictionary<{0}, {1}>";
+        public const string STR_TYPE_LIST = "List<{0}>";
     }
 }
