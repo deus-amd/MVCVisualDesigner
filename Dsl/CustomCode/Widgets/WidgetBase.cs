@@ -267,7 +267,7 @@ namespace MVCVisualDesigner
             get
             {
                 VDWidget widget = this;
-                while (widget.Parent != null) widget = this.Parent;
+                while (widget.Parent != null) widget = widget.Parent;
 
                 if (widget is VDView && widget.WidgetType == MVCVisualDesigner.WidgetType.View)
                     return (VDView)widget;
