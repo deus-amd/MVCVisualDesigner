@@ -44,7 +44,7 @@ namespace MVCVisualDesigner
                         }
                         else
                         {
-                            win.ShowWidgetModel(); 
+                            win.ShowWidgetModel(widget); 
                         }
                     }
                     else if (shape.ModelElement is PerformsActionOn)

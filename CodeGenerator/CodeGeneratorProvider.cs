@@ -1,4 +1,5 @@
 ﻿using MVCVisualDesigner.CodeGenerator;
+using MVCVisualDesigner.CodeGenerator.ModelCodeGenerator;
 using MVCVisualDesigner.CodeGenerator.RazorCodeGenerator;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace MVCVisualDesigner
         {
             m_controllerList = new List<ICodeGeneratorController>();
             m_controllerList.Add(new RazorCodeGeneratorController());
+            m_controllerList.Add(new CSModelCodeGeneratorController());
         }
 
         public List<ICodeGeneratorController> GetGeneratorList() { return m_controllerList; }
@@ -25,7 +27,7 @@ namespace MVCVisualDesigner
     public class RazorCodeGeneratorController : ICodeGeneratorController
     {
         public string Name { get { return "MVC Razor Generator"; } }
-        public string Description { get { return "Generate MVC razor view codes"; } }
+        public string Description { get { return "Generate MVC razor view code"; } }
 
 
         public void OnGenerateCode(VDView view, string viewPath)
@@ -49,9 +51,9 @@ namespace MVCVisualDesigner
             }
         }
 
-        private RazorGeneratorOptionUI m_settingControl;
         public Control SettingControl { get { return internalSettingControl; } }
 
+        private RazorGeneratorOptionUI m_settingControl;
         private RazorGeneratorOptionUI internalSettingControl
         {
             get
@@ -71,9 +73,57 @@ namespace MVCVisualDesigner
         }
     }
 
+    public class CSModelCodeGeneratorController : ICodeGeneratorController
+    {
+        public string Name { get { return "C# Model Generator"; } }
+
+        public string Description { get { return "Generate C# model code"; } }
+
+        public void OnGenerateCode(VDView view, string viewPath)
+        {
+            VDModelStore modelStore = view.ModelStore;
+            if (modelStore == null) return;
+
+            // generate code
+            CSModelGenerator generator = new CSModelGenerator(view);
+            string csModelCode = generator.TransformText();
+            if (string.IsNullOrEmpty(csModelCode)) return;
+
+            // save file
+            string filePath = SettingsHelper.getViewPathFromView(view, viewPath);
+            filePath = System.IO.Path.Combine(filePath, view.WidgetName + "_models.cs");
+            using (System.IO.StreamWriter w = new System.IO.StreamWriter(filePath))
+            {
+                w.Write(csModelCode);
+            }
+        }
+
+        public void OnLoadSettings(VDView rootView, string rootViewPath)
+        {
+            this.internalSettingControl.initView(rootView, rootViewPath);
+        }
+
+        public void OnSaveSettings(VDView rootView, string rootViewpath)
+        {
+        }
+
+        public Control SettingControl { get { return internalSettingControl; } }
+
+        private CSModelGeneratorOptionUI m_settingControl;
+        private CSModelGeneratorOptionUI internalSettingControl
+        {
+            get
+            {
+                if (m_settingControl == null) m_settingControl = new CSModelGeneratorOptionUI();
+                return m_settingControl;
+            }
+        }
+    }
+
     internal static class SettingsHelper
     {
         internal static readonly Guid GENERATED_VIEW_PATH = new Guid("6E08C559-1695-4F16-863C-4EF98EBCD143");
+        internal static readonly Guid GENERATED_CS_MODEL_PATH = new Guid("26A1177A-CB80-4D1E-9728-DF7DC3E5299E");
 
         internal static string getViewPathFromView(VDView view, string viewPath)
         {
@@ -95,6 +145,30 @@ namespace MVCVisualDesigner
             using (var trans = view.Store.TransactionManager.BeginTransaction("Update code generation settings"))
             {
                 view.settings[SettingsHelper.GENERATED_VIEW_PATH] = path;
+                trans.Commit();
+            }
+        }
+
+        internal static string getCSModelPathFromView(VDView view, string viewPath)
+        {
+            string path = string.Empty;
+            if (view.settings.ContainsKey(SettingsHelper.GENERATED_CS_MODEL_PATH))
+                path = (string)view.settings[SettingsHelper.GENERATED_CS_MODEL_PATH];
+
+            if (!string.IsNullOrEmpty(viewPath))
+                path = Utility.PathHelper.GetAbsolutePath(path, viewPath);
+
+            return path;
+        }
+
+        internal static void saveCSModelPathToView(string path, VDView view, string viewPath)
+        {
+            if (!string.IsNullOrEmpty(viewPath))
+                path = Utility.PathHelper.GetRelativePath(path, viewPath);
+
+            using (var trans = view.Store.TransactionManager.BeginTransaction("Update code generation settings"))
+            {
+                view.settings[SettingsHelper.GENERATED_CS_MODEL_PATH] = path;
                 trans.Commit();
             }
         }

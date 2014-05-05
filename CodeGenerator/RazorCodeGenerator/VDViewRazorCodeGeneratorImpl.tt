@@ -4,5 +4,14 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="MVCVisualDesigner" #>
+<# 
+	// Model declaration
+	if (!string.IsNullOrEmpty(this.Widget.ViewModelType))
+	{
+#>
+@model <#= this.Widget.ViewModelType #>
+<#
+	}
+#>
 <# /* generate code for children */ #>
 <#@ include file="../GenerateChildrenCode.t4" #>

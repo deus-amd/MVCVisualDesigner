@@ -9,7 +9,7 @@ namespace MVCVisualDesigner
 {
     public partial class VDView
     {
-        internal string GetModelTypeValue()
+        internal string GetViewModelTypeValue()
         {
             if (this.ModelInstance != null && this.ModelInstance.ModelType != null)
             {

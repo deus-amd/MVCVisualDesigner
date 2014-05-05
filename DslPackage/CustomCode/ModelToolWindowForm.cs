@@ -108,16 +108,18 @@ namespace MVCVisualDesigner
         }
 
 #region "Init Model Window"
-        public void ShowWidgetModel()
+        private VDWidget m_currentWidget = null;
+        public void ShowWidgetModel(VDWidget widget)
         {
             tlpActionModelLayout.Visible = false;
             tlpViewModelLayout.Visible = false;
             tlpWidgetModelLayout.Visible = true;
             tlpWidgetModelLayout.Dock = System.Windows.Forms.DockStyle.Fill;
 
-            m_currentView = null;
+            m_currentView = widget.RootView;
+            m_currentWidget = widget;
 
-            // todo: 
+            //todo: init widget view
         }
 
         public void ShowActionModel()
@@ -128,7 +130,7 @@ namespace MVCVisualDesigner
             tlpActionModelLayout.Dock = System.Windows.Forms.DockStyle.Fill;
 
             m_currentView = null;
-
+            m_currentWidget = null;
             // todo: 
         }
 
@@ -141,6 +143,7 @@ namespace MVCVisualDesigner
             tlpViewModelLayout.Dock = System.Windows.Forms.DockStyle.Fill;
 
             m_currentView = view;
+            m_currentWidget = null;
 
             // set model type
             this.ctrlViewModelType.InitTypeList(getAllTypes(), view.GetModelType());
@@ -375,7 +378,7 @@ namespace MVCVisualDesigner
             string newModelTypeName = newModelType.ToString();
 
             // model type is changed
-            if (string.Compare(newModelTypeName, m_currentView.ModelType) != 0)
+            if (string.Compare(newModelTypeName, m_currentView.ViewModelType) != 0)
             {
                 using (var trans = m_currentView.Store.TransactionManager.BeginTransaction("update view model type"))
                 {

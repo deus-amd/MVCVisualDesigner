@@ -46,13 +46,13 @@ namespace MVCVisualDesigner
 
         public override string WindowTitle { get { return "Model Window"; } }
 
-        public void ShowWidgetModel()
+        public void ShowWidgetModel(VDWidget widget)
         {
             m_selectedWidget = null;
 
             if (this.Window != null)
             {
-                m_form.ShowWidgetModel();
+                m_form.ShowWidgetModel(widget);
             }
         }
 

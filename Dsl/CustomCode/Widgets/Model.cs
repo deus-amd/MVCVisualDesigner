@@ -147,7 +147,7 @@ namespace MVCVisualDesigner
 
             // create model instance
             VDModelInstance modelInstance = new VDModelInstance(this.Partition,
-                new PropertyAssignment(VDModelInstance.m_ModelInstanceNameDomainPropertyId, modelName)) { ModelType = modelType };
+                new PropertyAssignment(VDModelInstance.ModelNameDomainPropertyId, modelName)) { ModelType = modelType };
             this.ModelMemberInstances.Add(modelInstance);
             this.ModelInstances.Add(modelInstance);
 
@@ -398,8 +398,6 @@ namespace MVCVisualDesigner
 
     public partial class VDModelInstance
     {
-        internal override string GetNameValue() { return this.m_ModelInstanceName; }
-
         public override VDModelType GetModelType() { return this.ModelType; }
 
         public List<VDModelMemberInstance> GetAllSubMemberInstances()
@@ -440,6 +438,21 @@ namespace MVCVisualDesigner
                 return type.FullName;
             else
                 return string.Empty;
+        }
+
+        // custom storage property
+        internal string GetDefaultValueValue()
+        {
+            if (this.ModelMemberInfo != null)
+                return this.ModelMemberInfo.DefaultValue;
+            else
+                return string.Empty;
+        }
+
+        internal void SetDefaultValueValue(string newValue)
+        {
+            if (this.ModelMemberInfo != null)
+                this.ModelMemberInfo.DefaultValue = newValue;
         }
 
         // to support object list view

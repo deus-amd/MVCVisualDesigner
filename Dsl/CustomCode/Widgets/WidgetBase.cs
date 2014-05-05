@@ -95,6 +95,24 @@ namespace MVCVisualDesigner
         {
             m_settings = newValue;
         }
+
+
+        // calculated property IntrinsicModelType
+        internal virtual string GetIntrinsicModelTypeValue()
+        {
+            return string.Empty;
+        }
+
+        // custom storage property ModelName
+        protected string m_ModelName;
+        internal virtual string GetModelNameValue()
+        {
+            return m_ModelName;
+        }
+        internal virtual void SetModelNameValue(string newValue)
+        {
+            m_ModelName = newValue;
+        }
     }
 
     public partial class VDWidget

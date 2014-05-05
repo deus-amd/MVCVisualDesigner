@@ -53,6 +53,18 @@
     <Compile Include="Interface\IJSCodeGenerator.cs" />
     <Compile Include="Interface\IRazorCodeGenerator.cs" />
     <Compile Include="Interface\IModelCodeGenerator.cs" />
+    <Compile Include="ModelCodeGenerator\CSModelGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CSModelGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelCodeGenerator\CSModelGeneratorOptionUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModelCodeGenerator\CSModelGeneratorOptionUI.Designer.cs">
+      <DependentUpon>CSModelGeneratorOptionUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelCodeGenerator\CSModelGenerator_Custom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RazorCodeGenerator\RazorCodeGenerator.cs">
       <AutoGen>True</AutoGen>
@@ -192,6 +204,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ModelCodeGenerator\CSModelGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>CSModelGenerator.cs</LastGenOutput>
+    </None>
     <None Include="RazorCodeGenerator\RazorCodeGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RazorCodeGenerator.cs</LastGenOutput>
@@ -320,6 +336,9 @@
     <None Include="GenerateChildrenCode.t4" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ModelCodeGenerator\CSModelGeneratorOptionUI.resx">
+      <DependentUpon>CSModelGeneratorOptionUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RazorCodeGenerator\RazorGeneratorOptionUI.resx">
       <DependentUpon>RazorGeneratorOptionUI.cs</DependentUpon>
     </EmbeddedResource>

@@ -15,5 +15,7 @@ namespace MVCVisualDesigner.Utility
 
         public const string STR_TYPE_DICTIONARY = "Dictionary<{0}, {1}>";
         public const string STR_TYPE_LIST = "List<{0}>";
+
+        public const string DEFAULT_INDENT = "    ";
     }
 }

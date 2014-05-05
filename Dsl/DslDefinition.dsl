@@ -42,6 +42,17 @@
             <ExternalTypeMoniker Name="/System.Collections.Generic/Dictionary&lt;System.Guid, System.String&gt;" />
           </Type>
         </DomainProperty>
+        <DomainProperty Id="e65b4ff5-7df1-44f5-a57b-c72c7c055655" Description="Intrinsic Model Type" Name="IntrinsicModelType" DisplayName="Intrinsic Model Type" Kind="Calculated">
+          <Notes>can be empty, to specify intrinsic model type of a
+widget. For example for an input accepting only integer
+only, its value should be "Int".
+
+The values set to this property should be defined in 
+"Predefined Types" option page.</Notes>
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
       </Properties>
       <ElementMergeDirectives>
         <ElementMergeDirective>
@@ -72,7 +83,7 @@
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
       <Properties>
-        <DomainProperty Id="8ad9e109-03a5-4fd8-85bf-e581dae710df" Description="@model directive" Name="ModelType" DisplayName="Model Type" Kind="Calculated" Category="Definition">
+        <DomainProperty Id="8ad9e109-03a5-4fd8-85bf-e581dae710df" Description="@model directive" Name="ViewModelType" DisplayName="Model Type" Kind="Calculated" Category="Definition">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
@@ -962,6 +973,11 @@
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
+        <DomainProperty Id="38d60e2d-03c3-4615-a733-f9ed243e03f3" Description="Description for MVCVisualDesigner.VDModelMemberInfo.Default Value" Name="DefaultValue" DisplayName="Default Value">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
       </Properties>
     </DomainClass>
     <DomainClass Id="a834d10e-0cc8-4630-8b45-5a99351ad7a4" Description="Description for MVCVisualDesigner.VDPropertyInfo" Name="VDPropertyInfo" DisplayName="VDProperty Info" Namespace="MVCVisualDesigner">
@@ -982,12 +998,6 @@
     <DomainClass Id="fdcfbaa6-215b-458d-8dc5-4ad370280ad6" Description="Description for MVCVisualDesigner.VDModelType" Name="VDModelType" DisplayName="VDModel Type" Namespace="MVCVisualDesigner">
       <Properties>
         <DomainProperty Id="7e6954f1-8cc3-4049-94b6-78bc2437e870" Description="Description for MVCVisualDesigner.VDModelType.Name Space" Name="NameSpace" DisplayName="Name Space">
-          <Type>
-            <ExternalTypeMoniker Name="/System/String" />
-          </Type>
-        </DomainProperty>
-        <DomainProperty Id="fc49e868-57c9-4a22-a339-2a717b282ecc" Description="Description for MVCVisualDesigner.VDModelType.Collection Type" Name="CollectionType" DisplayName="Collection Type">
-          <Notes>List&lt;T&gt; or Hash&lt;T&gt; ??</Notes>
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
@@ -1062,7 +1072,7 @@
         <DomainClassMoniker Name="VDModelMemberInstance" />
       </BaseClass>
       <Properties>
-        <DomainProperty Id="fac2455f-7f89-46f4-bd43-aee1f787018f" Description="Description for MVCVisualDesigner.VDModelInstance.M_ Model Instance Name" Name="m_ModelInstanceName" DisplayName="M_ Model Instance Name" GetterAccessModifier="Private">
+        <DomainProperty Id="fac2455f-7f89-46f4-bd43-aee1f787018f" Description="Description for MVCVisualDesigner.VDModelInstance.Model Name" Name="ModelName" DisplayName="Model Name" GetterAccessModifier="Private">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
@@ -1081,7 +1091,7 @@
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="acb69d2a-1917-4e1a-9568-fd2011a305be" Description="Description for MVCVisualDesigner.VDModelMemberInstance.Default Value" Name="DefaultValue" DisplayName="Default Value">
+        <DomainProperty Id="acb69d2a-1917-4e1a-9568-fd2011a305be" Description="Description for MVCVisualDesigner.VDModelMemberInstance.Default Value" Name="DefaultValue" DisplayName="Default Value" Kind="CustomStorage">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
@@ -2289,6 +2299,9 @@
           <XmlRelationshipData UseFullForm="true" RoleElementName="modelInstance">
             <DomainRelationshipMoniker Name="WidgetHasModelInstance" />
           </XmlRelationshipData>
+          <XmlPropertyData XmlName="intrinsicModelType" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDWidget/IntrinsicModelType" />
+          </XmlPropertyData>
         </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDView" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDViewMoniker" ElementName="vDView" MonikerTypeName="VDViewMoniker">
@@ -2303,8 +2316,8 @@
           <XmlRelationshipData UseFullForm="true" RoleElementName="modelStore">
             <DomainRelationshipMoniker Name="DesignerHasModelStore" />
           </XmlRelationshipData>
-          <XmlPropertyData XmlName="modelType" Representation="Ignore">
-            <DomainPropertyMoniker Name="VDView/ModelType" />
+          <XmlPropertyData XmlName="viewModelType" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDView/ViewModelType" />
           </XmlPropertyData>
         </ElementData>
       </XmlClassData>
@@ -3076,6 +3089,9 @@
           <XmlRelationshipData UseFullForm="true" RoleElementName="type">
             <DomainRelationshipMoniker Name="ModelMemberIsTypeOf" />
           </XmlRelationshipData>
+          <XmlPropertyData XmlName="defaultValue">
+            <DomainPropertyMoniker Name="VDModelMemberInfo/DefaultValue" />
+          </XmlPropertyData>
         </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDPropertyInfo" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDPropertyInfoMoniker" ElementName="vDPropertyInfo" MonikerTypeName="VDPropertyInfoMoniker">
@@ -3092,9 +3108,6 @@
         <ElementData>
           <XmlPropertyData XmlName="nameSpace">
             <DomainPropertyMoniker Name="VDModelType/NameSpace" />
-          </XmlPropertyData>
-          <XmlPropertyData XmlName="collectionType">
-            <DomainPropertyMoniker Name="VDModelType/CollectionType" />
           </XmlPropertyData>
           <XmlRelationshipData UseFullForm="true" RoleElementName="modelMembers">
             <DomainRelationshipMoniker Name="ModelTypeHasMembers" />
@@ -3148,8 +3161,8 @@
           <XmlRelationshipData UseFullForm="true" RoleElementName="modelType">
             <DomainRelationshipMoniker Name="ModelInstanceIsTypeOf" />
           </XmlRelationshipData>
-          <XmlPropertyData XmlName="m_ModelInstanceName">
-            <DomainPropertyMoniker Name="VDModelInstance/m_ModelInstanceName" />
+          <XmlPropertyData XmlName="modelName">
+            <DomainPropertyMoniker Name="VDModelInstance/ModelName" />
           </XmlPropertyData>
         </ElementData>
       </XmlClassData>
