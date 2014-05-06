@@ -149,7 +149,7 @@ namespace MVCVisualDesigner
             this.ctrlViewModelType.InitTypeList(getAllTypes(), view.GetModelType());
 
             // init tree list view
-            RefreshAllItemsForViewModel();
+            refreshAllItemsForViewModel();
         }
 
         public void ClearWindow()
@@ -286,7 +286,7 @@ namespace MVCVisualDesigner
                     trans.Commit();
                 }
 
-                this.RefreshAllItemsForViewModel();
+                this.refreshAllItemsForViewModel();
             }
         }
 #endregion
@@ -351,7 +351,7 @@ namespace MVCVisualDesigner
                     }
                 }
 
-                RefreshAllItemsForViewModel();
+                refreshAllItemsForViewModel();
             }
         }
 #endregion
@@ -425,7 +425,7 @@ namespace MVCVisualDesigner
                     trans.Commit();
                 }
 
-                RefreshAllItemsForViewModel();
+                refreshAllItemsForViewModel();
             }
         }
 
@@ -456,7 +456,7 @@ namespace MVCVisualDesigner
                 return false;
         }
 
-        private void RefreshAllItemsForViewModel()
+        private void refreshAllItemsForViewModel()
         {
             // update tree list view
             if (m_currentView != null && m_currentView.ModelInstance != null)
@@ -468,6 +468,20 @@ namespace MVCVisualDesigner
             {
                 tlvViewModel.ClearObjects();
                 tlvViewModel.DataSource = null;
+            }
+        }
+
+        private void refreshAllItemsForWidgetModel()
+        {
+            // update tree list view
+            if (m_currentWidget != null && m_currentWidget.ModelInstance != null)
+            {
+                tlvWidgetModel.DataSource = m_currentWidget.ModelInstance.GetAllSubMemberInstances();
+            }
+            else
+            {
+                tlvWidgetModel.ClearObjects();
+                tlvWidgetModel.DataSource = null;
             }
         }
 

@@ -398,6 +398,11 @@ namespace MVCVisualDesigner
 
     public partial class VDModelInstance
     {
+        // calculated Name property
+        internal override string GetNameValue() { return this.ModelName; }
+
+        // calculated TypeName property
+        //internal override string GetTypeNameValue() {}
         public override VDModelType GetModelType() { return this.ModelType; }
 
         public List<VDModelMemberInstance> GetAllSubMemberInstances()
@@ -431,7 +436,7 @@ namespace MVCVisualDesigner
         }
 
         // calculated TypeName property
-        internal string GetTypeNameValue()
+        internal virtual string GetTypeNameValue()
         {
             VDModelType type = GetModelType();
             if (type != null)

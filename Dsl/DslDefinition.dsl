@@ -1785,6 +1785,22 @@ The values set to this property should be defined in
         </DomainRole>
       </Target>
     </DomainRelationship>
+    <DomainRelationship Id="72a62a16-b27f-4267-b401-b61ec6edf1a4" Description="Description for MVCVisualDesigner.BindsTo" Name="BindsTo" DisplayName="Binds To" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="5f80c39e-795d-4509-bbcb-ebb1021acd11" Description="Description for MVCVisualDesigner.BindsTo.SourceVDModelMemberInstance" Name="SourceVDModelMemberInstance" DisplayName="Source VDModel Member Instance" PropertyName="BindingSource" Multiplicity="ZeroOne" PropertyDisplayName="Binding Source">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDModelMemberInstance" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="d9638009-1213-44cf-8d92-28182c43e1a2" Description="Description for MVCVisualDesigner.BindsTo.TargetVDModelMemberInstance" Name="TargetVDModelMemberInstance" DisplayName="Target VDModel Member Instance" PropertyName="BindingTarget" Multiplicity="ZeroOne" PropertyDisplayName="Binding Target">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDModelMemberInstance" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
   </Relationships>
   <Types>
     <ExternalType Name="DateTime" Namespace="System" />
@@ -3187,6 +3203,9 @@ The values set to this property should be defined in
           <XmlPropertyData XmlName="validatorNames">
             <DomainPropertyMoniker Name="VDModelMemberInstance/ValidatorNames" />
           </XmlPropertyData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="bindingSource">
+            <DomainRelationshipMoniker Name="BindsTo" />
+          </XmlRelationshipData>
         </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="MemberInstanceIsTypeOf" MonikerAttributeName="" SerializeId="true" MonikerElementName="memberInstanceIsTypeOfMoniker" ElementName="memberInstanceIsTypeOf" MonikerTypeName="MemberInstanceIsTypeOfMoniker">
@@ -3251,6 +3270,9 @@ The values set to this property should be defined in
       </XmlClassData>
       <XmlClassData TypeName="VDDictionaryTypeReferencesValueInfo" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDDictionaryTypeReferencesValueInfoMoniker" ElementName="vDDictionaryTypeReferencesValueInfo" MonikerTypeName="VDDictionaryTypeReferencesValueInfoMoniker">
         <DomainRelationshipMoniker Name="VDDictionaryTypeReferencesValueInfo" />
+      </XmlClassData>
+      <XmlClassData TypeName="BindsTo" MonikerAttributeName="" SerializeId="true" MonikerElementName="bindsToMoniker" ElementName="bindsTo" MonikerTypeName="BindsToMoniker">
+        <DomainRelationshipMoniker Name="BindsTo" />
       </XmlClassData>
     </ClassData>
   </XmlSerializationBehavior>
@@ -3888,6 +3910,25 @@ The values set to this property should be defined in
           <RolePlayerConnectDirective>
             <AcceptingClass>
               <DomainClassMoniker Name="VDPlaceholderInfo" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
+    <ConnectionBuilder Name="BindsToBuilder">
+      <LinkConnectDirective>
+        <DomainRelationshipMoniker Name="BindsTo" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDModelMemberInstance" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDModelMemberInstance" />
             </AcceptingClass>
           </RolePlayerConnectDirective>
         </TargetDirectives>
