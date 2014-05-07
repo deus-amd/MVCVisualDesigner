@@ -1072,7 +1072,7 @@ The values set to this property should be defined in
         <DomainClassMoniker Name="VDModelMemberInstance" />
       </BaseClass>
       <Properties>
-        <DomainProperty Id="fac2455f-7f89-46f4-bd43-aee1f787018f" Description="Description for MVCVisualDesigner.VDModelInstance.Model Name" Name="ModelName" DisplayName="Model Name" GetterAccessModifier="Private">
+        <DomainProperty Id="fac2455f-7f89-46f4-bd43-aee1f787018f" Description="Description for MVCVisualDesigner.VDModelInstance.Model Name" Name="ModelName" DisplayName="Model Name">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
@@ -1087,11 +1087,6 @@ The values set to this property should be defined in
           </Type>
         </DomainProperty>
         <DomainProperty Id="8a0d3aae-6080-4a62-bd1e-2dc66435272b" Description="Description for MVCVisualDesigner.VDModelMemberInstance.Type Name" Name="TypeName" DisplayName="Type Name" Kind="Calculated">
-          <Type>
-            <ExternalTypeMoniker Name="/System/String" />
-          </Type>
-        </DomainProperty>
-        <DomainProperty Id="acb69d2a-1917-4e1a-9568-fd2011a305be" Description="Description for MVCVisualDesigner.VDModelMemberInstance.Default Value" Name="DefaultValue" DisplayName="Default Value" Kind="CustomStorage">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
@@ -1113,12 +1108,29 @@ The values set to this property should be defined in
             <ExternalTypeMoniker Name="/System/Boolean" />
           </Type>
         </DomainProperty>
+        <DomainProperty Id="0858ade7-e479-4cfd-bac6-c7a041e2be93" Description="Description for MVCVisualDesigner.VDViewModelMemberInstance.Default Value" Name="DefaultValue" DisplayName="Default Value" Kind="CustomStorage">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
       </Properties>
     </DomainClass>
     <DomainClass Id="67224310-c6c5-45cf-bc3e-6f0b98ec10fa" Description="Description for MVCVisualDesigner.VDWidgetModelMemberInstance" Name="VDWidgetModelMemberInstance" DisplayName="VDWidget Model Member Instance" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDModelMemberInstance" />
       </BaseClass>
+      <Properties>
+        <DomainProperty Id="ebcebabb-7360-47ba-be1b-d4056e51c3f5" Description="Description for MVCVisualDesigner.VDWidgetModelMemberInstance.Value" Name="Value" DisplayName="Value">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="3c580fac-99e7-4681-968a-8e3e77947f65" Description="Description for MVCVisualDesigner.VDWidgetModelMemberInstance.Formatter Names" Name="FormatterNames" DisplayName="Formatter Names">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
     </DomainClass>
     <DomainClass Id="2cf45331-4da5-4e21-8e80-be2fbc4ba174" Description="Description for MVCVisualDesigner.VDActionModelMemberInstance" Name="VDActionModelMemberInstance" DisplayName="VDAction Model Member Instance" Namespace="MVCVisualDesigner">
       <BaseClass>
@@ -1787,14 +1799,14 @@ The values set to this property should be defined in
     </DomainRelationship>
     <DomainRelationship Id="72a62a16-b27f-4267-b401-b61ec6edf1a4" Description="Description for MVCVisualDesigner.BindsTo" Name="BindsTo" DisplayName="Binds To" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="5f80c39e-795d-4509-bbcb-ebb1021acd11" Description="Description for MVCVisualDesigner.BindsTo.SourceVDModelMemberInstance" Name="SourceVDModelMemberInstance" DisplayName="Source VDModel Member Instance" PropertyName="BindingSource" Multiplicity="ZeroOne" PropertyDisplayName="Binding Source">
+        <DomainRole Id="5f80c39e-795d-4509-bbcb-ebb1021acd11" Description="Description for MVCVisualDesigner.BindsTo.SourceVDModelMemberInstance" Name="SourceVDModelMemberInstance" DisplayName="Source VDModel Member Instance" PropertyName="BindingTarget" Multiplicity="ZeroOne" PropertyDisplayName="Binding Target">
           <RolePlayer>
             <DomainClassMoniker Name="VDModelMemberInstance" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="d9638009-1213-44cf-8d92-28182c43e1a2" Description="Description for MVCVisualDesigner.BindsTo.TargetVDModelMemberInstance" Name="TargetVDModelMemberInstance" DisplayName="Target VDModel Member Instance" PropertyName="BindingTarget" Multiplicity="ZeroOne" PropertyDisplayName="Binding Target">
+        <DomainRole Id="d9638009-1213-44cf-8d92-28182c43e1a2" Description="Description for MVCVisualDesigner.BindsTo.TargetVDModelMemberInstance" Name="TargetVDModelMemberInstance" DisplayName="Target VDModel Member Instance" PropertyName="BindingSource" Multiplicity="ZeroOne" PropertyDisplayName="Binding Source">
           <RolePlayer>
             <DomainClassMoniker Name="VDModelMemberInstance" />
           </RolePlayer>
@@ -3197,13 +3209,10 @@ The values set to this property should be defined in
           <XmlPropertyData XmlName="typeName" Representation="Ignore">
             <DomainPropertyMoniker Name="VDModelMemberInstance/TypeName" />
           </XmlPropertyData>
-          <XmlPropertyData XmlName="defaultValue">
-            <DomainPropertyMoniker Name="VDModelMemberInstance/DefaultValue" />
-          </XmlPropertyData>
           <XmlPropertyData XmlName="validatorNames">
             <DomainPropertyMoniker Name="VDModelMemberInstance/ValidatorNames" />
           </XmlPropertyData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="bindingSource">
+          <XmlRelationshipData UseFullForm="true" RoleElementName="bindingTarget">
             <DomainRelationshipMoniker Name="BindsTo" />
           </XmlRelationshipData>
         </ElementData>
@@ -3220,10 +3229,21 @@ The values set to this property should be defined in
           <XmlPropertyData XmlName="isJavaScriptModel">
             <DomainPropertyMoniker Name="VDViewModelMemberInstance/IsJavaScriptModel" />
           </XmlPropertyData>
+          <XmlPropertyData XmlName="defaultValue">
+            <DomainPropertyMoniker Name="VDViewModelMemberInstance/DefaultValue" />
+          </XmlPropertyData>
         </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDWidgetModelMemberInstance" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDWidgetModelMemberInstanceMoniker" ElementName="vDWidgetModelMemberInstance" MonikerTypeName="VDWidgetModelMemberInstanceMoniker">
         <DomainClassMoniker Name="VDWidgetModelMemberInstance" />
+        <ElementData>
+          <XmlPropertyData XmlName="value">
+            <DomainPropertyMoniker Name="VDWidgetModelMemberInstance/Value" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="formatterNames">
+            <DomainPropertyMoniker Name="VDWidgetModelMemberInstance/FormatterNames" />
+          </XmlPropertyData>
+        </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDActionModelMemberInstance" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDActionModelMemberInstanceMoniker" ElementName="vDActionModelMemberInstance" MonikerTypeName="VDActionModelMemberInstanceMoniker">
         <DomainClassMoniker Name="VDActionModelMemberInstance" />

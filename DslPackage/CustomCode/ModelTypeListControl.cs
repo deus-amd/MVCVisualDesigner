@@ -87,7 +87,6 @@ namespace MVCVisualDesigner
 
         private void ModelTypeList_Load(object sender, EventArgs e)
         {
-            this.cmbCollectonType.SelectedIndex = 0;
             if (this.cmbKeyTypeList.Items.Count > 0 && this.cmbValueTypeList.SelectedIndex < 0)
                 this.cmbKeyTypeList.SelectedIndex = 0;
             if (this.cmbValueTypeList.Items.Count > 0 && this.cmbValueTypeList.SelectedIndex < 0)

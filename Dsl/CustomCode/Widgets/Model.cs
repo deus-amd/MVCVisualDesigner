@@ -395,35 +395,7 @@ namespace MVCVisualDesigner
         }
     }
 
-
-    public partial class VDModelInstance
-    {
-        // calculated Name property
-        internal override string GetNameValue() { return this.ModelName; }
-
-        // calculated TypeName property
-        //internal override string GetTypeNameValue() {}
-        public override VDModelType GetModelType() { return this.ModelType; }
-
-        public List<VDModelMemberInstance> GetAllSubMemberInstances()
-        {
-            List<VDModelMemberInstance> instList = new List<VDModelMemberInstance>();
-            //instList.Add(this);
-            getChildMemberLists(instList, this);
-            return instList;
-        }
-
-        private void getChildMemberLists(List<VDModelMemberInstance> instList, VDModelMemberInstance parentInst)
-        {
-            foreach(var child in parentInst.ChildMemberInstances)
-            {
-                instList.Add(child);
-                getChildMemberLists(instList, child);
-            }
-        }
-    }
-
-
+#region "Model Instance"
     public partial class VDModelMemberInstance
     {
         // calculated Name property
@@ -443,33 +415,6 @@ namespace MVCVisualDesigner
                 return type.FullName;
             else
                 return string.Empty;
-        }
-
-        // custom storage property
-        internal string GetDefaultValueValue()
-        {
-            if (this.ModelMemberInfo != null)
-                return this.ModelMemberInfo.DefaultValue;
-            else
-                return string.Empty;
-        }
-
-        internal void SetDefaultValueValue(string newValue)
-        {
-            if (this.ModelMemberInfo != null)
-                this.ModelMemberInfo.DefaultValue = newValue;
-        }
-
-        // to support object list view
-        public Guid ParentID 
-        { 
-            get 
-            {
-                if (this.ParentMemberInstance != null && !(this.ParentMemberInstance is VDModelInstance))
-                    return this.ParentMemberInstance.Id;
-                else
-                    return Guid.Empty;
-            } 
         }
 
         public virtual VDModelType GetModelType()
@@ -492,11 +437,56 @@ namespace MVCVisualDesigner
                 return parent as VDModelInstance;
             }
         }
-    }
 
+        // to support object list view
+        public Guid ParentID
+        {
+            get
+            {
+                if (this.ParentMemberInstance != null && !(this.ParentMemberInstance is VDModelInstance))
+                    return this.ParentMemberInstance.Id;
+                else
+                    return Guid.Empty;
+            }
+        }
+
+        public string BindingTargetName
+        {
+            get
+            {
+                string name = string.Empty; 
+                if (this.BindingTarget != null)
+                {
+                    name = this.BindingTarget.Name;
+                    VDModelMemberInstance mmInst = this.BindingTarget.ParentMemberInstance;
+                    while (mmInst != null)
+                    {
+                        name = mmInst.Name ?? string.Empty + "/" + name;
+                        mmInst = mmInst.ParentMemberInstance;
+                    }
+                }
+                return name;
+            }
+        }
+    }
 
     public partial class VDViewModelMemberInstance
     {
+        // custom storage property
+        internal string GetDefaultValueValue()
+        {
+            if (this.ModelMemberInfo != null)
+                return this.ModelMemberInfo.DefaultValue;
+            else
+                return string.Empty;
+        }
+
+        internal void SetDefaultValueValue(string newValue)
+        {
+            if (this.ModelMemberInfo != null)
+                this.ModelMemberInfo.DefaultValue = newValue;
+        }
+
         // to support Object List View data binding
         public bool IsJavaScriptModel_OLV
         {
@@ -512,7 +502,48 @@ namespace MVCVisualDesigner
         }
     }
 
+    public partial class VDWidgetModelMemberInstance
+    {
 
+    }
+
+    public partial class VDModelInstance
+    {
+        // calculated Name property
+        internal override string GetNameValue() { return this.ModelName; }
+
+        // calculated TypeName property
+        //internal override string GetTypeNameValue() {}
+        public override VDModelType GetModelType() { return this.ModelType; }
+
+        public List<VDModelMemberInstance> GetAllSubMemberInstances()
+        {
+            List<VDModelMemberInstance> instList = new List<VDModelMemberInstance>();
+            getChildMemberLists(instList, this);
+            return instList;
+        }
+
+        public List<VDModelMemberInstance> GetAllMemberInstances()
+        {
+            List<VDModelMemberInstance> instList = new List<VDModelMemberInstance>();
+            instList.Add(this);
+            getChildMemberLists(instList, this);
+            return instList;
+        }
+
+        private void getChildMemberLists(List<VDModelMemberInstance> instList, VDModelMemberInstance parentInst)
+        {
+            foreach (var child in parentInst.ChildMemberInstances)
+            {
+                instList.Add(child);
+                getChildMemberLists(instList, child);
+            }
+        }
+    }
+#endregion
+
+
+#region "Model Type"
     public partial class VDModelType
     {
         // IsReadOnly property
@@ -593,7 +624,7 @@ namespace MVCVisualDesigner
             return string.Format(Utility.Constants.STR_TYPE_LIST, valueTypeFullName ?? string.Empty);
         }
     }
-
+#endregion
 
     public enum E_CollectionType
     {
@@ -604,6 +635,37 @@ namespace MVCVisualDesigner
 
     public class ModelTypeValue
     {
+        public ModelTypeValue()
+        {
+        }
+
+        public ModelTypeValue(string typeName)
+        {
+            if (string.IsNullOrEmpty(typeName)) return;
+            //todo: regex to parse the typename
+            string[] tokens = typeName.Split(new char[] {' ', '<', ',', '>' }, StringSplitOptions.RemoveEmptyEntries);
+            if (tokens.Length > 0)
+            {
+                if (tokens.Length == 3 && tokens[0] == "Dictionary")
+                {
+                    CollectionType = E_CollectionType.Dictionary;
+                    KeyType = tokens[0];
+                    ValueType = tokens[1];
+
+                }
+                else if (tokens.Length == 2 && tokens[0] == "List")
+                {
+                    CollectionType = E_CollectionType.List;
+                    ValueType = tokens[0];
+                }
+                else if (tokens.Length == 1)
+                {
+                    CollectionType = E_CollectionType.Not_Collection;
+                    ValueType = tokens[0];
+                }
+            }
+        }
+
         public E_CollectionType CollectionType { get; set; }
 
         private string m_key = string.Empty, m_value = string.Empty;

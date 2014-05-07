@@ -26,6 +26,8 @@ namespace MVCVisualDesigner
 
             // init tree list view
             this.tlvViewModel.RootKeyValue = Guid.Empty;
+            this.tlvWidgetModel.RootKeyValue = Guid.Empty;
+            this.tlvActionModel.RootKeyValue = Guid.Empty;
 
             m_ctrlTypeList = new ModelTypeListControl();
             m_ctrlTypeList.ValueChanged += TypeListCellEditor_ValueChanged;
@@ -119,7 +121,13 @@ namespace MVCVisualDesigner
             m_currentView = widget.RootView;
             m_currentWidget = widget;
 
-            //todo: init widget view
+            if (m_currentWidget.ModelInstance != null)
+                this.chkEnableWidgetModel.Checked = true;
+            else
+                this.chkEnableWidgetModel.Checked = false;
+
+            // init widget view
+            refreshAllItemsForWidgetModel();
         }
 
         public void ShowActionModel()
@@ -156,6 +164,9 @@ namespace MVCVisualDesigner
         {
             tlvViewModel.ClearObjects();
             tlvViewModel.DataSource = null;
+
+            tlvWidgetModel.ClearObjects();
+            tlvWidgetModel.DataSource = null;
 
             tlvActionModel.ClearObjects();
             tlvActionModel.DataSource = null;
@@ -357,16 +368,6 @@ namespace MVCVisualDesigner
 #endregion
 
 #region "Change View Model Type"
-        //
-        private void cmbViewModelType_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == '\r' || e.KeyChar == '\t')
-            {
-                tlvViewModel.Focus();
-                e.Handled = true;
-            }
-        }
-
         // check View's ModelType property, and create new model if needed (delete old model object if exists)
         void ctrlViewModelType_ValueChanged(object sender, EventArgs e)
         {
@@ -476,7 +477,7 @@ namespace MVCVisualDesigner
             // update tree list view
             if (m_currentWidget != null && m_currentWidget.ModelInstance != null)
             {
-                tlvWidgetModel.DataSource = m_currentWidget.ModelInstance.GetAllSubMemberInstances();
+                tlvWidgetModel.DataSource = m_currentWidget.ModelInstance.GetAllMemberInstances();
             }
             else
             {
@@ -519,6 +520,53 @@ namespace MVCVisualDesigner
 
                 return null;
             }
+        }
+
+        // 
+        private void chkEnableWidgetModel_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.modelStore==null || m_currentWidget == null) return;
+
+            using (var trans = m_currentView.Store.TransactionManager.BeginTransaction("enable/disable widget model instance"))
+            {
+                // delete old instance
+                if (m_currentWidget.ModelInstance != null)
+                {
+                    this.modelStore.DeleteModelInstance(m_currentWidget.ModelInstance);
+                }
+
+                // create new instance
+                if (this.chkEnableWidgetModel.Checked)
+                {
+                    string newModelTypeName = string.IsNullOrEmpty(m_currentWidget.IntrinsicModelType) ? Utility.Constants.STR_TYPE_STRING : m_currentWidget.IntrinsicModelType;
+                    ModelTypeValue newModelType = new ModelTypeValue(newModelTypeName);
+
+                    VDModelType modelType = null;
+                    if (newModelType.CollectionType == E_CollectionType.Dictionary)
+                    {
+                        modelType = this.modelStore.CreateDictionaryModelType(newModelType.KeyType, newModelType.ValueType, this.PredefinedTypeNames);
+                    }
+                    else if (newModelType.CollectionType == E_CollectionType.List)
+                    {
+                        modelType = this.modelStore.CreateListModelType(newModelType.ValueType, this.PredefinedTypeNames);
+                    }
+                    else
+                    {
+                        modelType = createModelType(newModelType.ValueType);
+                    }
+
+                    if (modelType != null)
+                    {
+                        VDModelInstance modelInstance = this.modelStore
+                            .CreateModelInstance<VDWidgetModelMemberInstance>(modelType, this.m_currentWidget.WidgetName);
+                        m_currentWidget.ModelInstance = modelInstance;
+                    }
+                }
+
+                trans.Commit();
+            }
+
+            refreshAllItemsForWidgetModel();
         }
     }
 }
