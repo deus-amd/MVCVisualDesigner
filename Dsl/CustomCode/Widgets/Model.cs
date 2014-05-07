@@ -140,14 +140,14 @@ namespace MVCVisualDesigner
             return listType;
         }
 
-        public VDModelInstance CreateModelInstance<TModelMemberInstance>(VDModelType modelType, string modelName) 
+        public TModelMemberInstance CreateModelInstance<TModelMemberInstance>(VDModelType modelType, string modelName) 
             where TModelMemberInstance : VDModelMemberInstance
         {
             if (modelType == null) return null;
 
             // create model instance
-            VDModelInstance modelInstance = new VDModelInstance(this.Partition,
-                new PropertyAssignment(VDModelInstance.ModelNameDomainPropertyId, modelName)) { ModelType = modelType };
+            VDModelMemberInstance modelInstance =  this.Store.ElementFactory.CreateElement(getDomainClassID<TModelMemberInstance>()) as VDModelMemberInstance;
+            modelInstance.ModelType = modelType;
             this.ModelMemberInstances.Add(modelInstance);
             this.ModelInstances.Add(modelInstance);
 
@@ -155,16 +155,16 @@ namespace MVCVisualDesigner
             Guid modelMemberInstanceDomainClassId = getDomainClassID<TModelMemberInstance>();
             createChildModelMemberInstances(modelInstance, modelMemberInstanceDomainClassId);
 
-            return modelInstance;
+            return modelInstance as TModelMemberInstance;
         }
 
         private void createChildModelMemberInstances(VDModelMemberInstance parentModelMemberInstance, Guid modelMemberInstanceDomainClassId)
         {
             Stack<VDModelType> superTypes = new Stack<VDModelType>();
             var mmi = parentModelMemberInstance.ParentMemberInstance;
-            while (mmi != null && mmi.GetModelType() != null)
+            while (mmi != null && mmi.ModelType != null)
             {
-                superTypes.Push(mmi.GetModelType());
+                superTypes.Push(mmi.ModelType);
                 mmi = mmi.ParentMemberInstance;
             }
 
@@ -176,7 +176,7 @@ namespace MVCVisualDesigner
         {
             // to avoid infinite recursion, if type of a member is same as any super member's type, 
             // don't create child member instances for it
-            VDModelType modelType = parentModelMemberInstance.GetModelType();
+            VDModelType modelType = parentModelMemberInstance.ModelType;
             if (modelType == null || superTypes.Contains(modelType)) return;
             superTypes.Push(modelType);
 
@@ -184,6 +184,7 @@ namespace MVCVisualDesigner
             {
                 var modelMemberInstance = this.Store.ElementFactory.CreateElement(modelMemberInstanceDomainClassId) as VDModelMemberInstance;
                 modelMemberInstance.ModelMemberInfo = modelMemberInfo;
+                modelMemberInstance.ModelType = modelMemberInfo.Type;
                 this.ModelMemberInstances.Add(modelMemberInstance);
                 parentModelMemberInstance.ChildMemberInstances.Add(modelMemberInstance);
 
@@ -200,9 +201,9 @@ namespace MVCVisualDesigner
         {
             Stack<VDModelType> superTypes = new Stack<VDModelType>(); //the order is reverse, but doesn't matter
             var mmi = parentModelMemberInstance.ParentMemberInstance;
-            while (mmi != null && mmi.GetModelType() != null)
+            while (mmi != null && mmi.ModelType != null)
             {
-                superTypes.Push(mmi.GetModelType());
+                superTypes.Push(mmi.ModelType);
                 mmi = mmi.ParentMemberInstance;
             }
 
@@ -213,7 +214,7 @@ namespace MVCVisualDesigner
                     VDModelMemberInfo newMemberInfo,
                     Guid modelMemberInstanceDomainClassId, Stack<VDModelType> superTypes)
         {
-            VDModelType parentType = parentModelMemberInstance.GetModelType();
+            VDModelType parentType = parentModelMemberInstance.ModelType;
             if (parentType == null || superTypes.Contains(parentType))
                 return;
             superTypes.Push(parentType);
@@ -221,6 +222,7 @@ namespace MVCVisualDesigner
             VDModelMemberInstance newMemberInstance = this.Store.ElementFactory.CreateElement(
                         modelMemberInstanceDomainClassId) as VDModelMemberInstance;
             newMemberInstance.ModelMemberInfo = newMemberInfo;
+            newMemberInstance.ModelType = newMemberInfo.Type;
             this.ModelMemberInstances.Add(newMemberInstance);
             parentModelMemberInstance.ChildMemberInstances.Add(newMemberInstance);
 
@@ -228,7 +230,7 @@ namespace MVCVisualDesigner
         }
 
         // todo: check if all embedding and reference links are deleted
-        public void DeleteModelInstance(VDModelInstance modelInstance)
+        public void DeleteModelInstance(VDModelMemberInstance modelInstance)
         {
             deleteModelMemberInstance(modelInstance);
         }
@@ -297,17 +299,9 @@ namespace MVCVisualDesigner
         private List<VDModelMemberInstance> getModelMemberInstancesOfType(VDModelType modelType)
         {
             List<VDModelMemberInstance> mmi = new List<VDModelMemberInstance>();
-            foreach (VDModelInstance modelInst in modelType.ModelInstancesOfThisType)
+            foreach(VDModelMemberInstance minst in modelType.ModelMemberInstancesOfThisType)
             {
-                mmi.Add(modelInst);
-            }
-
-            foreach(VDModelMemberInfo minfo in modelType.MembersOfThisType)
-            {
-                foreach(VDModelMemberInstance minst in minfo.MemberInstancesOfThisType)
-                {
-                    mmi.Add(minst);
-                }
+                mmi.Add(minst);
             }
             return mmi;
         }
@@ -351,6 +345,7 @@ namespace MVCVisualDesigner
             Guid modelMemberInstanceDomainClassId = getDomainClassID<TModelMemberInstance>();
             foreach(VDModelMemberInstance mmi in modelMemberInfoToChange.MemberInstancesOfThisType)
             {
+                mmi.ModelType = newMemberType;
                 createChildModelMemberInstances(mmi, modelMemberInstanceDomainClassId);
             }
         }
@@ -366,8 +361,6 @@ namespace MVCVisualDesigner
                 return VDWidgetModelMemberInstance.DomainClassId;
             else if (typeof(T) == typeof(VDActionModelMemberInstance))
                 return VDActionModelMemberInstance.DomainClassId;
-            else if (typeof(T) == typeof(VDModelInstance))
-                return VDModelInstance.DomainClassId;
 
             else if (typeof(T) == typeof(VDModelMemberInfo))
                 return VDModelMemberInfo.DomainClassId;
@@ -377,6 +370,10 @@ namespace MVCVisualDesigner
                 return VDFieldInfo.DomainClassId;
             else if (typeof(T) == typeof(VDMethodInfo))
                 return VDMethodInfo.DomainClassId;
+            else if (typeof(T) == typeof(VDPlaceholderInfo))
+                return VDPlaceholderInfo.DomainClassId;
+            else if (typeof(T) == typeof(VDModelInstanceInfo))
+                return VDModelInstanceInfo.DomainClassId;
 
             else if (typeof(T) == typeof(VDModelType))
                 return VDModelType.DomainClassId;
@@ -398,43 +395,76 @@ namespace MVCVisualDesigner
 #region "Model Instance"
     public partial class VDModelMemberInstance
     {
-        // calculated Name property
+        // custom storage Name property
+        private string m_name;
         internal virtual string GetNameValue()
         {
             if (this.ModelMemberInfo != null)
                 return this.ModelMemberInfo.Name;
             else
-                return string.Empty;
+                return m_name;
+        }
+
+        internal virtual void SetNameValue(string newName)
+        {
+            if (this.ModelMemberInfo == null)
+                m_name = newName;
         }
 
         // calculated TypeName property
         internal virtual string GetTypeNameValue()
         {
-            VDModelType type = GetModelType();
-            if (type != null)
-                return type.FullName;
+            if (this.ModelType != null)
+                return this.ModelType.FullName;
             else
                 return string.Empty;
         }
 
-        public virtual VDModelType GetModelType()
-        {
-            if (this.ModelMemberInfo != null)
-                return this.ModelMemberInfo.Type;
-            else
-                return null;
+        // if there is no model memeber, then its top level model member instance,
+        // that is, it's model instance
+        internal bool IsModelInstance 
+        { 
+            get 
+            { 
+                return this.ModelMemberInfo == null; 
+                /* or this.Widget != null */
+            } 
         }
 
-        public VDModelInstance HostModelInstance
+        public VDModelMemberInstance HostModelInstance
         {
             get
             {
                 VDModelMemberInstance parent = this;
-                while (parent != null && !(parent is VDModelInstance))
+                while (parent.ParentMemberInstance != null)
                 {
                     parent = parent.ParentMemberInstance;
                 }
-                return parent as VDModelInstance;
+                return parent;
+            }
+        }
+
+        public List<VDModelMemberInstance> GetAllSubMemberInstances()
+        {
+            List<VDModelMemberInstance> instList = new List<VDModelMemberInstance>();
+            getChildMemberLists(instList, this);
+            return instList;
+        }
+
+        public List<VDModelMemberInstance> GetAllMemberInstances()
+        {
+            List<VDModelMemberInstance> instList = new List<VDModelMemberInstance>();
+            instList.Add(this);
+            getChildMemberLists(instList, this);
+            return instList;
+        }
+
+        private void getChildMemberLists(List<VDModelMemberInstance> instList, VDModelMemberInstance parentInst)
+        {
+            foreach (var child in parentInst.ChildMemberInstances)
+            {
+                instList.Add(child);
+                getChildMemberLists(instList, child);
             }
         }
 
@@ -443,7 +473,8 @@ namespace MVCVisualDesigner
         {
             get
             {
-                if (this.ParentMemberInstance != null && !(this.ParentMemberInstance is VDModelInstance))
+                // todo: remvoe last condition, it only work for view model
+                if (this.ParentMemberInstance != null && this.ParentMemberInstance.ParentMemberInstance != null)
                     return this.ParentMemberInstance.Id;
                 else
                     return Guid.Empty;
@@ -504,40 +535,12 @@ namespace MVCVisualDesigner
 
     public partial class VDWidgetModelMemberInstance
     {
-
-    }
-
-    public partial class VDModelInstance
-    {
-        // calculated Name property
-        internal override string GetNameValue() { return this.ModelName; }
-
-        // calculated TypeName property
-        //internal override string GetTypeNameValue() {}
-        public override VDModelType GetModelType() { return this.ModelType; }
-
-        public List<VDModelMemberInstance> GetAllSubMemberInstances()
+        internal override string GetNameValue()
         {
-            List<VDModelMemberInstance> instList = new List<VDModelMemberInstance>();
-            getChildMemberLists(instList, this);
-            return instList;
-        }
-
-        public List<VDModelMemberInstance> GetAllMemberInstances()
-        {
-            List<VDModelMemberInstance> instList = new List<VDModelMemberInstance>();
-            instList.Add(this);
-            getChildMemberLists(instList, this);
-            return instList;
-        }
-
-        private void getChildMemberLists(List<VDModelMemberInstance> instList, VDModelMemberInstance parentInst)
-        {
-            foreach (var child in parentInst.ChildMemberInstances)
-            {
-                instList.Add(child);
-                getChildMemberLists(instList, child);
-            }
+            if (this.Widget != null)
+                return this.Widget.WidgetName;
+            else
+                return base.GetNameValue();
         }
     }
 #endregion

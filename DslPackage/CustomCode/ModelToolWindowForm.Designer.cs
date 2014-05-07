@@ -36,7 +36,8 @@
             this.olvColDefault = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColValidators = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvIsJSModel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvChildMemberInstances_W = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvChildMemberInstances = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColWidget = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.label2 = new System.Windows.Forms.Label();
             this.ctrlViewModelType = new MVCVisualDesigner.ModelTypeListControl();
             this.tlpActionModelLayout = new System.Windows.Forms.TableLayoutPanel();
@@ -94,7 +95,8 @@
             this.tlvViewModel.AllColumns.Add(this.olvColDefault);
             this.tlvViewModel.AllColumns.Add(this.olvColValidators);
             this.tlvViewModel.AllColumns.Add(this.olvIsJSModel);
-            this.tlvViewModel.AllColumns.Add(this.olvChildMemberInstances_W);
+            this.tlvViewModel.AllColumns.Add(this.olvChildMemberInstances);
+            this.tlvViewModel.AllColumns.Add(this.olvColWidget);
             this.tlvViewModel.AlternateRowBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(220)))));
             this.tlvViewModel.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick;
             this.tlvViewModel.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -168,11 +170,17 @@
             this.olvIsJSModel.Text = "JS Model";
             this.olvIsJSModel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // olvChildMemberInstances_W
+            // olvChildMemberInstances
             // 
-            this.olvChildMemberInstances_W.AspectName = "ChildMemberInstances";
-            this.olvChildMemberInstances_W.CellPadding = null;
-            this.olvChildMemberInstances_W.IsVisible = false;
+            this.olvChildMemberInstances.AspectName = "ChildMemberInstances";
+            this.olvChildMemberInstances.CellPadding = null;
+            this.olvChildMemberInstances.IsVisible = false;
+            // 
+            // olvColWidget
+            // 
+            this.olvColWidget.AspectName = "Widget";
+            this.olvColWidget.CellPadding = null;
+            this.olvColWidget.IsVisible = false;
             // 
             // label2
             // 
@@ -342,7 +350,8 @@
             this.tlvWidgetModel.AllColumns.Add(this.olvColValidators_W);
             this.tlvWidgetModel.AllColumns.Add(this.olvColBindsTo);
             this.tlvWidgetModel.AllColumns.Add(this.olvColFormatter_W);
-            this.tlvWidgetModel.AllColumns.Add(this.olvChildMemberInstances_W);
+            this.tlvWidgetModel.AllColumns.Add(this.olvChildMemberInstances);
+            this.tlvWidgetModel.AllColumns.Add(this.olvColWidget);
             this.tlvWidgetModel.AlternateRowBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(220)))));
             this.tlvWidgetModel.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick;
             this.tlvWidgetModel.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -394,7 +403,7 @@
             // 
             // olvColValue_W
             // 
-            this.olvColValue_W.AspectName = "DefaultValue";
+            this.olvColValue_W.AspectName = "InitValue";
             this.olvColValue_W.CellPadding = null;
             this.olvColValue_W.Text = "Value";
             this.olvColValue_W.Width = 82;
@@ -461,36 +470,42 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
         private BrightIdeasSoftware.OLVColumn olvColName;
         private BrightIdeasSoftware.OLVColumn olvColType;
         private BrightIdeasSoftware.OLVColumn olvColDefault;
         private BrightIdeasSoftware.OLVColumn olvColValidators;
-        private System.Windows.Forms.TableLayoutPanel tlpViewModelLayout;
-        private System.Windows.Forms.TableLayoutPanel tlpActionModelLayout;
-        private BrightIdeasSoftware.DataTreeListView tlvViewModel;
-        private System.Windows.Forms.ContextMenuStrip ctxMenuViewModel;
-        private System.Windows.Forms.ToolStripMenuItem tsmiAddViewModelMember;
-        private System.Windows.Forms.Label label2;
         private BrightIdeasSoftware.OLVColumn olvIsJSModel;
-        private BrightIdeasSoftware.OLVColumn olvChildMemberInstances_W;
-        private System.Windows.Forms.ToolStripMenuItem tsmiDeleteViewModelMember;
-        private ModelTypeListControl ctrlViewModelType;
-        private BrightIdeasSoftware.DataTreeListView tlvActionModel;
-        private BrightIdeasSoftware.OLVColumn olvColumn1;
-        private BrightIdeasSoftware.OLVColumn olvColumn2;
-        private BrightIdeasSoftware.OLVColumn olvColumn3;
-        private BrightIdeasSoftware.OLVColumn olvColumn4;
-        private System.Windows.Forms.TableLayoutPanel tlpWidgetModelLayout;
-        private BrightIdeasSoftware.DataTreeListView tlvWidgetModel;
+        private BrightIdeasSoftware.OLVColumn olvChildMemberInstances;
+        private BrightIdeasSoftware.OLVColumn olvColWidget;
+
         private BrightIdeasSoftware.OLVColumn olvColName_W;
         private BrightIdeasSoftware.OLVColumn olvColType_W;
         private BrightIdeasSoftware.OLVColumn olvColValue_W;
         private BrightIdeasSoftware.OLVColumn olvColValidators_W;
         private BrightIdeasSoftware.OLVColumn olvColBindsTo;
         private BrightIdeasSoftware.OLVColumn olvColFormatter_W;
+
         private BrightIdeasSoftware.OLVColumn olvColumn11;
+        private BrightIdeasSoftware.OLVColumn olvColumn1;
+        private BrightIdeasSoftware.OLVColumn olvColumn2;
+        private BrightIdeasSoftware.OLVColumn olvColumn3;
+        private BrightIdeasSoftware.OLVColumn olvColumn4;
+
+        private System.Windows.Forms.TableLayoutPanel tlpViewModelLayout;
+        private System.Windows.Forms.TableLayoutPanel tlpWidgetModelLayout;
+        private System.Windows.Forms.TableLayoutPanel tlpActionModelLayout;
+
+        private BrightIdeasSoftware.DataTreeListView tlvViewModel;
+        private BrightIdeasSoftware.DataTreeListView tlvWidgetModel;
+        private BrightIdeasSoftware.DataTreeListView tlvActionModel;
+
+        private System.Windows.Forms.ContextMenuStrip ctxMenuViewModel;
+        private System.Windows.Forms.ToolStripMenuItem tsmiAddViewModelMember;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDeleteViewModelMember;
+        private ModelTypeListControl ctrlViewModelType;
         private System.Windows.Forms.CheckBox chkEnableWidgetModel;
 
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

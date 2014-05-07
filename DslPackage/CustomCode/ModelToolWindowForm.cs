@@ -193,7 +193,7 @@ namespace MVCVisualDesigner
             {
                 string[] typeList = getAllTypes();
                 VDModelMemberInstance instance = (VDViewModelMemberInstance)e.RowObject;
-                m_ctrlTypeList.InitTypeList(typeList, instance == null ? null : instance.GetModelType());
+                m_ctrlTypeList.InitTypeList(typeList, instance == null ? null : instance.ModelType);
                 m_ctrlTypeList.Bounds = e.CellBounds;
                 m_ctrlTypeList.SetFont(((ObjectListView)sender).Font);
                 m_ctrlTypeList.Tag = e.RowObject;
@@ -290,10 +290,7 @@ namespace MVCVisualDesigner
             {
                 using (var trans = m_currentView.Store.TransactionManager.BeginTransaction("Update model member's type"))
                 {
-                    if (this.isPredefinedType(typeName))
-                        this.modelStore.ChangeModelMemberType<VDViewModelMemberInstance>(instance.ModelMemberInfo, modelTypeValue, this.PredefinedTypeNames);
-                    else
-                        this.modelStore.ChangeModelMemberType<VDViewModelMemberInstance>(instance.ModelMemberInfo, modelTypeValue, this.PredefinedTypeNames);
+                    this.modelStore.ChangeModelMemberType<VDViewModelMemberInstance>(instance.ModelMemberInfo, modelTypeValue, this.PredefinedTypeNames);
                     trans.Commit();
                 }
 
@@ -314,16 +311,24 @@ namespace MVCVisualDesigner
             if (selectedMember == null) // add member to model
             {
                 if (m_currentView.ModelInstance != null)
-                    modelType = m_currentView.ModelInstance.GetModelType();
+                    modelType = m_currentView.ModelInstance.ModelType;
+
+                // disable delete menu item
+                this.tsmiDeleteViewModelMember.Enabled = false;
             }
             else // add member to parent member
             {
-                modelType = selectedMember.GetModelType();
+                modelType = selectedMember.ModelType;
+
+                // enable/disable delete menu item
+                this.tsmiDeleteViewModelMember.Enabled =
+                    selectedMember.ModelMemberInfo != null &&
+                    selectedMember.ModelMemberInfo.HostModelType != null &&
+                    !selectedMember.ModelMemberInfo.HostModelType.IsReadOnly;
             }
 
             // if the type is not able to modify (external type, or primitive type ) ???
             this.tsmiAddViewModelMember.Enabled = modelType != null && !(modelType.IsReadOnly);
-            this.tsmiDeleteViewModelMember.Enabled = modelType != null && !(modelType.IsReadOnly) && (selectedMember != null);
 
             // Add Member for View Model
             this.ctxMenuViewModel.Tag = modelType;
@@ -353,11 +358,12 @@ namespace MVCVisualDesigner
                 else if (mi == this.tsmiDeleteViewModelMember) // delete member
                 {
                     VDViewModelMemberInstance selectedMember = (VDViewModelMemberInstance)mi.Tag;
-                    if (selectedMember == null || selectedMember.ModelMemberInfo == null) return;
+                    if (selectedMember == null || selectedMember.ModelMemberInfo == null
+                        || selectedMember.ModelMemberInfo.HostModelType == null) return;
 
                     using (var trans = m_currentView.Store.TransactionManager.BeginTransaction("delete model member"))
                     {
-                        this.modelStore.RemoveMemberFromModelType(modelType, selectedMember.ModelMemberInfo);
+                        this.modelStore.RemoveMemberFromModelType(selectedMember.ModelMemberInfo.HostModelType, selectedMember.ModelMemberInfo);
                         trans.Commit();
                     }
                 }
@@ -416,7 +422,7 @@ namespace MVCVisualDesigner
 
                         if (modelType != null)
                         {
-                            VDModelInstance modelInstance = this.modelStore
+                            VDViewModelMemberInstance modelInstance = this.modelStore
                                 .CreateModelInstance<VDViewModelMemberInstance>(modelType, "Model");
                             m_currentView.ModelInstance = modelInstance;
                         }
@@ -557,7 +563,7 @@ namespace MVCVisualDesigner
 
                     if (modelType != null)
                     {
-                        VDModelInstance modelInstance = this.modelStore
+                        VDWidgetModelMemberInstance modelInstance = this.modelStore
                             .CreateModelInstance<VDWidgetModelMemberInstance>(modelType, this.m_currentWidget.WidgetName);
                         m_currentWidget.ModelInstance = modelInstance;
                     }
