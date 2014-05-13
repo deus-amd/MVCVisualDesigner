@@ -912,16 +912,6 @@ The values set to this property should be defined in
         <DomainClassMoniker Name="VDViewComponent" />
       </BaseClass>
     </DomainClass>
-    <DomainClass Id="bab25ca6-49ef-4753-a5c0-5faaebc0666e" Description="Description for MVCVisualDesigner.VDEventSource" Name="VDEventSource" DisplayName="VDEvent Source" Namespace="MVCVisualDesigner">
-      <Properties>
-        <DomainProperty Id="04c26ca0-7d1b-44ee-9586-ab251ecbb036" Description="Description for MVCVisualDesigner.VDEventSource.Event Name" Name="EventName" DisplayName="Event Name">
-          <Type>
-            <ExternalTypeMoniker Name="/System/String" />
-          </Type>
-        </DomainProperty>
-      </Properties>
-    </DomainClass>
-    <DomainClass Id="8bbbd38a-b626-470a-8249-28240f6bb9a8" Description="Description for MVCVisualDesigner.VDEventTarget" Name="VDEventTarget" DisplayName="VDEvent Target" Namespace="MVCVisualDesigner" />
     <DomainClass Id="8c2cc2f4-f807-4ffc-92b9-d9fab7509503" Description="Description for MVCVisualDesigner.VDViewComponent" Name="VDViewComponent" DisplayName="VDView Component" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
@@ -929,18 +919,10 @@ The values set to this property should be defined in
       <ElementMergeDirectives>
         <ElementMergeDirective>
           <Index>
-            <DomainClassMoniker Name="VDEventSource" />
+            <DomainClassMoniker Name="VDEvent" />
           </Index>
           <LinkCreationPaths>
-            <DomainPath>WidgetHasEventSources.EventSources</DomainPath>
-          </LinkCreationPaths>
-        </ElementMergeDirective>
-        <ElementMergeDirective>
-          <Index>
-            <DomainClassMoniker Name="VDEventTarget" />
-          </Index>
-          <LinkCreationPaths>
-            <DomainPath>WidgetHasEventTargets.EventTargets</DomainPath>
+            <DomainPath>WidgetHasEvents.Events</DomainPath>
           </LinkCreationPaths>
         </ElementMergeDirective>
       </ElementMergeDirectives>
@@ -1150,6 +1132,47 @@ The values set to this property should be defined in
         <DomainClassMoniker Name="VDModelMemberInfo" />
       </BaseClass>
     </DomainClass>
+    <DomainClass Id="e73c2cb3-ae01-4bc0-acca-39c0345b9fe0" Description="Description for MVCVisualDesigner.VDEvent" Name="VDEvent" DisplayName="VDEvent" Namespace="MVCVisualDesigner">
+      <Properties>
+        <DomainProperty Id="f3acf99a-7624-43bd-97c6-27899b9c2528" Description="Description for MVCVisualDesigner.VDEvent.Event Name" Name="EventName" DisplayName="Event Name">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+    </DomainClass>
+    <DomainClass Id="34132139-9b57-4942-a0b8-8793fbe76a14" Description="Description for MVCVisualDesigner.VDClientAction" Name="VDClientAction" DisplayName="VDClient Action" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDViewComponent" />
+      </BaseClass>
+      <Properties>
+        <DomainProperty Id="40cc23fa-d77c-4051-bfe8-9bf57a214bbf" Description="Description for MVCVisualDesigner.VDClientAction.Action Name" Name="ActionName" DisplayName="Action Name">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+      <ElementMergeDirectives>
+        <ElementMergeDirective>
+          <Index>
+            <DomainClassMoniker Name="VDClientActionInput" />
+          </Index>
+          <LinkCreationPaths>
+            <DomainPath>ClientActionHasInput.Input</DomainPath>
+          </LinkCreationPaths>
+        </ElementMergeDirective>
+        <ElementMergeDirective>
+          <Index>
+            <DomainClassMoniker Name="VDClientActionOutput" />
+          </Index>
+          <LinkCreationPaths>
+            <DomainPath>ClientActionHasOutput.Output</DomainPath>
+          </LinkCreationPaths>
+        </ElementMergeDirective>
+      </ElementMergeDirectives>
+    </DomainClass>
+    <DomainClass Id="89f489b2-9617-432d-bdaa-ab385fc4f63c" Description="Description for MVCVisualDesigner.VDClientActionInput" Name="VDClientActionInput" DisplayName="VDClient Action Input" Namespace="MVCVisualDesigner" />
+    <DomainClass Id="973b7029-95d9-46ac-a8cb-1af9812cfe7d" Description="Description for MVCVisualDesigner.VDClientActionOutput" Name="VDClientActionOutput" DisplayName="VDClient Action Output" Namespace="MVCVisualDesigner" />
   </Classes>
   <Relationships>
     <DomainRelationship Id="8491408d-7160-4a47-9979-e0dab01d52b3" Description="Description for MVCVisualDesigner.WidgetHasChildren" Name="WidgetHasChildren" DisplayName="Widget Has Children" Namespace="MVCVisualDesigner" IsEmbedding="true">
@@ -1468,109 +1491,6 @@ The values set to this property should be defined in
         </DomainRole>
       </Target>
     </DomainRelationship>
-    <DomainRelationship Id="60944cf6-a68e-475c-8c69-358fe051b2de" Description="Description for MVCVisualDesigner.WidgetHasEventSources" Name="WidgetHasEventSources" DisplayName="Widget Has Event Sources" Namespace="MVCVisualDesigner" IsEmbedding="true">
-      <Source>
-        <DomainRole Id="2d11fed5-8618-4d78-9c43-144ba17a7b39" Description="Description for MVCVisualDesigner.WidgetHasEventSources.VDViewComponent" Name="VDViewComponent" DisplayName="VDView Component" PropertyName="EventSources" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Event Sources">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDViewComponent" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="494cd9af-ca4d-4557-8f16-e97edee18803" Description="Description for MVCVisualDesigner.WidgetHasEventSources.VDEventSource" Name="VDEventSource" DisplayName="VDEvent Source" PropertyName="Widget" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Widget">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDEventSource" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
-    <DomainRelationship Id="6c3c3a61-6962-488b-90a4-b5d1a26a9cbf" Description="Description for MVCVisualDesigner.WidgetHasEventTargets" Name="WidgetHasEventTargets" DisplayName="Widget Has Event Targets" Namespace="MVCVisualDesigner" IsEmbedding="true">
-      <Source>
-        <DomainRole Id="7b967878-44a8-4808-a1cf-1c71a527a646" Description="Description for MVCVisualDesigner.WidgetHasEventTargets.VDViewComponent" Name="VDViewComponent" DisplayName="VDView Component" PropertyName="EventTargets" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Event Targets">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDViewComponent" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="7bd2c14a-970d-40f5-88ae-bf9c155c8c9d" Description="Description for MVCVisualDesigner.WidgetHasEventTargets.VDEventTarget" Name="VDEventTarget" DisplayName="VDEvent Target" PropertyName="Widget" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Widget">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDEventTarget" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
-    <DomainRelationship Id="4b4c922e-0e87-423d-a477-7926e5a1f0f9" Description="Description for MVCVisualDesigner.PerformsActionOn" Name="PerformsActionOn" DisplayName="Performs Action On" Namespace="MVCVisualDesigner">
-      <Properties>
-        <DomainProperty Id="2597b0f6-52d4-4ba6-b4c1-ad31302d2989" Description="Description for MVCVisualDesigner.PerformsActionOn.Action Name" Name="ActionName" DisplayName="Action Name">
-          <Type>
-            <ExternalTypeMoniker Name="/System/String" />
-          </Type>
-        </DomainProperty>
-      </Properties>
-      <Source>
-        <DomainRole Id="fca9f394-6d3f-4fe0-9886-df85f5762656" Description="Description for MVCVisualDesigner.PerformsActionOn.VDEventSource" Name="VDEventSource" DisplayName="VDEvent Source" PropertyName="EventTargets" PropertyDisplayName="Event Targets">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDEventSource" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="6f0b137c-a476-4afe-a3f2-4cb51655ab7e" Description="Description for MVCVisualDesigner.PerformsActionOn.VDEventTarget" Name="VDEventTarget" DisplayName="VDEvent Target" PropertyName="EventSources" PropertyDisplayName="Event Sources">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDEventTarget" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
-    <DomainRelationship Id="2c77f0ae-cca9-4674-bd43-1a70cb17739a" Description="Description for MVCVisualDesigner.PerformsActionOn_2" Name="PerformsActionOn_2" DisplayName="Performs Action On_2" Namespace="MVCVisualDesigner">
-      <Source>
-        <DomainRole Id="ab9dd233-3c83-4cc2-b430-6353db6c22e5" Description="Description for MVCVisualDesigner.PerformsActionOn_2.VDViewComponent" Name="VDViewComponent" DisplayName="VDView Component" PropertyName="VDEventTargets" IsPropertyGenerator="false" PropertyDisplayName="VDEvent Targets">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDViewComponent" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="dfef49e8-c60d-46bf-88ed-43bf73cd4340" Description="Description for MVCVisualDesigner.PerformsActionOn_2.VDEventTarget" Name="VDEventTarget" DisplayName="VDEvent Target" PropertyName="SourceWidgets" IsPropertyGenerator="false" PropertyDisplayName="Source Widgets">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDEventTarget" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
-    <DomainRelationship Id="ef8869ed-339e-4466-a251-2154aa229a94" Description="Description for MVCVisualDesigner.PerformsActionOn_1" Name="PerformsActionOn_1" DisplayName="Performs Action On_1" Namespace="MVCVisualDesigner">
-      <Source>
-        <DomainRole Id="ca35142b-47b4-4425-90ce-4ee2b701991b" Description="Description for MVCVisualDesigner.PerformsActionOn_1.VDEventSource" Name="VDEventSource" DisplayName="VDEvent Source" PropertyName="TargetWidgets" IsPropertyGenerator="false" PropertyDisplayName="Target Widgets">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDEventSource" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="a75508c9-929d-41a9-99f2-f1b1c59ab3b8" Description="Description for MVCVisualDesigner.PerformsActionOn_1.VDViewComponent" Name="VDViewComponent" DisplayName="VDView Component" PropertyName="EventSources" IsPropertyGenerator="false" PropertyDisplayName="Event Sources">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDViewComponent" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
-    <DomainRelationship Id="9afe7ecc-8d35-4d85-a73a-5c22271f03c4" Description="Description for MVCVisualDesigner.PerformsActionOn_3" Name="PerformsActionOn_3" DisplayName="Performs Action On_3" Namespace="MVCVisualDesigner">
-      <Source>
-        <DomainRole Id="f5a8c41b-c2a4-4813-bd92-b055179afe6f" Description="Description for MVCVisualDesigner.PerformsActionOn_3.SourceVDViewComponent" Name="SourceVDViewComponent" DisplayName="Source VDView Component" PropertyName="TargetVDViewComponents" IsPropertyGenerator="false" PropertyDisplayName="Target VDView Components">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDViewComponent" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="5afe5a39-7121-40b8-ae1e-942a2901d6da" Description="Description for MVCVisualDesigner.PerformsActionOn_3.TargetVDViewComponent" Name="TargetVDViewComponent" DisplayName="Target VDView Component" PropertyName="SourceVDViewComponents" IsPropertyGenerator="false" PropertyDisplayName="Source VDView Components">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDViewComponent" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
     <DomainRelationship Id="f4a370ce-1a2b-43cb-bf2d-1b68f8e52288" Description="Description for MVCVisualDesigner.ViewHasModelSelector" Name="ViewHasModelSelector" DisplayName="View Has Model Selector" Namespace="MVCVisualDesigner" IsEmbedding="true">
       <Source>
         <DomainRole Id="f04aeb7c-be8b-4218-86b9-de016ec6e687" Description="Description for MVCVisualDesigner.ViewHasModelSelector.VDView" Name="VDView" DisplayName="VDView" PropertyName="ModelSelector" Multiplicity="ZeroOne" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Model Selector">
@@ -1807,6 +1727,134 @@ The values set to this property should be defined in
         <DomainRole Id="6f5e5865-b6d2-4677-819e-a87fb3f4629e" Description="Description for MVCVisualDesigner.WidgetHasModelInstance.VDModelMemberInstance" Name="VDModelMemberInstance" DisplayName="VDModel Member Instance" PropertyName="Widget" Multiplicity="ZeroOne" PropertyDisplayName="Widget">
           <RolePlayer>
             <DomainClassMoniker Name="VDModelMemberInstance" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="9ddee13a-78f6-491b-b539-e6513bf543e1" Description="Description for MVCVisualDesigner.WidgetHasEvents" Name="WidgetHasEvents" DisplayName="Widget Has Events" Namespace="MVCVisualDesigner" IsEmbedding="true">
+      <Source>
+        <DomainRole Id="03cba48b-9bd6-4a77-806b-3558651e4b68" Description="Description for MVCVisualDesigner.WidgetHasEvents.VDViewComponent" Name="VDViewComponent" DisplayName="VDView Component" PropertyName="Events" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Events">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDViewComponent" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="6d8afca5-5ab9-4b68-8eb9-6b9fa04f3dbf" Description="Description for MVCVisualDesigner.WidgetHasEvents.VDEvent" Name="VDEvent" DisplayName="VDEvent" PropertyName="Widget" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Widget">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDEvent" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="ac7b7e8c-8afb-4bc6-9eaf-845f7d236df8" Description="Description for MVCVisualDesigner.R1_Event2Component" Name="R1_Event2Component" DisplayName="R1_ Event2 Component" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="f8f41280-babe-4ea1-baee-0b3aa37bf894" Description="Description for MVCVisualDesigner.R1_Event2Component.VDEvent" Name="VDEvent" DisplayName="VDEvent" PropertyName="R1_Components" PropertyDisplayName="R1_ Components">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDEvent" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="dbf5789e-3bde-4dd0-94e0-f4b44181c524" Description="Description for MVCVisualDesigner.R1_Event2Component.VDViewComponent" Name="VDViewComponent" DisplayName="VDView Component" PropertyName="R1_Events" PropertyDisplayName="R1_ Events">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDViewComponent" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="6b0a2bc6-0ea4-41f6-9487-24051baf9669" Description="Description for MVCVisualDesigner.R2_Component2Component" Name="R2_Component2Component" DisplayName="R2_ Component2 Component" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="d4fab998-c39f-429e-bcb2-938abfcc38ae" Description="Description for MVCVisualDesigner.R2_Component2Component.SourceVDViewComponent" Name="SourceVDViewComponent" DisplayName="Source VDView Component" PropertyName="R2_TargetComponents" PropertyDisplayName="R2_ Target Components">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDViewComponent" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="1afc0933-4b30-429d-908b-7b879ac6fca3" Description="Description for MVCVisualDesigner.R2_Component2Component.TargetVDViewComponent" Name="TargetVDViewComponent" DisplayName="Target VDView Component" PropertyName="R2_SourceComponents" PropertyDisplayName="R2_ Source Components">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDViewComponent" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="bb143513-6736-415d-a9ef-b64a3a08932f" Description="Description for MVCVisualDesigner.ClientActionHasInput" Name="ClientActionHasInput" DisplayName="Client Action Has Input" Namespace="MVCVisualDesigner" IsEmbedding="true">
+      <Source>
+        <DomainRole Id="55a17088-0aaa-475d-90f3-0ff41375fd97" Description="Description for MVCVisualDesigner.ClientActionHasInput.VDClientAction" Name="VDClientAction" DisplayName="VDClient Action" PropertyName="Input" Multiplicity="ZeroOne" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Input">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDClientAction" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="76304668-47fd-4f16-9059-9fb119062728" Description="Description for MVCVisualDesigner.ClientActionHasInput.VDClientActionInput" Name="VDClientActionInput" DisplayName="VDClient Action Input" PropertyName="ClientAction" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Client Action">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDClientActionInput" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="d9b834a2-07a7-4596-b40c-15a4322211d1" Description="Description for MVCVisualDesigner.ClientActionHasOutput" Name="ClientActionHasOutput" DisplayName="Client Action Has Output" Namespace="MVCVisualDesigner" IsEmbedding="true">
+      <Source>
+        <DomainRole Id="fec7582f-5062-4799-a25a-fcc935ed0c84" Description="Description for MVCVisualDesigner.ClientActionHasOutput.VDClientAction" Name="VDClientAction" DisplayName="VDClient Action" PropertyName="Output" Multiplicity="ZeroOne" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Output">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDClientAction" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="1cc593c7-d48a-4b51-902c-bd93bed40009" Description="Description for MVCVisualDesigner.ClientActionHasOutput.VDClientActionOutput" Name="VDClientActionOutput" DisplayName="VDClient Action Output" PropertyName="ClientAction" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Client Action">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDClientActionOutput" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="2d313fa9-089d-4df3-929f-e2234349ea7e" Description="Description for MVCVisualDesigner.R5_Output2Component" Name="R5_Output2Component" DisplayName="R5_ Output2 Component" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="b9db8ac4-8b95-4d26-8573-ef387fcffc12" Description="Description for MVCVisualDesigner.R5_Output2Component.VDClientActionOutput" Name="VDClientActionOutput" DisplayName="VDClient Action Output" PropertyName="R5_Components" PropertyDisplayName="R5_ Components">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDClientActionOutput" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="7469439d-df6a-41ec-b647-384cade2fc55" Description="Description for MVCVisualDesigner.R5_Output2Component.VDViewComponent" Name="VDViewComponent" DisplayName="VDView Component" PropertyName="R5_Outputs" PropertyDisplayName="R5_ Outputs">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDViewComponent" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="c443b112-a640-4bb4-92b8-3b78b1f45131" Description="Description for MVCVisualDesigner.R3_Component2Input" Name="R3_Component2Input" DisplayName="R3_ Component2 Input" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="6adced25-ac99-4665-9418-78fccc67d3cc" Description="Description for MVCVisualDesigner.R3_Component2Input.VDViewComponent" Name="VDViewComponent" DisplayName="VDView Component" PropertyName="R3_Inputs" PropertyDisplayName="R3_ Inputs">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDViewComponent" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="f3a87dc6-e9e9-4921-8d3b-ece771878b6c" Description="Description for MVCVisualDesigner.R3_Component2Input.VDClientActionInput" Name="VDClientActionInput" DisplayName="VDClient Action Input" PropertyName="R3_Components" PropertyDisplayName="R3_ Components">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDClientActionInput" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="f3cf4b71-5a3d-4e70-b27d-15a4dc66c79a" Description="Description for MVCVisualDesigner.R4_Event2Input" Name="R4_Event2Input" DisplayName="R4_ Event2 Input" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="ed3f36c4-edea-4e07-b76b-f8358e682a0e" Description="Description for MVCVisualDesigner.R4_Event2Input.VDEvent" Name="VDEvent" DisplayName="VDEvent" PropertyName="R4_Inputs" PropertyDisplayName="R4_ Inputs">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDEvent" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="8a97b715-7ffb-4a2d-a1d2-6b48fbce0a7e" Description="Description for MVCVisualDesigner.R4_Event2Input.VDClientActionInput" Name="VDClientActionInput" DisplayName="VDClient Action Input" PropertyName="R4_Events" PropertyDisplayName="R4_ Events">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDClientActionInput" />
           </RolePlayer>
         </DomainRole>
       </Target>
@@ -2272,20 +2320,26 @@ The values set to this property should be defined in
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <Port Id="0d637168-0ce4-4dc1-8148-5209a1173164" Description="Description for MVCVisualDesigner.VDEventSourcePort" Name="VDEventSourcePort" DisplayName="VDEvent Source Port" Namespace="MVCVisualDesigner" FixedTooltipText="VDEvent Source Port" FillColor="Orange" InitialWidth="0.1" InitialHeight="0.1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Circle">
+    <GeometryShape Id="d92d49b3-5d9a-4aef-a43f-a97ccf2aa3ff" Description="Description for MVCVisualDesigner.VDModelSelectorShape" Name="VDModelSelectorShape" DisplayName="VDModel Selector Shape" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="VDModel Selector Shape" OutlineColor="MidnightBlue" InitialHeight="1" OutlineThickness="0.01" Geometry="Rectangle" />
+    <Port Id="798624b1-5170-4615-b548-a213998e0049" Description="Description for MVCVisualDesigner.VDEventPort" Name="VDEventPort" DisplayName="VDEvent Port" Namespace="MVCVisualDesigner" FixedTooltipText="VDEvent Port" TextColor="SaddleBrown" FillColor="Gold" OutlineColor="DarkGoldenrod" InitialWidth="0.1" InitialHeight="0.1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Circle">
       <ShapeHasDecorators Position="OuterTopCenter" HorizontalOffset="0" VerticalOffset="0">
         <TextDecorator Name="EventNameDecorator" DisplayName="Event Name Decorator" DefaultText="EventNameDecorator" />
       </ShapeHasDecorators>
     </Port>
-    <Port Id="af8c6ce1-1bd2-4d47-9b67-3d7bb3a1367e" Description="Description for MVCVisualDesigner.VDEventTargetPort" Name="VDEventTargetPort" DisplayName="VDEvent Target Port" Namespace="MVCVisualDesigner" FixedTooltipText="VDEvent Target Port" FillColor="Green" InitialWidth="0.1" InitialHeight="0.1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle" />
-    <GeometryShape Id="d92d49b3-5d9a-4aef-a43f-a97ccf2aa3ff" Description="Description for MVCVisualDesigner.VDModelSelectorShape" Name="VDModelSelectorShape" DisplayName="VDModel Selector Shape" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="VDModel Selector Shape" OutlineColor="MidnightBlue" InitialHeight="1" OutlineThickness="0.01" Geometry="Rectangle" />
+    <GeometryShape Id="91ac0240-c590-4f77-8fcf-0fa1c38edf76" Description="Description for MVCVisualDesigner.VDClientActionShape" Name="VDClientActionShape" DisplayName="VDClient Action Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDClient Action Shape" TextColor="SaddleBrown" OutlineColor="DarkGoldenrod" InitialWidth="1" InitialHeight="0.2" OutlineThickness="0.01" FillGradientMode="None" Geometry="RoundedRectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+      <ShapeHasDecorators Position="Center" HorizontalOffset="0" VerticalOffset="0">
+        <TextDecorator Name="ActionNameDecorator" DisplayName="Action Name Decorator" DefaultText="ActionNameDecorator" />
+      </ShapeHasDecorators>
+    </GeometryShape>
+    <Port Id="e59ee57e-ff91-4d1d-8b8c-6f092d14c1da" Description="Description for MVCVisualDesigner.VDClientActionInputPort" Name="VDClientActionInputPort" DisplayName="VDClient Action Input Port" Namespace="MVCVisualDesigner" FixedTooltipText="VDClient Action Input Port" FillColor="DarkGoldenrod" OutlineColor="DarkGoldenrod" InitialWidth="0.1" InitialHeight="0.1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle" />
+    <Port Id="680c5319-3a6f-4ea1-a185-b04f750b753b" Description="Description for MVCVisualDesigner.VDClientActionOutputPort" Name="VDClientActionOutputPort" DisplayName="VDClient Action Output Port" Namespace="MVCVisualDesigner" FixedTooltipText="VDClient Action Output Port" FillColor="DarkGoldenrod" OutlineColor="DarkGoldenrod" InitialWidth="0.1" InitialHeight="0.1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle" />
   </Shapes>
   <Connectors>
-    <Connector Id="63c5cc6f-a107-45c2-87c9-2c0a88ac3581" Description="" Name="VDPerformsActionOnConnector" DisplayName="Action" Namespace="MVCVisualDesigner" FixedTooltipText="VDPerforms Action On Connector" Color="DarkOrange" DashStyle="Dash" TargetEndStyle="EmptyArrow" Thickness="0.01">
-      <ConnectorHasDecorators Position="TargetTop" OffsetFromShape="0" OffsetFromLine="0" isMoveable="true">
-        <TextDecorator Name="ActionNameDecorator" DisplayName="Action Name Decorator" DefaultText="ActionNameDecorator" />
-      </ConnectorHasDecorators>
-    </Connector>
+    <Connector Id="70b7f30a-758e-457f-8423-15ba1ae06ac4" Description="Description for MVCVisualDesigner.VDClientActionOutput2ComponentConnector" Name="VDClientActionOutput2ComponentConnector" DisplayName="VDClient Action Output2 Component Connector" Namespace="MVCVisualDesigner" FixedTooltipText="VDClient Action Output2 Component Connector" Color="DarkGoldenrod" TargetEndStyle="FilledArrow" Thickness="0.01" />
+    <Connector Id="3f174086-f1f1-4b2c-9ea5-bf494098650d" Description="Description for MVCVisualDesigner.VDEvent2ClientActionInputConnector" Name="VDEvent2ClientActionInputConnector" DisplayName="VDEvent2 Client Action Input Connector" Namespace="MVCVisualDesigner" FixedTooltipText="VDEvent2 Client Action Input Connector" Color="Goldenrod" Thickness="0.01" />
   </Connectors>
   <XmlSerializationBehavior Name="MVCVisualDesignerSerializationBehavior" Namespace="MVCVisualDesigner">
     <ClassData>
@@ -2996,23 +3050,6 @@ The values set to this property should be defined in
       <XmlClassData TypeName="VDIcon" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDIconMoniker" ElementName="vDIcon" MonikerTypeName="VDIconMoniker">
         <DomainClassMoniker Name="VDIcon" />
       </XmlClassData>
-      <XmlClassData TypeName="VDEventSource" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDEventSourceMoniker" ElementName="vDEventSource" MonikerTypeName="VDEventSourceMoniker">
-        <DomainClassMoniker Name="VDEventSource" />
-        <ElementData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="eventTargets">
-            <DomainRelationshipMoniker Name="PerformsActionOn" />
-          </XmlRelationshipData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="targetWidgets">
-            <DomainRelationshipMoniker Name="PerformsActionOn_1" />
-          </XmlRelationshipData>
-          <XmlPropertyData XmlName="eventName">
-            <DomainPropertyMoniker Name="VDEventSource/EventName" />
-          </XmlPropertyData>
-        </ElementData>
-      </XmlClassData>
-      <XmlClassData TypeName="VDEventTarget" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDEventTargetMoniker" ElementName="vDEventTarget" MonikerTypeName="VDEventTargetMoniker">
-        <DomainClassMoniker Name="VDEventTarget" />
-      </XmlClassData>
       <XmlClassData TypeName="VDIconShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDIconShapeMoniker" ElementName="vDIconShape" MonikerTypeName="VDIconShapeMoniker">
         <GeometryShapeMoniker Name="VDIconShape" />
       </XmlClassData>
@@ -3031,54 +3068,19 @@ The values set to this property should be defined in
       <XmlClassData TypeName="VDAjaxShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDAjaxShapeMoniker" ElementName="vDAjaxShape" MonikerTypeName="VDAjaxShapeMoniker">
         <GeometryShapeMoniker Name="VDAjaxShape" />
       </XmlClassData>
-      <XmlClassData TypeName="VDEventSourcePort" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDEventSourcePortMoniker" ElementName="vDEventSourcePort" MonikerTypeName="VDEventSourcePortMoniker">
-        <PortMoniker Name="VDEventSourcePort" />
-      </XmlClassData>
-      <XmlClassData TypeName="VDEventTargetPort" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDEventTargetPortMoniker" ElementName="vDEventTargetPort" MonikerTypeName="VDEventTargetPortMoniker">
-        <PortMoniker Name="VDEventTargetPort" />
-      </XmlClassData>
-      <XmlClassData TypeName="VDPerformsActionOnConnector" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDPerformsActionOnConnectorMoniker" ElementName="vDPerformsActionOnConnector" MonikerTypeName="VDPerformsActionOnConnectorMoniker">
-        <ConnectorMoniker Name="VDPerformsActionOnConnector" />
-      </XmlClassData>
       <XmlClassData TypeName="VDViewComponent" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDViewComponentMoniker" ElementName="vDViewComponent" MonikerTypeName="VDViewComponentMoniker">
         <DomainClassMoniker Name="VDViewComponent" />
         <ElementData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="eventSources">
-            <DomainRelationshipMoniker Name="WidgetHasEventSources" />
+          <XmlRelationshipData UseFullForm="true" RoleElementName="events">
+            <DomainRelationshipMoniker Name="WidgetHasEvents" />
           </XmlRelationshipData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="eventTargets">
-            <DomainRelationshipMoniker Name="WidgetHasEventTargets" />
+          <XmlRelationshipData UseFullForm="true" RoleElementName="r2_TargetComponents">
+            <DomainRelationshipMoniker Name="R2_Component2Component" />
           </XmlRelationshipData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="vDEventTargets">
-            <DomainRelationshipMoniker Name="PerformsActionOn_2" />
-          </XmlRelationshipData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="targetVDViewComponents">
-            <DomainRelationshipMoniker Name="PerformsActionOn_3" />
+          <XmlRelationshipData UseFullForm="true" RoleElementName="r3_Inputs">
+            <DomainRelationshipMoniker Name="R3_Component2Input" />
           </XmlRelationshipData>
         </ElementData>
-      </XmlClassData>
-      <XmlClassData TypeName="WidgetHasEventSources" MonikerAttributeName="" SerializeId="true" MonikerElementName="widgetHasEventSourcesMoniker" ElementName="widgetHasEventSources" MonikerTypeName="WidgetHasEventSourcesMoniker">
-        <DomainRelationshipMoniker Name="WidgetHasEventSources" />
-      </XmlClassData>
-      <XmlClassData TypeName="WidgetHasEventTargets" MonikerAttributeName="" SerializeId="true" MonikerElementName="widgetHasEventTargetsMoniker" ElementName="widgetHasEventTargets" MonikerTypeName="WidgetHasEventTargetsMoniker">
-        <DomainRelationshipMoniker Name="WidgetHasEventTargets" />
-      </XmlClassData>
-      <XmlClassData TypeName="PerformsActionOn" MonikerAttributeName="" SerializeId="true" MonikerElementName="performsActionOnMoniker" ElementName="performsActionOn" MonikerTypeName="PerformsActionOnMoniker">
-        <DomainRelationshipMoniker Name="PerformsActionOn" />
-        <ElementData>
-          <XmlPropertyData XmlName="actionName">
-            <DomainPropertyMoniker Name="PerformsActionOn/ActionName" />
-          </XmlPropertyData>
-        </ElementData>
-      </XmlClassData>
-      <XmlClassData TypeName="PerformsActionOn_2" MonikerAttributeName="" SerializeId="true" MonikerElementName="performsActionOn_2Moniker" ElementName="performsActionOn_2" MonikerTypeName="PerformsActionOn_2Moniker">
-        <DomainRelationshipMoniker Name="PerformsActionOn_2" />
-      </XmlClassData>
-      <XmlClassData TypeName="PerformsActionOn_1" MonikerAttributeName="" SerializeId="true" MonikerElementName="performsActionOn_1Moniker" ElementName="performsActionOn_1" MonikerTypeName="PerformsActionOn_1Moniker">
-        <DomainRelationshipMoniker Name="PerformsActionOn_1" />
-      </XmlClassData>
-      <XmlClassData TypeName="PerformsActionOn_3" MonikerAttributeName="" SerializeId="true" MonikerElementName="performsActionOn_3Moniker" ElementName="performsActionOn_3" MonikerTypeName="PerformsActionOn_3Moniker">
-        <DomainRelationshipMoniker Name="PerformsActionOn_3" />
       </XmlClassData>
       <XmlClassData TypeName="VDModelSelector" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDModelSelectorMoniker" ElementName="vDModelSelector" MonikerTypeName="VDModelSelectorMoniker">
         <DomainClassMoniker Name="VDModelSelector" />
@@ -3289,6 +3291,87 @@ The values set to this property should be defined in
       </XmlClassData>
       <XmlClassData TypeName="WidgetHasModelInstance" MonikerAttributeName="" SerializeId="true" MonikerElementName="widgetHasModelInstanceMoniker" ElementName="widgetHasModelInstance" MonikerTypeName="WidgetHasModelInstanceMoniker">
         <DomainRelationshipMoniker Name="WidgetHasModelInstance" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDEvent" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDEventMoniker" ElementName="vDEvent" MonikerTypeName="VDEventMoniker">
+        <DomainClassMoniker Name="VDEvent" />
+        <ElementData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="r1_Components">
+            <DomainRelationshipMoniker Name="R1_Event2Component" />
+          </XmlRelationshipData>
+          <XmlPropertyData XmlName="eventName">
+            <DomainPropertyMoniker Name="VDEvent/EventName" />
+          </XmlPropertyData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="r4_Inputs">
+            <DomainRelationshipMoniker Name="R4_Event2Input" />
+          </XmlRelationshipData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="VDClientAction" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDClientActionMoniker" ElementName="vDClientAction" MonikerTypeName="VDClientActionMoniker">
+        <DomainClassMoniker Name="VDClientAction" />
+        <ElementData>
+          <XmlPropertyData XmlName="actionName">
+            <DomainPropertyMoniker Name="VDClientAction/ActionName" />
+          </XmlPropertyData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="input">
+            <DomainRelationshipMoniker Name="ClientActionHasInput" />
+          </XmlRelationshipData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="output">
+            <DomainRelationshipMoniker Name="ClientActionHasOutput" />
+          </XmlRelationshipData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="VDEventPort" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDEventPortMoniker" ElementName="vDEventPort" MonikerTypeName="VDEventPortMoniker">
+        <PortMoniker Name="VDEventPort" />
+      </XmlClassData>
+      <XmlClassData TypeName="WidgetHasEvents" MonikerAttributeName="" SerializeId="true" MonikerElementName="widgetHasEventsMoniker" ElementName="widgetHasEvents" MonikerTypeName="WidgetHasEventsMoniker">
+        <DomainRelationshipMoniker Name="WidgetHasEvents" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDClientActionOutput2ComponentConnector" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDClientActionOutput2ComponentConnectorMoniker" ElementName="vDClientActionOutput2ComponentConnector" MonikerTypeName="VDClientActionOutput2ComponentConnectorMoniker">
+        <ConnectorMoniker Name="VDClientActionOutput2ComponentConnector" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDEvent2ClientActionInputConnector" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDEvent2ClientActionInputConnectorMoniker" ElementName="vDEvent2ClientActionInputConnector" MonikerTypeName="VDEvent2ClientActionInputConnectorMoniker">
+        <ConnectorMoniker Name="VDEvent2ClientActionInputConnector" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDClientActionShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDClientActionShapeMoniker" ElementName="vDClientActionShape" MonikerTypeName="VDClientActionShapeMoniker">
+        <GeometryShapeMoniker Name="VDClientActionShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="R1_Event2Component" MonikerAttributeName="" SerializeId="true" MonikerElementName="r1_Event2ComponentMoniker" ElementName="r1_Event2Component" MonikerTypeName="R1_Event2ComponentMoniker">
+        <DomainRelationshipMoniker Name="R1_Event2Component" />
+      </XmlClassData>
+      <XmlClassData TypeName="R2_Component2Component" MonikerAttributeName="" SerializeId="true" MonikerElementName="r2_Component2ComponentMoniker" ElementName="r2_Component2Component" MonikerTypeName="R2_Component2ComponentMoniker">
+        <DomainRelationshipMoniker Name="R2_Component2Component" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDClientActionInput" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDClientActionInputMoniker" ElementName="vDClientActionInput" MonikerTypeName="VDClientActionInputMoniker">
+        <DomainClassMoniker Name="VDClientActionInput" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDClientActionOutput" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDClientActionOutputMoniker" ElementName="vDClientActionOutput" MonikerTypeName="VDClientActionOutputMoniker">
+        <DomainClassMoniker Name="VDClientActionOutput" />
+        <ElementData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="r5_Components">
+            <DomainRelationshipMoniker Name="R5_Output2Component" />
+          </XmlRelationshipData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="ClientActionHasInput" MonikerAttributeName="" SerializeId="true" MonikerElementName="clientActionHasInputMoniker" ElementName="clientActionHasInput" MonikerTypeName="ClientActionHasInputMoniker">
+        <DomainRelationshipMoniker Name="ClientActionHasInput" />
+      </XmlClassData>
+      <XmlClassData TypeName="ClientActionHasOutput" MonikerAttributeName="" SerializeId="true" MonikerElementName="clientActionHasOutputMoniker" ElementName="clientActionHasOutput" MonikerTypeName="ClientActionHasOutputMoniker">
+        <DomainRelationshipMoniker Name="ClientActionHasOutput" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDClientActionInputPort" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDClientActionInputPortMoniker" ElementName="vDClientActionInputPort" MonikerTypeName="VDClientActionInputPortMoniker">
+        <PortMoniker Name="VDClientActionInputPort" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDClientActionOutputPort" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDClientActionOutputPortMoniker" ElementName="vDClientActionOutputPort" MonikerTypeName="VDClientActionOutputPortMoniker">
+        <PortMoniker Name="VDClientActionOutputPort" />
+      </XmlClassData>
+      <XmlClassData TypeName="R5_Output2Component" MonikerAttributeName="" SerializeId="true" MonikerElementName="r5_Output2ComponentMoniker" ElementName="r5_Output2Component" MonikerTypeName="R5_Output2ComponentMoniker">
+        <DomainRelationshipMoniker Name="R5_Output2Component" />
+      </XmlClassData>
+      <XmlClassData TypeName="R3_Component2Input" MonikerAttributeName="" SerializeId="true" MonikerElementName="r3_Component2InputMoniker" ElementName="r3_Component2Input" MonikerTypeName="R3_Component2InputMoniker">
+        <DomainRelationshipMoniker Name="R3_Component2Input" />
+      </XmlClassData>
+      <XmlClassData TypeName="R4_Event2Input" MonikerAttributeName="" SerializeId="true" MonikerElementName="r4_Event2InputMoniker" ElementName="r4_Event2Input" MonikerTypeName="R4_Event2InputMoniker">
+        <DomainRelationshipMoniker Name="R4_Event2Input" />
       </XmlClassData>
     </ClassData>
   </XmlSerializationBehavior>
@@ -3690,76 +3773,6 @@ The values set to this property should be defined in
         </TargetDirectives>
       </LinkConnectDirective>
     </ConnectionBuilder>
-    <ConnectionBuilder Name="PerformsActionOnBuilder">
-      <LinkConnectDirective UsesCustomConnect="true">
-        <DomainRelationshipMoniker Name="PerformsActionOn" />
-        <SourceDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDEventSource" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </SourceDirectives>
-        <TargetDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDEventTarget" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </TargetDirectives>
-      </LinkConnectDirective>
-      <LinkConnectDirective UsesCustomConnect="true">
-        <DomainRelationshipMoniker Name="PerformsActionOn_1" />
-        <SourceDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDEventSource" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </SourceDirectives>
-        <TargetDirectives>
-          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDViewComponent" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </TargetDirectives>
-      </LinkConnectDirective>
-      <LinkConnectDirective UsesCustomConnect="true">
-        <DomainRelationshipMoniker Name="PerformsActionOn_2" />
-        <SourceDirectives>
-          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDViewComponent" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </SourceDirectives>
-        <TargetDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDEventTarget" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </TargetDirectives>
-      </LinkConnectDirective>
-      <LinkConnectDirective UsesCustomConnect="true">
-        <DomainRelationshipMoniker Name="PerformsActionOn_3" />
-        <SourceDirectives>
-          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDViewComponent" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </SourceDirectives>
-        <TargetDirectives>
-          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDViewComponent" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </TargetDirectives>
-      </LinkConnectDirective>
-    </ConnectionBuilder>
     <ConnectionBuilder Name="ModelMemberIsTypeOfBuilder">
       <LinkConnectDirective>
         <DomainRelationshipMoniker Name="ModelMemberIsTypeOf" />
@@ -3945,6 +3958,131 @@ The values set to this property should be defined in
           <RolePlayerConnectDirective>
             <AcceptingClass>
               <DomainClassMoniker Name="VDModelMemberInstance" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
+    <ConnectionBuilder Name="EventBuilder">
+      <LinkConnectDirective UsesCustomConnect="true">
+        <DomainRelationshipMoniker Name="R1_Event2Component" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDEvent" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDViewComponent" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+      <LinkConnectDirective UsesCustomConnect="true">
+        <DomainRelationshipMoniker Name="R2_Component2Component" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDViewComponent" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDViewComponent" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+      <LinkConnectDirective UsesCustomConnect="true">
+        <DomainRelationshipMoniker Name="R3_Component2Input" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDViewComponent" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDClientActionInput" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+      <LinkConnectDirective UsesCustomConnect="true">
+        <DomainRelationshipMoniker Name="R4_Event2Input" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDEvent" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDClientActionInput" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+      <LinkConnectDirective UsesCustomConnect="true">
+        <DomainRelationshipMoniker Name="R5_Output2Component" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDClientActionOutput" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDViewComponent" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
+    <ConnectionBuilder Name="R3_Component2InputBuilder">
+      <LinkConnectDirective>
+        <DomainRelationshipMoniker Name="R3_Component2Input" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDViewComponent" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDClientActionInput" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
+    <ConnectionBuilder Name="R4_Event2InputBuilder">
+      <LinkConnectDirective>
+        <DomainRelationshipMoniker Name="R4_Event2Input" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDEvent" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDClientActionInput" />
             </AcceptingClass>
           </RolePlayerConnectDirective>
         </TargetDirectives>
@@ -4206,59 +4344,62 @@ The values set to this property should be defined in
         <GeometryShapeMoniker Name="VDAjaxShape" />
       </ShapeMap>
       <ShapeMap>
-        <DomainClassMoniker Name="VDEventSource" />
-        <ParentElementPath>
-          <DomainPath>WidgetHasEventSources.Widget/!VDViewComponent</DomainPath>
-        </ParentElementPath>
-        <DecoratorMap>
-          <TextDecoratorMoniker Name="VDEventSourcePort/EventNameDecorator" />
-          <PropertyDisplayed>
-            <PropertyPath>
-              <DomainPropertyMoniker Name="VDEventSource/EventName" />
-            </PropertyPath>
-          </PropertyDisplayed>
-        </DecoratorMap>
-        <PortMoniker Name="VDEventSourcePort" />
-      </ShapeMap>
-      <ShapeMap>
-        <DomainClassMoniker Name="VDEventTarget" />
-        <ParentElementPath>
-          <DomainPath>WidgetHasEventTargets.Widget/!VDViewComponent</DomainPath>
-        </ParentElementPath>
-        <PortMoniker Name="VDEventTargetPort" />
-      </ShapeMap>
-      <ShapeMap>
         <DomainClassMoniker Name="VDModelSelector" />
         <ParentElementPath>
           <DomainPath>ViewHasModelSelector.View/!VDView</DomainPath>
         </ParentElementPath>
         <GeometryShapeMoniker Name="VDModelSelectorShape" />
       </ShapeMap>
-    </ShapeMaps>
-    <ConnectorMaps>
-      <ConnectorMap>
-        <ConnectorMoniker Name="VDPerformsActionOnConnector" />
-        <DomainRelationshipMoniker Name="PerformsActionOn" />
+      <ShapeMap>
+        <DomainClassMoniker Name="VDEvent" />
+        <ParentElementPath>
+          <DomainPath>WidgetHasEvents.Widget/!VDViewComponent</DomainPath>
+        </ParentElementPath>
         <DecoratorMap>
-          <TextDecoratorMoniker Name="VDPerformsActionOnConnector/ActionNameDecorator" />
+          <TextDecoratorMoniker Name="VDEventPort/EventNameDecorator" />
           <PropertyDisplayed>
             <PropertyPath>
-              <DomainPropertyMoniker Name="PerformsActionOn/ActionName" />
+              <DomainPropertyMoniker Name="VDEvent/EventName" />
             </PropertyPath>
           </PropertyDisplayed>
         </DecoratorMap>
+        <PortMoniker Name="VDEventPort" />
+      </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDClientAction" />
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDClientActionShape/ActionNameDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="VDClientAction/ActionName" />
+            </PropertyPath>
+          </PropertyDisplayed>
+        </DecoratorMap>
+        <GeometryShapeMoniker Name="VDClientActionShape" />
+      </ShapeMap>
+      <ShapeMap>
+        <DomainClassMoniker Name="VDClientActionInput" />
+        <ParentElementPath>
+          <DomainPath>ClientActionHasInput.ClientAction/!VDClientAction</DomainPath>
+        </ParentElementPath>
+        <PortMoniker Name="VDClientActionInputPort" />
+      </ShapeMap>
+      <ShapeMap>
+        <DomainClassMoniker Name="VDClientActionOutput" />
+        <ParentElementPath>
+          <DomainPath>ClientActionHasOutput.ClientAction/!VDClientAction</DomainPath>
+        </ParentElementPath>
+        <PortMoniker Name="VDClientActionOutputPort" />
+      </ShapeMap>
+    </ShapeMaps>
+    <ConnectorMaps>
+      <ConnectorMap>
+        <ConnectorMoniker Name="VDClientActionOutput2ComponentConnector" />
+        <DomainRelationshipMoniker Name="R5_Output2Component" />
       </ConnectorMap>
       <ConnectorMap>
-        <ConnectorMoniker Name="VDPerformsActionOnConnector" />
-        <DomainRelationshipMoniker Name="PerformsActionOn_1" />
-      </ConnectorMap>
-      <ConnectorMap>
-        <ConnectorMoniker Name="VDPerformsActionOnConnector" />
-        <DomainRelationshipMoniker Name="PerformsActionOn_2" />
-      </ConnectorMap>
-      <ConnectorMap>
-        <ConnectorMoniker Name="VDPerformsActionOnConnector" />
-        <DomainRelationshipMoniker Name="PerformsActionOn_3" />
+        <ConnectorMoniker Name="VDEvent2ClientActionInputConnector" />
+        <DomainRelationshipMoniker Name="R4_Event2Input" />
       </ConnectorMap>
     </ConnectorMaps>
   </Diagram>
@@ -4334,8 +4475,8 @@ The values set to this property should be defined in
       <ElementTool Name="AjaxTool" ToolboxIcon="Resources\FileFromWeb_6281_24.bmp" Caption="Ajax" Tooltip="" HelpKeyword="AjaxTool">
         <DomainClassMoniker Name="VDAjax" />
       </ElementTool>
-      <ConnectionTool Name="ActionTool" ToolboxIcon="Resources\VSObject_Event.bmp" Caption="Action" Tooltip="" HelpKeyword="ActionTool">
-        <ConnectionBuilderMoniker Name="MVCVisualDesigner/PerformsActionOnBuilder" />
+      <ConnectionTool Name="EventConnectionTool" ToolboxIcon="Resources\VSObject_Event.bmp" Caption="Event" Tooltip="Event Connection Tool" HelpKeyword="">
+        <ConnectionBuilderMoniker Name="MVCVisualDesigner/EventBuilder" />
       </ConnectionTool>
     </ToolboxTab>
     <Validation UsesMenu="false" UsesOpen="false" UsesSave="false" UsesLoad="false" />

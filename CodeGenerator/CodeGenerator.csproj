@@ -53,6 +53,13 @@
     <Compile Include="Interface\IJSCodeGenerator.cs" />
     <Compile Include="Interface\IRazorCodeGenerator.cs" />
     <Compile Include="Interface\IModelCodeGenerator.cs" />
+    <Compile Include="JavaScriptCodeGenerator\JavaScriptCodeGeneratorInterfaces.cs" />
+    <Compile Include="JavaScriptCodeGenerator\JavaScriptGeneratorOptionUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="JavaScriptCodeGenerator\JavaScriptGeneratorOptionUI.Designer.cs">
+      <DependentUpon>JavaScriptGeneratorOptionUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModelCodeGenerator\CSModelGenerator.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -336,6 +343,9 @@
     <None Include="GenerateChildrenCode.t4" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="JavaScriptCodeGenerator\JavaScriptGeneratorOptionUI.resx">
+      <DependentUpon>JavaScriptGeneratorOptionUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModelCodeGenerator\CSModelGeneratorOptionUI.resx">
       <DependentUpon>CSModelGeneratorOptionUI.cs</DependentUpon>
     </EmbeddedResource>

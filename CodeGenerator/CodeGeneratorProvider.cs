@@ -1,4 +1,5 @@
 ﻿using MVCVisualDesigner.CodeGenerator;
+using MVCVisualDesigner.CodeGenerator.JavaScriptCodeGenerator;
 using MVCVisualDesigner.CodeGenerator.ModelCodeGenerator;
 using MVCVisualDesigner.CodeGenerator.RazorCodeGenerator;
 using System;
@@ -19,6 +20,7 @@ namespace MVCVisualDesigner
             m_controllerList = new List<ICodeGeneratorController>();
             m_controllerList.Add(new RazorCodeGeneratorController());
             m_controllerList.Add(new CSModelCodeGeneratorController());
+            m_controllerList.Add(new JavaScriptCodeGeneratorController());
         }
 
         public List<ICodeGeneratorController> GetGeneratorList() { return m_controllerList; }
@@ -53,12 +55,12 @@ namespace MVCVisualDesigner
 
         public Control SettingControl { get { return internalSettingControl; } }
 
-        private RazorGeneratorOptionUI m_settingControl;
-        private RazorGeneratorOptionUI internalSettingControl
+        private JavaScriptGeneratorOptionUI m_settingControl;
+        private JavaScriptGeneratorOptionUI internalSettingControl
         {
             get
             {
-                if (m_settingControl == null) m_settingControl = new RazorGeneratorOptionUI();
+                if (m_settingControl == null) m_settingControl = new JavaScriptGeneratorOptionUI();
                 return m_settingControl; 
             }
         }
@@ -120,40 +122,69 @@ namespace MVCVisualDesigner
         }
     }
 
+    public class JavaScriptCodeGeneratorController : ICodeGeneratorController
+    {
+        public string Name { get { return "JavaScript Generator"; } }
+
+        public string Description { get { return "Generate JavaScript widget initialization and event handling code"; } }
+
+        public void OnGenerateCode(VDView view, string viewPath)
+        {
+        }
+
+        public void OnLoadSettings(VDView rootView, string rootViewPath)
+        {
+            this.internalSettingControl.initTreeView(rootView, rootViewPath);
+        }
+
+        public void OnSaveSettings(VDView rootView, string rootViewpath)
+        {
+        }
+
+        public Control SettingControl { get { return internalSettingControl; } }
+
+        private JavaScriptGeneratorOptionUI m_settingControl;
+        private JavaScriptGeneratorOptionUI internalSettingControl
+        {
+            get
+            {
+                if (m_settingControl == null) m_settingControl = new JavaScriptGeneratorOptionUI();
+                return m_settingControl;
+            }
+        }
+    }
+
     internal static class SettingsHelper
     {
         internal static readonly Guid GENERATED_VIEW_PATH = new Guid("6E08C559-1695-4F16-863C-4EF98EBCD143");
         internal static readonly Guid GENERATED_CS_MODEL_PATH = new Guid("26A1177A-CB80-4D1E-9728-DF7DC3E5299E");
+        internal static readonly Guid GENERATED_JAVASCRIPT_PATH = new Guid("F5A4D0AE-C59A-43F3-96F5-BA2CBF12F845");
 
         internal static string getViewPathFromView(VDView view, string viewPath)
         {
-            string path = string.Empty;
-            if (view.settings.ContainsKey(SettingsHelper.GENERATED_VIEW_PATH))
-                path = (string)view.settings[SettingsHelper.GENERATED_VIEW_PATH];
-
-            if (!string.IsNullOrEmpty(viewPath))
-                path = Utility.PathHelper.GetAbsolutePath(path, viewPath);
-
-            return path;
+            return getPathFromView(SettingsHelper.GENERATED_VIEW_PATH, view, viewPath);
         }
 
         internal static void saveViewPathToView(string path, VDView view, string viewPath)
         {
-            if (!string.IsNullOrEmpty(viewPath))
-                path = Utility.PathHelper.GetRelativePath(path, viewPath);
-
-            using (var trans = view.Store.TransactionManager.BeginTransaction("Update code generation settings"))
-            {
-                view.settings[SettingsHelper.GENERATED_VIEW_PATH] = path;
-                trans.Commit();
-            }
+            savePathToView(SettingsHelper.GENERATED_VIEW_PATH, path, view, viewPath);
         }
 
         internal static string getCSModelPathFromView(VDView view, string viewPath)
         {
+            return getPathFromView(SettingsHelper.GENERATED_CS_MODEL_PATH, view, viewPath);
+        }
+
+        internal static void saveCSModelPathToView(string path, VDView view, string viewPath)
+        {
+            savePathToView(SettingsHelper.GENERATED_CS_MODEL_PATH, path, view, viewPath);
+        }
+
+        internal static string getPathFromView(Guid propGuid, VDView view, string viewPath)
+        {
             string path = string.Empty;
-            if (view.settings.ContainsKey(SettingsHelper.GENERATED_CS_MODEL_PATH))
-                path = (string)view.settings[SettingsHelper.GENERATED_CS_MODEL_PATH];
+            if (view.settings.ContainsKey(propGuid))
+                path = (string)view.settings[propGuid];
 
             if (!string.IsNullOrEmpty(viewPath))
                 path = Utility.PathHelper.GetAbsolutePath(path, viewPath);
@@ -161,14 +192,14 @@ namespace MVCVisualDesigner
             return path;
         }
 
-        internal static void saveCSModelPathToView(string path, VDView view, string viewPath)
+        internal static void savePathToView(Guid propGuid, string path, VDView view, string viewPath)
         {
             if (!string.IsNullOrEmpty(viewPath))
                 path = Utility.PathHelper.GetRelativePath(path, viewPath);
 
             using (var trans = view.Store.TransactionManager.BeginTransaction("Update code generation settings"))
             {
-                view.settings[SettingsHelper.GENERATED_CS_MODEL_PATH] = path;
+                view.settings[propGuid] = path;
                 trans.Commit();
             }
         }

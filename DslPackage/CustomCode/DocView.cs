@@ -42,14 +42,14 @@ namespace MVCVisualDesigner
                         {
                             win.ShowViewModel((VDView)widget); 
                         }
+                        else if (widget is VDClientAction)
+                        {
+                            win.ShowActionModel((VDClientAction)widget);
+                        }
                         else
                         {
                             win.ShowWidgetModel(widget); 
                         }
-                    }
-                    else if (shape.ModelElement is PerformsActionOn)
-                    {
-                        win.ShowActionModel();
                     }
                     else
                     {

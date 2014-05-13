@@ -48,7 +48,9 @@ namespace MVCVisualDesigner
 
         public void ShowWidgetModel(VDWidget widget)
         {
-            m_selectedWidget = null;
+            m_selectedWidget = widget;
+
+            setToolWindowTitle(this.WindowTitle + " - Widget Model");
 
             if (this.Window != null)
             {
@@ -56,9 +58,11 @@ namespace MVCVisualDesigner
             }
         }
 
-        public void ShowActionModel()
+        public void ShowActionModel(VDClientAction action)
         {
-            m_selectedWidget = null;
+            m_selectedWidget = action;
+
+            setToolWindowTitle(this.WindowTitle + " - Action Model");
 
             if (this.Window != null)
             {
@@ -69,6 +73,8 @@ namespace MVCVisualDesigner
         public void ShowViewModel(VDView view)
         {
             m_selectedWidget = view;
+
+            setToolWindowTitle(this.WindowTitle + " - View Model");
 
             if (this.Window != null)
             {
@@ -87,6 +93,13 @@ namespace MVCVisualDesigner
 
         private VDWidget m_selectedWidget = null;
 
+        private void setToolWindowTitle(string title)
+        {
+            if (this.Frame != null)
+            {
+                this.Frame.SetProperty((int)Microsoft.VisualStudio.Shell.Interop.__VSFPROPID.VSFPROPID_Caption, title);
+            }
+        }
         //
         private MVCVisualDesignerPackage m_package;
         internal MVCVisualDesignerPackage GetPackage()

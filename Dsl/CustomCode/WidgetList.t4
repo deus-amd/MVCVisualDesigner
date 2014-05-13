@@ -29,6 +29,7 @@ string[] WidgetList = new string[]{
 	"VDDialog",
 	"VDMessagePanel",
 	"VDAjax",
+	"VDClientAction",
 
 	// Utilities
 	"VDHoriSeparator",

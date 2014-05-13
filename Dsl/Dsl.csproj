@@ -88,6 +88,10 @@
     <Compile Include="CustomCode\DomainElementListEditor.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CustomCode\EventActions\IClientActionDescriptor.cs" />
+    <Compile Include="CustomCode\EventActions\IClientActionDescriptorProvider.cs" />
+    <Compile Include="CustomCode\EventActions\IEventDescriptor.cs" />
+    <Compile Include="CustomCode\EventActions\IEventDescriptorProvider.cs" />
     <Compile Include="CustomCode\EventSettingDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -351,4 +355,5 @@
       <Name>Utility</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
 </Project>
