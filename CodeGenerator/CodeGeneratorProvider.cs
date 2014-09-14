@@ -83,21 +83,21 @@ namespace MVCVisualDesigner
 
         public void OnGenerateCode(VDView view, string viewPath)
         {
-            VDModelStore modelStore = view.ModelStore;
-            if (modelStore == null) return;
+            ////////VDModelStore modelStore = view.ModelStore;
+            ////////if (modelStore == null) return;
 
-            // generate code
-            CSModelGenerator generator = new CSModelGenerator(view);
-            string csModelCode = generator.TransformText();
-            if (string.IsNullOrEmpty(csModelCode)) return;
+            ////////// generate code
+            ////////CSModelGenerator generator = new CSModelGenerator(view);
+            ////////string csModelCode = generator.TransformText();
+            ////////if (string.IsNullOrEmpty(csModelCode)) return;
 
-            // save file
-            string filePath = SettingsHelper.getViewPathFromView(view, viewPath);
-            filePath = System.IO.Path.Combine(filePath, view.WidgetName + "_models.cs");
-            using (System.IO.StreamWriter w = new System.IO.StreamWriter(filePath))
-            {
-                w.Write(csModelCode);
-            }
+            ////////// save file
+            ////////string filePath = SettingsHelper.getViewPathFromView(view, viewPath);
+            ////////filePath = System.IO.Path.Combine(filePath, view.WidgetName + "_models.cs");
+            ////////using (System.IO.StreamWriter w = new System.IO.StreamWriter(filePath))
+            ////////{
+            ////////    w.Write(csModelCode);
+            ////////}
         }
 
         public void OnLoadSettings(VDView rootView, string rootViewPath)

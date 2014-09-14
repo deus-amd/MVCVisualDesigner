@@ -61,3 +61,12 @@
 /ObjectListView/obj/
 /TypeDescriptor/bin/
 /TypeDescriptor/obj/
+
+
+#
+# AutoCompleteMenu
+#
+/AutoCompleteMenu/Bin/
+/AutoCompleteMenu/Obj/
+/AutoCompleteMenuTester/Bin/
+/AutoCompleteMenuTester/Obj/

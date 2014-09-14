@@ -6,7 +6,7 @@
 <#
     if (this.ModelStore == null) return string.Empty;
 
-    foreach(VDModelType mt in this.ModelStore.ModelTypes)
+    foreach(VDModelType2 mt in this.ModelStore.ModelTypes)
     {
         // only generate C# model for custom type
         if (!(mt is VDCustomType)) continue;

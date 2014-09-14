@@ -11,12 +11,16 @@ namespace MVCVisualDesigner
     {
         internal string GetViewModelTypeValue()
         {
+#if todel
             if (this.ModelInstance != null && this.ModelInstance.ModelType != null)
             {
                 return this.ModelInstance.ModelType.FullName;
             }
+#endif
             return string.Empty;
         }
+
+        public WidgetInfoManager WidgetInfoManager { get; set; }
     }
 
     public partial class VDPartialView

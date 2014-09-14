@@ -28,8 +28,9 @@ string[] WidgetList = new string[]{
 	"VDConfirmDialog",
 	"VDDialog",
 	"VDMessagePanel",
-	"VDAjax",
 	"VDClientAction",
+	"VDServerAction",
+	"VDCondition",
 
 	// Utilities
 	"VDHoriSeparator",

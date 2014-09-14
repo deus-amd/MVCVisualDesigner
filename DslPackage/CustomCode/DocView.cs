@@ -42,9 +42,9 @@ namespace MVCVisualDesigner
                         {
                             win.ShowViewModel((VDView)widget); 
                         }
-                        else if (widget is VDClientAction)
+                        else if (widget is VDActionBase)
                         {
-                            win.ShowActionModel((VDClientAction)widget);
+                            win.ShowActionModel((VDActionBase)widget);
                         }
                         else
                         {
@@ -53,6 +53,10 @@ namespace MVCVisualDesigner
                     }
                     else
                     {
+                        // avoid tool window blink
+                        if (shape.ModelElement is VDWidgetTitle)
+                            return;
+
                         win.HideWindow();
                     }
                 }

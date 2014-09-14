@@ -34,6 +34,7 @@ namespace MVCVisualDesigner
 
             VDHoriContainer titleContainer = this.Store.ElementFactory.CreateElement(VDHoriContainer.DomainClassId,
                 new PropertyAssignment(VDContainer.TagDomainPropertyId, TITLE_CONTAINER_TAG),
+                new PropertyAssignment(VDWidgetBase.WidgetNameDomainPropertyId, TITLE_CONTAINER_TAG),
                 new PropertyAssignment(VDContainer.HasLeftAnchorDomainPropertyId, true),
                 new PropertyAssignment(VDContainer.HasRightAnchorDomainPropertyId, true),
                 new PropertyAssignment(VDContainer.HasTopAnchorDomainPropertyId, true),
@@ -41,6 +42,7 @@ namespace MVCVisualDesigner
 
             VDVertContainer headContainer = this.Store.ElementFactory.CreateElement(VDVertContainer.DomainClassId,
                 new PropertyAssignment(VDContainer.TagDomainPropertyId, TABLE_HEAD_CONTAINER_TAG),
+                new PropertyAssignment(VDWidgetBase.WidgetNameDomainPropertyId, TABLE_HEAD_CONTAINER_TAG),
                 new PropertyAssignment(VDContainer.HasLeftAnchorDomainPropertyId, true),
                 new PropertyAssignment(VDContainer.HasRightAnchorDomainPropertyId, true),
                 new PropertyAssignment(VDContainer.HasTopAnchorDomainPropertyId, true)) as VDVertContainer;
@@ -48,11 +50,13 @@ namespace MVCVisualDesigner
 
             VDVertContainer bodyContainer = this.Store.ElementFactory.CreateElement(VDVertContainer.DomainClassId,
                 new PropertyAssignment(VDContainer.TagDomainPropertyId, TABLE_BODY_CONTAINER_TAG),
+                new PropertyAssignment(VDWidgetBase.WidgetNameDomainPropertyId, TABLE_BODY_CONTAINER_TAG),
                 new PropertyAssignment(VDContainer.HasLeftAnchorDomainPropertyId, true),
                 new PropertyAssignment(VDContainer.HasRightAnchorDomainPropertyId, true)) as VDVertContainer;
 
             VDVertContainer footContainer = this.Store.ElementFactory.CreateElement(VDVertContainer.DomainClassId,
                 new PropertyAssignment(VDContainer.TagDomainPropertyId, TABLE_FOOT_CONTAINER_TAG),
+                new PropertyAssignment(VDWidgetBase.WidgetNameDomainPropertyId, TABLE_FOOT_CONTAINER_TAG),
                 new PropertyAssignment(VDContainer.HasLeftAnchorDomainPropertyId, true),
                 new PropertyAssignment(VDContainer.HasRightAnchorDomainPropertyId, true),
                 new PropertyAssignment(VDContainer.HasBottomAnchorDomainPropertyId, true)) as VDVertContainer;

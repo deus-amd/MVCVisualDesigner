@@ -9,8 +9,8 @@
             "VDHoriSeparator",
             "VDAlert",
             "VDConfirmDialog",
-            "VDAjax",
             "VDClientAction",
+            "VDServerAction",
         };
 
         public static HashSet<string> DefaultGenerators = new HashSet<string>()

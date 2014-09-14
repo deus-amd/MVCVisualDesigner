@@ -140,6 +140,12 @@
     <Compile Include="CustomCode\OptionPages\MVDOptionPageBase.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CustomCode\SelectorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomCode\SelectorControl.Designer.cs">
+      <DependentUpon>SelectorControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="GeneratedCode\CommandSet.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -286,6 +292,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomCode\ModelTypeListControl.resx">
       <DependentUpon>ModelTypeListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomCode\SelectorControl.resx">
+      <DependentUpon>SelectorControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VSPackage.resx">
       <SubType>Designer</SubType>

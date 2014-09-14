@@ -198,24 +198,75 @@ namespace MVCVisualDesigner
             base.MergeRelate(sourceElement, elementGroup);
         }
 
-        // Deleting Propagate
-        private VDWidget m_parentToDel;
-        protected override void OnDeleting()
+#region Widget Value
+        public override VDWidgetValue WidgetValue
         {
-            m_parentToDel = this.Parent;
-            base.OnDeleting();
+            get
+            {
+                if (base.WidgetValue == null && !m_deleting)
+                {
+                    using (var trans = this.Store.TransactionManager.BeginTransaction("Create widget value for " + this.WidgetType.ToString()))
+                    {
+                        base.WidgetValue = createWidgetValue();
+                        trans.Commit();
+                    }
+                }
+                return base.WidgetValue;
+            }
+            set
+            {
+                base.WidgetValue = value;
+            }
         }
 
+        protected virtual VDWidgetValue createWidgetValue()
+        {
+            return null;
+        }
+#endregion
+
+        // Deleting Propagate
+        private VDWidget m_parentToDel;
+        private VDWidgetValue m_widgetValueToDel = null;
+        protected override void OnDeleting()
+        {
+            m_deleting = true;
+            try
+            {
+                m_parentToDel = this.Parent;
+                m_widgetValueToDel = this.WidgetValue;
+                if (m_widgetValueToDel != null && m_widgetValueToDel.HasExternalReference) 
+                    m_widgetValueToDel = null;
+
+                base.OnDeleting();
+            }
+            finally
+            {
+                m_deleting = false;
+            }
+        }
+
+        private bool m_deleting = false;
         protected override void OnDeleted()
         {
             base.OnDeleted();
 
-            if (m_deleteWithoutPropagating) return;
-
-            if (PropagateDeletingToParent && m_parentToDel != null && this.Store.TransactionManager.InTransaction)
+            if (this.Store.TransactionManager.InTransaction)
             {
-                onPropagateDeletingParent(m_parentToDel);
-                m_parentToDel = null;
+                // delete widget value
+                if (m_widgetValueToDel != null)
+                {
+                    m_widgetValueToDel.Delete();
+                    m_widgetValueToDel = null;
+                }
+
+                if (m_deleteWithoutPropagating) return;
+
+                if (PropagateDeletingToParent && m_parentToDel != null)
+                {
+                    onPropagateDeletingParent(m_parentToDel);
+                    m_parentToDel = null;
+                }
             }
         }
 
@@ -282,14 +333,6 @@ namespace MVCVisualDesigner
             return RootView != null ? RootView.ModelStore : null;
         }
 
-        public VDModelType GetModelType()
-        {
-            if (this.ModelInstance == null) 
-                return null;
-            else 
-                return this.ModelInstance.ModelType;
-        }
-
         // More HTML Attributes
         public string GetMoreHtmlAttributeString(params string[] ignoreList)
         {
@@ -346,6 +389,35 @@ namespace MVCVisualDesigner
             }
             return string.Empty;
         }
+
+        // actions and events
+#region Actions and Events
+        public List<IActionInfo> SupportedActions
+        {
+            get
+            {
+                VDModelStore store = GetModelStore();
+                if (store != null)
+                {
+                    return store.GetSupportedActionList(this.WidgetType);
+                }
+                return null;
+            }
+        }
+
+        public List<IEventInfo> SupportedEvents
+        {
+            get
+            {
+                VDModelStore store = GetModelStore();
+                if (store != null)
+                {
+                    return store.GetSupportedEventList(this.WidgetType);
+                }
+                return null;
+            }
+        }
+#endregion
     }
 }
 

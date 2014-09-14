@@ -18,7 +18,7 @@ namespace MVCVisualDesigner
         }
 
         private ModelToolWindowForm m_form;
-        public override System.Windows.Forms.IWin32Window Window
+        public ModelToolWindowForm ModelToolWindowForm
         {
             get
             {
@@ -29,6 +29,8 @@ namespace MVCVisualDesigner
                 return m_form;
             }
         }
+
+        public override System.Windows.Forms.IWin32Window Window { get { return ModelToolWindowForm; } }
 
         protected override void OnDocumentWindowChanged(ModelingDocView oldView, ModelingDocView newView)
         {
@@ -50,23 +52,23 @@ namespace MVCVisualDesigner
         {
             m_selectedWidget = widget;
 
-            setToolWindowTitle(this.WindowTitle + " - Widget Model");
+            setToolWindowTitle(string.Format("Widget Value - {0} [{1}]", widget.WidgetName, widget.WidgetType.ToString()));
 
             if (this.Window != null)
             {
-                m_form.ShowWidgetModel(widget);
+                ModelToolWindowForm.WidgetValueHandler.Show(widget);
             }
         }
 
-        public void ShowActionModel(VDClientAction action)
+        public void ShowActionModel(VDActionBase action)
         {
             m_selectedWidget = action;
 
-            setToolWindowTitle(this.WindowTitle + " - Action Model");
+            setToolWindowTitle(string.Format("Action Data - {0} [{1} Action]", action.Name, action is VDClientAction ? "Client" : "Server"));
 
             if (this.Window != null)
             {
-                m_form.ShowActionModel();
+                ModelToolWindowForm.ActionDataHandler.Show(action);
             }
         }
 
@@ -74,11 +76,11 @@ namespace MVCVisualDesigner
         {
             m_selectedWidget = view;
 
-            setToolWindowTitle(this.WindowTitle + " - View Model");
+            setToolWindowTitle(string.Format("View Model - {0} [{1}]", view.WidgetName, view.WidgetType.ToString()));
 
             if (this.Window != null)
             {
-                m_form.ShowViewModel(view);
+                ModelToolWindowForm.ViewModelHandler.Show(view);
             }
         }
 
@@ -87,7 +89,7 @@ namespace MVCVisualDesigner
             this.Hide();
             if (this.Window != null)
             {
-                m_form.ClearWindow();
+//todel                m_form.ClearWindow();
             }
         }
 
@@ -130,7 +132,7 @@ namespace MVCVisualDesigner
             // Model Window lost focus
             else if (lostFocusWindow != null && string.Compare(lostFocusWindow.ObjectKind, GUID_MODEL_TOOL_WINDOW, true) ==0)
             {
-                if (this.Window != null) m_form.OnLostFocus();
+//todel                if (this.Window != null) m_form.OnLostFocus();
             }
         }
 

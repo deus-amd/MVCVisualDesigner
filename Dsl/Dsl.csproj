@@ -78,6 +78,18 @@
     <Compile Include="CustomCode\CodeGen\ICodeGenerator.cs" />
     <Compile Include="CustomCode\CodeGen\ICodeGeneratorProvider.cs" />
     <Compile Include="CustomCode\CodeGen\SettingUIValidationException.cs" />
+    <Compile Include="CustomCode\Component2ActionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomCode\Component2ActionDialog.Designer.cs">
+      <DependentUpon>Component2ActionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomCode\Component2ComponentDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomCode\Component2ComponentDialog.Designer.cs">
+      <DependentUpon>Component2ComponentDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomCode\Diagram.cs" />
     <Compile Include="CustomCode\Diagram_BindFields.cs">
       <AutoGen>True</AutoGen>
@@ -88,31 +100,25 @@
     <Compile Include="CustomCode\DomainElementListEditor.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CustomCode\EventActions\IClientActionDescriptor.cs" />
-    <Compile Include="CustomCode\EventActions\IClientActionDescriptorProvider.cs" />
-    <Compile Include="CustomCode\EventActions\IEventDescriptor.cs" />
-    <Compile Include="CustomCode\EventActions\IEventDescriptorProvider.cs" />
-    <Compile Include="CustomCode\EventSettingDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CustomCode\EventSettingDialog.Designer.cs">
-      <DependentUpon>EventSettingDialog.cs</DependentUpon>
-    </Compile>
+    <Compile Include="CustomCode\EventActions\ActionInfo.cs" />
+    <Compile Include="CustomCode\EventActions\EventInfo.cs" />
     <Compile Include="CustomCode\HTMLAttribute.cs" />
     <Compile Include="CustomCode\ICustomMerge.cs" />
     <Compile Include="CustomCode\MergeMananger.cs" />
     <Compile Include="CustomCode\PropertyEditors\VDCollectionEditor.cs" />
+    <Compile Include="CustomCode\SelectorHelper.cs" />
     <Compile Include="CustomCode\ShapeFields\MultiLineTextField.cs" />
     <Compile Include="CustomCode\StateMachine.cs" />
     <Compile Include="CustomCode\Types\GenericTypeDescriptor.cs" />
     <Compile Include="CustomCode\Types\ITypeDescriptor.cs" />
     <Compile Include="CustomCode\Types\ITypeDescriptorProvider.cs" />
-    <Compile Include="CustomCode\Widgets\Ajax.cs" />
+    <Compile Include="CustomCode\WidgetInfoManager.cs" />
     <Compile Include="CustomCode\Widgets\Alert_Confirm.cs" />
     <Compile Include="CustomCode\Widgets\CodeSnippet.cs" />
+    <Compile Include="CustomCode\Widgets\Condition.cs" />
     <Compile Include="CustomCode\Widgets\Container.cs" />
     <Compile Include="CustomCode\Widgets\Dialog.cs" />
-    <Compile Include="CustomCode\Widgets\Event.cs" />
+    <Compile Include="CustomCode\Widgets\Action_Event.cs" />
     <Compile Include="CustomCode\Widgets\Form.cs" />
     <Compile Include="CustomCode\Widgets\HTMLTag.cs" />
     <Compile Include="CustomCode\Widgets\Icon.cs" />
@@ -125,6 +131,7 @@
     <Compile Include="CustomCode\Widgets\Text.cs" />
     <Compile Include="CustomCode\Widgets\VDInternalUtility.cs" />
     <Compile Include="CustomCode\Widgets\View.cs" />
+    <Compile Include="CustomCode\Widgets\WidgetValue.cs" />
     <Compile Include="CustomCode\WidgetTreeWalker.cs" />
     <Compile Include="Resources\MVDResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -321,8 +328,11 @@
     <Service Include="{508349B6-6B84-4df5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CustomCode\EventSettingDialog.resx">
-      <DependentUpon>EventSettingDialog.cs</DependentUpon>
+    <EmbeddedResource Include="CustomCode\Component2ActionDialog.resx">
+      <DependentUpon>Component2ActionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomCode\Component2ComponentDialog.resx">
+      <DependentUpon>Component2ComponentDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GeneratedCode\DomainModelResx.resx">
       <AutoGen>True</AutoGen>

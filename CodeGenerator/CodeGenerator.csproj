@@ -53,6 +53,11 @@
     <Compile Include="Interface\IJSCodeGenerator.cs" />
     <Compile Include="Interface\IRazorCodeGenerator.cs" />
     <Compile Include="Interface\IModelCodeGenerator.cs" />
+    <Compile Include="JavaScriptCodeGenerator\JavaScriptCodeGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JavaScriptCodeGenerator.tt</DependentUpon>
+    </Compile>
     <Compile Include="JavaScriptCodeGenerator\JavaScriptCodeGeneratorInterfaces.cs" />
     <Compile Include="JavaScriptCodeGenerator\JavaScriptGeneratorOptionUI.cs">
       <SubType>UserControl</SubType>
@@ -60,10 +65,20 @@
     <Compile Include="JavaScriptCodeGenerator\JavaScriptGeneratorOptionUI.Designer.cs">
       <DependentUpon>JavaScriptGeneratorOptionUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModelCodeGenerator\CSModelGenerator.cs">
+    <Compile Include="JavaScriptCodeGenerator\DefaultJavaScriptCodeGeneratorImpl.cs">
+      <DependentUpon>DefaultJavaScriptCodeGeneratorImpl.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CSModelGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.cs">
+      <DependentUpon>VDCheckBoxJavaScriptCodeGeneratorImpl.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="JavaScriptCodeGenerator\VDViewJavaScriptCodeGeneratorImpl.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VDViewJavaScriptCodeGeneratorImpl.tt</DependentUpon>
     </Compile>
     <Compile Include="ModelCodeGenerator\CSModelGeneratorOptionUI.cs">
       <SubType>UserControl</SubType>
@@ -88,6 +103,11 @@
     </Compile>
     <Compile Include="RazorCodeGenerator\RazorGeneratorOptionUI.Designer.cs">
       <DependentUpon>RazorGeneratorOptionUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RazorCodeGenerator\VDConditionRazorCodeGeneratorImpl.cs">
+      <DependentUpon>VDConditionRazorCodeGeneratorImpl.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="RazorCodeGenerator\VDMessagePanelRazorCodeGeneratorImpl.cs">
       <DependentUpon>VDMessagePanelRazorCodeGeneratorImpl.tt</DependentUpon>
@@ -211,10 +231,25 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ModelCodeGenerator\CSModelGenerator.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>CSModelGenerator.cs</LastGenOutput>
+    <None Include="JavaScriptCodeGenerator\JavaScriptCodeGenerator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <Parameters>&lt;%3fxml version="1.0" encoding="utf-16"%3f&gt;
+&lt;ArrayOfParameterStorage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" /&gt;</Parameters>
+      <LastGenOutput>JavaScriptCodeGenerator.cs</LastGenOutput>
     </None>
+    <None Include="JavaScriptCodeGenerator\DefaultJavaScriptCodeGeneratorImpl.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DefaultJavaScriptCodeGeneratorImpl.cs</LastGenOutput>
+    </None>
+    <None Include="JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>VDCheckBoxJavaScriptCodeGeneratorImpl.cs</LastGenOutput>
+    </None>
+    <None Include="JavaScriptCodeGenerator\VDViewJavaScriptCodeGeneratorImpl.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>VDViewJavaScriptCodeGeneratorImpl.cs</LastGenOutput>
+    </None>
+    <None Include="ModelCodeGenerator\CSModelGenerator.tt" />
     <None Include="RazorCodeGenerator\RazorCodeGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RazorCodeGenerator.cs</LastGenOutput>
@@ -222,6 +257,11 @@
     <None Include="RazorCodeGenerator\DefaultRazorCodeGeneratorImpl.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DefaultRazorCodeGeneratorImpl.cs</LastGenOutput>
+      <CustomToolNamespace>MVCVisualDesigner.CodeGenerator</CustomToolNamespace>
+    </None>
+    <None Include="RazorCodeGenerator\VDConditionRazorCodeGeneratorImpl.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>VDConditionRazorCodeGeneratorImpl.cs</LastGenOutput>
       <CustomToolNamespace>MVCVisualDesigner.CodeGenerator</CustomToolNamespace>
     </None>
     <None Include="RazorCodeGenerator\VDMessagePanelRazorCodeGeneratorImpl.tt">

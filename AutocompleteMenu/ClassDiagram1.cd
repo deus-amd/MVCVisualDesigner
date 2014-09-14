@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AutocompleteMenuNS.AutocompleteItem" Collapsed="true">
+    <Position X="4.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAoAAgAKAEgAAASAAAAAAAAAAAAABACAAAQAg=</HashCode>
+      <FileName>AutocompleteItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutocompleteMenuNS.MethodAutocompleteItem" Collapsed="true">
+    <Position X="0.75" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAACCAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>AutocompleteItems.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutocompleteMenuNS.SnippetAutocompleteItem" Collapsed="true">
+    <Position X="3.5" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEgAAACAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>AutocompleteItems.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutocompleteMenuNS.SubstringAutocompleteItem" Collapsed="true">
+    <Position X="6.25" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAACAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>AutocompleteItems.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutocompleteMenuNS.MulticolumnAutocompleteItem" Collapsed="true">
+    <Position X="6" Y="3" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AACAAAACAAAAAAAAAEAAAAAAAAAAAQAAAABAAAAAAAA=</HashCode>
+      <FileName>AutocompleteItems.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutocompleteMenuNS.AutocompleteListView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="5.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AYaQAABAACRBAAAACAYgAQBEAAAEQCQAAkQAIAACEAA=</HashCode>
+      <FileName>AutocompleteListView.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AutocompleteMenuNS.AutocompleteMenu" BaseTypeListCollapsed="true">
+    <Position X="12.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AQYQEAAgAShAKIGIqARA4UDEgADM6gBEkeBEQAGHAAI=</HashCode>
+      <FileName>AutocompleteMenu.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AutocompleteMenuNS.AutocompleteMenuHost" Collapsed="true">
+    <Position X="9.75" Y="3" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAICAAAgAAAAIAEAAA=</HashCode>
+      <FileName>AutocompleteMenuHost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutocompleteMenuNS.SelectingEventArgs" Collapsed="true">
+    <Position X="0.5" Y="8.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAYAAAAAAAAAAAAAAEAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>EventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutocompleteMenuNS.SelectedEventArgs" Collapsed="true">
+    <Position X="2.5" Y="8.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutocompleteMenuNS.HoveredEventArgs" Collapsed="true">
+    <Position X="4.5" Y="8.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutocompleteMenuNS.PaintItemEventArgs" Collapsed="true">
+    <Position X="9" Y="9.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAEAAAAABAAAAAAAAAAAAAAAAAABACAAA=</HashCode>
+      <FileName>EventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutocompleteMenuNS.WrapperNeededEventArgs" Collapsed="true">
+    <Position X="6.5" Y="8.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutocompleteMenuNS.Range" Collapsed="true">
+    <Position X="9.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEIAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Range.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutocompleteMenuNS.TextBoxWrapper" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="3.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAABAEEAwwAAIEAIAiAAAAAAEkAAAAAiSAACAAA=</HashCode>
+      <FileName>TextBoxWrapper.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.EventArgs" Collapsed="true">
+    <Position X="4.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Windows.Forms.PaintEventArgs" Collapsed="true">
+    <Position X="9.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="AutocompleteMenuNS.IAutocompleteListView" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAYQAAAAAABBAAAACAAAAQBAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IAutocompleteListView.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AutocompleteMenuNS.ITextBoxWrapper" Collapsed="true">
+    <Position X="3.5" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAwgAAAAAIAiAAAAAAEAAAAAAgSAAAAAA=</HashCode>
+      <FileName>ITextBoxWrapper.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="AutocompleteMenuNS.CompareResult" Collapsed="true">
+    <Position X="9.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAIAAAAAAAEAAA=</HashCode>
+      <FileName>AutocompleteItem.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

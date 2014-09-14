@@ -21,14 +21,22 @@ namespace MVCVisualDesigner
                     view.ModelStore = new VDModelStore(this.Store);
                     initModelTypeList(view.ModelStore);
                 }
+
+                if (view.WidgetInfoManager == null)
+                {
+                    //todo: read from options
+                    view.WidgetInfoManager = new WidgetInfoManager();
+                }
             }
         }
 
         private void initModelTypeList(VDModelStore modelStore)
         {
+#if todel
             // init the type list, be sure "string" type always exists, it's default type
             modelStore.ModelTypes.Add(new VDPredefinedType(modelStore.Partition,
-                new PropertyAssignment(VDModelType.NameDomainPropertyId, "string")));
+                new PropertyAssignment(VDModelType2.NameDomainPropertyId, "string")));
+#endif
         }
     }
 }

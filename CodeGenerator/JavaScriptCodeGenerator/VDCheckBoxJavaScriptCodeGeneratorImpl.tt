@@ -1,0 +1,52 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="MVCVisualDesigner" #>
+<#+
+    private void generateWidgetInitCode(VDCheckBox eventSource, IJavaScriptCodeGeneratorFactory jsGenFactory)
+    {
+        VDCheckBox checkbox = eventSource;
+        foreach(VDEvent e in checkbox.Events)
+        {
+#>
+$("<#= "todo:checkbox.GetCSSSelector()" #>").<#= e.Name #>(function(event){
+<#+ 
+            this.PushIndent(Utility.Constants.DEFAULT_INDENT);
+
+            // generate code for each action/target
+            //foreach(VDClientActionInput input in e.ActionInputs)
+            //{
+            //    VDClientAction action = input.ClientAction;
+            //    if (action == null || action.Output == null) continue;
+
+            //    foreach(VDViewComponent target in action.Output.Targets)
+            //    {
+            //        IJavaScriptCodeGenerator actionGenerator = jsGenFactory.GetCodeGenerator(target);
+            //        actionGenerator.GenerateActionCode(eventSource, target, action);
+            //    }
+            //}
+
+            this.PopIndent();
+#>
+    return false;
+});
+<#+ 
+        }
+    }
+
+    private void generateActionCodeImpl(VDWidget eventSource, VDCheckBox eventTarget, VDClientAction action)
+    {
+        //todo:  get action model
+#>
+var data = {};
+var $target = $("<#= "todo: eventTarget.GetCSSSelector()"  #>");
+$target.<#= action.Name #>(data);
+<#+
+    }
+
+    private void generateGettingWidgetValueCodeImpl(VDCheckBox widget)
+    {
+    }
+#>

@@ -248,7 +248,7 @@ namespace MVCVisualDesigner
 
         protected override void InitializeShapeFields(IList<ShapeField> shapeFields)
         {
-            double vertMargin = 0.03;
+            double vertMargin = 0.01;
             double horiMargin = 0.02;
             double marginToParent = 0.01;
 
@@ -265,7 +265,7 @@ namespace MVCVisualDesigner
             head.AnchoringBehavior.SetLeftAnchor(AnchoringBehavior.Edge.Left, marginToParent);
             head.AnchoringBehavior.SetRightAnchor(AnchoringBehavior.Edge.Right, marginToParent);
             //head.AnchoringBehavior.SetBottomAnchor(AnchoringBehavior.Edge.Bottom, marginToParent);
-            head.DefaultHeight = 0.2;
+            head.DefaultHeight = 0.15;
             shapeFields.Add(head);
 
             // ++ OpenTag ++
@@ -327,7 +327,7 @@ namespace MVCVisualDesigner
             footer.AnchoringBehavior.SetTopAnchor(AnchoringBehavior.Edge.Bottom, -0.2);
             footer.AnchoringBehavior.SetLeftAnchor(AnchoringBehavior.Edge.Left, marginToParent);
             footer.AnchoringBehavior.SetRightAnchor(AnchoringBehavior.Edge.Right, marginToParent);
-            footer.DefaultHeight = 0.2;
+            footer.DefaultHeight = 0.15;
             shapeFields.Add(footer);
 
             // ++ close tag in footer ++
@@ -396,7 +396,7 @@ namespace MVCVisualDesigner
             get
             {
                 if (!this.hasChildren)
-                    return new SizeD(0.4D, 0.2D);
+                    return new SizeD(0.4D, 0.15D);
                 else
                     return base.MinimumResizableSize;
             }
@@ -414,8 +414,8 @@ namespace MVCVisualDesigner
         }
 
         //public override double PaddingLeft { get { return 0.15; } }
-        public override double PaddingTop { get { return 0.25; } }
-        public override double PaddingBottom { get { return 0.25; } }
+        public override double PaddingTop { get { return 0.16; } }
+        public override double PaddingBottom { get { return 0.16; } }
 
         class HtmlTagTextField : TextField
         {

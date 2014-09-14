@@ -42,17 +42,6 @@
             <ExternalTypeMoniker Name="/System.Collections.Generic/Dictionary&lt;System.Guid, System.String&gt;" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="e65b4ff5-7df1-44f5-a57b-c72c7c055655" Description="Intrinsic Model Type" Name="IntrinsicModelType" DisplayName="Intrinsic Model Type" Kind="Calculated">
-          <Notes>can be empty, to specify intrinsic model type of a
-widget. For example for an input accepting only integer
-only, its value should be "Int".
-
-The values set to this property should be defined in 
-"Predefined Types" option page.</Notes>
-          <Type>
-            <ExternalTypeMoniker Name="/System/String" />
-          </Type>
-        </DomainProperty>
       </Properties>
       <ElementMergeDirectives>
         <ElementMergeDirective>
@@ -892,11 +881,6 @@ The values set to this property should be defined in
         <DomainClassMoniker Name="VDViewComponent" />
       </BaseClass>
     </DomainClass>
-    <DomainClass Id="ccb47c91-47c4-401b-b809-7e95039da58a" Description="Description for MVCVisualDesigner.VDAjax" Name="VDAjax" DisplayName="VDAjax" Namespace="MVCVisualDesigner">
-      <BaseClass>
-        <DomainClassMoniker Name="VDViewComponent" />
-      </BaseClass>
-    </DomainClass>
     <DomainClass Id="44662fa6-7b51-4e96-bbac-d22ba9ab1c49" Description="Description for MVCVisualDesigner.VDMessagePanel" Name="VDMessagePanel" DisplayName="VDMessage Panel" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDViewComponent" />
@@ -919,10 +903,18 @@ The values set to this property should be defined in
       <ElementMergeDirectives>
         <ElementMergeDirective>
           <Index>
-            <DomainClassMoniker Name="VDEvent" />
+            <DomainClassMoniker Name="VDEventBase" />
           </Index>
           <LinkCreationPaths>
             <DomainPath>WidgetHasEvents.Events</DomainPath>
+          </LinkCreationPaths>
+        </ElementMergeDirective>
+        <ElementMergeDirective>
+          <Index>
+            <DomainClassMoniker Name="VDActionJoint" />
+          </Index>
+          <LinkCreationPaths>
+            <DomainPath>WidgetHasActionJoints.ActionJoints</DomainPath>
           </LinkCreationPaths>
         </ElementMergeDirective>
       </ElementMergeDirectives>
@@ -932,209 +924,30 @@ The values set to this property should be defined in
       <ElementMergeDirectives>
         <ElementMergeDirective>
           <Index>
-            <DomainClassMoniker Name="VDModelType" />
+            <DomainClassMoniker Name="VDMetaType" />
           </Index>
           <LinkCreationPaths>
-            <DomainPath>ModelStoreHasModelTypes.ModelTypes</DomainPath>
+            <DomainPath>ModelStoreHasTypeDefs.MetaTypes</DomainPath>
           </LinkCreationPaths>
         </ElementMergeDirective>
         <ElementMergeDirective>
           <Index>
-            <DomainClassMoniker Name="VDModelMemberInstance" />
+            <DomainClassMoniker Name="VDConcreteType" />
           </Index>
           <LinkCreationPaths>
-            <DomainPath>ModelStoreHasModelMemberInstances.ModelMemberInstances</DomainPath>
+            <DomainPath>ModelStoreHasTypeInsts.ConcreteTypes</DomainPath>
           </LinkCreationPaths>
         </ElementMergeDirective>
       </ElementMergeDirectives>
     </DomainClass>
-    <DomainClass Id="1eb58725-c77e-4c16-ba87-678b76afed7d" Description="Description for MVCVisualDesigner.VDModelMemberInfo" Name="VDModelMemberInfo" DisplayName="VDModel Member Info" Namespace="MVCVisualDesigner">
+    <DomainClass Id="e73c2cb3-ae01-4bc0-acca-39c0345b9fe0" Description="Description for MVCVisualDesigner.VDEventBase" Name="VDEventBase" DisplayName="VDEvent Base" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner">
       <Properties>
-        <DomainProperty Id="f5322b6f-2475-460a-85d9-7fb9dd5f4c09" Description="Description for MVCVisualDesigner.VDModelMemberInfo.Name" Name="Name" DisplayName="Name">
+        <DomainProperty Id="f3acf99a-7624-43bd-97c6-27899b9c2528" Description="Description for MVCVisualDesigner.VDEventBase.Name" Name="Name" DisplayName="Name">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="38d60e2d-03c3-4615-a733-f9ed243e03f3" Description="Description for MVCVisualDesigner.VDModelMemberInfo.Default Value" Name="DefaultValue" DisplayName="Default Value">
-          <Type>
-            <ExternalTypeMoniker Name="/System/String" />
-          </Type>
-        </DomainProperty>
-      </Properties>
-    </DomainClass>
-    <DomainClass Id="a834d10e-0cc8-4630-8b45-5a99351ad7a4" Description="Description for MVCVisualDesigner.VDPropertyInfo" Name="VDPropertyInfo" DisplayName="VDProperty Info" Namespace="MVCVisualDesigner">
-      <BaseClass>
-        <DomainClassMoniker Name="VDModelMemberInfo" />
-      </BaseClass>
-    </DomainClass>
-    <DomainClass Id="3df63a29-6be6-48b1-9b60-48d793f5affe" Description="Description for MVCVisualDesigner.VDFieldInfo" Name="VDFieldInfo" DisplayName="VDField Info" Namespace="MVCVisualDesigner">
-      <BaseClass>
-        <DomainClassMoniker Name="VDModelMemberInfo" />
-      </BaseClass>
-    </DomainClass>
-    <DomainClass Id="c9bc4516-9de1-47c8-ad70-63101a975e11" Description="Description for MVCVisualDesigner.VDMethodInfo" Name="VDMethodInfo" DisplayName="VDMethod Info" Namespace="MVCVisualDesigner">
-      <BaseClass>
-        <DomainClassMoniker Name="VDModelMemberInfo" />
-      </BaseClass>
-    </DomainClass>
-    <DomainClass Id="fdcfbaa6-215b-458d-8dc5-4ad370280ad6" Description="Description for MVCVisualDesigner.VDModelType" Name="VDModelType" DisplayName="VDModel Type" Namespace="MVCVisualDesigner">
-      <Properties>
-        <DomainProperty Id="7e6954f1-8cc3-4049-94b6-78bc2437e870" Description="Description for MVCVisualDesigner.VDModelType.Name Space" Name="NameSpace" DisplayName="Name Space">
-          <Type>
-            <ExternalTypeMoniker Name="/System/String" />
-          </Type>
-        </DomainProperty>
-        <DomainProperty Id="430c897f-2b74-4b32-8287-422f6e990bc4" Description="Description for MVCVisualDesigner.VDModelType.Name" Name="Name" DisplayName="Name">
-          <Type>
-            <ExternalTypeMoniker Name="/System/String" />
-          </Type>
-        </DomainProperty>
-        <DomainProperty Id="fa35d39f-f41f-4d68-9260-4acf967f149a" Description="Description for MVCVisualDesigner.VDModelType.Is Interface" Name="IsInterface" DisplayName="Is Interface">
-          <Type>
-            <ExternalTypeMoniker Name="/System/Boolean" />
-          </Type>
-        </DomainProperty>
-        <DomainProperty Id="355c4767-80cf-400d-966b-e2b690d0f56b" Description="Description for MVCVisualDesigner.VDModelType.Is Abstract" Name="IsAbstract" DisplayName="Is Abstract">
-          <Type>
-            <ExternalTypeMoniker Name="/System/Boolean" />
-          </Type>
-        </DomainProperty>
-        <DomainProperty Id="efbacc35-74e0-480c-9fa9-b9a4b0381f81" Description="Description for MVCVisualDesigner.VDModelType.Is Read Only" Name="IsReadOnly" DisplayName="Is Read Only" Kind="CustomStorage">
-          <Type>
-            <ExternalTypeMoniker Name="/System/Boolean" />
-          </Type>
-        </DomainProperty>
-        <DomainProperty Id="4c40bae9-c0ea-4632-9547-779c4654febc" Description="Description for MVCVisualDesigner.VDModelType.Full Name" Name="FullName" DisplayName="Full Name" Kind="Calculated">
-          <Type>
-            <ExternalTypeMoniker Name="/System/String" />
-          </Type>
-        </DomainProperty>
-      </Properties>
-      <ElementMergeDirectives>
-        <ElementMergeDirective>
-          <Index>
-            <DomainClassMoniker Name="VDModelMemberInfo" />
-          </Index>
-          <LinkCreationPaths>
-            <DomainPath>ModelTypeHasMembers.ModelMembers</DomainPath>
-          </LinkCreationPaths>
-        </ElementMergeDirective>
-      </ElementMergeDirectives>
-    </DomainClass>
-    <DomainClass Id="abe83d67-8610-4cfa-a36d-831b477fd7ba" Description="Description for MVCVisualDesigner.VDPredefinedType" Name="VDPredefinedType" DisplayName="VDPredefined Type" Namespace="MVCVisualDesigner">
-      <BaseClass>
-        <DomainClassMoniker Name="VDModelType" />
-      </BaseClass>
-    </DomainClass>
-    <DomainClass Id="a917e142-50ae-48a1-88a5-295a3acb7fb6" Description="Description for MVCVisualDesigner.VDExternalType" Name="VDExternalType" DisplayName="VDExternal Type" Namespace="MVCVisualDesigner">
-      <Notes>Types defined in external dll</Notes>
-      <BaseClass>
-        <DomainClassMoniker Name="VDModelType" />
-      </BaseClass>
-      <Properties>
-        <DomainProperty Id="cd45b70c-832f-41e6-bb54-e5d55c47b747" Description="Description for MVCVisualDesigner.VDExternalType.Assembly Name" Name="AssemblyName" DisplayName="Assembly Name">
-          <Type>
-            <ExternalTypeMoniker Name="/System/String" />
-          </Type>
-        </DomainProperty>
-        <DomainProperty Id="3f61c3dd-287a-46fe-8b56-ae82ab84838e" Description="Description for MVCVisualDesigner.VDExternalType.Assembly Path" Name="AssemblyPath" DisplayName="Assembly Path">
-          <Type>
-            <ExternalTypeMoniker Name="/System/String" />
-          </Type>
-        </DomainProperty>
-      </Properties>
-    </DomainClass>
-    <DomainClass Id="4222b375-4cf2-42e7-9fff-d35112bf97a8" Description="Description for MVCVisualDesigner.VDCustomType" Name="VDCustomType" DisplayName="VDCustom Type" Namespace="MVCVisualDesigner">
-      <BaseClass>
-        <DomainClassMoniker Name="VDModelType" />
-      </BaseClass>
-    </DomainClass>
-    <DomainClass Id="ea883055-314a-4c73-8c99-61840ce6e8df" Description="Description for MVCVisualDesigner.VDModelMemberInstance" Name="VDModelMemberInstance" DisplayName="VDModel Member Instance" Namespace="MVCVisualDesigner">
-      <Properties>
-        <DomainProperty Id="bcacc593-abe0-472d-84b8-830a0c0b0034" Description="Description for MVCVisualDesigner.VDModelMemberInstance.Name" Name="Name" DisplayName="Name" Kind="CustomStorage">
-          <Type>
-            <ExternalTypeMoniker Name="/System/String" />
-          </Type>
-        </DomainProperty>
-        <DomainProperty Id="8a0d3aae-6080-4a62-bd1e-2dc66435272b" Description="Description for MVCVisualDesigner.VDModelMemberInstance.Type Name" Name="TypeName" DisplayName="Type Name" Kind="Calculated">
-          <Type>
-            <ExternalTypeMoniker Name="/System/String" />
-          </Type>
-        </DomainProperty>
-        <DomainProperty Id="9acc0022-9322-428a-b137-a42fc88b9bed" Description="Description for MVCVisualDesigner.VDModelMemberInstance.Validator Names" Name="ValidatorNames" DisplayName="Validator Names">
-          <Type>
-            <ExternalTypeMoniker Name="/System/String" />
-          </Type>
-        </DomainProperty>
-      </Properties>
-    </DomainClass>
-    <DomainClass Id="97345a6f-7365-45a9-9be3-5a2180e1f755" Description="Description for MVCVisualDesigner.VDViewModelMemberInstance" Name="VDViewModelMemberInstance" DisplayName="VDView Model Member Instance" Namespace="MVCVisualDesigner">
-      <BaseClass>
-        <DomainClassMoniker Name="VDModelMemberInstance" />
-      </BaseClass>
-      <Properties>
-        <DomainProperty Id="139f3f1b-b2ef-4860-a2ce-f1c552538d85" Description="Description for MVCVisualDesigner.VDViewModelMemberInstance.Is Java Script Model" Name="IsJavaScriptModel" DisplayName="Is Java Script Model">
-          <Type>
-            <ExternalTypeMoniker Name="/System/Boolean" />
-          </Type>
-        </DomainProperty>
-        <DomainProperty Id="0858ade7-e479-4cfd-bac6-c7a041e2be93" Description="Description for MVCVisualDesigner.VDViewModelMemberInstance.Default Value" Name="DefaultValue" DisplayName="Default Value" Kind="CustomStorage">
-          <Type>
-            <ExternalTypeMoniker Name="/System/String" />
-          </Type>
-        </DomainProperty>
-      </Properties>
-    </DomainClass>
-    <DomainClass Id="67224310-c6c5-45cf-bc3e-6f0b98ec10fa" Description="Description for MVCVisualDesigner.VDWidgetModelMemberInstance" Name="VDWidgetModelMemberInstance" DisplayName="VDWidget Model Member Instance" Namespace="MVCVisualDesigner">
-      <BaseClass>
-        <DomainClassMoniker Name="VDModelMemberInstance" />
-      </BaseClass>
-      <Properties>
-        <DomainProperty Id="ebcebabb-7360-47ba-be1b-d4056e51c3f5" Description="Description for MVCVisualDesigner.VDWidgetModelMemberInstance.Value" Name="Value" DisplayName="Value">
-          <Type>
-            <ExternalTypeMoniker Name="/System/String" />
-          </Type>
-        </DomainProperty>
-        <DomainProperty Id="3c580fac-99e7-4681-968a-8e3e77947f65" Description="Description for MVCVisualDesigner.VDWidgetModelMemberInstance.Formatter Names" Name="FormatterNames" DisplayName="Formatter Names">
-          <Type>
-            <ExternalTypeMoniker Name="/System/String" />
-          </Type>
-        </DomainProperty>
-        <DomainProperty Id="5d36b870-5c86-440f-bea4-50d70ce61b50" Description="Description for MVCVisualDesigner.VDWidgetModelMemberInstance.Init Value" Name="InitValue" DisplayName="Init Value">
-          <Type>
-            <ExternalTypeMoniker Name="/System/String" />
-          </Type>
-        </DomainProperty>
-      </Properties>
-    </DomainClass>
-    <DomainClass Id="2cf45331-4da5-4e21-8e80-be2fbc4ba174" Description="Description for MVCVisualDesigner.VDActionModelMemberInstance" Name="VDActionModelMemberInstance" DisplayName="VDAction Model Member Instance" Namespace="MVCVisualDesigner">
-      <BaseClass>
-        <DomainClassMoniker Name="VDModelMemberInstance" />
-      </BaseClass>
-    </DomainClass>
-    <DomainClass Id="6345a4f3-bd3d-41bd-a89c-71c6838bb36f" Description="Description for MVCVisualDesigner.VDListType" Name="VDListType" DisplayName="VDList Type" Namespace="MVCVisualDesigner">
-      <BaseClass>
-        <DomainClassMoniker Name="VDModelType" />
-      </BaseClass>
-    </DomainClass>
-    <DomainClass Id="497cdd52-d630-4edd-bc84-5159b768a0f4" Description="Description for MVCVisualDesigner.VDDictionaryType" Name="VDDictionaryType" DisplayName="VDDictionary Type" Namespace="MVCVisualDesigner">
-      <BaseClass>
-        <DomainClassMoniker Name="VDModelType" />
-      </BaseClass>
-    </DomainClass>
-    <DomainClass Id="73188b54-34d0-4f11-b6e3-c7edd3410c21" Description="Description for MVCVisualDesigner.VDPlaceholderInfo" Name="VDPlaceholderInfo" DisplayName="VDPlaceholder Info" Namespace="MVCVisualDesigner">
-      <BaseClass>
-        <DomainClassMoniker Name="VDModelMemberInfo" />
-      </BaseClass>
-    </DomainClass>
-    <DomainClass Id="b0a939ff-ccd6-4bcc-b623-55d127cb0eb9" Description="Description for MVCVisualDesigner.VDModelInstanceInfo" Name="VDModelInstanceInfo" DisplayName="VDModel Instance Info" Namespace="MVCVisualDesigner">
-      <BaseClass>
-        <DomainClassMoniker Name="VDModelMemberInfo" />
-      </BaseClass>
-    </DomainClass>
-    <DomainClass Id="e73c2cb3-ae01-4bc0-acca-39c0345b9fe0" Description="Description for MVCVisualDesigner.VDEvent" Name="VDEvent" DisplayName="VDEvent" Namespace="MVCVisualDesigner">
-      <Properties>
-        <DomainProperty Id="f3acf99a-7624-43bd-97c6-27899b9c2528" Description="Description for MVCVisualDesigner.VDEvent.Event Name" Name="EventName" DisplayName="Event Name">
+        <DomainProperty Id="e2714819-0d4a-445c-8cf9-545c2f9cc10f" Description="Description for MVCVisualDesigner.VDEventBase.Category" Name="Category" DisplayName="Category">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
@@ -1143,10 +956,34 @@ The values set to this property should be defined in
     </DomainClass>
     <DomainClass Id="34132139-9b57-4942-a0b8-8793fbe76a14" Description="Description for MVCVisualDesigner.VDClientAction" Name="VDClientAction" DisplayName="VDClient Action" Namespace="MVCVisualDesigner">
       <BaseClass>
-        <DomainClassMoniker Name="VDViewComponent" />
+        <DomainClassMoniker Name="VDActionBase" />
       </BaseClass>
       <Properties>
-        <DomainProperty Id="40cc23fa-d77c-4051-bfe8-9bf57a214bbf" Description="Description for MVCVisualDesigner.VDClientAction.Action Name" Name="ActionName" DisplayName="Action Name">
+        <DomainProperty Id="accf8f28-4544-43c3-8abc-d598ed23a1fb" Description="Description for MVCVisualDesigner.VDClientAction.Category" Name="Category" DisplayName="Category">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+    </DomainClass>
+    <DomainClass Id="b84c723c-8956-4e14-8fb7-d45f9c699c48" Description="Description for MVCVisualDesigner.VDModelType" Name="VDModelType" DisplayName="VDModel Type" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner">
+      <Properties>
+        <DomainProperty Id="1d2bb612-0e12-443f-8815-15995949293d" Description="Description for MVCVisualDesigner.VDModelType.Name" Name="Name" DisplayName="Name" Kind="CustomStorage">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="99efe31a-0381-461e-9bbb-2a1d65840515" Description="Description for MVCVisualDesigner.VDModelType.Name Space" Name="NameSpace" DisplayName="Name Space" Kind="CustomStorage">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="7c0f3cff-cae5-4334-82b5-9e82b033f894" Description="Description for MVCVisualDesigner.VDModelType.Full Name" Name="FullName" DisplayName="Full Name" Kind="Calculated">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="aafd161c-e544-4ad4-97fb-c2e5133d6fa4" Description="Description for MVCVisualDesigner.VDModelType.Disp Name" Name="DispName" DisplayName="Disp Name" Kind="CustomStorage">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
@@ -1155,24 +992,239 @@ The values set to this property should be defined in
       <ElementMergeDirectives>
         <ElementMergeDirective>
           <Index>
-            <DomainClassMoniker Name="VDClientActionInput" />
+            <DomainClassMoniker Name="VDModelMember" />
           </Index>
           <LinkCreationPaths>
-            <DomainPath>ClientActionHasInput.Input</DomainPath>
-          </LinkCreationPaths>
-        </ElementMergeDirective>
-        <ElementMergeDirective>
-          <Index>
-            <DomainClassMoniker Name="VDClientActionOutput" />
-          </Index>
-          <LinkCreationPaths>
-            <DomainPath>ClientActionHasOutput.Output</DomainPath>
+            <DomainPath>ModelTypeHasMembers.Members</DomainPath>
           </LinkCreationPaths>
         </ElementMergeDirective>
       </ElementMergeDirectives>
     </DomainClass>
-    <DomainClass Id="89f489b2-9617-432d-bdaa-ab385fc4f63c" Description="Description for MVCVisualDesigner.VDClientActionInput" Name="VDClientActionInput" DisplayName="VDClient Action Input" Namespace="MVCVisualDesigner" />
-    <DomainClass Id="973b7029-95d9-46ac-a8cb-1af9812cfe7d" Description="Description for MVCVisualDesigner.VDClientActionOutput" Name="VDClientActionOutput" DisplayName="VDClient Action Output" Namespace="MVCVisualDesigner" />
+    <DomainClass Id="42c72d20-03c8-4db7-86f6-0ab940c2b12f" Description="Description for MVCVisualDesigner.VDModelMember" Name="VDModelMember" DisplayName="VDModel Member" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner">
+      <Properties>
+        <DomainProperty Id="8d572832-85d8-4af3-ac21-1b57b4f52bf5" Description="Description for MVCVisualDesigner.VDModelMember.Name" Name="Name" DisplayName="Name" Kind="CustomStorage">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="b8167c01-b839-4611-8ea6-296d21b7250e" Description="Description for MVCVisualDesigner.VDModelMember.Disp Name" Name="DispName" DisplayName="Disp Name" Kind="CustomStorage">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+    </DomainClass>
+    <DomainClass Id="14f3be95-0211-44b3-aa29-9cb01ae1f6f2" Description="Description for MVCVisualDesigner.VDMetaType" Name="VDMetaType" DisplayName="VDMeta Type" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDModelType" />
+      </BaseClass>
+      <ElementMergeDirectives>
+        <ElementMergeDirective>
+          <Index>
+            <DomainClassMoniker Name="VDMetaMember" />
+          </Index>
+          <LinkCreationPaths>
+            <DomainPath>MetaTypeHasMembers.Members</DomainPath>
+          </LinkCreationPaths>
+        </ElementMergeDirective>
+      </ElementMergeDirectives>
+    </DomainClass>
+    <DomainClass Id="7f7edb15-112e-4dcb-b11b-be2c2be9e4b0" Description="Description for MVCVisualDesigner.VDConcreteType" Name="VDConcreteType" DisplayName="VDConcrete Type" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true">
+      <BaseClass>
+        <DomainClassMoniker Name="VDModelType" />
+      </BaseClass>
+      <ElementMergeDirectives>
+        <ElementMergeDirective>
+          <Index>
+            <DomainClassMoniker Name="VDConcreteMember" />
+          </Index>
+          <LinkCreationPaths>
+            <DomainPath>ConcreteTypeHasMembers.Members</DomainPath>
+          </LinkCreationPaths>
+        </ElementMergeDirective>
+      </ElementMergeDirectives>
+    </DomainClass>
+    <DomainClass Id="a082de97-8db5-408f-a538-d732598ea4de" Description="Description for MVCVisualDesigner.VDMetaMember" Name="VDMetaMember" DisplayName="VDMeta Member" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDModelMember" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="f1237994-d7b4-49d0-be72-0d516f5bc688" Description="Description for MVCVisualDesigner.VDConcreteMember" Name="VDConcreteMember" DisplayName="VDConcrete Member" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true">
+      <BaseClass>
+        <DomainClassMoniker Name="VDModelMember" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="e39f8e80-9358-4a43-a86b-72f6e3869f4a" Description="Description for MVCVisualDesigner.VDViewModelMember" Name="VDViewModelMember" DisplayName="VDView Model Member" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDConcreteMember" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="26d13f3b-6261-4d57-b63d-ff7950171163" Description="Description for MVCVisualDesigner.VDWidgetValueMember" Name="VDWidgetValueMember" DisplayName="VDWidget Value Member" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDConcreteMember" />
+      </BaseClass>
+      <Properties>
+        <DomainProperty Id="6420f021-719b-4a3e-a46d-0f889b78da85" Description="Description for MVCVisualDesigner.VDWidgetValueMember.Init Value" Name="InitValue" DisplayName="Init Value">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="7ecc27c6-7d57-4859-b969-79b72da98695" Description="Description for MVCVisualDesigner.VDWidgetValueMember.Formatter Names" Name="FormatterNames" DisplayName="Formatter Names">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="16cdcae8-83a6-4336-8548-35224d87c93a" Description="Description for MVCVisualDesigner.VDWidgetValueMember.Validator Names" Name="ValidatorNames" DisplayName="Validator Names">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+    </DomainClass>
+    <DomainClass Id="5358d3ed-366c-4131-b1aa-2ebf463b4eda" Description="Description for MVCVisualDesigner.VDActionDataMember" Name="VDActionDataMember" DisplayName="VDAction Data Member" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDConcreteMember" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="73ae4970-2f6d-47cd-b6f7-74ef0be5566c" Description="Description for MVCVisualDesigner.VDActionBase" Name="VDActionBase" DisplayName="VDAction Base" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDViewComponent" />
+      </BaseClass>
+      <Properties>
+        <DomainProperty Id="c81429cf-6e59-4c12-9bbf-c15c38dbf941" Description="Description for MVCVisualDesigner.VDActionBase.Name" Name="Name" DisplayName="Name">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="9c7b54a9-2033-4f32-8c0d-84451547b7c0" Description="Description for MVCVisualDesigner.VDActionBase.Description" Name="Description" DisplayName="Description">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+    </DomainClass>
+    <DomainClass Id="2cc35d34-a3a0-4e86-8804-d0d1ec065ddf" Description="Description for MVCVisualDesigner.VDServerAction" Name="VDServerAction" DisplayName="VDServer Action" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDActionBase" />
+      </BaseClass>
+      <Properties>
+        <DomainProperty Id="bea96821-0f1c-41c1-992b-893d83b83359" Description="Description for MVCVisualDesigner.VDServerAction.Controller" Name="Controller" DisplayName="Controller">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="b8645a1e-ba1e-494f-8324-79254ce57fcf" Description="Description for MVCVisualDesigner.VDServerAction.Area" Name="Area" DisplayName="Area">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+    </DomainClass>
+    <DomainClass Id="bfd49130-2d8d-4ac3-b77d-4a2852249599" Description="Description for MVCVisualDesigner.VDEvent" Name="VDEvent" DisplayName="VDEvent" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDEventBase" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="dc9e2b95-4210-4b54-93a9-77766114a095" Description="Description for MVCVisualDesigner.VDPseudoEvent" Name="VDPseudoEvent" DisplayName="VDPseudo Event" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDEventBase" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="35cd4282-4ea5-48cf-b7cc-1615e825ffb8" Description="Description for MVCVisualDesigner.VDActionJoint" Name="VDActionJoint" DisplayName="VDAction Joint" Namespace="MVCVisualDesigner">
+      <Properties>
+        <DomainProperty Id="73b7c839-d63c-48a6-95d6-195437cea1b3" Description="Description for MVCVisualDesigner.VDActionJoint.Name" Name="Name" DisplayName="Name">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="4aa77995-b095-4bcf-8486-6970c3c3911a" Description="Description for MVCVisualDesigner.VDActionJoint.Category" Name="Category" DisplayName="Category">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="6781fab5-6bd3-40c6-beb3-275b587a2210" Description="Description for MVCVisualDesigner.VDActionJoint.Display Name" Name="DisplayName" DisplayName="Display Name" Kind="Calculated">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+    </DomainClass>
+    <DomainClass Id="78356fac-6a1e-4985-a714-408d69dcb79a" Description="Description for MVCVisualDesigner.VDCondition" Name="VDCondition" DisplayName="VDCondition" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDViewComponent" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="fb2bb3ef-738f-4c39-96fa-cdef74654f36" Description="Description for MVCVisualDesigner.VDWidgetValue" Name="VDWidgetValue" DisplayName="VDWidget Value" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDConcreteType" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="7553d0f0-4622-4aaf-a67b-22b1b82ec67a" Description="Description for MVCVisualDesigner.VDPredefinedType" Name="VDPredefinedType" DisplayName="VDPredefined Type" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDMetaType" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="0f0665b1-b257-45a8-b943-155359ada971" Description="Description for MVCVisualDesigner.VDViewModel" Name="VDViewModel" DisplayName="VDView Model" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDConcreteType" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="c7aec64a-a253-4625-b9dd-7f036cf668de" Description="Description for MVCVisualDesigner.VDActionData" Name="VDActionData" DisplayName="VDAction Data" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDConcreteType" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="8ac62402-612e-4df1-9bb8-b95a2fdebdbf" Description="Description for MVCVisualDesigner.VDBuiltInProperty" Name="VDBuiltInProperty" DisplayName="VDBuilt In Property" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDMetaMember" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="05abf1f7-11d4-48d7-b9f4-6be1d2f978d5" Description="Description for MVCVisualDesigner.VDListType" Name="VDListType" DisplayName="VDList Type" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDMetaType" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="0784a40b-4e47-4bba-9bee-a56fd99cf950" Description="Description for MVCVisualDesigner.VDDictionaryType" Name="VDDictionaryType" DisplayName="VDDictionary Type" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDMetaType" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="dc43f1bf-070c-430b-9445-6ac0feb12fb1" Description="Description for MVCVisualDesigner.VDCustomType" Name="VDCustomType" DisplayName="VDCustom Type" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDMetaType" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="1a27021c-a182-4867-b27f-6fdf613bb61c" Description="Description for MVCVisualDesigner.VDReferenceType" Name="VDReferenceType" DisplayName="VDReference Type" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDMetaType" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="c3ab5d3f-a70e-40d6-9a44-9c35079215f3" Description="Description for MVCVisualDesigner.VDProperty" Name="VDProperty" DisplayName="VDProperty" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDMetaMember" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="3e9b282c-3cf1-4b56-8276-226bbe560a33" Description="Description for MVCVisualDesigner.VDMethod" Name="VDMethod" DisplayName="VDMethod" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDMetaMember" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="2a9054dc-861a-49af-a679-255d8101bfe1" Description="Description for MVCVisualDesigner.VDField" Name="VDField" DisplayName="VDField" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDMetaMember" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="b59cb147-97bc-4b60-a05c-2d38b6303110" Description="Description for MVCVisualDesigner.VDPrimitiveType" Name="VDPrimitiveType" DisplayName="VDPrimitive Type" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDMetaType" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="79b2659d-7d8f-4c11-9267-b3ad1c49f595" Description="Description for MVCVisualDesigner.VDPrimitiveMemberType" Name="VDPrimitiveMemberType" DisplayName="VDPrimitive Member Type" Namespace="MVCVisualDesigner">
+      <Notes>used as Type of primitive concrete members</Notes>
+      <BaseClass>
+        <DomainClassMoniker Name="VDConcreteType" />
+      </BaseClass>
+    </DomainClass>
   </Classes>
   <Relationships>
     <DomainRelationship Id="8491408d-7160-4a47-9979-e0dab01d52b3" Description="Description for MVCVisualDesigner.WidgetHasChildren" Name="WidgetHasChildren" DisplayName="Widget Has Children" Namespace="MVCVisualDesigner" IsEmbedding="true">
@@ -1523,214 +1575,6 @@ The values set to this property should be defined in
         </DomainRole>
       </Target>
     </DomainRelationship>
-    <DomainRelationship Id="43bc2e7c-f67a-4766-9d1f-cd4e44c66ed1" Description="Description for MVCVisualDesigner.ModelMemberIsTypeOf" Name="ModelMemberIsTypeOf" DisplayName="Model Member Is Type Of" Namespace="MVCVisualDesigner">
-      <Source>
-        <DomainRole Id="495da7d0-fbf4-4a33-9138-4508bc38a1f0" Description="Description for MVCVisualDesigner.ModelMemberIsTypeOf.VDModelMemberInfo" Name="VDModelMemberInfo" DisplayName="VDModel Member Info" PropertyName="Type" Multiplicity="ZeroOne" PropertyDisplayName="Type">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDModelMemberInfo" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="2097a53e-4296-4a85-8d49-4e4836cd7302" Description="Description for MVCVisualDesigner.ModelMemberIsTypeOf.VDModelType" Name="VDModelType" DisplayName="VDModel Type" PropertyName="MembersOfThisType" PropertyDisplayName="Members Of This Type">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDModelType" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
-    <DomainRelationship Id="df625687-9b73-4d59-9d74-ef116a6d47ac" Description="Description for MVCVisualDesigner.ModelStoreHasModelTypes" Name="ModelStoreHasModelTypes" DisplayName="Model Store Has Model Types" Namespace="MVCVisualDesigner" IsEmbedding="true">
-      <Source>
-        <DomainRole Id="c5d1a9fa-133d-44c4-8069-d979487192c9" Description="Description for MVCVisualDesigner.ModelStoreHasModelTypes.VDModelStore" Name="VDModelStore" DisplayName="VDModel Store" PropertyName="ModelTypes" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Model Types">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDModelStore" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="59911486-7f81-416f-b05e-561ded0ac6d0" Description="Description for MVCVisualDesigner.ModelStoreHasModelTypes.VDModelType" Name="VDModelType" DisplayName="VDModel Type" PropertyName="ModelStore" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Model Store">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDModelType" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
-    <DomainRelationship Id="7ee6daae-7a78-4f29-bce5-e20bf5c413b8" Description="Description for MVCVisualDesigner.ModelTypeHasMembers" Name="ModelTypeHasMembers" DisplayName="Model Type Has Members" Namespace="MVCVisualDesigner" IsEmbedding="true">
-      <Source>
-        <DomainRole Id="ab26ed70-f26d-432a-a7f1-1060742cc78b" Description="Description for MVCVisualDesigner.ModelTypeHasMembers.VDModelType" Name="VDModelType" DisplayName="VDModel Type" PropertyName="ModelMembers" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Model Members">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDModelType" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="d94948b2-dd8a-44bb-b9ea-5b4ef129bf8f" Description="Description for MVCVisualDesigner.ModelTypeHasMembers.VDModelMemberInfo" Name="VDModelMemberInfo" DisplayName="VDModel Member Info" PropertyName="HostModelType" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Host Model Type">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDModelMemberInfo" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
-    <DomainRelationship Id="592826ee-84a0-4c5e-8885-8a860c5617ad" Description="Description for MVCVisualDesigner.MemberInstanceIsTypeOf" Name="MemberInstanceIsTypeOf" DisplayName="Member Instance Is Type Of" Namespace="MVCVisualDesigner">
-      <Source>
-        <DomainRole Id="757a8737-3301-43c7-9105-775cab67f8f2" Description="Description for MVCVisualDesigner.MemberInstanceIsTypeOf.VDModelMemberInstance" Name="VDModelMemberInstance" DisplayName="VDModel Member Instance" PropertyName="ModelMemberInfo" Multiplicity="ZeroOne" PropertyDisplayName="Model Member Info">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDModelMemberInstance" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="fe1730c9-2afa-43e7-ba9d-5336c47dab82" Description="Description for MVCVisualDesigner.MemberInstanceIsTypeOf.VDModelMemberInfo" Name="VDModelMemberInfo" DisplayName="VDModel Member Info" PropertyName="MemberInstancesOfThisType" PropertyDisplayName="Member Instances Of This Type">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDModelMemberInfo" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
-    <DomainRelationship Id="36dd23d8-72a2-4dd2-9256-cd6e928c5e90" Description="Description for MVCVisualDesigner.MemberInstanceReferencesParentMemberInstance" Name="MemberInstanceReferencesParentMemberInstance" DisplayName="Member Instance References Parent Member Instance" Namespace="MVCVisualDesigner">
-      <Source>
-        <DomainRole Id="4277d58b-427d-4473-ad44-6735f7d11b7c" Description="Description for MVCVisualDesigner.MemberInstanceReferencesParentMemberInstance.SourceVDModelMemberInstance" Name="SourceVDModelMemberInstance" DisplayName="Source VDModel Member Instance" PropertyName="ParentMemberInstance" Multiplicity="ZeroOne" PropertyDisplayName="Parent Member Instance">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDModelMemberInstance" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="f1c311dc-fce9-4fad-814b-37f451224fde" Description="Description for MVCVisualDesigner.MemberInstanceReferencesParentMemberInstance.TargetVDModelMemberInstance" Name="TargetVDModelMemberInstance" DisplayName="Target VDModel Member Instance" PropertyName="ChildMemberInstances" PropertyDisplayName="Child Member Instances">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDModelMemberInstance" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
-    <DomainRelationship Id="1a223579-83f9-431b-bdae-6875cbf7b0c3" Description="Description for MVCVisualDesigner.ModelStoreHasModelMemberInstances" Name="ModelStoreHasModelMemberInstances" DisplayName="Model Store Has Model Member Instances" Namespace="MVCVisualDesigner" IsEmbedding="true">
-      <Source>
-        <DomainRole Id="3badf676-7487-4409-b871-2746e6140030" Description="Description for MVCVisualDesigner.ModelStoreHasModelMemberInstances.VDModelStore" Name="VDModelStore" DisplayName="VDModel Store" PropertyName="ModelMemberInstances" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Model Member Instances">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDModelStore" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="22086cbd-9b97-4009-973d-8ef35744c3fa" Description="Description for MVCVisualDesigner.ModelStoreHasModelMemberInstances.VDModelMemberInstance" Name="VDModelMemberInstance" DisplayName="VDModel Member Instance" PropertyName="ModelStore" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Model Store">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDModelMemberInstance" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
-    <DomainRelationship Id="f212dddd-0f0f-4800-a9bc-0947ea6a9749" Description="Description for MVCVisualDesigner.VDListTypeReferencesValueInfo" Name="VDListTypeReferencesValueInfo" DisplayName="VDList Type References Value Info" Namespace="MVCVisualDesigner">
-      <Source>
-        <DomainRole Id="262c592e-d3d6-4891-a218-233abdca9ba0" Description="Description for MVCVisualDesigner.VDListTypeReferencesValueInfo.VDListType" Name="VDListType" DisplayName="VDList Type" PropertyName="ValueInfo" Multiplicity="ZeroOne" PropertyDisplayName="Value Info">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDListType" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="76db041d-7aa0-428d-a481-0759809abad9" Description="Description for MVCVisualDesigner.VDListTypeReferencesValueInfo.VDPlaceholderInfo" Name="VDPlaceholderInfo" DisplayName="VDPlaceholder Info" PropertyName="VDListType" Multiplicity="One" IsPropertyGenerator="false" PropertyDisplayName="VDList Type">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDPlaceholderInfo" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
-    <DomainRelationship Id="fb4da746-034a-4cbc-89e8-b2815b8eef05" Description="Description for MVCVisualDesigner.VDDictionaryTypeReferencesKeyInfo" Name="VDDictionaryTypeReferencesKeyInfo" DisplayName="VDDictionary Type References Key Info" Namespace="MVCVisualDesigner">
-      <Source>
-        <DomainRole Id="8425da43-657a-4a6d-ac45-b537e06ec8b1" Description="Description for MVCVisualDesigner.VDDictionaryTypeReferencesKeyInfo.VDDictionaryType" Name="VDDictionaryType" DisplayName="VDDictionary Type" PropertyName="KeyInfo" Multiplicity="ZeroOne" PropertyDisplayName="Key Info">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDDictionaryType" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="6962cb3b-340f-4684-af10-633359d2d06e" Description="Description for MVCVisualDesigner.VDDictionaryTypeReferencesKeyInfo.VDPlaceholderInfo" Name="VDPlaceholderInfo" DisplayName="VDPlaceholder Info" PropertyName="VDDictionaryType" Multiplicity="One" IsPropertyGenerator="false" PropertyDisplayName="VDDictionary Type">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDPlaceholderInfo" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
-    <DomainRelationship Id="82715056-c6ca-4505-b63e-0e25822dda9c" Description="Description for MVCVisualDesigner.VDDictionaryTypeReferencesValueInfo" Name="VDDictionaryTypeReferencesValueInfo" DisplayName="VDDictionary Type References Value Info" Namespace="MVCVisualDesigner">
-      <Source>
-        <DomainRole Id="95447745-bd50-4973-a64a-b9ce69543547" Description="Description for MVCVisualDesigner.VDDictionaryTypeReferencesValueInfo.VDDictionaryType" Name="VDDictionaryType" DisplayName="VDDictionary Type" PropertyName="ValueInfo" Multiplicity="ZeroOne" PropertyDisplayName="Value Info">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDDictionaryType" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="1f349f73-5686-4d9f-925f-47a2136661a3" Description="Description for MVCVisualDesigner.VDDictionaryTypeReferencesValueInfo.VDPlaceholderInfo" Name="VDPlaceholderInfo" DisplayName="VDPlaceholder Info" PropertyName="VDDictionaryType" Multiplicity="One" IsPropertyGenerator="false" PropertyDisplayName="VDDictionary Type">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDPlaceholderInfo" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
-    <DomainRelationship Id="72a62a16-b27f-4267-b401-b61ec6edf1a4" Description="Description for MVCVisualDesigner.BindsTo" Name="BindsTo" DisplayName="Binds To" Namespace="MVCVisualDesigner">
-      <Source>
-        <DomainRole Id="5f80c39e-795d-4509-bbcb-ebb1021acd11" Description="Description for MVCVisualDesigner.BindsTo.SourceVDModelMemberInstance" Name="SourceVDModelMemberInstance" DisplayName="Source VDModel Member Instance" PropertyName="BindingTarget" Multiplicity="ZeroOne" PropertyDisplayName="Binding Target">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDModelMemberInstance" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="d9638009-1213-44cf-8d92-28182c43e1a2" Description="Description for MVCVisualDesigner.BindsTo.TargetVDModelMemberInstance" Name="TargetVDModelMemberInstance" DisplayName="Target VDModel Member Instance" PropertyName="BindingSource" Multiplicity="ZeroOne" PropertyDisplayName="Binding Source">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDModelMemberInstance" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
-    <DomainRelationship Id="03ef6dd0-e032-4977-9c48-ac716302ed86" Description="Description for MVCVisualDesigner.ModelStoreHasModelInstances" Name="ModelStoreHasModelInstances" DisplayName="Model Store Has Model Instances" Namespace="MVCVisualDesigner">
-      <Source>
-        <DomainRole Id="a8d104fe-f543-4b89-acc1-1529094741f8" Description="Description for MVCVisualDesigner.ModelStoreHasModelInstances.VDModelStore" Name="VDModelStore" DisplayName="VDModel Store" PropertyName="ModelInstances" PropertyDisplayName="Model Instances">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDModelStore" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="c0c616ba-2513-4a76-a232-393ade10981b" Description="Description for MVCVisualDesigner.ModelStoreHasModelInstances.VDModelMemberInstance" Name="VDModelMemberInstance" DisplayName="VDModel Member Instance" PropertyName="VDModelStore" Multiplicity="ZeroOne" IsPropertyGenerator="false" PropertyDisplayName="VDModel Store">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDModelMemberInstance" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
-    <DomainRelationship Id="cc98f5a8-4366-48fd-b8df-b472a7cb0cba" Description="Description for MVCVisualDesigner.ModelMemberInstanceIsTypeOf" Name="ModelMemberInstanceIsTypeOf" DisplayName="Model Member Instance Is Type Of" Namespace="MVCVisualDesigner">
-      <Source>
-        <DomainRole Id="8007e1ca-b352-45d0-9f7a-bb84d407e3e6" Description="Description for MVCVisualDesigner.ModelMemberInstanceIsTypeOf.VDModelMemberInstance" Name="VDModelMemberInstance" DisplayName="VDModel Member Instance" PropertyName="ModelType" Multiplicity="ZeroOne" PropertyDisplayName="Model Type">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDModelMemberInstance" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="a3f8fccf-78b9-487c-954f-81d238de8fd0" Description="Description for MVCVisualDesigner.ModelMemberInstanceIsTypeOf.VDModelType" Name="VDModelType" DisplayName="VDModel Type" PropertyName="ModelMemberInstancesOfThisType" PropertyDisplayName="Model Member Instances Of This Type">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDModelType" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
-    <DomainRelationship Id="4b4e6597-99e4-4193-9ff2-313d8764add7" Description="Description for MVCVisualDesigner.WidgetHasModelInstance" Name="WidgetHasModelInstance" DisplayName="Widget Has Model Instance" Namespace="MVCVisualDesigner">
-      <Source>
-        <DomainRole Id="0e505555-246e-459f-8c65-cb7f96e32d18" Description="Description for MVCVisualDesigner.WidgetHasModelInstance.VDWidget" Name="VDWidget" DisplayName="VDWidget" PropertyName="ModelInstance" Multiplicity="ZeroOne" PropertyDisplayName="Model Instance">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDWidget" />
-          </RolePlayer>
-        </DomainRole>
-      </Source>
-      <Target>
-        <DomainRole Id="6f5e5865-b6d2-4677-819e-a87fb3f4629e" Description="Description for MVCVisualDesigner.WidgetHasModelInstance.VDModelMemberInstance" Name="VDModelMemberInstance" DisplayName="VDModel Member Instance" PropertyName="Widget" Multiplicity="ZeroOne" PropertyDisplayName="Widget">
-          <RolePlayer>
-            <DomainClassMoniker Name="VDModelMemberInstance" />
-          </RolePlayer>
-        </DomainRole>
-      </Target>
-    </DomainRelationship>
     <DomainRelationship Id="9ddee13a-78f6-491b-b539-e6513bf543e1" Description="Description for MVCVisualDesigner.WidgetHasEvents" Name="WidgetHasEvents" DisplayName="Widget Has Events" Namespace="MVCVisualDesigner" IsEmbedding="true">
       <Source>
         <DomainRole Id="03cba48b-9bd6-4a77-806b-3558651e4b68" Description="Description for MVCVisualDesigner.WidgetHasEvents.VDViewComponent" Name="VDViewComponent" DisplayName="VDView Component" PropertyName="Events" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Events">
@@ -1740,121 +1584,325 @@ The values set to this property should be defined in
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="6d8afca5-5ab9-4b68-8eb9-6b9fa04f3dbf" Description="Description for MVCVisualDesigner.WidgetHasEvents.VDEvent" Name="VDEvent" DisplayName="VDEvent" PropertyName="Widget" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Widget">
+        <DomainRole Id="6d8afca5-5ab9-4b68-8eb9-6b9fa04f3dbf" Description="Description for MVCVisualDesigner.WidgetHasEvents.VDEventBase" Name="VDEventBase" DisplayName="VDEvent Base" PropertyName="Widget" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Widget">
           <RolePlayer>
-            <DomainClassMoniker Name="VDEvent" />
+            <DomainClassMoniker Name="VDEventBase" />
           </RolePlayer>
         </DomainRole>
       </Target>
     </DomainRelationship>
-    <DomainRelationship Id="ac7b7e8c-8afb-4bc6-9eaf-845f7d236df8" Description="Description for MVCVisualDesigner.R1_Event2Component" Name="R1_Event2Component" DisplayName="R1_ Event2 Component" Namespace="MVCVisualDesigner">
+    <DomainRelationship Id="ac7b7e8c-8afb-4bc6-9eaf-845f7d236df8" Description="Description for MVCVisualDesigner.R_Event2Component" Name="R_Event2Component" DisplayName="R_ Event2 Component" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="f8f41280-babe-4ea1-baee-0b3aa37bf894" Description="Description for MVCVisualDesigner.R1_Event2Component.VDEvent" Name="VDEvent" DisplayName="VDEvent" PropertyName="R1_Components" PropertyDisplayName="R1_ Components">
+        <DomainRole Id="f8f41280-babe-4ea1-baee-0b3aa37bf894" Description="Description for MVCVisualDesigner.R_Event2Component.VDEventBase" Name="VDEventBase" DisplayName="VDEvent Base" PropertyName="TargetComponents" PropertyDisplayName="Target Components">
           <RolePlayer>
-            <DomainClassMoniker Name="VDEvent" />
+            <DomainClassMoniker Name="VDEventBase" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="dbf5789e-3bde-4dd0-94e0-f4b44181c524" Description="Description for MVCVisualDesigner.R1_Event2Component.VDViewComponent" Name="VDViewComponent" DisplayName="VDView Component" PropertyName="R1_Events" PropertyDisplayName="R1_ Events">
+        <DomainRole Id="dbf5789e-3bde-4dd0-94e0-f4b44181c524" Description="Description for MVCVisualDesigner.R_Event2Component.VDViewComponent" Name="VDViewComponent" DisplayName="VDView Component" PropertyName="SourceEvents" PropertyDisplayName="Source Events">
           <RolePlayer>
             <DomainClassMoniker Name="VDViewComponent" />
           </RolePlayer>
         </DomainRole>
       </Target>
     </DomainRelationship>
-    <DomainRelationship Id="6b0a2bc6-0ea4-41f6-9487-24051baf9669" Description="Description for MVCVisualDesigner.R2_Component2Component" Name="R2_Component2Component" DisplayName="R2_ Component2 Component" Namespace="MVCVisualDesigner">
+    <DomainRelationship Id="6b0a2bc6-0ea4-41f6-9487-24051baf9669" Description="Description for MVCVisualDesigner.R_Component2Component" Name="R_Component2Component" DisplayName="R_ Component2 Component" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="d4fab998-c39f-429e-bcb2-938abfcc38ae" Description="Description for MVCVisualDesigner.R2_Component2Component.SourceVDViewComponent" Name="SourceVDViewComponent" DisplayName="Source VDView Component" PropertyName="R2_TargetComponents" PropertyDisplayName="R2_ Target Components">
+        <DomainRole Id="d4fab998-c39f-429e-bcb2-938abfcc38ae" Description="Description for MVCVisualDesigner.R_Component2Component.SourceVDViewComponent" Name="SourceVDViewComponent" DisplayName="Source VDView Component" PropertyName="TargetComponents" IsPropertyGenerator="false" IsPropertyBrowsable="false" PropertyDisplayName="Target Components">
           <RolePlayer>
             <DomainClassMoniker Name="VDViewComponent" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="1afc0933-4b30-429d-908b-7b879ac6fca3" Description="Description for MVCVisualDesigner.R2_Component2Component.TargetVDViewComponent" Name="TargetVDViewComponent" DisplayName="Target VDView Component" PropertyName="R2_SourceComponents" PropertyDisplayName="R2_ Source Components">
+        <DomainRole Id="1afc0933-4b30-429d-908b-7b879ac6fca3" Description="Description for MVCVisualDesigner.R_Component2Component.TargetVDViewComponent" Name="TargetVDViewComponent" DisplayName="Target VDView Component" PropertyName="SourceComponents" IsPropertyGenerator="false" IsPropertyBrowsable="false" PropertyDisplayName="Source Components">
           <RolePlayer>
             <DomainClassMoniker Name="VDViewComponent" />
           </RolePlayer>
         </DomainRole>
       </Target>
     </DomainRelationship>
-    <DomainRelationship Id="bb143513-6736-415d-a9ef-b64a3a08932f" Description="Description for MVCVisualDesigner.ClientActionHasInput" Name="ClientActionHasInput" DisplayName="Client Action Has Input" Namespace="MVCVisualDesigner" IsEmbedding="true">
+    <DomainRelationship Id="8a5d1346-527a-436f-9482-d1da3c4a7a4b" Description="Description for MVCVisualDesigner.ModelTypeHasMembers" Name="ModelTypeHasMembers" DisplayName="Model Type Has Members" Namespace="MVCVisualDesigner" IsEmbedding="true">
       <Source>
-        <DomainRole Id="55a17088-0aaa-475d-90f3-0ff41375fd97" Description="Description for MVCVisualDesigner.ClientActionHasInput.VDClientAction" Name="VDClientAction" DisplayName="VDClient Action" PropertyName="Input" Multiplicity="ZeroOne" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Input">
+        <DomainRole Id="eddd59d7-2f28-4433-b1fa-42e977bcf27b" Description="Description for MVCVisualDesigner.ModelTypeHasMembers.VDModelType" Name="VDModelType" DisplayName="VDModel Type" PropertyName="Members" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Members">
           <RolePlayer>
-            <DomainClassMoniker Name="VDClientAction" />
+            <DomainClassMoniker Name="VDModelType" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="76304668-47fd-4f16-9059-9fb119062728" Description="Description for MVCVisualDesigner.ClientActionHasInput.VDClientActionInput" Name="VDClientActionInput" DisplayName="VDClient Action Input" PropertyName="ClientAction" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Client Action">
+        <DomainRole Id="ed6e9af6-46af-472a-b999-e2df8c42054c" Description="Description for MVCVisualDesigner.ModelTypeHasMembers.VDModelMember" Name="VDModelMember" DisplayName="VDModel Member" PropertyName="Host" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Host">
           <RolePlayer>
-            <DomainClassMoniker Name="VDClientActionInput" />
+            <DomainClassMoniker Name="VDModelMember" />
           </RolePlayer>
         </DomainRole>
       </Target>
     </DomainRelationship>
-    <DomainRelationship Id="d9b834a2-07a7-4596-b40c-15a4322211d1" Description="Description for MVCVisualDesigner.ClientActionHasOutput" Name="ClientActionHasOutput" DisplayName="Client Action Has Output" Namespace="MVCVisualDesigner" IsEmbedding="true">
+    <DomainRelationship Id="a2506288-82d6-441e-82fa-35bc79779b07" Description="Description for MVCVisualDesigner.ConcreteMemberRefersMeta" Name="ConcreteMemberRefersMeta" DisplayName="Concrete Member Refers Meta" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="fec7582f-5062-4799-a25a-fcc935ed0c84" Description="Description for MVCVisualDesigner.ClientActionHasOutput.VDClientAction" Name="VDClientAction" DisplayName="VDClient Action" PropertyName="Output" Multiplicity="ZeroOne" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Output">
+        <DomainRole Id="972c9fbe-b616-48a9-876e-360eb939635d" Description="Description for MVCVisualDesigner.ConcreteMemberRefersMeta.VDConcreteMember" Name="VDConcreteMember" DisplayName="VDConcrete Member" PropertyName="Meta" Multiplicity="One" PropertyDisplayName="Meta">
           <RolePlayer>
-            <DomainClassMoniker Name="VDClientAction" />
+            <DomainClassMoniker Name="VDConcreteMember" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="1cc593c7-d48a-4b51-902c-bd93bed40009" Description="Description for MVCVisualDesigner.ClientActionHasOutput.VDClientActionOutput" Name="VDClientActionOutput" DisplayName="VDClient Action Output" PropertyName="ClientAction" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Client Action">
+        <DomainRole Id="984e81c2-47d2-482a-8de1-a64991bd58c6" Description="Description for MVCVisualDesigner.ConcreteMemberRefersMeta.VDMetaMember" Name="VDMetaMember" DisplayName="VDMeta Member" PropertyName="ConcreteMembers" PropertyDisplayName="Concrete Members">
           <RolePlayer>
-            <DomainClassMoniker Name="VDClientActionOutput" />
+            <DomainClassMoniker Name="VDMetaMember" />
           </RolePlayer>
         </DomainRole>
       </Target>
     </DomainRelationship>
-    <DomainRelationship Id="2d313fa9-089d-4df3-929f-e2234349ea7e" Description="Description for MVCVisualDesigner.R5_Output2Component" Name="R5_Output2Component" DisplayName="R5_ Output2 Component" Namespace="MVCVisualDesigner">
+    <DomainRelationship Id="cef24e02-8182-4bd7-8f08-0a713c123cb9" Description="Description for MVCVisualDesigner.ConcreteTypeRefersMeta" Name="ConcreteTypeRefersMeta" DisplayName="Concrete Type Refers Meta" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="b9db8ac4-8b95-4d26-8573-ef387fcffc12" Description="Description for MVCVisualDesigner.R5_Output2Component.VDClientActionOutput" Name="VDClientActionOutput" DisplayName="VDClient Action Output" PropertyName="R5_Components" PropertyDisplayName="R5_ Components">
+        <DomainRole Id="18e10e7d-7cf3-4f7b-8d70-85bfa00ce37b" Description="Description for MVCVisualDesigner.ConcreteTypeRefersMeta.VDConcreteType" Name="VDConcreteType" DisplayName="VDConcrete Type" PropertyName="Meta" Multiplicity="One" PropertyDisplayName="Meta">
           <RolePlayer>
-            <DomainClassMoniker Name="VDClientActionOutput" />
+            <DomainClassMoniker Name="VDConcreteType" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="7469439d-df6a-41ec-b647-384cade2fc55" Description="Description for MVCVisualDesigner.R5_Output2Component.VDViewComponent" Name="VDViewComponent" DisplayName="VDView Component" PropertyName="R5_Outputs" PropertyDisplayName="R5_ Outputs">
+        <DomainRole Id="ff4b1247-ea49-48ac-9bf7-14df5acf33fa" Description="Description for MVCVisualDesigner.ConcreteTypeRefersMeta.VDMetaType" Name="VDMetaType" DisplayName="VDMeta Type" PropertyName="ConcreteTypes" PropertyDisplayName="Concrete Types">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDMetaType" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="efff6e6c-7a60-470b-85e3-5c0723c82484" Description="Description for MVCVisualDesigner.ModelStoreHasTypeDefs" Name="ModelStoreHasTypeDefs" DisplayName="Model Store Has Type Defs" Namespace="MVCVisualDesigner" IsEmbedding="true">
+      <Source>
+        <DomainRole Id="9d131d9b-5ecb-46aa-a217-ec9cb814f644" Description="Description for MVCVisualDesigner.ModelStoreHasTypeDefs.VDModelStore" Name="VDModelStore" DisplayName="VDModel Store" PropertyName="MetaTypes" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Meta Types">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDModelStore" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="242e8e0b-8b8e-41c9-b0ba-df7d4ce6bd30" Description="Description for MVCVisualDesigner.ModelStoreHasTypeDefs.VDMetaType" Name="VDMetaType" DisplayName="VDMeta Type" PropertyName="ModelStore" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Model Store">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDMetaType" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="700c9885-0c33-4d9e-b14b-9ab92a0a6440" Description="Description for MVCVisualDesigner.ModelStoreHasTypeInsts" Name="ModelStoreHasTypeInsts" DisplayName="Model Store Has Type Insts" Namespace="MVCVisualDesigner" IsEmbedding="true">
+      <Source>
+        <DomainRole Id="1a7846dd-7b57-4ffc-bcbf-e8f2a19dae96" Description="Description for MVCVisualDesigner.ModelStoreHasTypeInsts.VDModelStore" Name="VDModelStore" DisplayName="VDModel Store" PropertyName="ConcreteTypes" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Concrete Types">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDModelStore" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="ff1df5f9-0b30-4e89-8e6a-de7eaad0e251" Description="Description for MVCVisualDesigner.ModelStoreHasTypeInsts.VDConcreteType" Name="VDConcreteType" DisplayName="VDConcrete Type" PropertyName="ModelStore" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Model Store">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDConcreteType" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="b1434b44-cc2b-4778-bf6e-08438fda0dbc" Description="Description for MVCVisualDesigner.WidgetHasActionJoints" Name="WidgetHasActionJoints" DisplayName="Widget Has Action Joints" Namespace="MVCVisualDesigner" IsEmbedding="true">
+      <Source>
+        <DomainRole Id="b0ceeac1-246e-49e6-9544-df4732e77cee" Description="Description for MVCVisualDesigner.WidgetHasActionJoints.VDViewComponent" Name="VDViewComponent" DisplayName="VDView Component" PropertyName="ActionJoints" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Action Joints">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDViewComponent" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="6469eda9-bded-40fa-a4f8-1251bb0c5b16" Description="Description for MVCVisualDesigner.WidgetHasActionJoints.VDActionJoint" Name="VDActionJoint" DisplayName="VDAction Joint" PropertyName="Widget" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Widget">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDActionJoint" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="e822d2fe-0311-4d5f-b37b-8e61294b22e9" Description="Description for MVCVisualDesigner.R_ActionJoint2Component" Name="R_ActionJoint2Component" DisplayName="R_ Action Joint2 Component" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="d55456ca-1d87-46db-9a82-9d7e2e9e7f91" Description="Description for MVCVisualDesigner.R_ActionJoint2Component.VDActionJoint" Name="VDActionJoint" DisplayName="VDAction Joint" PropertyName="TargetComponents" PropertyDisplayName="Target Components">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDActionJoint" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="b95ddc49-a873-444e-8c7f-26254222e262" Description="Description for MVCVisualDesigner.R_ActionJoint2Component.VDViewComponent" Name="VDViewComponent" DisplayName="VDView Component" PropertyName="SourceActionJoints" PropertyDisplayName="Source Action Joints">
           <RolePlayer>
             <DomainClassMoniker Name="VDViewComponent" />
           </RolePlayer>
         </DomainRole>
       </Target>
     </DomainRelationship>
-    <DomainRelationship Id="c443b112-a640-4bb4-92b8-3b78b1f45131" Description="Description for MVCVisualDesigner.R3_Component2Input" Name="R3_Component2Input" DisplayName="R3_ Component2 Input" Namespace="MVCVisualDesigner">
+    <DomainRelationship Id="f04ce543-22a0-4d43-b60f-879379a6e5dc" Description="Description for MVCVisualDesigner.WidgetHasValue" Name="WidgetHasValue" DisplayName="Widget Has Value" Namespace="MVCVisualDesigner">
       <Source>
-        <DomainRole Id="6adced25-ac99-4665-9418-78fccc67d3cc" Description="Description for MVCVisualDesigner.R3_Component2Input.VDViewComponent" Name="VDViewComponent" DisplayName="VDView Component" PropertyName="R3_Inputs" PropertyDisplayName="R3_ Inputs">
+        <DomainRole Id="8c559974-6881-457a-9328-55f77a9071ff" Description="Description for MVCVisualDesigner.WidgetHasValue.VDWidget" Name="VDWidget" DisplayName="VDWidget" PropertyName="WidgetValue" Multiplicity="ZeroOne" PropertyDisplayName="Widget Value">
           <RolePlayer>
-            <DomainClassMoniker Name="VDViewComponent" />
+            <DomainClassMoniker Name="VDWidget" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="f3a87dc6-e9e9-4921-8d3b-ece771878b6c" Description="Description for MVCVisualDesigner.R3_Component2Input.VDClientActionInput" Name="VDClientActionInput" DisplayName="VDClient Action Input" PropertyName="R3_Components" PropertyDisplayName="R3_ Components">
+        <DomainRole Id="7cad7513-02d3-4e3a-8102-4e10a13fd81e" Description="Description for MVCVisualDesigner.WidgetHasValue.VDWidgetValue" Name="VDWidgetValue" DisplayName="VDWidget Value" PropertyName="Widget" Multiplicity="ZeroOne" PropertyDisplayName="Widget">
           <RolePlayer>
-            <DomainClassMoniker Name="VDClientActionInput" />
+            <DomainClassMoniker Name="VDWidgetValue" />
           </RolePlayer>
         </DomainRole>
       </Target>
     </DomainRelationship>
-    <DomainRelationship Id="f3cf4b71-5a3d-4e70-b27d-15a4dc66c79a" Description="Description for MVCVisualDesigner.R4_Event2Input" Name="R4_Event2Input" DisplayName="R4_ Event2 Input" Namespace="MVCVisualDesigner">
+    <DomainRelationship Id="3d1ee45e-e6be-4836-b390-21fc52960e27" Description="Description for MVCVisualDesigner.MetaTypeHasMembers" Name="MetaTypeHasMembers" DisplayName="Meta Type Has Members" Namespace="MVCVisualDesigner" IsEmbedding="true">
+      <BaseRelationship>
+        <DomainRelationshipMoniker Name="ModelTypeHasMembers" />
+      </BaseRelationship>
       <Source>
-        <DomainRole Id="ed3f36c4-edea-4e07-b76b-f8358e682a0e" Description="Description for MVCVisualDesigner.R4_Event2Input.VDEvent" Name="VDEvent" DisplayName="VDEvent" PropertyName="R4_Inputs" PropertyDisplayName="R4_ Inputs">
+        <DomainRole Id="34bde8d9-5f8e-49b0-a77f-e6869555a09b" Description="Description for MVCVisualDesigner.MetaTypeHasMembers.VDMetaType" Name="VDMetaType" DisplayName="VDMeta Type" PropertyName="Members" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Members">
           <RolePlayer>
-            <DomainClassMoniker Name="VDEvent" />
+            <DomainClassMoniker Name="VDMetaType" />
           </RolePlayer>
         </DomainRole>
       </Source>
       <Target>
-        <DomainRole Id="8a97b715-7ffb-4a2d-a1d2-6b48fbce0a7e" Description="Description for MVCVisualDesigner.R4_Event2Input.VDClientActionInput" Name="VDClientActionInput" DisplayName="VDClient Action Input" PropertyName="R4_Events" PropertyDisplayName="R4_ Events">
+        <DomainRole Id="6b9ca5f8-7906-412e-b960-c8454a16f663" Description="Description for MVCVisualDesigner.MetaTypeHasMembers.VDMetaMember" Name="VDMetaMember" DisplayName="VDMeta Member" PropertyName="Host" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Host">
           <RolePlayer>
-            <DomainClassMoniker Name="VDClientActionInput" />
+            <DomainClassMoniker Name="VDMetaMember" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="9247f1cf-ddb4-4625-ba0a-f4d46f366f49" Description="Description for MVCVisualDesigner.ConcreteTypeHasMembers" Name="ConcreteTypeHasMembers" DisplayName="Concrete Type Has Members" Namespace="MVCVisualDesigner" IsEmbedding="true">
+      <BaseRelationship>
+        <DomainRelationshipMoniker Name="ModelTypeHasMembers" />
+      </BaseRelationship>
+      <Source>
+        <DomainRole Id="04782281-7d22-4de9-b529-9af3d90eb498" Description="Description for MVCVisualDesigner.ConcreteTypeHasMembers.VDConcreteType" Name="VDConcreteType" DisplayName="VDConcrete Type" PropertyName="Members" PropagatesCopy="PropagatesCopyToLinkAndOppositeRolePlayer" PropertyDisplayName="Members">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDConcreteType" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="572283df-ffc7-4137-86a7-3755c7c13649" Description="Description for MVCVisualDesigner.ConcreteTypeHasMembers.VDConcreteMember" Name="VDConcreteMember" DisplayName="VDConcrete Member" PropertyName="Host" Multiplicity="One" PropagatesDelete="true" PropertyDisplayName="Host">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDConcreteMember" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="bc50864a-985f-4ea9-8be0-c868753ab807" Description="Description for MVCVisualDesigner.TypeOfModelMember" Name="TypeOfModelMember" DisplayName="Type Of Model Member" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="dbb00ebe-fb0a-4fc7-bff6-b292f40a4bba" Description="Description for MVCVisualDesigner.TypeOfModelMember.VDModelMember" Name="VDModelMember" DisplayName="VDModel Member" PropertyName="Type" Multiplicity="One" PropertyDisplayName="Type">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDModelMember" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="b8c9166d-d1dd-46fe-a353-89a0475560da" Description="Description for MVCVisualDesigner.TypeOfModelMember.VDModelType" Name="VDModelType" DisplayName="VDModel Type" PropertyName="MembersOfThisType" PropertyDisplayName="Members Of This Type">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDModelType" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="3a53d55c-c4ec-4d7d-ac69-0ffb59e9d034" Description="Description for MVCVisualDesigner.TypeOfMetaMember" Name="TypeOfMetaMember" DisplayName="Type Of Meta Member" Namespace="MVCVisualDesigner">
+      <BaseRelationship>
+        <DomainRelationshipMoniker Name="TypeOfModelMember" />
+      </BaseRelationship>
+      <Source>
+        <DomainRole Id="f396bb99-db17-4770-a9e8-67a295ce9b17" Description="Description for MVCVisualDesigner.TypeOfMetaMember.VDMetaMember" Name="VDMetaMember" DisplayName="VDMeta Member" PropertyName="Type" Multiplicity="One" PropertyDisplayName="Type">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDMetaMember" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="b911a55e-4aa7-47d4-96ff-1bc6db61fe27" Description="Description for MVCVisualDesigner.TypeOfMetaMember.VDMetaType" Name="VDMetaType" DisplayName="VDMeta Type" PropertyName="MembersOfThisType" PropertyDisplayName="Members Of This Type">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDMetaType" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="d488f417-6379-490a-bc8f-5501537ba5c7" Description="Description for MVCVisualDesigner.TypeOfConcreteMember" Name="TypeOfConcreteMember" DisplayName="Type Of Concrete Member" Namespace="MVCVisualDesigner">
+      <BaseRelationship>
+        <DomainRelationshipMoniker Name="TypeOfModelMember" />
+      </BaseRelationship>
+      <Source>
+        <DomainRole Id="ee1e8881-fcdd-4ab8-a8f8-57cd9c6f8e4b" Description="Description for MVCVisualDesigner.TypeOfConcreteMember.VDConcreteMember" Name="VDConcreteMember" DisplayName="VDConcrete Member" PropertyName="Type" Multiplicity="One" PropertyDisplayName="Type">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDConcreteMember" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="a2c175ee-e5db-4922-8e0b-18de0ce8087f" Description="the multiplicity is actually 0..1 (except for VDPrimitiveMemberType), it's 0..* for now because it's derived from parent relationship" Name="VDConcreteType" DisplayName="VDConcrete Type" PropertyName="MembersOfThisType" PropertyDisplayName="Members Of This Type">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDConcreteType" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="28a03a1e-583f-40c9-aabe-7b2a510c7990" Description="Description for MVCVisualDesigner.ValueTypeOfList" Name="ValueTypeOfList" DisplayName="Value Type Of List" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="928c1bbb-b01e-4910-9f76-338a7700dbe6" Description="Description for MVCVisualDesigner.ValueTypeOfList.VDListType" Name="VDListType" DisplayName="VDList Type" PropertyName="Value" Multiplicity="ZeroOne" PropertyDisplayName="Value">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDListType" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="ba409b8d-667f-4866-858e-e8b143b4d84c" Description="Description for MVCVisualDesigner.ValueTypeOfList.VDBuiltInProperty" Name="VDBuiltInProperty" DisplayName="VDBuilt In Property" PropertyName="VDListType" Multiplicity="One" IsPropertyGenerator="false" PropertyDisplayName="VDList Type">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDBuiltInProperty" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="c9ce48a8-8da2-4c8a-bbf0-de6d1261773c" Description="Description for MVCVisualDesigner.KeyTypeOfDict" Name="KeyTypeOfDict" DisplayName="Key Type Of Dict" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="8f66d6b3-b79e-45f8-9752-f3c739966ce8" Description="Description for MVCVisualDesigner.KeyTypeOfDict.VDDictionaryType" Name="VDDictionaryType" DisplayName="VDDictionary Type" PropertyName="Key" Multiplicity="ZeroOne" PropertyDisplayName="Key">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDDictionaryType" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="88dddf89-86e4-4c31-aa02-e72f78d81fdd" Description="Description for MVCVisualDesigner.KeyTypeOfDict.VDBuiltInProperty" Name="VDBuiltInProperty" DisplayName="VDBuilt In Property" PropertyName="VDDictionaryType" Multiplicity="One" IsPropertyGenerator="false" PropertyDisplayName="VDDictionary Type">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDBuiltInProperty" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="01698baf-b354-4165-8cbc-7d8f2fb47ce0" Description="Description for MVCVisualDesigner.ValueTypeOfDict" Name="ValueTypeOfDict" DisplayName="Value Type Of Dict" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="d412af81-9033-4042-872b-cb39925aff70" Description="Description for MVCVisualDesigner.ValueTypeOfDict.VDDictionaryType" Name="VDDictionaryType" DisplayName="VDDictionary Type" PropertyName="Value" Multiplicity="ZeroOne" PropertyDisplayName="Value">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDDictionaryType" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="c122bd84-3dd6-4eb1-9d9d-cff19c3caf92" Description="Description for MVCVisualDesigner.ValueTypeOfDict.VDBuiltInProperty" Name="VDBuiltInProperty" DisplayName="VDBuilt In Property" PropertyName="VDDictionaryType" Multiplicity="One" IsPropertyGenerator="false" PropertyDisplayName="VDDictionary Type">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDBuiltInProperty" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="a263b286-de2b-4ca3-8eaa-ae3b582105a6" Description="Description for MVCVisualDesigner.PrimitiveTypeHasValue" Name="PrimitiveTypeHasValue" DisplayName="Primitive Type Has Value" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="9ec72f16-8307-493f-aa4e-902321ea464b" Description="Description for MVCVisualDesigner.PrimitiveTypeHasValue.VDPrimitiveType" Name="VDPrimitiveType" DisplayName="VDPrimitive Type" PropertyName="Value" Multiplicity="One" PropertyDisplayName="Value">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDPrimitiveType" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="3fcdecae-e8bd-4fc9-b8e1-e45051160fd6" Description="Description for MVCVisualDesigner.PrimitiveTypeHasValue.VDBuiltInProperty" Name="VDBuiltInProperty" DisplayName="VDBuilt In Property" PropertyName="VDPrimitiveType" Multiplicity="One" IsPropertyGenerator="false" PropertyDisplayName="VDPrimitive Type">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDBuiltInProperty" />
           </RolePlayer>
         </DomainRole>
       </Target>
@@ -2053,7 +2101,7 @@ The values set to this property should be defined in
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <Port Id="407d285a-e203-4917-a395-730505e148c5" Description="" Name="VDWidgetTitlePort" DisplayName="Widget Title Port" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="Widget Title Port" TextColor="White" FillColor="DarkBlue" OutlineColor="DarkBlue" InitialWidth="1" InitialHeight="0.18" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle" />
+    <Port Id="407d285a-e203-4917-a395-730505e148c5" Description="" Name="VDWidgetTitlePort" DisplayName="Widget Title Port" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="Widget Title Port" TextColor="White" FillColor="DarkBlue" OutlineColor="DarkBlue" InitialWidth="1" InitialHeight="0.15" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle" />
     <GeometryShape Id="36e435cc-7626-4bb3-a4aa-b529b7cdfea4" Description="" Name="VDSectionHeadShape" DisplayName="VDSection Head Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDSection Head Shape" TextColor="Navy" FillColor="SkyBlue" OutlineColor="Transparent" InitialWidth="5" InitialHeight="0.3" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
@@ -2315,31 +2363,59 @@ The values set to this property should be defined in
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="56b59d3c-8aab-42fd-84b0-ae9fd7513a85" Description="Description for MVCVisualDesigner.VDAjaxShape" Name="VDAjaxShape" DisplayName="VDAjax Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDAjax Shape" OutlineColor="DimGray" InitialHeight="1" OutlineDashStyle="Dash" OutlineThickness="0.01" FillGradientMode="None" Geometry="RoundedRectangle">
-      <BaseGeometryShape>
-        <GeometryShapeMoniker Name="VDWidgetShape" />
-      </BaseGeometryShape>
-    </GeometryShape>
     <GeometryShape Id="d92d49b3-5d9a-4aef-a43f-a97ccf2aa3ff" Description="Description for MVCVisualDesigner.VDModelSelectorShape" Name="VDModelSelectorShape" DisplayName="VDModel Selector Shape" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="VDModel Selector Shape" OutlineColor="MidnightBlue" InitialHeight="1" OutlineThickness="0.01" Geometry="Rectangle" />
-    <Port Id="798624b1-5170-4615-b548-a213998e0049" Description="Description for MVCVisualDesigner.VDEventPort" Name="VDEventPort" DisplayName="VDEvent Port" Namespace="MVCVisualDesigner" FixedTooltipText="VDEvent Port" TextColor="SaddleBrown" FillColor="Gold" OutlineColor="DarkGoldenrod" InitialWidth="0.1" InitialHeight="0.1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Circle">
+    <Port Id="798624b1-5170-4615-b548-a213998e0049" Description="Description for MVCVisualDesigner.VDEventPort" Name="VDEventPort" DisplayName="Event" Namespace="MVCVisualDesigner" FixedTooltipText="VDEvent Port" TextColor="SaddleBrown" FillColor="Gold" OutlineColor="DarkGoldenrod" InitialWidth="0.08" InitialHeight="0.08" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+      <BasePort>
+        <PortMoniker Name="VDEventBasePort" />
+      </BasePort>
       <ShapeHasDecorators Position="OuterTopCenter" HorizontalOffset="0" VerticalOffset="0">
         <TextDecorator Name="EventNameDecorator" DisplayName="Event Name Decorator" DefaultText="EventNameDecorator" />
       </ShapeHasDecorators>
     </Port>
-    <GeometryShape Id="91ac0240-c590-4f77-8fcf-0fa1c38edf76" Description="Description for MVCVisualDesigner.VDClientActionShape" Name="VDClientActionShape" DisplayName="VDClient Action Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDClient Action Shape" TextColor="SaddleBrown" OutlineColor="DarkGoldenrod" InitialWidth="1" InitialHeight="0.2" OutlineThickness="0.01" FillGradientMode="None" Geometry="RoundedRectangle">
+    <GeometryShape Id="91ac0240-c590-4f77-8fcf-0fa1c38edf76" Description="Description for MVCVisualDesigner.VDClientActionShape" Name="VDClientActionShape" DisplayName="VDClient Action Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDClient Action Shape" TextColor="SaddleBrown" FillColor="Wheat" OutlineColor="DarkGoldenrod" InitialWidth="0.8" InitialHeight="0.16" OutlineThickness="0.01" FillGradientMode="None" Geometry="RoundedRectangle">
       <BaseGeometryShape>
-        <GeometryShapeMoniker Name="VDWidgetShape" />
+        <GeometryShapeMoniker Name="VDActionBaseShape" />
       </BaseGeometryShape>
       <ShapeHasDecorators Position="Center" HorizontalOffset="0" VerticalOffset="0">
         <TextDecorator Name="ActionNameDecorator" DisplayName="Action Name Decorator" DefaultText="ActionNameDecorator" />
       </ShapeHasDecorators>
     </GeometryShape>
-    <Port Id="e59ee57e-ff91-4d1d-8b8c-6f092d14c1da" Description="Description for MVCVisualDesigner.VDClientActionInputPort" Name="VDClientActionInputPort" DisplayName="VDClient Action Input Port" Namespace="MVCVisualDesigner" FixedTooltipText="VDClient Action Input Port" FillColor="DarkGoldenrod" OutlineColor="DarkGoldenrod" InitialWidth="0.1" InitialHeight="0.1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle" />
-    <Port Id="680c5319-3a6f-4ea1-a185-b04f750b753b" Description="Description for MVCVisualDesigner.VDClientActionOutputPort" Name="VDClientActionOutputPort" DisplayName="VDClient Action Output Port" Namespace="MVCVisualDesigner" FixedTooltipText="VDClient Action Output Port" FillColor="DarkGoldenrod" OutlineColor="DarkGoldenrod" InitialWidth="0.1" InitialHeight="0.1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle" />
+    <GeometryShape Id="2c8bb20e-59ea-42d1-8b67-4ecff257e5da" Description="Description for MVCVisualDesigner.VDServerActionShape" Name="VDServerActionShape" DisplayName="VDServer Action Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDServer Action Shape" TextColor="Maroon" FillColor="MistyRose" OutlineColor="Maroon" InitialWidth="0.8" InitialHeight="0.16" OutlineThickness="0.01" FillGradientMode="None" Geometry="RoundedRectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDActionBaseShape" />
+      </BaseGeometryShape>
+      <ShapeHasDecorators Position="Center" HorizontalOffset="0" VerticalOffset="0">
+        <TextDecorator Name="ActionNameDecorator" DisplayName="Action Name Decorator" DefaultText="ActionNameDecorator" />
+      </ShapeHasDecorators>
+    </GeometryShape>
+    <Port Id="faef86d5-0228-4d0d-8231-bde4f2fe743b" Description="Description for MVCVisualDesigner.VDPseudoEventPort" Name="VDPseudoEventPort" DisplayName="Pseudo Event" Namespace="MVCVisualDesigner" FixedTooltipText="VDPseudo Event Port" TextColor="MidnightBlue" FillColor="Blue" OutlineColor="MidnightBlue" InitialWidth="0.08" InitialHeight="0.08" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+      <BasePort>
+        <PortMoniker Name="VDEventBasePort" />
+      </BasePort>
+      <ShapeHasDecorators Position="OuterTopCenter" HorizontalOffset="0" VerticalOffset="0">
+        <TextDecorator Name="EventNameDecorator" DisplayName="Event Name Decorator" DefaultText="EventNameDecorator" />
+      </ShapeHasDecorators>
+    </Port>
+    <Port Id="f9bdca04-fa6b-4d5a-9b17-049b8ff3f27a" Description="Description for MVCVisualDesigner.VDActionJointPort" Name="VDActionJointPort" DisplayName="Action Joint" Namespace="MVCVisualDesigner" FixedTooltipText="VDAction Joint Port" TextColor="DarkGreen" FillColor="LightGreen" OutlineColor="DarkGreen" InitialWidth="0.08" InitialHeight="0.08" OutlineThickness="0.01" FillGradientMode="None" Geometry="Circle">
+      <ShapeHasDecorators Position="OuterTopCenter" HorizontalOffset="0" VerticalOffset="0">
+        <TextDecorator Name="JointNameDecorator" DisplayName="Joint Name Decorator" DefaultText="JointNameDecorator" />
+      </ShapeHasDecorators>
+    </Port>
+    <GeometryShape Id="c0349982-edc0-4597-aa1e-0272fbd86ce1" Description="Description for MVCVisualDesigner.VDConditionShape" Name="VDConditionShape" DisplayName="VDCondition Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDCondition Shape" FillColor="WhiteSmoke" InitialWidth="0.8" InitialHeight="0.4" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
+    <Port Id="117f7583-2847-45a8-9289-2542128c2dec" Description="Description for MVCVisualDesigner.VDEventBasePort" Name="VDEventBasePort" DisplayName="VDEvent Base Port" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner" FixedTooltipText="VDEvent Base Port" InitialWidth="0.1" InitialHeight="0.1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle" />
+    <GeometryShape Id="1507e6ea-10a2-4f6c-8d94-9c00b0b575e3" Description="Description for MVCVisualDesigner.VDActionBaseShape" Name="VDActionBaseShape" DisplayName="VDAction Base Shape" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner" FixedTooltipText="VDAction Base Shape" InitialWidth="1" InitialHeight="0.2" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
   </Shapes>
   <Connectors>
-    <Connector Id="70b7f30a-758e-457f-8423-15ba1ae06ac4" Description="Description for MVCVisualDesigner.VDClientActionOutput2ComponentConnector" Name="VDClientActionOutput2ComponentConnector" DisplayName="VDClient Action Output2 Component Connector" Namespace="MVCVisualDesigner" FixedTooltipText="VDClient Action Output2 Component Connector" Color="DarkGoldenrod" TargetEndStyle="FilledArrow" Thickness="0.01" />
-    <Connector Id="3f174086-f1f1-4b2c-9ea5-bf494098650d" Description="Description for MVCVisualDesigner.VDEvent2ClientActionInputConnector" Name="VDEvent2ClientActionInputConnector" DisplayName="VDEvent2 Client Action Input Connector" Namespace="MVCVisualDesigner" FixedTooltipText="VDEvent2 Client Action Input Connector" Color="Goldenrod" Thickness="0.01" />
+    <Connector Id="70b7f30a-758e-457f-8423-15ba1ae06ac4" Description="Description for MVCVisualDesigner.VDActionJoint2ComponentConnector" Name="VDActionJoint2ComponentConnector" DisplayName="VDAction Joint2 Component Connector" Namespace="MVCVisualDesigner" FixedTooltipText="VDAction Joint2 Component Connector" Color="DarkGreen" TargetEndStyle="FilledArrow" Thickness="0.01" />
+    <Connector Id="3f174086-f1f1-4b2c-9ea5-bf494098650d" Description="Description for MVCVisualDesigner.VDEvent2ComponentConnector" Name="VDEvent2ComponentConnector" DisplayName="VDEvent2 Component Connector" Namespace="MVCVisualDesigner" FixedTooltipText="VDEvent2 Component Connector" Color="DarkGoldenrod" TargetEndStyle="FilledArrow" Thickness="0.01" />
   </Connectors>
   <XmlSerializationBehavior Name="MVCVisualDesignerSerializationBehavior" Namespace="MVCVisualDesigner">
     <ClassData>
@@ -2376,11 +2452,8 @@ The values set to this property should be defined in
           <XmlPropertyData XmlName="settings">
             <DomainPropertyMoniker Name="VDWidget/settings" />
           </XmlPropertyData>
-          <XmlPropertyData XmlName="intrinsicModelType" Representation="Ignore">
-            <DomainPropertyMoniker Name="VDWidget/IntrinsicModelType" />
-          </XmlPropertyData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="modelInstance">
-            <DomainRelationshipMoniker Name="WidgetHasModelInstance" />
+          <XmlRelationshipData UseFullForm="true" RoleElementName="widgetValue">
+            <DomainRelationshipMoniker Name="WidgetHasValue" />
           </XmlRelationshipData>
         </ElementData>
       </XmlClassData>
@@ -3038,9 +3111,6 @@ The values set to this property should be defined in
       <XmlClassData TypeName="VDConfirmDialog" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDConfirmDialogMoniker" ElementName="vDConfirmDialog" MonikerTypeName="VDConfirmDialogMoniker">
         <DomainClassMoniker Name="VDConfirmDialog" />
       </XmlClassData>
-      <XmlClassData TypeName="VDAjax" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDAjaxMoniker" ElementName="vDAjax" MonikerTypeName="VDAjaxMoniker">
-        <DomainClassMoniker Name="VDAjax" />
-      </XmlClassData>
       <XmlClassData TypeName="VDMessagePanel" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDMessagePanelMoniker" ElementName="vDMessagePanel" MonikerTypeName="VDMessagePanelMoniker">
         <DomainClassMoniker Name="VDMessagePanel" />
       </XmlClassData>
@@ -3065,20 +3135,17 @@ The values set to this property should be defined in
       <XmlClassData TypeName="VDDialogShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDDialogShapeMoniker" ElementName="vDDialogShape" MonikerTypeName="VDDialogShapeMoniker">
         <GeometryShapeMoniker Name="VDDialogShape" />
       </XmlClassData>
-      <XmlClassData TypeName="VDAjaxShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDAjaxShapeMoniker" ElementName="vDAjaxShape" MonikerTypeName="VDAjaxShapeMoniker">
-        <GeometryShapeMoniker Name="VDAjaxShape" />
-      </XmlClassData>
       <XmlClassData TypeName="VDViewComponent" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDViewComponentMoniker" ElementName="vDViewComponent" MonikerTypeName="VDViewComponentMoniker">
         <DomainClassMoniker Name="VDViewComponent" />
         <ElementData>
           <XmlRelationshipData UseFullForm="true" RoleElementName="events">
             <DomainRelationshipMoniker Name="WidgetHasEvents" />
           </XmlRelationshipData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="r2_TargetComponents">
-            <DomainRelationshipMoniker Name="R2_Component2Component" />
+          <XmlRelationshipData UseFullForm="true" RoleElementName="targetComponents">
+            <DomainRelationshipMoniker Name="R_Component2Component" />
           </XmlRelationshipData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="r3_Inputs">
-            <DomainRelationshipMoniker Name="R3_Component2Input" />
+          <XmlRelationshipData UseFullForm="true" RoleElementName="actionJoints">
+            <DomainRelationshipMoniker Name="WidgetHasActionJoints" />
           </XmlRelationshipData>
         </ElementData>
       </XmlClassData>
@@ -3094,230 +3161,37 @@ The values set to this property should be defined in
       <XmlClassData TypeName="VDModelStore" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDModelStoreMoniker" ElementName="vDModelStore" MonikerTypeName="VDModelStoreMoniker">
         <DomainClassMoniker Name="VDModelStore" />
         <ElementData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="modelTypes">
-            <DomainRelationshipMoniker Name="ModelStoreHasModelTypes" />
+          <XmlRelationshipData UseFullForm="true" RoleElementName="metaTypes">
+            <DomainRelationshipMoniker Name="ModelStoreHasTypeDefs" />
           </XmlRelationshipData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="modelMemberInstances">
-            <DomainRelationshipMoniker Name="ModelStoreHasModelMemberInstances" />
-          </XmlRelationshipData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="modelInstances">
-            <DomainRelationshipMoniker Name="ModelStoreHasModelInstances" />
+          <XmlRelationshipData UseFullForm="true" RoleElementName="concreteTypes">
+            <DomainRelationshipMoniker Name="ModelStoreHasTypeInsts" />
           </XmlRelationshipData>
         </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="DesignerHasModelStore" MonikerAttributeName="" SerializeId="true" MonikerElementName="designerHasModelStoreMoniker" ElementName="designerHasModelStore" MonikerTypeName="DesignerHasModelStoreMoniker">
         <DomainRelationshipMoniker Name="DesignerHasModelStore" />
       </XmlClassData>
-      <XmlClassData TypeName="VDModelMemberInfo" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDModelMemberInfoMoniker" ElementName="vDModelMemberInfo" MonikerTypeName="VDModelMemberInfoMoniker">
-        <DomainClassMoniker Name="VDModelMemberInfo" />
+      <XmlClassData TypeName="VDEventBase" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDEventBaseMoniker" ElementName="vDEventBase" MonikerTypeName="VDEventBaseMoniker">
+        <DomainClassMoniker Name="VDEventBase" />
         <ElementData>
-          <XmlPropertyData XmlName="name">
-            <DomainPropertyMoniker Name="VDModelMemberInfo/Name" />
-          </XmlPropertyData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="type">
-            <DomainRelationshipMoniker Name="ModelMemberIsTypeOf" />
-          </XmlRelationshipData>
-          <XmlPropertyData XmlName="defaultValue">
-            <DomainPropertyMoniker Name="VDModelMemberInfo/DefaultValue" />
-          </XmlPropertyData>
-        </ElementData>
-      </XmlClassData>
-      <XmlClassData TypeName="VDPropertyInfo" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDPropertyInfoMoniker" ElementName="vDPropertyInfo" MonikerTypeName="VDPropertyInfoMoniker">
-        <DomainClassMoniker Name="VDPropertyInfo" />
-      </XmlClassData>
-      <XmlClassData TypeName="VDFieldInfo" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDFieldInfoMoniker" ElementName="vDFieldInfo" MonikerTypeName="VDFieldInfoMoniker">
-        <DomainClassMoniker Name="VDFieldInfo" />
-      </XmlClassData>
-      <XmlClassData TypeName="VDMethodInfo" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDMethodInfoMoniker" ElementName="vDMethodInfo" MonikerTypeName="VDMethodInfoMoniker">
-        <DomainClassMoniker Name="VDMethodInfo" />
-      </XmlClassData>
-      <XmlClassData TypeName="VDModelType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDModelTypeMoniker" ElementName="vDModelType" MonikerTypeName="VDModelTypeMoniker">
-        <DomainClassMoniker Name="VDModelType" />
-        <ElementData>
-          <XmlPropertyData XmlName="nameSpace">
-            <DomainPropertyMoniker Name="VDModelType/NameSpace" />
-          </XmlPropertyData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="modelMembers">
-            <DomainRelationshipMoniker Name="ModelTypeHasMembers" />
+          <XmlRelationshipData UseFullForm="true" RoleElementName="targetComponents">
+            <DomainRelationshipMoniker Name="R_Event2Component" />
           </XmlRelationshipData>
           <XmlPropertyData XmlName="name">
-            <DomainPropertyMoniker Name="VDModelType/Name" />
+            <DomainPropertyMoniker Name="VDEventBase/Name" />
           </XmlPropertyData>
-          <XmlPropertyData XmlName="isInterface">
-            <DomainPropertyMoniker Name="VDModelType/IsInterface" />
+          <XmlPropertyData XmlName="category">
+            <DomainPropertyMoniker Name="VDEventBase/Category" />
           </XmlPropertyData>
-          <XmlPropertyData XmlName="isAbstract">
-            <DomainPropertyMoniker Name="VDModelType/IsAbstract" />
-          </XmlPropertyData>
-          <XmlPropertyData XmlName="isReadOnly">
-            <DomainPropertyMoniker Name="VDModelType/IsReadOnly" />
-          </XmlPropertyData>
-          <XmlPropertyData XmlName="fullName" Representation="Ignore">
-            <DomainPropertyMoniker Name="VDModelType/FullName" />
-          </XmlPropertyData>
-        </ElementData>
-      </XmlClassData>
-      <XmlClassData TypeName="VDPredefinedType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDPredefinedTypeMoniker" ElementName="vDPredefinedType" MonikerTypeName="VDPredefinedTypeMoniker">
-        <DomainClassMoniker Name="VDPredefinedType" />
-      </XmlClassData>
-      <XmlClassData TypeName="VDExternalType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDExternalTypeMoniker" ElementName="vDExternalType" MonikerTypeName="VDExternalTypeMoniker">
-        <DomainClassMoniker Name="VDExternalType" />
-        <ElementData>
-          <XmlPropertyData XmlName="assemblyName">
-            <DomainPropertyMoniker Name="VDExternalType/AssemblyName" />
-          </XmlPropertyData>
-          <XmlPropertyData XmlName="assemblyPath">
-            <DomainPropertyMoniker Name="VDExternalType/AssemblyPath" />
-          </XmlPropertyData>
-        </ElementData>
-      </XmlClassData>
-      <XmlClassData TypeName="VDCustomType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDCustomTypeMoniker" ElementName="vDCustomType" MonikerTypeName="VDCustomTypeMoniker">
-        <DomainClassMoniker Name="VDCustomType" />
-      </XmlClassData>
-      <XmlClassData TypeName="ModelMemberIsTypeOf" MonikerAttributeName="" SerializeId="true" MonikerElementName="modelMemberIsTypeOfMoniker" ElementName="modelMemberIsTypeOf" MonikerTypeName="ModelMemberIsTypeOfMoniker">
-        <DomainRelationshipMoniker Name="ModelMemberIsTypeOf" />
-      </XmlClassData>
-      <XmlClassData TypeName="ModelStoreHasModelTypes" MonikerAttributeName="" SerializeId="true" MonikerElementName="modelStoreHasModelTypesMoniker" ElementName="modelStoreHasModelTypes" MonikerTypeName="ModelStoreHasModelTypesMoniker">
-        <DomainRelationshipMoniker Name="ModelStoreHasModelTypes" />
-      </XmlClassData>
-      <XmlClassData TypeName="ModelTypeHasMembers" MonikerAttributeName="" SerializeId="true" MonikerElementName="modelTypeHasMembersMoniker" ElementName="modelTypeHasMembers" MonikerTypeName="ModelTypeHasMembersMoniker">
-        <DomainRelationshipMoniker Name="ModelTypeHasMembers" />
-      </XmlClassData>
-      <XmlClassData TypeName="VDModelMemberInstance" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDModelMemberInstanceMoniker" ElementName="vDModelMemberInstance" MonikerTypeName="VDModelMemberInstanceMoniker">
-        <DomainClassMoniker Name="VDModelMemberInstance" />
-        <ElementData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="modelMemberInfo">
-            <DomainRelationshipMoniker Name="MemberInstanceIsTypeOf" />
-          </XmlRelationshipData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="parentMemberInstance">
-            <DomainRelationshipMoniker Name="MemberInstanceReferencesParentMemberInstance" />
-          </XmlRelationshipData>
-          <XmlPropertyData XmlName="name">
-            <DomainPropertyMoniker Name="VDModelMemberInstance/Name" />
-          </XmlPropertyData>
-          <XmlPropertyData XmlName="typeName" Representation="Ignore">
-            <DomainPropertyMoniker Name="VDModelMemberInstance/TypeName" />
-          </XmlPropertyData>
-          <XmlPropertyData XmlName="validatorNames">
-            <DomainPropertyMoniker Name="VDModelMemberInstance/ValidatorNames" />
-          </XmlPropertyData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="bindingTarget">
-            <DomainRelationshipMoniker Name="BindsTo" />
-          </XmlRelationshipData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="modelType">
-            <DomainRelationshipMoniker Name="ModelMemberInstanceIsTypeOf" />
-          </XmlRelationshipData>
-        </ElementData>
-      </XmlClassData>
-      <XmlClassData TypeName="MemberInstanceIsTypeOf" MonikerAttributeName="" SerializeId="true" MonikerElementName="memberInstanceIsTypeOfMoniker" ElementName="memberInstanceIsTypeOf" MonikerTypeName="MemberInstanceIsTypeOfMoniker">
-        <DomainRelationshipMoniker Name="MemberInstanceIsTypeOf" />
-      </XmlClassData>
-      <XmlClassData TypeName="MemberInstanceReferencesParentMemberInstance" MonikerAttributeName="" SerializeId="true" MonikerElementName="memberInstanceReferencesParentMemberInstanceMoniker" ElementName="memberInstanceReferencesParentMemberInstance" MonikerTypeName="MemberInstanceReferencesParentMemberInstanceMoniker">
-        <DomainRelationshipMoniker Name="MemberInstanceReferencesParentMemberInstance" />
-      </XmlClassData>
-      <XmlClassData TypeName="VDViewModelMemberInstance" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDViewModelMemberInstanceMoniker" ElementName="vDViewModelMemberInstance" MonikerTypeName="VDViewModelMemberInstanceMoniker">
-        <DomainClassMoniker Name="VDViewModelMemberInstance" />
-        <ElementData>
-          <XmlPropertyData XmlName="isJavaScriptModel">
-            <DomainPropertyMoniker Name="VDViewModelMemberInstance/IsJavaScriptModel" />
-          </XmlPropertyData>
-          <XmlPropertyData XmlName="defaultValue">
-            <DomainPropertyMoniker Name="VDViewModelMemberInstance/DefaultValue" />
-          </XmlPropertyData>
-        </ElementData>
-      </XmlClassData>
-      <XmlClassData TypeName="VDWidgetModelMemberInstance" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDWidgetModelMemberInstanceMoniker" ElementName="vDWidgetModelMemberInstance" MonikerTypeName="VDWidgetModelMemberInstanceMoniker">
-        <DomainClassMoniker Name="VDWidgetModelMemberInstance" />
-        <ElementData>
-          <XmlPropertyData XmlName="value">
-            <DomainPropertyMoniker Name="VDWidgetModelMemberInstance/Value" />
-          </XmlPropertyData>
-          <XmlPropertyData XmlName="formatterNames">
-            <DomainPropertyMoniker Name="VDWidgetModelMemberInstance/FormatterNames" />
-          </XmlPropertyData>
-          <XmlPropertyData XmlName="initValue">
-            <DomainPropertyMoniker Name="VDWidgetModelMemberInstance/InitValue" />
-          </XmlPropertyData>
-        </ElementData>
-      </XmlClassData>
-      <XmlClassData TypeName="VDActionModelMemberInstance" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDActionModelMemberInstanceMoniker" ElementName="vDActionModelMemberInstance" MonikerTypeName="VDActionModelMemberInstanceMoniker">
-        <DomainClassMoniker Name="VDActionModelMemberInstance" />
-      </XmlClassData>
-      <XmlClassData TypeName="VDListType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDListTypeMoniker" ElementName="vDListType" MonikerTypeName="VDListTypeMoniker">
-        <DomainClassMoniker Name="VDListType" />
-        <ElementData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="valueInfo">
-            <DomainRelationshipMoniker Name="VDListTypeReferencesValueInfo" />
-          </XmlRelationshipData>
-        </ElementData>
-      </XmlClassData>
-      <XmlClassData TypeName="VDDictionaryType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDDictionaryTypeMoniker" ElementName="vDDictionaryType" MonikerTypeName="VDDictionaryTypeMoniker">
-        <DomainClassMoniker Name="VDDictionaryType" />
-        <ElementData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="keyInfo">
-            <DomainRelationshipMoniker Name="VDDictionaryTypeReferencesKeyInfo" />
-          </XmlRelationshipData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="valueInfo">
-            <DomainRelationshipMoniker Name="VDDictionaryTypeReferencesValueInfo" />
-          </XmlRelationshipData>
-        </ElementData>
-      </XmlClassData>
-      <XmlClassData TypeName="ModelStoreHasModelMemberInstances" MonikerAttributeName="" SerializeId="true" MonikerElementName="modelStoreHasModelMemberInstancesMoniker" ElementName="modelStoreHasModelMemberInstances" MonikerTypeName="ModelStoreHasModelMemberInstancesMoniker">
-        <DomainRelationshipMoniker Name="ModelStoreHasModelMemberInstances" />
-      </XmlClassData>
-      <XmlClassData TypeName="VDPlaceholderInfo" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDPlaceholderInfoMoniker" ElementName="vDPlaceholderInfo" MonikerTypeName="VDPlaceholderInfoMoniker">
-        <DomainClassMoniker Name="VDPlaceholderInfo" />
-      </XmlClassData>
-      <XmlClassData TypeName="VDListTypeReferencesValueInfo" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDListTypeReferencesValueInfoMoniker" ElementName="vDListTypeReferencesValueInfo" MonikerTypeName="VDListTypeReferencesValueInfoMoniker">
-        <DomainRelationshipMoniker Name="VDListTypeReferencesValueInfo" />
-      </XmlClassData>
-      <XmlClassData TypeName="VDDictionaryTypeReferencesKeyInfo" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDDictionaryTypeReferencesKeyInfoMoniker" ElementName="vDDictionaryTypeReferencesKeyInfo" MonikerTypeName="VDDictionaryTypeReferencesKeyInfoMoniker">
-        <DomainRelationshipMoniker Name="VDDictionaryTypeReferencesKeyInfo" />
-      </XmlClassData>
-      <XmlClassData TypeName="VDDictionaryTypeReferencesValueInfo" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDDictionaryTypeReferencesValueInfoMoniker" ElementName="vDDictionaryTypeReferencesValueInfo" MonikerTypeName="VDDictionaryTypeReferencesValueInfoMoniker">
-        <DomainRelationshipMoniker Name="VDDictionaryTypeReferencesValueInfo" />
-      </XmlClassData>
-      <XmlClassData TypeName="BindsTo" MonikerAttributeName="" SerializeId="true" MonikerElementName="bindsToMoniker" ElementName="bindsTo" MonikerTypeName="BindsToMoniker">
-        <DomainRelationshipMoniker Name="BindsTo" />
-      </XmlClassData>
-      <XmlClassData TypeName="ModelStoreHasModelInstances" MonikerAttributeName="" SerializeId="true" MonikerElementName="modelStoreHasModelInstancesMoniker" ElementName="modelStoreHasModelInstances" MonikerTypeName="ModelStoreHasModelInstancesMoniker">
-        <DomainRelationshipMoniker Name="ModelStoreHasModelInstances" />
-      </XmlClassData>
-      <XmlClassData TypeName="VDModelInstanceInfo" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDModelInstanceInfoMoniker" ElementName="vDModelInstanceInfo" MonikerTypeName="VDModelInstanceInfoMoniker">
-        <DomainClassMoniker Name="VDModelInstanceInfo" />
-      </XmlClassData>
-      <XmlClassData TypeName="ModelMemberInstanceIsTypeOf" MonikerAttributeName="" SerializeId="true" MonikerElementName="modelMemberInstanceIsTypeOfMoniker" ElementName="modelMemberInstanceIsTypeOf" MonikerTypeName="ModelMemberInstanceIsTypeOfMoniker">
-        <DomainRelationshipMoniker Name="ModelMemberInstanceIsTypeOf" />
-      </XmlClassData>
-      <XmlClassData TypeName="WidgetHasModelInstance" MonikerAttributeName="" SerializeId="true" MonikerElementName="widgetHasModelInstanceMoniker" ElementName="widgetHasModelInstance" MonikerTypeName="WidgetHasModelInstanceMoniker">
-        <DomainRelationshipMoniker Name="WidgetHasModelInstance" />
-      </XmlClassData>
-      <XmlClassData TypeName="VDEvent" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDEventMoniker" ElementName="vDEvent" MonikerTypeName="VDEventMoniker">
-        <DomainClassMoniker Name="VDEvent" />
-        <ElementData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="r1_Components">
-            <DomainRelationshipMoniker Name="R1_Event2Component" />
-          </XmlRelationshipData>
-          <XmlPropertyData XmlName="eventName">
-            <DomainPropertyMoniker Name="VDEvent/EventName" />
-          </XmlPropertyData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="r4_Inputs">
-            <DomainRelationshipMoniker Name="R4_Event2Input" />
-          </XmlRelationshipData>
         </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDClientAction" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDClientActionMoniker" ElementName="vDClientAction" MonikerTypeName="VDClientActionMoniker">
         <DomainClassMoniker Name="VDClientAction" />
         <ElementData>
-          <XmlPropertyData XmlName="actionName">
-            <DomainPropertyMoniker Name="VDClientAction/ActionName" />
+          <XmlPropertyData XmlName="category">
+            <DomainPropertyMoniker Name="VDClientAction/Category" />
           </XmlPropertyData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="input">
-            <DomainRelationshipMoniker Name="ClientActionHasInput" />
-          </XmlRelationshipData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="output">
-            <DomainRelationshipMoniker Name="ClientActionHasOutput" />
-          </XmlRelationshipData>
         </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDEventPort" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDEventPortMoniker" ElementName="vDEventPort" MonikerTypeName="VDEventPortMoniker">
@@ -3326,52 +3200,289 @@ The values set to this property should be defined in
       <XmlClassData TypeName="WidgetHasEvents" MonikerAttributeName="" SerializeId="true" MonikerElementName="widgetHasEventsMoniker" ElementName="widgetHasEvents" MonikerTypeName="WidgetHasEventsMoniker">
         <DomainRelationshipMoniker Name="WidgetHasEvents" />
       </XmlClassData>
-      <XmlClassData TypeName="VDClientActionOutput2ComponentConnector" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDClientActionOutput2ComponentConnectorMoniker" ElementName="vDClientActionOutput2ComponentConnector" MonikerTypeName="VDClientActionOutput2ComponentConnectorMoniker">
-        <ConnectorMoniker Name="VDClientActionOutput2ComponentConnector" />
+      <XmlClassData TypeName="VDActionJoint2ComponentConnector" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDActionJoint2ComponentConnectorMoniker" ElementName="vDActionJoint2ComponentConnector" MonikerTypeName="VDActionJoint2ComponentConnectorMoniker">
+        <ConnectorMoniker Name="VDActionJoint2ComponentConnector" />
       </XmlClassData>
-      <XmlClassData TypeName="VDEvent2ClientActionInputConnector" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDEvent2ClientActionInputConnectorMoniker" ElementName="vDEvent2ClientActionInputConnector" MonikerTypeName="VDEvent2ClientActionInputConnectorMoniker">
-        <ConnectorMoniker Name="VDEvent2ClientActionInputConnector" />
+      <XmlClassData TypeName="VDEvent2ComponentConnector" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDEvent2ComponentConnectorMoniker" ElementName="vDEvent2ComponentConnector" MonikerTypeName="VDEvent2ComponentConnectorMoniker">
+        <ConnectorMoniker Name="VDEvent2ComponentConnector" />
       </XmlClassData>
       <XmlClassData TypeName="VDClientActionShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDClientActionShapeMoniker" ElementName="vDClientActionShape" MonikerTypeName="VDClientActionShapeMoniker">
         <GeometryShapeMoniker Name="VDClientActionShape" />
       </XmlClassData>
-      <XmlClassData TypeName="R1_Event2Component" MonikerAttributeName="" SerializeId="true" MonikerElementName="r1_Event2ComponentMoniker" ElementName="r1_Event2Component" MonikerTypeName="R1_Event2ComponentMoniker">
-        <DomainRelationshipMoniker Name="R1_Event2Component" />
+      <XmlClassData TypeName="R_Event2Component" MonikerAttributeName="" SerializeId="true" MonikerElementName="r_Event2ComponentMoniker" ElementName="r_Event2Component" MonikerTypeName="R_Event2ComponentMoniker">
+        <DomainRelationshipMoniker Name="R_Event2Component" />
       </XmlClassData>
-      <XmlClassData TypeName="R2_Component2Component" MonikerAttributeName="" SerializeId="true" MonikerElementName="r2_Component2ComponentMoniker" ElementName="r2_Component2Component" MonikerTypeName="R2_Component2ComponentMoniker">
-        <DomainRelationshipMoniker Name="R2_Component2Component" />
+      <XmlClassData TypeName="R_Component2Component" MonikerAttributeName="" SerializeId="true" MonikerElementName="r_Component2ComponentMoniker" ElementName="r_Component2Component" MonikerTypeName="R_Component2ComponentMoniker">
+        <DomainRelationshipMoniker Name="R_Component2Component" />
       </XmlClassData>
-      <XmlClassData TypeName="VDClientActionInput" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDClientActionInputMoniker" ElementName="vDClientActionInput" MonikerTypeName="VDClientActionInputMoniker">
-        <DomainClassMoniker Name="VDClientActionInput" />
-      </XmlClassData>
-      <XmlClassData TypeName="VDClientActionOutput" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDClientActionOutputMoniker" ElementName="vDClientActionOutput" MonikerTypeName="VDClientActionOutputMoniker">
-        <DomainClassMoniker Name="VDClientActionOutput" />
+      <XmlClassData TypeName="VDModelType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDModelTypeMoniker" ElementName="vDModelType" MonikerTypeName="VDModelTypeMoniker">
+        <DomainClassMoniker Name="VDModelType" />
         <ElementData>
-          <XmlRelationshipData UseFullForm="true" RoleElementName="r5_Components">
-            <DomainRelationshipMoniker Name="R5_Output2Component" />
+          <XmlPropertyData XmlName="name">
+            <DomainPropertyMoniker Name="VDModelType/Name" />
+          </XmlPropertyData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="members">
+            <DomainRelationshipMoniker Name="ModelTypeHasMembers" />
+          </XmlRelationshipData>
+          <XmlPropertyData XmlName="nameSpace">
+            <DomainPropertyMoniker Name="VDModelType/NameSpace" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="fullName" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDModelType/FullName" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="dispName">
+            <DomainPropertyMoniker Name="VDModelType/DispName" />
+          </XmlPropertyData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="VDModelMember" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDModelMemberMoniker" ElementName="vDModelMember" MonikerTypeName="VDModelMemberMoniker">
+        <DomainClassMoniker Name="VDModelMember" />
+        <ElementData>
+          <XmlPropertyData XmlName="name">
+            <DomainPropertyMoniker Name="VDModelMember/Name" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="dispName">
+            <DomainPropertyMoniker Name="VDModelMember/DispName" />
+          </XmlPropertyData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="type">
+            <DomainRelationshipMoniker Name="TypeOfModelMember" />
           </XmlRelationshipData>
         </ElementData>
       </XmlClassData>
-      <XmlClassData TypeName="ClientActionHasInput" MonikerAttributeName="" SerializeId="true" MonikerElementName="clientActionHasInputMoniker" ElementName="clientActionHasInput" MonikerTypeName="ClientActionHasInputMoniker">
-        <DomainRelationshipMoniker Name="ClientActionHasInput" />
+      <XmlClassData TypeName="VDMetaType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDMetaTypeMoniker" ElementName="vDMetaType" MonikerTypeName="VDMetaTypeMoniker">
+        <DomainClassMoniker Name="VDMetaType" />
+        <ElementData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="members">
+            <DomainRelationshipMoniker Name="MetaTypeHasMembers" />
+          </XmlRelationshipData>
+        </ElementData>
       </XmlClassData>
-      <XmlClassData TypeName="ClientActionHasOutput" MonikerAttributeName="" SerializeId="true" MonikerElementName="clientActionHasOutputMoniker" ElementName="clientActionHasOutput" MonikerTypeName="ClientActionHasOutputMoniker">
-        <DomainRelationshipMoniker Name="ClientActionHasOutput" />
+      <XmlClassData TypeName="VDConcreteType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDConcreteTypeMoniker" ElementName="vDConcreteType" MonikerTypeName="VDConcreteTypeMoniker">
+        <DomainClassMoniker Name="VDConcreteType" />
+        <ElementData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="meta">
+            <DomainRelationshipMoniker Name="ConcreteTypeRefersMeta" />
+          </XmlRelationshipData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="members">
+            <DomainRelationshipMoniker Name="ConcreteTypeHasMembers" />
+          </XmlRelationshipData>
+        </ElementData>
       </XmlClassData>
-      <XmlClassData TypeName="VDClientActionInputPort" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDClientActionInputPortMoniker" ElementName="vDClientActionInputPort" MonikerTypeName="VDClientActionInputPortMoniker">
-        <PortMoniker Name="VDClientActionInputPort" />
+      <XmlClassData TypeName="VDMetaMember" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDMetaMemberMoniker" ElementName="vDMetaMember" MonikerTypeName="VDMetaMemberMoniker">
+        <DomainClassMoniker Name="VDMetaMember" />
+        <ElementData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="type">
+            <DomainRelationshipMoniker Name="TypeOfMetaMember" />
+          </XmlRelationshipData>
+        </ElementData>
       </XmlClassData>
-      <XmlClassData TypeName="VDClientActionOutputPort" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDClientActionOutputPortMoniker" ElementName="vDClientActionOutputPort" MonikerTypeName="VDClientActionOutputPortMoniker">
-        <PortMoniker Name="VDClientActionOutputPort" />
+      <XmlClassData TypeName="VDConcreteMember" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDConcreteMemberMoniker" ElementName="vDConcreteMember" MonikerTypeName="VDConcreteMemberMoniker">
+        <DomainClassMoniker Name="VDConcreteMember" />
+        <ElementData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="meta">
+            <DomainRelationshipMoniker Name="ConcreteMemberRefersMeta" />
+          </XmlRelationshipData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="type">
+            <DomainRelationshipMoniker Name="TypeOfConcreteMember" />
+          </XmlRelationshipData>
+        </ElementData>
       </XmlClassData>
-      <XmlClassData TypeName="R5_Output2Component" MonikerAttributeName="" SerializeId="true" MonikerElementName="r5_Output2ComponentMoniker" ElementName="r5_Output2Component" MonikerTypeName="R5_Output2ComponentMoniker">
-        <DomainRelationshipMoniker Name="R5_Output2Component" />
+      <XmlClassData TypeName="ModelTypeHasMembers" MonikerAttributeName="" SerializeId="true" MonikerElementName="modelTypeHasMembersMoniker" ElementName="modelTypeHasMembers" MonikerTypeName="ModelTypeHasMembersMoniker">
+        <DomainRelationshipMoniker Name="ModelTypeHasMembers" />
       </XmlClassData>
-      <XmlClassData TypeName="R3_Component2Input" MonikerAttributeName="" SerializeId="true" MonikerElementName="r3_Component2InputMoniker" ElementName="r3_Component2Input" MonikerTypeName="R3_Component2InputMoniker">
-        <DomainRelationshipMoniker Name="R3_Component2Input" />
+      <XmlClassData TypeName="ConcreteMemberRefersMeta" MonikerAttributeName="" SerializeId="true" MonikerElementName="concreteMemberRefersMetaMoniker" ElementName="concreteMemberRefersMeta" MonikerTypeName="ConcreteMemberRefersMetaMoniker">
+        <DomainRelationshipMoniker Name="ConcreteMemberRefersMeta" />
       </XmlClassData>
-      <XmlClassData TypeName="R4_Event2Input" MonikerAttributeName="" SerializeId="true" MonikerElementName="r4_Event2InputMoniker" ElementName="r4_Event2Input" MonikerTypeName="R4_Event2InputMoniker">
-        <DomainRelationshipMoniker Name="R4_Event2Input" />
+      <XmlClassData TypeName="ConcreteTypeRefersMeta" MonikerAttributeName="" SerializeId="true" MonikerElementName="concreteTypeRefersMetaMoniker" ElementName="concreteTypeRefersMeta" MonikerTypeName="ConcreteTypeRefersMetaMoniker">
+        <DomainRelationshipMoniker Name="ConcreteTypeRefersMeta" />
+      </XmlClassData>
+      <XmlClassData TypeName="ModelStoreHasTypeDefs" MonikerAttributeName="" SerializeId="true" MonikerElementName="modelStoreHasTypeDefsMoniker" ElementName="modelStoreHasTypeDefs" MonikerTypeName="ModelStoreHasTypeDefsMoniker">
+        <DomainRelationshipMoniker Name="ModelStoreHasTypeDefs" />
+      </XmlClassData>
+      <XmlClassData TypeName="ModelStoreHasTypeInsts" MonikerAttributeName="" SerializeId="true" MonikerElementName="modelStoreHasTypeInstsMoniker" ElementName="modelStoreHasTypeInsts" MonikerTypeName="ModelStoreHasTypeInstsMoniker">
+        <DomainRelationshipMoniker Name="ModelStoreHasTypeInsts" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDViewModelMember" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDViewModelMemberMoniker" ElementName="vDViewModelMember" MonikerTypeName="VDViewModelMemberMoniker">
+        <DomainClassMoniker Name="VDViewModelMember" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDWidgetValueMember" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDWidgetValueMemberMoniker" ElementName="vDWidgetValueMember" MonikerTypeName="VDWidgetValueMemberMoniker">
+        <DomainClassMoniker Name="VDWidgetValueMember" />
+        <ElementData>
+          <XmlPropertyData XmlName="initValue">
+            <DomainPropertyMoniker Name="VDWidgetValueMember/InitValue" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="formatterNames">
+            <DomainPropertyMoniker Name="VDWidgetValueMember/FormatterNames" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="validatorNames">
+            <DomainPropertyMoniker Name="VDWidgetValueMember/ValidatorNames" />
+          </XmlPropertyData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="VDActionDataMember" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDActionDataMemberMoniker" ElementName="vDActionDataMember" MonikerTypeName="VDActionDataMemberMoniker">
+        <DomainClassMoniker Name="VDActionDataMember" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDActionBase" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDActionBaseMoniker" ElementName="vDActionBase" MonikerTypeName="VDActionBaseMoniker">
+        <DomainClassMoniker Name="VDActionBase" />
+        <ElementData>
+          <XmlPropertyData XmlName="name">
+            <DomainPropertyMoniker Name="VDActionBase/Name" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="description">
+            <DomainPropertyMoniker Name="VDActionBase/Description" />
+          </XmlPropertyData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="VDServerAction" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDServerActionMoniker" ElementName="vDServerAction" MonikerTypeName="VDServerActionMoniker">
+        <DomainClassMoniker Name="VDServerAction" />
+        <ElementData>
+          <XmlPropertyData XmlName="controller">
+            <DomainPropertyMoniker Name="VDServerAction/Controller" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="area">
+            <DomainPropertyMoniker Name="VDServerAction/Area" />
+          </XmlPropertyData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="VDEvent" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDEventMoniker" ElementName="vDEvent" MonikerTypeName="VDEventMoniker">
+        <DomainClassMoniker Name="VDEvent" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDPseudoEvent" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDPseudoEventMoniker" ElementName="vDPseudoEvent" MonikerTypeName="VDPseudoEventMoniker">
+        <DomainClassMoniker Name="VDPseudoEvent" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDActionJoint" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDActionJointMoniker" ElementName="vDActionJoint" MonikerTypeName="VDActionJointMoniker">
+        <DomainClassMoniker Name="VDActionJoint" />
+        <ElementData>
+          <XmlPropertyData XmlName="name">
+            <DomainPropertyMoniker Name="VDActionJoint/Name" />
+          </XmlPropertyData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="targetComponents">
+            <DomainRelationshipMoniker Name="R_ActionJoint2Component" />
+          </XmlRelationshipData>
+          <XmlPropertyData XmlName="category">
+            <DomainPropertyMoniker Name="VDActionJoint/Category" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="displayName" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDActionJoint/DisplayName" />
+          </XmlPropertyData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="WidgetHasActionJoints" MonikerAttributeName="" SerializeId="true" MonikerElementName="widgetHasActionJointsMoniker" ElementName="widgetHasActionJoints" MonikerTypeName="WidgetHasActionJointsMoniker">
+        <DomainRelationshipMoniker Name="WidgetHasActionJoints" />
+      </XmlClassData>
+      <XmlClassData TypeName="R_ActionJoint2Component" MonikerAttributeName="" SerializeId="true" MonikerElementName="r_ActionJoint2ComponentMoniker" ElementName="r_ActionJoint2Component" MonikerTypeName="R_ActionJoint2ComponentMoniker">
+        <DomainRelationshipMoniker Name="R_ActionJoint2Component" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDCondition" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDConditionMoniker" ElementName="vDCondition" MonikerTypeName="VDConditionMoniker">
+        <DomainClassMoniker Name="VDCondition" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDServerActionShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDServerActionShapeMoniker" ElementName="vDServerActionShape" MonikerTypeName="VDServerActionShapeMoniker">
+        <GeometryShapeMoniker Name="VDServerActionShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDPseudoEventPort" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDPseudoEventPortMoniker" ElementName="vDPseudoEventPort" MonikerTypeName="VDPseudoEventPortMoniker">
+        <PortMoniker Name="VDPseudoEventPort" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDActionJointPort" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDActionJointPortMoniker" ElementName="vDActionJointPort" MonikerTypeName="VDActionJointPortMoniker">
+        <PortMoniker Name="VDActionJointPort" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDConditionShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDConditionShapeMoniker" ElementName="vDConditionShape" MonikerTypeName="VDConditionShapeMoniker">
+        <GeometryShapeMoniker Name="VDConditionShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDEventBasePort" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDEventBasePortMoniker" ElementName="vDEventBasePort" MonikerTypeName="VDEventBasePortMoniker">
+        <PortMoniker Name="VDEventBasePort" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDActionBaseShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDActionBaseShapeMoniker" ElementName="vDActionBaseShape" MonikerTypeName="VDActionBaseShapeMoniker">
+        <GeometryShapeMoniker Name="VDActionBaseShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDWidgetValue" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDWidgetValueMoniker" ElementName="vDWidgetValue" MonikerTypeName="VDWidgetValueMoniker">
+        <DomainClassMoniker Name="VDWidgetValue" />
+      </XmlClassData>
+      <XmlClassData TypeName="WidgetHasValue" MonikerAttributeName="" SerializeId="true" MonikerElementName="widgetHasValueMoniker" ElementName="widgetHasValue" MonikerTypeName="WidgetHasValueMoniker">
+        <DomainRelationshipMoniker Name="WidgetHasValue" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDPredefinedType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDPredefinedTypeMoniker" ElementName="vDPredefinedType" MonikerTypeName="VDPredefinedTypeMoniker">
+        <DomainClassMoniker Name="VDPredefinedType" />
+      </XmlClassData>
+      <XmlClassData TypeName="MetaTypeHasMembers" MonikerAttributeName="" SerializeId="true" MonikerElementName="metaTypeHasMembersMoniker" ElementName="metaTypeHasMembers" MonikerTypeName="MetaTypeHasMembersMoniker">
+        <DomainRelationshipMoniker Name="MetaTypeHasMembers" />
+      </XmlClassData>
+      <XmlClassData TypeName="ConcreteTypeHasMembers" MonikerAttributeName="" SerializeId="true" MonikerElementName="concreteTypeHasMembersMoniker" ElementName="concreteTypeHasMembers" MonikerTypeName="ConcreteTypeHasMembersMoniker">
+        <DomainRelationshipMoniker Name="ConcreteTypeHasMembers" />
+      </XmlClassData>
+      <XmlClassData TypeName="TypeOfModelMember" MonikerAttributeName="" SerializeId="true" MonikerElementName="typeOfModelMemberMoniker" ElementName="typeOfModelMember" MonikerTypeName="TypeOfModelMemberMoniker">
+        <DomainRelationshipMoniker Name="TypeOfModelMember" />
+      </XmlClassData>
+      <XmlClassData TypeName="TypeOfMetaMember" MonikerAttributeName="" SerializeId="true" MonikerElementName="typeOfMetaMemberMoniker" ElementName="typeOfMetaMember" MonikerTypeName="TypeOfMetaMemberMoniker">
+        <DomainRelationshipMoniker Name="TypeOfMetaMember" />
+      </XmlClassData>
+      <XmlClassData TypeName="TypeOfConcreteMember" MonikerAttributeName="" SerializeId="true" MonikerElementName="typeOfConcreteMemberMoniker" ElementName="typeOfConcreteMember" MonikerTypeName="TypeOfConcreteMemberMoniker">
+        <DomainRelationshipMoniker Name="TypeOfConcreteMember" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDViewModel" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDViewModelMoniker" ElementName="vDViewModel" MonikerTypeName="VDViewModelMoniker">
+        <DomainClassMoniker Name="VDViewModel" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDActionData" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDActionDataMoniker" ElementName="vDActionData" MonikerTypeName="VDActionDataMoniker">
+        <DomainClassMoniker Name="VDActionData" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDBuiltInProperty" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDBuiltInPropertyMoniker" ElementName="vDBuiltInProperty" MonikerTypeName="VDBuiltInPropertyMoniker">
+        <DomainClassMoniker Name="VDBuiltInProperty" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDListType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDListTypeMoniker" ElementName="vDListType" MonikerTypeName="VDListTypeMoniker">
+        <DomainClassMoniker Name="VDListType" />
+        <ElementData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="value">
+            <DomainRelationshipMoniker Name="ValueTypeOfList" />
+          </XmlRelationshipData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="VDDictionaryType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDDictionaryTypeMoniker" ElementName="vDDictionaryType" MonikerTypeName="VDDictionaryTypeMoniker">
+        <DomainClassMoniker Name="VDDictionaryType" />
+        <ElementData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="key">
+            <DomainRelationshipMoniker Name="KeyTypeOfDict" />
+          </XmlRelationshipData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="value">
+            <DomainRelationshipMoniker Name="ValueTypeOfDict" />
+          </XmlRelationshipData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="ValueTypeOfList" MonikerAttributeName="" SerializeId="true" MonikerElementName="valueTypeOfListMoniker" ElementName="valueTypeOfList" MonikerTypeName="ValueTypeOfListMoniker">
+        <DomainRelationshipMoniker Name="ValueTypeOfList" />
+      </XmlClassData>
+      <XmlClassData TypeName="KeyTypeOfDict" MonikerAttributeName="" SerializeId="true" MonikerElementName="keyTypeOfDictMoniker" ElementName="keyTypeOfDict" MonikerTypeName="KeyTypeOfDictMoniker">
+        <DomainRelationshipMoniker Name="KeyTypeOfDict" />
+      </XmlClassData>
+      <XmlClassData TypeName="ValueTypeOfDict" MonikerAttributeName="" SerializeId="true" MonikerElementName="valueTypeOfDictMoniker" ElementName="valueTypeOfDict" MonikerTypeName="ValueTypeOfDictMoniker">
+        <DomainRelationshipMoniker Name="ValueTypeOfDict" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDCustomType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDCustomTypeMoniker" ElementName="vDCustomType" MonikerTypeName="VDCustomTypeMoniker">
+        <DomainClassMoniker Name="VDCustomType" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDReferenceType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDReferenceTypeMoniker" ElementName="vDReferenceType" MonikerTypeName="VDReferenceTypeMoniker">
+        <DomainClassMoniker Name="VDReferenceType" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDProperty" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDPropertyMoniker" ElementName="vDProperty" MonikerTypeName="VDPropertyMoniker">
+        <DomainClassMoniker Name="VDProperty" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDMethod" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDMethodMoniker" ElementName="vDMethod" MonikerTypeName="VDMethodMoniker">
+        <DomainClassMoniker Name="VDMethod" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDField" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDFieldMoniker" ElementName="vDField" MonikerTypeName="VDFieldMoniker">
+        <DomainClassMoniker Name="VDField" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDPrimitiveType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDPrimitiveTypeMoniker" ElementName="vDPrimitiveType" MonikerTypeName="VDPrimitiveTypeMoniker">
+        <DomainClassMoniker Name="VDPrimitiveType" />
+        <ElementData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="value">
+            <DomainRelationshipMoniker Name="PrimitiveTypeHasValue" />
+          </XmlRelationshipData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="PrimitiveTypeHasValue" MonikerAttributeName="" SerializeId="true" MonikerElementName="primitiveTypeHasValueMoniker" ElementName="primitiveTypeHasValue" MonikerTypeName="PrimitiveTypeHasValueMoniker">
+        <DomainRelationshipMoniker Name="PrimitiveTypeHasValue" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDPrimitiveMemberType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDPrimitiveMemberTypeMoniker" ElementName="vDPrimitiveMemberType" MonikerTypeName="VDPrimitiveMemberTypeMoniker">
+        <DomainClassMoniker Name="VDPrimitiveMemberType" />
       </XmlClassData>
     </ClassData>
   </XmlSerializationBehavior>
@@ -3524,17 +3635,6 @@ The values set to this property should be defined in
         <PropertyDisplayed>
           <PropertyPath>
             <DomainPropertyMoniker Name="VDContainer/Tag" />
-            <DomainPath />
-          </PropertyPath>
-        </PropertyDisplayed>
-      </ExplorerNodeSettings>
-      <ExplorerNodeSettings IconToDisplay="Resources\VSObject_Class.bmp">
-        <Class>
-          <DomainClassMoniker Name="VDModelType" />
-        </Class>
-        <PropertyDisplayed>
-          <PropertyPath>
-            <DomainPropertyMoniker Name="VDModelType/FullName" />
             <DomainPath />
           </PropertyPath>
         </PropertyDisplayed>
@@ -3773,180 +3873,119 @@ The values set to this property should be defined in
         </TargetDirectives>
       </LinkConnectDirective>
     </ConnectionBuilder>
-    <ConnectionBuilder Name="ModelMemberIsTypeOfBuilder">
+    <ConnectionBuilder Name="EventBuilder">
+      <LinkConnectDirective UsesCustomConnect="true">
+        <DomainRelationshipMoniker Name="R_Event2Component" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDEventBase" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDViewComponent" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+      <LinkConnectDirective UsesCustomConnect="true">
+        <DomainRelationshipMoniker Name="R_Component2Component" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDViewComponent" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDViewComponent" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+      <LinkConnectDirective UsesCustomConnect="true">
+        <DomainRelationshipMoniker Name="R_ActionJoint2Component" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDActionJoint" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDViewComponent" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
+    <ConnectionBuilder Name="ConcreteMemberRefersMetaBuilder">
       <LinkConnectDirective>
-        <DomainRelationshipMoniker Name="ModelMemberIsTypeOf" />
+        <DomainRelationshipMoniker Name="ConcreteMemberRefersMeta" />
         <SourceDirectives>
           <RolePlayerConnectDirective>
             <AcceptingClass>
-              <DomainClassMoniker Name="VDModelMemberInfo" />
+              <DomainClassMoniker Name="VDConcreteMember" />
             </AcceptingClass>
           </RolePlayerConnectDirective>
         </SourceDirectives>
         <TargetDirectives>
           <RolePlayerConnectDirective>
             <AcceptingClass>
-              <DomainClassMoniker Name="VDModelType" />
+              <DomainClassMoniker Name="VDMetaMember" />
             </AcceptingClass>
           </RolePlayerConnectDirective>
         </TargetDirectives>
       </LinkConnectDirective>
     </ConnectionBuilder>
-    <ConnectionBuilder Name="MemberInstanceIsTypeOfBuilder">
+    <ConnectionBuilder Name="ConcreteTypeRefersMetaBuilder">
       <LinkConnectDirective>
-        <DomainRelationshipMoniker Name="MemberInstanceIsTypeOf" />
+        <DomainRelationshipMoniker Name="ConcreteTypeRefersMeta" />
         <SourceDirectives>
           <RolePlayerConnectDirective>
             <AcceptingClass>
-              <DomainClassMoniker Name="VDModelMemberInstance" />
+              <DomainClassMoniker Name="VDConcreteType" />
             </AcceptingClass>
           </RolePlayerConnectDirective>
         </SourceDirectives>
         <TargetDirectives>
           <RolePlayerConnectDirective>
             <AcceptingClass>
-              <DomainClassMoniker Name="VDModelMemberInfo" />
+              <DomainClassMoniker Name="VDMetaType" />
             </AcceptingClass>
           </RolePlayerConnectDirective>
         </TargetDirectives>
       </LinkConnectDirective>
     </ConnectionBuilder>
-    <ConnectionBuilder Name="MemberInstanceReferencesParentMemberInstanceBuilder">
+    <ConnectionBuilder Name="R_ActionJoint2ComponentBuilder">
       <LinkConnectDirective>
-        <DomainRelationshipMoniker Name="MemberInstanceReferencesParentMemberInstance" />
+        <DomainRelationshipMoniker Name="R_ActionJoint2Component" />
         <SourceDirectives>
           <RolePlayerConnectDirective>
             <AcceptingClass>
-              <DomainClassMoniker Name="VDModelMemberInstance" />
+              <DomainClassMoniker Name="VDActionJoint" />
             </AcceptingClass>
           </RolePlayerConnectDirective>
         </SourceDirectives>
         <TargetDirectives>
           <RolePlayerConnectDirective>
             <AcceptingClass>
-              <DomainClassMoniker Name="VDModelMemberInstance" />
+              <DomainClassMoniker Name="VDViewComponent" />
             </AcceptingClass>
           </RolePlayerConnectDirective>
         </TargetDirectives>
       </LinkConnectDirective>
     </ConnectionBuilder>
-    <ConnectionBuilder Name="VDListTypeReferencesValueInfoBuilder">
+    <ConnectionBuilder Name="WidgetHasValueBuilder">
       <LinkConnectDirective>
-        <DomainRelationshipMoniker Name="VDListTypeReferencesValueInfo" />
-        <SourceDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDListType" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </SourceDirectives>
-        <TargetDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDPlaceholderInfo" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </TargetDirectives>
-      </LinkConnectDirective>
-    </ConnectionBuilder>
-    <ConnectionBuilder Name="VDDictionaryTypeReferencesKeyInfoBuilder">
-      <LinkConnectDirective>
-        <DomainRelationshipMoniker Name="VDDictionaryTypeReferencesKeyInfo" />
-        <SourceDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDDictionaryType" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </SourceDirectives>
-        <TargetDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDPlaceholderInfo" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </TargetDirectives>
-      </LinkConnectDirective>
-    </ConnectionBuilder>
-    <ConnectionBuilder Name="VDDictionaryTypeReferencesValueInfoBuilder">
-      <LinkConnectDirective>
-        <DomainRelationshipMoniker Name="VDDictionaryTypeReferencesValueInfo" />
-        <SourceDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDDictionaryType" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </SourceDirectives>
-        <TargetDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDPlaceholderInfo" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </TargetDirectives>
-      </LinkConnectDirective>
-    </ConnectionBuilder>
-    <ConnectionBuilder Name="BindsToBuilder">
-      <LinkConnectDirective>
-        <DomainRelationshipMoniker Name="BindsTo" />
-        <SourceDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDModelMemberInstance" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </SourceDirectives>
-        <TargetDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDModelMemberInstance" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </TargetDirectives>
-      </LinkConnectDirective>
-    </ConnectionBuilder>
-    <ConnectionBuilder Name="ModelStoreHasModelInstancesBuilder">
-      <LinkConnectDirective>
-        <DomainRelationshipMoniker Name="ModelStoreHasModelInstances" />
-        <SourceDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDModelStore" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </SourceDirectives>
-        <TargetDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDModelMemberInstance" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </TargetDirectives>
-      </LinkConnectDirective>
-    </ConnectionBuilder>
-    <ConnectionBuilder Name="ModelMemberInstanceIsTypeOfBuilder">
-      <LinkConnectDirective>
-        <DomainRelationshipMoniker Name="ModelMemberInstanceIsTypeOf" />
-        <SourceDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDModelMemberInstance" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </SourceDirectives>
-        <TargetDirectives>
-          <RolePlayerConnectDirective>
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDModelType" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </TargetDirectives>
-      </LinkConnectDirective>
-    </ConnectionBuilder>
-    <ConnectionBuilder Name="WidgetHasModelInstanceBuilder">
-      <LinkConnectDirective>
-        <DomainRelationshipMoniker Name="WidgetHasModelInstance" />
+        <DomainRelationshipMoniker Name="WidgetHasValue" />
         <SourceDirectives>
           <RolePlayerConnectDirective>
             <AcceptingClass>
@@ -3957,132 +3996,140 @@ The values set to this property should be defined in
         <TargetDirectives>
           <RolePlayerConnectDirective>
             <AcceptingClass>
-              <DomainClassMoniker Name="VDModelMemberInstance" />
+              <DomainClassMoniker Name="VDWidgetValue" />
             </AcceptingClass>
           </RolePlayerConnectDirective>
         </TargetDirectives>
       </LinkConnectDirective>
     </ConnectionBuilder>
-    <ConnectionBuilder Name="EventBuilder">
-      <LinkConnectDirective UsesCustomConnect="true">
-        <DomainRelationshipMoniker Name="R1_Event2Component" />
-        <SourceDirectives>
-          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDEvent" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </SourceDirectives>
-        <TargetDirectives>
-          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDViewComponent" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </TargetDirectives>
-      </LinkConnectDirective>
-      <LinkConnectDirective UsesCustomConnect="true">
-        <DomainRelationshipMoniker Name="R2_Component2Component" />
-        <SourceDirectives>
-          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDViewComponent" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </SourceDirectives>
-        <TargetDirectives>
-          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDViewComponent" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </TargetDirectives>
-      </LinkConnectDirective>
-      <LinkConnectDirective UsesCustomConnect="true">
-        <DomainRelationshipMoniker Name="R3_Component2Input" />
-        <SourceDirectives>
-          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDViewComponent" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </SourceDirectives>
-        <TargetDirectives>
-          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDClientActionInput" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </TargetDirectives>
-      </LinkConnectDirective>
-      <LinkConnectDirective UsesCustomConnect="true">
-        <DomainRelationshipMoniker Name="R4_Event2Input" />
-        <SourceDirectives>
-          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDEvent" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </SourceDirectives>
-        <TargetDirectives>
-          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDClientActionInput" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </TargetDirectives>
-      </LinkConnectDirective>
-      <LinkConnectDirective UsesCustomConnect="true">
-        <DomainRelationshipMoniker Name="R5_Output2Component" />
-        <SourceDirectives>
-          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDClientActionOutput" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </SourceDirectives>
-        <TargetDirectives>
-          <RolePlayerConnectDirective UsesRoleSpecificCustomAccept="true">
-            <AcceptingClass>
-              <DomainClassMoniker Name="VDViewComponent" />
-            </AcceptingClass>
-          </RolePlayerConnectDirective>
-        </TargetDirectives>
-      </LinkConnectDirective>
-    </ConnectionBuilder>
-    <ConnectionBuilder Name="R3_Component2InputBuilder">
+    <ConnectionBuilder Name="TypeOfModelMemberBuilder">
       <LinkConnectDirective>
-        <DomainRelationshipMoniker Name="R3_Component2Input" />
+        <DomainRelationshipMoniker Name="TypeOfModelMember" />
         <SourceDirectives>
           <RolePlayerConnectDirective>
             <AcceptingClass>
-              <DomainClassMoniker Name="VDViewComponent" />
+              <DomainClassMoniker Name="VDModelMember" />
             </AcceptingClass>
           </RolePlayerConnectDirective>
         </SourceDirectives>
         <TargetDirectives>
           <RolePlayerConnectDirective>
             <AcceptingClass>
-              <DomainClassMoniker Name="VDClientActionInput" />
+              <DomainClassMoniker Name="VDModelType" />
             </AcceptingClass>
           </RolePlayerConnectDirective>
         </TargetDirectives>
       </LinkConnectDirective>
     </ConnectionBuilder>
-    <ConnectionBuilder Name="R4_Event2InputBuilder">
+    <ConnectionBuilder Name="TypeOfMetaMemberBuilder">
       <LinkConnectDirective>
-        <DomainRelationshipMoniker Name="R4_Event2Input" />
+        <DomainRelationshipMoniker Name="TypeOfMetaMember" />
         <SourceDirectives>
           <RolePlayerConnectDirective>
             <AcceptingClass>
-              <DomainClassMoniker Name="VDEvent" />
+              <DomainClassMoniker Name="VDMetaMember" />
             </AcceptingClass>
           </RolePlayerConnectDirective>
         </SourceDirectives>
         <TargetDirectives>
           <RolePlayerConnectDirective>
             <AcceptingClass>
-              <DomainClassMoniker Name="VDClientActionInput" />
+              <DomainClassMoniker Name="VDMetaType" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
+    <ConnectionBuilder Name="TypeOfConcreteMemberBuilder">
+      <LinkConnectDirective>
+        <DomainRelationshipMoniker Name="TypeOfConcreteMember" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDConcreteMember" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDConcreteType" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
+    <ConnectionBuilder Name="ValueTypeOfListBuilder">
+      <LinkConnectDirective>
+        <DomainRelationshipMoniker Name="ValueTypeOfList" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDListType" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDBuiltInProperty" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
+    <ConnectionBuilder Name="KeyTypeOfDictBuilder">
+      <LinkConnectDirective>
+        <DomainRelationshipMoniker Name="KeyTypeOfDict" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDDictionaryType" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDBuiltInProperty" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
+    <ConnectionBuilder Name="ValueTypeOfDictBuilder">
+      <LinkConnectDirective>
+        <DomainRelationshipMoniker Name="ValueTypeOfDict" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDDictionaryType" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDBuiltInProperty" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
+    <ConnectionBuilder Name="PrimitiveTypeHasValueBuilder">
+      <LinkConnectDirective>
+        <DomainRelationshipMoniker Name="PrimitiveTypeHasValue" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDPrimitiveType" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDBuiltInProperty" />
             </AcceptingClass>
           </RolePlayerConnectDirective>
         </TargetDirectives>
@@ -4339,10 +4386,6 @@ The values set to this property should be defined in
         <DomainClassMoniker Name="VDDialog" />
         <GeometryShapeMoniker Name="VDDialogShape" />
       </ShapeMap>
-      <ShapeMap HasCustomParentElement="true">
-        <DomainClassMoniker Name="VDAjax" />
-        <GeometryShapeMoniker Name="VDAjaxShape" />
-      </ShapeMap>
       <ShapeMap>
         <DomainClassMoniker Name="VDModelSelector" />
         <ParentElementPath>
@@ -4356,10 +4399,10 @@ The values set to this property should be defined in
           <DomainPath>WidgetHasEvents.Widget/!VDViewComponent</DomainPath>
         </ParentElementPath>
         <DecoratorMap>
-          <TextDecoratorMoniker Name="VDEventPort/EventNameDecorator" />
+          <TextDecoratorMoniker Name="VDPseudoEventPort/EventNameDecorator" />
           <PropertyDisplayed>
             <PropertyPath>
-              <DomainPropertyMoniker Name="VDEvent/EventName" />
+              <DomainPropertyMoniker Name="VDEventBase/Name" />
             </PropertyPath>
           </PropertyDisplayed>
         </DecoratorMap>
@@ -4371,35 +4414,75 @@ The values set to this property should be defined in
           <TextDecoratorMoniker Name="VDClientActionShape/ActionNameDecorator" />
           <PropertyDisplayed>
             <PropertyPath>
-              <DomainPropertyMoniker Name="VDClientAction/ActionName" />
+              <DomainPropertyMoniker Name="VDActionBase/Name" />
             </PropertyPath>
           </PropertyDisplayed>
         </DecoratorMap>
         <GeometryShapeMoniker Name="VDClientActionShape" />
       </ShapeMap>
-      <ShapeMap>
-        <DomainClassMoniker Name="VDClientActionInput" />
-        <ParentElementPath>
-          <DomainPath>ClientActionHasInput.ClientAction/!VDClientAction</DomainPath>
-        </ParentElementPath>
-        <PortMoniker Name="VDClientActionInputPort" />
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDServerAction" />
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDServerActionShape/ActionNameDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="VDActionBase/Name" />
+            </PropertyPath>
+          </PropertyDisplayed>
+        </DecoratorMap>
+        <GeometryShapeMoniker Name="VDServerActionShape" />
       </ShapeMap>
       <ShapeMap>
-        <DomainClassMoniker Name="VDClientActionOutput" />
+        <DomainClassMoniker Name="VDPseudoEvent" />
         <ParentElementPath>
-          <DomainPath>ClientActionHasOutput.ClientAction/!VDClientAction</DomainPath>
+          <DomainPath>WidgetHasEvents.Widget/!VDViewComponent</DomainPath>
         </ParentElementPath>
-        <PortMoniker Name="VDClientActionOutputPort" />
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDPseudoEventPort/EventNameDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="VDEventBase/Name" />
+            </PropertyPath>
+          </PropertyDisplayed>
+        </DecoratorMap>
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDEventPort/EventNameDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="VDEventBase/Name" />
+            </PropertyPath>
+          </PropertyDisplayed>
+        </DecoratorMap>
+        <PortMoniker Name="VDPseudoEventPort" />
+      </ShapeMap>
+      <ShapeMap>
+        <DomainClassMoniker Name="VDActionJoint" />
+        <ParentElementPath>
+          <DomainPath>WidgetHasActionJoints.Widget/!VDViewComponent</DomainPath>
+        </ParentElementPath>
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDActionJointPort/JointNameDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="VDActionJoint/DisplayName" />
+            </PropertyPath>
+          </PropertyDisplayed>
+        </DecoratorMap>
+        <PortMoniker Name="VDActionJointPort" />
+      </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDCondition" />
+        <GeometryShapeMoniker Name="VDConditionShape" />
       </ShapeMap>
     </ShapeMaps>
     <ConnectorMaps>
       <ConnectorMap>
-        <ConnectorMoniker Name="VDClientActionOutput2ComponentConnector" />
-        <DomainRelationshipMoniker Name="R5_Output2Component" />
+        <ConnectorMoniker Name="VDEvent2ComponentConnector" />
+        <DomainRelationshipMoniker Name="R_Event2Component" />
       </ConnectorMap>
       <ConnectorMap>
-        <ConnectorMoniker Name="VDEvent2ClientActionInputConnector" />
-        <DomainRelationshipMoniker Name="R4_Event2Input" />
+        <ConnectorMoniker Name="VDActionJoint2ComponentConnector" />
+        <DomainRelationshipMoniker Name="R_ActionJoint2Component" />
       </ConnectorMap>
     </ConnectorMaps>
   </Diagram>
@@ -4472,12 +4555,14 @@ The values set to this property should be defined in
       <ElementTool Name="IconTool" ToolboxIcon="Resources\DynamicImage_6024_24.bmp" Caption="Icon" Tooltip="" HelpKeyword="IconTool">
         <DomainClassMoniker Name="VDIcon" />
       </ElementTool>
-      <ElementTool Name="AjaxTool" ToolboxIcon="Resources\FileFromWeb_6281_24.bmp" Caption="Ajax" Tooltip="" HelpKeyword="AjaxTool">
-        <DomainClassMoniker Name="VDAjax" />
-      </ElementTool>
       <ConnectionTool Name="EventConnectionTool" ToolboxIcon="Resources\VSObject_Event.bmp" Caption="Event" Tooltip="Event Connection Tool" HelpKeyword="">
         <ConnectionBuilderMoniker Name="MVCVisualDesigner/EventBuilder" />
       </ConnectionTool>
+    </ToolboxTab>
+    <ToolboxTab TabText="Action">
+      <ElementTool Name="ConditionTool" ToolboxIcon="Resources\Filter.bmp" Caption="Condition" Tooltip="" HelpKeyword="ConditionTool">
+        <DomainClassMoniker Name="VDCondition" />
+      </ElementTool>
     </ToolboxTab>
     <Validation UsesMenu="false" UsesOpen="false" UsesSave="false" UsesLoad="false" />
     <DiagramMoniker Name="VDDiagram" />

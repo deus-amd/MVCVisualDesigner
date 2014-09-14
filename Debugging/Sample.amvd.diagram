@@ -1,18 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<mVCVisualDesignerDiagram dslVersion="0.0.2.0" Id="b3214b62-95ab-4700-8a25-2fb30f9f01a4" absoluteBounds="0, 0, 11, 8.5" name="Sample">
-  <exampleModelMoniker Id="2a38f7da-25cf-4b11-a329-74f6174dd24e" />
+<vDDiagram dslVersion="0.0.3.0" Id="a2039ca9-9232-41a3-a572-f6f304e9dd27" absoluteBounds="0, 0, 11, 8.5" name="Sample">
+  <vDViewMoniker Id="7116c30d-f7f5-4abd-9aea-d53e8873d44d" />
   <nestedChildShapes>
-    <exampleShape Id="dd6b8314-fe15-4914-9c9a-d8bdd0f28916" absoluteBounds="0.5, 1.75, 2, 0.75">
-      <exampleElementMoniker name="/2a38f7da-25cf-4b11-a329-74f6174dd24e/ExampleElement1" />
-    </exampleShape>
-    <exampleShape Id="fb6f8b2f-b00e-40a7-b131-f7da11bd791d" absoluteBounds="3, 0.5, 2, 0.75">
-      <exampleElementMoniker name="/2a38f7da-25cf-4b11-a329-74f6174dd24e/ExampleElement2" />
-    </exampleShape>
-    <exampleConnector Id="b491443e-0750-477f-97c4-f5eda3281fdc" edgePoints="[(1.5 : 1.75); (1.5 : 0.875); (3 : 0.875)]" fixedFrom="NotFixed" fixedTo="NotFixed" TargetRelationshipDomainClassId="fed6cfa2-a447-4d51-8609-ce68ce03a66b">
-      <nodes>
-        <exampleShapeMoniker Id="dd6b8314-fe15-4914-9c9a-d8bdd0f28916" />
-        <exampleShapeMoniker Id="fb6f8b2f-b00e-40a7-b131-f7da11bd791d" />
-      </nodes>
-    </exampleConnector>
+    <vDTableRowWrapperShape Id="19f3c86d-bbe8-455f-9ed8-b03a5da7e427" absoluteBounds="2.07, 1.02, 4.5, 0.60000000000000009" disabled="false" isPinned="false" relayoutChildren="false">
+      <vDTableRowWrapperMoniker Id="e2ce7551-6c3b-4860-b4c4-ba9adc54d348" />
+      <relativeChildShapes>
+        <vDWidgetTitlePort Id="ffa94729-25bb-4a91-93f2-117176c042e3" absoluteBounds="2.07, 0.85000000044703483, 1.0800211191177367, 0.15">
+          <vDWidgetTitleMoniker Id="547e9319-9305-48c4-85f5-89b55bc998ad" />
+        </vDWidgetTitlePort>
+      </relativeChildShapes>
+      <nestedChildShapes>
+        <vDHoriContainerShape Id="ced05383-6bb5-40f5-b2ae-b0b723bcf6e8" absoluteBounds="2.07, 1.02, 4.5, 0.1" disabled="false" isPinned="false" relayoutChildren="false">
+          <vDHoriContainerMoniker Id="87b3b7f0-ce87-4362-b65b-21ea18b13493" />
+          <nestedChildShapes>
+            <vDTableColTitleShape Id="49d288d3-c19f-446f-b4d6-6a566899186b" absoluteBounds="2.17, 1.02, 1, 0.1" disabled="false" isPinned="false" relayoutChildren="false">
+              <vDTableColTitleMoniker Id="e4cb4350-1af6-4468-a580-3045b73ff05f" />
+            </vDTableColTitleShape>
+            <vDTableColTitleShape Id="8db8061d-08b1-4170-b85d-89f60d428f51" absoluteBounds="3.17, 1.02, 1, 0.1" disabled="false" isPinned="false" relayoutChildren="false">
+              <vDTableColTitleMoniker Id="8731afbe-18ce-49dc-9cf4-8454ee5c292c" />
+            </vDTableColTitleShape>
+            <vDTableColTitleShape Id="e6d74e8c-a619-48e9-8870-8d6c9fec50f6" absoluteBounds="4.17, 1.02, 1, 0.1" disabled="false" isPinned="false" relayoutChildren="false">
+              <vDTableColTitleMoniker Id="6679458e-169f-4632-b4be-586d2d2211f5" />
+            </vDTableColTitleShape>
+            <vDTableColTitleShape Id="1b3c9f52-bcad-48ec-ad48-62aa5cd4ba2e" absoluteBounds="5.17, 1.02, 1, 0.1" disabled="false" isPinned="false" relayoutChildren="false">
+              <vDTableColTitleMoniker Id="9940f293-4492-46e9-9425-8696414c4386" />
+            </vDTableColTitleShape>
+          </nestedChildShapes>
+        </vDHoriContainerShape>
+        <vDVertContainerShape Id="8e401a67-c82d-461c-bd67-87a67b457ba0" absoluteBounds="2.07, 1.12, 4.5, 0.50000000000000011" disabled="false" isPinned="false" relayoutChildren="false">
+          <vDVertContainerMoniker Id="a088cee2-69fb-481c-9eed-813fa442fbb5" />
+          <nestedChildShapes>
+            <vDTableRowShape Id="929bd1f2-6e62-4b46-9e78-32bc73651281" absoluteBounds="2.07, 1.12, 4.5, 0.5" disabled="false" isPinned="false" relayoutChildren="false">
+              <vDTableRowMoniker Id="6ad8d329-24fc-488f-b321-ee3e1c79dce7" />
+              <nestedChildShapes>
+                <vDTableRowTitleShape Id="b1e3f267-3bb3-46bf-97f5-d088b3fff926" absoluteBounds="2.07, 1.12, 0.1, 0.4" disabled="false" isPinned="false" relayoutChildren="false">
+                  <vDTableRowTitleMoniker Id="c5fc1019-782b-4d9e-8a38-fb94e071b30a" />
+                </vDTableRowTitleShape>
+                <vDTableCellShape Id="9780532c-fc07-4855-a57d-7f88ef21cf08" absoluteBounds="2.17, 1.12, 1, 0.4" disabled="false" isPinned="false" relayoutChildren="false" colSpan="1" rowSpan="1">
+                  <vDTableCellMoniker Id="36ace6c6-6c24-4cd5-bee5-5ead08ed6722" />
+                </vDTableCellShape>
+                <vDTableCellShape Id="805f60e6-aa00-4e2b-bd62-aa288f3b7ff1" absoluteBounds="3.17, 1.12, 1, 0.4" disabled="false" isPinned="false" relayoutChildren="false" colSpan="1" rowSpan="1">
+                  <vDTableCellMoniker Id="dc4965c6-0050-4879-b981-39d6a0aca258" />
+                </vDTableCellShape>
+                <vDTableCellShape Id="b15011a1-4fc9-4846-8245-e0c45a09c337" absoluteBounds="4.17, 1.12, 1, 0.4" disabled="false" isPinned="false" relayoutChildren="false" colSpan="1" rowSpan="1">
+                  <vDTableCellMoniker Id="b9977f7d-fbfb-4e3e-a300-77a08899da76" />
+                </vDTableCellShape>
+                <vDTableCellShape Id="4fbc1c06-9198-4efe-902f-2dc5b5011c6e" absoluteBounds="5.17, 1.12, 1, 0.4" disabled="false" isPinned="false" relayoutChildren="false" colSpan="1" rowSpan="1">
+                  <vDTableCellMoniker Id="2ffa2510-9e1e-4659-8ad5-2a5cb6a2b091" />
+                </vDTableCellShape>
+              </nestedChildShapes>
+            </vDTableRowShape>
+          </nestedChildShapes>
+        </vDVertContainerShape>
+      </nestedChildShapes>
+    </vDTableRowWrapperShape>
   </nestedChildShapes>
-</mVCVisualDesignerDiagram>
+</vDDiagram>
