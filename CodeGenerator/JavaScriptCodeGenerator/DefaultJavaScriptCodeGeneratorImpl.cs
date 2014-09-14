@@ -18,7 +18,7 @@ namespace MVCVisualDesigner.CodeGenerator.JavaScriptCodeGenerator
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\John\Desktop\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\DefaultJavaScriptCodeGeneratorImpl.tt"
+    #line 1 "C:\Users\John\repos\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\DefaultJavaScriptCodeGeneratorImpl.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class DefaultJavaScriptCodeGeneratorImpl : DefaultJavaScriptCodeGeneratorImplBase
     {
@@ -31,7 +31,7 @@ namespace MVCVisualDesigner.CodeGenerator.JavaScriptCodeGenerator
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 6 "C:\Users\John\Desktop\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\DefaultJavaScriptCodeGeneratorImpl.tt"
+        #line 6 "C:\Users\John\repos\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\DefaultJavaScriptCodeGeneratorImpl.tt"
  
 	private void internalGenerateWidgetInitCode(VDWidget eventSource, IJavaScriptCodeGeneratorFactory jsGenFactory)
 	{

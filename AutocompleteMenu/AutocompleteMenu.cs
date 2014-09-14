@@ -281,7 +281,7 @@ namespace AutocompleteMenuNS
                     value.ImageList = ImageList;
                     ctrl.RightToLeft = RightToLeft;
                     ctrl.Font = Font;
-                    ctrl.MaximumSize = ctrl.MaximumSize;
+                    ctrl.MaximumSize = MaximumSize;
                 }
                 Host.ListView = value;
                 Host.ListView.ItemSelected += new EventHandler(ListView_ItemSelected);

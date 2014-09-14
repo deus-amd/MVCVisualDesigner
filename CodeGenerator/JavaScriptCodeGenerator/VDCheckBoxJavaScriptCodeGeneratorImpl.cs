@@ -19,7 +19,7 @@ namespace MVCVisualDesigner.CodeGenerator.JavaScriptCodeGenerator
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\John\Desktop\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
+    #line 1 "C:\Users\John\repos\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class VDCheckBoxJavaScriptCodeGeneratorImpl : VDCheckBoxJavaScriptCodeGeneratorImplBase
     {
@@ -32,7 +32,7 @@ namespace MVCVisualDesigner.CodeGenerator.JavaScriptCodeGenerator
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 7 "C:\Users\John\Desktop\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
+        #line 7 "C:\Users\John\repos\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
 
     private void generateWidgetInitCode(VDCheckBox eventSource, IJavaScriptCodeGeneratorFactory jsGenFactory)
     {
@@ -44,42 +44,42 @@ namespace MVCVisualDesigner.CodeGenerator.JavaScriptCodeGenerator
         #line default
         #line hidden
         
-        #line 13 "C:\Users\John\Desktop\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
+        #line 13 "C:\Users\John\repos\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
 this.Write("$(\"");
 
         
         #line default
         #line hidden
         
-        #line 14 "C:\Users\John\Desktop\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
+        #line 14 "C:\Users\John\repos\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture("todo:checkbox.GetCSSSelector()"));
 
         
         #line default
         #line hidden
         
-        #line 14 "C:\Users\John\Desktop\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
+        #line 14 "C:\Users\John\repos\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
 this.Write("\").");
 
         
         #line default
         #line hidden
         
-        #line 14 "C:\Users\John\Desktop\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
+        #line 14 "C:\Users\John\repos\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(e.Name));
 
         
         #line default
         #line hidden
         
-        #line 14 "C:\Users\John\Desktop\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
+        #line 14 "C:\Users\John\repos\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
 this.Write("(function(event){\r\n");
 
         
         #line default
         #line hidden
         
-        #line 15 "C:\Users\John\Desktop\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
+        #line 15 "C:\Users\John\repos\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
  
             this.PushIndent(Utility.Constants.DEFAULT_INDENT);
 
@@ -102,14 +102,14 @@ this.Write("(function(event){\r\n");
         #line default
         #line hidden
         
-        #line 32 "C:\Users\John\Desktop\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
+        #line 32 "C:\Users\John\repos\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
 this.Write("    return false;\r\n});\r\n");
 
         
         #line default
         #line hidden
         
-        #line 35 "C:\Users\John\Desktop\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
+        #line 35 "C:\Users\John\repos\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
  
         }
     }
@@ -122,42 +122,42 @@ this.Write("    return false;\r\n});\r\n");
         #line default
         #line hidden
         
-        #line 42 "C:\Users\John\Desktop\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
+        #line 42 "C:\Users\John\repos\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
 this.Write("var data = {};\r\nvar $target = $(\"");
 
         
         #line default
         #line hidden
         
-        #line 44 "C:\Users\John\Desktop\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
+        #line 44 "C:\Users\John\repos\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture("todo: eventTarget.GetCSSSelector()"));
 
         
         #line default
         #line hidden
         
-        #line 44 "C:\Users\John\Desktop\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
+        #line 44 "C:\Users\John\repos\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
 this.Write("\");\r\n$target.");
 
         
         #line default
         #line hidden
         
-        #line 45 "C:\Users\John\Desktop\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
+        #line 45 "C:\Users\John\repos\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(action.Name));
 
         
         #line default
         #line hidden
         
-        #line 45 "C:\Users\John\Desktop\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
+        #line 45 "C:\Users\John\repos\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
 this.Write("(data);\r\n");
 
         
         #line default
         #line hidden
         
-        #line 46 "C:\Users\John\Desktop\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
+        #line 46 "C:\Users\John\repos\MVCVisualDesigner\CodeGenerator\JavaScriptCodeGenerator\VDCheckBoxJavaScriptCodeGeneratorImpl.tt"
 
     }
 
