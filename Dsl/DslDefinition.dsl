@@ -2213,7 +2213,7 @@
         <TextDecorator Name="TagDecorator" DisplayName="Tag" DefaultText="" FontStyle="Bold" FontSize="18" />
       </ShapeHasDecorators>
     </GeometryShape>
-    <GeometryShape Id="806cf407-c3ea-4911-a70d-b1e51f2b8f67" Description="Description for MVCVisualDesigner.VDTableShape" Name="VDTableShape" DisplayName="VDTable Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Shape" FillColor="Silver" InitialWidth="4" InitialHeight="3" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+    <GeometryShape Id="806cf407-c3ea-4911-a70d-b1e51f2b8f67" Description="Description for MVCVisualDesigner.VDTableShape" Name="VDTableShape" DisplayName="VDTable Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Shape" FillColor="Silver" InitialWidth="2.3" InitialHeight="1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
@@ -2239,7 +2239,7 @@
         <TextDecorator Name="IndexDecorator" DisplayName="Index Decorator" DefaultText="IndexDecorator" FontSize="6" />
       </ShapeHasDecorators>
     </GeometryShape>
-    <GeometryShape Id="9785269d-3ecc-49dd-b93d-0775ca4383ed" Description="Description for MVCVisualDesigner.VDTableRowShape" Name="VDTableRowShape" DisplayName="VDTable Row Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Row Shape" FillColor="LightGray" OutlineColor="Transparent" InitialHeight="0.5" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
+    <GeometryShape Id="9785269d-3ecc-49dd-b93d-0775ca4383ed" Description="Description for MVCVisualDesigner.VDTableRowShape" Name="VDTableRowShape" DisplayName="VDTable Row Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Row Shape" FillColor="LightGray" OutlineColor="Transparent" InitialHeight="0.35" OutlineThickness="0" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
@@ -2278,7 +2278,7 @@
         <TextDecorator Name="TextDecorator" DisplayName="Text Decorator" DefaultText="TextDecorator" />
       </ShapeHasDecorators>
     </GeometryShape>
-    <GeometryShape Id="7c066626-676c-439b-bba4-cc8adb2d2c75" Description="Description for MVCVisualDesigner.VDTableRowWrapperShape" Name="VDTableRowWrapperShape" DisplayName="VDTable Row Wrapper Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Row Wrapper Shape" FillColor="Silver" InitialWidth="4" InitialHeight="0.6" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+    <GeometryShape Id="7c066626-676c-439b-bba4-cc8adb2d2c75" Description="Description for MVCVisualDesigner.VDTableRowWrapperShape" Name="VDTableRowWrapperShape" DisplayName="VDTable Row Wrapper Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Row Wrapper Shape" FillColor="Silver" InitialWidth="2.3" InitialHeight="0.45" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDTableShape" />
       </BaseGeometryShape>

@@ -12,8 +12,8 @@ namespace MVCVisualDesigner
     public class TableConstants
     {
         public const double TITLE_SIZE = 0.1;
-        public const double MIN_COL_WIDTH = 1.0;
-        public const double MIN_ROW_HEIGHT = 0.4;
+        public const double MIN_COL_WIDTH = 0.7;
+        public const double MIN_ROW_HEIGHT = 0.3;
     }
 
     ////////////////////////////////////////////////////////////////////////////////
