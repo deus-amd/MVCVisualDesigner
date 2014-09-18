@@ -288,18 +288,18 @@
             this.tsmiAddViewModelMember,
             this.tsmiDeleteViewModelMember});
             this.ctxMenuViewModel.Name = "ctxMenuViewModel";
-            this.ctxMenuViewModel.Size = new System.Drawing.Size(134, 48);
+            this.ctxMenuViewModel.Size = new System.Drawing.Size(128, 48);
             // 
             // tsmiAddViewModelMember
             // 
             this.tsmiAddViewModelMember.Name = "tsmiAddViewModelMember";
-            this.tsmiAddViewModelMember.Size = new System.Drawing.Size(133, 22);
+            this.tsmiAddViewModelMember.Size = new System.Drawing.Size(127, 22);
             this.tsmiAddViewModelMember.Text = "Add Child";
             // 
             // tsmiDeleteViewModelMember
             // 
             this.tsmiDeleteViewModelMember.Name = "tsmiDeleteViewModelMember";
-            this.tsmiDeleteViewModelMember.Size = new System.Drawing.Size(133, 22);
+            this.tsmiDeleteViewModelMember.Size = new System.Drawing.Size(127, 22);
             this.tsmiDeleteViewModelMember.Text = "Delete";
             // 
             // tlpWidgetModelLayout
@@ -427,18 +427,18 @@
             this.tsmiAddActionDataMember,
             this.tsmiDeleteActionDataMember});
             this.ctxMenuActionData.Name = "ctxMenuActionModel";
-            this.ctxMenuActionData.Size = new System.Drawing.Size(134, 48);
+            this.ctxMenuActionData.Size = new System.Drawing.Size(128, 48);
             // 
             // tsmiAddActionDataMember
             // 
             this.tsmiAddActionDataMember.Name = "tsmiAddActionDataMember";
-            this.tsmiAddActionDataMember.Size = new System.Drawing.Size(133, 22);
+            this.tsmiAddActionDataMember.Size = new System.Drawing.Size(127, 22);
             this.tsmiAddActionDataMember.Text = "Add Child";
             // 
             // tsmiDeleteActionDataMember
             // 
             this.tsmiDeleteActionDataMember.Name = "tsmiDeleteActionDataMember";
-            this.tsmiDeleteActionDataMember.Size = new System.Drawing.Size(133, 22);
+            this.tsmiDeleteActionDataMember.Size = new System.Drawing.Size(127, 22);
             this.tsmiDeleteActionDataMember.Text = "Delete";
             // 
             // olvParentID
@@ -461,30 +461,22 @@
             this.tsmiAddWidgetValueMember,
             this.tsmiDeleteWidgetValueMember});
             this.ctxMenuWidgetValue.Name = "ctxMenuWidgetValue";
-            this.ctxMenuWidgetValue.Size = new System.Drawing.Size(134, 48);
+            this.ctxMenuWidgetValue.Size = new System.Drawing.Size(128, 48);
             // 
             // tsmiAddWidgetValueMember
             // 
             this.tsmiAddWidgetValueMember.Name = "tsmiAddWidgetValueMember";
-            this.tsmiAddWidgetValueMember.Size = new System.Drawing.Size(133, 22);
+            this.tsmiAddWidgetValueMember.Size = new System.Drawing.Size(127, 22);
             this.tsmiAddWidgetValueMember.Text = "Add Child";
             // 
             // tsmiDeleteWidgetValueMember
             // 
             this.tsmiDeleteWidgetValueMember.Name = "tsmiDeleteWidgetValueMember";
-            this.tsmiDeleteWidgetValueMember.Size = new System.Drawing.Size(133, 22);
+            this.tsmiDeleteWidgetValueMember.Size = new System.Drawing.Size(127, 22);
             this.tsmiDeleteWidgetValueMember.Text = "Delete";
             // 
             // txtTypeEditor
             // 
-            this.txtTypeEditor.AutoCompleteCustomSource.AddRange(new string[] {
-            "aa",
-            "bb",
-            "cc",
-            "dd",
-            "ee",
-            "ff",
-            "gg"});
             this.autocompleteMenu_Type.SetAutocompleteMenu(this.txtTypeEditor, this.autocompleteMenu_Type);
             this.txtTypeEditor.Location = new System.Drawing.Point(38, 506);
             this.txtTypeEditor.Name = "txtTypeEditor";

@@ -864,14 +864,12 @@ namespace MVCVisualDesigner
                 else
                 {
                     //VDModelMemberInstance instance = (VDModelMemberInstance)e.RowObject;
-                    
                     m_txtTypeEditor.Bounds = e.CellBounds;
                     m_txtTypeEditor.Font = (((ObjectListView)sender).Font);
                     m_txtTypeEditor.Tag = e.RowObject;
                     m_txtTypeEditor.Visible = true;
                     e.Control = m_txtTypeEditor;
                     e.AutoDispose = false;
-                    m_autoComplete.Show(m_txtTypeEditor, true);
                 }
             }
             else // init value, formatter, validator
