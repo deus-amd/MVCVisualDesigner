@@ -87,9 +87,9 @@ namespace MVCVisualDesigner
         public void HideWindow()
         {
             this.Hide();
-            if (this.Window != null)
+            if (this.ModelToolWindowForm != null)
             {
-//todel                m_form.ClearWindow();
+                this.ModelToolWindowForm.OnHideWindow();
             }
         }
 
@@ -132,7 +132,7 @@ namespace MVCVisualDesigner
             // Model Window lost focus
             else if (lostFocusWindow != null && string.Compare(lostFocusWindow.ObjectKind, GUID_MODEL_TOOL_WINDOW, true) ==0)
             {
-//todel                if (this.Window != null) m_form.OnLostFocus();
+                if (this.ModelToolWindowForm != null) ModelToolWindowForm.OnLostFocus();
             }
         }
 

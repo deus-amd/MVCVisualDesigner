@@ -1,4 +1,5 @@
-﻿using BrightIdeasSoftware;
+﻿using AutocompleteMenuNS;
+using BrightIdeasSoftware;
 using MVCVisualDesigner.TypeDescriptor;
 using System;
 using System.CodeDom.Compiler;
@@ -8,6 +9,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -21,7 +23,13 @@ namespace MVCVisualDesigner
             InitializeComponent();
             m_toolWindow = toolWindow;
 
-            m_widgetValueHandler = new WidgetValueHandler(this, tlvWidgetModel, toolTipMsg, ctxMenuWidgetValue, tsmiAddWidgetValueMember, tsmiDeleteWidgetValueMember);
+            // init type editor
+            txtTypeEditor.KeyDown += onTypeEditorKeyDown;
+            ModelTypeDynamicCollection modelTypeCollection = new ModelTypeDynamicCollection(txtTypeEditor);
+            autocompleteMenu_Type.SetAutocompleteItems(modelTypeCollection);
+
+            m_widgetValueHandler = new WidgetValueHandler(this, tlvWidgetModel, toolTipMsg, ctxMenuWidgetValue, tsmiAddWidgetValueMember, tsmiDeleteWidgetValueMember,
+                                                                txtTypeEditor, autocompleteMenu_Type, modelTypeCollection);
             m_viewModelHandler = new ViewModelHandler(this, tlvViewModel, toolTipMsg, ctxMenuViewModel, tsmiAddViewModelMember, tsmiDeleteViewModelMember);
             m_actionDataHandler = new ActionDataHandler(this, tlvActionModel, toolTipMsg, ctxMenuActionData, tsmiAddActionDataMember, tsmiDeleteActionDataMember);
 
@@ -29,17 +37,13 @@ namespace MVCVisualDesigner
             this.tlvViewModel.RootKeyValue = Guid.Empty;
             this.tlvWidgetModel.RootKeyValue = Guid.Empty;
             this.tlvActionModel.RootKeyValue = Guid.Empty;
+        }
 
-            //this.ctrlViewModelType.ValueChanged += ctrlViewModelType_ValueChanged;
-
-
-            //m_ctrlTypeListForViewModel = new ModelTypeListControl();
-            //m_ctrlTypeListForViewModel.ValueChanged += ViewModel_TypeListCellEditor_ValueChanged;
-
-            //m_ctrlTypeListForActionModel = new ModelTypeListControl();
-            //m_ctrlTypeListForActionModel.ValueChanged += ActionModel_TypeListCellEditor_ValueChanged;
-
-            //m_ctrlSelector = new SelectorControl();
+        void onTypeEditorKeyDown(object sender, KeyEventArgs e)
+        {
+            //forcibly shows menu
+            if (e.Control && e.KeyCode == Keys.Space)
+                autocompleteMenu_Type.Show(txtTypeEditor, true);
         }
 
         internal void ShowWidgetValuePanel()
@@ -75,26 +79,21 @@ namespace MVCVisualDesigner
         private ActionDataHandler m_actionDataHandler;
         public ActionDataHandler ActionDataHandler { get { return m_actionDataHandler; } }
 
-#if todel
-        public void ClearWindow()
-        {
-            tlvViewModel.ClearObjects();
-            tlvViewModel.DataSource = null;
-
-            tlvWidgetModel.ClearObjects();
-            tlvWidgetModel.DataSource = null;
-
-            tlvActionModel.ClearObjects();
-            tlvActionModel.DataSource = null;
-        }
-
         public void OnLostFocus()
         {
-            // hide type list control
-            if (m_ctrlTypeListForViewModel != null && m_ctrlTypeListForViewModel.Visible)
-                m_ctrlTypeListForViewModel.Hide();
+            WidgetValueHandler.OnLostFocus();
+            ViewModelHandler.OnLostFocus();
+            ActionDataHandler.OnLostFocus();
         }
 
+        public void OnHideWindow()
+        {
+            WidgetValueHandler.OnHideWindow();
+            ViewModelHandler.OnHideWindow();
+            ActionDataHandler.OnHideWindow();
+        }
+
+#if todel
         private ModelTypeListControl m_ctrlTypeListForViewModel;
         private ModelTypeListControl m_ctrlTypeListForActionModel;
         private SelectorControl m_ctrlSelector;
@@ -304,14 +303,6 @@ namespace MVCVisualDesigner
                 e.Control = m_ctrlSelector;
                 e.AutoDispose = false;
             }
-        }
-
-        private void tlvActionModel_CellEditValidating(object sender, CellEditEventArgs e)
-        {
-        }
-
-        private void tlvActionModel_CellEditFinishing(object sender, CellEditEventArgs e)
-        {
         }
 
         void ActionModel_TypeListCellEditor_ValueChanged(object sender, EventArgs e)
@@ -759,6 +750,16 @@ namespace MVCVisualDesigner
         }
 
         protected VDView RootView { get; set; }
+
+        public virtual void OnLostFocus() 
+        { 
+        }
+
+        public virtual void OnHideWindow()
+        { 
+            m_treeListView.ClearObjects();
+            m_treeListView.DataSource = null;
+        }
     }
 
     public class WidgetValueHandler : ModelToolWindowHandler
@@ -770,8 +771,13 @@ namespace MVCVisualDesigner
         private const string COLUMN_FORMATTER = "Formatter";
         private const string COLUMN_DISPNAME = "Display Name";
 
-        public WidgetValueHandler(ModelToolWindowForm form, DataTreeListView treeListView, ToolTip toolTip, 
-            ContextMenuStrip contextMenu, ToolStripMenuItem miAddChild, ToolStripMenuItem miDelete)
+        private TextBox m_txtTypeEditor = null;
+        private ModelTypeDynamicCollection m_modelTypeCollection = null;
+        private AutocompleteMenu m_autoComplete = null;
+
+        public WidgetValueHandler(ModelToolWindowForm form, DataTreeListView treeListView, ToolTip toolTip,
+                                    ContextMenuStrip contextMenu, ToolStripMenuItem miAddChild, ToolStripMenuItem miDelete, 
+                                    TextBox txtTypeEditor, AutocompleteMenu autoComplete, ModelTypeDynamicCollection typeCollection)
             : base(form, treeListView, toolTip, contextMenu, miAddChild, miDelete)
         {
             // set up event handlers
@@ -783,6 +789,11 @@ namespace MVCVisualDesigner
             //
             m_miAddChild.Click += OnAddMemberMenuClick;
             m_miDelete.Click += OnDelMemberMenuClick;
+
+            //
+            m_txtTypeEditor = txtTypeEditor;
+            m_modelTypeCollection = typeCollection;
+            m_autoComplete = autoComplete;
         }
 
         void OnCellRightClick(object sender, CellRightClickEventArgs e)
@@ -837,7 +848,7 @@ namespace MVCVisualDesigner
 
             if (columnName == COLUMN_NAME || columnName == COLUMN_DISPNAME)
             {
-                if (node != null && !node.CanChangeName)
+                if (node == null || !node.CanChangeName)
                 {
                     showTooltipMsg(columnName + " can not be changed.", e);
                     e.Cancel = true;
@@ -845,15 +856,27 @@ namespace MVCVisualDesigner
             }
             else if (columnName == COLUMN_TYPE)
             {
-                if (node != null && !node.CanChangeType)
+                if (node == null || !node.CanChangeType)
                 {
                     showTooltipMsg("Type can not be changed.", e);
                     e.Cancel = true;
                 }
+                else
+                {
+                    //VDModelMemberInstance instance = (VDModelMemberInstance)e.RowObject;
+                    
+                    m_txtTypeEditor.Bounds = e.CellBounds;
+                    m_txtTypeEditor.Font = (((ObjectListView)sender).Font);
+                    m_txtTypeEditor.Tag = e.RowObject;
+                    m_txtTypeEditor.Visible = true;
+                    e.Control = m_txtTypeEditor;
+                    e.AutoDispose = false;
+                    m_autoComplete.Show(m_txtTypeEditor, true);
+                }
             }
             else // init value, formatter, validator
             {
-                if (node != null && node is TypeNode)
+                if (node == null || node is TypeNode)
                 {
                     showTooltipMsg(columnName + " can not be changed.", e);
                     e.Cancel = true;
@@ -902,7 +925,9 @@ namespace MVCVisualDesigner
                 else if (columnName == COLUMN_DISPNAME)
                     node.OnDispNameChanged(oldValue, newValue);
                 else if (columnName == COLUMN_TYPE)
+                {
                     node.OnTypeNameChanged(oldValue, newValue);
+                }
                 else if (columnName == COLUMN_INITVAL)
                     node.OnInitValueChanged(oldValue, newValue);
                 else if (columnName == COLUMN_VALIDATOR)
@@ -924,7 +949,17 @@ namespace MVCVisualDesigner
             this.RootView = widget.RootView;
             this.m_currentWidget = widget;
 
+            this.m_modelTypeCollection.ModelStore = widget != null ? widget.GetModelStore() : null;
             refreshTreeListView();
+        }
+
+        public override void OnLostFocus()
+        {
+            // hide type editor
+            if (m_txtTypeEditor != null && m_txtTypeEditor.Visible)
+            {
+                m_txtTypeEditor.Hide();
+            }
         }
 
         private void refreshTreeListView()
@@ -954,7 +989,7 @@ namespace MVCVisualDesigner
             m_toolTip.Show(msg, m_treeListView, e.CellBounds.Left, e.CellBounds.Bottom, 800); 
         }
 
-#region Nodes
+        #region Tree List View Nodes
         private void getNodesForWidget(VDWidget widget, NodeBase parentNode, List<NodeBase> allNodes)
         {
             NodeBase node = getTypeNode(widget, parentNode);
@@ -1322,7 +1357,7 @@ namespace MVCVisualDesigner
                 m_member.FormatterNames = newValue;
             }
         }
-#endregion
+        #endregion
     }
 
     public class ViewModelHandler : ModelToolWindowHandler
@@ -1416,6 +1451,47 @@ namespace MVCVisualDesigner
             }
         }
 #endif
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////
+    public class ModelTypeDynamicCollection : IEnumerable<AutocompleteItem>
+    {
+        private TextBoxBase tb;
+
+        public ModelTypeDynamicCollection(TextBoxBase tb)
+        {
+            this.tb = tb;
+        }
+
+        public IEnumerator<AutocompleteItem> GetEnumerator()
+        {
+            return BuildList().GetEnumerator();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        private IEnumerable<AutocompleteItem> BuildList()
+        {
+            var types = new Dictionary<string, VDMetaType>();
+
+            if (ModelStore != null)
+            {
+                foreach(VDMetaType metaType in ModelStore.MetaTypes)
+                {
+                    types.Add(metaType.FullName, metaType);
+                }
+            }
+
+            //return autocomplete items
+            foreach (var typeName in types.Keys)
+                yield return new AutocompleteItem(typeName, 0);
+        }
+
+        public VDModelStore ModelStore { get; set; }
     }
 }
 

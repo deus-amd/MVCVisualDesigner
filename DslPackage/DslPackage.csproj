@@ -223,12 +223,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Package.tt</DependentUpon>
     </Compile>
-    <Compile Include="CustomCode\ModelTypeListControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CustomCode\ModelTypeListControl.Designer.cs">
-      <DependentUpon>ModelTypeListControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="GeneratedCode\EditorFactory.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -244,6 +238,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutocompleteMenu\AutocompleteMenu.csproj">
+      <Project>{43cbc9aa-6a8e-463f-83a9-aff3124afdb6}</Project>
+      <Name>AutocompleteMenu</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CodeGenerator\CodeGenerator.csproj">
       <Project>{e9732795-2394-4e8a-989a-a627abbf0c0c}</Project>
       <Name>CodeGenerator</Name>
@@ -289,9 +287,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomCode\OptionPages\PredefinedTypeOptionPageControl.resx">
       <DependentUpon>PredefinedTypeOptionPageControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CustomCode\ModelTypeListControl.resx">
-      <DependentUpon>ModelTypeListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomCode\SelectorControl.resx">
       <DependentUpon>SelectorControl.cs</DependentUpon>

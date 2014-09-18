@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModelToolWindowForm));
             this.tlpViewModelLayout = new System.Windows.Forms.TableLayoutPanel();
             this.tlvViewModel = new BrightIdeasSoftware.DataTreeListView();
             this.olvColName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -66,6 +67,9 @@
             this.ctxMenuWidgetValue = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiAddWidgetValueMember = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeleteWidgetValueMember = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtTypeEditor = new System.Windows.Forms.TextBox();
+            this.autocompleteMenu_Type = new AutocompleteMenuNS.AutocompleteMenu();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tlpViewModelLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tlvViewModel)).BeginInit();
             this.tlpActionModelLayout.SuspendLayout();
@@ -284,18 +288,18 @@
             this.tsmiAddViewModelMember,
             this.tsmiDeleteViewModelMember});
             this.ctxMenuViewModel.Name = "ctxMenuViewModel";
-            this.ctxMenuViewModel.Size = new System.Drawing.Size(128, 48);
+            this.ctxMenuViewModel.Size = new System.Drawing.Size(134, 48);
             // 
             // tsmiAddViewModelMember
             // 
             this.tsmiAddViewModelMember.Name = "tsmiAddViewModelMember";
-            this.tsmiAddViewModelMember.Size = new System.Drawing.Size(127, 22);
+            this.tsmiAddViewModelMember.Size = new System.Drawing.Size(133, 22);
             this.tsmiAddViewModelMember.Text = "Add Child";
             // 
             // tsmiDeleteViewModelMember
             // 
             this.tsmiDeleteViewModelMember.Name = "tsmiDeleteViewModelMember";
-            this.tsmiDeleteViewModelMember.Size = new System.Drawing.Size(127, 22);
+            this.tsmiDeleteViewModelMember.Size = new System.Drawing.Size(133, 22);
             this.tsmiDeleteViewModelMember.Text = "Delete";
             // 
             // tlpWidgetModelLayout
@@ -423,18 +427,18 @@
             this.tsmiAddActionDataMember,
             this.tsmiDeleteActionDataMember});
             this.ctxMenuActionData.Name = "ctxMenuActionModel";
-            this.ctxMenuActionData.Size = new System.Drawing.Size(128, 48);
+            this.ctxMenuActionData.Size = new System.Drawing.Size(134, 48);
             // 
             // tsmiAddActionDataMember
             // 
             this.tsmiAddActionDataMember.Name = "tsmiAddActionDataMember";
-            this.tsmiAddActionDataMember.Size = new System.Drawing.Size(127, 22);
+            this.tsmiAddActionDataMember.Size = new System.Drawing.Size(133, 22);
             this.tsmiAddActionDataMember.Text = "Add Child";
             // 
             // tsmiDeleteActionDataMember
             // 
             this.tsmiDeleteActionDataMember.Name = "tsmiDeleteActionDataMember";
-            this.tsmiDeleteActionDataMember.Size = new System.Drawing.Size(127, 22);
+            this.tsmiDeleteActionDataMember.Size = new System.Drawing.Size(133, 22);
             this.tsmiDeleteActionDataMember.Text = "Delete";
             // 
             // olvParentID
@@ -457,28 +461,65 @@
             this.tsmiAddWidgetValueMember,
             this.tsmiDeleteWidgetValueMember});
             this.ctxMenuWidgetValue.Name = "ctxMenuWidgetValue";
-            this.ctxMenuWidgetValue.Size = new System.Drawing.Size(128, 48);
+            this.ctxMenuWidgetValue.Size = new System.Drawing.Size(134, 48);
             // 
             // tsmiAddWidgetValueMember
             // 
             this.tsmiAddWidgetValueMember.Name = "tsmiAddWidgetValueMember";
-            this.tsmiAddWidgetValueMember.Size = new System.Drawing.Size(127, 22);
+            this.tsmiAddWidgetValueMember.Size = new System.Drawing.Size(133, 22);
             this.tsmiAddWidgetValueMember.Text = "Add Child";
             // 
             // tsmiDeleteWidgetValueMember
             // 
             this.tsmiDeleteWidgetValueMember.Name = "tsmiDeleteWidgetValueMember";
-            this.tsmiDeleteWidgetValueMember.Size = new System.Drawing.Size(127, 22);
+            this.tsmiDeleteWidgetValueMember.Size = new System.Drawing.Size(133, 22);
             this.tsmiDeleteWidgetValueMember.Text = "Delete";
+            // 
+            // txtTypeEditor
+            // 
+            this.txtTypeEditor.AutoCompleteCustomSource.AddRange(new string[] {
+            "aa",
+            "bb",
+            "cc",
+            "dd",
+            "ee",
+            "ff",
+            "gg"});
+            this.autocompleteMenu_Type.SetAutocompleteMenu(this.txtTypeEditor, this.autocompleteMenu_Type);
+            this.txtTypeEditor.Location = new System.Drawing.Point(38, 506);
+            this.txtTypeEditor.Name = "txtTypeEditor";
+            this.txtTypeEditor.Size = new System.Drawing.Size(100, 20);
+            this.txtTypeEditor.TabIndex = 3;
+            // 
+            // autocompleteMenu_Type
+            // 
+            this.autocompleteMenu_Type.AllowsTabKey = true;
+            this.autocompleteMenu_Type.AppearInterval = 100;
+            this.autocompleteMenu_Type.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.autocompleteMenu_Type.ImageList = this.imageList1;
+            this.autocompleteMenu_Type.Items = new string[0];
+            this.autocompleteMenu_Type.MinFragmentLength = 0;
+            this.autocompleteMenu_Type.TargetControlWrapper = null;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "Class_489.png");
+            this.imageList1.Images.SetKeyName(1, "Class-Friend_491.png");
+            this.imageList1.Images.SetKeyName(2, "Class-Private_493.png");
+            this.imageList1.Images.SetKeyName(3, "Class-Protected_492.png");
+            this.imageList1.Images.SetKeyName(4, "Class-Sealed_490.png");
             // 
             // ModelToolWindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(759, 536);
+            this.ClientSize = new System.Drawing.Size(759, 576);
             this.Controls.Add(this.tlpActionModelLayout);
             this.Controls.Add(this.tlpWidgetModelLayout);
             this.Controls.Add(this.tlpViewModelLayout);
+            this.Controls.Add(this.txtTypeEditor);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ModelToolWindowForm";
             this.Text = "ModelToolWindowForm";
@@ -494,6 +535,7 @@
             this.ctxMenuActionData.ResumeLayout(false);
             this.ctxMenuWidgetValue.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -544,5 +586,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiAddWidgetValueMember;
         private System.Windows.Forms.ToolStripMenuItem tsmiDeleteWidgetValueMember;
         private System.Windows.Forms.ToolStripMenuItem tsmiDeleteActionDataMember;
+        private System.Windows.Forms.TextBox txtTypeEditor;
+        private AutocompleteMenuNS.AutocompleteMenu autocompleteMenu_Type;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }
