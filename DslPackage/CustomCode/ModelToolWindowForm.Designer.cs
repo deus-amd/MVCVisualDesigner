@@ -67,9 +67,9 @@
             this.ctxMenuWidgetValue = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiAddWidgetValueMember = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeleteWidgetValueMember = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtTypeEditor = new System.Windows.Forms.TextBox();
-            this.autocompleteMenu_Type = new AutocompleteMenuNS.AutocompleteMenu();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.autocompleteMenu_Type = new AutocompleteMenuNS.AutocompleteMenu();
+            this.m_typeEditor = new MVCVisualDesigner.AutoCompleteTextBox();
             this.tlpViewModelLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tlvViewModel)).BeginInit();
             this.tlpActionModelLayout.SuspendLayout();
@@ -475,24 +475,6 @@
             this.tsmiDeleteWidgetValueMember.Size = new System.Drawing.Size(127, 22);
             this.tsmiDeleteWidgetValueMember.Text = "Delete";
             // 
-            // txtTypeEditor
-            // 
-            this.autocompleteMenu_Type.SetAutocompleteMenu(this.txtTypeEditor, this.autocompleteMenu_Type);
-            this.txtTypeEditor.Location = new System.Drawing.Point(38, 506);
-            this.txtTypeEditor.Name = "txtTypeEditor";
-            this.txtTypeEditor.Size = new System.Drawing.Size(100, 20);
-            this.txtTypeEditor.TabIndex = 3;
-            // 
-            // autocompleteMenu_Type
-            // 
-            this.autocompleteMenu_Type.AllowsTabKey = true;
-            this.autocompleteMenu_Type.AppearInterval = 100;
-            this.autocompleteMenu_Type.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.autocompleteMenu_Type.ImageList = this.imageList1;
-            this.autocompleteMenu_Type.Items = new string[0];
-            this.autocompleteMenu_Type.MinFragmentLength = 0;
-            this.autocompleteMenu_Type.TargetControlWrapper = null;
-            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
@@ -503,15 +485,33 @@
             this.imageList1.Images.SetKeyName(3, "Class-Protected_492.png");
             this.imageList1.Images.SetKeyName(4, "Class-Sealed_490.png");
             // 
+            // autocompleteMenu_Type
+            // 
+            this.autocompleteMenu_Type.AllowsTabKey = true;
+            this.autocompleteMenu_Type.AppearInterval = 100;
+            this.autocompleteMenu_Type.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.autocompleteMenu_Type.ImageList = this.imageList1;
+            this.autocompleteMenu_Type.Items = new string[0];
+            this.autocompleteMenu_Type.MinFragmentLength = 1;
+            this.autocompleteMenu_Type.TargetControlWrapper = null;
+            // 
+            // m_typeEditor
+            // 
+            this.autocompleteMenu_Type.SetAutocompleteMenu(this.m_typeEditor, this.autocompleteMenu_Type);
+            this.m_typeEditor.Location = new System.Drawing.Point(75, 534);
+            this.m_typeEditor.Name = "m_typeEditor";
+            this.m_typeEditor.Size = new System.Drawing.Size(100, 20);
+            this.m_typeEditor.TabIndex = 3;
+            // 
             // ModelToolWindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(759, 576);
+            this.Controls.Add(this.m_typeEditor);
             this.Controls.Add(this.tlpActionModelLayout);
             this.Controls.Add(this.tlpWidgetModelLayout);
             this.Controls.Add(this.tlpViewModelLayout);
-            this.Controls.Add(this.txtTypeEditor);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ModelToolWindowForm";
             this.Text = "ModelToolWindowForm";
@@ -538,8 +538,6 @@
         private BrightIdeasSoftware.OLVColumn olvColumn4;
         private BrightIdeasSoftware.OLVColumn olvParentID;
         private BrightIdeasSoftware.OLVColumn olvID;
-        //private BrightIdeasSoftware.OLVColumn olvColumn4;
-        //private BrightIdeasSoftware.OLVColumn olvColumn5;
 
         private BrightIdeasSoftware.OLVColumn olvColName;
         private BrightIdeasSoftware.OLVColumn olvColType;
@@ -567,7 +565,6 @@
         private System.Windows.Forms.ContextMenuStrip ctxMenuViewModel;
         private System.Windows.Forms.ToolStripMenuItem tsmiAddViewModelMember;
         private System.Windows.Forms.ToolStripMenuItem tsmiDeleteViewModelMember;
-        //private ModelTypeListControl ctrlViewModelType;
         private System.Windows.Forms.ToolTip toolTipMsg;
 
         private System.Windows.Forms.Label label1;
@@ -578,8 +575,9 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiAddWidgetValueMember;
         private System.Windows.Forms.ToolStripMenuItem tsmiDeleteWidgetValueMember;
         private System.Windows.Forms.ToolStripMenuItem tsmiDeleteActionDataMember;
-        private System.Windows.Forms.TextBox txtTypeEditor;
-        private AutocompleteMenuNS.AutocompleteMenu autocompleteMenu_Type;
         private System.Windows.Forms.ImageList imageList1;
+        private AutoCompleteTextBox m_typeEditor;
+        private AutocompleteMenuNS.AutocompleteMenu autocompleteMenu_Type;
+        //private AutocompleteMenuNS.AutocompleteMenu autocompleteMenu_Type;
     }
 }

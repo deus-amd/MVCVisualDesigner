@@ -23,13 +23,8 @@ namespace MVCVisualDesigner
             InitializeComponent();
             m_toolWindow = toolWindow;
 
-            // init type editor
-            txtTypeEditor.KeyDown += onTypeEditorKeyDown;
-            ModelTypeDynamicCollection modelTypeCollection = new ModelTypeDynamicCollection(txtTypeEditor);
-            autocompleteMenu_Type.SetAutocompleteItems(modelTypeCollection);
-
-            m_widgetValueHandler = new WidgetValueHandler(this, tlvWidgetModel, toolTipMsg, ctxMenuWidgetValue, tsmiAddWidgetValueMember, tsmiDeleteWidgetValueMember,
-                                                                txtTypeEditor, autocompleteMenu_Type, modelTypeCollection);
+            m_widgetValueHandler = new WidgetValueHandler(
+                this, tlvWidgetModel, toolTipMsg, ctxMenuWidgetValue, tsmiAddWidgetValueMember, tsmiDeleteWidgetValueMember, m_typeEditor);
             m_viewModelHandler = new ViewModelHandler(this, tlvViewModel, toolTipMsg, ctxMenuViewModel, tsmiAddViewModelMember, tsmiDeleteViewModelMember);
             m_actionDataHandler = new ActionDataHandler(this, tlvActionModel, toolTipMsg, ctxMenuActionData, tsmiAddActionDataMember, tsmiDeleteActionDataMember);
 
@@ -37,13 +32,9 @@ namespace MVCVisualDesigner
             this.tlvViewModel.RootKeyValue = Guid.Empty;
             this.tlvWidgetModel.RootKeyValue = Guid.Empty;
             this.tlvActionModel.RootKeyValue = Guid.Empty;
-        }
 
-        void onTypeEditorKeyDown(object sender, KeyEventArgs e)
-        {
-            //forcibly shows menu
-            if (e.Control && e.KeyCode == Keys.Space)
-                autocompleteMenu_Type.Show(txtTypeEditor, true);
+            // init type editor
+            m_typeEditor.Init(autocompleteMenu_Type);
         }
 
         internal void ShowWidgetValuePanel()
@@ -771,13 +762,10 @@ namespace MVCVisualDesigner
         private const string COLUMN_FORMATTER = "Formatter";
         private const string COLUMN_DISPNAME = "Display Name";
 
-        private TextBox m_txtTypeEditor = null;
-        private ModelTypeDynamicCollection m_modelTypeCollection = null;
-        private AutocompleteMenu m_autoComplete = null;
+        private AutoCompleteTextBox m_typeEditor = null;
 
         public WidgetValueHandler(ModelToolWindowForm form, DataTreeListView treeListView, ToolTip toolTip,
-                                    ContextMenuStrip contextMenu, ToolStripMenuItem miAddChild, ToolStripMenuItem miDelete, 
-                                    TextBox txtTypeEditor, AutocompleteMenu autoComplete, ModelTypeDynamicCollection typeCollection)
+                                    ContextMenuStrip contextMenu, ToolStripMenuItem miAddChild, ToolStripMenuItem miDelete, AutoCompleteTextBox txtTypeEditor)
             : base(form, treeListView, toolTip, contextMenu, miAddChild, miDelete)
         {
             // set up event handlers
@@ -791,9 +779,7 @@ namespace MVCVisualDesigner
             m_miDelete.Click += OnDelMemberMenuClick;
 
             //
-            m_txtTypeEditor = txtTypeEditor;
-            m_modelTypeCollection = typeCollection;
-            m_autoComplete = autoComplete;
+            m_typeEditor = txtTypeEditor;
         }
 
         void OnCellRightClick(object sender, CellRightClickEventArgs e)
@@ -863,12 +849,12 @@ namespace MVCVisualDesigner
                 }
                 else
                 {
-                    //VDModelMemberInstance instance = (VDModelMemberInstance)e.RowObject;
-                    m_txtTypeEditor.Bounds = e.CellBounds;
-                    m_txtTypeEditor.Font = (((ObjectListView)sender).Font);
-                    m_txtTypeEditor.Tag = e.RowObject;
-                    m_txtTypeEditor.Visible = true;
-                    e.Control = m_txtTypeEditor;
+                    m_typeEditor.Text = node.TypeName;
+                    m_typeEditor.Bounds = e.CellBounds;
+                    m_typeEditor.Font = (((ObjectListView)sender).Font);
+                    m_typeEditor.Tag = e.RowObject;
+                    m_typeEditor.Visible = true;
+                    e.Control = m_typeEditor;
                     e.AutoDispose = false;
                 }
             }
@@ -904,6 +890,9 @@ namespace MVCVisualDesigner
 
         void OnCellEditFinishing(object sender, CellEditEventArgs e)
         {
+            // the editing is canceled (press ESC)
+            if (e.Cancel) return;
+
             // We have updated the model object, so we cancel the auto update
             e.Cancel = true;
 
@@ -947,16 +936,16 @@ namespace MVCVisualDesigner
             this.RootView = widget.RootView;
             this.m_currentWidget = widget;
 
-            this.m_modelTypeCollection.ModelStore = widget != null ? widget.GetModelStore() : null;
+            m_typeEditor.SetModelStore(widget != null ? widget.GetModelStore() : null);
             refreshTreeListView();
         }
 
         public override void OnLostFocus()
         {
             // hide type editor
-            if (m_txtTypeEditor != null && m_txtTypeEditor.Visible)
+            if (m_typeEditor != null && m_typeEditor.Visible)
             {
-                m_txtTypeEditor.Hide();
+                m_typeEditor.Hide();
             }
         }
 
@@ -1451,45 +1440,84 @@ namespace MVCVisualDesigner
 #endif
     }
 
-
-    ////////////////////////////////////////////////////////////////////////////////
-    public class ModelTypeDynamicCollection : IEnumerable<AutocompleteItem>
+    public class AutoCompleteTextBox : TextBox
     {
-        private TextBoxBase tb;
+        private AutocompleteMenu m_autoCompleteMenu;
+        private ModelTypeDynamicCollection m_modelTypeCollection;
 
-        public ModelTypeDynamicCollection(TextBoxBase tb)
+        // 
+        public void Init(AutocompleteMenu autoCompleteMenu)
         {
-            this.tb = tb;
+            m_autoCompleteMenu = autoCompleteMenu;
+            m_modelTypeCollection = new ModelTypeDynamicCollection(this);
+            m_autoCompleteMenu.SetAutocompleteItems(m_modelTypeCollection);
         }
 
-        public IEnumerator<AutocompleteItem> GetEnumerator()
+        protected override bool ProcessDialogKey(Keys keyData)
         {
-            return BuildList().GetEnumerator();
-        }
-
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
-        private IEnumerable<AutocompleteItem> BuildList()
-        {
-            var types = new Dictionary<string, VDMetaType>();
-
-            if (ModelStore != null)
+            if (m_autoCompleteMenu != null)
             {
-                foreach(VDMetaType metaType in ModelStore.MetaTypes)
+                if (keyData == Keys.Enter || keyData == Keys.Tab)
                 {
-                    types.Add(metaType.FullName, metaType);
+                    m_autoCompleteMenu.ProcessKey((char)keyData, Keys.None);
                 }
             }
-
-            //return autocomplete items
-            foreach (var typeName in types.Keys)
-                yield return new AutocompleteItem(typeName, 0);
+            return base.ProcessDialogKey(keyData);
         }
 
-        public VDModelStore ModelStore { get; set; }
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            //forcibly shows menu
+            if (e.Control && e.KeyCode == Keys.Space)
+                m_autoCompleteMenu.Show(this, true);
+
+            base.OnKeyDown(e);
+        }
+
+        public void SetModelStore(VDModelStore modelStore)
+        {
+            this.m_modelTypeCollection.ModelStore = modelStore;
+        }
+
+        // collection
+        class ModelTypeDynamicCollection : IEnumerable<AutocompleteItem>
+        {
+            private TextBoxBase tb;
+
+            public ModelTypeDynamicCollection(TextBoxBase tb)
+            {
+                this.tb = tb;
+            }
+
+            public IEnumerator<AutocompleteItem> GetEnumerator()
+            {
+                return BuildList().GetEnumerator();
+            }
+
+            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
+
+            private IEnumerable<AutocompleteItem> BuildList()
+            {
+                var types = new Dictionary<string, VDMetaType>();
+
+                if (ModelStore != null)
+                {
+                    foreach (VDMetaType metaType in ModelStore.MetaTypes)
+                    {
+                        types.Add(metaType.FullName, metaType);
+                    }
+                }
+
+                //return autocomplete items
+                foreach (var typeName in types.Keys)
+                    yield return new AutocompleteItem(typeName, 0);
+            }
+
+            public VDModelStore ModelStore { get; set; }
+        }
     }
 }
 
