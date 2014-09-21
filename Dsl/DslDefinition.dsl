@@ -1053,6 +1053,13 @@
       <BaseClass>
         <DomainClassMoniker Name="VDModelMember" />
       </BaseClass>
+      <Properties>
+        <DomainProperty Id="bec7cc37-7cf6-4b43-9143-2cf9556c8f30" Description="Description for MVCVisualDesigner.VDConcreteMember.Validator Names" Name="ValidatorNames" DisplayName="Validator Names">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
     </DomainClass>
     <DomainClass Id="e39f8e80-9358-4a43-a86b-72f6e3869f4a" Description="Description for MVCVisualDesigner.VDViewModelMember" Name="VDViewModelMember" DisplayName="VDView Model Member" Namespace="MVCVisualDesigner">
       <BaseClass>
@@ -1074,19 +1081,26 @@
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="16cdcae8-83a6-4336-8548-35224d87c93a" Description="Description for MVCVisualDesigner.VDWidgetValueMember.Validator Names" Name="ValidatorNames" DisplayName="Validator Names">
-          <Type>
-            <ExternalTypeMoniker Name="/System/String" />
-          </Type>
-        </DomainProperty>
       </Properties>
     </DomainClass>
     <DomainClass Id="5358d3ed-366c-4131-b1aa-2ebf463b4eda" Description="Description for MVCVisualDesigner.VDActionDataMember" Name="VDActionDataMember" DisplayName="VDAction Data Member" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDConcreteMember" />
       </BaseClass>
+      <Properties>
+        <DomainProperty Id="1b5c18f8-3204-4057-8e35-932f8c8da18d" Description="Description for MVCVisualDesigner.VDActionDataMember.Data Source" Name="DataSource" DisplayName="Data Source">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+        <DomainProperty Id="57123809-95e9-40e1-886b-02e657efb19f" Description="Description for MVCVisualDesigner.VDActionDataMember.Custom Selector" Name="CustomSelector" DisplayName="Custom Selector">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
     </DomainClass>
-    <DomainClass Id="73ae4970-2f6d-47cd-b6f7-74ef0be5566c" Description="Description for MVCVisualDesigner.VDActionBase" Name="VDActionBase" DisplayName="VDAction Base" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner">
+    <DomainClass Id="73ae4970-2f6d-47cd-b6f7-74ef0be5566c" Description="Description for MVCVisualDesigner.VDActionBase" Name="VDActionBase" DisplayName="VDAction Base" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true">
       <BaseClass>
         <DomainClassMoniker Name="VDViewComponent" />
       </BaseClass>
@@ -1903,6 +1917,22 @@
         <DomainRole Id="3fcdecae-e8bd-4fc9-b8e1-e45051160fd6" Description="Description for MVCVisualDesigner.PrimitiveTypeHasValue.VDBuiltInProperty" Name="VDBuiltInProperty" DisplayName="VDBuilt In Property" PropertyName="VDPrimitiveType" Multiplicity="One" IsPropertyGenerator="false" PropertyDisplayName="VDPrimitive Type">
           <RolePlayer>
             <DomainClassMoniker Name="VDBuiltInProperty" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="760bbcb9-5d15-4794-9aff-f6437e02f1f2" Description="Description for MVCVisualDesigner.ActionHasData" Name="ActionHasData" DisplayName="Action Has Data" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="7c780ee5-ee18-4f18-b373-68959fe06d92" Description="Description for MVCVisualDesigner.ActionHasData.VDActionBase" Name="VDActionBase" DisplayName="VDAction Base" PropertyName="ActionData" Multiplicity="ZeroOne" PropertyDisplayName="Action Data">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDActionBase" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="52a7fe28-0c5a-48ca-a904-ed63e9993446" Description="Description for MVCVisualDesigner.ActionHasData.VDActionData" Name="VDActionData" DisplayName="VDAction Data" PropertyName="Action" Multiplicity="ZeroOne" PropertyDisplayName="Action">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDActionData" />
           </RolePlayer>
         </DomainRole>
       </Target>
@@ -3285,6 +3315,9 @@
           <XmlRelationshipData UseFullForm="true" RoleElementName="type">
             <DomainRelationshipMoniker Name="TypeOfConcreteMember" />
           </XmlRelationshipData>
+          <XmlPropertyData XmlName="validatorNames">
+            <DomainPropertyMoniker Name="VDConcreteMember/ValidatorNames" />
+          </XmlPropertyData>
         </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="ModelTypeHasMembers" MonikerAttributeName="" SerializeId="true" MonikerElementName="modelTypeHasMembersMoniker" ElementName="modelTypeHasMembers" MonikerTypeName="ModelTypeHasMembersMoniker">
@@ -3314,13 +3347,18 @@
           <XmlPropertyData XmlName="formatterNames">
             <DomainPropertyMoniker Name="VDWidgetValueMember/FormatterNames" />
           </XmlPropertyData>
-          <XmlPropertyData XmlName="validatorNames">
-            <DomainPropertyMoniker Name="VDWidgetValueMember/ValidatorNames" />
-          </XmlPropertyData>
         </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDActionDataMember" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDActionDataMemberMoniker" ElementName="vDActionDataMember" MonikerTypeName="VDActionDataMemberMoniker">
         <DomainClassMoniker Name="VDActionDataMember" />
+        <ElementData>
+          <XmlPropertyData XmlName="dataSource">
+            <DomainPropertyMoniker Name="VDActionDataMember/DataSource" />
+          </XmlPropertyData>
+          <XmlPropertyData XmlName="customSelector">
+            <DomainPropertyMoniker Name="VDActionDataMember/CustomSelector" />
+          </XmlPropertyData>
+        </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDActionBase" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDActionBaseMoniker" ElementName="vDActionBase" MonikerTypeName="VDActionBaseMoniker">
         <DomainClassMoniker Name="VDActionBase" />
@@ -3331,6 +3369,9 @@
           <XmlPropertyData XmlName="description">
             <DomainPropertyMoniker Name="VDActionBase/Description" />
           </XmlPropertyData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="actionData">
+            <DomainRelationshipMoniker Name="ActionHasData" />
+          </XmlRelationshipData>
         </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDServerAction" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDServerActionMoniker" ElementName="vDServerAction" MonikerTypeName="VDServerActionMoniker">
@@ -3483,6 +3524,9 @@
       </XmlClassData>
       <XmlClassData TypeName="VDPrimitiveMemberType" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDPrimitiveMemberTypeMoniker" ElementName="vDPrimitiveMemberType" MonikerTypeName="VDPrimitiveMemberTypeMoniker">
         <DomainClassMoniker Name="VDPrimitiveMemberType" />
+      </XmlClassData>
+      <XmlClassData TypeName="ActionHasData" MonikerAttributeName="" SerializeId="true" MonikerElementName="actionHasDataMoniker" ElementName="actionHasData" MonikerTypeName="ActionHasDataMoniker">
+        <DomainRelationshipMoniker Name="ActionHasData" />
       </XmlClassData>
     </ClassData>
   </XmlSerializationBehavior>
@@ -4130,6 +4174,25 @@
           <RolePlayerConnectDirective>
             <AcceptingClass>
               <DomainClassMoniker Name="VDBuiltInProperty" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
+    <ConnectionBuilder Name="ActionHasDataBuilder">
+      <LinkConnectDirective>
+        <DomainRelationshipMoniker Name="ActionHasData" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDActionBase" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDActionData" />
             </AcceptingClass>
           </RolePlayerConnectDirective>
         </TargetDirectives>

@@ -246,7 +246,7 @@ namespace MVCVisualDesigner
             }
         }
 
-        private bool m_deleting = false;
+        protected bool m_deleting = false;
         protected override void OnDeleted()
         {
             base.OnDeleted();

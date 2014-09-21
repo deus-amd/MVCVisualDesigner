@@ -23,10 +23,12 @@ namespace MVCVisualDesigner
             InitializeComponent();
             m_toolWindow = toolWindow;
 
-            m_widgetValueHandler = new WidgetValueHandler(
-                this, tlvWidgetModel, toolTipMsg, ctxMenuWidgetValue, tsmiAddWidgetValueMember, tsmiDeleteWidgetValueMember, m_typeEditor);
-            m_viewModelHandler = new ViewModelHandler(this, tlvViewModel, toolTipMsg, ctxMenuViewModel, tsmiAddViewModelMember, tsmiDeleteViewModelMember);
-            m_actionDataHandler = new ActionDataHandler(this, tlvActionModel, toolTipMsg, ctxMenuActionData, tsmiAddActionDataMember, tsmiDeleteActionDataMember);
+            m_widgetValueHandler = new WidgetValueHandler(this, tlvWidgetModel, toolTipMsg, ctxMenuWidgetValue, 
+                        tsmiAddWidgetValueMember, tsmiDeleteWidgetValueMember, m_typeEditor);
+            m_viewModelHandler = new ViewModelHandler(this, tlvViewModel, toolTipMsg, ctxMenuViewModel, 
+                        tsmiAddViewModelMember, tsmiDeleteViewModelMember, m_typeEditor);
+            m_actionDataHandler = new ActionDataHandler(this, tlvActionModel, toolTipMsg, ctxMenuActionData, 
+                        tsmiAddActionDataMember, tsmiDeleteActionDataMember, m_typeEditor);
 
             // init tree list view
             this.tlvViewModel.RootKeyValue = Guid.Empty;
@@ -722,15 +724,21 @@ namespace MVCVisualDesigner
 
     public abstract class ModelToolWindowHandler
     {
+        protected const string COLUMN_NAME = "Name";
+        protected const string COLUMN_TYPE = "Type";
+        protected const string COLUMN_VALIDATOR = "Validator";
+        protected const string COLUMN_DISPNAME = "Display Name";
+
         protected ModelToolWindowForm m_form;
         protected DataTreeListView m_treeListView;
         protected ToolTip m_toolTip;
         protected ContextMenuStrip m_contextMenu;
         protected ToolStripMenuItem m_miAddChild;
         protected ToolStripMenuItem m_miDelete;
+        protected AutoCompleteTextBox m_typeEditor = null;
 
         public ModelToolWindowHandler(ModelToolWindowForm form, DataTreeListView treeListView, ToolTip toolTip, 
-            ContextMenuStrip contextMenu, ToolStripMenuItem miAddChild, ToolStripMenuItem miDelete)
+            ContextMenuStrip contextMenu, ToolStripMenuItem miAddChild, ToolStripMenuItem miDelete, AutoCompleteTextBox typeEditor)
         {
             m_form = form;
             m_treeListView = treeListView;
@@ -738,12 +746,46 @@ namespace MVCVisualDesigner
             m_contextMenu = contextMenu;
             m_miAddChild = miAddChild;
             m_miDelete = miDelete;
+            m_typeEditor = typeEditor;
+
+            // set up event handlers
+            // - cell editing
+            m_treeListView.CellEditStarting += OnCellEditStarting;
+            m_treeListView.CellEditValidating += OnCellEditValidating;
+            m_treeListView.CellEditFinishing += OnCellEditFinishing;
+            // - menu handling
+            m_treeListView.CellRightClick += OnCellRightClick;
+            m_miAddChild.Click += OnAddMemberMenuClick;
+            m_miDelete.Click += OnDelMemberMenuClick;
         }
 
+        // show/hide/lost focus
         protected VDView RootView { get; set; }
+        protected VDWidget m_currentWidget;
 
-        public virtual void OnLostFocus() 
-        { 
+        virtual public void Show(VDWidget widget)  // widget could be action, view and widgets
+        {
+            if (widget == null)
+            {
+                m_currentWidget = null;
+                this.RootView = null;
+            }
+            else
+            {
+                this.RootView = widget.RootView;
+                this.m_currentWidget = widget;
+                m_typeEditor.SetModelStore(widget != null ? widget.GetModelStore() : null);
+            }
+            refreshTreeListView();
+        }
+
+        public virtual void OnLostFocus()
+        {
+            // hide type editor
+            if (m_typeEditor != null && m_typeEditor.Visible)
+            {
+                m_typeEditor.Hide();
+            }
         }
 
         public virtual void OnHideWindow()
@@ -751,45 +793,17 @@ namespace MVCVisualDesigner
             m_treeListView.ClearObjects();
             m_treeListView.DataSource = null;
         }
-    }
 
-    public class WidgetValueHandler : ModelToolWindowHandler
-    {
-        private const string COLUMN_NAME = "Name";
-        private const string COLUMN_TYPE = "Type";
-        private const string COLUMN_INITVAL = "Init Value";
-        private const string COLUMN_VALIDATOR = "Validator";
-        private const string COLUMN_FORMATTER = "Formatter";
-        private const string COLUMN_DISPNAME = "Display Name";
-
-        private AutoCompleteTextBox m_typeEditor = null;
-
-        public WidgetValueHandler(ModelToolWindowForm form, DataTreeListView treeListView, ToolTip toolTip,
-                                    ContextMenuStrip contextMenu, ToolStripMenuItem miAddChild, ToolStripMenuItem miDelete, AutoCompleteTextBox txtTypeEditor)
-            : base(form, treeListView, toolTip, contextMenu, miAddChild, miDelete)
+        // menu handling
+        virtual protected void OnCellRightClick(object sender, CellRightClickEventArgs e) 
         {
-            // set up event handlers
-            m_treeListView.CellEditStarting += OnCellEditStarting;
-            m_treeListView.CellEditValidating += OnCellEditValidating;
-            m_treeListView.CellEditFinishing += OnCellEditFinishing;
-            m_treeListView.CellRightClick += OnCellRightClick;
-
-            //
-            m_miAddChild.Click += OnAddMemberMenuClick;
-            m_miDelete.Click += OnDelMemberMenuClick;
-
-            //
-            m_typeEditor = txtTypeEditor;
-        }
-
-        void OnCellRightClick(object sender, CellRightClickEventArgs e)
-        {
-            // no widget selected
             if (m_currentWidget == null) return;
+
+            NodeBase selectedNode = (NodeBase)e.Model;
+            if (selectedNode == null) return;
 
             e.MenuStrip = this.m_contextMenu;
 
-            NodeBase selectedNode = (NodeBase)e.Model;
             m_miAddChild.Enabled = selectedNode.CanAddChildMembers;
             m_miAddChild.Tag = selectedNode;
 
@@ -797,13 +811,13 @@ namespace MVCVisualDesigner
             m_miDelete.Tag = selectedNode;
         }
 
-        void OnAddMemberMenuClick(object sender, EventArgs e)
+        virtual protected void OnAddMemberMenuClick(object sender, EventArgs e) 
         {
             System.Diagnostics.Debug.Assert(m_currentWidget != null);
             if (m_currentWidget == null) return;
 
             NodeBase selectedNode = m_miAddChild.Tag as NodeBase;
-            using(var trans = m_currentWidget.Store.TransactionManager.BeginTransaction("addd widget value member"))
+            using (var trans = m_currentWidget.Store.TransactionManager.BeginTransaction("addd widget value member"))
             {
                 selectedNode.AddChildNode();
                 trans.Commit();
@@ -812,7 +826,7 @@ namespace MVCVisualDesigner
             refreshTreeListView();
         }
 
-        void OnDelMemberMenuClick(object sender, EventArgs e)
+        virtual protected void OnDelMemberMenuClick(object sender, EventArgs e) 
         {
             System.Diagnostics.Debug.Assert(m_currentWidget != null);
             if (m_currentWidget == null) return;
@@ -827,7 +841,8 @@ namespace MVCVisualDesigner
             refreshTreeListView();
         }
 
-        void OnCellEditStarting(object sender, CellEditEventArgs e)
+        // cell editing
+        virtual protected void OnCellEditStarting(object sender, CellEditEventArgs e) 
         {
             NodeBase node = e.RowObject as NodeBase;
             string columnName = e.Column.Text;
@@ -858,17 +873,9 @@ namespace MVCVisualDesigner
                     e.AutoDispose = false;
                 }
             }
-            else // init value, formatter, validator
-            {
-                if (node == null || node is TypeNode)
-                {
-                    showTooltipMsg(columnName + " can not be changed.", e);
-                    e.Cancel = true;
-                }
-            }
         }
 
-        void OnCellEditValidating(object sender, CellEditEventArgs e)
+        virtual protected void OnCellEditValidating(object sender, CellEditEventArgs e) 
         {
             string columnName = e.Column.Text;
             if (columnName == COLUMN_NAME)
@@ -882,13 +889,9 @@ namespace MVCVisualDesigner
             else if (columnName == COLUMN_TYPE)
             {
             }
-            else if (columnName == COLUMN_INITVAL)
-            {
-                //todo: validate according to type
-            } 
         }
 
-        void OnCellEditFinishing(object sender, CellEditEventArgs e)
+        virtual protected void OnCellEditFinishing(object sender, CellEditEventArgs e) 
         {
             // the editing is canceled (press ESC)
             if (e.Cancel) return;
@@ -912,15 +915,11 @@ namespace MVCVisualDesigner
                 else if (columnName == COLUMN_DISPNAME)
                     node.OnDispNameChanged(oldValue, newValue);
                 else if (columnName == COLUMN_TYPE)
-                {
                     node.OnTypeNameChanged(oldValue, newValue);
-                }
-                else if (columnName == COLUMN_INITVAL)
-                    node.OnInitValueChanged(oldValue, newValue);
                 else if (columnName == COLUMN_VALIDATOR)
                     node.OnValidatorChanged(oldValue, newValue);
-                else if (columnName == COLUMN_FORMATTER)
-                    node.OnFormatterChanged(oldValue, newValue);
+                else
+                    onCellEditingFinishedOtherColumns(sender, e, node, columnName, oldValue, newValue);
 
                 trans.Commit();
             }
@@ -928,41 +927,32 @@ namespace MVCVisualDesigner
             refreshTreeListView();
         }
 
-        private VDWidget m_currentWidget;
-        public void Show(VDWidget widget) 
-        { 
-            m_form.ShowWidgetValuePanel();
-
-            this.RootView = widget.RootView;
-            this.m_currentWidget = widget;
-
-            m_typeEditor.SetModelStore(widget != null ? widget.GetModelStore() : null);
-            refreshTreeListView();
-        }
-
-        public override void OnLostFocus()
+        virtual protected void onCellEditingFinishedOtherColumns(object sender, CellEditEventArgs e, 
+            NodeBase node, string columnName, string oldValue, string newValue)
         {
-            // hide type editor
-            if (m_typeEditor != null && m_typeEditor.Visible)
-            {
-                m_typeEditor.Hide();
-            }
         }
 
-        private void refreshTreeListView()
+        // tree list view handling
+        protected virtual void refreshTreeListView()
         {
             // reclaim the old nodes
             if (m_treeListView.DataSource != null && m_treeListView.DataSource is List<NodeBase>)
             {
-                reclaimNodes((List<NodeBase>)m_treeListView.DataSource);
+                List<NodeBase> nodes = (List<NodeBase>)m_treeListView.DataSource;
+                foreach(NodeBase node in nodes)
+                {
+                    reclaimNode(node);
+                }
             }
 
             // update tree list view
             if (m_currentWidget != null)
             {
-                List<NodeBase> allNodes = new List<NodeBase>();
-                getNodesForWidget(m_currentWidget, null, allNodes);
-                m_treeListView.DataSource = allNodes;
+                List<NodeBase> allNodes = getAllNodes();
+                if (allNodes != null)
+                {
+                    m_treeListView.DataSource = allNodes;
+                }
             }
             else
             {
@@ -971,12 +961,139 @@ namespace MVCVisualDesigner
             }
         }
 
-        private void showTooltipMsg(string msg, CellEditEventArgs e)
+        virtual protected List<NodeBase> getAllNodes() { return null; }
+
+        protected void reclaimNode(NodeBase node) 
+        {
+            if (!m_nodeCache.ContainsKey(node.GetType()))
+                m_nodeCache.Add(node.GetType(), new Stack<NodeBase>());
+            m_nodeCache[node.GetType()].Push(node);
+        }
+
+        protected T getCachedNode<T>() where T : NodeBase, new()
+        {
+            if (!m_nodeCache.ContainsKey(typeof(T)) || m_nodeCache[typeof(T)].Count <= 0) 
+                return new T();
+            else
+                return m_nodeCache[typeof(T)].Pop() as T;
+        }
+
+        protected Dictionary<Type, Stack<NodeBase>> m_nodeCache = new Dictionary<Type, Stack<NodeBase>>();
+
+        // Utility
+        protected void showTooltipMsg(string msg, CellEditEventArgs e)
         {
             m_toolTip.Show(msg, m_treeListView, e.CellBounds.Left, e.CellBounds.Bottom, 800); 
         }
 
+        // Node class
+        protected abstract class NodeBase
+        {
+            protected Guid m_id;
+            protected NodeBase m_parentNode;
+
+            protected void Init(Guid id, NodeBase parent)
+            {
+                m_id = id;
+                m_parentNode = parent;
+            }
+
+            public Guid ID { get { return m_id; } }
+            public Guid ParentID { get { return m_parentNode == null ? Guid.Empty : m_parentNode.ID; } }
+
+            public string Name { get; set; }
+            public string DispName { get; set; }
+            public string TypeName { get; set; }
+            public string ValidatorNames { get; set; }
+
+            /// <summary> If be able to Add child nodes of this node </summary>
+            abstract internal bool CanAddChildMembers { get; }
+
+            abstract internal bool CanBeDeleted { get; }
+
+            /// <summary> If be able to change Name column of this node </summary>
+            abstract internal bool CanChangeName { get; }
+
+            /// <summary> If be able to change Type column of this node </summary>
+            abstract internal bool CanChangeType { get; }
+
+            virtual internal void AddChildNode() { }
+            virtual internal void DeleteNode() { }
+
+            virtual internal void OnNameChanged(string oldValue, string newValue) { }
+            virtual internal void OnDispNameChanged(string oldValue, string newValue) { }
+            virtual internal void OnTypeNameChanged(string oldValue, string newValue) { }
+            virtual internal void OnValidatorChanged(string oldValue, string newValue) { }
+        }
+    }
+
+    public class WidgetValueHandler : ModelToolWindowHandler
+    {
+        private const string COLUMN_INITVAL = "Init Value";
+        private const string COLUMN_FORMATTER = "Formatter";
+
+        public WidgetValueHandler(ModelToolWindowForm form, DataTreeListView treeListView, ToolTip toolTip,
+                                    ContextMenuStrip contextMenu, ToolStripMenuItem miAddChild, ToolStripMenuItem miDelete, AutoCompleteTextBox typeEditor)
+            : base(form, treeListView, toolTip, contextMenu, miAddChild, miDelete, typeEditor)
+        {
+        }
+
+        override protected void OnCellEditStarting(object sender, CellEditEventArgs e)
+        {
+            NodeBase node = e.RowObject as NodeBase;
+            string columnName = e.Column.Text;
+
+            if (columnName == COLUMN_INITVAL || columnName == COLUMN_FORMATTER || columnName == COLUMN_VALIDATOR)
+            {
+                if (node == null || node is TypeNode)
+                {
+                    showTooltipMsg(columnName + " can not be changed.", e);
+                    e.Cancel = true;
+                }
+            }
+            else
+                base.OnCellEditStarting(sender, e);
+        }
+
+        override protected void OnCellEditValidating(object sender, CellEditEventArgs e)
+        {
+            string columnName = e.Column.Text;
+            if (columnName == COLUMN_INITVAL)
+            {
+                //todo: validate according to type
+            } 
+            else
+            {
+                base.OnCellEditValidating(sender, e);
+            }
+        }
+
+        protected override void onCellEditingFinishedOtherColumns(object sender, CellEditEventArgs e, 
+            NodeBase node, string columnName, string oldValue, string newValue)
+        {
+            WidgetValueNode curNode = node as WidgetValueNode;
+            if (curNode == null) return;
+
+            if (columnName == COLUMN_INITVAL)
+                curNode.OnInitValueChanged(oldValue, newValue);
+            else if (columnName == COLUMN_FORMATTER)
+                curNode.OnFormatterChanged(oldValue, newValue);
+        }
+
+        override public void Show(VDWidget widget) 
+        {
+            m_form.ShowWidgetValuePanel();
+            base.Show(widget);
+        }
+
         #region Tree List View Nodes
+        protected override List<NodeBase> getAllNodes()
+        {
+            List<NodeBase> nodes = new List<NodeBase>();
+            getNodesForWidget(m_currentWidget, null, nodes);
+            return nodes;
+        }
+
         private void getNodesForWidget(VDWidget widget, NodeBase parentNode, List<NodeBase> allNodes)
         {
             NodeBase node = getTypeNode(widget, parentNode);
@@ -1021,88 +1138,36 @@ namespace MVCVisualDesigner
 
         private TypeNode getTypeNode(VDWidget widget, NodeBase parentNode)
         {
-            TypeNode node = null;
-            if (m_typeNodeCache.Count > 0)
-                node = m_typeNodeCache.Pop();
-            else
-                node = new TypeNode();
+            TypeNode node = getCachedNode<TypeNode>();
             node.InitTypeNode(widget, parentNode);
             return node;
         }
 
         private MemberNode getMemberNode(VDWidget widget, VDWidgetValueMember widgetValueMember, NodeBase parentNode)
         {
-            MemberNode node = null;
-            if (m_memberNodeCache.Count > 0)
-                node = m_memberNodeCache.Pop();
-            else
-                node = new MemberNode();
+            MemberNode node = getCachedNode<MemberNode>();
             node.InitMemberNode(widget, widgetValueMember, parentNode);
             return node;
         }
 
-        private void reclaimNodes(List<NodeBase> nodes)
+        abstract class WidgetValueNode : NodeBase
         {
-            foreach(NodeBase node in nodes)
-            {
-                if (node is TypeNode)
-                    m_typeNodeCache.Push((TypeNode)node);
-                else
-                    m_memberNodeCache.Push((MemberNode)node);
-            }
-        }
-        
-        // cache the nodes
-        private Stack<TypeNode> m_typeNodeCache = new Stack<TypeNode>();
-        private Stack<MemberNode> m_memberNodeCache = new Stack<MemberNode>();
-
-        abstract class NodeBase
-        {
-            protected Guid m_id;
             protected VDWidget m_widget;
-            protected NodeBase m_parentNode;
-
             protected void Init(Guid id, VDWidget widget, NodeBase parent)
             {
-                m_id = id;
                 m_widget = widget;
-                m_parentNode = parent;
+                base.Init(id, parent);
             }
 
-            public Guid ID { get { return m_id; } }
-            public Guid ParentID { get { return m_parentNode == null ? Guid.Empty : m_parentNode.ID; } }
-
-            public string Name { get; set; }
-            public string DispName { get; set; }
-            public string TypeName { get; set; }
             public string InitValue { get; set; }
-            public string ValidatorNames { get; set; }
             public string FormatterNames { get; set; }
 
-            /// <summary> If be able to Add child nodes of this node </summary>
-            abstract internal bool CanAddChildMembers { get; }
-
-            abstract internal bool CanBeDeleted { get; }
-
-            /// <summary> If be able to change Name column of this node </summary>
-            abstract internal bool CanChangeName { get; }
-
-            /// <summary> If be able to change Type column of this node </summary>
-            abstract internal bool CanChangeType { get; }
-
-            virtual internal void AddChildNode() { }
-            virtual internal void DeleteNode() { }
-
-            virtual internal void OnNameChanged(string oldValue, string newValue) { }
-            virtual internal void OnDispNameChanged(string oldValue, string newValue) { }
-            virtual internal void OnTypeNameChanged(string oldValue, string newValue) { }
             virtual internal void OnInitValueChanged(string oldValue, string newValue) { }
-            virtual internal void OnValidatorChanged(string oldValue, string newValue) { }
             virtual internal void OnFormatterChanged(string oldValue, string newValue) { }
         }
 
         // the node to represent the WidgetValue of a widget, only one node of this kind for a widget
-        class TypeNode : NodeBase
+        class TypeNode : WidgetValueNode
         {
             private VDWidgetValue m_widgetValue;
             internal void InitTypeNode(VDWidget widget, NodeBase parent)
@@ -1178,7 +1243,7 @@ namespace MVCVisualDesigner
                     m_widgetValue = null;
                 }
 
-                m_widgetValue = modelStore.CreateWidgetValue(newValue);
+                m_widgetValue = modelStore.CreateConcreteType<VDWidgetValue>(newValue);
                 if (!modelStore.IsPrimitiveType(newValue) && !modelStore.IsPredefinedType(newValue))
                 {
                     // add member "Value"
@@ -1188,7 +1253,7 @@ namespace MVCVisualDesigner
             }
         }
 
-        class MemberNode : NodeBase
+        class MemberNode : WidgetValueNode
         {
             private VDWidgetValueMember m_member;
             internal void InitMemberNode(VDWidget widget, VDWidgetValueMember member, NodeBase parent)
@@ -1350,94 +1415,274 @@ namespace MVCVisualDesigner
     public class ViewModelHandler : ModelToolWindowHandler
     {
         public ViewModelHandler(ModelToolWindowForm form, DataTreeListView treeListView, ToolTip toolTip, 
-            ContextMenuStrip contextMenu, ToolStripMenuItem miAddChild, ToolStripMenuItem miDelete)
-            : base(form, treeListView, toolTip, contextMenu, miAddChild, miDelete)
+            ContextMenuStrip contextMenu, ToolStripMenuItem miAddChild, ToolStripMenuItem miDelete, AutoCompleteTextBox typeEditor)
+            : base(form, treeListView, toolTip, contextMenu, miAddChild, miDelete, typeEditor)
         {
         }
 
-        public void Show(VDView view) 
-        { 
-            m_form.ShowViewModelPanel(); 
-        }
-
-#if false
         private VDView m_currentView = null;
-        public void ShowViewModel(VDView view)
+        public override void Show(VDWidget widget)
         {
-            tlpActionModelLayout.Visible = false;
-            tlpViewModelLayout.Visible = true;
-            tlpWidgetModelLayout.Visible = false;
-            tlpViewModelLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-
-            m_currentView = view;
-            m_currentWidget = null;
-
-            // set model type
-            this.ctrlViewModelType.InitTypeList(getAllTypes(), view.GetModelType());
-
-            // init tree list view
-            refreshAllItemsForViewModel();
+            m_form.ShowViewModelPanel();
+            m_currentView = widget as VDView;
+            base.Show(widget);
         }
 
-        private void refreshAllItemsForViewModel()
+        protected override void refreshTreeListView()
         {
-            // update tree list view
-            if (m_currentView != null && m_currentView.ModelInstance != null)
-            {
-                tlvViewModel.DataSource = m_currentView.ModelInstance.GetAllSubMemberInstances();
-                //tlvViewModel.SetObjects(m_currentView.ModelInstance.GetAllSubMemberInstances());
-            }
-            else
-            {
-                tlvViewModel.ClearObjects();
-                tlvViewModel.DataSource = null;
-            }
+            //// update tree list view
+            //if (m_currentView != null && m_currentView.ModelInstance != null)
+            //{
+            //    tlvViewModel.DataSource = m_currentView.ModelInstance.GetAllSubMemberInstances();
+            //    //tlvViewModel.SetObjects(m_currentView.ModelInstance.GetAllSubMemberInstances());
+            //}
+            //else
+            //{
+            //    tlvViewModel.ClearObjects();
+            //    tlvViewModel.DataSource = null;
+            //}
         }
-#endif
     }
 
     public class ActionDataHandler : ModelToolWindowHandler
     {
+        private const string COLUMN_DATA_SOURCE = "Data Source";
+        private const string COLUMN_CUSTOM_SELECTOR = "Custom Selector";
+
         public ActionDataHandler(ModelToolWindowForm form, DataTreeListView treeListView, ToolTip toolTip,
-            ContextMenuStrip contextMenu, ToolStripMenuItem miAddChild, ToolStripMenuItem miDelete)
-            : base(form, treeListView, toolTip, contextMenu, miAddChild, miDelete)
+            ContextMenuStrip contextMenu, ToolStripMenuItem miAddChild, ToolStripMenuItem miDelete, AutoCompleteTextBox typeEditor)
+            : base(form, treeListView, toolTip, contextMenu, miAddChild, miDelete, typeEditor)
         {
         }
 
-        public void Show(VDActionBase action) 
-        { 
-            m_form.ShowActionDataPanel();  
-        }
-#if false
-        public void ShowActionModel(VDClientAction clientAction)
+        private VDActionBase m_currentAction;
+        public override void Show(VDWidget widget)
         {
-            tlpActionModelLayout.Visible = true;
-            tlpViewModelLayout.Visible = false;
-            tlpWidgetModelLayout.Visible = false;
-            tlpActionModelLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            m_form.ShowActionDataPanel();
+            m_currentAction = widget as VDActionBase;
+            base.Show(widget);
+        }
 
-            m_currentView = clientAction.RootView;
-            m_currentWidget = clientAction;
-
-            // todo: 
-
-            refreshAllItemsForActionModel();
+        protected override List<NodeBase> getAllNodes()
+        {
+            List<NodeBase> allNodes = new List<NodeBase>();
+            if (m_currentAction != null && m_currentAction.ActionData != null)
+            {
+                RootNode rootNode = getCachedNode<RootNode>();
+                rootNode.InitRootNode(m_currentAction.ActionData);
+                allNodes.Add(rootNode);
+                getMemberNode(m_currentAction.ActionData, rootNode, allNodes);
+            }
+            return allNodes;
         }
         
-        private void refreshAllItemsForActionModel()
+        private void getMemberNode(VDActionData ad, NodeBase parent, List<NodeBase> allNodes)
         {
-            // update tree list view
-            if (m_currentWidget != null && m_currentWidget.ModelInstance != null)
+            if (ad == null) return;
+
+            foreach(VDModelMember m in ad.Members)
             {
-                tlvActionModel.DataSource = m_currentWidget.ModelInstance.GetAllMemberInstances();
+                VDActionDataMember member = m as VDActionDataMember;
+                MemberNode node = getCachedNode<MemberNode>();
+                node.InitMemberNode(member, parent);
+                allNodes.Add(node);
+
+                if (member.Meta != null && !(member.Meta.Type is VDPrimitiveType)) // the type of this member is not Primitive Type
+                {
+                    getMemberNode(member.Type as VDActionData, node, allNodes);
+                }
+            }
+        }
+
+        protected override void OnCellEditStarting(object sender, CellEditEventArgs e)
+        {
+            NodeBase node = e.RowObject as NodeBase;
+            string columnName = e.Column.Text;
+
+            if (columnName == COLUMN_DATA_SOURCE || columnName == COLUMN_CUSTOM_SELECTOR || columnName == COLUMN_VALIDATOR)
+            {
+                if (node == null || node is RootNode)
+                {
+                    showTooltipMsg(columnName + " can not be changed.", e);
+                    e.Cancel = true;
+                }
+            }
+            else
+                base.OnCellEditStarting(sender, e);
+        }
+
+        protected override void OnCellEditValidating(object sender, CellEditEventArgs e)
+        {
+            string columnName = e.Column.Text;
+            if (columnName == COLUMN_TYPE)
+            {
+                string newValue = (string)e.NewValue;
+                if (m_currentAction == null ||
+                    (e.RowObject is RootNode && m_currentAction.GetModelStore().IsPrimitiveType(newValue)))
+                {
+                    showTooltipMsg("Type can not be primitive type", e);
+                    e.Cancel = true;
+                }
             }
             else
             {
-                tlvActionModel.ClearObjects();
-                tlvActionModel.DataSource = null;
+                base.OnCellEditValidating(sender, e);
             }
         }
-#endif
+
+        protected override void onCellEditingFinishedOtherColumns(object sender, CellEditEventArgs e, 
+            NodeBase node, string columnName, string oldValue, string newValue)
+        {
+            ActionDataNode curNode = node as ActionDataNode;
+            if (curNode == null) return;
+
+            if (columnName == COLUMN_DATA_SOURCE)
+                curNode.OnDataSourceChanged(oldValue, newValue);
+            else if (columnName == COLUMN_CUSTOM_SELECTOR)
+                curNode.OnCustomSelectorChanged(oldValue, newValue);
+            base.onCellEditingFinishedOtherColumns(sender, e, node, columnName, oldValue, newValue);
+        }
+
+        abstract class ActionDataNode : NodeBase
+        {
+            public string DataSource { get; set; }
+            public string CustomSelector { get; set; }
+
+            internal void OnDataSourceChanged(string oldValue, string newValue) { }
+            internal void OnCustomSelectorChanged(string oldValue, string newValue) { }
+        }
+
+        class RootNode : ActionDataNode
+        {
+            private VDActionData m_actionData;
+            internal void InitRootNode(VDActionData actionData)
+            {
+                m_actionData = actionData;
+                base.Init(actionData.Id, null);
+                if (actionData != null)
+                {
+                    this.Name = actionData.Action != null ? (actionData.Action.Name ?? string.Empty) : string.Empty;
+                    TypeName = actionData.Meta != null ? actionData.Meta.FullName : string.Empty;
+                    DispName = actionData.DispName;
+                }
+                else
+                {
+                    Name = string.Empty;
+                    TypeName = string.Empty;
+                    DispName = string.Empty;
+                }
+
+                ValidatorNames = string.Empty;
+                DataSource = string.Empty;
+                CustomSelector = string.Empty;
+            }
+
+            internal override bool CanAddChildMembers
+            {
+                get
+                {
+                    if (m_actionData == null || m_actionData.Meta == null)
+                        return false;
+
+                    VDMetaType metaType = m_actionData.Meta;
+                    return !(metaType is VDDictionaryType || metaType is VDListType
+                        || metaType is VDPredefinedType || metaType is VDPrimitiveType);
+                }
+            }
+
+            internal override bool CanBeDeleted { get { return false; } }
+
+            internal override bool CanChangeName { get { return false; } }
+
+            internal override bool CanChangeType
+            {
+                get
+                {
+                    return m_actionData != null && m_actionData.Meta != null;
+                }
+            }
+
+            internal override void AddChildNode()
+            {
+                if (m_actionData == null || m_actionData == null) return;
+                VDModelStore modelStore = m_actionData.ModelStore;
+                int idx = 0;
+                while (m_actionData.Members.Find(m => m.Name == Utility.Constants.STR_NEW_MEMBER + ++idx) != null) ;
+                m_actionData.AddMember<VDProperty>(Utility.Constants.STR_TYPE_STRING, "NewMember" + idx);
+            }
+
+            internal override void OnTypeNameChanged(string oldValue, string newValue)
+            {
+                if (oldValue == newValue) return;
+                if (m_actionData == null || m_actionData == null) return;
+
+                VDModelStore modelStore = m_actionData.ModelStore;
+
+                // delete old widgets
+                if (!m_actionData.HasExternalReference)
+                {
+                    m_actionData.Delete();
+                    m_actionData = null;
+                }
+
+                m_actionData = modelStore.CreateConcreteType<VDActionData>(newValue);
+                if (!modelStore.IsPrimitiveType(newValue) && !modelStore.IsPredefinedType(newValue))
+                {
+                    // add member "Value"
+                    m_actionData.AddMember<VDBuiltInProperty>(Utility.Constants.STR_TYPE_STRING, Utility.Constants.STR_VALUE_MEMBER);
+                }
+                m_actionData.Action.ActionData = m_actionData;
+            }
+        }
+
+        class MemberNode : ActionDataNode
+        {
+            private VDActionDataMember m_actionDataMember;
+            internal void InitMemberNode(VDActionDataMember member, NodeBase parent)
+            {
+                m_actionDataMember = member;
+                base.Init(member.Id, parent);
+
+                if (member != null)
+                {
+                    Name = member.Name;
+                    DispName = member.DispName;
+                    TypeName = member.Meta != null && member.Meta.Type != null ? member.Meta.Type.FullName : string.Empty;
+                    ValidatorNames = member.ValidatorNames;
+                    DataSource = member.DataSource;
+                    CustomSelector = member.CustomSelector;
+                }
+                else
+                {
+                    Name = string.Empty;
+                    DispName = string.Empty;
+                    TypeName = string.Empty;
+                    ValidatorNames = string.Empty;
+                    DataSource = string.Empty;
+                    CustomSelector = string.Empty;
+                }
+            }
+
+            internal override bool CanAddChildMembers
+            {
+                get { throw new NotImplementedException(); }
+            }
+
+            internal override bool CanBeDeleted
+            {
+                get { throw new NotImplementedException(); }
+            }
+
+            internal override bool CanChangeName
+            {
+                get { throw new NotImplementedException(); }
+            }
+
+            internal override bool CanChangeType
+            {
+                get { throw new NotImplementedException(); }
+            }
+        }
     }
 
     public class AutoCompleteTextBox : TextBox

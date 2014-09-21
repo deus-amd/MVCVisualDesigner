@@ -866,14 +866,14 @@ namespace MVCVisualDesigner
         }
 
         // Concrete Type
-        public VDWidgetValue GetWidgetValue(string typeName)
+        public T GetConcreteType<T>(string typeName) where T : VDConcreteType
         {
             if (String.IsNullOrWhiteSpace(typeName)) return null;
             ModelTypeInfo typeInfo = new ModelTypeInfo(typeName);
-            return GetWidgetValue(typeInfo);
+            return GetConcreteType<T>(typeInfo);
         }
 
-        public VDWidgetValue GetWidgetValue(ModelTypeInfo typeInfo)
+        public T GetConcreteType<T>(ModelTypeInfo typeInfo) where T : VDConcreteType
         {
             if (typeInfo == null) return null;
 
@@ -882,47 +882,47 @@ namespace MVCVisualDesigner
                 return this.ConcreteTypes.Find(t =>
                 {
                     VDDictionaryType dt = t.Meta as VDDictionaryType;
-                    return t is VDWidgetValue && dt != null
+                    return t is T && dt != null
                         && (dt.Key != null && dt.Key.Type != null && dt.Key.Type.FullName == typeInfo.KeyType)
                         && (dt.Value != null && dt.Value.Type != null && dt.Value.Type.FullName == typeInfo.ValueType);
-                }) as VDWidgetValue;
+                }) as T;
             }
             else if (typeInfo.CollectionType == E_CollectionType.List)
             {
                 return this.ConcreteTypes.Find(t =>
                 {
                     VDListType lt = t.Meta as VDListType;
-                    return t is VDWidgetValue && lt != null
+                    return t is T && lt != null
                         && lt.Value != null && lt.Value.Type != null && lt.Value.Type.FullName == typeInfo.ValueType;
-                }) as VDWidgetValue;
+                }) as T;
             }
             else
             {
                 return this.ConcreteTypes.Find(t =>
                 {
-                    return t is VDWidgetValue && !(t.Meta is VDDictionaryType) && !(t.Meta is VDListType) && t.Meta.FullName == typeInfo.ValueType;
-                }) as VDWidgetValue;
+                    return t is T && !(t.Meta is VDDictionaryType) && !(t.Meta is VDListType) && t.Meta.FullName == typeInfo.ValueType;
+                }) as T;
             }
         }
 
-        public VDWidgetValue CreateWidgetValue(string metaTypeFullName)
+        public T CreateConcreteType<T>(string metaTypeFullName) where T : VDConcreteType
         {
             VDMetaType metaType = CreateMetaType(metaTypeFullName);
-            return CreateWidgetValue(metaType);
+            return CreateConcreteType<T>(metaType);
         }
 
-        public VDWidgetValue CreateWidgetValue(ModelTypeInfo typeInfo)
+        public T CreateConcreteType<T>(ModelTypeInfo typeInfo) where T : VDConcreteType
         {
             VDMetaType metaType = CreateMetaType(typeInfo);
-            return CreateWidgetValue(metaType);
+            return CreateConcreteType<T>(metaType);
         }
 
-        public VDWidgetValue CreateWidgetValue(VDMetaType metaType, VDWidgetValueMember memberOfThisType = null)
+        public T CreateConcreteType<T>(VDMetaType metaType, VDConcreteMember memberOfThisType = null) where T : VDConcreteType
         {
             //VDWidgetValue widgetValue = GetWidgetValue(metaType.FullName);
             //if (widgetValue != null) return widgetValue;
 
-            VDWidgetValue widgetValue = new VDWidgetValue(this.Partition);
+            T widgetValue = newConcreteType<T>();
             widgetValue.Meta = metaType;
             this.ConcreteTypes.Add(widgetValue);
 
@@ -944,25 +944,49 @@ namespace MVCVisualDesigner
             }
 
             // add members
-            foreach(VDModelMember m in metaType.Members)
+            foreach (VDModelMember m in metaType.Members)
             {
                 VDMetaMember metaMember = m as VDMetaMember;
                 if (metaMember == null) continue;
 
-                VDWidgetValueMember newMember = new VDWidgetValueMember(this.Partition);
+                VDConcreteMember newMember = newConcreteMember<T>();
                 newMember.Meta = metaMember;
                 if (metaMember.Type is VDPrimitiveType)
                 {
-                    newMember.Type = GetPrimitiveMemberType(metaMember.Type.FullName); 
+                    newMember.Type = GetPrimitiveMemberType(metaMember.Type.FullName);
                 }
                 else
                 {
-                    newMember.Type = this.CreateWidgetValue(metaMember.Type as VDMetaType, newMember);
+                    newMember.Type = this.CreateConcreteType<T>(metaMember.Type as VDMetaType, newMember);
                 }
                 widgetValue.Members.Add(newMember);
             }
 
             return widgetValue;
+        }
+
+        private T newConcreteType<T>() where T : VDConcreteType
+        {
+            if (typeof(T) == typeof(VDWidgetValue))
+                return new VDWidgetValue(this.Partition) as T;
+            else if (typeof(T) == typeof(VDActionData))
+                return new VDActionData(this.Partition) as T;
+            else if (typeof(T) == typeof(VDViewModel))
+                return new VDViewModel(this.Partition) as T;
+            else
+                return default(T);
+        }
+
+        private VDConcreteMember newConcreteMember<T>() where T : VDConcreteType
+        {
+            if (typeof(T) == typeof(VDWidgetValue))
+                return new VDWidgetValueMember(this.Partition);
+            else if (typeof(T) == typeof(VDActionData))
+                return new VDActionDataMember(this.Partition);
+            else if (typeof(T) == typeof(VDViewModel))
+                return new VDViewModelMember(this.Partition);
+            else
+                return null;
         }
 
         internal protected VDPrimitiveMemberType GetPrimitiveMemberType(string typeName)
@@ -1374,12 +1398,12 @@ namespace MVCVisualDesigner
         //
         internal virtual void AddMemberImpl(VDMetaMember metaMember)
         {
-            VDWidgetValueMember newMember = new VDWidgetValueMember(this.Partition);
+            VDConcreteMember newMember = newConcreteMember();
             newMember.Meta = metaMember;
             if (metaMember.Type is VDPrimitiveType)
                 newMember.Type = this.ModelStore.GetPrimitiveMemberType(metaMember.Type.FullName);
             else
-                newMember.Type = this.ModelStore.CreateWidgetValue(metaMember.Type as VDMetaType);
+                newMember.Type = this.ModelStore.CreateConcreteType<VDWidgetValue>(metaMember.Type as VDMetaType);
             this.Members.Add(newMember);
         }
 
@@ -1401,13 +1425,10 @@ namespace MVCVisualDesigner
             if (memberMetaType is VDPrimitiveType)
                 member.Type = this.ModelStore.GetPrimitiveMemberType(memberMetaType.FullName);
             else
-                member.Type = this.ModelStore.CreateWidgetValue(memberMetaType);
+                member.Type = this.ModelStore.CreateConcreteType<VDWidgetValue>(memberMetaType);
         }
-    }
 
-    public partial class VDWidgetValue : VDConcreteType
-    {
-        // if has external reference except VDWidget.WidgetValue
+        // if has external reference except VDWidget.WidgetValue/VDActionBase.ActionData/VDView.Model
         public bool HasExternalReference
         {
             get
@@ -1415,19 +1436,45 @@ namespace MVCVisualDesigner
                 if (this.MembersOfThisType.Count <= 0 && this.Members.Count <= 0)
                     return false;
 
-                if (this.Members.Count < this.MembersOfThisType.Count) 
+                if (this.Members.Count < this.MembersOfThisType.Count)
                     return true;
 
                 HashSet<Guid> members = new HashSet<Guid>();
                 this.Members.ForEach(m => members.Add(m.Id));
 
-                foreach(var m in this.MembersOfThisType)
+                foreach (var m in this.MembersOfThisType)
                 {
                     if (!members.Contains(m.Id)) return true;
                 }
 
                 return false;
             }
+        }
+
+        virtual protected internal VDConcreteMember newConcreteMember() { return null; }
+    }
+
+    public partial class VDWidgetValue : VDConcreteType
+    {
+        protected internal override VDConcreteMember newConcreteMember()
+        {
+            return new VDWidgetValueMember(this.Partition);
+        }
+    }
+
+    public partial class VDActionData : VDConcreteType
+    {
+        protected internal override VDConcreteMember newConcreteMember()
+        {
+            return new VDActionDataMember(this.Partition);
+        }
+    }
+
+    public partial class VDViewModel : VDConcreteType
+    {
+        protected internal override VDConcreteMember newConcreteMember()
+        {
+            return new VDViewModelMember(this.Partition);
         }
     }
 

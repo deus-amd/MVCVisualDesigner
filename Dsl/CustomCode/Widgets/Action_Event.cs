@@ -29,9 +29,38 @@ namespace MVCVisualDesigner
         }
     }
 
-    public partial class VDActionBase
+    public partial class VDActionBaseBase
+    {
+
+    }
+
+    public partial class VDActionBase : VDActionBaseBase
     {
         public abstract IActionInfo ActionInfo { get;  protected set; }
+
+        public override VDActionData ActionData
+        {
+            get
+            {
+                if (base.ActionData == null && !this.m_deleting)
+                {
+                    using (var trans = this.Store.TransactionManager.BeginTransaction("Create action data for " + this.WidgetType.ToString()))
+                    {
+                        VDModelStore modelStore = this.GetModelStore();
+                        if (modelStore != null)
+                        {
+                            base.ActionData = modelStore.CreateConcreteType<VDActionData>("{}"); // todo: give it a name to make it is able to be referenced
+                        }
+                        trans.Commit();
+                    }
+                }
+                return base.ActionData;
+            }
+            set
+            {
+                base.ActionData = value;
+            }
+        }
     }
 
     public partial class VDClientAction
@@ -303,7 +332,7 @@ namespace MVCVisualDesigner
         class VDActionShapeRule : PortMovementRule
         {
             private static VDActionShapeRule s_instance = new VDActionShapeRule();
-            internal static VDActionShapeRule Instance { get { return s_instance; } }
+            internal new static VDActionShapeRule Instance { get { return s_instance; } }
 
             public override RectangleD GetCompliantBounds(ShapeElement shape, RectangleD proposedBounds)
             {

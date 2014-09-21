@@ -14,7 +14,7 @@ namespace MVCVisualDesigner
             VDModelStore modelStore = this.GetModelStore();
             if (modelStore != null)
             {
-                return modelStore.CreateWidgetValue("string");
+                return modelStore.CreateConcreteType<VDWidgetValue>("string");
             }
             return null;
         }
