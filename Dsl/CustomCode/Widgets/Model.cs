@@ -919,12 +919,12 @@ namespace MVCVisualDesigner
 
         public T CreateConcreteType<T>(VDMetaType metaType, VDConcreteMember memberOfThisType = null) where T : VDConcreteType
         {
-            //VDWidgetValue widgetValue = GetWidgetValue(metaType.FullName);
-            //if (widgetValue != null) return widgetValue;
+            //T concreteType = GetConcreteType<T>(metaType.FullName);
+            //if (concreteType != null) return concreteType;
 
-            T widgetValue = newConcreteType<T>();
-            widgetValue.Meta = metaType;
-            this.ConcreteTypes.Add(widgetValue);
+            T concreteType = newConcreteType<T>();
+            concreteType.Meta = metaType;
+            this.ConcreteTypes.Add(concreteType);
 
             // avoid recursive infinitely
             if (memberOfThisType != null)
@@ -933,14 +933,14 @@ namespace MVCVisualDesigner
                 VDConcreteType hostType = memberOfThisType.Host as VDConcreteType;
                 while (hostType != null)
                 {
-                    if (hostType.FullName == widgetValue.FullName)
+                    if (hostType.FullName == concreteType.FullName)
                     {
                         usedTypeInParent = true;
                         break;
                     }
                     hostType = hostType.HostType;
                 }
-                if (usedTypeInParent) return widgetValue;
+                if (usedTypeInParent) return concreteType;
             }
 
             // add members
@@ -949,7 +949,7 @@ namespace MVCVisualDesigner
                 VDMetaMember metaMember = m as VDMetaMember;
                 if (metaMember == null) continue;
 
-                VDConcreteMember newMember = newConcreteMember<T>();
+                VDConcreteMember newMember = concreteType.newConcreteMember();
                 newMember.Meta = metaMember;
                 if (metaMember.Type is VDPrimitiveType)
                 {
@@ -959,10 +959,10 @@ namespace MVCVisualDesigner
                 {
                     newMember.Type = this.CreateConcreteType<T>(metaMember.Type as VDMetaType, newMember);
                 }
-                widgetValue.Members.Add(newMember);
+                concreteType.Members.Add(newMember);
             }
 
-            return widgetValue;
+            return concreteType;
         }
 
         private T newConcreteType<T>() where T : VDConcreteType
@@ -975,18 +975,6 @@ namespace MVCVisualDesigner
                 return new VDViewModel(this.Partition) as T;
             else
                 return default(T);
-        }
-
-        private VDConcreteMember newConcreteMember<T>() where T : VDConcreteType
-        {
-            if (typeof(T) == typeof(VDWidgetValue))
-                return new VDWidgetValueMember(this.Partition);
-            else if (typeof(T) == typeof(VDActionData))
-                return new VDActionDataMember(this.Partition);
-            else if (typeof(T) == typeof(VDViewModel))
-                return new VDViewModelMember(this.Partition);
-            else
-                return null;
         }
 
         internal protected VDPrimitiveMemberType GetPrimitiveMemberType(string typeName)
@@ -1451,12 +1439,12 @@ namespace MVCVisualDesigner
             }
         }
 
-        virtual protected internal VDConcreteMember newConcreteMember() { return null; }
+        virtual internal VDConcreteMember newConcreteMember() { return null; }
     }
 
     public partial class VDWidgetValue : VDConcreteType
     {
-        protected internal override VDConcreteMember newConcreteMember()
+        internal override VDConcreteMember newConcreteMember()
         {
             return new VDWidgetValueMember(this.Partition);
         }
@@ -1464,7 +1452,7 @@ namespace MVCVisualDesigner
 
     public partial class VDActionData : VDConcreteType
     {
-        protected internal override VDConcreteMember newConcreteMember()
+        internal override VDConcreteMember newConcreteMember()
         {
             return new VDActionDataMember(this.Partition);
         }
@@ -1472,7 +1460,7 @@ namespace MVCVisualDesigner
 
     public partial class VDViewModel : VDConcreteType
     {
-        protected internal override VDConcreteMember newConcreteMember()
+        internal override VDConcreteMember newConcreteMember()
         {
             return new VDViewModelMember(this.Partition);
         }

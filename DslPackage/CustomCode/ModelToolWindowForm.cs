@@ -983,7 +983,7 @@ namespace MVCVisualDesigner
         // Utility
         protected void showTooltipMsg(string msg, CellEditEventArgs e)
         {
-            m_toolTip.Show(msg, m_treeListView, e.CellBounds.Left, e.CellBounds.Bottom, 800); 
+            m_toolTip.Show(msg, m_treeListView, e.CellBounds.Left, e.CellBounds.Bottom, 1000); 
         }
 
         // Node class
@@ -1414,6 +1414,8 @@ namespace MVCVisualDesigner
 
     public class ViewModelHandler : ModelToolWindowHandler
     {
+        private const string COLUMN_IS_JS_MODEL = "JS Model";
+
         public ViewModelHandler(ModelToolWindowForm form, DataTreeListView treeListView, ToolTip toolTip, 
             ContextMenuStrip contextMenu, ToolStripMenuItem miAddChild, ToolStripMenuItem miDelete, AutoCompleteTextBox typeEditor)
             : base(form, treeListView, toolTip, contextMenu, miAddChild, miDelete, typeEditor)
@@ -1428,19 +1430,314 @@ namespace MVCVisualDesigner
             base.Show(widget);
         }
 
-        protected override void refreshTreeListView()
+        protected override List<NodeBase> getAllNodes()
         {
-            //// update tree list view
-            //if (m_currentView != null && m_currentView.ModelInstance != null)
-            //{
-            //    tlvViewModel.DataSource = m_currentView.ModelInstance.GetAllSubMemberInstances();
-            //    //tlvViewModel.SetObjects(m_currentView.ModelInstance.GetAllSubMemberInstances());
-            //}
-            //else
-            //{
-            //    tlvViewModel.ClearObjects();
-            //    tlvViewModel.DataSource = null;
-            //}
+            List<NodeBase> allNodes = new List<NodeBase>();
+            if (m_currentView != null && m_currentView.Model != null)
+            {
+                RootNode rootNode = getCachedNode<RootNode>();
+                rootNode.InitRootNode(m_currentView.Model);
+                allNodes.Add(rootNode);
+                getMemberNode(m_currentView.Model, rootNode, allNodes);
+            }
+            return allNodes;
+        }
+
+        private void getMemberNode(VDViewModel model, NodeBase parent, List<NodeBase> allNodes)
+        {
+            if (model == null) return;
+
+            foreach (VDModelMember m in model.Members)
+            {
+                VDViewModelMember member = m as VDViewModelMember;
+                MemberNode node = getCachedNode<MemberNode>();
+                node.InitMemberNode(member, parent);
+                allNodes.Add(node);
+
+                if (member.Meta != null && !(member.Meta.Type is VDPrimitiveType)) // the type of this member is not Primitive Type
+                {
+                    getMemberNode(member.Type as VDViewModel, node, allNodes);
+                }
+            }
+        }
+
+        protected override void OnCellEditStarting(object sender, CellEditEventArgs e)
+        {
+            NodeBase node = e.RowObject as NodeBase;
+            string columnName = e.Column.Text;
+
+            if (columnName == COLUMN_IS_JS_MODEL || columnName == COLUMN_VALIDATOR)
+            {
+                if (node == null || node is RootNode)
+                {
+                    showTooltipMsg(columnName + " can not be changed.", e);
+                    e.Cancel = true;
+                }
+            }
+            else
+                base.OnCellEditStarting(sender, e);
+        }
+
+        protected override void OnCellEditValidating(object sender, CellEditEventArgs e)
+        {
+            string columnName = e.Column.Text;
+            base.OnCellEditValidating(sender, e);
+        }
+
+        protected override void onCellEditingFinishedOtherColumns(object sender, CellEditEventArgs e,
+            NodeBase node, string columnName, string oldValue, string newValue)
+        {
+            ViewModelNode curNode = node as ViewModelNode;
+            if (curNode == null) return;
+
+            if (columnName == COLUMN_IS_JS_MODEL)
+            {
+                bool bOldValue = false;
+                bool bNewValue = false;
+                bool.TryParse(oldValue, out bOldValue);
+                bool.TryParse(newValue, out bNewValue);
+                if (bOldValue == bNewValue) return;
+                curNode.OnIsJSModelChanged(bOldValue, bNewValue);
+            }
+            base.onCellEditingFinishedOtherColumns(sender, e, node, columnName, oldValue, newValue);
+        }
+
+        abstract class ViewModelNode : NodeBase
+        {
+            public bool IsJSModel { get; set; }
+
+            internal virtual void OnIsJSModelChanged(bool oldValue, bool newValue) { }
+        }
+
+        class RootNode : ViewModelNode
+        {
+            private VDViewModel m_viewModel;
+            internal void InitRootNode(VDViewModel viewModel)
+            {
+                m_viewModel = viewModel;
+                base.Init(viewModel.Id, null);
+                if (viewModel != null)
+                {
+                    this.Name = viewModel != null && viewModel.View != null ? "[" + viewModel.View.WidgetType.ToString() + "]" : string.Empty;
+                    TypeName = viewModel.Meta != null ? viewModel.Meta.FullName : string.Empty;
+                    DispName = viewModel.DispName;
+                }
+                else
+                {
+                    Name = string.Empty;
+                    TypeName = string.Empty;
+                    DispName = string.Empty;
+                }
+
+                ValidatorNames = string.Empty;
+                IsJSModel = false;
+            }
+
+            internal override bool CanAddChildMembers
+            {
+                get
+                {
+                    if (m_viewModel == null || m_viewModel.Meta == null)
+                        return false;
+
+                    VDMetaType metaType = m_viewModel.Meta;
+                    return !(metaType is VDDictionaryType || metaType is VDListType
+                        || metaType is VDPredefinedType || metaType is VDPrimitiveType);
+                }
+            }
+
+            internal override bool CanBeDeleted { get { return false; } }
+
+            internal override bool CanChangeName { get { return false; } }
+
+            internal override bool CanChangeType
+            {
+                get
+                {
+                    return m_viewModel != null && m_viewModel.Meta != null;
+                }
+            }
+
+            internal override void AddChildNode()
+            {
+                if (m_viewModel == null || m_viewModel == null) return;
+                VDModelStore modelStore = m_viewModel.ModelStore;
+                int idx = 0;
+                while (m_viewModel.Members.Find(m => m.Name == Utility.Constants.STR_NEW_MEMBER + ++idx) != null) ;
+                m_viewModel.AddMember<VDProperty>(Utility.Constants.STR_TYPE_STRING, "NewMember" + idx);
+            }
+
+            internal override void OnTypeNameChanged(string oldValue, string newValue)
+            {
+                if (oldValue == newValue) return;
+                if (m_viewModel == null || m_viewModel == null) return;
+
+                VDModelStore modelStore = m_viewModel.ModelStore;
+
+                // delete old widgets
+                if (!m_viewModel.HasExternalReference)
+                {
+                    m_viewModel.Delete();
+                    m_viewModel = null;
+                }
+
+                m_viewModel = modelStore.CreateConcreteType<VDViewModel>(newValue);
+                if (!modelStore.IsPrimitiveType(newValue) && !modelStore.IsPredefinedType(newValue))
+                {
+                    // add member "Value"
+                    m_viewModel.AddMember<VDBuiltInProperty>(Utility.Constants.STR_TYPE_STRING, Utility.Constants.STR_VALUE_MEMBER);
+                }
+                m_viewModel.View.Model = m_viewModel;
+            }
+        }
+
+        class MemberNode : ViewModelNode
+        {
+            private VDViewModelMember m_member;
+            internal void InitMemberNode(VDViewModelMember member, NodeBase parent)
+            {
+                m_member = member;
+                base.Init(member.Id, parent);
+
+                if (member != null)
+                {
+                    Name = member.Name;
+                    DispName = member.DispName;
+                    TypeName = member.Meta != null && member.Meta.Type != null ? member.Meta.Type.FullName : string.Empty;
+                    ValidatorNames = member.ValidatorNames;
+                    IsJSModel = member.IsJSModel;
+                }
+                else
+                {
+                    Name = string.Empty;
+                    DispName = string.Empty;
+                    TypeName = string.Empty;
+                    ValidatorNames = string.Empty;
+                    IsJSModel = false;
+                }
+            }
+
+            internal override bool CanAddChildMembers
+            {
+                get
+                {
+                    if (m_member == null || m_member.Meta == null || m_member.Meta.Type == null)
+                        return false;
+
+                    if (m_member.Meta is VDBuiltInProperty)
+                        return false;
+
+                    VDMetaType metaType = m_member.Meta.Type as VDMetaType;
+                    return !(metaType is VDDictionaryType || metaType is VDListType
+                        || metaType is VDPredefinedType || metaType is VDPrimitiveType);
+                }
+            }
+
+            internal override bool CanBeDeleted
+            {
+                get
+                {
+                    if (m_member == null || m_member.Meta == null || m_member.Meta.Host == null)
+                        return false;
+
+                    if (m_member.Meta is VDBuiltInProperty)
+                        return false;
+
+                    VDMetaType metaType = m_member.Meta.Host as VDMetaType;
+                    return !(metaType is VDDictionaryType || metaType is VDListType
+                        || metaType is VDPredefinedType || metaType is VDPrimitiveType);
+                }
+            }
+
+            internal override bool CanChangeName
+            {
+                get
+                {
+                    if (m_member == null || m_member.Meta == null || m_member.Meta.Host == null)
+                        return false;
+
+                    if (m_member.Meta is VDBuiltInProperty)
+                        return false;
+
+                    VDMetaType metaType = m_member.Meta.Host as VDMetaType;
+                    return !(metaType is VDDictionaryType || metaType is VDListType
+                        || metaType is VDPredefinedType || metaType is VDPrimitiveType);
+                }
+            }
+
+            internal override bool CanChangeType
+            {
+                get
+                {
+                    if (m_member == null || m_member.Meta == null || m_member.Meta.Host == null)
+                        return false;
+
+                    VDMetaType metaType = m_member.Meta.Host as VDMetaType;
+                    return !(metaType is VDPredefinedType || metaType is VDPrimitiveType);
+                }
+            }
+
+            internal override void AddChildNode()
+            {
+                if (!CanAddChildMembers) return;
+
+                VDConcreteType host = (VDConcreteType)m_member.Host;
+                if (host == null) return;
+
+                VDModelStore modelStore = host.ModelStore;
+                int idx = 0;
+                while (host.Members.Find(m => m.Name == Utility.Constants.STR_NEW_MEMBER + ++idx) != null) ;
+                host.AddMember<VDProperty>(Utility.Constants.STR_TYPE_STRING, "NewMember" + idx);
+            }
+
+            internal override void DeleteNode()
+            {
+                if (!CanBeDeleted) return;
+
+                if (m_member.Host != null)
+                {
+                    ((VDConcreteType)m_member.Host).DeleteMember(m_member.Name);
+                }
+            }
+
+            internal override void OnNameChanged(string oldValue, string newValue)
+            {
+                if (!CanChangeName) return;
+                if (oldValue == newValue) return;
+                if (string.IsNullOrWhiteSpace(newValue)) throw new ArgumentNullException("newValue");
+
+                m_member.ChangeName(newValue);
+            }
+
+            internal override void OnDispNameChanged(string oldValue, string newValue)
+            {
+                if (!CanChangeName) return;
+                if (oldValue == newValue) return;
+                if (string.IsNullOrWhiteSpace(newValue)) throw new ArgumentNullException("newValue");
+
+                m_member.ChangeDispName(newValue);
+            }
+
+            internal override void OnTypeNameChanged(string oldValue, string newValue)
+            {
+                if (!CanChangeType) return;
+                if (oldValue == newValue) return;
+                if (string.IsNullOrWhiteSpace(newValue)) throw new ArgumentNullException("newValue");
+
+                m_member.ChangeType(newValue);
+            }
+
+            internal override void OnValidatorChanged(string oldValue, string newValue)
+            {
+                if (oldValue == newValue) return;
+                m_member.ValidatorNames = newValue;
+            }
+
+            internal override void OnIsJSModelChanged(bool oldValue, bool newValue)
+            {
+                if (oldValue == newValue) return;
+                m_member.IsJSModel = newValue;
+            }
         }
     }
 
@@ -1548,8 +1845,8 @@ namespace MVCVisualDesigner
             public string DataSource { get; set; }
             public string CustomSelector { get; set; }
 
-            internal void OnDataSourceChanged(string oldValue, string newValue) { }
-            internal void OnCustomSelectorChanged(string oldValue, string newValue) { }
+            internal virtual void OnDataSourceChanged(string oldValue, string newValue) { }
+            internal virtual void OnCustomSelectorChanged(string oldValue, string newValue) { }
         }
 
         class RootNode : ActionDataNode
@@ -1637,10 +1934,10 @@ namespace MVCVisualDesigner
 
         class MemberNode : ActionDataNode
         {
-            private VDActionDataMember m_actionDataMember;
+            private VDActionDataMember m_member;
             internal void InitMemberNode(VDActionDataMember member, NodeBase parent)
             {
-                m_actionDataMember = member;
+                m_member = member;
                 base.Init(member.Id, parent);
 
                 if (member != null)
@@ -1665,22 +1962,130 @@ namespace MVCVisualDesigner
 
             internal override bool CanAddChildMembers
             {
-                get { throw new NotImplementedException(); }
+                get
+                {
+                    if (m_member == null || m_member.Meta == null || m_member.Meta.Type == null)
+                        return false;
+
+                    if (m_member.Meta is VDBuiltInProperty)
+                        return false;
+
+                    VDMetaType metaType = m_member.Meta.Type as VDMetaType;
+                    return !(metaType is VDDictionaryType || metaType is VDListType
+                        || metaType is VDPredefinedType || metaType is VDPrimitiveType);
+                }
             }
 
             internal override bool CanBeDeleted
             {
-                get { throw new NotImplementedException(); }
+                get
+                {
+                    if (m_member == null || m_member.Meta == null || m_member.Meta.Host == null)
+                        return false;
+
+                    if (m_member.Meta is VDBuiltInProperty)
+                        return false;
+
+                    VDMetaType metaType = m_member.Meta.Host as VDMetaType;
+                    return !(metaType is VDDictionaryType || metaType is VDListType
+                        || metaType is VDPredefinedType || metaType is VDPrimitiveType);
+                }
             }
 
             internal override bool CanChangeName
             {
-                get { throw new NotImplementedException(); }
+                get
+                {
+                    if (m_member == null || m_member.Meta == null || m_member.Meta.Host == null)
+                        return false;
+
+                    if (m_member.Meta is VDBuiltInProperty)
+                        return false;
+
+                    VDMetaType metaType = m_member.Meta.Host as VDMetaType;
+                    return !(metaType is VDDictionaryType || metaType is VDListType
+                        || metaType is VDPredefinedType || metaType is VDPrimitiveType);
+                }
             }
 
             internal override bool CanChangeType
             {
-                get { throw new NotImplementedException(); }
+                get
+                {
+                    if (m_member == null || m_member.Meta == null || m_member.Meta.Host == null)
+                        return false;
+
+                    VDMetaType metaType = m_member.Meta.Host as VDMetaType;
+                    return !(metaType is VDPredefinedType || metaType is VDPrimitiveType);
+                }
+            }
+
+            internal override void AddChildNode()
+            {
+                if (!CanAddChildMembers) return;
+
+                VDConcreteType host = (VDConcreteType)m_member.Host;
+                if (host == null) return;
+
+                VDModelStore modelStore = host.ModelStore;
+                int idx = 0;
+                while (host.Members.Find(m => m.Name == Utility.Constants.STR_NEW_MEMBER + ++idx) != null) ;
+                host.AddMember<VDProperty>(Utility.Constants.STR_TYPE_STRING, "NewMember" + idx);
+            }
+
+            internal override void DeleteNode()
+            {
+                if (!CanBeDeleted) return;
+
+                if (m_member.Host != null)
+                {
+                    ((VDConcreteType)m_member.Host).DeleteMember(m_member.Name);
+                }
+            }
+
+            internal override void OnNameChanged(string oldValue, string newValue)
+            {
+                if (!CanChangeName) return;
+                if (oldValue == newValue) return;
+                if (string.IsNullOrWhiteSpace(newValue)) throw new ArgumentNullException("newValue");
+
+                m_member.ChangeName(newValue);
+            }
+
+            internal override void OnDispNameChanged(string oldValue, string newValue)
+            {
+                if (!CanChangeName) return;
+                if (oldValue == newValue) return;
+                if (string.IsNullOrWhiteSpace(newValue)) throw new ArgumentNullException("newValue");
+
+                m_member.ChangeDispName(newValue);
+            }
+
+            internal override void OnTypeNameChanged(string oldValue, string newValue)
+            {
+                if (!CanChangeType) return;
+                if (oldValue == newValue) return;
+                if (string.IsNullOrWhiteSpace(newValue)) throw new ArgumentNullException("newValue");
+
+                m_member.ChangeType(newValue);
+            }
+
+            internal override void OnValidatorChanged(string oldValue, string newValue)
+            {
+                if (oldValue == newValue) return;
+                m_member.ValidatorNames = newValue;
+            }
+
+            internal override void OnDataSourceChanged(string oldValue, string newValue)
+            {
+                if (oldValue == newValue) return;
+                m_member.DataSource = newValue;
+            }
+
+            internal override void OnCustomSelectorChanged(string oldValue, string newValue)
+            {
+                if (oldValue == newValue) return;
+                m_member.CustomSelector = newValue;
             }
         }
     }

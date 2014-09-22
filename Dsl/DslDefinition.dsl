@@ -1065,6 +1065,13 @@
       <BaseClass>
         <DomainClassMoniker Name="VDConcreteMember" />
       </BaseClass>
+      <Properties>
+        <DomainProperty Id="63e31936-2e75-42ca-8bf8-33f45d82f699" Description="Description for MVCVisualDesigner.VDViewModelMember.Is JSModel" Name="IsJSModel" DisplayName="Is JSModel">
+          <Type>
+            <ExternalTypeMoniker Name="/System/Boolean" />
+          </Type>
+        </DomainProperty>
+      </Properties>
     </DomainClass>
     <DomainClass Id="26d13f3b-6261-4d57-b63d-ff7950171163" Description="Description for MVCVisualDesigner.VDWidgetValueMember" Name="VDWidgetValueMember" DisplayName="VDWidget Value Member" Namespace="MVCVisualDesigner">
       <BaseClass>
@@ -1937,6 +1944,38 @@
         </DomainRole>
       </Target>
     </DomainRelationship>
+    <DomainRelationship Id="f4f48ab3-fe1a-4593-bec4-fdb437dedbc3" Description="Description for MVCVisualDesigner.ActionDataMemberReferencesDataProvider" Name="ActionDataMemberReferencesDataProvider" DisplayName="Action Data Member References Data Provider" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="dae20543-ad81-4fec-b662-17f2fc736d02" Description="Description for MVCVisualDesigner.ActionDataMemberReferencesDataProvider.VDActionDataMember" Name="VDActionDataMember" DisplayName="VDAction Data Member" PropertyName="DataProvider" Multiplicity="ZeroOne" PropertyDisplayName="Data Provider">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDActionDataMember" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="29c77650-7914-4c58-8028-dca049a732af" Description="Description for MVCVisualDesigner.ActionDataMemberReferencesDataProvider.VDWidget" Name="VDWidget" DisplayName="VDWidget" PropertyName="ActionDataMembers" PropertyDisplayName="Action Data Members">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDWidget" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
+    <DomainRelationship Id="60731357-e649-4383-a352-fd7fa4cbee34" Description="Description for MVCVisualDesigner.ViewHasModel" Name="ViewHasModel" DisplayName="View Has Model" Namespace="MVCVisualDesigner">
+      <Source>
+        <DomainRole Id="88240ff0-29de-4f00-9dcc-085b0d569b3f" Description="Description for MVCVisualDesigner.ViewHasModel.VDView" Name="VDView" DisplayName="VDView" PropertyName="Model" Multiplicity="ZeroOne" PropertyDisplayName="Model">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDView" />
+          </RolePlayer>
+        </DomainRole>
+      </Source>
+      <Target>
+        <DomainRole Id="a9ffe7e9-6794-473c-a631-c87e2c06e43c" Description="Description for MVCVisualDesigner.ViewHasModel.VDViewModel" Name="VDViewModel" DisplayName="VDView Model" PropertyName="View" Multiplicity="ZeroOne" PropertyDisplayName="View">
+          <RolePlayer>
+            <DomainClassMoniker Name="VDViewModel" />
+          </RolePlayer>
+        </DomainRole>
+      </Target>
+    </DomainRelationship>
   </Relationships>
   <Types>
     <ExternalType Name="DateTime" Namespace="System" />
@@ -2502,6 +2541,9 @@
           <XmlPropertyData XmlName="viewModelType" Representation="Ignore">
             <DomainPropertyMoniker Name="VDView/ViewModelType" />
           </XmlPropertyData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="model">
+            <DomainRelationshipMoniker Name="ViewHasModel" />
+          </XmlRelationshipData>
         </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDSection" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDSectionMoniker" ElementName="vDSection" MonikerTypeName="VDSectionMoniker">
@@ -3337,6 +3379,11 @@
       </XmlClassData>
       <XmlClassData TypeName="VDViewModelMember" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDViewModelMemberMoniker" ElementName="vDViewModelMember" MonikerTypeName="VDViewModelMemberMoniker">
         <DomainClassMoniker Name="VDViewModelMember" />
+        <ElementData>
+          <XmlPropertyData XmlName="isJSModel">
+            <DomainPropertyMoniker Name="VDViewModelMember/IsJSModel" />
+          </XmlPropertyData>
+        </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDWidgetValueMember" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDWidgetValueMemberMoniker" ElementName="vDWidgetValueMember" MonikerTypeName="VDWidgetValueMemberMoniker">
         <DomainClassMoniker Name="VDWidgetValueMember" />
@@ -3358,6 +3405,9 @@
           <XmlPropertyData XmlName="customSelector">
             <DomainPropertyMoniker Name="VDActionDataMember/CustomSelector" />
           </XmlPropertyData>
+          <XmlRelationshipData UseFullForm="true" RoleElementName="dataProvider">
+            <DomainRelationshipMoniker Name="ActionDataMemberReferencesDataProvider" />
+          </XmlRelationshipData>
         </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDActionBase" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDActionBaseMoniker" ElementName="vDActionBase" MonikerTypeName="VDActionBaseMoniker">
@@ -3527,6 +3577,12 @@
       </XmlClassData>
       <XmlClassData TypeName="ActionHasData" MonikerAttributeName="" SerializeId="true" MonikerElementName="actionHasDataMoniker" ElementName="actionHasData" MonikerTypeName="ActionHasDataMoniker">
         <DomainRelationshipMoniker Name="ActionHasData" />
+      </XmlClassData>
+      <XmlClassData TypeName="ActionDataMemberReferencesDataProvider" MonikerAttributeName="" SerializeId="true" MonikerElementName="actionDataMemberReferencesDataProviderMoniker" ElementName="actionDataMemberReferencesDataProvider" MonikerTypeName="ActionDataMemberReferencesDataProviderMoniker">
+        <DomainRelationshipMoniker Name="ActionDataMemberReferencesDataProvider" />
+      </XmlClassData>
+      <XmlClassData TypeName="ViewHasModel" MonikerAttributeName="" SerializeId="true" MonikerElementName="viewHasModelMoniker" ElementName="viewHasModel" MonikerTypeName="ViewHasModelMoniker">
+        <DomainRelationshipMoniker Name="ViewHasModel" />
       </XmlClassData>
     </ClassData>
   </XmlSerializationBehavior>
@@ -4193,6 +4249,44 @@
           <RolePlayerConnectDirective>
             <AcceptingClass>
               <DomainClassMoniker Name="VDActionData" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
+    <ConnectionBuilder Name="ActionDataMemberReferencesDataProviderBuilder">
+      <LinkConnectDirective>
+        <DomainRelationshipMoniker Name="ActionDataMemberReferencesDataProvider" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDActionDataMember" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDWidget" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </TargetDirectives>
+      </LinkConnectDirective>
+    </ConnectionBuilder>
+    <ConnectionBuilder Name="ViewHasModelBuilder">
+      <LinkConnectDirective>
+        <DomainRelationshipMoniker Name="ViewHasModel" />
+        <SourceDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDView" />
+            </AcceptingClass>
+          </RolePlayerConnectDirective>
+        </SourceDirectives>
+        <TargetDirectives>
+          <RolePlayerConnectDirective>
+            <AcceptingClass>
+              <DomainClassMoniker Name="VDViewModel" />
             </AcceptingClass>
           </RolePlayerConnectDirective>
         </TargetDirectives>
