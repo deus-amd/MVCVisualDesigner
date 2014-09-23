@@ -854,24 +854,11 @@ namespace MVCVisualDesigner
         {
             ViewModelNode curNode = node as ViewModelNode;
             if (curNode == null) return;
-
-            if (columnName == COLUMN_IS_JS_MODEL)
-            {
-                bool bOldValue = false;
-                bool bNewValue = false;
-                bool.TryParse(oldValue, out bOldValue);
-                bool.TryParse(newValue, out bNewValue);
-                if (bOldValue == bNewValue) return;
-                curNode.OnIsJSModelChanged(bOldValue, bNewValue);
-            }
-            base.onCellEditingFinishedOtherColumns(sender, e, node, columnName, oldValue, newValue);
         }
 
         abstract class ViewModelNode : NodeBase
         {
-            public bool IsJSModel { get; set; }
-
-            internal virtual void OnIsJSModelChanged(bool oldValue, bool newValue) { }
+            abstract public bool IsJSModel { get; set; }
         }
 
         class RootNode : ViewModelNode
@@ -896,6 +883,12 @@ namespace MVCVisualDesigner
 
                 ValidatorNames = string.Empty;
                 IsJSModel = false;
+            }
+
+            public override bool IsJSModel 
+            { 
+                get { return false; }
+                set { } 
             }
 
             internal override bool CanAddChildMembers
@@ -980,6 +973,22 @@ namespace MVCVisualDesigner
                     ValidatorNames = string.Empty;
                     IsJSModel = false;
                 }
+            }
+
+            public override bool IsJSModel 
+            { 
+                get 
+                {
+                    return m_member.IsJSModel;
+                }
+                set
+                { 
+                    using(var trans = this.m_member.Store.TransactionManager.BeginTransaction("Set IsJSModel value"))
+                    {
+                        m_member.IsJSModel = value;
+                        trans.Commit();
+                    }
+                } 
             }
 
             internal override bool CanAddChildMembers
@@ -1096,12 +1105,6 @@ namespace MVCVisualDesigner
             {
                 if (oldValue == newValue) return;
                 m_member.ValidatorNames = newValue;
-            }
-
-            internal override void OnIsJSModelChanged(bool oldValue, bool newValue)
-            {
-                if (oldValue == newValue) return;
-                m_member.IsJSModel = newValue;
             }
         }
     }
