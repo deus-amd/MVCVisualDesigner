@@ -31,12 +31,19 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModelToolWindowForm));
             this.tlpViewModelLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.tlvViewModel = new BrightIdeasSoftware.DataTreeListView();
-            this.olvColName_View = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColType_View = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColValidators_View = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColIsJSModel_View = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tlpActionModelLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.ctxMenuViewModel = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiAddViewModelMember = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDeleteViewModelMember = new System.Windows.Forms.ToolStripMenuItem();
+            this.tlpWidgetModelLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.ctxMenuActionData = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiAddActionDataMember = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDeleteActionDataMember = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTipMsg = new System.Windows.Forms.ToolTip(this.components);
+            this.ctxMenuWidgetValue = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiAddWidgetValueMember = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDeleteWidgetValueMember = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tlvActionModel = new BrightIdeasSoftware.DataTreeListView();
             this.olvColName_Action = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColType_Action = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -46,10 +53,6 @@
             this.olvColDispName_Action = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColID_Action = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColParentID_Action = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.ctxMenuViewModel = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiAddViewModelMember = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDeleteViewModelMember = new System.Windows.Forms.ToolStripMenuItem();
-            this.tlpWidgetModelLayout = new System.Windows.Forms.TableLayoutPanel();
             this.tlvWidgetModel = new BrightIdeasSoftware.DataTreeListView();
             this.olvColName_W = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColType_W = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -59,30 +62,27 @@
             this.olvColDispName_W = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColID_W = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColParentID_W = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.ctxMenuActionData = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiAddActionDataMember = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDeleteActionDataMember = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolTipMsg = new System.Windows.Forms.ToolTip(this.components);
-            this.ctxMenuWidgetValue = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiAddWidgetValueMember = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDeleteWidgetValueMember = new System.Windows.Forms.ToolStripMenuItem();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.tlvViewModel = new BrightIdeasSoftware.DataTreeListView();
+            this.olvColName_View = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColType_View = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColValidators_View = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColIsJSModel_View = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColDispName_View = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColID_View = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColParentID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvParentID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.autocompleteMenu_Type = new AutocompleteMenuNS.AutocompleteMenu();
             this.m_typeEditor = new MVCVisualDesigner.AutoCompleteTextBox();
-            this.olvColDispName_View = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColID_View = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColParentID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tlpViewModelLayout.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tlvViewModel)).BeginInit();
             this.tlpActionModelLayout.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tlvActionModel)).BeginInit();
             this.ctxMenuViewModel.SuspendLayout();
             this.tlpWidgetModelLayout.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tlvWidgetModel)).BeginInit();
             this.ctxMenuActionData.SuspendLayout();
             this.ctxMenuWidgetValue.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tlvActionModel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tlvWidgetModel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tlvViewModel)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpViewModelLayout
@@ -102,81 +102,6 @@
             this.tlpViewModelLayout.Size = new System.Drawing.Size(735, 179);
             this.tlpViewModelLayout.TabIndex = 0;
             // 
-            // tlvViewModel
-            // 
-            this.tlvViewModel.AllColumns.Add(this.olvColName_View);
-            this.tlvViewModel.AllColumns.Add(this.olvColType_View);
-            this.tlvViewModel.AllColumns.Add(this.olvColValidators_View);
-            this.tlvViewModel.AllColumns.Add(this.olvColIsJSModel_View);
-            this.tlvViewModel.AllColumns.Add(this.olvColDispName_View);
-            this.tlvViewModel.AllColumns.Add(this.olvColID_View);
-            this.tlvViewModel.AllColumns.Add(this.olvColParentID);
-            this.tlvViewModel.AlternateRowBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(220)))));
-            this.tlvViewModel.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick;
-            this.tlvViewModel.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColName_View,
-            this.olvColType_View,
-            this.olvColValidators_View,
-            this.olvColIsJSModel_View,
-            this.olvColDispName_View});
-            this.tlpViewModelLayout.SetColumnSpan(this.tlvViewModel, 4);
-            this.tlvViewModel.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tlvViewModel.DataSource = null;
-            this.tlvViewModel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlvViewModel.FullRowSelect = true;
-            this.tlvViewModel.GridLines = true;
-            this.tlvViewModel.KeyAspectName = "ID";
-            this.tlvViewModel.Location = new System.Drawing.Point(3, 3);
-            this.tlvViewModel.Name = "tlvViewModel";
-            this.tlvViewModel.OwnerDraw = true;
-            this.tlvViewModel.ParentKeyAspectName = "ParentID";
-            this.tlvViewModel.RootKeyValueString = "";
-            this.tlpViewModelLayout.SetRowSpan(this.tlvViewModel, 3);
-            this.tlvViewModel.SelectAllOnControlA = false;
-            this.tlvViewModel.ShowGroups = false;
-            this.tlvViewModel.ShowImagesOnSubItems = true;
-            this.tlvViewModel.Size = new System.Drawing.Size(729, 173);
-            this.tlvViewModel.TabIndex = 0;
-            this.tlvViewModel.UseAlternatingBackColors = true;
-            this.tlvViewModel.UseCompatibleStateImageBehavior = false;
-            this.tlvViewModel.UseHotItem = true;
-            this.tlvViewModel.UseSubItemCheckBoxes = true;
-            this.tlvViewModel.UseTranslucentHotItem = true;
-            this.tlvViewModel.View = System.Windows.Forms.View.Details;
-            this.tlvViewModel.VirtualMode = true;
-            // 
-            // olvColName_View
-            // 
-            this.olvColName_View.AspectName = "Name";
-            this.olvColName_View.CellPadding = null;
-            this.olvColName_View.Text = "Name";
-            this.olvColName_View.Width = 150;
-            // 
-            // olvColType_View
-            // 
-            this.olvColType_View.AspectName = "TypeName";
-            this.olvColType_View.CellPadding = null;
-            this.olvColType_View.MinimumWidth = 150;
-            this.olvColType_View.Text = "Type";
-            this.olvColType_View.Width = 149;
-            // 
-            // olvColValidators_View
-            // 
-            this.olvColValidators_View.AspectName = "ValidatorNames";
-            this.olvColValidators_View.CellPadding = null;
-            this.olvColValidators_View.Text = "Validator";
-            this.olvColValidators_View.Width = 114;
-            // 
-            // olvColIsJSModel_View
-            // 
-            this.olvColIsJSModel_View.AspectName = "IsJavaScriptModel";
-            this.olvColIsJSModel_View.CellPadding = null;
-            this.olvColIsJSModel_View.CheckBoxes = true;
-            this.olvColIsJSModel_View.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvColIsJSModel_View.Text = "JS Model";
-            this.olvColIsJSModel_View.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvColIsJSModel_View.Width = 61;
-            // 
             // tlpActionModelLayout
             // 
             this.tlpActionModelLayout.ColumnCount = 4;
@@ -193,6 +118,93 @@
             this.tlpActionModelLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpActionModelLayout.Size = new System.Drawing.Size(735, 139);
             this.tlpActionModelLayout.TabIndex = 2;
+            // 
+            // ctxMenuViewModel
+            // 
+            this.ctxMenuViewModel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiAddViewModelMember,
+            this.tsmiDeleteViewModelMember});
+            this.ctxMenuViewModel.Name = "ctxMenuViewModel";
+            this.ctxMenuViewModel.Size = new System.Drawing.Size(128, 48);
+            // 
+            // tsmiAddViewModelMember
+            // 
+            this.tsmiAddViewModelMember.Name = "tsmiAddViewModelMember";
+            this.tsmiAddViewModelMember.Size = new System.Drawing.Size(127, 22);
+            this.tsmiAddViewModelMember.Text = "Add Child";
+            // 
+            // tsmiDeleteViewModelMember
+            // 
+            this.tsmiDeleteViewModelMember.Name = "tsmiDeleteViewModelMember";
+            this.tsmiDeleteViewModelMember.Size = new System.Drawing.Size(127, 22);
+            this.tsmiDeleteViewModelMember.Text = "Delete";
+            // 
+            // tlpWidgetModelLayout
+            // 
+            this.tlpWidgetModelLayout.ColumnCount = 4;
+            this.tlpWidgetModelLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tlpWidgetModelLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpWidgetModelLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this.tlpWidgetModelLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpWidgetModelLayout.Controls.Add(this.tlvWidgetModel, 0, 0);
+            this.tlpWidgetModelLayout.Location = new System.Drawing.Point(9, 209);
+            this.tlpWidgetModelLayout.Name = "tlpWidgetModelLayout";
+            this.tlpWidgetModelLayout.RowCount = 3;
+            this.tlpWidgetModelLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 22F));
+            this.tlpWidgetModelLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpWidgetModelLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpWidgetModelLayout.Size = new System.Drawing.Size(738, 142);
+            this.tlpWidgetModelLayout.TabIndex = 1;
+            // 
+            // ctxMenuActionData
+            // 
+            this.ctxMenuActionData.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiAddActionDataMember,
+            this.tsmiDeleteActionDataMember});
+            this.ctxMenuActionData.Name = "ctxMenuActionModel";
+            this.ctxMenuActionData.Size = new System.Drawing.Size(128, 48);
+            // 
+            // tsmiAddActionDataMember
+            // 
+            this.tsmiAddActionDataMember.Name = "tsmiAddActionDataMember";
+            this.tsmiAddActionDataMember.Size = new System.Drawing.Size(127, 22);
+            this.tsmiAddActionDataMember.Text = "Add Child";
+            // 
+            // tsmiDeleteActionDataMember
+            // 
+            this.tsmiDeleteActionDataMember.Name = "tsmiDeleteActionDataMember";
+            this.tsmiDeleteActionDataMember.Size = new System.Drawing.Size(127, 22);
+            this.tsmiDeleteActionDataMember.Text = "Delete";
+            // 
+            // ctxMenuWidgetValue
+            // 
+            this.ctxMenuWidgetValue.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiAddWidgetValueMember,
+            this.tsmiDeleteWidgetValueMember});
+            this.ctxMenuWidgetValue.Name = "ctxMenuWidgetValue";
+            this.ctxMenuWidgetValue.Size = new System.Drawing.Size(128, 48);
+            // 
+            // tsmiAddWidgetValueMember
+            // 
+            this.tsmiAddWidgetValueMember.Name = "tsmiAddWidgetValueMember";
+            this.tsmiAddWidgetValueMember.Size = new System.Drawing.Size(127, 22);
+            this.tsmiAddWidgetValueMember.Text = "Add Child";
+            // 
+            // tsmiDeleteWidgetValueMember
+            // 
+            this.tsmiDeleteWidgetValueMember.Name = "tsmiDeleteWidgetValueMember";
+            this.tsmiDeleteWidgetValueMember.Size = new System.Drawing.Size(127, 22);
+            this.tsmiDeleteWidgetValueMember.Text = "Delete";
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "Class_489.png");
+            this.imageList1.Images.SetKeyName(1, "Class-Friend_491.png");
+            this.imageList1.Images.SetKeyName(2, "Class-Private_493.png");
+            this.imageList1.Images.SetKeyName(3, "Class-Protected_492.png");
+            this.imageList1.Images.SetKeyName(4, "Class-Sealed_490.png");
             // 
             // tlvActionModel
             // 
@@ -297,43 +309,6 @@
             this.olvColParentID_Action.IsVisible = false;
             this.olvColParentID_Action.Text = "Parent ID";
             // 
-            // ctxMenuViewModel
-            // 
-            this.ctxMenuViewModel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiAddViewModelMember,
-            this.tsmiDeleteViewModelMember});
-            this.ctxMenuViewModel.Name = "ctxMenuViewModel";
-            this.ctxMenuViewModel.Size = new System.Drawing.Size(128, 48);
-            // 
-            // tsmiAddViewModelMember
-            // 
-            this.tsmiAddViewModelMember.Name = "tsmiAddViewModelMember";
-            this.tsmiAddViewModelMember.Size = new System.Drawing.Size(127, 22);
-            this.tsmiAddViewModelMember.Text = "Add Child";
-            // 
-            // tsmiDeleteViewModelMember
-            // 
-            this.tsmiDeleteViewModelMember.Name = "tsmiDeleteViewModelMember";
-            this.tsmiDeleteViewModelMember.Size = new System.Drawing.Size(127, 22);
-            this.tsmiDeleteViewModelMember.Text = "Delete";
-            // 
-            // tlpWidgetModelLayout
-            // 
-            this.tlpWidgetModelLayout.ColumnCount = 4;
-            this.tlpWidgetModelLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tlpWidgetModelLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpWidgetModelLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
-            this.tlpWidgetModelLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpWidgetModelLayout.Controls.Add(this.tlvWidgetModel, 0, 0);
-            this.tlpWidgetModelLayout.Location = new System.Drawing.Point(9, 209);
-            this.tlpWidgetModelLayout.Name = "tlpWidgetModelLayout";
-            this.tlpWidgetModelLayout.RowCount = 3;
-            this.tlpWidgetModelLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 22F));
-            this.tlpWidgetModelLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpWidgetModelLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpWidgetModelLayout.Size = new System.Drawing.Size(738, 142);
-            this.tlpWidgetModelLayout.TabIndex = 1;
-            // 
             // tlvWidgetModel
             // 
             this.tlvWidgetModel.AllColumns.Add(this.olvColName_W);
@@ -436,55 +411,101 @@
             this.olvColParentID_W.IsVisible = false;
             this.olvColParentID_W.Text = "Parent ID";
             // 
-            // ctxMenuActionData
+            // tlvViewModel
             // 
-            this.ctxMenuActionData.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiAddActionDataMember,
-            this.tsmiDeleteActionDataMember});
-            this.ctxMenuActionData.Name = "ctxMenuActionModel";
-            this.ctxMenuActionData.Size = new System.Drawing.Size(128, 48);
+            this.tlvViewModel.AllColumns.Add(this.olvColName_View);
+            this.tlvViewModel.AllColumns.Add(this.olvColType_View);
+            this.tlvViewModel.AllColumns.Add(this.olvColValidators_View);
+            this.tlvViewModel.AllColumns.Add(this.olvColIsJSModel_View);
+            this.tlvViewModel.AllColumns.Add(this.olvColDispName_View);
+            this.tlvViewModel.AllColumns.Add(this.olvColID_View);
+            this.tlvViewModel.AllColumns.Add(this.olvColParentID);
+            this.tlvViewModel.AlternateRowBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(220)))));
+            this.tlvViewModel.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick;
+            this.tlvViewModel.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColName_View,
+            this.olvColType_View,
+            this.olvColValidators_View,
+            this.olvColIsJSModel_View,
+            this.olvColDispName_View});
+            this.tlpViewModelLayout.SetColumnSpan(this.tlvViewModel, 4);
+            this.tlvViewModel.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tlvViewModel.DataSource = null;
+            this.tlvViewModel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlvViewModel.FullRowSelect = true;
+            this.tlvViewModel.GridLines = true;
+            this.tlvViewModel.KeyAspectName = "ID";
+            this.tlvViewModel.Location = new System.Drawing.Point(3, 3);
+            this.tlvViewModel.Name = "tlvViewModel";
+            this.tlvViewModel.OwnerDraw = true;
+            this.tlvViewModel.ParentKeyAspectName = "ParentID";
+            this.tlvViewModel.RootKeyValueString = "";
+            this.tlpViewModelLayout.SetRowSpan(this.tlvViewModel, 3);
+            this.tlvViewModel.SelectAllOnControlA = false;
+            this.tlvViewModel.ShowGroups = false;
+            this.tlvViewModel.ShowImagesOnSubItems = true;
+            this.tlvViewModel.Size = new System.Drawing.Size(729, 173);
+            this.tlvViewModel.TabIndex = 0;
+            this.tlvViewModel.UseAlternatingBackColors = true;
+            this.tlvViewModel.UseCompatibleStateImageBehavior = false;
+            this.tlvViewModel.UseHotItem = true;
+            this.tlvViewModel.UseSubItemCheckBoxes = true;
+            this.tlvViewModel.UseTranslucentHotItem = true;
+            this.tlvViewModel.View = System.Windows.Forms.View.Details;
+            this.tlvViewModel.VirtualMode = true;
             // 
-            // tsmiAddActionDataMember
+            // olvColName_View
             // 
-            this.tsmiAddActionDataMember.Name = "tsmiAddActionDataMember";
-            this.tsmiAddActionDataMember.Size = new System.Drawing.Size(127, 22);
-            this.tsmiAddActionDataMember.Text = "Add Child";
+            this.olvColName_View.AspectName = "Name";
+            this.olvColName_View.CellPadding = null;
+            this.olvColName_View.Text = "Name";
+            this.olvColName_View.Width = 150;
             // 
-            // tsmiDeleteActionDataMember
+            // olvColType_View
             // 
-            this.tsmiDeleteActionDataMember.Name = "tsmiDeleteActionDataMember";
-            this.tsmiDeleteActionDataMember.Size = new System.Drawing.Size(127, 22);
-            this.tsmiDeleteActionDataMember.Text = "Delete";
+            this.olvColType_View.AspectName = "TypeName";
+            this.olvColType_View.CellPadding = null;
+            this.olvColType_View.MinimumWidth = 150;
+            this.olvColType_View.Text = "Type";
+            this.olvColType_View.Width = 150;
             // 
-            // ctxMenuWidgetValue
+            // olvColValidators_View
             // 
-            this.ctxMenuWidgetValue.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiAddWidgetValueMember,
-            this.tsmiDeleteWidgetValueMember});
-            this.ctxMenuWidgetValue.Name = "ctxMenuWidgetValue";
-            this.ctxMenuWidgetValue.Size = new System.Drawing.Size(128, 48);
+            this.olvColValidators_View.AspectName = "ValidatorNames";
+            this.olvColValidators_View.CellPadding = null;
+            this.olvColValidators_View.Text = "Validator";
+            this.olvColValidators_View.Width = 114;
             // 
-            // tsmiAddWidgetValueMember
+            // olvColIsJSModel_View
             // 
-            this.tsmiAddWidgetValueMember.Name = "tsmiAddWidgetValueMember";
-            this.tsmiAddWidgetValueMember.Size = new System.Drawing.Size(127, 22);
-            this.tsmiAddWidgetValueMember.Text = "Add Child";
+            this.olvColIsJSModel_View.AspectName = "IsJSModel";
+            this.olvColIsJSModel_View.CellPadding = null;
+            this.olvColIsJSModel_View.CheckBoxes = true;
+            this.olvColIsJSModel_View.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvColIsJSModel_View.Text = "JS Model";
+            this.olvColIsJSModel_View.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvColIsJSModel_View.Width = 61;
             // 
-            // tsmiDeleteWidgetValueMember
+            // olvColDispName_View
             // 
-            this.tsmiDeleteWidgetValueMember.Name = "tsmiDeleteWidgetValueMember";
-            this.tsmiDeleteWidgetValueMember.Size = new System.Drawing.Size(127, 22);
-            this.tsmiDeleteWidgetValueMember.Text = "Delete";
+            this.olvColDispName_View.AspectName = "DispName";
+            this.olvColDispName_View.CellPadding = null;
+            this.olvColDispName_View.Text = "Display Name";
+            this.olvColDispName_View.Width = 127;
             // 
-            // imageList1
+            // olvColID_View
             // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "Class_489.png");
-            this.imageList1.Images.SetKeyName(1, "Class-Friend_491.png");
-            this.imageList1.Images.SetKeyName(2, "Class-Private_493.png");
-            this.imageList1.Images.SetKeyName(3, "Class-Protected_492.png");
-            this.imageList1.Images.SetKeyName(4, "Class-Sealed_490.png");
+            this.olvColID_View.AspectName = "ID";
+            this.olvColID_View.CellPadding = null;
+            this.olvColID_View.IsVisible = false;
+            this.olvColID_View.Text = "ID";
+            // 
+            // olvColParentID
+            // 
+            this.olvColParentID.AspectName = "ParentID";
+            this.olvColParentID.CellPadding = null;
+            this.olvColParentID.IsVisible = false;
+            this.olvColParentID.Text = "Parent ID";
             // 
             // olvParentID
             // 
@@ -518,27 +539,6 @@
             this.m_typeEditor.Size = new System.Drawing.Size(100, 20);
             this.m_typeEditor.TabIndex = 3;
             // 
-            // olvColDispName_View
-            // 
-            this.olvColDispName_View.AspectName = "DispName";
-            this.olvColDispName_View.CellPadding = null;
-            this.olvColDispName_View.Text = "Display Name";
-            this.olvColDispName_View.Width = 127;
-            // 
-            // olvColID_View
-            // 
-            this.olvColID_View.AspectName = "ID";
-            this.olvColID_View.CellPadding = null;
-            this.olvColID_View.IsVisible = false;
-            this.olvColID_View.Text = "ID";
-            // 
-            // olvColParentID
-            // 
-            this.olvColParentID.AspectName = "ParentID";
-            this.olvColParentID.CellPadding = null;
-            this.olvColParentID.IsVisible = false;
-            this.olvColParentID.Text = "Parent ID";
-            // 
             // ModelToolWindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -552,14 +552,14 @@
             this.Name = "ModelToolWindowForm";
             this.Text = "ModelToolWindowForm";
             this.tlpViewModelLayout.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tlvViewModel)).EndInit();
             this.tlpActionModelLayout.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tlvActionModel)).EndInit();
             this.ctxMenuViewModel.ResumeLayout(false);
             this.tlpWidgetModelLayout.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tlvWidgetModel)).EndInit();
             this.ctxMenuActionData.ResumeLayout(false);
             this.ctxMenuWidgetValue.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tlvActionModel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tlvWidgetModel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tlvViewModel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

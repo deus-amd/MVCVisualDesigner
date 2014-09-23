@@ -7,20 +7,45 @@ using System.Threading.Tasks;
 // MEL
 namespace MVCVisualDesigner
 {
-    public partial class VDView
+    public partial class VDViewBase
     {
         internal string GetViewModelTypeValue()
         {
-#if todel
-            if (this.ModelInstance != null && this.ModelInstance.ModelType != null)
+            if (this.Model != null)
             {
-                return this.ModelInstance.ModelType.FullName;
+                return this.Model.FullName;
             }
-#endif
             return string.Empty;
         }
+    }
 
+    public partial class VDView
+    {
         public WidgetInfoManager WidgetInfoManager { get; set; }
+
+        public override VDViewModel Model
+        {
+            get
+            {
+                if (base.Model == null && !m_deleting)
+                {
+                    using (var trans = this.Store.TransactionManager.BeginTransaction("Create view model for " + this.WidgetType.ToString()))
+                    {
+                        VDModelStore modelStore = this.GetModelStore();
+                        if (modelStore != null)
+                        {
+                            base.Model = modelStore.CreateConcreteType<VDViewModel>(Utility.Constants.STR_TYPE_STRING);
+                        }
+                        trans.Commit();
+                    }
+                }
+                return base.Model;
+            }
+            set
+            {
+                base.Model = value;
+            }
+        }
     }
 
     public partial class VDPartialView

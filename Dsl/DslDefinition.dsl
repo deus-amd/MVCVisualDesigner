@@ -67,7 +67,7 @@
         </ElementMergeDirective>
       </ElementMergeDirectives>
     </DomainClass>
-    <DomainClass Id="7c91a0ff-d5ec-467a-b0b8-705ad9049330" Description="" Name="VDView" DisplayName="View" Namespace="MVCVisualDesigner">
+    <DomainClass Id="7c91a0ff-d5ec-467a-b0b8-705ad9049330" Description="" Name="VDView" DisplayName="View" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true">
       <BaseClass>
         <DomainClassMoniker Name="VDWidget" />
       </BaseClass>
