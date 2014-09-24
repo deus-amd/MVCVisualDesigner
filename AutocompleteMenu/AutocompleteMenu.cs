@@ -818,5 +818,7 @@ namespace AutocompleteMenuNS
 
             return false;
         }
+
+        public bool Visible { get { return Host.Visible; } }
     }
 }
