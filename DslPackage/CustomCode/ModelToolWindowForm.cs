@@ -26,7 +26,7 @@ namespace MVCVisualDesigner
             m_widgetValueHandler = new WidgetValueHandler(this, tlvWidgetModel, toolTipMsg, ctxMenuWidgetValue, 
                         tsmiAddWidgetValueMember, tsmiDeleteWidgetValueMember, m_typeEditor);
             m_viewModelHandler = new ViewModelHandler(this, tlvViewModel, toolTipMsg, ctxMenuViewModel, 
-                        tsmiAddViewModelMember, tsmiDeleteViewModelMember, m_typeEditor);
+                        tsmiAddViewModelMember, tsmiDeleteViewModelMember, tsmiCreateViewModel, tsmiRemoveViewModel, m_typeEditor);
             m_actionDataHandler = new ActionDataHandler(this, tlvActionModel, toolTipMsg, ctxMenuActionData, 
                         tsmiAddActionDataMember, tsmiDeleteActionDataMember, m_typeEditor);
 
@@ -160,20 +160,21 @@ namespace MVCVisualDesigner
         }
 
         // menu handling
-        virtual protected void OnCellRightClick(object sender, CellRightClickEventArgs e) 
+        virtual protected void OnCellRightClick(object sender, CellRightClickEventArgs e)
         {
-            if (m_currentWidget == null) return;
+            e.MenuStrip = this.m_contextMenu;
+            m_miAddChild.Enabled = false;
+            m_miDelete.Enabled = false;
 
             NodeBase selectedNode = (NodeBase)e.Model;
-            if (selectedNode == null) return;
+            if (m_currentWidget != null && selectedNode != null)
+            {
+                m_miAddChild.Enabled = selectedNode.CanAddChildMembers;
+                m_miAddChild.Tag = selectedNode;
 
-            e.MenuStrip = this.m_contextMenu;
-
-            m_miAddChild.Enabled = selectedNode.CanAddChildMembers;
-            m_miAddChild.Tag = selectedNode;
-
-            m_miDelete.Enabled = selectedNode.CanBeDeleted;
-            m_miDelete.Tag = selectedNode;
+                m_miDelete.Enabled = selectedNode.CanBeDeleted;
+                m_miDelete.Tag = selectedNode;
+            }
         }
 
         virtual protected void OnAddMemberMenuClick(object sender, EventArgs e) 
@@ -710,13 +711,13 @@ namespace MVCVisualDesigner
             {
                 if (!CanAddChildMembers) return;
                 
-                VDConcreteType host = (VDConcreteType)m_member.Host;
-                if (host == null) return;
+                VDConcreteType memberType = (VDConcreteType)m_member.Type;
+                if (memberType == null) return;
 
-                VDModelStore modelStore = host.ModelStore;
+                VDModelStore modelStore = memberType.ModelStore;
                 int idx = 0;
-                while (host.Members.Find(m => m.Name == Utility.Constants.STR_NEW_MEMBER + ++idx) != null) ;
-                host.AddMember<VDProperty>(Utility.Constants.STR_TYPE_STRING, "NewMember" + idx);
+                while (memberType.Members.Find(m => m.Name == Utility.Constants.STR_NEW_MEMBER + ++idx) != null) ;
+                memberType.AddMember<VDProperty>(Utility.Constants.STR_TYPE_STRING, "NewMember" + idx);
             }
 
             internal override void DeleteNode()
@@ -781,10 +782,19 @@ namespace MVCVisualDesigner
     {
         private const string COLUMN_IS_JS_MODEL = "JS Model";
 
+        private ToolStripMenuItem m_miCreateModel;
+        private ToolStripMenuItem m_miRemoveModel;
+
         public ViewModelHandler(ModelToolWindowForm form, DataTreeListView treeListView, ToolTip toolTip, 
-            ContextMenuStrip contextMenu, ToolStripMenuItem miAddChild, ToolStripMenuItem miDelete, AutoCompleteTextBox typeEditor)
+            ContextMenuStrip contextMenu, ToolStripMenuItem miAddChild, ToolStripMenuItem miDelete,
+            ToolStripMenuItem miCreateModel, ToolStripMenuItem miRemoveModel, AutoCompleteTextBox typeEditor)
             : base(form, treeListView, toolTip, contextMenu, miAddChild, miDelete, typeEditor)
         {
+            m_miCreateModel = miCreateModel;
+            m_miRemoveModel = miRemoveModel;
+
+            m_miCreateModel.Click += onCreateModelClick;
+            m_miRemoveModel.Click += onRemoveModelClick;
         }
 
         private VDView m_currentView = null;
@@ -801,7 +811,7 @@ namespace MVCVisualDesigner
             if (m_currentView != null && m_currentView.Model != null)
             {
                 RootNode rootNode = getCachedNode<RootNode>();
-                rootNode.InitRootNode(m_currentView.Model);
+                rootNode.InitRootNode(m_currentView);
                 allNodes.Add(rootNode);
                 getMemberNode(m_currentView.Model, rootNode, allNodes);
             }
@@ -824,6 +834,58 @@ namespace MVCVisualDesigner
                     getMemberNode(member.Type as VDViewModel, node, allNodes);
                 }
             }
+        }
+
+        // Add Model / Remove Model menu
+        protected override void OnCellRightClick(object sender, CellRightClickEventArgs e)
+        {
+            base.OnCellRightClick(sender, e);
+
+            m_miCreateModel.Enabled = m_currentView != null && m_currentView.Model == null;
+            m_miRemoveModel.Enabled = m_currentView != null && m_currentView.Model != null;
+        }
+
+        void onCreateModelClick(object sender, EventArgs e)
+        {
+            if (m_currentView == null || m_currentView.Model != null)
+                return;
+
+            using (var trans = m_currentView.Store.TransactionManager.BeginTransaction(
+                string.Format("Create view model for {0} [{1}]", m_currentView.WidgetName ?? string.Empty, m_currentView.WidgetType.ToString())))
+            {
+                VDModelStore modelStore = m_currentView.GetModelStore();
+                if (modelStore != null)
+                {
+                    m_currentView.Model = modelStore.CreateConcreteType<VDViewModel>(Utility.Constants.STR_TYPE_STRING);
+                }
+                trans.Commit();
+            }
+
+            refreshTreeListView();
+        }
+
+        void onRemoveModelClick(object sender, EventArgs e)
+        {
+            if (m_currentView == null || m_currentView.Model == null)
+                return;
+
+            using (var trans = m_currentView.Store.TransactionManager.BeginTransaction(
+                string.Format("Remove view model for {0} [{1}]", m_currentView.WidgetName ?? string.Empty, m_currentView.WidgetType.ToString())))
+            {
+                VDModelStore modelStore = m_currentView.GetModelStore();
+                if (modelStore != null)
+                {
+                    VDViewModel viewModel = m_currentView.Model;
+                    m_currentView.Model = null;
+                    if (!viewModel.HasExternalReference)
+                    {
+                        viewModel.Delete();
+                    }
+                }
+                trans.Commit();
+            }
+
+            refreshTreeListView();
         }
 
         protected override void OnCellEditStarting(object sender, CellEditEventArgs e)
@@ -863,16 +925,16 @@ namespace MVCVisualDesigner
 
         class RootNode : ViewModelNode
         {
-            private VDViewModel m_viewModel;
-            internal void InitRootNode(VDViewModel viewModel)
+            private VDView m_view;
+            internal void InitRootNode(VDView view)
             {
-                m_viewModel = viewModel;
-                base.Init(viewModel.Id, null);
-                if (viewModel != null)
+                m_view = view;
+                base.Init(m_view.Id, null);
+                if (m_view.Model != null)
                 {
-                    this.Name = viewModel != null && viewModel.View != null ? "[" + viewModel.View.WidgetType.ToString() + "]" : string.Empty;
-                    TypeName = viewModel.Meta != null ? viewModel.Meta.FullName : string.Empty;
-                    DispName = viewModel.DispName;
+                    this.Name = m_view != null ? "[" + view.WidgetType.ToString() + "]" : string.Empty;
+                    TypeName = m_view.Model.Meta != null ? m_view.Model.Meta.FullName : string.Empty;
+                    DispName = m_view.Model.DispName;
                 }
                 else
                 {
@@ -895,10 +957,10 @@ namespace MVCVisualDesigner
             {
                 get
                 {
-                    if (m_viewModel == null || m_viewModel.Meta == null)
+                    if (m_view.Model == null || m_view.Model.Meta == null)
                         return false;
 
-                    VDMetaType metaType = m_viewModel.Meta;
+                    VDMetaType metaType = m_view.Model.Meta;
                     return !(metaType is VDDictionaryType || metaType is VDListType
                         || metaType is VDPredefinedType || metaType is VDPrimitiveType);
                 }
@@ -912,40 +974,34 @@ namespace MVCVisualDesigner
             {
                 get
                 {
-                    return m_viewModel != null && m_viewModel.Meta != null;
+                    return m_view.Model != null && m_view.Model.Meta != null;
                 }
             }
 
             internal override void AddChildNode()
             {
-                if (m_viewModel == null || m_viewModel == null) return;
-                VDModelStore modelStore = m_viewModel.ModelStore;
+                if (m_view.Model == null || m_view.Model == null) return;
+                VDModelStore modelStore = m_view.Model.ModelStore;
                 int idx = 0;
-                while (m_viewModel.Members.Find(m => m.Name == Utility.Constants.STR_NEW_MEMBER + ++idx) != null) ;
-                m_viewModel.AddMember<VDProperty>(Utility.Constants.STR_TYPE_STRING, "NewMember" + idx);
+                while (m_view.Model.Members.Find(m => m.Name == Utility.Constants.STR_NEW_MEMBER + ++idx) != null) ;
+                m_view.Model.AddMember<VDProperty>(Utility.Constants.STR_TYPE_STRING, "NewMember" + idx);
             }
 
             internal override void OnTypeNameChanged(string oldValue, string newValue)
             {
                 if (oldValue == newValue) return;
-                if (m_viewModel == null || m_viewModel == null) return;
 
-                VDModelStore modelStore = m_viewModel.ModelStore;
+                if (m_view.Model == null || m_view.Model == null) return;
+
+                VDModelStore modelStore = m_view.Model.ModelStore;
 
                 // delete old widgets
-                if (!m_viewModel.HasExternalReference)
+                if (!m_view.Model.HasExternalReference)
                 {
-                    m_viewModel.Delete();
-                    m_viewModel = null;
+                    m_view.Model.Delete();
                 }
 
-                m_viewModel = modelStore.CreateConcreteType<VDViewModel>(newValue);
-                if (!modelStore.IsPrimitiveType(newValue) && !modelStore.IsPredefinedType(newValue))
-                {
-                    // add member "Value"
-                    m_viewModel.AddMember<VDBuiltInProperty>(Utility.Constants.STR_TYPE_STRING, Utility.Constants.STR_VALUE_MEMBER);
-                }
-                m_viewModel.View.Model = m_viewModel;
+                m_view.Model = modelStore.CreateConcreteType<VDViewModel>(newValue);
             }
         }
 
@@ -1055,13 +1111,13 @@ namespace MVCVisualDesigner
             {
                 if (!CanAddChildMembers) return;
 
-                VDConcreteType host = (VDConcreteType)m_member.Host;
-                if (host == null) return;
+                VDConcreteType memberType = (VDConcreteType)m_member.Type;
+                if (memberType == null) return;
 
-                VDModelStore modelStore = host.ModelStore;
+                VDModelStore modelStore = memberType.ModelStore;
                 int idx = 0;
-                while (host.Members.Find(m => m.Name == Utility.Constants.STR_NEW_MEMBER + ++idx) != null) ;
-                host.AddMember<VDProperty>(Utility.Constants.STR_TYPE_STRING, "NewMember" + idx);
+                while (memberType.Members.Find(m => m.Name == Utility.Constants.STR_NEW_MEMBER + ++idx) != null) ;
+                memberType.AddMember<VDProperty>(Utility.Constants.STR_TYPE_STRING, "NewMember" + idx);
             }
 
             internal override void DeleteNode()
@@ -1134,7 +1190,7 @@ namespace MVCVisualDesigner
             if (m_currentAction != null && m_currentAction.ActionData != null)
             {
                 RootNode rootNode = getCachedNode<RootNode>();
-                rootNode.InitRootNode(m_currentAction.ActionData);
+                rootNode.InitRootNode(m_currentAction);
                 allNodes.Add(rootNode);
                 getMemberNode(m_currentAction.ActionData, rootNode, allNodes);
             }
@@ -1182,8 +1238,8 @@ namespace MVCVisualDesigner
             if (columnName == COLUMN_TYPE)
             {
                 string newValue = (string)e.NewValue;
-                if (m_currentAction == null ||
-                    (e.RowObject is RootNode && m_currentAction.GetModelStore().IsPrimitiveType(newValue)))
+                if (m_currentAction == null || m_currentAction.ActionData == null ||
+                    (e.RowObject is RootNode && m_currentAction.ActionData.ModelStore.IsPrimitiveType(newValue)))
                 {
                     showTooltipMsg("Type can not be primitive type", e);
                     e.Cancel = true;
@@ -1219,16 +1275,16 @@ namespace MVCVisualDesigner
 
         class RootNode : ActionDataNode
         {
-            private VDActionData m_actionData;
-            internal void InitRootNode(VDActionData actionData)
+            private VDActionBase m_action;
+            internal void InitRootNode(VDActionBase action)
             {
-                m_actionData = actionData;
-                base.Init(actionData.Id, null);
-                if (actionData != null)
+                m_action = action;
+                base.Init(action.Id, null);
+                if (action.ActionData != null)
                 {
-                    this.Name = actionData.Action != null ? (actionData.Action.Name ?? string.Empty) : string.Empty;
-                    TypeName = actionData.Meta != null ? actionData.Meta.FullName : string.Empty;
-                    DispName = actionData.DispName;
+                    this.Name = m_action != null ? string.Format("[{0}]", m_action.Name ?? string.Empty) : string.Empty;
+                    TypeName = m_action.ActionData.Meta != null ? action.ActionData.Meta.FullName : string.Empty;
+                    DispName = action.ActionData.DispName;
                 }
                 else
                 {
@@ -1246,10 +1302,10 @@ namespace MVCVisualDesigner
             {
                 get
                 {
-                    if (m_actionData == null || m_actionData.Meta == null)
+                    if (m_action.ActionData == null || m_action.ActionData.Meta == null)
                         return false;
 
-                    VDMetaType metaType = m_actionData.Meta;
+                    VDMetaType metaType = m_action.ActionData.Meta;
                     return !(metaType is VDDictionaryType || metaType is VDListType
                         || metaType is VDPredefinedType || metaType is VDPrimitiveType);
                 }
@@ -1263,40 +1319,33 @@ namespace MVCVisualDesigner
             {
                 get
                 {
-                    return m_actionData != null && m_actionData.Meta != null;
+                    return m_action.ActionData != null && m_action.ActionData.Meta != null;
                 }
             }
 
             internal override void AddChildNode()
             {
-                if (m_actionData == null || m_actionData == null) return;
-                VDModelStore modelStore = m_actionData.ModelStore;
+                if (m_action.ActionData == null || m_action.ActionData == null) return;
+                VDModelStore modelStore = m_action.ActionData.ModelStore;
                 int idx = 0;
-                while (m_actionData.Members.Find(m => m.Name == Utility.Constants.STR_NEW_MEMBER + ++idx) != null) ;
-                m_actionData.AddMember<VDProperty>(Utility.Constants.STR_TYPE_STRING, "NewMember" + idx);
+                while (m_action.ActionData.Members.Find(m => m.Name == Utility.Constants.STR_NEW_MEMBER + ++idx) != null) ;
+                m_action.ActionData.AddMember<VDProperty>(Utility.Constants.STR_TYPE_STRING, "NewMember" + idx);
             }
 
             internal override void OnTypeNameChanged(string oldValue, string newValue)
             {
                 if (oldValue == newValue) return;
-                if (m_actionData == null || m_actionData == null) return;
+                if (m_action.ActionData == null || m_action.ActionData == null) return;
 
-                VDModelStore modelStore = m_actionData.ModelStore;
+                VDModelStore modelStore = m_action.ActionData.ModelStore;
 
                 // delete old widgets
-                if (!m_actionData.HasExternalReference)
+                if (!m_action.ActionData.HasExternalReference)
                 {
-                    m_actionData.Delete();
-                    m_actionData = null;
+                    m_action.ActionData.Delete();
                 }
 
-                m_actionData = modelStore.CreateConcreteType<VDActionData>(newValue);
-                if (!modelStore.IsPrimitiveType(newValue) && !modelStore.IsPredefinedType(newValue))
-                {
-                    // add member "Value"
-                    m_actionData.AddMember<VDBuiltInProperty>(Utility.Constants.STR_TYPE_STRING, Utility.Constants.STR_VALUE_MEMBER);
-                }
-                m_actionData.Action.ActionData = m_actionData;
+                m_action.ActionData = modelStore.CreateConcreteType<VDActionData>(newValue);
             }
         }
 
@@ -1392,13 +1441,13 @@ namespace MVCVisualDesigner
             {
                 if (!CanAddChildMembers) return;
 
-                VDConcreteType host = (VDConcreteType)m_member.Host;
-                if (host == null) return;
+                VDConcreteType memberType = (VDConcreteType)m_member.Type;
+                if (memberType == null) return;
 
-                VDModelStore modelStore = host.ModelStore;
+                VDModelStore modelStore = memberType.ModelStore;
                 int idx = 0;
-                while (host.Members.Find(m => m.Name == Utility.Constants.STR_NEW_MEMBER + ++idx) != null) ;
-                host.AddMember<VDProperty>(Utility.Constants.STR_TYPE_STRING, "NewMember" + idx);
+                while (memberType.Members.Find(m => m.Name == Utility.Constants.STR_NEW_MEMBER + ++idx) != null) ;
+                memberType.AddMember<VDProperty>(Utility.Constants.STR_TYPE_STRING, "NewMember" + idx);
             }
 
             internal override void DeleteNode()
@@ -1473,11 +1522,12 @@ namespace MVCVisualDesigner
 
         protected override bool ProcessDialogKey(Keys keyData)
         {
-            if (m_autoCompleteMenu != null)
+            if (m_autoCompleteMenu != null && m_autoCompleteMenu.Visible)
             {
                 if (keyData == Keys.Enter || keyData == Keys.Tab)
                 {
                     m_autoCompleteMenu.ProcessKey((char)keyData, Keys.None);
+                    return true;
                 }
             }
             return base.ProcessDialogKey(keyData);
@@ -1519,22 +1569,77 @@ namespace MVCVisualDesigner
 
             private IEnumerable<AutocompleteItem> BuildList()
             {
-                var types = new Dictionary<string, VDMetaType>();
+                Dictionary<string, int> allTypes = new Dictionary<string,int>();
 
-                if (ModelStore != null)
+                if (ModelStore != null) 
                 {
                     foreach (VDMetaType metaType in ModelStore.MetaTypes)
                     {
-                        types.Add(metaType.FullName, metaType);
+                        if (!allTypes.ContainsKey(metaType.FullName))
+                        {
+                            if (metaType is VDPrimitiveType)
+                                allTypes.Add(metaType.FullName, 2);
+                            else if (metaType is VDPredefinedType)
+                                allTypes.Add(metaType.FullName, 3);
+                            else
+                                allTypes.Add(metaType.FullName, 0);
+                        }
                     }
+
+                    // get primitive and predefined types
+                    foreach(string type in ModelStore.PrimitiveTypes)
+                    {
+                        if (!allTypes.ContainsKey(type))
+                        {
+                            allTypes.Add(type, 2);
+                        }
+                    }
+
+                    // todo: 
+                    //foreach(string type in ModelStore.PredefinedTypes)
+                    //{
+                    //    if (!allTypes.ContainsKey(type))
+                    //    {
+                    //        allTypes.Add(type, 3);
+                    //    }
+                    //}
                 }
 
                 //return autocomplete items
-                foreach (var typeName in types.Keys)
-                    yield return new AutocompleteItem(typeName, 0);
+                List<ModelTypeItem> items = new List<ModelTypeItem>(); 
+                foreach (var kv in allTypes)
+                {
+                    items.Add(new ModelTypeItem(kv.Key, kv.Value));
+                }
+                items.Sort((x, y) => string.Compare(x.Text, y.Text));
+                return items;
             }
 
             public VDModelStore ModelStore { get; set; }
+
+            class ModelTypeItem : AutocompleteItem
+            {
+                public ModelTypeItem() { }
+
+                public ModelTypeItem(string text) : base(text) { }
+
+                public ModelTypeItem(string text, int imageIndex) : base(text, imageIndex) { }
+
+                public ModelTypeItem(string text, int imageIndex, string menuText) : base(text, imageIndex, menuText) { }
+
+                public ModelTypeItem(string text, int imageIndex, string menuText, string toolTipTitle, string toolTipText)
+                    : base(text, imageIndex, menuText, toolTipTitle, toolTipText)
+                {
+                }
+
+                public override CompareResult Compare(string fragmentText)
+                {
+                    if (Text.StartsWith(fragmentText, StringComparison.InvariantCultureIgnoreCase))
+                        return CompareResult.VisibleAndSelected;
+
+                    return CompareResult.Hidden;
+                }
+            }
         }
     }
 }

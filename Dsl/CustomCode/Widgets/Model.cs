@@ -5,663 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-#if todel
-namespace MVCVisualDesigner
-{
-    public partial class VDModelStore
-    {
-        public VDModelType2 GetModelType(string fullTypeName)
-        {
-            if (string.IsNullOrEmpty(fullTypeName)) return null;
-
-            foreach(var modelType in this.ModelTypes)
-            {
-                if (string.Compare(modelType.FullName, fullTypeName) == 0)
-                    return modelType;
-            }
-            return null;
-        }
-
-        public VDModelType2 GetModelType(string typeName, string nameSpace)
-        {
-            string fullTypeName;
-            if (string.IsNullOrEmpty(nameSpace))
-            {
-                fullTypeName = typeName;
-            }
-            else
-            {
-                fullTypeName = string.Format("{0}.{1}", nameSpace, typeName);
-            }
-            return GetModelType(fullTypeName);
-        }
-
-        public VDModelType2 CreateModelType(ModelTypeValue modelType, HashSet<string> predefinedTypes)
-        {
-            if (modelType.CollectionType == E_CollectionType.Not_Collection)
-                return CreateModelType(modelType.ValueType, predefinedTypes);
-            else if (modelType.CollectionType == E_CollectionType.Dictionary)
-                return CreateDictionaryModelType(modelType.KeyType, modelType.ValueType, predefinedTypes);
-            else if (modelType.CollectionType == E_CollectionType.List)
-                return CreateListModelType(modelType.ValueType, predefinedTypes);
-
-            return null;
-        }
-
-        public VDModelType2 CreateModelType(string fullTypeName, HashSet<string> predefinedTypes)
-        {
-            VDModelType2 type = GetModelType(fullTypeName);
-            if (type != null) return type;
-
-            string typeName = null;
-            string nameSpace = null;
-            Utility.Helper.SplitFullName(fullTypeName, out nameSpace, out typeName);
-
-
-            Guid modelTypeID;
-            if (predefinedTypes != null && predefinedTypes.Contains(fullTypeName))
-                modelTypeID = VDPredefinedType.DomainClassId;
-            else
-                modelTypeID = VDCustomType.DomainClassId;
-
-            type = this.Store.ElementFactory.CreateElement(modelTypeID,
-                new PropertyAssignment(VDModelType2.NameDomainPropertyId, typeName),
-                new PropertyAssignment(VDModelType2.NameSpaceDomainPropertyId, nameSpace)) as VDModelType2;
-            this.ModelTypes.Add(type);
-
-            return type;
-        }
-
-        public VDModelType2 CreateModelType(string typeName, string nameSpace, HashSet<string> predefinedTypes)
-        {
-            string fullTypeName;
-            if (string.IsNullOrEmpty(nameSpace))
-            {
-                fullTypeName = typeName;
-            }
-            else
-            {
-                fullTypeName = string.Format("{0}.{1}", nameSpace, typeName);
-            }
-            return CreateModelType(fullTypeName, predefinedTypes);
-        }
-
-        public VDDictionaryType CreateDictionaryModelType(string keyTypeFullName, string valueTypeFullName, HashSet<string> predefinedTypes)
-        {
-            string dictFullName = VDDictionaryType.GetDictionaryFullName(keyTypeFullName, valueTypeFullName);
-            VDDictionaryType dictType = GetModelType(dictFullName) as VDDictionaryType;
-            if (dictType != null) return dictType;
-
-            dictType = this.Store.ElementFactory.CreateElement(VDDictionaryType.DomainClassId,
-                new PropertyAssignment(VDModelType2.NameDomainPropertyId, dictFullName),
-                new PropertyAssignment(VDModelType2.NameSpaceDomainPropertyId, string.Empty)) as VDDictionaryType;
-            this.ModelTypes.Add(dictType);
-
-            // key member info
-            VDModelType2 keyType = CreateModelType(keyTypeFullName, predefinedTypes);
-            VDPlaceholderInfo keyMemInfo = this.Store.ElementFactory.CreateElement(
-                    VDPlaceholderInfo.DomainClassId,
-                    new PropertyAssignment(VDModelMemberInfo.NameDomainPropertyId, "Key")) as VDPlaceholderInfo;
-            dictType.ModelMembers.Add(keyMemInfo);
-            dictType.KeyInfo = keyMemInfo;
-            keyMemInfo.Type = keyType;
-
-            // value member info
-            VDModelType2 valueType = CreateModelType(valueTypeFullName, predefinedTypes);
-            VDPlaceholderInfo valueMemInfo = this.Store.ElementFactory.CreateElement(
-                    VDPlaceholderInfo.DomainClassId,
-                    new PropertyAssignment(VDModelMemberInfo.NameDomainPropertyId, "Value")) as VDPlaceholderInfo;
-            dictType.ModelMembers.Add(valueMemInfo);
-            dictType.ValueInfo = valueMemInfo;
-            valueMemInfo.Type = valueType;
-
-            return dictType;
-        }
-
-        public VDListType CreateListModelType(string valueTypeFullName, HashSet<string> predefinedTypes)
-        {
-            string listFullName = VDListType.GetListFullName(valueTypeFullName);
-            VDListType listType = GetModelType(listFullName) as VDListType;
-            if (listType != null) return listType;
-
-            listType = this.Store.ElementFactory.CreateElement(VDListType.DomainClassId,
-                new PropertyAssignment(VDModelType2.NameDomainPropertyId, listFullName),
-                new PropertyAssignment(VDModelType2.NameSpaceDomainPropertyId, string.Empty)) as VDListType;
-            this.ModelTypes.Add(listType);
-
-            // value member info
-            VDModelType2 valueType = CreateModelType(valueTypeFullName, predefinedTypes);
-            VDPlaceholderInfo valueMemInfo = this.Store.ElementFactory.CreateElement(
-                    VDPlaceholderInfo.DomainClassId,
-                    new PropertyAssignment(VDModelMemberInfo.NameDomainPropertyId, "Value")) as VDPlaceholderInfo;
-            listType.ModelMembers.Add(valueMemInfo);
-            listType.ValueInfo = valueMemInfo;
-            valueMemInfo.Type = valueType;
-
-            return listType;
-        }
-
-        public TModelMemberInstance CreateModelInstance<TModelMemberInstance>(VDModelType2 modelType, string modelName) 
-            where TModelMemberInstance : VDModelMemberInstance
-        {
-            if (modelType == null) return null;
-
-            // create model instance
-            VDModelMemberInstance modelInstance = this.Store.ElementFactory.CreateElement(getDomainClassID<TModelMemberInstance>(),
-                new PropertyAssignment(VDModelMemberInstance.NameDomainPropertyId, modelName)) as VDModelMemberInstance;
-            modelInstance.ModelType = modelType;
-            this.ModelMemberInstances.Add(modelInstance);
-            this.ModelInstances.Add(modelInstance);
-
-            // create model member instances according to model type definition
-            Guid modelMemberInstanceDomainClassId = getDomainClassID<TModelMemberInstance>();
-            createChildModelMemberInstances(modelInstance, modelMemberInstanceDomainClassId);
-
-            return modelInstance as TModelMemberInstance;
-        }
-
-        private void createChildModelMemberInstances(VDModelMemberInstance parentModelMemberInstance, Guid modelMemberInstanceDomainClassId)
-        {
-            Stack<VDModelType2> superTypes = new Stack<VDModelType2>();
-            var mmi = parentModelMemberInstance.ParentMemberInstance;
-            while (mmi != null && mmi.ModelType != null)
-            {
-                superTypes.Push(mmi.ModelType);
-                mmi = mmi.ParentMemberInstance;
-            }
-
-            createChildModelMemberInstances(parentModelMemberInstance, modelMemberInstanceDomainClassId, superTypes);
-        }
-
-        private void createChildModelMemberInstances(VDModelMemberInstance parentModelMemberInstance, Guid modelMemberInstanceDomainClassId, 
-                Stack<VDModelType2> superTypes)
-        {
-            // to avoid infinite recursion, if type of a member is same as any super member's type, 
-            // don't create child member instances for it
-            VDModelType2 modelType = parentModelMemberInstance.ModelType;
-            if (modelType == null || superTypes.Contains(modelType)) return;
-            superTypes.Push(modelType);
-
-            foreach (VDModelMemberInfo modelMemberInfo in modelType.ModelMembers)
-            {
-                var modelMemberInstance = this.Store.ElementFactory.CreateElement(modelMemberInstanceDomainClassId) as VDModelMemberInstance;
-                modelMemberInstance.ModelMemberInfo = modelMemberInfo;
-                modelMemberInstance.ModelType = modelMemberInfo.Type;
-                this.ModelMemberInstances.Add(modelMemberInstance);
-                parentModelMemberInstance.ChildMemberInstances.Add(modelMemberInstance);
-
-                // create sub members recursivly
-                createChildModelMemberInstances(modelMemberInstance, modelMemberInstanceDomainClassId, superTypes);
-            }
-
-            superTypes.Pop();
-        }
-
-        private void createModelMemberInstance(VDModelMemberInstance parentModelMemberInstance,
-            VDModelMemberInfo newMemberInfo,
-            Guid modelMemberInstanceDomainClassId)
-        {
-            Stack<VDModelType2> superTypes = new Stack<VDModelType2>(); //the order is reverse, but doesn't matter
-            var mmi = parentModelMemberInstance.ParentMemberInstance;
-            while (mmi != null && mmi.ModelType != null)
-            {
-                superTypes.Push(mmi.ModelType);
-                mmi = mmi.ParentMemberInstance;
-            }
-
-            createModelMemberInstance(parentModelMemberInstance, newMemberInfo, modelMemberInstanceDomainClassId, superTypes);
-        }
-
-        private void createModelMemberInstance(VDModelMemberInstance parentModelMemberInstance, 
-                    VDModelMemberInfo newMemberInfo,
-                    Guid modelMemberInstanceDomainClassId, Stack<VDModelType2> superTypes)
-        {
-            VDModelType2 parentType = parentModelMemberInstance.ModelType;
-            if (parentType == null || superTypes.Contains(parentType))
-                return;
-            superTypes.Push(parentType);
-
-            VDModelMemberInstance newMemberInstance = this.Store.ElementFactory.CreateElement(
-                        modelMemberInstanceDomainClassId) as VDModelMemberInstance;
-            newMemberInstance.ModelMemberInfo = newMemberInfo;
-            newMemberInstance.ModelType = newMemberInfo.Type;
-            this.ModelMemberInstances.Add(newMemberInstance);
-            parentModelMemberInstance.ChildMemberInstances.Add(newMemberInstance);
-
-            createChildModelMemberInstances(newMemberInstance, modelMemberInstanceDomainClassId, superTypes);
-        }
-
-        // todo: check if all embedding and reference links are deleted
-        public void DeleteModelInstance(VDModelMemberInstance modelInstance)
-        {
-            deleteModelMemberInstance(modelInstance);
-        }
-
-        private void deleteModelMemberInstance(VDModelMemberInstance parentModelMemberInstance)
-        {
-            List<VDModelMemberInstance> instListToDel = new List<VDModelMemberInstance>();
-            foreach (VDModelMemberInstance childMember in parentModelMemberInstance.ChildMemberInstances)
-            {
-                instListToDel.Add(childMember);
-            }
-
-            foreach (var childMember in instListToDel)
-            {
-                deleteModelMemberInstance(childMember);
-                childMember.Delete();
-            }
-
-            parentModelMemberInstance.Delete();
-        }
-
-        private void deleteChildModelMemberInstances(VDModelMemberInstance parentModelMemberInstance)
-        {
-            List<VDModelMemberInstance> instListToDel = new List<VDModelMemberInstance>();
-            foreach (VDModelMemberInstance mmi in parentModelMemberInstance.ChildMemberInstances)
-            {
-                instListToDel.Add(mmi);
-            }
-
-            foreach (var mmi in instListToDel)
-            {
-                deleteModelMemberInstance(mmi);
-            }
-        }
-
-        // add member to model type and all related mode instances and model instance members
-        public void AddMemberToModelType<TModelMemberInfo, TModelMemberInstance>(
-                VDModelType2 modelType, string memberName, string memberTypeName, HashSet<string> predefinedTypes)
-                    where TModelMemberInfo : VDModelMemberInfo 
-                    where TModelMemberInstance : VDModelMemberInstance
-        {
-            // not all type can add new member, such as primitive type, external type etc.
-            if (modelType.IsReadOnly)
-                throw new Exception(string.Format("Type {0}::{1} is readonly.", modelType.NameSpace ?? string.Empty, modelType.Name ?? string.Empty));
-
-            // create new ModelMemberInfo 
-            VDModelMemberInfo newMemberInfo = this.Store.ElementFactory.CreateElement(
-                    getDomainClassID<TModelMemberInfo>(),
-                    new PropertyAssignment(VDModelMemberInfo.NameDomainPropertyId, memberName)) as VDModelMemberInfo;
-            modelType.ModelMembers.Add(newMemberInfo);
-            //
-            // set model member type
-            VDModelType2 newMemberType = this.CreateModelType(memberTypeName, predefinedTypes);
-            newMemberInfo.Type = newMemberType;
-
-            //
-            // add a new member instance to all model instances and model instance members of type "modelType", 
-            Guid modelMemberInstanceDomainClassId = getDomainClassID<TModelMemberInstance>();
-            List<VDModelMemberInstance> modelMemberInstances = getModelMemberInstancesOfType(modelType);
-            foreach(var inst in modelMemberInstances)
-            {
-                createModelMemberInstance(inst, newMemberInfo, modelMemberInstanceDomainClassId);
-            }
-        }
-
-        private List<VDModelMemberInstance> getModelMemberInstancesOfType(VDModelType2 modelType)
-        {
-            List<VDModelMemberInstance> mmi = new List<VDModelMemberInstance>();
-            foreach(VDModelMemberInstance minst in modelType.ModelMemberInstancesOfThisType)
-            {
-                mmi.Add(minst);
-            }
-            return mmi;
-        }
-
-        // delete member from model type and all related mode instances and model instance members
-        public void RemoveMemberFromModelType(VDModelType2 modelType, VDModelMemberInfo modelMemberInfoToRemove)
-        {
-            // not all type can add new member, such as primitive type, external type etc.
-            if (modelType.IsReadOnly)
-                throw new Exception(string.Format("Type {0}::{1} is readonly.", modelType.NameSpace ?? string.Empty, modelType.Name ?? string.Empty));
-            
-            // delete member instances
-            List<VDModelMemberInstance> instancesToDel = new List<VDModelMemberInstance>(modelMemberInfoToRemove.MemberInstancesOfThisType);
-            foreach(var memberInstance in instancesToDel)
-            {
-                if (!memberInstance.IsDeleted && !memberInstance.IsDeleting)
-                {
-                    deleteModelMemberInstance(memberInstance);
-                }
-            }
-
-            // delete member info
-            modelMemberInfoToRemove.Delete();
-        }
-
-        public void ChangeModelMemberType<TModelMemberInstance>(
-                VDModelMemberInfo modelMemberInfoToChange,
-                ModelTypeValue newModelType, HashSet<string> predefinedTypes)
-            where TModelMemberInstance : VDModelMemberInstance
-        {
-            VDModelType2 newMemberType = CreateModelType(newModelType, predefinedTypes);
-            modelMemberInfoToChange.Type = newMemberType;
-
-            // delete the child member instances which is created based on old type definition
-            foreach (VDModelMemberInstance mmi in modelMemberInfoToChange.MemberInstancesOfThisType)
-            {
-                deleteChildModelMemberInstances(mmi);
-            }
-
-            // create new child member instances according to the new type
-            Guid modelMemberInstanceDomainClassId = getDomainClassID<TModelMemberInstance>();
-            foreach(VDModelMemberInstance mmi in modelMemberInfoToChange.MemberInstancesOfThisType)
-            {
-                mmi.ModelType = newMemberType;
-                createChildModelMemberInstances(mmi, modelMemberInstanceDomainClassId);
-            }
-        }
-
-
-        private static Guid getDomainClassID<T>() where T : ModelElement
-        {
-            if (typeof(T) == typeof(VDModelMemberInstance))
-                return VDModelMemberInstance.DomainClassId;
-            else if (typeof(T) == typeof(VDViewModelMemberInstance))
-                return VDViewModelMemberInstance.DomainClassId;
-            else if (typeof(T) == typeof(VDWidgetModelMemberInstance))
-                return VDWidgetModelMemberInstance.DomainClassId;
-            else if (typeof(T) == typeof(VDActionModelMemberInstance))
-                return VDActionModelMemberInstance.DomainClassId;
-
-            else if (typeof(T) == typeof(VDModelMemberInfo))
-                return VDModelMemberInfo.DomainClassId;
-            else if (typeof(T) == typeof(VDPropertyInfo))
-                return VDPropertyInfo.DomainClassId;
-            else if (typeof(T) == typeof(VDFieldInfo))
-                return VDFieldInfo.DomainClassId;
-            else if (typeof(T) == typeof(VDMethodInfo))
-                return VDMethodInfo.DomainClassId;
-            else if (typeof(T) == typeof(VDPlaceholderInfo))
-                return VDPlaceholderInfo.DomainClassId;
-            else if (typeof(T) == typeof(VDModelInstanceInfo))
-                return VDModelInstanceInfo.DomainClassId;
-
-            else if (typeof(T) == typeof(VDModelType2))
-                return VDModelType2.DomainClassId;
-            else if (typeof(T) == typeof(VDPredefinedType))
-                return VDPredefinedType.DomainClassId;
-            else if (typeof(T) == typeof(VDExternalType))
-                return VDExternalType.DomainClassId;
-            else if (typeof(T) == typeof(VDCustomType))
-                return VDCustomType.DomainClassId;
-            else if (typeof(T) == typeof(VDDictionaryType))
-                return VDDictionaryType.DomainClassId;
-            else if (typeof(T) == typeof(VDListType))
-                return VDListType.DomainClassId;
-
-            return Guid.Empty;
-        }
-    }
-
-#region "Model Instance"
-    public partial class VDModelMemberInstance
-    {
-        // custom storage Name property
-        private string m_name;
-        internal virtual string GetNameValue()
-        {
-            if (this.ModelMemberInfo != null)
-                return this.ModelMemberInfo.Name;
-            else
-                return m_name;
-        }
-
-        internal virtual void SetNameValue(string newName)
-        {
-            if (this.ModelMemberInfo == null)
-                m_name = newName;
-        }
-
-        // calculated TypeName property
-        internal virtual string GetTypeNameValue()
-        {
-            if (this.ModelType != null)
-                return this.ModelType.FullName;
-            else
-                return string.Empty;
-        }
-
-        // if there is no model memeber, then its top level model member instance,
-        // that is, it's model instance
-        internal bool IsModelInstance 
-        { 
-            get 
-            { 
-                return this.ModelMemberInfo == null; 
-                /* or this.Widget != null */
-            } 
-        }
-
-        public VDModelMemberInstance HostModelInstance
-        {
-            get
-            {
-                VDModelMemberInstance parent = this;
-                while (parent.ParentMemberInstance != null)
-                {
-                    parent = parent.ParentMemberInstance;
-                }
-                return parent;
-            }
-        }
-
-        public List<VDModelMemberInstance> GetAllSubMemberInstances()
-        {
-            List<VDModelMemberInstance> instList = new List<VDModelMemberInstance>();
-            getChildMemberLists(instList, this);
-            return instList;
-        }
-
-        public List<VDModelMemberInstance> GetAllMemberInstances()
-        {
-            List<VDModelMemberInstance> instList = new List<VDModelMemberInstance>();
-            instList.Add(this);
-            getChildMemberLists(instList, this);
-            return instList;
-        }
-
-        private void getChildMemberLists(List<VDModelMemberInstance> instList, VDModelMemberInstance parentInst)
-        {
-            foreach (var child in parentInst.ChildMemberInstances)
-            {
-                instList.Add(child);
-                getChildMemberLists(instList, child);
-            }
-        }
-
-        // to support object list view
-        public Guid ParentID
-        {
-            get
-            {
-                if (this.ParentMemberInstance != null)
-                {
-                    // todo: remvoe it in the future, it only works for view model
-                    if (this is VDViewModelMemberInstance && this.ParentMemberInstance.ParentMemberInstance == null) return Guid.Empty;
-
-                    return this.ParentMemberInstance.Id;
-                }
-                else
-                    return Guid.Empty;
-            }
-        }
-    }
-
-    public partial class VDViewModelMemberInstance
-    {
-        // custom storage property
-        internal string GetDefaultValueValue()
-        {
-            if (this.ModelMemberInfo != null)
-                return this.ModelMemberInfo.DefaultValue;
-            else
-                return string.Empty;
-        }
-
-        internal void SetDefaultValueValue(string newValue)
-        {
-            if (this.ModelMemberInfo != null)
-                this.ModelMemberInfo.DefaultValue = newValue;
-        }
-
-        // to support Object List View data binding
-        public bool IsJavaScriptModel_OLV
-        {
-            get { return this.IsJavaScriptModel; }
-            set 
-            { 
-                using(var trans = this.Store.TransactionManager.BeginTransaction("Update IsJavaScriptModel property"))
-                {
-                    this.IsJavaScriptModel = value;
-                    trans.Commit();
-                }
-            }
-        }
-    }
-
-    public partial class VDWidgetModelMemberInstance
-    {
-        internal override string GetNameValue()
-        {
-//            if (this.Widget != null)
-//                return this.Widget.WidgetName;
-//            else
-                return base.GetNameValue();
-        }
-
-        // referred model member instance full name
-        public string ReferenceName
-        {
-            get
-            {
-                string name = string.Empty;
-                if (this.Reference != null)
-                {
-                    name = this.Reference.Name;
-                    VDModelMemberInstance mmInst = this.Reference.ParentMemberInstance;
-                    while (mmInst != null)
-                    {
-                        name = mmInst.Name ?? string.Empty + "/" + name;
-                        mmInst = mmInst.ParentMemberInstance;
-                    }
-                }
-                return name;
-            }
-        }
-    }
-
-    public partial class VDActionModelMemberInstance
-    {
-        // Selector calculated property
-        public string GetSelectorValue()
-        {
-            StringBuilder sb = new StringBuilder();
-            if (SelectorAnchor != null)
-                sb.AppendFormat("{0}[{1}].{2}", SelectorAnchor.WidgetName ?? "", SelectorAnchor.WidgetType.ToString(), this.SelectorFunction ?? "");
-            else
-                sb.AppendFormat("{0}", this.SelectorFunction ?? "");
-
-            if (!string.IsNullOrEmpty(this.ResolvedTargetWidget))
-                sb.AppendFormat(" => {0}", this.ResolvedTargetWidget);
-
-            if (sb.Length > 0)
-                return sb.ToString();
-            else
-                return Utility.Constants.STR_NOT_SPECIFIED;
-        }
-    }
-#endregion
-
-
-#region "Model Type"
-    public partial class VDModelType2
-    {
-        // IsReadOnly property
-        protected bool m_bIsReadOnly = false;
-        internal virtual bool GetIsReadOnlyValue() { return m_bIsReadOnly; }
-        internal virtual void SetIsReadOnlyValue(bool newValue) { m_bIsReadOnly = newValue; }
-        internal virtual string GetFullNameValue() 
-        {  
-            return string.IsNullOrEmpty(this.NameSpace) ? this.Name : this.NameSpace + "." + this.Name;
-        }
-
-        //
-        public override int GetHashCode()
-        {
-            int code = 0;
-            if (this.NameSpace != null)
-                code += this.NameSpace.GetHashCode() * 1000;
-            if (this.Name != null)
-                code += this.Name.GetHashCode();
-            return code;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj is VDModelType2)
-            {
-                VDModelType2 other = (VDModelType2)obj;
-                if (string.Compare(this.FullName, other.FullName) == 0)
-                    return true;
-            }
-            return false;
-        }
-    }
-
-#if todel
-    public partial class VDPredefinedType
-    {
-        // always read only
-        internal override bool GetIsReadOnlyValue() { return true; }
-        internal override void SetIsReadOnlyValue(bool newValue) { }
-    }
-#endif
-
-    public partial class VDDictionaryType
-    {
-        // always read only, can not add new members
-        internal override bool GetIsReadOnlyValue() { return true; }
-        internal override void SetIsReadOnlyValue(bool newValue) { }
-
-        internal override string GetFullNameValue()
-        {
-            return GetDictionaryFullName(
-                this.KeyInfo == null || this.KeyInfo.Type == null ? string.Empty : this.KeyInfo.Type.FullName,
-                this.ValueInfo == null || this.ValueInfo.Type == null ? string.Empty : this.ValueInfo.Type.FullName);
-        }
-
-        public static string GetDictionaryFullName(string keyTypeFullName, string valueTypeFullName)
-        {
-            return string.Format(Utility.Constants.STR_TYPE_DICTIONARY, 
-                keyTypeFullName ?? string.Empty, 
-                valueTypeFullName ?? string.Empty);
-        }
-    }
-
-    public partial class VDListType
-    {
-        // always read only, can not add new members
-        internal override bool GetIsReadOnlyValue() { return true; }
-        internal override void SetIsReadOnlyValue(bool newValue) { }
-
-        internal override string GetFullNameValue()
-        {
-            return GetListFullName(
-                this.ValueInfo == null || this.ValueInfo.Type == null ? string.Empty
-                : this.ValueInfo.Type.FullName);
-        }
-
-        public static string GetListFullName(string valueTypeFullName)
-        {
-            return string.Format(Utility.Constants.STR_TYPE_LIST, valueTypeFullName ?? string.Empty);
-        }
-    }
-#endregion
-
-}
-#endif
-
 namespace MVCVisualDesigner
 {
     public partial class VDModelStore
@@ -754,6 +97,8 @@ namespace MVCVisualDesigner
             "int?", "bool?", "string?", "long?", "short?", "uint?", "ushort?", "ulong?", "DateTime?", 
             "IPAddress", "Version"
         };
+
+        public HashSet<string> PrimitiveTypes { get { return m_primitiveTypes; } }
 
         public bool IsPredefinedType(string fullName)
         {
@@ -1391,7 +736,7 @@ namespace MVCVisualDesigner
             if (metaMember.Type is VDPrimitiveType)
                 newMember.Type = this.ModelStore.GetPrimitiveMemberType(metaMember.Type.FullName);
             else
-                newMember.Type = this.ModelStore.CreateConcreteType<VDWidgetValue>(metaMember.Type as VDMetaType);
+                newMember.Type = this.newInstance(metaMember.Type as VDMetaType);
             this.Members.Add(newMember);
         }
 
@@ -1413,7 +758,7 @@ namespace MVCVisualDesigner
             if (memberMetaType is VDPrimitiveType)
                 member.Type = this.ModelStore.GetPrimitiveMemberType(memberMetaType.FullName);
             else
-                member.Type = this.ModelStore.CreateConcreteType<VDWidgetValue>(memberMetaType);
+                member.Type = this.newInstance(memberMetaType);
         }
 
         // if has external reference except VDWidget.WidgetValue/VDActionBase.ActionData/VDView.Model
@@ -1440,6 +785,7 @@ namespace MVCVisualDesigner
         }
 
         virtual internal VDConcreteMember newConcreteMember() { return null; }
+        virtual internal VDConcreteType newInstance(VDMetaType metaType) { return null; }
     }
 
     public partial class VDWidgetValue : VDConcreteType
@@ -1447,6 +793,11 @@ namespace MVCVisualDesigner
         internal override VDConcreteMember newConcreteMember()
         {
             return new VDWidgetValueMember(this.Partition);
+        }
+
+        internal override VDConcreteType newInstance(VDMetaType metaType)
+        {
+            return this.ModelStore.CreateConcreteType<VDWidgetValue>(metaType);
         }
     }
 
@@ -1456,6 +807,11 @@ namespace MVCVisualDesigner
         {
             return new VDActionDataMember(this.Partition);
         }
+
+        internal override VDConcreteType newInstance(VDMetaType metaType)
+        {
+            return this.ModelStore.CreateConcreteType<VDActionData>(metaType);
+        }
     }
 
     public partial class VDViewModel : VDConcreteType
@@ -1463,6 +819,11 @@ namespace MVCVisualDesigner
         internal override VDConcreteMember newConcreteMember()
         {
             return new VDViewModelMember(this.Partition);
+        }
+
+        internal override VDConcreteType newInstance(VDMetaType metaType)
+        {
+            return this.ModelStore.CreateConcreteType<VDViewModel>(metaType);
         }
     }
 
