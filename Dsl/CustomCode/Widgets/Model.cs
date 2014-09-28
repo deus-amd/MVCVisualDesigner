@@ -28,6 +28,11 @@ namespace MVCVisualDesigner
                 new EventInfo("onYes", "Confirm Event"),
                 new EventInfo("onNo", "Confirm Event")
             });
+            m_events.Add("ServerAction", new List<IEventInfo>() { 
+                new EventInfo("onSuccess", "Server Action"),
+                new EventInfo("onFail", "Server Action"),
+                new EventInfo("onComplete", "Server Action"),
+            });
 
             m_actions = new Dictionary<string, List<IActionInfo>>();
             m_actions.Add("JS Action", new List<IActionInfo>() { 
@@ -53,6 +58,8 @@ namespace MVCVisualDesigner
                 return m_events["Alert"];
             else if (wt == WidgetType.ConfirmDialog)
                 return m_events["Confirm"];
+            else if (wt == WidgetType.ServerAction)
+                return m_events["ServerAction"];
             else
                 return m_events["JS Event"];
         }
@@ -63,6 +70,16 @@ namespace MVCVisualDesigner
 
             List<IActionInfo> actionInfo = m_actions["JS Action"];
             return actionInfo;
+        }
+
+        public List<IActionJointInfo> GetSupportedServerActionJoints()
+        {
+            List<IActionJointInfo> joints = new List<IActionJointInfo>()
+            {
+                new ActionJointInfo("Server", "Result"),
+            };
+
+            return joints;
         }
 
         public IEventInfo GetEventInfo(string category, string name)

@@ -410,6 +410,8 @@ namespace MVCVisualDesigner
                 return null;
             }
         }
+
+        public virtual bool CanBeTargetOfServerAction { get { return false; } }
 #endregion
 
         public static VDWidget GetCommonParent(VDWidget w1, VDWidget w2)

@@ -875,11 +875,25 @@
       <BaseClass>
         <DomainClassMoniker Name="VDViewComponent" />
       </BaseClass>
+      <Properties>
+        <DomainProperty Id="c49e8937-e667-4cce-afbb-d922699ddc1f" Description="Description for MVCVisualDesigner.VDAlert.Message" Name="Message" DisplayName="Message">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
     </DomainClass>
     <DomainClass Id="ace993ce-330b-4636-9036-86133adfb034" Description="Description for MVCVisualDesigner.VDConfirmDialog" Name="VDConfirmDialog" DisplayName="VDConfirm Dialog" Namespace="MVCVisualDesigner">
       <BaseClass>
         <DomainClassMoniker Name="VDViewComponent" />
       </BaseClass>
+      <Properties>
+        <DomainProperty Id="9c8236f6-2316-4813-981d-7c3b33633d96" Description="Description for MVCVisualDesigner.VDConfirmDialog.Message" Name="Message" DisplayName="Message">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
     </DomainClass>
     <DomainClass Id="44662fa6-7b51-4e96-bbac-d22ba9ab1c49" Description="Description for MVCVisualDesigner.VDMessagePanel" Name="VDMessagePanel" DisplayName="VDMessage Panel" Namespace="MVCVisualDesigner">
       <BaseClass>
@@ -2446,15 +2460,21 @@
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="9dd3a3cf-c6de-4123-ae6e-a1b4dc767f5d" Description="Description for MVCVisualDesigner.VDAlertShape" Name="VDAlertShape" DisplayName="VDAlert Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDAlert Shape" OutlineColor="DimGray" InitialHeight="1" OutlineDashStyle="Dash" OutlineThickness="0.01" FillGradientMode="None" Geometry="RoundedRectangle">
+    <GeometryShape Id="9dd3a3cf-c6de-4123-ae6e-a1b4dc767f5d" Description="Description for MVCVisualDesigner.VDAlertShape" Name="VDAlertShape" DisplayName="VDAlert Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDAlert Shape" TextColor="Gold" OutlineColor="DimGray" InitialWidth="1.2" InitialHeight="0.4" OutlineDashStyle="Dash" OutlineThickness="0.01" FillGradientMode="None" Geometry="RoundedRectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
+      <ShapeHasDecorators Position="InnerTopLeft" HorizontalOffset="0" VerticalOffset="0">
+        <TextDecorator Name="MessageTextDecorator" DisplayName="Message Text Decorator" DefaultText="MessageTextDecorator" />
+      </ShapeHasDecorators>
     </GeometryShape>
-    <GeometryShape Id="08c59a36-eebc-4097-8219-97f80873eae5" Description="Description for MVCVisualDesigner.VDConfirmDialogShape" Name="VDConfirmDialogShape" DisplayName="VDConfirm Dialog Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDConfirm Dialog Shape" OutlineColor="DimGray" InitialHeight="1" OutlineDashStyle="Dash" OutlineThickness="0.01" FillGradientMode="None" Geometry="RoundedRectangle">
+    <GeometryShape Id="08c59a36-eebc-4097-8219-97f80873eae5" Description="Description for MVCVisualDesigner.VDConfirmDialogShape" Name="VDConfirmDialogShape" DisplayName="VDConfirm Dialog Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDConfirm Dialog Shape" TextColor="MidnightBlue" OutlineColor="DimGray" InitialWidth="1.2" InitialHeight="0.4" OutlineDashStyle="Dash" OutlineThickness="0.01" FillGradientMode="None" Geometry="RoundedRectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
+      <ShapeHasDecorators Position="InnerTopLeft" HorizontalOffset="0" VerticalOffset="0">
+        <TextDecorator Name="MessageTextDecorator" DisplayName="Message Text Decorator" DefaultText="MessageTextDecorator" />
+      </ShapeHasDecorators>
     </GeometryShape>
     <GeometryShape Id="1350d597-ba5f-4ee8-893c-835f089e66dd" Description="Description for MVCVisualDesigner.VDMessagePanelShape" Name="VDMessagePanelShape" DisplayName="VDMessage Panel Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDMessage Panel Shape" InitialHeight="1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
@@ -3239,9 +3259,19 @@
       </XmlClassData>
       <XmlClassData TypeName="VDAlert" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDAlertMoniker" ElementName="vDAlert" MonikerTypeName="VDAlertMoniker">
         <DomainClassMoniker Name="VDAlert" />
+        <ElementData>
+          <XmlPropertyData XmlName="message">
+            <DomainPropertyMoniker Name="VDAlert/Message" />
+          </XmlPropertyData>
+        </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDConfirmDialog" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDConfirmDialogMoniker" ElementName="vDConfirmDialog" MonikerTypeName="VDConfirmDialogMoniker">
         <DomainClassMoniker Name="VDConfirmDialog" />
+        <ElementData>
+          <XmlPropertyData XmlName="message">
+            <DomainPropertyMoniker Name="VDConfirmDialog/Message" />
+          </XmlPropertyData>
+        </ElementData>
       </XmlClassData>
       <XmlClassData TypeName="VDMessagePanel" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDMessagePanelMoniker" ElementName="vDMessagePanel" MonikerTypeName="VDMessagePanelMoniker">
         <DomainClassMoniker Name="VDMessagePanel" />
@@ -4623,10 +4653,34 @@
       </ShapeMap>
       <ShapeMap HasCustomParentElement="true">
         <DomainClassMoniker Name="VDAlert" />
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDAlertShape/MessageTextDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="VDAlert/Message" />
+            </PropertyPath>
+          </PropertyDisplayed>
+        </DecoratorMap>
         <GeometryShapeMoniker Name="VDAlertShape" />
       </ShapeMap>
       <ShapeMap HasCustomParentElement="true">
         <DomainClassMoniker Name="VDConfirmDialog" />
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDAlertShape/MessageTextDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="VDConfirmDialog/Message" />
+            </PropertyPath>
+          </PropertyDisplayed>
+        </DecoratorMap>
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDConfirmDialogShape/MessageTextDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="VDConfirmDialog/Message" />
+            </PropertyPath>
+          </PropertyDisplayed>
+        </DecoratorMap>
         <GeometryShapeMoniker Name="VDConfirmDialogShape" />
       </ShapeMap>
       <ShapeMap HasCustomParentElement="true">

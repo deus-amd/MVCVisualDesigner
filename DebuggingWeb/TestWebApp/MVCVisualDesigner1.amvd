@@ -126,11 +126,11 @@
                                         <widgetHasChildren Id="1e9be145-ce84-4dcc-a72f-5db2ec363a6a">
                                           <vDButton Id="98b3b1a1-3afa-4f11-a966-77f303a1c6c6" moreHTMLAttributes="AAEAAAD/////AQAAAAAAAAAMAgAAAFhNVkNWaXN1YWxEZXNpZ25lci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1lODRjOWNmNDk0ODU0OTYyBAEAAACeAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZSwgTVZDVmlzdWFsRGVzaWduZXIuRHNsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49ZTg0YzljZjQ5NDg1NDk2Ml1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAhTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZVtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB9NVkNWaXN1YWxEZXNpZ25lci5IVE1MQXR0cmlidXRlAgAAAAs=" widgetName="VDButton1" classAttribute="" iDAttribute="" settings="AAEAAAD/////AQAAAAAAAAAEAQAAAOABU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlvbmFyeWAyW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlN0cmluZywgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAAB1ZlcnNpb24IQ29tcGFyZXIISGFzaFNpemUAAwAIkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0IAAAAAAkCAAAAAAAAAAQCAAAAkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0AAAAACw==" text="Delete">
                                             <events>
-                                              <widgetHasEvents Id="a9527754-71a2-44d7-9fbd-9fbf9acfded9">
-                                                <vDEvent Id="6154769c-aeea-4c35-b373-8312307cfa5e" name="click" category="JS Event">
+                                              <widgetHasEvents Id="60d77826-1b4e-4f8a-96f6-c48e7040453d">
+                                                <vDEvent Id="90a7cc7d-b9a2-41d1-b2df-c94bca9866d4" name="click" category="JS Event">
                                                   <targetComponents>
-                                                    <r_Event2Component Id="237c910a-95e7-4dc8-bc69-bb4868347a0a">
-                                                      <vDClientActionMoniker Id="e1a4b40c-ddb6-46f2-9beb-de6f9d185f6a" />
+                                                    <r_Event2Component Id="f1bf1452-7764-443c-82c0-e95e98ec9119">
+                                                      <vDClientActionMoniker Id="aab26b8e-5f4b-45a1-8405-b75db821af65" />
                                                     </r_Event2Component>
                                                   </targetComponents>
                                                 </vDEvent>
@@ -202,109 +202,102 @@
         </title>
       </vDTable>
     </widgetHasChildren>
-    <widgetHasChildren Id="79937eb4-badd-4082-95c7-aeb98396e735">
-      <vDAlert Id="0e4f2d12-ccc3-47d3-9de9-b8e1de7c9f98" moreHTMLAttributes="AAEAAAD/////AQAAAAAAAAAMAgAAAFhNVkNWaXN1YWxEZXNpZ25lci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1lODRjOWNmNDk0ODU0OTYyBAEAAACeAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZSwgTVZDVmlzdWFsRGVzaWduZXIuRHNsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49ZTg0YzljZjQ5NDg1NDk2Ml1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAhTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZVtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB9NVkNWaXN1YWxEZXNpZ25lci5IVE1MQXR0cmlidXRlAgAAAAs=" widgetName="VDAlert1" classAttribute="" iDAttribute="" settings="AAEAAAD/////AQAAAAAAAAAEAQAAAOABU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlvbmFyeWAyW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlN0cmluZywgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAAB1ZlcnNpb24IQ29tcGFyZXIISGFzaFNpemUAAwAIkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0IAAAAAAkCAAAAAAAAAAQCAAAAkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0AAAAACw==">
+    <widgetHasChildren Id="d2a427eb-8fef-4a99-b25b-0c2d86fbcb7f">
+      <vDConfirmDialog Id="442d2b22-7c9b-4ba3-9392-d8174067a03b" moreHTMLAttributes="AAEAAAD/////AQAAAAAAAAAMAgAAAFhNVkNWaXN1YWxEZXNpZ25lci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1lODRjOWNmNDk0ODU0OTYyBAEAAACeAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZSwgTVZDVmlzdWFsRGVzaWduZXIuRHNsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49ZTg0YzljZjQ5NDg1NDk2Ml1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAhTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZVtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB9NVkNWaXN1YWxEZXNpZ25lci5IVE1MQXR0cmlidXRlAgAAAAs=" widgetName="VDConfirmDialog1" classAttribute="" iDAttribute="" settings="AAEAAAD/////AQAAAAAAAAAEAQAAAOABU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlvbmFyeWAyW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlN0cmluZywgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAAB1ZlcnNpb24IQ29tcGFyZXIISGFzaFNpemUAAwAIkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0IAAAAAAkCAAAAAAAAAAQCAAAAkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0AAAAACw==" message="Are you sure to delete?">
         <title>
-          <widgetHasTitle Id="269e48dc-b1b6-4bfd-b23a-c902977b8631">
-            <vDWidgetTitle Id="ad674d7b-cf2a-4ee3-b3e8-80cb12f7b3a8" />
+          <widgetHasTitle Id="30ac9498-2413-4632-84cf-b408707c0828">
+            <vDWidgetTitle Id="92fa7401-478a-4400-b6ef-9fd2a4bb6083" />
           </widgetHasTitle>
         </title>
-      </vDAlert>
-    </widgetHasChildren>
-    <widgetHasChildren Id="b6cb7a31-374c-471a-adc0-b9d6020323a9">
-      <vDSection Id="5fe912a0-2423-4d1a-b44f-07a6b3fbb4a8" moreHTMLAttributes="AAEAAAD/////AQAAAAAAAAAMAgAAAFhNVkNWaXN1YWxEZXNpZ25lci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1lODRjOWNmNDk0ODU0OTYyBAEAAACeAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZSwgTVZDVmlzdWFsRGVzaWduZXIuRHNsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49ZTg0YzljZjQ5NDg1NDk2Ml1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAhTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZVtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB9NVkNWaXN1YWxEZXNpZ25lci5IVE1MQXR0cmlidXRlAgAAAAs=" widgetName="VDSection1" classAttribute="" iDAttribute="" settings="AAEAAAD/////AQAAAAAAAAAEAQAAAOABU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlvbmFyeWAyW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlN0cmluZywgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAAB1ZlcnNpb24IQ29tcGFyZXIISGFzaFNpemUAAwAIkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0IAAAAAAkCAAAAAAAAAAQCAAAAkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0AAAAACw==">
-        <children>
-          <sectionHasHead Id="2c97dde5-00b7-43ca-b118-9560b6aa137a">
-            <vDSectionHead Id="8e8f89c9-4881-45a9-9da7-e087c69fa9bf" moreHTMLAttributes="AAEAAAD/////AQAAAAAAAAAMAgAAAFhNVkNWaXN1YWxEZXNpZ25lci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1lODRjOWNmNDk0ODU0OTYyBAEAAACeAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZSwgTVZDVmlzdWFsRGVzaWduZXIuRHNsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49ZTg0YzljZjQ5NDg1NDk2Ml1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAhTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZVtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB9NVkNWaXN1YWxEZXNpZ25lci5IVE1MQXR0cmlidXRlAgAAAAs=" classAttribute="" iDAttribute="" settings="AAEAAAD/////AQAAAAAAAAAEAQAAAOABU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlvbmFyeWAyW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlN0cmluZywgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAAB1ZlcnNpb24IQ29tcGFyZXIISGFzaFNpemUAAwAIkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0IAAAAAAkCAAAAAAAAAAQCAAAAkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0AAAAACw==" />
-          </sectionHasHead>
-          <sectionHasBody Id="1627a291-98a7-4e1d-b674-bc06bb267904">
-            <vDSectionBody Id="da1e908b-e4e5-4e3f-99cf-5ff8aa1f6423" moreHTMLAttributes="AAEAAAD/////AQAAAAAAAAAMAgAAAFhNVkNWaXN1YWxEZXNpZ25lci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1lODRjOWNmNDk0ODU0OTYyBAEAAACeAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZSwgTVZDVmlzdWFsRGVzaWduZXIuRHNsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49ZTg0YzljZjQ5NDg1NDk2Ml1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAhTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZVtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB9NVkNWaXN1YWxEZXNpZ25lci5IVE1MQXR0cmlidXRlAgAAAAs=" classAttribute="" iDAttribute="" settings="AAEAAAD/////AQAAAAAAAAAEAQAAAOABU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlvbmFyeWAyW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlN0cmluZywgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAAB1ZlcnNpb24IQ29tcGFyZXIISGFzaFNpemUAAwAIkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0IAAAAAAkCAAAAAAAAAAQCAAAAkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0AAAAACw==">
-              <children>
-                <widgetHasChildren Id="e73f8a47-05f2-434d-8193-e1b9f597c8d1">
-                  <vDButton Id="f49e0245-da12-4f2c-9b8f-12ef7a4cbd13" moreHTMLAttributes="AAEAAAD/////AQAAAAAAAAAMAgAAAFhNVkNWaXN1YWxEZXNpZ25lci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1lODRjOWNmNDk0ODU0OTYyBAEAAACeAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZSwgTVZDVmlzdWFsRGVzaWduZXIuRHNsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49ZTg0YzljZjQ5NDg1NDk2Ml1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAhTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZVtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB9NVkNWaXN1YWxEZXNpZ25lci5IVE1MQXR0cmlidXRlAgAAAAs=" widgetName="VDButton1" classAttribute="" iDAttribute="" settings="AAEAAAD/////AQAAAAAAAAAEAQAAAOABU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlvbmFyeWAyW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlN0cmluZywgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAAB1ZlcnNpb24IQ29tcGFyZXIISGFzaFNpemUAAwAIkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0IAAAAAAkCAAAAAAAAAAQCAAAAkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0AAAAACw==">
-                    <events>
-                      <widgetHasEvents Id="9e1cac2d-87e1-4266-9103-c664398b1b38">
-                        <vDEvent Id="f3c001a0-6b8a-435e-bc24-18466ce6e6a7" name="click" category="JS Event">
-                          <targetComponents>
-                            <r_Event2Component Id="6c9989cd-6653-463b-b6c5-3aee814a92ea">
-                              <vDClientActionMoniker Id="275760f1-5846-4742-81fe-f9ae2705d82f" />
-                            </r_Event2Component>
-                          </targetComponents>
-                        </vDEvent>
-                      </widgetHasEvents>
-                    </events>
-                  </vDButton>
-                </widgetHasChildren>
-                <widgetHasChildren Id="2adb64f2-cc0f-4b20-8e80-9eb6187b3146">
-                  <vDAlert Id="b020da4a-b71e-4c1d-a1b7-b70e47ea73ce" moreHTMLAttributes="AAEAAAD/////AQAAAAAAAAAMAgAAAFhNVkNWaXN1YWxEZXNpZ25lci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1lODRjOWNmNDk0ODU0OTYyBAEAAACeAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZSwgTVZDVmlzdWFsRGVzaWduZXIuRHNsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49ZTg0YzljZjQ5NDg1NDk2Ml1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAhTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZVtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB9NVkNWaXN1YWxEZXNpZ25lci5IVE1MQXR0cmlidXRlAgAAAAs=" widgetName="VDAlert1" classAttribute="" iDAttribute="" settings="AAEAAAD/////AQAAAAAAAAAEAQAAAOABU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlvbmFyeWAyW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlN0cmluZywgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAAB1ZlcnNpb24IQ29tcGFyZXIISGFzaFNpemUAAwAIkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0IAAAAAAkCAAAAAAAAAAQCAAAAkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0AAAAACw==">
-                    <title>
-                      <widgetHasTitle Id="fdb8b075-87ca-4430-823a-9d6ff92f486e">
-                        <vDWidgetTitle Id="d595dcd3-4f2b-48d7-aaf0-238c00335f24" />
-                      </widgetHasTitle>
-                    </title>
-                  </vDAlert>
-                </widgetHasChildren>
-                <widgetHasChildren Id="77eeb132-fb97-4608-b3e6-8dc368850163">
-                  <vDClientAction Id="275760f1-5846-4742-81fe-f9ae2705d82f" moreHTMLAttributes="AAEAAAD/////AQAAAAAAAAAMAgAAAFhNVkNWaXN1YWxEZXNpZ25lci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1lODRjOWNmNDk0ODU0OTYyBAEAAACeAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZSwgTVZDVmlzdWFsRGVzaWduZXIuRHNsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49ZTg0YzljZjQ5NDg1NDk2Ml1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAhTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZVtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB9NVkNWaXN1YWxEZXNpZ25lci5IVE1MQXR0cmlidXRlAgAAAAs=" classAttribute="" iDAttribute="" settings="AAEAAAD/////AQAAAAAAAAAEAQAAAOABU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlvbmFyeWAyW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlN0cmluZywgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAAB1ZlcnNpb24IQ29tcGFyZXIISGFzaFNpemUAAwAIkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0IAAAAAAkCAAAAAAAAAAQCAAAAkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0AAAAACw==" name="Show" category="JS Action">
-                    <actionJoints>
-                      <widgetHasActionJoints Id="98431d12-7023-442f-b787-aef0c58d4c55">
-                        <vDActionJoint Id="11f6548a-575f-4bc8-a0ec-4bae60f475bb" name="(Default)">
-                          <targetComponents>
-                            <r_ActionJoint2Component Id="21411021-7d0e-4707-ba82-ce7f137ec0ac">
-                              <vDAlertMoniker Id="b020da4a-b71e-4c1d-a1b7-b70e47ea73ce" />
-                            </r_ActionJoint2Component>
-                          </targetComponents>
-                        </vDActionJoint>
-                      </widgetHasActionJoints>
-                    </actionJoints>
-                    <actionData>
-                      <actionHasData Id="f07c6c8b-085d-46cd-8d8f-988f528c30bb">
-                        <vDActionDataMoniker Id="a2b930d8-de5d-43ec-b083-473aea1889b4" />
-                      </actionHasData>
-                    </actionData>
-                  </vDClientAction>
-                </widgetHasChildren>
-              </children>
-            </vDSectionBody>
-          </sectionHasBody>
-          <widgetHasChildren Id="ee053f13-f463-457a-8608-5b970528a61b">
-            <vDHoriSeparator Id="18cf0fe7-9759-4e15-b4ff-53200fa32add" moreHTMLAttributes="AAEAAAD/////AQAAAAAAAAAMAgAAAFhNVkNWaXN1YWxEZXNpZ25lci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1lODRjOWNmNDk0ODU0OTYyBAEAAACeAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZSwgTVZDVmlzdWFsRGVzaWduZXIuRHNsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49ZTg0YzljZjQ5NDg1NDk2Ml1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAhTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZVtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB9NVkNWaXN1YWxEZXNpZ25lci5IVE1MQXR0cmlidXRlAgAAAAs=" classAttribute="" iDAttribute="" settings="AAEAAAD/////AQAAAAAAAAAEAQAAAOABU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlvbmFyeWAyW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlN0cmluZywgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAAB1ZlcnNpb24IQ29tcGFyZXIISGFzaFNpemUAAwAIkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0IAAAAAAkCAAAAAAAAAAQCAAAAkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0AAAAACw==" topMargin="0" bottomMargin="0">
-              <topWidget>
-                <separatorRefersTopWidget Id="d4612535-68e3-47dc-9640-a69d6abe4a32">
-                  <vDSectionHeadMoniker Id="8e8f89c9-4881-45a9-9da7-e087c69fa9bf" />
-                </separatorRefersTopWidget>
-              </topWidget>
-              <bottomWidget>
-                <separatorRefersBottomWidget Id="c1b401ea-f610-4e3a-825f-6fa2664e1469">
-                  <vDSectionBodyMoniker Id="da1e908b-e4e5-4e3f-99cf-5ff8aa1f6423" />
-                </separatorRefersBottomWidget>
-              </bottomWidget>
-            </vDHoriSeparator>
-          </widgetHasChildren>
-        </children>
-        <title>
-          <widgetHasTitle Id="e4a4c667-f530-446e-8371-f42559053ab5">
-            <vDWidgetTitle Id="06343e16-795b-4122-95b4-c1d130d658e7" />
-          </widgetHasTitle>
-        </title>
-      </vDSection>
-    </widgetHasChildren>
-    <widgetHasChildren Id="ad114a1b-a337-4856-ae3e-c11f5a1ed3ee">
-      <vDClientAction Id="e1a4b40c-ddb6-46f2-9beb-de6f9d185f6a" moreHTMLAttributes="AAEAAAD/////AQAAAAAAAAAMAgAAAFhNVkNWaXN1YWxEZXNpZ25lci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1lODRjOWNmNDk0ODU0OTYyBAEAAACeAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZSwgTVZDVmlzdWFsRGVzaWduZXIuRHNsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49ZTg0YzljZjQ5NDg1NDk2Ml1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAhTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZVtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB9NVkNWaXN1YWxEZXNpZ25lci5IVE1MQXR0cmlidXRlAgAAAAs=" classAttribute="" iDAttribute="" settings="AAEAAAD/////AQAAAAAAAAAEAQAAAOABU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlvbmFyeWAyW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlN0cmluZywgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAAB1ZlcnNpb24IQ29tcGFyZXIISGFzaFNpemUAAwAIkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0IAAAAAAkCAAAAAAAAAAQCAAAAkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0AAAAACw==" name="Show" category="JS Action">
-        <actionJoints>
-          <widgetHasActionJoints Id="f4518e5c-f9a0-493e-b166-b87f2dd45671">
-            <vDActionJoint Id="0abd4754-5fd5-43e6-80ef-eccff708af7e" name="(Default)">
+        <events>
+          <widgetHasEvents Id="f3f44b5b-c78a-4ba6-851b-d030c26bbf3f">
+            <vDEvent Id="c2523828-4cd5-4476-91a1-1f2b0116279d" name="onYes" category="Confirm Event">
               <targetComponents>
-                <r_ActionJoint2Component Id="8315d3c2-60a7-445d-b351-28df75796c9c">
-                  <vDAlertMoniker Id="0e4f2d12-ccc3-47d3-9de9-b8e1de7c9f98" />
+                <r_Event2Component Id="f9f95580-c18e-46a1-ae18-23b6262aac59">
+                  <vDServerActionMoniker Id="edaf7193-72d2-43eb-97d7-15e67b7743b8" />
+                </r_Event2Component>
+              </targetComponents>
+            </vDEvent>
+          </widgetHasEvents>
+        </events>
+      </vDConfirmDialog>
+    </widgetHasChildren>
+    <widgetHasChildren Id="e727e673-4508-45d9-b3ce-1663ba534520">
+      <vDClientAction Id="aab26b8e-5f4b-45a1-8405-b75db821af65" moreHTMLAttributes="AAEAAAD/////AQAAAAAAAAAMAgAAAFhNVkNWaXN1YWxEZXNpZ25lci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1lODRjOWNmNDk0ODU0OTYyBAEAAACeAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZSwgTVZDVmlzdWFsRGVzaWduZXIuRHNsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49ZTg0YzljZjQ5NDg1NDk2Ml1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAhTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZVtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB9NVkNWaXN1YWxEZXNpZ25lci5IVE1MQXR0cmlidXRlAgAAAAs=" classAttribute="" iDAttribute="" settings="AAEAAAD/////AQAAAAAAAAAEAQAAAOABU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlvbmFyeWAyW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlN0cmluZywgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAAB1ZlcnNpb24IQ29tcGFyZXIISGFzaFNpemUAAwAIkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0IAAAAAAkCAAAAAAAAAAQCAAAAkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0AAAAACw==" name="Show" category="JS Action">
+        <actionJoints>
+          <widgetHasActionJoints Id="637bb0d9-5465-4c12-bde6-5917d020feb6">
+            <vDActionJoint Id="c9bf68b6-7d78-43e8-9331-03f678419740" name="(Default)">
+              <targetComponents>
+                <r_ActionJoint2Component Id="67dfd9c3-2d10-4739-b83a-e647685e1f40">
+                  <vDConfirmDialogMoniker Id="442d2b22-7c9b-4ba3-9392-d8174067a03b" />
                 </r_ActionJoint2Component>
               </targetComponents>
             </vDActionJoint>
           </widgetHasActionJoints>
         </actionJoints>
         <actionData>
-          <actionHasData Id="f334a1a3-3d98-440e-aaea-fc0efffb26dd">
-            <vDActionDataMoniker Id="eb2f6760-2321-457a-8d3d-85b9bd36c1fd" />
+          <actionHasData Id="f5497e3a-2ee8-4bfe-ad3a-7ded59931aa9">
+            <vDActionDataMoniker Id="8fbd3fe2-98d6-44e3-99a5-cb4dddb4c8f2" />
+          </actionHasData>
+        </actionData>
+      </vDClientAction>
+    </widgetHasChildren>
+    <widgetHasChildren Id="ae369d6b-4f99-449c-b52a-dcad81374d26">
+      <vDPartialViewResult Id="c830e036-2595-497a-af1f-9e31b80441cf" moreHTMLAttributes="AAEAAAD/////AQAAAAAAAAAMAgAAAFhNVkNWaXN1YWxEZXNpZ25lci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1lODRjOWNmNDk0ODU0OTYyBAEAAACeAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZSwgTVZDVmlzdWFsRGVzaWduZXIuRHNsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49ZTg0YzljZjQ5NDg1NDk2Ml1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAhTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZVtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB9NVkNWaXN1YWxEZXNpZ25lci5IVE1MQXR0cmlidXRlAgAAAAs=" widgetName="VDPartialViewResult1" classAttribute="" iDAttribute="" settings="AAEAAAD/////AQAAAAAAAAAEAQAAAOABU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlvbmFyeWAyW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlN0cmluZywgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAAB1ZlcnNpb24IQ29tcGFyZXIISGFzaFNpemUAAwAIkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0IAAAAAAkCAAAAAAAAAAQCAAAAkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0AAAAACw==">
+        <title>
+          <widgetHasTitle Id="57755f05-3f63-41da-b219-a08c62fa8a22">
+            <vDWidgetTitle Id="8de3006d-ccb9-49c4-b652-ffa87b85d34f" />
+          </widgetHasTitle>
+        </title>
+        <events>
+          <widgetHasEvents Id="2ead1a45-b1d0-4449-8da5-848df4ae4e28">
+            <vDPseudoEvent Id="0452100e-ea66-4890-a3b1-6a0bd07a61c8" name="THEN" category="Pseudo">
+              <targetComponents>
+                <r_Event2Component Id="2ce32e82-fbd5-40c0-8231-e579bf2ee3a8">
+                  <vDClientActionMoniker Id="2fb74979-1c6a-4f4f-9bf4-3ab00a1b8cc4" />
+                </r_Event2Component>
+              </targetComponents>
+            </vDPseudoEvent>
+          </widgetHasEvents>
+        </events>
+      </vDPartialViewResult>
+    </widgetHasChildren>
+    <widgetHasChildren Id="549c0bd3-7186-4a79-ad87-a57452414ac0">
+      <vDServerAction Id="edaf7193-72d2-43eb-97d7-15e67b7743b8" moreHTMLAttributes="AAEAAAD/////AQAAAAAAAAAMAgAAAFhNVkNWaXN1YWxEZXNpZ25lci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1lODRjOWNmNDk0ODU0OTYyBAEAAACeAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZSwgTVZDVmlzdWFsRGVzaWduZXIuRHNsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49ZTg0YzljZjQ5NDg1NDk2Ml1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAhTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZVtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB9NVkNWaXN1YWxEZXNpZ25lci5IVE1MQXR0cmlidXRlAgAAAAs=" classAttribute="" iDAttribute="" settings="AAEAAAD/////AQAAAAAAAAAEAQAAAOABU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlvbmFyeWAyW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlN0cmluZywgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAAB1ZlcnNpb24IQ29tcGFyZXIISGFzaFNpemUAAwAIkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0IAAAAAAkCAAAAAAAAAAQCAAAAkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0AAAAACw==" name="DeleteData">
+        <actionJoints>
+          <widgetHasActionJoints Id="6ae31e23-6fc8-479e-a33a-dc423976cd53">
+            <vDActionJoint Id="6c4bd699-9bce-491d-b9fe-53d4737c02e9" name="Result" category="Server">
+              <targetComponents>
+                <r_ActionJoint2Component Id="ef4527ee-89af-4c14-bd5d-7bfe48e26134">
+                  <vDPartialViewResultMoniker Id="c830e036-2595-497a-af1f-9e31b80441cf" />
+                </r_ActionJoint2Component>
+              </targetComponents>
+            </vDActionJoint>
+          </widgetHasActionJoints>
+        </actionJoints>
+        <actionData>
+          <actionHasData Id="00d52693-25ac-4a94-8fbb-7a8d98fd426a">
+            <vDActionDataMoniker Id="c3eae78a-116c-4afa-81ad-6906a47f2d5c" />
+          </actionHasData>
+        </actionData>
+      </vDServerAction>
+    </widgetHasChildren>
+    <widgetHasChildren Id="24abf21b-17a1-4913-8ed6-b97be86c92c6">
+      <vDClientAction Id="2fb74979-1c6a-4f4f-9bf4-3ab00a1b8cc4" moreHTMLAttributes="AAEAAAD/////AQAAAAAAAAAMAgAAAFhNVkNWaXN1YWxEZXNpZ25lci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1lODRjOWNmNDk0ODU0OTYyBAEAAACeAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZSwgTVZDVmlzdWFsRGVzaWduZXIuRHNsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49ZTg0YzljZjQ5NDg1NDk2Ml1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAhTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZVtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB9NVkNWaXN1YWxEZXNpZ25lci5IVE1MQXR0cmlidXRlAgAAAAs=" classAttribute="" iDAttribute="" settings="AAEAAAD/////AQAAAAAAAAAEAQAAAOABU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlvbmFyeWAyW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlN0cmluZywgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAAB1ZlcnNpb24IQ29tcGFyZXIISGFzaFNpemUAAwAIkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0IAAAAAAkCAAAAAAAAAAQCAAAAkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0AAAAACw==" name="Replace" category="JS Action">
+        <actionJoints>
+          <widgetHasActionJoints Id="8a101ab2-ea7f-455b-8c73-d8ed713f1262">
+            <vDActionJoint Id="29f5098a-6906-4758-b607-cc23302ae1ac" name="(Default)">
+              <targetComponents>
+                <r_ActionJoint2Component Id="5256d620-9299-44af-8ad3-478819d8b52f">
+                  <vDVertContainerMoniker Id="1ffaa0e2-9013-4a01-b79b-1e96ebe8db67" />
+                </r_ActionJoint2Component>
+              </targetComponents>
+            </vDActionJoint>
+          </widgetHasActionJoints>
+        </actionJoints>
+        <actionData>
+          <actionHasData Id="945d5ad4-497c-4e98-a722-42f03f5dff26">
+            <vDActionDataMoniker Id="2204e36f-2924-46fe-be2a-992092c6aeb9" />
           </actionHasData>
         </actionData>
       </vDClientAction>
@@ -823,6 +816,60 @@
             <vDActionData Id="a2b930d8-de5d-43ec-b083-473aea1889b4" name="{}">
               <meta>
                 <concreteTypeRefersMeta Id="e45c53e1-c989-4d39-8450-4bd369855ae3">
+                  <vDCustomTypeMoniker Id="9d4bce52-b8b6-4e83-b473-7fd0e0da4be9" />
+                </concreteTypeRefersMeta>
+              </meta>
+            </vDActionData>
+          </modelStoreHasTypeInsts>
+          <modelStoreHasTypeInsts Id="2b31dcd8-c12f-4ced-a72f-0c417c6b1390">
+            <vDActionData Id="a8b34aa4-ccfc-45be-884d-ae1251fc4457" name="{}">
+              <meta>
+                <concreteTypeRefersMeta Id="9f412810-efc8-456e-bca4-001c877e7afb">
+                  <vDCustomTypeMoniker Id="9d4bce52-b8b6-4e83-b473-7fd0e0da4be9" />
+                </concreteTypeRefersMeta>
+              </meta>
+            </vDActionData>
+          </modelStoreHasTypeInsts>
+          <modelStoreHasTypeInsts Id="78314d78-bc2a-4003-b454-7539f42bf1f2">
+            <vDActionData Id="8fbd3fe2-98d6-44e3-99a5-cb4dddb4c8f2" name="{}">
+              <meta>
+                <concreteTypeRefersMeta Id="af9f217e-7a6f-4e3f-834b-21ac13cf89d8">
+                  <vDCustomTypeMoniker Id="9d4bce52-b8b6-4e83-b473-7fd0e0da4be9" />
+                </concreteTypeRefersMeta>
+              </meta>
+            </vDActionData>
+          </modelStoreHasTypeInsts>
+          <modelStoreHasTypeInsts Id="9bec58fc-fee1-408e-ab28-acf07fae9a39">
+            <vDActionData Id="c9876bcb-52db-42dd-8616-fb2bc18867b9" name="{}">
+              <meta>
+                <concreteTypeRefersMeta Id="afa47386-b35a-4b88-9c4c-1e823c33c6f5">
+                  <vDCustomTypeMoniker Id="9d4bce52-b8b6-4e83-b473-7fd0e0da4be9" />
+                </concreteTypeRefersMeta>
+              </meta>
+            </vDActionData>
+          </modelStoreHasTypeInsts>
+          <modelStoreHasTypeInsts Id="2d57347f-3546-4800-9348-b83fa51281b6">
+            <vDActionData Id="2b3eb257-aff0-4721-9b75-45f3b9703cc4" name="{}">
+              <meta>
+                <concreteTypeRefersMeta Id="66a80d87-cc91-4547-b1bd-daf74232090d">
+                  <vDCustomTypeMoniker Id="9d4bce52-b8b6-4e83-b473-7fd0e0da4be9" />
+                </concreteTypeRefersMeta>
+              </meta>
+            </vDActionData>
+          </modelStoreHasTypeInsts>
+          <modelStoreHasTypeInsts Id="2810507d-3305-4af3-b4ec-6b1365c222d4">
+            <vDActionData Id="c3eae78a-116c-4afa-81ad-6906a47f2d5c" name="{}">
+              <meta>
+                <concreteTypeRefersMeta Id="0c1b2097-e4d5-4f3a-9949-480a4cc85503">
+                  <vDCustomTypeMoniker Id="9d4bce52-b8b6-4e83-b473-7fd0e0da4be9" />
+                </concreteTypeRefersMeta>
+              </meta>
+            </vDActionData>
+          </modelStoreHasTypeInsts>
+          <modelStoreHasTypeInsts Id="97ab85d2-8eca-4ba8-8438-856a9d392767">
+            <vDActionData Id="2204e36f-2924-46fe-be2a-992092c6aeb9" name="{}">
+              <meta>
+                <concreteTypeRefersMeta Id="6785cd11-64e5-4ebf-b5f8-8b6f4d46c4ba">
                   <vDCustomTypeMoniker Id="9d4bce52-b8b6-4e83-b473-7fd0e0da4be9" />
                 </concreteTypeRefersMeta>
               </meta>

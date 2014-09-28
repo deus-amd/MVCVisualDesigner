@@ -16,6 +16,8 @@ namespace MVCVisualDesigner
         {
             return string.Empty;
         }
+
+        public override bool CanBeTargetOfServerAction { get { return true; } }
     }
 
     public partial class VDPartialViewResult

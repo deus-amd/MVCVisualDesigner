@@ -111,6 +111,7 @@ namespace MVCVisualDesigner
                 return this;
             }
 
+            private List<IActionJointInfo> m_serverActionJoints = null;
             public NewActionHandler SetTarget(VDViewComponent target)
             {
                 m_txtTarget.Text = string.Empty;
@@ -127,7 +128,14 @@ namespace MVCVisualDesigner
                 }
 
                 m_chkServer.Checked = false;
+                m_chkServer.Enabled = target.CanBeTargetOfServerAction;
 
+                VDModelStore ms = target.GetModelStore();
+                if (ms != null)
+                    m_serverActionJoints = ms.GetSupportedServerActionJoints();
+                else
+                    m_serverActionJoints = null;
+                
                 return this;
             }
 
@@ -139,7 +147,12 @@ namespace MVCVisualDesigner
                 m_cmbJoint.Items.Clear();
                 if (m_chkServer.Checked)
                 {
-                    //todo: joints for server action
+                    // set joints for server action
+                    if (m_serverActionJoints != null)
+                        m_cmbJoint.Items.AddRange(m_serverActionJoints.ToArray());
+
+                    if (m_cmbJoint.Items.Count > 0)
+                        m_cmbJoint.SelectedIndex = 0;
                 }
                 else
                 {

@@ -161,6 +161,23 @@ namespace MVCVisualDesigner
                 this.Category = m_actionJointInfo.Category;
             }
         }
+
+        public List<VDActionBase> GetActions()
+        {
+            List<VDActionBase> actions = new List<VDActionBase>();
+            if (this.Widget is VDActionBase)
+            {
+                actions.Add((VDActionBase)this.Widget);
+            }
+            else
+            {
+                foreach(VDActionJoint acj in this.Widget.SourceActionJoints)
+                {
+                    actions.AddRange(acj.GetActions());
+                }
+            }
+            return actions;
+        }
     }
 
     public static partial class EventBuilder
@@ -175,7 +192,10 @@ namespace MVCVisualDesigner
 
         private static bool CanAcceptVDViewComponentAndVDViewComponentAsSourceAndTarget(VDViewComponent sourceComponent, VDViewComponent targetComponent)
         {
-            return true;
+            if (sourceComponent is VDServerAction && !targetComponent.CanBeTargetOfServerAction)
+                return false;
+            else
+                return true;
         }
 
         private static bool CanAcceptVDEventBaseAndVDViewComponentAsSourceAndTarget(VDEventBase sourceEvent, VDViewComponent targetComponent)
@@ -185,7 +205,10 @@ namespace MVCVisualDesigner
 
         private static bool CanAcceptVDActionJointAndVDViewComponentAsSourceAndTarget(VDActionJoint sourceActionJoint, VDViewComponent targetComponent)
         {
-            return true;
+            if (sourceActionJoint.GetActions().Find(act => act is VDServerAction) != null && !targetComponent.CanBeTargetOfServerAction)
+                return false;
+            else
+                return true;
         }
 
         private static ElementLink ConnectSourceToTarget(ModelElement source, ModelElement target)

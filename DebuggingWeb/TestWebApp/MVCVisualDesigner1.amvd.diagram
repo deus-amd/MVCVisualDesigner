@@ -1,94 +1,94 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<vDDiagram dslVersion="0.0.3.0" Id="174422fc-ae3d-491c-98e6-4828439dbf36" absoluteBounds="0, 0, 11.96, 8.5" name="MVCVisualDesigner1">
+<vDDiagram dslVersion="0.0.3.0" Id="174422fc-ae3d-491c-98e6-4828439dbf36" absoluteBounds="0, 0, 11.71, 8.5" name="MVCVisualDesigner1">
   <vDViewMoniker Id="85bf1426-1820-4220-9ab3-5cbfc4864b6c" />
   <nestedChildShapes>
-    <vDTableShape Id="efb4c455-1bce-477a-b974-728ce23ac0fa" absoluteBounds="2.44, 0.53, 3.3700000000000006, 2.0999999999999996" disabled="false" isPinned="false" relayoutChildren="false">
+    <vDTableShape Id="efb4c455-1bce-477a-b974-728ce23ac0fa" absoluteBounds="0.5, 0.5, 3.37, 2.29" disabled="false" isPinned="false" relayoutChildren="false">
       <vDTableMoniker Id="6ad07f69-1f34-4a56-bbee-e7e984ef6167" />
       <relativeChildShapes>
-        <vDWidgetTitlePort Id="754f59c4-440d-4978-99c9-867c22f46391" absoluteBounds="2.44, 0.36000000044703484, 0.72241616845130907, 0.15">
+        <vDWidgetTitlePort Id="754f59c4-440d-4978-99c9-867c22f46391" absoluteBounds="0.5, 0.33000000044703481, 0.72241616845130907, 0.15">
           <vDWidgetTitleMoniker Id="f935fd4c-517b-4d86-b175-b0705c5ccd5e" />
         </vDWidgetTitlePort>
       </relativeChildShapes>
       <nestedChildShapes>
-        <vDHoriContainerShape Id="8ea7e115-a34b-4731-80b8-20f188b1ca8f" absoluteBounds="2.44, 0.53, 3.3699999999999997, 0.1" disabled="false" isPinned="false" relayoutChildren="false">
+        <vDHoriContainerShape Id="8ea7e115-a34b-4731-80b8-20f188b1ca8f" absoluteBounds="0.5, 0.5, 3.3699999999999997, 0.1" disabled="false" isPinned="false" relayoutChildren="false">
           <vDHoriContainerMoniker Id="3445f379-6bc4-4e75-a3c0-2152d1af9042" />
           <nestedChildShapes>
-            <vDTableColTitleShape Id="145538f8-4f8b-4b2e-a663-69563ccb0ed0" absoluteBounds="2.54, 0.53, 0.70000000000000007, 0.1" disabled="false" isPinned="false" relayoutChildren="false">
+            <vDTableColTitleShape Id="145538f8-4f8b-4b2e-a663-69563ccb0ed0" absoluteBounds="0.6, 0.5, 0.70000000000000007, 0.1" disabled="false" isPinned="false" relayoutChildren="false">
               <vDTableColTitleMoniker Id="302611c1-5333-497a-a142-d94a8b386d82" />
             </vDTableColTitleShape>
-            <vDTableColTitleShape Id="64378a41-8607-44f0-9363-e9950794118d" absoluteBounds="3.24, 0.53, 0.7, 0.1" disabled="false" isPinned="false" relayoutChildren="false">
+            <vDTableColTitleShape Id="64378a41-8607-44f0-9363-e9950794118d" absoluteBounds="1.3, 0.5, 0.7, 0.1" disabled="false" isPinned="false" relayoutChildren="false">
               <vDTableColTitleMoniker Id="c9939ccf-b9e6-4cae-8e46-e6dadcbe52b3" />
             </vDTableColTitleShape>
-            <vDTableColTitleShape Id="d2a217ab-a83b-47ff-b4a3-68ace0bfb429" absoluteBounds="3.9400000000000004, 0.53, 0.7, 0.1" disabled="false" isPinned="false" relayoutChildren="false">
+            <vDTableColTitleShape Id="d2a217ab-a83b-47ff-b4a3-68ace0bfb429" absoluteBounds="2, 0.5, 0.7, 0.1" disabled="false" isPinned="false" relayoutChildren="false">
               <vDTableColTitleMoniker Id="fa024bd6-a35f-43ef-b9f7-c2be1fdeaeb2" />
             </vDTableColTitleShape>
-            <vDTableColTitleShape Id="5272f28d-9eac-4516-aa4a-63e433922914" absoluteBounds="4.6400000000000006, 0.53, 0.7, 0.1" disabled="false" isPinned="false" relayoutChildren="false">
+            <vDTableColTitleShape Id="5272f28d-9eac-4516-aa4a-63e433922914" absoluteBounds="2.7, 0.5, 0.7, 0.1" disabled="false" isPinned="false" relayoutChildren="false">
               <vDTableColTitleMoniker Id="9108910c-326f-4bf0-b12b-371992f533c0" />
             </vDTableColTitleShape>
           </nestedChildShapes>
         </vDHoriContainerShape>
-        <vDVertContainerShape Id="0d7be330-cf0a-4d99-843f-4ddd61dce50f" absoluteBounds="2.44, 0.63, 3.3699999999999997, 0.48" disabled="false" isPinned="false" relayoutChildren="false">
+        <vDVertContainerShape Id="0d7be330-cf0a-4d99-843f-4ddd61dce50f" absoluteBounds="0.5, 0.6, 3.3699999999999997, 0.48" disabled="false" isPinned="false" relayoutChildren="false">
           <vDVertContainerMoniker Id="5e85164a-8bfd-4564-8d1e-ca02417c1f80" />
           <nestedChildShapes>
-            <vDTableRowShape Id="382ee71e-e140-4146-b590-c136e50ba0d1" absoluteBounds="2.44, 0.7, 3.3699999999999997, 0.35" disabled="false" isPinned="false" relayoutChildren="false">
+            <vDTableRowShape Id="382ee71e-e140-4146-b590-c136e50ba0d1" absoluteBounds="0.5, 0.66999999999999993, 3.3699999999999997, 0.35" disabled="false" isPinned="false" relayoutChildren="false">
               <vDTableRowMoniker Id="ad4ec36a-92c4-4d95-86b5-6be527d0007c" />
               <nestedChildShapes>
-                <vDTableRowTitleShape Id="b79d39af-7467-4bda-91f3-afe1df29f8d7" absoluteBounds="2.44, 0.7, 0.1, 0.3" disabled="false" isPinned="false" relayoutChildren="false">
+                <vDTableRowTitleShape Id="b79d39af-7467-4bda-91f3-afe1df29f8d7" absoluteBounds="0.5, 0.66999999999999993, 0.1, 0.3" disabled="false" isPinned="false" relayoutChildren="false">
                   <vDTableRowTitleMoniker Id="ab464118-84a0-4f83-a110-9e6d1d6025e5" />
                 </vDTableRowTitleShape>
-                <vDTableCellShape Id="652c0c55-bcba-4767-9aed-d03a26c3f6fc" absoluteBounds="2.54, 0.7, 0.70000000000000007, 0.3" disabled="false" isPinned="false" relayoutChildren="false" colSpan="1" rowSpan="1">
+                <vDTableCellShape Id="652c0c55-bcba-4767-9aed-d03a26c3f6fc" absoluteBounds="0.6, 0.66999999999999993, 0.70000000000000007, 0.3" disabled="false" isPinned="false" relayoutChildren="false" colSpan="1" rowSpan="1">
                   <vDTableCellMoniker Id="0a70361b-2dd7-4cc2-b6dd-d14d84ca6e05" />
                 </vDTableCellShape>
-                <vDTableCellShape Id="f1ee97d5-d5cc-4481-a0b8-f3ce8897c4de" absoluteBounds="3.24, 0.7, 0.7, 0.3" disabled="false" isPinned="false" relayoutChildren="false" colSpan="1" rowSpan="1">
+                <vDTableCellShape Id="f1ee97d5-d5cc-4481-a0b8-f3ce8897c4de" absoluteBounds="1.3, 0.66999999999999993, 0.7, 0.3" disabled="false" isPinned="false" relayoutChildren="false" colSpan="1" rowSpan="1">
                   <vDTableCellMoniker Id="b12c0d8f-6eed-4677-95b7-9574ace2e904" />
                 </vDTableCellShape>
-                <vDTableCellShape Id="4316dc25-5443-4da2-913d-1b6cf6e07ebb" absoluteBounds="3.9400000000000004, 0.7, 0.7, 0.3" disabled="false" isPinned="false" relayoutChildren="false" colSpan="1" rowSpan="1">
+                <vDTableCellShape Id="4316dc25-5443-4da2-913d-1b6cf6e07ebb" absoluteBounds="2, 0.66999999999999993, 0.7, 0.3" disabled="false" isPinned="false" relayoutChildren="false" colSpan="1" rowSpan="1">
                   <vDTableCellMoniker Id="e4a589d2-19dc-4e7d-9e72-e7603516688d" />
                 </vDTableCellShape>
-                <vDTableCellShape Id="1056df3e-d814-43c3-a480-0fd95b62bcd3" absoluteBounds="4.6400000000000006, 0.7, 0.7, 0.3" disabled="false" isPinned="false" relayoutChildren="false" colSpan="1" rowSpan="1">
+                <vDTableCellShape Id="1056df3e-d814-43c3-a480-0fd95b62bcd3" absoluteBounds="2.7, 0.66999999999999993, 0.7, 0.3" disabled="false" isPinned="false" relayoutChildren="false" colSpan="1" rowSpan="1">
                   <vDTableCellMoniker Id="d7e5285e-e539-4aa0-97ca-df54b797b85d" />
                 </vDTableCellShape>
               </nestedChildShapes>
             </vDTableRowShape>
           </nestedChildShapes>
         </vDVertContainerShape>
-        <vDVertContainerShape Id="520dbd85-dae4-4375-952c-1c38775c06e8" absoluteBounds="2.44, 1.1600000000000001, 3.3699999999999997, 1.2600000000000002" disabled="false" isPinned="false" relayoutChildren="false">
+        <vDVertContainerShape Id="520dbd85-dae4-4375-952c-1c38775c06e8" absoluteBounds="0.5, 1.13, 3.37, 1.4400000000000002" disabled="false" isPinned="false" relayoutChildren="false">
           <vDVertContainerMoniker Id="1ffaa0e2-9013-4a01-b79b-1e96ebe8db67" />
           <nestedChildShapes>
-            <vDCodeSnippetShape Id="e47e5d53-e632-4092-86bc-1daf06f08e98" absoluteBounds="2.44, 1.3900000000000001, 3.3699999999999997, 0.92999999999999994" disabled="false" isPinned="false" relayoutChildren="false">
+            <vDCodeSnippetShape Id="e47e5d53-e632-4092-86bc-1daf06f08e98" absoluteBounds="0.5, 1.3599999999999999, 3.3699999999999997, 0.92999999999999994" disabled="false" isPinned="false" relayoutChildren="false">
               <vDCodeSnippetMoniker Id="86e6559c-3ea4-44f7-ad3b-89bbb31e2f22" />
               <relativeChildShapes>
-                <vDWidgetTitlePort Id="14d32074-20f9-4767-ba00-ae9b95f759a0" absoluteBounds="2.44, 1.2200000004470351, 1.1660806894302367, 0.15">
+                <vDWidgetTitlePort Id="14d32074-20f9-4767-ba00-ae9b95f759a0" absoluteBounds="0.5, 1.1900000004470348, 1.1660806894302367, 0.15">
                   <vDWidgetTitleMoniker Id="73789f9c-3b86-48a8-bfdc-801e0452a787" />
                 </vDWidgetTitlePort>
               </relativeChildShapes>
               <nestedChildShapes>
-                <vDCodeSnippetBodyShape Id="edb43581-febb-47a4-acb1-5705fef9815b" absoluteBounds="2.44, 1.6994618022441865, 3.3699999999999997, 0.45886286377906793" disabled="false" isPinned="true" relayoutChildren="false">
+                <vDCodeSnippetBodyShape Id="edb43581-febb-47a4-acb1-5705fef9815b" absoluteBounds="0.5, 1.6694618022441863, 3.3699999999999997, 0.45886286377906793" disabled="false" isPinned="true" relayoutChildren="false">
                   <vDCodeSnippetBodyMoniker Id="f8c151c7-076c-4f9b-9b09-df234f0b3f23" />
                   <nestedChildShapes>
-                    <vDTableRowShape Id="08b653ac-cf4b-47f5-aa77-7c920db7eb64" absoluteBounds="2.44, 1.7594618022441866, 3.3699999999999997, 0.35000000000000003" disabled="false" isPinned="false" relayoutChildren="false">
+                    <vDTableRowShape Id="08b653ac-cf4b-47f5-aa77-7c920db7eb64" absoluteBounds="0.5, 1.7294618022441863, 3.3699999999999997, 0.35000000000000003" disabled="false" isPinned="false" relayoutChildren="false">
                       <vDTableRowMoniker Id="6b6b9c90-d554-459b-830d-0480b2a4e840" />
                       <nestedChildShapes>
-                        <vDTableRowTitleShape Id="bb205062-7f93-47d0-8c20-a5c22ad5ef49" absoluteBounds="2.44, 1.7594618022441866, 0.1, 0.3" disabled="false" isPinned="false" relayoutChildren="false">
+                        <vDTableRowTitleShape Id="bb205062-7f93-47d0-8c20-a5c22ad5ef49" absoluteBounds="0.5, 1.7294618022441863, 0.1, 0.3" disabled="false" isPinned="false" relayoutChildren="false">
                           <vDTableRowTitleMoniker Id="c02904a1-7eb7-4cde-9403-15d9b6fe13a0" />
                         </vDTableRowTitleShape>
-                        <vDTableCellShape Id="bde0a065-f024-4c7a-82e5-b714251a6ce3" absoluteBounds="2.54, 1.7594618022441866, 0.70000000000000007, 0.3" disabled="false" isPinned="false" relayoutChildren="false" colSpan="1" rowSpan="1">
+                        <vDTableCellShape Id="bde0a065-f024-4c7a-82e5-b714251a6ce3" absoluteBounds="0.6, 1.7294618022441863, 0.70000000000000007, 0.3" disabled="false" isPinned="false" relayoutChildren="false" colSpan="1" rowSpan="1">
                           <vDTableCellMoniker Id="1ef06e03-58b6-4b7e-965a-f309eb6e4864" />
                         </vDTableCellShape>
-                        <vDTableCellShape Id="01b9804a-2521-48f2-ae52-2c8ebbe67a33" absoluteBounds="3.24, 1.7594618022441866, 0.7, 0.3" disabled="false" isPinned="false" relayoutChildren="false" colSpan="1" rowSpan="1">
+                        <vDTableCellShape Id="01b9804a-2521-48f2-ae52-2c8ebbe67a33" absoluteBounds="1.3, 1.7294618022441863, 0.7, 0.3" disabled="false" isPinned="false" relayoutChildren="false" colSpan="1" rowSpan="1">
                           <vDTableCellMoniker Id="88e65ff7-ca9e-4302-b1de-144f9767ace0" />
                         </vDTableCellShape>
-                        <vDTableCellShape Id="5110bad3-aac7-4c89-a7a7-e44ebf14295c" absoluteBounds="3.9400000000000004, 1.7594618022441866, 0.7, 0.3" disabled="false" isPinned="false" relayoutChildren="false" colSpan="1" rowSpan="1">
+                        <vDTableCellShape Id="5110bad3-aac7-4c89-a7a7-e44ebf14295c" absoluteBounds="2, 1.7294618022441863, 0.7, 0.3" disabled="false" isPinned="false" relayoutChildren="false" colSpan="1" rowSpan="1">
                           <vDTableCellMoniker Id="8ffe4e7b-ff0e-411c-a8d4-a913655a0c74" />
                         </vDTableCellShape>
-                        <vDTableCellShape Id="3a2ea179-6724-4d34-8ae4-2d4a94514731" absoluteBounds="4.6400000000000006, 1.7594618022441866, 0.7, 0.3" disabled="false" isPinned="false" relayoutChildren="false" colSpan="1" rowSpan="1">
+                        <vDTableCellShape Id="3a2ea179-6724-4d34-8ae4-2d4a94514731" absoluteBounds="2.7, 1.7294618022441863, 0.7, 0.3" disabled="false" isPinned="false" relayoutChildren="false" colSpan="1" rowSpan="1">
                           <vDTableCellMoniker Id="480ab97f-c710-45b9-9488-cb78dc6bb741" />
                           <nestedChildShapes>
-                            <vDButtonShape Id="c32731e7-5d4c-450f-bebd-7ba46d56a038" absoluteBounds="4.7200000000000006, 1.8394618022441867, 0.49999999999999994, 0.15" disabled="false" isPinned="false" relayoutChildren="false">
+                            <vDButtonShape Id="c32731e7-5d4c-450f-bebd-7ba46d56a038" absoluteBounds="2.7800000000000002, 1.8194618022441864, 0.49999999999999994, 0.15" disabled="false" isPinned="false" relayoutChildren="false">
                               <vDButtonMoniker Id="98b3b1a1-3afa-4f11-a966-77f303a1c6c6" />
                               <relativeChildShapes>
-                                <vDEventPort Id="08513cf6-5dfa-48f3-8feb-b4003d3c4e91" absoluteBounds="5.1800000000000006, 1.9094618022441867, 0.08, 0.08">
-                                  <vDEventMoniker Id="6154769c-aeea-4c35-b373-8312307cfa5e" />
+                                <vDEventPort Id="977f8d30-d433-4ab8-ad81-dc13ba44757d" absoluteBounds="3.24, 1.8569618022441865, 0.08, 0.08">
+                                  <vDEventMoniker Id="90a7cc7d-b9a2-41d1-b2df-c94bca9866d4" />
                                   <relativeChildShapes />
                                 </vDEventPort>
                               </relativeChildShapes>
@@ -103,107 +103,108 @@
             </vDCodeSnippetShape>
           </nestedChildShapes>
         </vDVertContainerShape>
-        <vDVertContainerShape Id="4a486047-e656-4bf3-a13c-73ee02a9b43a" absoluteBounds="2.44, 2.4699999999999998, 3.3699999999999997, 0.1599999999999997" disabled="false" isPinned="false" relayoutChildren="false">
+        <vDVertContainerShape Id="4a486047-e656-4bf3-a13c-73ee02a9b43a" absoluteBounds="0.5, 2.62, 3.37, 0.16999999999999993" disabled="false" isPinned="false" relayoutChildren="false">
           <vDVertContainerMoniker Id="7f34e27e-e965-408b-8811-5549c11a29e9" />
         </vDVertContainerShape>
-        <vDHoriSeparatorShape Id="a2d9f296-37dc-4750-84e3-45a09f3dcf8d" absoluteBounds="2.44, 1.1099999999999999, 3.37, 0.049999999999999822" disabled="false" isPinned="false" relayoutChildren="false">
+        <vDHoriSeparatorShape Id="a2d9f296-37dc-4750-84e3-45a09f3dcf8d" absoluteBounds="0.5, 1.0799999999999999, 3.37, 0.049999999999999822" disabled="false" isPinned="false" relayoutChildren="false">
           <vDHoriSeparatorMoniker Id="5633be4f-1109-4e1b-b715-49fb7e86ab21" />
         </vDHoriSeparatorShape>
-        <vDHoriSeparatorShape Id="9166f9c0-6258-468f-b92b-fc5e64d3adb8" absoluteBounds="2.44, 2.4200000000000004, 3.37, 0.050000000000000266" disabled="false" isPinned="false" relayoutChildren="false">
+        <vDHoriSeparatorShape Id="9166f9c0-6258-468f-b92b-fc5e64d3adb8" absoluteBounds="0.5, 2.57, 3.37, 0.050000000000000266" disabled="false" isPinned="false" relayoutChildren="false">
           <vDHoriSeparatorMoniker Id="e256ed51-d2d8-4c5c-a8b6-391bf44313e3" />
         </vDHoriSeparatorShape>
       </nestedChildShapes>
     </vDTableShape>
-    <vDAlertShape Id="ce843308-d5c9-49a2-af6c-3c4813383e75" absoluteBounds="10.21, 1.16, 1.5, 1.0000000000000002" disabled="false" isPinned="false" relayoutChildren="false">
-      <vDAlertMoniker Id="0e4f2d12-ccc3-47d3-9de9-b8e1de7c9f98" />
+    <vDConfirmDialogShape Id="4ed610c3-9acb-44c6-900a-56f1b2156f3d" absoluteBounds="5.25, 1.62, 1.7599999999999998, 0.39999999999999991" disabled="false" isPinned="false" relayoutChildren="false">
+      <vDConfirmDialogMoniker Id="442d2b22-7c9b-4ba3-9392-d8174067a03b" />
       <relativeChildShapes>
-        <vDWidgetTitlePort Id="9b6a0c6b-0663-47e1-8972-67b4f71eb498" absoluteBounds="10.21, 0.99000000044703473, 0.68970132470130907, 0.15">
-          <vDWidgetTitleMoniker Id="ad674d7b-cf2a-4ee3-b3e8-80cb12f7b3a8" />
+        <vDWidgetTitlePort Id="f6a59596-8441-4e04-b0a4-159610de2b2c" absoluteBounds="5.25, 1.450000000447035, 1.2794229745864867, 0.15">
+          <vDWidgetTitleMoniker Id="92fa7401-478a-4400-b6ef-9fd2a4bb6083" />
         </vDWidgetTitlePort>
+        <vDEventPort Id="9e1eb027-36b8-42ff-83fd-381e1d07e983" absoluteBounds="6.97, 1.78, 0.08, 0.08">
+          <vDEventMoniker Id="c2523828-4cd5-4476-91a1-1f2b0116279d" />
+          <relativeChildShapes />
+        </vDEventPort>
       </relativeChildShapes>
-    </vDAlertShape>
-    <vDSectionShape Id="b6f07117-c0be-45d1-a05e-6b64e6b3219d" absoluteBounds="4.82, 3.5, 5, 3" disabled="false" isPinned="false" relayoutChildren="false">
-      <vDSectionMoniker Id="5fe912a0-2423-4d1a-b44f-07a6b3fbb4a8" />
+    </vDConfirmDialogShape>
+    <vDClientActionShape Id="b7084beb-39ce-46c2-81c7-a3ed26bd559d" absoluteBounds="4.15, 1.76, 0.79999999999999982, 0.16" disabled="false" isPinned="false" relayoutChildren="false">
+      <vDClientActionMoniker Id="aab26b8e-5f4b-45a1-8405-b75db821af65" />
       <relativeChildShapes>
-        <vDWidgetTitlePort Id="e8ea0a92-07f8-40b4-bdb1-27ccdcae8e9f" absoluteBounds="4.82, 3.3300000004470349, 0.83850503563880907, 0.15">
-          <vDWidgetTitleMoniker Id="06343e16-795b-4122-95b4-c1d130d658e7" />
-        </vDWidgetTitlePort>
-      </relativeChildShapes>
-      <nestedChildShapes>
-        <vDSectionHeadShape Id="360cc196-8101-45a5-b407-ea3d91da6c0e" absoluteBounds="4.82, 3.5, 5, 0.3" disabled="false" isPinned="false" relayoutChildren="false">
-          <vDSectionHeadMoniker Id="8e8f89c9-4881-45a9-9da7-e087c69fa9bf" />
-        </vDSectionHeadShape>
-        <vDSectionBodyShape Id="76b0e729-ff64-428f-aa0a-1e5d357a9252" absoluteBounds="4.82, 3.85, 5, 2.7" disabled="false" isPinned="false" relayoutChildren="false">
-          <vDSectionBodyMoniker Id="da1e908b-e4e5-4e3f-99cf-5ff8aa1f6423" />
-          <nestedChildShapes>
-            <vDButtonShape Id="d7f1ee6a-7cf4-4e60-b411-8e16e4796b80" absoluteBounds="5.24, 5.26, 0.5, 0.15" disabled="false" isPinned="false" relayoutChildren="false">
-              <vDButtonMoniker Id="f49e0245-da12-4f2c-9b8f-12ef7a4cbd13" />
-              <relativeChildShapes>
-                <vDEventPort Id="0431ee37-4a79-44dd-8f42-eb241383d9ed" absoluteBounds="5.7, 5.3025, 0.08, 0.08">
-                  <vDEventMoniker Id="f3c001a0-6b8a-435e-bc24-18466ce6e6a7" />
-                  <relativeChildShapes />
-                </vDEventPort>
-              </relativeChildShapes>
-            </vDButtonShape>
-            <vDAlertShape Id="38b61d89-67f5-4bfb-9fc0-b5cd1198977a" absoluteBounds="7.9600000000000009, 4.59, 1.4999999999999996, 1" disabled="false" isPinned="false" relayoutChildren="false">
-              <vDAlertMoniker Id="b020da4a-b71e-4c1d-a1b7-b70e47ea73ce" />
-              <relativeChildShapes>
-                <vDWidgetTitlePort Id="e1356d6a-0468-405d-893e-ed2d483aab76" absoluteBounds="7.9600000000000009, 4.4200000004470343, 0.68970132470130907, 0.15">
-                  <vDWidgetTitleMoniker Id="d595dcd3-4f2b-48d7-aaf0-238c00335f24" />
-                </vDWidgetTitlePort>
-              </relativeChildShapes>
-            </vDAlertShape>
-            <vDClientActionShape Id="c4d2eff8-1c9e-4291-b1a9-de8a59719a91" absoluteBounds="6.2, 4.85, 0.8, 0.15" disabled="false" isPinned="false" relayoutChildren="false">
-              <vDClientActionMoniker Id="275760f1-5846-4742-81fe-f9ae2705d82f" />
-              <relativeChildShapes>
-                <vDActionJointPort Id="767ff981-8955-44d6-b8ce-d4c50a30cbf0" absoluteBounds="6.96, 4.9099999999999993, 0.08, 0.08">
-                  <vDActionJointMoniker Id="11f6548a-575f-4bc8-a0ec-4bae60f475bb" />
-                  <relativeChildShapes />
-                </vDActionJointPort>
-              </relativeChildShapes>
-            </vDClientActionShape>
-          </nestedChildShapes>
-        </vDSectionBodyShape>
-        <vDHoriSeparatorShape Id="b9ff7c55-24d8-484c-a373-5edf1bebe83d" absoluteBounds="4.82, 3.8, 5, 0.049999999999999989" disabled="false" isPinned="false" relayoutChildren="false">
-          <vDHoriSeparatorMoniker Id="18cf0fe7-9759-4e15-b4ff-53200fa32add" />
-        </vDHoriSeparatorShape>
-      </nestedChildShapes>
-    </vDSectionShape>
-    <vDClientActionShape Id="8755eec7-0be4-4f95-8c3d-abd866d9960b" absoluteBounds="7.19, 1.82, 0.79999999999999982, 0.16" disabled="false" isPinned="false" relayoutChildren="false">
-      <vDClientActionMoniker Id="e1a4b40c-ddb6-46f2-9beb-de6f9d185f6a" />
-      <relativeChildShapes>
-        <vDActionJointPort Id="9b3c8dce-89f1-406d-ada5-3b16a316cee1" absoluteBounds="7.95, 1.86, 0.08, 0.08">
-          <vDActionJointMoniker Id="0abd4754-5fd5-43e6-80ef-eccff708af7e" />
+        <vDActionJointPort Id="acffc277-1ec8-42a5-92bd-d62b4f4dce14" absoluteBounds="4.91, 1.7975, 0.08, 0.08">
+          <vDActionJointMoniker Id="c9bf68b6-7d78-43e8-9331-03f678419740" />
           <relativeChildShapes />
         </vDActionJointPort>
       </relativeChildShapes>
     </vDClientActionShape>
-    <vDEvent2ComponentConnector Id="f645f4d7-386d-4ac4-83ea-01b22375e78a" edgePoints="[(5.26 : 1.94351396994941); (5.635 : 1.94351396994941); (5.635 : 1.93212619334441); (7.19 : 1.93212619334441)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <r_Event2ComponentMoniker Id="237c910a-95e7-4dc8-bc69-bb4868347a0a" />
+    <vDEvent2ComponentConnector Id="5c61f55c-707f-4b19-9cbe-9ddf0933c8ee" edgePoints="[(3.32 : 1.88914831576554); (3.695 : 1.88914831576554); (3.695 : 1.84); (4.15 : 1.84)]" fixedFrom="Caller" fixedTo="NotFixed">
+      <r_Event2ComponentMoniker Id="f1bf1452-7764-443c-82c0-e95e98ec9119" />
       <nodes>
-        <vDEventPortMoniker Id="08513cf6-5dfa-48f3-8feb-b4003d3c4e91" />
-        <vDClientActionShapeMoniker Id="8755eec7-0be4-4f95-8c3d-abd866d9960b" />
+        <vDEventPortMoniker Id="977f8d30-d433-4ab8-ad81-dc13ba44757d" />
+        <vDClientActionShapeMoniker Id="b7084beb-39ce-46c2-81c7-a3ed26bd559d" />
       </nodes>
     </vDEvent2ComponentConnector>
-    <vDActionJoint2ComponentConnector Id="9f5c095d-1c43-4700-a054-cf45689c33f4" edgePoints="[(8.03 : 1.9); (10.21 : 1.9)]" fixedFrom="Caller" fixedTo="NotFixed">
-      <r_ActionJoint2ComponentMoniker Id="8315d3c2-60a7-445d-b351-28df75796c9c" />
+    <vDActionJoint2ComponentConnector Id="ced9c18f-8abf-4adc-a434-ac540f6ca44f" edgePoints="[(4.99 : 1.8375); (5.25 : 1.8375)]" fixedFrom="Caller" fixedTo="Algorithm">
+      <r_ActionJoint2ComponentMoniker Id="67dfd9c3-2d10-4739-b83a-e647685e1f40" />
       <nodes>
-        <vDActionJointPortMoniker Id="9b3c8dce-89f1-406d-ada5-3b16a316cee1" />
-        <vDAlertShapeMoniker Id="ce843308-d5c9-49a2-af6c-3c4813383e75" />
+        <vDActionJointPortMoniker Id="acffc277-1ec8-42a5-92bd-d62b4f4dce14" />
+        <vDConfirmDialogShapeMoniker Id="4ed610c3-9acb-44c6-900a-56f1b2156f3d" />
       </nodes>
     </vDActionJoint2ComponentConnector>
-    <vDEvent2ComponentConnector Id="1d81addf-ea5f-4524-bacd-b33f17deaeeb" edgePoints="[(5.78 : 5.34247080324821); (6.62033184636873 : 5.34247080324821); (6.62033184636873 : 5)]" fixedFrom="Caller" fixedTo="Caller">
-      <r_Event2ComponentMoniker Id="6c9989cd-6653-463b-b6c5-3aee814a92ea" />
+    <vDPartialViewResultShape Id="5ec46f44-e06e-4358-8019-3a8bc029b75c" absoluteBounds="9.16, 1.61, 1.6400000000000006, 0.3899999999999999" disabled="false" isPinned="false" relayoutChildren="false">
+      <vDPartialViewResultMoniker Id="c830e036-2595-497a-af1f-9e31b80441cf" />
+      <relativeChildShapes>
+        <vDWidgetTitlePort Id="362a112e-d33e-42cd-b7f0-bc5b35fa2728" absoluteBounds="9.16, 1.440000000447035, 1.4533731698989867, 0.15">
+          <vDWidgetTitleMoniker Id="8de3006d-ccb9-49c4-b652-ffa87b85d34f" />
+        </vDWidgetTitlePort>
+        <vDPseudoEventPort Id="99743b41-cce4-42a6-9cff-391b122a1b41" absoluteBounds="10.760000000000002, 1.7625000000000002, 0.08, 0.08">
+          <vDPseudoEventMoniker Id="0452100e-ea66-4890-a3b1-6a0bd07a61c8" />
+          <relativeChildShapes />
+        </vDPseudoEventPort>
+      </relativeChildShapes>
+    </vDPartialViewResultShape>
+    <vDServerActionShape Id="633aac4d-bf71-43ad-a730-56177e876a55" absoluteBounds="7.6000000000000005, 1.75, 0.79999999999999982, 0.16" disabled="false" isPinned="false" relayoutChildren="false">
+      <vDServerActionMoniker Id="edaf7193-72d2-43eb-97d7-15e67b7743b8" />
+      <relativeChildShapes>
+        <vDActionJointPort Id="30c23aaf-1725-4298-bb25-1a9d0d25ea84" absoluteBounds="8.36, 1.79, 0.08, 0.08">
+          <vDActionJointMoniker Id="6c4bd699-9bce-491d-b9fe-53d4737c02e9" />
+          <relativeChildShapes />
+        </vDActionJointPort>
+      </relativeChildShapes>
+    </vDServerActionShape>
+    <vDEvent2ComponentConnector Id="05b594ba-65e9-446b-b0fd-c1530d0db33a" edgePoints="[(7.05 : 1.82); (7.6 : 1.82)]" fixedFrom="Caller" fixedTo="Algorithm">
+      <r_Event2ComponentMoniker Id="f9f95580-c18e-46a1-ae18-23b6262aac59" />
       <nodes>
-        <vDEventPortMoniker Id="0431ee37-4a79-44dd-8f42-eb241383d9ed" />
-        <vDClientActionShapeMoniker Id="c4d2eff8-1c9e-4291-b1a9-de8a59719a91" />
+        <vDEventPortMoniker Id="9e1eb027-36b8-42ff-83fd-381e1d07e983" />
+        <vDServerActionShapeMoniker Id="633aac4d-bf71-43ad-a730-56177e876a55" />
       </nodes>
     </vDEvent2ComponentConnector>
-    <vDActionJoint2ComponentConnector Id="40c392de-1f26-41d7-ba15-b7ffae74369d" edgePoints="[(7.03997999531216 : 4.95126490111854); (7.96 : 4.95126490111854)]" fixedFrom="Caller" fixedTo="Algorithm">
-      <r_ActionJoint2ComponentMoniker Id="21411021-7d0e-4707-ba82-ce7f137ec0ac" />
+    <vDActionJoint2ComponentConnector Id="779f14c3-6385-4e8c-87ab-e4f434c4422e" edgePoints="[(8.44 : 1.83); (9.16 : 1.83)]" fixedFrom="Caller" fixedTo="Algorithm">
+      <r_ActionJoint2ComponentMoniker Id="ef4527ee-89af-4c14-bd5d-7bfe48e26134" />
       <nodes>
-        <vDActionJointPortMoniker Id="767ff981-8955-44d6-b8ce-d4c50a30cbf0" />
-        <vDAlertShapeMoniker Id="38b61d89-67f5-4bfb-9fc0-b5cd1198977a" />
+        <vDActionJointPortMoniker Id="30c23aaf-1725-4298-bb25-1a9d0d25ea84" />
+        <vDPartialViewResultShapeMoniker Id="5ec46f44-e06e-4358-8019-3a8bc029b75c" />
+      </nodes>
+    </vDActionJoint2ComponentConnector>
+    <vDClientActionShape Id="18cd8a5e-fbbf-4cf3-ae15-db6e052edf2a" absoluteBounds="6.37, 2.36, 0.79999999999999982, 0.15" disabled="false" isPinned="false" relayoutChildren="false">
+      <vDClientActionMoniker Id="2fb74979-1c6a-4f4f-9bf4-3ab00a1b8cc4" />
+      <relativeChildShapes>
+        <vDActionJointPort Id="778494af-95f2-4295-9298-685db20f2c4d" absoluteBounds="6.33, 2.4, 0.08, 0.08">
+          <vDActionJointMoniker Id="29f5098a-6906-4758-b607-cc23302ae1ac" />
+          <relativeChildShapes />
+        </vDActionJointPort>
+      </relativeChildShapes>
+    </vDClientActionShape>
+    <vDEvent2ComponentConnector Id="37f8fc26-892c-47f2-a50f-392c6159c6a1" edgePoints="[(10.84 : 1.8025); (11.215 : 1.8025); (11.215 : 2.43140145738787); (7.17 : 2.43140145738787)]" fixedFrom="Caller" fixedTo="Caller">
+      <r_Event2ComponentMoniker Id="2ce32e82-fbd5-40c0-8231-e579bf2ee3a8" />
+      <nodes>
+        <vDPseudoEventPortMoniker Id="99743b41-cce4-42a6-9cff-391b122a1b41" />
+        <vDClientActionShapeMoniker Id="18cd8a5e-fbbf-4cf3-ae15-db6e052edf2a" />
+      </nodes>
+    </vDEvent2ComponentConnector>
+    <vDActionJoint2ComponentConnector Id="4f339702-dde5-4aec-92ff-897033f62bef" edgePoints="[(6.33 : 2.44); (5.955 : 2.44); (5.955 : 2.43760790469322); (3.87 : 2.43760790469322)]" fixedFrom="Caller" fixedTo="Caller">
+      <r_ActionJoint2ComponentMoniker Id="5256d620-9299-44af-8ad3-478819d8b52f" />
+      <nodes>
+        <vDActionJointPortMoniker Id="778494af-95f2-4295-9298-685db20f2c4d" />
+        <vDVertContainerShapeMoniker Id="520dbd85-dae4-4375-952c-1c38775c06e8" />
       </nodes>
     </vDActionJoint2ComponentConnector>
   </nestedChildShapes>
