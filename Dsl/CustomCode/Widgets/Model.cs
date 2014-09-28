@@ -19,30 +19,42 @@ namespace MVCVisualDesigner
             m_events.Add("JS Event", new List<IEventInfo>() { 
                     new EventInfo("click", "JS Event"), 
                     new EventInfo("change", "JS Event"), 
-                    new EventInfo("dddd", "JS Event") ,
                     new PseudoEventInfo("Pseudo", "AND") ,
                     new PseudoEventInfo("Pseudo", "THEN") });
+            m_events.Add("Alert", new List<IEventInfo>() { 
+                new EventInfo("onOK", "Alert Event")
+            });
+            m_events.Add("Confirm", new List<IEventInfo>() { 
+                new EventInfo("onYes", "Confirm Event"),
+                new EventInfo("onNo", "Confirm Event")
+            });
 
             m_actions = new Dictionary<string, List<IActionInfo>>();
             m_actions.Add("JS Action", new List<IActionInfo>() { 
-                    new ClientActionInfo("add", "JS Action"), 
-                    new ClientActionInfo("delete", "JS Action"), 
-                    new ClientActionInfo("replace", "JS Action") });
+                    new ClientActionInfo("Show", "JS Action"), 
+                    new ClientActionInfo("Hide", "JS Action"), 
+                    new ClientActionInfo("Add", "JS Action"), 
+                    new ClientActionInfo("Delete", "JS Action"), 
+                    new ClientActionInfo("Replace", "JS Action") });
 
             m_joints = new Dictionary<string, List<IActionJointInfo>>();
-            m_joints.Add("replace", new List<IActionJointInfo>() { 
-                    new ActionJointInfo("replace", "of"), 
-                    new ActionJointInfo("replace", "with") });
+            m_joints.Add("Replace", new List<IActionJointInfo>() { 
+                    new ActionJointInfo("Replace", "Of"), 
+                    new ActionJointInfo("Replace", "With") });
 
-            m_actions["JS Action"][2].Joints.AddRange(m_joints["replace"]);
+            m_actions["JS Action"][2].Joints.AddRange(m_joints["Replace"]);
         }
 
         public List<IEventInfo> GetSupportedEventList(WidgetType wt)
         {
             if (m_events == null) InitData();
 
-            List<IEventInfo> eventInfo = m_events["JS Event"];
-            return eventInfo;
+            if (wt == WidgetType.Alert)
+                return m_events["Alert"];
+            else if (wt == WidgetType.ConfirmDialog)
+                return m_events["Confirm"];
+            else
+                return m_events["JS Event"];
         }
 
         public List<IActionInfo> GetSupportedActionList(WidgetType wt)
@@ -158,6 +170,12 @@ namespace MVCVisualDesigner
         {
             VDMetaType metaType = GetMetaType(typeInfo);
             if (metaType != null) return metaType;
+
+            if (string.Compare(typeInfo.ValueType, Utility.Constants.STR_TYPE_LIST, true) == 0
+                 ||string.Compare(typeInfo.ValueType, Utility.Constants.STR_TYPE_LIST, true) == 0)
+            {
+                throw new Exception(string.Format("keyword {0} is reserved", typeInfo.ValueType));
+            }
 
             if (typeInfo.CollectionType == E_CollectionType.Dictionary)
             {
@@ -374,13 +392,13 @@ namespace MVCVisualDesigner
                 if (tokens.Length == 3 && tokens[0] == Utility.Constants.STR_TYPE_DICTIONARY)
                 {
                     CollectionType = E_CollectionType.Dictionary;
-                    KeyType = tokens[0];
-                    ValueType = tokens[1];
+                    KeyType = tokens[1];
+                    ValueType = tokens[2];
                 }
                 else if (tokens.Length == 2 && tokens[0] == Utility.Constants.STR_TYPE_LIST)
                 {
                     CollectionType = E_CollectionType.List;
-                    ValueType = tokens[0];
+                    ValueType = tokens[1];
                 }
                 else if (tokens.Length == 1)
                 {
@@ -786,6 +804,33 @@ namespace MVCVisualDesigner
 
         virtual internal VDConcreteMember newConcreteMember() { return null; }
         virtual internal VDConcreteType newInstance(VDMetaType metaType) { return null; }
+
+        public void DeleteIfNoReference()
+        {
+            List<VDConcreteType> memberTypes = new List<VDConcreteType>();
+            if (this.Meta != null)
+            {
+                foreach(VDModelMember member in this.Members)
+                {
+                    VDConcreteType memberType = member.Type as VDConcreteType;
+                    if (memberType != null && !(memberType is VDPrimitiveMemberType))
+                    {
+                        memberTypes.Add(memberType);
+                    }
+                }
+            }
+
+            if (!this.HasExternalReference)
+            {
+                this.Delete();
+            }
+
+            foreach(VDConcreteType mt in memberTypes)
+            {
+                if (!mt.HasExternalReference)
+                    mt.DeleteIfNoReference();
+            }
+        }
     }
 
     public partial class VDWidgetValue : VDConcreteType

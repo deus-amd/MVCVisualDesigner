@@ -233,7 +233,8 @@ namespace MVCVisualDesigner
                 {
                     IActionInfo actInfo = dlg.NewAction.SelectedAction;
                     VDActionBase newAct = actInfo.CreateAction(sourceEvent.Partition);
-                    sourceEvent.Widget.Parent.Children.Add(newAct);
+                    VDWidget.GetCommonParent(sourceEvent.Widget, targetComponent).Children.Add(newAct);
+                    //sourceEvent.Widget.Parent.Children.Add(newAct);
                     sourceEvent.TargetComponents.Add(newAct);
 
                     IActionJointInfo jointInfo = dlg.NewAction.SelectedJoint;
@@ -262,7 +263,8 @@ namespace MVCVisualDesigner
 
                         IActionInfo actInfo = dlg.NewAction.SelectedAction;
                         VDActionBase newAct = actInfo.CreateAction(srcComponent.Partition);
-                        srcComponent.Parent.Children.Add(newAct);
+                        VDWidget.GetCommonParent(srcComponent, tgtComponent).Children.Add(newAct);
+                        //srcComponent.Parent.Children.Add(newAct);
                         newEvent.TargetComponents.Add(newAct);
 
                         IActionJointInfo jointInfo = dlg.NewAction.SelectedJoint;
@@ -305,6 +307,55 @@ namespace MVCVisualDesigner
                 return PortRuleHelper.GetCompliantBounds(shape, proposedBounds, "EventNameDecorator");
             }
         }
+
+        //!!!! Bypass MS BUG
+        // when port is on a nested shape, the link lines are routed badly
+        // this is a workaround to fix this issue
+        public override bool IsPort
+        {
+            get
+            {
+                if (this.ParentShape != null && this.ParentShape.ParentShape is VDDiagram)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        protected override void OnChildConfigured(Microsoft.VisualStudio.Modeling.Diagrams.ShapeElement child, bool childWasPlaced, bool createdDuringViewFixup)
+        {
+            base.OnChildConfigured(child, childWasPlaced, createdDuringViewFixup);
+            VDEventBasePort port = child as VDEventBasePort;
+            if ((port != null) && !port.IsPort)
+            {
+                this.ConfiguredChildPortShape(port, childWasPlaced);
+            }
+        }
+        protected override void OnChildConfiguring(Microsoft.VisualStudio.Modeling.Diagrams.ShapeElement child, bool createdDuringViewFixup)
+        {
+            base.OnChildConfiguring(child, createdDuringViewFixup);
+            VDEventBasePort port = child as VDEventBasePort;
+            if ((port != null) && !port.IsPort)
+            {
+                port.ActiveBoundsRules = this.BoundsRules;
+            }
+        }
+        //!!!! Bypass MS BUG
+
+        //public override bool HasConnectionPoints { get { return true; } }
+
+        //public override void EnsureConnectionPoints(LinkShape link)
+        //{
+        //    //if (this.Placement == PortPlacement.Left)
+        //    //    this.CreateConnectionPoint(new PointD(this.AbsoluteBounds.X, this.AbsoluteBounds.Top + (this.AbsoluteBounds.Height / 2.0)));
+        //    //else if (this.Placement == PortPlacement.Right)
+        //    //    this.CreateConnectionPoint(new PointD(this.AbsoluteBounds.Right, this.AbsoluteBounds.Top + (this.AbsoluteBounds.Height / 2.0)));
+        //    //else if (this.Placement == PortPlacement.Top)
+        //    //    this.CreateConnectionPoint(new PointD(this.AbsoluteBounds.X + (this.AbsoluteBoundingBox.Width / 2.0), this.AbsoluteBounds.Top));
+        //    //else if (this.Placement == PortPlacement.Bottom)
+        //    //    this.CreateConnectionPoint(new PointD(this.AbsoluteBounds.X + (this.AbsoluteBoundingBox.Width / 2.0), this.AbsoluteBounds.Bottom));
+        //    //base.EnsureConnectionPoints(link);
+        //}
     }
 
     public partial class VDActionJointPort
@@ -321,6 +372,40 @@ namespace MVCVisualDesigner
                 return PortRuleHelper.GetCompliantBounds(shape, proposedBounds, "JointNameDecorator");
             }
         }
+
+        //!!!! Bypass MS BUG
+        // when port is on a nested shape, the link lines are routed badly
+        // this is a workaround to fix this issue
+        public override bool IsPort
+        {
+            get
+            {
+                if (this.ParentShape != null && this.ParentShape.ParentShape is VDDiagram)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        protected override void OnChildConfigured(Microsoft.VisualStudio.Modeling.Diagrams.ShapeElement child, bool childWasPlaced, bool createdDuringViewFixup)
+        {
+            base.OnChildConfigured(child, childWasPlaced, createdDuringViewFixup);
+            VDActionJointPort port = child as VDActionJointPort;
+            if ((port != null) && !port.IsPort)
+            {
+                this.ConfiguredChildPortShape(port, childWasPlaced);
+            }
+        }
+        protected override void OnChildConfiguring(Microsoft.VisualStudio.Modeling.Diagrams.ShapeElement child, bool createdDuringViewFixup)
+        {
+            base.OnChildConfiguring(child, createdDuringViewFixup);
+            VDActionJointPort port = child as VDActionJointPort;
+            if ((port != null) && !port.IsPort)
+            {
+                port.ActiveBoundsRules = this.BoundsRules;
+            }
+        }
+        //!!!! Bypass MS BUG
     }
 
     public partial class VDActionBaseShape
@@ -388,5 +473,42 @@ namespace MVCVisualDesigner
         }
     }
 
+    //public partial class VDEvent2ComponentConnector
+    //{
+    //    public override void OnShapeInserted()
+    //    {
+    //        if (this.FromShape != null && this.ToShape != null)
+    //        {
+    //            try
+    //            {
+    //                // FromShape is Event Port, FromShape.Parent is Widget hosting Event Port
+    //                if (this.FromShape.ParentShape != null && this.FromShape.ParentShape.ParentShape is VDDiagram && this.ToShape.ParentShape is VDDiagram)
+    //                    this.RoutingStyle = Microsoft.VisualStudio.Modeling.Diagrams.GraphObject.VGRoutingStyle.VGRouteRightAngle;
+    //                else
+    //                    this.RoutingStyle = Microsoft.VisualStudio.Modeling.Diagrams.GraphObject.VGRoutingStyle.VGRouteStraight;
+    //            }
+    //            catch { }
+    //        }
+    //    }
+    //}
+
+    //public partial class VDActionJoint2ComponentConnector
+    //{
+    //    public override void OnShapeInserted()
+    //    {
+    //        if (this.FromShape != null && this.ToShape != null)
+    //        {
+    //            try
+    //            {
+    //                // FromShape is Action Joint, FromShape.Parent is Action 
+    //                if (this.FromShape.ParentShape != null && this.FromShape.ParentShape.ParentShape is VDDiagram && this.ToShape.ParentShape is VDDiagram)
+    //                    this.RoutingStyle = Microsoft.VisualStudio.Modeling.Diagrams.GraphObject.VGRoutingStyle.VGRouteRightAngle;
+    //                else
+    //                    this.RoutingStyle = Microsoft.VisualStudio.Modeling.Diagrams.GraphObject.VGRoutingStyle.VGRouteStraight;
+    //            }
+    //            catch { }
+    //        }
+    //    }
+    //}
 #endregion
 }

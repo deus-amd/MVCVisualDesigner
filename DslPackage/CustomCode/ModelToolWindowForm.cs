@@ -276,26 +276,28 @@ namespace MVCVisualDesigner
             {
                 string oldValue = e.Value != null ? e.Value.ToString() : "";
                 string newValue = e.NewValue != null ? e.NewValue.ToString() : "";
+                bool ret = false;
                 if (columnName == COLUMN_NAME)
-                    node.OnNameChanged(oldValue, newValue);
+                    ret = node.OnNameChanged(oldValue, newValue);
                 else if (columnName == COLUMN_DISPNAME)
-                    node.OnDispNameChanged(oldValue, newValue);
+                    ret = node.OnDispNameChanged(oldValue, newValue);
                 else if (columnName == COLUMN_TYPE)
-                    node.OnTypeNameChanged(oldValue, newValue);
+                    ret = node.OnTypeNameChanged(oldValue, newValue);
                 else if (columnName == COLUMN_VALIDATOR)
-                    node.OnValidatorChanged(oldValue, newValue);
+                    ret = node.OnValidatorChanged(oldValue, newValue);
                 else
-                    onCellEditingFinishedOtherColumns(sender, e, node, columnName, oldValue, newValue);
+                    ret = onCellEditingFinishedOtherColumns(sender, e, node, columnName, oldValue, newValue);
 
-                trans.Commit();
+                if (ret) trans.Commit();
             }
 
             refreshTreeListView();
         }
 
-        virtual protected void onCellEditingFinishedOtherColumns(object sender, CellEditEventArgs e, 
+        virtual protected bool onCellEditingFinishedOtherColumns(object sender, CellEditEventArgs e, 
             NodeBase node, string columnName, string oldValue, string newValue)
         {
+            return false;
         }
 
         // tree list view handling
@@ -386,10 +388,10 @@ namespace MVCVisualDesigner
             virtual internal void AddChildNode() { }
             virtual internal void DeleteNode() { }
 
-            virtual internal void OnNameChanged(string oldValue, string newValue) { }
-            virtual internal void OnDispNameChanged(string oldValue, string newValue) { }
-            virtual internal void OnTypeNameChanged(string oldValue, string newValue) { }
-            virtual internal void OnValidatorChanged(string oldValue, string newValue) { }
+            virtual internal bool OnNameChanged(string oldValue, string newValue) { return false; }
+            virtual internal bool OnDispNameChanged(string oldValue, string newValue) { return false; }
+            virtual internal bool OnTypeNameChanged(string oldValue, string newValue) { return false; }
+            virtual internal bool OnValidatorChanged(string oldValue, string newValue) { return false; }
         }
     }
 
@@ -434,16 +436,18 @@ namespace MVCVisualDesigner
             }
         }
 
-        protected override void onCellEditingFinishedOtherColumns(object sender, CellEditEventArgs e, 
+        protected override bool onCellEditingFinishedOtherColumns(object sender, CellEditEventArgs e, 
             NodeBase node, string columnName, string oldValue, string newValue)
         {
             WidgetValueNode curNode = node as WidgetValueNode;
-            if (curNode == null) return;
+            if (curNode == null) return false;
 
             if (columnName == COLUMN_INITVAL)
-                curNode.OnInitValueChanged(oldValue, newValue);
+                return curNode.OnInitValueChanged(oldValue, newValue);
             else if (columnName == COLUMN_FORMATTER)
-                curNode.OnFormatterChanged(oldValue, newValue);
+                return curNode.OnFormatterChanged(oldValue, newValue);
+
+            return false;
         }
 
         override public void Show(VDWidget widget) 
@@ -528,8 +532,8 @@ namespace MVCVisualDesigner
             public string InitValue { get; set; }
             public string FormatterNames { get; set; }
 
-            virtual internal void OnInitValueChanged(string oldValue, string newValue) { }
-            virtual internal void OnFormatterChanged(string oldValue, string newValue) { }
+            virtual internal bool OnInitValueChanged(string oldValue, string newValue) { return false; }
+            virtual internal bool OnFormatterChanged(string oldValue, string newValue) { return false; }
         }
 
         // the node to represent the WidgetValue of a widget, only one node of this kind for a widget
@@ -595,19 +599,16 @@ namespace MVCVisualDesigner
                 m_widgetValue.AddMember<VDProperty>(Utility.Constants.STR_TYPE_STRING, "NewMember" + idx);
             }
 
-            internal override void OnTypeNameChanged(string oldValue, string newValue)
+            internal override bool OnTypeNameChanged(string oldValue, string newValue)
             {
-                if (oldValue == newValue) return;
-                if (m_widget == null || m_widgetValue == null) return;
+                if (oldValue == newValue) return false;
+                if (m_widget == null || m_widgetValue == null) return false;
 
                 VDModelStore modelStore = m_widgetValue.ModelStore;
 
                 // delete old widgets
-                if (!m_widgetValue.HasExternalReference)
-                {
-                    m_widgetValue.Delete();
-                    m_widgetValue = null;
-                }
+                m_widgetValue.DeleteIfNoReference();
+                m_widgetValue = null;
 
                 m_widgetValue = modelStore.CreateConcreteType<VDWidgetValue>(newValue);
                 if (!modelStore.IsPrimitiveType(newValue) && !modelStore.IsPredefinedType(newValue))
@@ -616,6 +617,7 @@ namespace MVCVisualDesigner
                     m_widgetValue.AddMember<VDBuiltInProperty>(Utility.Constants.STR_TYPE_STRING, Utility.Constants.STR_VALUE_MEMBER);
                 }
                 m_widget.WidgetValue = m_widgetValue;
+                return true;
             }
         }
 
@@ -730,49 +732,55 @@ namespace MVCVisualDesigner
                 }
             }
 
-            internal override void OnNameChanged(string oldValue, string newValue)
+            internal override bool OnNameChanged(string oldValue, string newValue)
             {
-                if (!CanChangeName) return;
-                if (oldValue == newValue) return;
+                if (!CanChangeName) return false;
+                if (oldValue == newValue) return false;
                 if (string.IsNullOrWhiteSpace(newValue)) throw new ArgumentNullException("newValue");
                 
                 m_member.ChangeName(newValue);
+                return true;
             }
 
-            internal override void OnDispNameChanged(string oldValue, string newValue)
+            internal override bool OnDispNameChanged(string oldValue, string newValue)
             {
-                if (!CanChangeName) return;
-                if (oldValue == newValue) return;
+                if (!CanChangeName) return false;
+                if (oldValue == newValue) return false;
                 if (string.IsNullOrWhiteSpace(newValue)) throw new ArgumentNullException("newValue");
                 
                 m_member.ChangeDispName(newValue);
+                return true;
             }
 
-            internal override void OnTypeNameChanged(string oldValue, string newValue)
+            internal override bool OnTypeNameChanged(string oldValue, string newValue)
             {
-                if (!CanChangeType) return;
-                if (oldValue == newValue) return;
+                if (!CanChangeType) return false;
+                if (oldValue == newValue) return false;
                 if (string.IsNullOrWhiteSpace(newValue)) throw new ArgumentNullException("newValue");
 
                 m_member.ChangeType(newValue);
+                return true;
             }
 
-            internal override void OnInitValueChanged(string oldValue, string newValue)
+            internal override bool OnInitValueChanged(string oldValue, string newValue)
             {
-                if (oldValue == newValue) return;
+                if (oldValue == newValue) return false;
                 m_member.InitValue = newValue;
+                return true;
             }
 
-            internal override void OnValidatorChanged(string oldValue, string newValue)
+            internal override bool OnValidatorChanged(string oldValue, string newValue)
             {
-                if (oldValue == newValue) return;
+                if (oldValue == newValue) return false;
                 m_member.ValidatorNames = newValue;
+                return true;
             }
 
-            internal override void OnFormatterChanged(string oldValue, string newValue)
+            internal override bool OnFormatterChanged(string oldValue, string newValue)
             {
-                if (oldValue == newValue) return;
+                if (oldValue == newValue) return false;
                 m_member.FormatterNames = newValue;
+                return true;
             }
         }
         #endregion
@@ -877,10 +885,7 @@ namespace MVCVisualDesigner
                 {
                     VDViewModel viewModel = m_currentView.Model;
                     m_currentView.Model = null;
-                    if (!viewModel.HasExternalReference)
-                    {
-                        viewModel.Delete();
-                    }
+                    viewModel.DeleteIfNoReference();
                 }
                 trans.Commit();
             }
@@ -909,13 +914,6 @@ namespace MVCVisualDesigner
         {
             string columnName = e.Column.Text;
             base.OnCellEditValidating(sender, e);
-        }
-
-        protected override void onCellEditingFinishedOtherColumns(object sender, CellEditEventArgs e,
-            NodeBase node, string columnName, string oldValue, string newValue)
-        {
-            ViewModelNode curNode = node as ViewModelNode;
-            if (curNode == null) return;
         }
 
         abstract class ViewModelNode : NodeBase
@@ -987,21 +985,19 @@ namespace MVCVisualDesigner
                 m_view.Model.AddMember<VDProperty>(Utility.Constants.STR_TYPE_STRING, "NewMember" + idx);
             }
 
-            internal override void OnTypeNameChanged(string oldValue, string newValue)
+            internal override bool OnTypeNameChanged(string oldValue, string newValue)
             {
-                if (oldValue == newValue) return;
+                if (oldValue == newValue) return false;
 
-                if (m_view.Model == null || m_view.Model == null) return;
+                if (m_view.Model == null || m_view.Model == null) return false;
 
                 VDModelStore modelStore = m_view.Model.ModelStore;
 
                 // delete old widgets
-                if (!m_view.Model.HasExternalReference)
-                {
-                    m_view.Model.Delete();
-                }
+                m_view.Model.DeleteIfNoReference();
 
                 m_view.Model = modelStore.CreateConcreteType<VDViewModel>(newValue);
+                return true;
             }
         }
 
@@ -1130,37 +1126,41 @@ namespace MVCVisualDesigner
                 }
             }
 
-            internal override void OnNameChanged(string oldValue, string newValue)
+            internal override bool OnNameChanged(string oldValue, string newValue)
             {
-                if (!CanChangeName) return;
-                if (oldValue == newValue) return;
+                if (!CanChangeName) return false;
+                if (oldValue == newValue) return false;
                 if (string.IsNullOrWhiteSpace(newValue)) throw new ArgumentNullException("newValue");
 
                 m_member.ChangeName(newValue);
+                return true;
             }
 
-            internal override void OnDispNameChanged(string oldValue, string newValue)
+            internal override bool OnDispNameChanged(string oldValue, string newValue)
             {
-                if (!CanChangeName) return;
-                if (oldValue == newValue) return;
+                if (!CanChangeName) return false;
+                if (oldValue == newValue) return false;
                 if (string.IsNullOrWhiteSpace(newValue)) throw new ArgumentNullException("newValue");
 
                 m_member.ChangeDispName(newValue);
+                return true;
             }
 
-            internal override void OnTypeNameChanged(string oldValue, string newValue)
+            internal override bool OnTypeNameChanged(string oldValue, string newValue)
             {
-                if (!CanChangeType) return;
-                if (oldValue == newValue) return;
+                if (!CanChangeType) return false;
+                if (oldValue == newValue) return false;
                 if (string.IsNullOrWhiteSpace(newValue)) throw new ArgumentNullException("newValue");
 
                 m_member.ChangeType(newValue);
+                return true;
             }
 
-            internal override void OnValidatorChanged(string oldValue, string newValue)
+            internal override bool OnValidatorChanged(string oldValue, string newValue)
             {
-                if (oldValue == newValue) return;
+                if (oldValue == newValue) return false;
                 m_member.ValidatorNames = newValue;
+                return true;
             }
         }
     }
@@ -1251,17 +1251,18 @@ namespace MVCVisualDesigner
             }
         }
 
-        protected override void onCellEditingFinishedOtherColumns(object sender, CellEditEventArgs e, 
+        protected override bool onCellEditingFinishedOtherColumns(object sender, CellEditEventArgs e, 
             NodeBase node, string columnName, string oldValue, string newValue)
         {
             ActionDataNode curNode = node as ActionDataNode;
-            if (curNode == null) return;
+            if (curNode == null) return false;
 
             if (columnName == COLUMN_DATA_SOURCE)
-                curNode.OnDataSourceChanged(oldValue, newValue);
+                return curNode.OnDataSourceChanged(oldValue, newValue);
             else if (columnName == COLUMN_CUSTOM_SELECTOR)
-                curNode.OnCustomSelectorChanged(oldValue, newValue);
-            base.onCellEditingFinishedOtherColumns(sender, e, node, columnName, oldValue, newValue);
+                return curNode.OnCustomSelectorChanged(oldValue, newValue);
+
+            return base.onCellEditingFinishedOtherColumns(sender, e, node, columnName, oldValue, newValue);
         }
 
         abstract class ActionDataNode : NodeBase
@@ -1269,8 +1270,8 @@ namespace MVCVisualDesigner
             public string DataSource { get; set; }
             public string CustomSelector { get; set; }
 
-            internal virtual void OnDataSourceChanged(string oldValue, string newValue) { }
-            internal virtual void OnCustomSelectorChanged(string oldValue, string newValue) { }
+            internal virtual bool OnDataSourceChanged(string oldValue, string newValue) { return false; }
+            internal virtual bool OnCustomSelectorChanged(string oldValue, string newValue) { return false; }
         }
 
         class RootNode : ActionDataNode
@@ -1332,20 +1333,18 @@ namespace MVCVisualDesigner
                 m_action.ActionData.AddMember<VDProperty>(Utility.Constants.STR_TYPE_STRING, "NewMember" + idx);
             }
 
-            internal override void OnTypeNameChanged(string oldValue, string newValue)
+            internal override bool OnTypeNameChanged(string oldValue, string newValue)
             {
-                if (oldValue == newValue) return;
-                if (m_action.ActionData == null || m_action.ActionData == null) return;
+                if (oldValue == newValue) return false;
+                if (m_action.ActionData == null || m_action.ActionData == null) return false;
 
                 VDModelStore modelStore = m_action.ActionData.ModelStore;
 
                 // delete old widgets
-                if (!m_action.ActionData.HasExternalReference)
-                {
-                    m_action.ActionData.Delete();
-                }
+                m_action.ActionData.DeleteIfNoReference();
 
                 m_action.ActionData = modelStore.CreateConcreteType<VDActionData>(newValue);
+                return true;
             }
         }
 
@@ -1460,49 +1459,55 @@ namespace MVCVisualDesigner
                 }
             }
 
-            internal override void OnNameChanged(string oldValue, string newValue)
+            internal override bool OnNameChanged(string oldValue, string newValue)
             {
-                if (!CanChangeName) return;
-                if (oldValue == newValue) return;
+                if (!CanChangeName) return false;
+                if (oldValue == newValue) return false;
                 if (string.IsNullOrWhiteSpace(newValue)) throw new ArgumentNullException("newValue");
 
                 m_member.ChangeName(newValue);
+                return true;
             }
 
-            internal override void OnDispNameChanged(string oldValue, string newValue)
+            internal override bool OnDispNameChanged(string oldValue, string newValue)
             {
-                if (!CanChangeName) return;
-                if (oldValue == newValue) return;
+                if (!CanChangeName) return false;
+                if (oldValue == newValue) return false;
                 if (string.IsNullOrWhiteSpace(newValue)) throw new ArgumentNullException("newValue");
 
                 m_member.ChangeDispName(newValue);
+                return true;
             }
 
-            internal override void OnTypeNameChanged(string oldValue, string newValue)
+            internal override bool OnTypeNameChanged(string oldValue, string newValue)
             {
-                if (!CanChangeType) return;
-                if (oldValue == newValue) return;
+                if (!CanChangeType) return false;
+                if (oldValue == newValue) return false;
                 if (string.IsNullOrWhiteSpace(newValue)) throw new ArgumentNullException("newValue");
 
                 m_member.ChangeType(newValue);
+                return true;
             }
 
-            internal override void OnValidatorChanged(string oldValue, string newValue)
+            internal override bool OnValidatorChanged(string oldValue, string newValue)
             {
-                if (oldValue == newValue) return;
+                if (oldValue == newValue) return false;
                 m_member.ValidatorNames = newValue;
+                return true;
             }
 
-            internal override void OnDataSourceChanged(string oldValue, string newValue)
+            internal override bool OnDataSourceChanged(string oldValue, string newValue)
             {
-                if (oldValue == newValue) return;
+                if (oldValue == newValue) return false;
                 m_member.DataSource = newValue;
+                return true;
             }
 
-            internal override void OnCustomSelectorChanged(string oldValue, string newValue)
+            internal override bool OnCustomSelectorChanged(string oldValue, string newValue)
             {
-                if (oldValue == newValue) return;
+                if (oldValue == newValue) return false;
                 m_member.CustomSelector = newValue;
+                return true;
             }
         }
     }
@@ -1603,6 +1608,10 @@ namespace MVCVisualDesigner
                     //        allTypes.Add(type, 3);
                     //    }
                     //}
+                    if (!allTypes.ContainsKey(Utility.Constants.STR_TYPE_DICTIONARY))
+                        allTypes.Add(Utility.Constants.STR_TYPE_DICTIONARY, 3);
+                    if (!allTypes.ContainsKey(Utility.Constants.STR_TYPE_LIST))
+                        allTypes.Add(Utility.Constants.STR_TYPE_LIST, 3);
                 }
 
                 //return autocomplete items

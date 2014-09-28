@@ -96,22 +96,15 @@ namespace MVCVisualDesigner
             m_settings = newValue;
         }
 
-
-        // calculated property IntrinsicModelType
-        internal virtual string GetIntrinsicModelTypeValue()
+        // custom storage property WidgetName
+        protected string m_WidgetName;
+        internal virtual string GetWidgetNameValue()
         {
-            return string.Empty;
+            return m_WidgetName;
         }
-
-        // custom storage property ModelName
-        protected string m_ModelName;
-        internal virtual string GetModelNameValue()
+        internal virtual void SetWidgetNameValue(string newValue)
         {
-            return m_ModelName;
-        }
-        internal virtual void SetModelNameValue(string newValue)
-        {
-            m_ModelName = newValue;
+            m_WidgetName = newValue;
         }
     }
 
@@ -418,6 +411,29 @@ namespace MVCVisualDesigner
             }
         }
 #endregion
+
+        public static VDWidget GetCommonParent(VDWidget w1, VDWidget w2)
+        {
+            int len1 = 0, len2 = 0;
+            VDWidget parent1 = w1.Parent;
+            while (parent1 != null) { parent1 = parent1.Parent; len1++; }
+            VDWidget parent2 = w2.Parent;
+            while (parent2 != null) { parent2 = parent2.Parent; len2++; }
+
+            parent1 = w1.Parent;
+            parent2 = w2.Parent;
+            if (len1 > len2)
+                while (len1-- > len2) parent1 = parent1.Parent; 
+            else
+                while (len2-- > len1) parent2 = parent2.Parent;
+
+            while(!object.ReferenceEquals(parent1, parent2) && !(parent1 is VDInternalUtility))
+            {
+                parent1 = parent1.Parent;
+                parent2 = parent2.Parent;
+            }
+            return parent1;
+        }
     }
 }
 
@@ -677,6 +693,10 @@ namespace MVCVisualDesigner
 #region Bounds Rules
         public override BoundsRules BoundsRules { get { return VDDefaultBoundsRules.Instance; } }
 
+        // when shape has port, the size may be changed even the ResizableSides is set to not allow to resize
+        // so use bounds rules to limit the size
+        protected virtual bool AllowToResizeUnResizableSides { get { return false; } }
+
         public class VDDefaultBoundsRules : BoundsRules
         {
             internal static readonly VDDefaultBoundsRules Instance = new VDDefaultBoundsRules();
@@ -714,6 +734,23 @@ namespace MVCVisualDesigner
                     }
                 }
 
+                VDWidgetShape thisShape = shape as VDWidgetShape;
+                if (thisShape != null && !thisShape.AllowToResizeUnResizableSides
+                    && thisShape.ModelElement != null && !(thisShape.ModelElement is VDInternalUtility))
+                {
+                    if (thisShape.ResizableSides == NodeSides.Horizontal)
+                    {
+                        proposedBounds.Height = thisShape.DefaultSize.Height;
+                    }
+                    else if (thisShape.ResizableSides == NodeSides.Vertical)
+                    {
+                        proposedBounds.Width = thisShape.DefaultSize.Width;
+                    }
+                    else if (thisShape.ResizableSides == NodeSides.None)
+                    {
+                        proposedBounds.Size = thisShape.DefaultSize;
+                    }
+                }
                 return proposedBounds;
             }
         }

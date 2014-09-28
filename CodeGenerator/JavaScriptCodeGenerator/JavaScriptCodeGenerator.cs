@@ -15,6 +15,8 @@ namespace MVCVisualDesigner.CodeGenerator.JavaScriptCodeGenerator
 
             { WidgetType.Section, new VDSectionJavaScriptCodeGenerator() },
 
+            { WidgetType.Button, new VDButtonJavaScriptCodeGenerator() },
+
             { WidgetType.Form, new VDFormJavaScriptCodeGenerator() },
 
             { WidgetType.Radio, new VDRadioJavaScriptCodeGenerator() },
@@ -180,6 +182,38 @@ namespace MVCVisualDesigner.CodeGenerator.JavaScriptCodeGenerator
     public partial class VDSectionJavaScriptCodeGenerator : VDSectionJavaScriptCodeGeneratorBase
     {
         public VDSectionJavaScriptCodeGenerator() 
+        {
+        }
+    }
+
+
+    public class VDButtonJavaScriptCodeGeneratorBase : IJavaScriptCodeGenerator
+    {
+        protected VDButtonJavaScriptCodeGeneratorImpl m_impl = new VDButtonJavaScriptCodeGeneratorImpl();
+
+        public VDButtonJavaScriptCodeGeneratorBase()
+        {
+        }
+
+        public virtual string GenerateWidgetInitCode(VDWidget eventSource, IJavaScriptCodeGeneratorFactory jsGenFactory)
+        {
+            return m_impl.GenerateWidgetInitCode(eventSource, jsGenFactory);
+        }
+
+         public virtual string GenerateActionCode(VDWidget eventSource, VDWidget eventTarget, VDClientAction action)
+         {
+            return m_impl.GenerateActionCode(eventSource, eventTarget, action);
+         }
+
+         public virtual string GenerateGettingWidgetValueCode(VDWidget widget)
+         {
+            return m_impl.GenerateGettingWidgetValueCode(widget);
+         }
+    }
+
+    public partial class VDButtonJavaScriptCodeGenerator : VDButtonJavaScriptCodeGeneratorBase
+    {
+        public VDButtonJavaScriptCodeGenerator() 
         {
         }
     }
@@ -1164,6 +1198,45 @@ namespace MVCVisualDesigner.CodeGenerator.JavaScriptCodeGenerator
 			//StringBuilder sbOld = this.GenerationEnvironment;
 			//this.GenerationEnvironment = new StringBuilder();
             //generateGettingWidgetValueCodeImpl((VDSection)widget);
+			//string code = this.GenerationEnvironment.ToString();
+			//this.GenerationEnvironment = sbOld;
+			//return code;
+			return string.Empty;
+        }
+    }
+    public partial class VDButtonJavaScriptCodeGeneratorImpl : IJavaScriptCodeGenerator
+    {
+        public VDButtonJavaScriptCodeGeneratorImpl()
+        {
+        }
+
+		public string GenerateWidgetInitCode(VDWidget eventSource, IJavaScriptCodeGeneratorFactory jsGenFactory)
+        {
+			//StringBuilder sbOld = this.GenerationEnvironment;
+			//this.GenerationEnvironment = new StringBuilder();
+            //generateWidgetInitCodeImpl((VDButton)eventSource, jsGenFactory);
+			//string code = this.GenerationEnvironment.ToString();
+			//this.GenerationEnvironment = sbOld;
+			//return code;
+			return string.Empty;
+        }
+
+        public string GenerateActionCode(VDWidget eventSource, VDWidget eventTarget, VDClientAction action)
+        {
+			//StringBuilder sbOld = this.GenerationEnvironment;
+			//this.GenerationEnvironment = new StringBuilder();
+            //generateActionCodeImpl(eventSource, (VDButton)eventTarget, action);
+			//string code = this.GenerationEnvironment.ToString();
+			//this.GenerationEnvironment = sbOld;
+			//return code;
+			return string.Empty;
+        }
+
+        public string GenerateGettingWidgetValueCode(VDWidget widget)
+        {
+			//StringBuilder sbOld = this.GenerationEnvironment;
+			//this.GenerationEnvironment = new StringBuilder();
+            //generateGettingWidgetValueCodeImpl((VDButton)widget);
 			//string code = this.GenerationEnvironment.ToString();
 			//this.GenerationEnvironment = sbOld;
 			//return code;

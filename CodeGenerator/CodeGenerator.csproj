@@ -104,6 +104,11 @@
     <Compile Include="RazorCodeGenerator\RazorGeneratorOptionUI.Designer.cs">
       <DependentUpon>RazorGeneratorOptionUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="RazorCodeGenerator\VDButtonRazorCodeGeneratorImpl.cs">
+      <DependentUpon>VDButtonRazorCodeGeneratorImpl.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="RazorCodeGenerator\VDConditionRazorCodeGeneratorImpl.cs">
       <DependentUpon>VDConditionRazorCodeGeneratorImpl.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -257,6 +262,11 @@
     <None Include="RazorCodeGenerator\DefaultRazorCodeGeneratorImpl.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DefaultRazorCodeGeneratorImpl.cs</LastGenOutput>
+      <CustomToolNamespace>MVCVisualDesigner.CodeGenerator</CustomToolNamespace>
+    </None>
+    <None Include="RazorCodeGenerator\VDButtonRazorCodeGeneratorImpl.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>VDButtonRazorCodeGeneratorImpl.cs</LastGenOutput>
       <CustomToolNamespace>MVCVisualDesigner.CodeGenerator</CustomToolNamespace>
     </None>
     <None Include="RazorCodeGenerator\VDConditionRazorCodeGeneratorImpl.tt">

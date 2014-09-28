@@ -40,6 +40,16 @@
 /Debugging/MVCVisualDesignerReport.txt
 /Debugging/MVCVisualDesignerReportVB.txt
 
+
+#
+# Debugging Web Project
+#
+/DebuggingWeb/TestWebApp/bin/
+/DebuggingWeb/TestWebApp/obj/
+/DebuggingWeb/packages/**
+!/DebuggingWeb/packages/repositories.config
+
+#
 /Dsl/CustomCode/FixUpDiagram.cs
 /Dsl/CustomCode/WidgetType.cs
 

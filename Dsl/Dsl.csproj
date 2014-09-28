@@ -114,6 +114,7 @@
     <Compile Include="CustomCode\Types\ITypeDescriptorProvider.cs" />
     <Compile Include="CustomCode\WidgetInfoManager.cs" />
     <Compile Include="CustomCode\Widgets\Alert_Confirm.cs" />
+    <Compile Include="CustomCode\Widgets\Button.cs" />
     <Compile Include="CustomCode\Widgets\CodeSnippet.cs" />
     <Compile Include="CustomCode\Widgets\Condition.cs" />
     <Compile Include="CustomCode\Widgets\Container.cs" />

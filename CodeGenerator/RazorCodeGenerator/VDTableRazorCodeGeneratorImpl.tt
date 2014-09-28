@@ -18,13 +18,10 @@
 #>
     <thead>
 <#
-        foreach(VDTableRow row in headRows)
-        {
-            ICodeGenerator rowCG = this.CodeGeneratorFactory.GetCodeGenerator(row);
-            this.PushIndent("        ");
-#><#= rowCG.GenerateCode(this.CodeGeneratorFactory, this.WalkerFactory) #><#
-            this.PopIndent();
-        }
+        ICodeGenerator cg = this.CodeGeneratorFactory.GetCodeGenerator(table.TableHeadContainer);
+        this.PushIndent("        ");
+#><#= cg.GenerateCode(this.CodeGeneratorFactory, this.WalkerFactory) #><#
+        this.PopIndent();
 #>
 
     </thead>
@@ -36,13 +33,10 @@
 #>
     <tbody>
 <#
-        foreach(VDTableRow row in bodyRows)
-        {
-            ICodeGenerator rowCG = this.CodeGeneratorFactory.GetCodeGenerator(row);
-            this.PushIndent("        ");
-#><#= rowCG.GenerateCode(this.CodeGeneratorFactory, this.WalkerFactory) #><#
-            this.PopIndent();
-        }
+        ICodeGenerator cg = this.CodeGeneratorFactory.GetCodeGenerator(table.TableBodyContainer);
+        this.PushIndent("        ");
+#><#= cg.GenerateCode(this.CodeGeneratorFactory, this.WalkerFactory) #><#
+        this.PopIndent();
 #>
     
     </tbody>
@@ -54,13 +48,10 @@
 #>
     <tfoot>
 <#
-        foreach(VDTableRow row in footRows)
-        {
-            ICodeGenerator rowCG = this.CodeGeneratorFactory.GetCodeGenerator(row);
-            this.PushIndent("        ");
-#><#= rowCG.GenerateCode(this.CodeGeneratorFactory, this.WalkerFactory) #><#
-            this.PopIndent();
-        }
+        ICodeGenerator cg = this.CodeGeneratorFactory.GetCodeGenerator(table.TableFootContainer);
+        this.PushIndent("        ");
+#><#= cg.GenerateCode(this.CodeGeneratorFactory, this.WalkerFactory) #><#
+        this.PopIndent();
 #>
  
     </tfoot>

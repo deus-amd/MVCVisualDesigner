@@ -4,7 +4,7 @@ string[] WidgetList = new string[]{
 	"VDView",
 	"VDPartialView",
 	"VDSection",
-	//"VDButton",
+	"VDButton",
 	"VDForm",
 	"VDRadio",
 	"VDCheckBox",

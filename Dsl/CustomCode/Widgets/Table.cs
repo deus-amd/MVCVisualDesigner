@@ -470,6 +470,17 @@ namespace MVCVisualDesigner
             }
         }
 
+        public bool IsTableFootCell
+        {
+            get
+            {
+                if (this.ParentRow != null)
+                    return this.ParentRow.RowType == E_RowType.FootRow;
+                else
+                    return false;
+            }
+        }
+
         protected override bool PropagateDeletingToParent { get { return true; } }
 
         internal sealed partial class RowSpanPropertyHandler : DomainPropertyValueHandler<VDTableCell, UInt32>
@@ -552,6 +563,30 @@ namespace MVCVisualDesigner
 
                 base.OnValueChanging(tableCell, oldValue, newValue);
             }
+        }
+
+        // handle cell name
+        internal override string GetWidgetNameValue()
+        {
+            // has specified a name 
+            if (!string.IsNullOrEmpty(base.GetWidgetNameValue()))
+                return base.GetWidgetNameValue();
+
+            // use header name otherwise
+            if (this.ParentRow != null && this.ParentRow.RowType != E_RowType.HeadRow && this.ParentRow.Table != null)
+            {
+                List<VDTableRow> headRows = this.ParentRow.Table.HeadRows;
+                foreach(VDTableRow headRow in headRows)
+                {
+                    VDTableCell headCell = headRow.GetChildren<VDTableCell>().Find(hcell => 
+                                                hcell.ColSpan == this.ColSpan 
+                                              && hcell.Col == this.Col 
+                                              && !string.IsNullOrEmpty(hcell.m_WidgetName));
+                    if (headCell != null) return headCell.m_WidgetName;
+                }
+            }
+
+            return base.GetWidgetNameValue();
         }
     }
 
@@ -1027,7 +1062,7 @@ namespace MVCVisualDesigner
         }
     }
 
-    public partial class VDTableCellShape
+    public partial class VDTableCellShapeBase
     {
         [CLSCompliant(false)]
         public uint GetColSpanValue()
@@ -1042,9 +1077,9 @@ namespace MVCVisualDesigner
             if (this.ModelElement != null) { this.GetMEL<VDTableCell>().ColSpan = newvalue; }
         }
 
-        internal sealed partial class ColSpanPropertyHandler : DomainPropertyValueHandler<VDTableCellShape, UInt32>
+        internal sealed partial class ColSpanPropertyHandler : DomainPropertyValueHandler<VDTableCellShapeBase, UInt32>
         {
-            protected override void OnValueChanged(VDTableCellShape element, uint oldValue, uint newValue)
+            protected override void OnValueChanged(VDTableCellShapeBase element, uint oldValue, uint newValue)
             {
                 base.OnValueChanged(element, oldValue, newValue);
 
@@ -1068,9 +1103,9 @@ namespace MVCVisualDesigner
             if (this.ModelElement != null) { this.GetMEL<VDTableCell>().RowSpan = newvalue; }
         }
 
-        internal sealed partial class RowSpanPropertyHandler : DomainPropertyValueHandler<VDTableCellShape, UInt32>
+        internal sealed partial class RowSpanPropertyHandler : DomainPropertyValueHandler<VDTableCellShapeBase, UInt32>
         {
-            protected override void OnValueChanged(VDTableCellShape element, uint oldValue, uint newValue)
+            protected override void OnValueChanged(VDTableCellShapeBase element, uint oldValue, uint newValue)
             {
                 base.OnValueChanged(element, oldValue, newValue);
 
@@ -1137,6 +1172,35 @@ namespace MVCVisualDesigner
                 }
 
                 return compliantBounds;
+            }
+        }
+    }
+
+    public partial class VDTableCellShape
+    {
+        protected StyleSetResourceId m_headBrushId = new StyleSetResourceId("MVDesigner", "TableHeadCellBrush");
+        protected StyleSetResourceId m_footBrushId = new StyleSetResourceId("MVDesigner", "TableFootCellBrush");
+
+        protected override void InitializeResources(StyleSet classStyleSet)
+        {
+            base.InitializeResources(classStyleSet);
+            classStyleSet.AddBrush(m_headBrushId, m_headBrushId, new BrushSettings() { Color = Color.LightSkyBlue });
+            classStyleSet.AddBrush(m_footBrushId, m_footBrushId, new BrushSettings() { Color = Color.LightSkyBlue });
+        }
+
+        public override StyleSetResourceId BackgroundBrushId
+        {
+            get
+            {
+                VDTableCell cell = GetMEL<VDTableCell>();
+                if (cell != null)
+                {
+                    if (cell.IsTableHeadCell)
+                        return m_headBrushId;
+                    else if (cell.IsTableFootCell)
+                        return m_footBrushId;
+                }
+                return base.BackgroundBrushId;
             }
         }
     }
@@ -1365,5 +1429,15 @@ namespace MVCVisualDesigner
                 cells.ForEach(c => c.Size = SizeD.Empty); // trigger bounds rules
             }
         }
+    }
+
+    public partial class VDEvent2ComponentConnector
+    {
+        public override bool CanMoveAnchorPoints { get { return true; } }
+    }
+
+    public partial class VDActionJoint2ComponentConnector
+    {
+        public override bool CanMoveAnchorPoints { get { return true; } }
     }
 }

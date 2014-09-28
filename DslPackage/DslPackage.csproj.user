@@ -3,4 +3,10 @@
   <PropertyGroup>
     <ProjectView>ProjectFiles</ProjectView>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <StartArguments>/rootsuffix Exp "..\..\..\DebuggingWeb\TestWebApp.sln"</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <StartArguments>/rootsuffix Exp "..\..\..\DebuggingWeb\TestWebApp.sln"</StartArguments>
+  </PropertyGroup>
 </Project>

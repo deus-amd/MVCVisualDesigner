@@ -55,12 +55,12 @@ namespace MVCVisualDesigner
 
         public Control SettingControl { get { return internalSettingControl; } }
 
-        private JavaScriptGeneratorOptionUI m_settingControl;
-        private JavaScriptGeneratorOptionUI internalSettingControl
+        private RazorGeneratorOptionUI m_settingControl;
+        private RazorGeneratorOptionUI internalSettingControl
         {
             get
             {
-                if (m_settingControl == null) m_settingControl = new JavaScriptGeneratorOptionUI();
+                if (m_settingControl == null) m_settingControl = new RazorGeneratorOptionUI();
                 return m_settingControl; 
             }
         }

@@ -21,7 +21,7 @@
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
         </DomainProperty>
-        <DomainProperty Id="2262ee8c-8983-4d6b-b640-6321f3358337" Description="Widget Name, can be empty and duplicated?" Name="WidgetName" DisplayName="Widget Name" Category="Definition" IsElementName="true">
+        <DomainProperty Id="2262ee8c-8983-4d6b-b640-6321f3358337" Description="Widget Name, can be empty and duplicated?" Name="WidgetName" DisplayName="Widget Name" Kind="CustomStorage" Category="Definition" IsElementName="true">
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
@@ -1246,6 +1246,18 @@
         <DomainClassMoniker Name="VDConcreteType" />
       </BaseClass>
     </DomainClass>
+    <DomainClass Id="f7f03bb3-55ab-4f4f-900b-cace1474e4eb" Description="Description for MVCVisualDesigner.VDButton" Name="VDButton" DisplayName="VDButton" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDViewComponent" />
+      </BaseClass>
+      <Properties>
+        <DomainProperty Id="334c1f24-18b8-4851-93f6-e1761e7244fa" Description="Description for MVCVisualDesigner.VDButton.Text" Name="Text" DisplayName="Text">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+    </DomainClass>
   </Classes>
   <Relationships>
     <DomainRelationship Id="8491408d-7160-4a47-9979-e0dab01d52b3" Description="Description for MVCVisualDesigner.WidgetHasChildren" Name="WidgetHasChildren" DisplayName="Widget Has Children" Namespace="MVCVisualDesigner" IsEmbedding="true">
@@ -2313,7 +2325,7 @@
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="a53c8579-f624-4ce8-999f-3429d9013df2" Description="Description for MVCVisualDesigner.VDTableCellShape" Name="VDTableCellShape" DisplayName="VDTable Cell Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDTable Cell Shape" OutlineColor="RoyalBlue" InitialHeight="1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+    <GeometryShape Id="a53c8579-f624-4ce8-999f-3429d9013df2" Description="Description for MVCVisualDesigner.VDTableCellShape" Name="VDTableCellShape" DisplayName="VDTable Cell Shape" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="VDTable Cell Shape" FillColor="AliceBlue" OutlineColor="RoyalBlue" InitialHeight="1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
@@ -2357,7 +2369,7 @@
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="af958aed-29f3-42fc-a7b6-b58bfdf8d83e" Description="Description for MVCVisualDesigner.VDCodeSnippetShape" Name="VDCodeSnippetShape" DisplayName="VDCode Snippet Shape" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="VDCode Snippet Shape" InitialHeight="1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+    <GeometryShape Id="af958aed-29f3-42fc-a7b6-b58bfdf8d83e" Description="Description for MVCVisualDesigner.VDCodeSnippetShape" Name="VDCodeSnippetShape" DisplayName="VDCode Snippet Shape" Namespace="MVCVisualDesigner" GeneratesDoubleDerived="true" FixedTooltipText="VDCode Snippet Shape" FillColor="DarkGray" InitialHeight="1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
@@ -2480,6 +2492,14 @@
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
+    </GeometryShape>
+    <GeometryShape Id="c2aec4c5-d146-4734-abc7-429d4b2bf2b4" Description="Description for MVCVisualDesigner.VDButtonShape" Name="VDButtonShape" DisplayName="VDButton Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDButton Shape" TextColor="Blue" FillColor="Azure" OutlineColor="RoyalBlue" InitialWidth="0.5" InitialHeight="0.15" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+      <ShapeHasDecorators Position="InnerMiddleLeft" HorizontalOffset="0" VerticalOffset="0">
+        <TextDecorator Name="TextDecorator" DisplayName="Text Decorator" DefaultText="TextDecorator" FontStyle="Underline" />
+      </ShapeHasDecorators>
     </GeometryShape>
   </Shapes>
   <Connectors>
@@ -3584,6 +3604,17 @@
       <XmlClassData TypeName="ViewHasModel" MonikerAttributeName="" SerializeId="true" MonikerElementName="viewHasModelMoniker" ElementName="viewHasModel" MonikerTypeName="ViewHasModelMoniker">
         <DomainRelationshipMoniker Name="ViewHasModel" />
       </XmlClassData>
+      <XmlClassData TypeName="VDButton" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDButtonMoniker" ElementName="vDButton" MonikerTypeName="VDButtonMoniker">
+        <DomainClassMoniker Name="VDButton" />
+        <ElementData>
+          <XmlPropertyData XmlName="text">
+            <DomainPropertyMoniker Name="VDButton/Text" />
+          </XmlPropertyData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="VDButtonShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDButtonShapeMoniker" ElementName="vDButtonShape" MonikerTypeName="VDButtonShapeMoniker">
+        <GeometryShapeMoniker Name="VDButtonShape" />
+      </XmlClassData>
     </ClassData>
   </XmlSerializationBehavior>
   <ExplorerBehavior Name="MVCVisualDesignerExplorer">
@@ -4631,6 +4662,18 @@
         <DomainClassMoniker Name="VDCondition" />
         <GeometryShapeMoniker Name="VDConditionShape" />
       </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDButton" />
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDButtonShape/TextDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="VDButton/Text" />
+            </PropertyPath>
+          </PropertyDisplayed>
+        </DecoratorMap>
+        <GeometryShapeMoniker Name="VDButtonShape" />
+      </ShapeMap>
     </ShapeMaps>
     <ConnectorMaps>
       <ConnectorMap>
@@ -4674,6 +4717,9 @@
       </ElementTool>
       <ElementTool Name="MessagePanelTool" ToolboxIcon="Resources\List_Bullets.bmp" Caption="Message Panel" Tooltip="" HelpKeyword="MessagePanelTool">
         <DomainClassMoniker Name="VDMessagePanel" />
+      </ElementTool>
+      <ElementTool Name="ButtonTool" ToolboxIcon="Resources\Button_668_24.bmp" Caption="Button" Tooltip="" HelpKeyword="ButtonTool">
+        <DomainClassMoniker Name="VDButton" />
       </ElementTool>
     </ToolboxTab>
     <ToolboxTab TabText="Form">

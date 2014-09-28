@@ -9,12 +9,15 @@ foreach(VDWidget child in walker)
     }
 
     var cg = this.CodeGeneratorFactory.GetCodeGenerator(child);
+    if (cg != null)
+    {
 #><#= cg.GenerateCode(this.CodeGeneratorFactory, this.WalkerFactory) #><#
 
-    // post code
-    if (!(child is VDCodeSnippet))
-    {
-        #><#= VDWidget.GetPostCodeSnippet(child.CodeSnippet) #><#
+        // post code
+        if (!(child is VDCodeSnippet))
+        {
+#><#= VDWidget.GetPostCodeSnippet(child.CodeSnippet) #><#
+        }
     }
 }
 #>
