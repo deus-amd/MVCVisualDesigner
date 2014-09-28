@@ -1258,6 +1258,28 @@
         </DomainProperty>
       </Properties>
     </DomainClass>
+    <DomainClass Id="48f95349-715d-4f11-b538-1fda50e270d3" Description="Description for MVCVisualDesigner.VDActionResult" Name="VDActionResult" DisplayName="VDAction Result" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDViewComponent" />
+      </BaseClass>
+      <Properties>
+        <DomainProperty Id="1325700c-4ba8-47d0-9dfb-a5fe5ba3366d" Description="Description for MVCVisualDesigner.VDActionResult.Description" Name="Description" DisplayName="Description" Kind="Calculated" IsBrowsable="false" IsUIReadOnly="true">
+          <Type>
+            <ExternalTypeMoniker Name="/System/String" />
+          </Type>
+        </DomainProperty>
+      </Properties>
+    </DomainClass>
+    <DomainClass Id="a20566c3-4a75-4df0-b6dc-662b470501f1" Description="Description for MVCVisualDesigner.VDPartialViewResult" Name="VDPartialViewResult" DisplayName="VDPartial View Result" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDActionResult" />
+      </BaseClass>
+    </DomainClass>
+    <DomainClass Id="95eb6a74-64b5-4c9e-bb12-3d5780eb3eae" Description="Description for MVCVisualDesigner.VDJSONResult" Name="VDJSONResult" DisplayName="VDJSONResult" Namespace="MVCVisualDesigner">
+      <BaseClass>
+        <DomainClassMoniker Name="VDActionResult" />
+      </BaseClass>
+    </DomainClass>
   </Classes>
   <Relationships>
     <DomainRelationship Id="8491408d-7160-4a47-9979-e0dab01d52b3" Description="Description for MVCVisualDesigner.WidgetHasChildren" Name="WidgetHasChildren" DisplayName="Widget Has Children" Namespace="MVCVisualDesigner" IsEmbedding="true">
@@ -2501,6 +2523,24 @@
         <TextDecorator Name="TextDecorator" DisplayName="Text Decorator" DefaultText="TextDecorator" FontStyle="Underline" />
       </ShapeHasDecorators>
     </GeometryShape>
+    <GeometryShape Id="62797253-0326-443f-bcc0-cd0556d50d18" Description="Description for MVCVisualDesigner.VDActionResultShape" Name="VDActionResultShape" DisplayName="VDAction Result Shape" InheritanceModifier="Abstract" Namespace="MVCVisualDesigner" FixedTooltipText="VDAction Result Shape" InitialHeight="1" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDWidgetShape" />
+      </BaseGeometryShape>
+      <ShapeHasDecorators Position="Center" HorizontalOffset="0" VerticalOffset="0">
+        <TextDecorator Name="DescriptionTextDecorator" DisplayName="Description Text Decorator" DefaultText="DescriptionTextDecorator" FontStyle="Bold" FontSize="20" />
+      </ShapeHasDecorators>
+    </GeometryShape>
+    <GeometryShape Id="43637415-2d3c-46bc-b22e-34196f8f1f69" Description="Description for MVCVisualDesigner.VDPartialViewResultShape" Name="VDPartialViewResultShape" DisplayName="VDPartial View Result Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDPartial View Result Shape" TextColor="IndianRed" FillColor="MistyRose" OutlineColor="Maroon" InitialHeight="0.4" OutlineDashStyle="Dash" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDActionResultShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
+    <GeometryShape Id="82676f5f-5eea-4602-b9c2-b09e15f2b865" Description="Description for MVCVisualDesigner.VDJSONResultShape" Name="VDJSONResultShape" DisplayName="VDJSONResult Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDJSONResult Shape" TextColor="IndianRed" FillColor="MistyRose" OutlineColor="Maroon" InitialHeight="0.4" OutlineDashStyle="Dash" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+      <BaseGeometryShape>
+        <GeometryShapeMoniker Name="VDActionResultShape" />
+      </BaseGeometryShape>
+    </GeometryShape>
   </Shapes>
   <Connectors>
     <Connector Id="70b7f30a-758e-457f-8423-15ba1ae06ac4" Description="Description for MVCVisualDesigner.VDActionJoint2ComponentConnector" Name="VDActionJoint2ComponentConnector" DisplayName="VDAction Joint2 Component Connector" Namespace="MVCVisualDesigner" FixedTooltipText="VDAction Joint2 Component Connector" Color="DarkGreen" TargetEndStyle="FilledArrow" Thickness="0.01" />
@@ -3615,6 +3655,29 @@
       <XmlClassData TypeName="VDButtonShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDButtonShapeMoniker" ElementName="vDButtonShape" MonikerTypeName="VDButtonShapeMoniker">
         <GeometryShapeMoniker Name="VDButtonShape" />
       </XmlClassData>
+      <XmlClassData TypeName="VDActionResult" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDActionResultMoniker" ElementName="vDActionResult" MonikerTypeName="VDActionResultMoniker">
+        <DomainClassMoniker Name="VDActionResult" />
+        <ElementData>
+          <XmlPropertyData XmlName="description" Representation="Ignore">
+            <DomainPropertyMoniker Name="VDActionResult/Description" />
+          </XmlPropertyData>
+        </ElementData>
+      </XmlClassData>
+      <XmlClassData TypeName="VDPartialViewResult" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDPartialViewResultMoniker" ElementName="vDPartialViewResult" MonikerTypeName="VDPartialViewResultMoniker">
+        <DomainClassMoniker Name="VDPartialViewResult" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDJSONResult" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDJSONResultMoniker" ElementName="vDJSONResult" MonikerTypeName="VDJSONResultMoniker">
+        <DomainClassMoniker Name="VDJSONResult" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDActionResultShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDActionResultShapeMoniker" ElementName="vDActionResultShape" MonikerTypeName="VDActionResultShapeMoniker">
+        <GeometryShapeMoniker Name="VDActionResultShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDPartialViewResultShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDPartialViewResultShapeMoniker" ElementName="vDPartialViewResultShape" MonikerTypeName="VDPartialViewResultShapeMoniker">
+        <GeometryShapeMoniker Name="VDPartialViewResultShape" />
+      </XmlClassData>
+      <XmlClassData TypeName="VDJSONResultShape" MonikerAttributeName="" SerializeId="true" MonikerElementName="vDJSONResultShapeMoniker" ElementName="vDJSONResultShape" MonikerTypeName="VDJSONResultShapeMoniker">
+        <GeometryShapeMoniker Name="VDJSONResultShape" />
+      </XmlClassData>
     </ClassData>
   </XmlSerializationBehavior>
   <ExplorerBehavior Name="MVCVisualDesignerExplorer">
@@ -4674,6 +4737,30 @@
         </DecoratorMap>
         <GeometryShapeMoniker Name="VDButtonShape" />
       </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDJSONResult" />
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDActionResultShape/DescriptionTextDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="VDActionResult/Description" />
+            </PropertyPath>
+          </PropertyDisplayed>
+        </DecoratorMap>
+        <GeometryShapeMoniker Name="VDJSONResultShape" />
+      </ShapeMap>
+      <ShapeMap HasCustomParentElement="true">
+        <DomainClassMoniker Name="VDPartialViewResult" />
+        <DecoratorMap>
+          <TextDecoratorMoniker Name="VDActionResultShape/DescriptionTextDecorator" />
+          <PropertyDisplayed>
+            <PropertyPath>
+              <DomainPropertyMoniker Name="VDActionResult/Description" />
+            </PropertyPath>
+          </PropertyDisplayed>
+        </DecoratorMap>
+        <GeometryShapeMoniker Name="VDPartialViewResultShape" />
+      </ShapeMap>
     </ShapeMaps>
     <ConnectorMaps>
       <ConnectorMap>
@@ -4758,13 +4845,19 @@
       <ElementTool Name="IconTool" ToolboxIcon="Resources\DynamicImage_6024_24.bmp" Caption="Icon" Tooltip="" HelpKeyword="IconTool">
         <DomainClassMoniker Name="VDIcon" />
       </ElementTool>
-      <ConnectionTool Name="EventConnectionTool" ToolboxIcon="Resources\VSObject_Event.bmp" Caption="Event" Tooltip="Event Connection Tool" HelpKeyword="">
-        <ConnectionBuilderMoniker Name="MVCVisualDesigner/EventBuilder" />
-      </ConnectionTool>
     </ToolboxTab>
     <ToolboxTab TabText="Action">
       <ElementTool Name="ConditionTool" ToolboxIcon="Resources\Filter.bmp" Caption="Condition" Tooltip="" HelpKeyword="ConditionTool">
         <DomainClassMoniker Name="VDCondition" />
+      </ElementTool>
+      <ConnectionTool Name="EventConnectionTool" ToolboxIcon="Resources\VSObject_Event.bmp" Caption="Event" Tooltip="Event Connection Tool" HelpKeyword="">
+        <ConnectionBuilderMoniker Name="MVCVisualDesigner/EventBuilder" />
+      </ConnectionTool>
+      <ElementTool Name="JSONResultTool" ToolboxIcon="Resources\Namespace_24.bmp" Caption="JSON Result" Tooltip="" HelpKeyword="JSONResultTool">
+        <DomainClassMoniker Name="VDJSONResult" />
+      </ElementTool>
+      <ElementTool Name="PartialViewResultTool" ToolboxIcon="Resources\MediaType_183_24.bmp" Caption="Partial View Result" Tooltip="" HelpKeyword="PartialViewResultTool">
+        <DomainClassMoniker Name="VDPartialViewResult" />
       </ElementTool>
     </ToolboxTab>
     <Validation UsesMenu="false" UsesOpen="false" UsesSave="false" UsesLoad="false" />

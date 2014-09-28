@@ -11,6 +11,8 @@
             "VDConfirmDialog",
             "VDClientAction",
             "VDServerAction",
+            "VDPartialViewResult",
+            "VDJSONResult",
         };
 
         public static HashSet<string> DefaultGenerators = new HashSet<string>()

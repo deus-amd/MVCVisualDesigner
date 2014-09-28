@@ -32,6 +32,10 @@ string[] WidgetList = new string[]{
 	"VDServerAction",
 	"VDCondition",
 
+	// Action Result
+	"VDPartialViewResult",
+	"VDJSONResult",
+
 	// Utilities
 	"VDHoriSeparator",
 	"VDVertSeparator",
