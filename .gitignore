@@ -62,6 +62,10 @@
 /CodeGenerator/RazorCodeGenerator/DefaultRazorCodeGeneratorImpl.cs
 /CodeGenerator/ModelCodeGenerator/CSModelGenerator.cs
 
+/CodeGenerator/JavaScriptCodeGenerator/JavaScriptCodeGenerator.cs
+/CodeGenerator/JavaScriptCodeGenerator/DefaultJavaScriptCodeGeneratorImpl.cs
+/CodeGenerator/JavaScriptCodeGenerator/VD*Impl.cs
+
 /Dsl/CustomCode/Diagram_BindFields.cs
 
 /Utility/bin/

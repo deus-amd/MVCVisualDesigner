@@ -40,14 +40,17 @@ namespace MVCVisualDesigner
                     new ClientActionInfo("Hide", "JS Action"), 
                     new ClientActionInfo("Add", "JS Action"), 
                     new ClientActionInfo("Delete", "JS Action"), 
-                    new ClientActionInfo("Replace", "JS Action") });
+                    new ClientActionInfo("Replace", "JS Action"),
+                    new ClientActionInfo("Replace Content", "JS Action"),
+            });
 
             m_joints = new Dictionary<string, List<IActionJointInfo>>();
             m_joints.Add("Replace", new List<IActionJointInfo>() { 
                     new ActionJointInfo("Replace", "Of"), 
                     new ActionJointInfo("Replace", "With") });
 
-            m_actions["JS Action"][2].Joints.AddRange(m_joints["Replace"]);
+            m_actions["JS Action"][4].Joints.AddRange(m_joints["Replace"]);
+            m_actions["JS Action"][5].Joints.AddRange(m_joints["Replace"]);
         }
 
         public List<IEventInfo> GetSupportedEventList(WidgetType wt)

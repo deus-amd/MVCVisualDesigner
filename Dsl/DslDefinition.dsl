@@ -2548,15 +2548,15 @@
         <GeometryShapeMoniker Name="VDWidgetShape" />
       </BaseGeometryShape>
       <ShapeHasDecorators Position="Center" HorizontalOffset="0" VerticalOffset="0">
-        <TextDecorator Name="DescriptionTextDecorator" DisplayName="Description Text Decorator" DefaultText="DescriptionTextDecorator" FontStyle="Bold" FontSize="20" />
+        <TextDecorator Name="DescriptionTextDecorator" DisplayName="Description Text Decorator" DefaultText="DescriptionTextDecorator" FontStyle="Bold" FontSize="16" />
       </ShapeHasDecorators>
     </GeometryShape>
-    <GeometryShape Id="43637415-2d3c-46bc-b22e-34196f8f1f69" Description="Description for MVCVisualDesigner.VDPartialViewResultShape" Name="VDPartialViewResultShape" DisplayName="VDPartial View Result Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDPartial View Result Shape" TextColor="IndianRed" FillColor="MistyRose" OutlineColor="Maroon" InitialHeight="0.4" OutlineDashStyle="Dash" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+    <GeometryShape Id="43637415-2d3c-46bc-b22e-34196f8f1f69" Description="Description for MVCVisualDesigner.VDPartialViewResultShape" Name="VDPartialViewResultShape" DisplayName="VDPartial View Result Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDPartial View Result Shape" TextColor="LightCoral" FillColor="MistyRose" OutlineColor="Maroon" InitialHeight="0.4" OutlineDashStyle="Dash" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDActionResultShape" />
       </BaseGeometryShape>
     </GeometryShape>
-    <GeometryShape Id="82676f5f-5eea-4602-b9c2-b09e15f2b865" Description="Description for MVCVisualDesigner.VDJSONResultShape" Name="VDJSONResultShape" DisplayName="VDJSONResult Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDJSONResult Shape" TextColor="IndianRed" FillColor="MistyRose" OutlineColor="Maroon" InitialHeight="0.4" OutlineDashStyle="Dash" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
+    <GeometryShape Id="82676f5f-5eea-4602-b9c2-b09e15f2b865" Description="Description for MVCVisualDesigner.VDJSONResultShape" Name="VDJSONResultShape" DisplayName="VDJSONResult Shape" Namespace="MVCVisualDesigner" FixedTooltipText="VDJSONResult Shape" TextColor="LightCoral" FillColor="MistyRose" OutlineColor="Maroon" InitialHeight="0.4" OutlineDashStyle="Dash" OutlineThickness="0.01" FillGradientMode="None" Geometry="Rectangle">
       <BaseGeometryShape>
         <GeometryShapeMoniker Name="VDActionResultShape" />
       </BaseGeometryShape>
