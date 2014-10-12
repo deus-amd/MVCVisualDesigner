@@ -265,10 +265,10 @@
     <widgetHasChildren Id="75fb9bd2-97a3-4927-bcb2-d7c47baa6b88">
       <vDServerAction Id="26f0ac2c-9c76-49d2-ba21-085baf7b58c5" moreHTMLAttributes="AAEAAAD/////AQAAAAAAAAAMAgAAAFhNVkNWaXN1YWxEZXNpZ25lci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1lODRjOWNmNDk0ODU0OTYyBAEAAACeAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZSwgTVZDVmlzdWFsRGVzaWduZXIuRHNsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49ZTg0YzljZjQ5NDg1NDk2Ml1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAhTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZVtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB9NVkNWaXN1YWxEZXNpZ25lci5IVE1MQXR0cmlidXRlAgAAAAs=" classAttribute="" iDAttribute="" settings="AAEAAAD/////AQAAAAAAAAAEAQAAAOABU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlvbmFyeWAyW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlN0cmluZywgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAAB1ZlcnNpb24IQ29tcGFyZXIISGFzaFNpemUAAwAIkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0IAAAAAAkCAAAAAAAAAAQCAAAAkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0AAAAACw==" name="DeleteFriendInfo">
         <actionJoints>
-          <widgetHasActionJoints Id="3a0d3061-f6f2-4a08-954f-dd5fddebe55b">
-            <vDActionJoint Id="1b66fe91-88c7-49e0-aa75-bc1f8bf59926" name="Result" category="Server">
+          <widgetHasActionJoints Id="3636c80f-6fa0-44f9-b90f-8a42ef2405d0">
+            <vDActionJoint Id="acb2214c-6886-4b60-b30f-85361361c219" name="Result" category="Server">
               <targetComponents>
-                <r_ActionJoint2Component Id="7306c20c-83eb-4a0f-b74d-9702b850b85e">
+                <r_ActionJoint2Component Id="f41ac22d-bf0e-4e45-a72b-649a318a98ef">
                   <vDPartialViewResultMoniker Id="fec52e92-8ad3-4fdf-9584-09944397a4d6" />
                 </r_ActionJoint2Component>
               </targetComponents>
@@ -401,7 +401,28 @@
             </vDPrimitiveType>
           </modelStoreHasTypeDefs>
           <modelStoreHasTypeDefs Id="0811ca8b-77cf-4ebc-b8c0-536ad8c6f7be">
-            <vDCustomType Id="407d0176-d74b-415c-aa78-c9af8b31378b" name="{}" />
+            <vDCustomType Id="407d0176-d74b-415c-aa78-c9af8b31378b" name="{}">
+              <members>
+                <metaTypeHasMembers Id="521c25dd-9050-4599-8830-18b73d763088">
+                  <vDProperty Id="5699d1b2-6e64-45fd-bd43-a0dcba6bf339" name="FirstName">
+                    <type>
+                      <typeOfMetaMember Id="21d8d069-1617-4ce3-8597-c6010e7cbdb4">
+                        <vDPrimitiveTypeMoniker Id="c7251b12-3f08-4097-af78-fc7175dba02f" />
+                      </typeOfMetaMember>
+                    </type>
+                  </vDProperty>
+                </metaTypeHasMembers>
+                <metaTypeHasMembers Id="67c691aa-eaa8-4a22-80b4-8aa93d2124b1">
+                  <vDProperty Id="52df9539-b657-4e30-a5d4-10803ce0be0a" name="LastName">
+                    <type>
+                      <typeOfMetaMember Id="bfba3157-750b-4562-85e0-fe86d1a1fe69">
+                        <vDPrimitiveTypeMoniker Id="c7251b12-3f08-4097-af78-fc7175dba02f" />
+                      </typeOfMetaMember>
+                    </type>
+                  </vDProperty>
+                </metaTypeHasMembers>
+              </members>
+            </vDCustomType>
           </modelStoreHasTypeDefs>
         </metaTypes>
         <concreteTypes>
@@ -703,6 +724,36 @@
           </modelStoreHasTypeInsts>
           <modelStoreHasTypeInsts Id="b8dc845c-91d9-4ec5-b5ee-43095c7f9447">
             <vDActionData Id="f9bbb737-ed6a-4e3d-bf2b-242474b05aa0" name="{}">
+              <members>
+                <concreteTypeHasMembers Id="17aac878-21c1-4cfb-9831-8b971212e448">
+                  <vDActionDataMember Id="288868d8-b910-459d-98ec-5bf4713232d1" name="FirstName">
+                    <type>
+                      <typeOfConcreteMember Id="4a705cc9-4ed0-446e-b587-d225bfc9748c">
+                        <vDPrimitiveMemberTypeMoniker Id="b9b02f2b-3356-41a5-9e41-221b334df2a4" />
+                      </typeOfConcreteMember>
+                    </type>
+                    <meta>
+                      <concreteMemberRefersMeta Id="5ff5fb59-c5ba-45f8-a2d1-a125ae522990">
+                        <vDPropertyMoniker Id="5699d1b2-6e64-45fd-bd43-a0dcba6bf339" />
+                      </concreteMemberRefersMeta>
+                    </meta>
+                  </vDActionDataMember>
+                </concreteTypeHasMembers>
+                <concreteTypeHasMembers Id="2d9575b8-de9a-47d9-af3d-68fe25784cfb">
+                  <vDActionDataMember Id="977f6de8-737b-470f-9656-8f146c946595" name="LastName">
+                    <type>
+                      <typeOfConcreteMember Id="928eb2eb-44d0-4df9-9cea-ef392c01faf9">
+                        <vDPrimitiveMemberTypeMoniker Id="b9b02f2b-3356-41a5-9e41-221b334df2a4" />
+                      </typeOfConcreteMember>
+                    </type>
+                    <meta>
+                      <concreteMemberRefersMeta Id="926d52d5-3ab7-4618-8f0a-7b61e8bb47bf">
+                        <vDPropertyMoniker Id="52df9539-b657-4e30-a5d4-10803ce0be0a" />
+                      </concreteMemberRefersMeta>
+                    </meta>
+                  </vDActionDataMember>
+                </concreteTypeHasMembers>
+              </members>
               <meta>
                 <concreteTypeRefersMeta Id="f8a1a779-111b-4eaf-b86c-098d66d7d48d">
                   <vDCustomTypeMoniker Id="407d0176-d74b-415c-aa78-c9af8b31378b" />
@@ -712,6 +763,36 @@
           </modelStoreHasTypeInsts>
           <modelStoreHasTypeInsts Id="81ff354c-6029-45a2-babf-b47a64f4f2e3">
             <vDActionData Id="297b6102-2586-4738-b341-2de362763808" name="{}">
+              <members>
+                <concreteTypeHasMembers Id="18ed5cba-7d85-4c31-a36b-0150181214f0">
+                  <vDActionDataMember Id="3751fbc5-e291-40fc-831e-7432201963a1" name="FirstName">
+                    <type>
+                      <typeOfConcreteMember Id="f5f8639b-1aed-4ec4-bfec-cb2ac015883a">
+                        <vDPrimitiveMemberTypeMoniker Id="b9b02f2b-3356-41a5-9e41-221b334df2a4" />
+                      </typeOfConcreteMember>
+                    </type>
+                    <meta>
+                      <concreteMemberRefersMeta Id="7c99da2f-0f9e-4fdb-a07c-ed0040643c98">
+                        <vDPropertyMoniker Id="5699d1b2-6e64-45fd-bd43-a0dcba6bf339" />
+                      </concreteMemberRefersMeta>
+                    </meta>
+                  </vDActionDataMember>
+                </concreteTypeHasMembers>
+                <concreteTypeHasMembers Id="ccc2cc65-b346-4f17-84bf-102e29e2d765">
+                  <vDActionDataMember Id="e72904f2-aada-4852-93c1-2dc0256b8932" name="LastName">
+                    <type>
+                      <typeOfConcreteMember Id="15c5b3ec-400e-4aa6-b809-8d37894549b5">
+                        <vDPrimitiveMemberTypeMoniker Id="b9b02f2b-3356-41a5-9e41-221b334df2a4" />
+                      </typeOfConcreteMember>
+                    </type>
+                    <meta>
+                      <concreteMemberRefersMeta Id="3ed92a36-5230-42c4-a403-c28fb11e2db9">
+                        <vDPropertyMoniker Id="52df9539-b657-4e30-a5d4-10803ce0be0a" />
+                      </concreteMemberRefersMeta>
+                    </meta>
+                  </vDActionDataMember>
+                </concreteTypeHasMembers>
+              </members>
               <meta>
                 <concreteTypeRefersMeta Id="405ec2b4-5dfc-47d9-8126-c63db324d8f7">
                   <vDCustomTypeMoniker Id="407d0176-d74b-415c-aa78-c9af8b31378b" />
@@ -721,6 +802,36 @@
           </modelStoreHasTypeInsts>
           <modelStoreHasTypeInsts Id="94da2e6e-bc07-4629-8a9e-f79714afcae8">
             <vDActionData Id="28b0af3c-8177-4198-8524-a0ee4948a857" name="{}">
+              <members>
+                <concreteTypeHasMembers Id="dd68844c-00b9-4d35-826d-422fa89866be">
+                  <vDActionDataMember Id="51cb2ec3-1b93-438c-9dcb-d91ea98507a8" name="FirstName">
+                    <type>
+                      <typeOfConcreteMember Id="569395fa-f1f4-45a8-919c-55c5bed78658">
+                        <vDPrimitiveMemberTypeMoniker Id="b9b02f2b-3356-41a5-9e41-221b334df2a4" />
+                      </typeOfConcreteMember>
+                    </type>
+                    <meta>
+                      <concreteMemberRefersMeta Id="5dd485d1-a77f-486b-b0af-ab9f022a909a">
+                        <vDPropertyMoniker Id="5699d1b2-6e64-45fd-bd43-a0dcba6bf339" />
+                      </concreteMemberRefersMeta>
+                    </meta>
+                  </vDActionDataMember>
+                </concreteTypeHasMembers>
+                <concreteTypeHasMembers Id="8d2eec19-98b1-4e26-b9a6-eb5bb2cf1059">
+                  <vDActionDataMember Id="2f3b800f-4658-4d9b-afd3-608f8110ef9f" name="LastName">
+                    <type>
+                      <typeOfConcreteMember Id="47c47558-0ac6-4212-9223-e3cd202cd3a2">
+                        <vDPrimitiveMemberTypeMoniker Id="b9b02f2b-3356-41a5-9e41-221b334df2a4" />
+                      </typeOfConcreteMember>
+                    </type>
+                    <meta>
+                      <concreteMemberRefersMeta Id="e139f65e-2318-49d3-83d3-39b0c8ddef01">
+                        <vDPropertyMoniker Id="52df9539-b657-4e30-a5d4-10803ce0be0a" />
+                      </concreteMemberRefersMeta>
+                    </meta>
+                  </vDActionDataMember>
+                </concreteTypeHasMembers>
+              </members>
               <meta>
                 <concreteTypeRefersMeta Id="6302a68e-72cf-4db6-b97b-4db42d3b8ae3">
                   <vDCustomTypeMoniker Id="407d0176-d74b-415c-aa78-c9af8b31378b" />
@@ -730,6 +841,36 @@
           </modelStoreHasTypeInsts>
           <modelStoreHasTypeInsts Id="cb3f1dac-71c6-4927-979c-7b0f5e34a8b9">
             <vDActionData Id="b1fd7657-9e81-4e53-ac24-896b1d9fa978" name="{}">
+              <members>
+                <concreteTypeHasMembers Id="118e55ea-2d37-49d4-bc6e-0afcbf1d7879">
+                  <vDActionDataMember Id="6a440e76-5b03-4715-9d32-dc2d16c93327" name="FirstName">
+                    <type>
+                      <typeOfConcreteMember Id="184d21e0-d7a1-4d54-b90c-98f21aa07a9b">
+                        <vDPrimitiveMemberTypeMoniker Id="b9b02f2b-3356-41a5-9e41-221b334df2a4" />
+                      </typeOfConcreteMember>
+                    </type>
+                    <meta>
+                      <concreteMemberRefersMeta Id="e1d5e9fd-66f2-4d5d-a99e-6633851639f6">
+                        <vDPropertyMoniker Id="5699d1b2-6e64-45fd-bd43-a0dcba6bf339" />
+                      </concreteMemberRefersMeta>
+                    </meta>
+                  </vDActionDataMember>
+                </concreteTypeHasMembers>
+                <concreteTypeHasMembers Id="3404ad14-8f45-44d5-8419-d7a4c47ae4d5">
+                  <vDActionDataMember Id="6855099f-1c8d-4e85-bf0d-920f94eca367" name="LastName">
+                    <type>
+                      <typeOfConcreteMember Id="0d9588f4-1ba0-42f9-baf4-5d075b1fd890">
+                        <vDPrimitiveMemberTypeMoniker Id="b9b02f2b-3356-41a5-9e41-221b334df2a4" />
+                      </typeOfConcreteMember>
+                    </type>
+                    <meta>
+                      <concreteMemberRefersMeta Id="12210e28-d8d3-4c01-82af-02bb1f8a0764">
+                        <vDPropertyMoniker Id="52df9539-b657-4e30-a5d4-10803ce0be0a" />
+                      </concreteMemberRefersMeta>
+                    </meta>
+                  </vDActionDataMember>
+                </concreteTypeHasMembers>
+              </members>
               <meta>
                 <concreteTypeRefersMeta Id="423898f0-5033-4ede-bec2-56d13db18e3b">
                   <vDCustomTypeMoniker Id="407d0176-d74b-415c-aa78-c9af8b31378b" />
@@ -739,6 +880,36 @@
           </modelStoreHasTypeInsts>
           <modelStoreHasTypeInsts Id="f0db12c5-3faa-42a0-8e06-73126a930ea6">
             <vDActionData Id="ba76cf0f-18e6-4fb5-a548-97a49252da92" name="{}">
+              <members>
+                <concreteTypeHasMembers Id="26207d25-9788-460a-b989-433a831890a3">
+                  <vDActionDataMember Id="497b4372-2cab-45f5-b394-b9d4011af387" name="FirstName" dataSource="FriendInfoRow.GetValue(&quot;FirstName&quot;)">
+                    <type>
+                      <typeOfConcreteMember Id="930c436e-5cc9-4e02-af2d-d6bcec760905">
+                        <vDPrimitiveMemberTypeMoniker Id="b9b02f2b-3356-41a5-9e41-221b334df2a4" />
+                      </typeOfConcreteMember>
+                    </type>
+                    <meta>
+                      <concreteMemberRefersMeta Id="89bc1d6c-c400-4c9a-ac62-15234bf89ad9">
+                        <vDPropertyMoniker Id="5699d1b2-6e64-45fd-bd43-a0dcba6bf339" />
+                      </concreteMemberRefersMeta>
+                    </meta>
+                  </vDActionDataMember>
+                </concreteTypeHasMembers>
+                <concreteTypeHasMembers Id="458a9af6-ad5d-4a1d-a04e-c57e3a4c9a40">
+                  <vDActionDataMember Id="6985ecca-231a-4836-970a-9192669ec93c" name="LastName" dataSource="FriendInfoRow.GetValue(&quot;LastName&quot;)">
+                    <type>
+                      <typeOfConcreteMember Id="2789ec55-74cf-4b9d-861d-1eaa917dee9c">
+                        <vDPrimitiveMemberTypeMoniker Id="b9b02f2b-3356-41a5-9e41-221b334df2a4" />
+                      </typeOfConcreteMember>
+                    </type>
+                    <meta>
+                      <concreteMemberRefersMeta Id="4c301dde-c93c-43a0-a423-bf2d7cccfc10">
+                        <vDPropertyMoniker Id="52df9539-b657-4e30-a5d4-10803ce0be0a" />
+                      </concreteMemberRefersMeta>
+                    </meta>
+                  </vDActionDataMember>
+                </concreteTypeHasMembers>
+              </members>
               <meta>
                 <concreteTypeRefersMeta Id="3e0e0740-6fc1-4574-9ebc-1c49cd0f5748">
                   <vDCustomTypeMoniker Id="407d0176-d74b-415c-aa78-c9af8b31378b" />
@@ -748,6 +919,36 @@
           </modelStoreHasTypeInsts>
           <modelStoreHasTypeInsts Id="2785cdd4-945e-4172-9506-a8b76f175f55">
             <vDActionData Id="6e13755d-4a9f-4ac9-89dc-c6978e37984e" name="{}">
+              <members>
+                <concreteTypeHasMembers Id="cf628bf7-d507-4a16-87f3-3e75f0d0b7aa">
+                  <vDActionDataMember Id="4404aa7b-97bd-4862-b3d7-b6627410743a" name="FirstName">
+                    <type>
+                      <typeOfConcreteMember Id="c294cebf-fa2d-4cc3-8bf2-2fe85b7744dd">
+                        <vDPrimitiveMemberTypeMoniker Id="b9b02f2b-3356-41a5-9e41-221b334df2a4" />
+                      </typeOfConcreteMember>
+                    </type>
+                    <meta>
+                      <concreteMemberRefersMeta Id="1515502c-5994-47a7-9560-c082f3590321">
+                        <vDPropertyMoniker Id="5699d1b2-6e64-45fd-bd43-a0dcba6bf339" />
+                      </concreteMemberRefersMeta>
+                    </meta>
+                  </vDActionDataMember>
+                </concreteTypeHasMembers>
+                <concreteTypeHasMembers Id="19503dab-2c07-40e4-a644-09cf52758355">
+                  <vDActionDataMember Id="7cb4e933-a037-4152-8ad0-12ff285e20dc" name="LastName">
+                    <type>
+                      <typeOfConcreteMember Id="68d0c4f8-1ae3-41e0-9932-8946b914762b">
+                        <vDPrimitiveMemberTypeMoniker Id="b9b02f2b-3356-41a5-9e41-221b334df2a4" />
+                      </typeOfConcreteMember>
+                    </type>
+                    <meta>
+                      <concreteMemberRefersMeta Id="973256a1-5309-45a6-86fc-b48c385bfe84">
+                        <vDPropertyMoniker Id="52df9539-b657-4e30-a5d4-10803ce0be0a" />
+                      </concreteMemberRefersMeta>
+                    </meta>
+                  </vDActionDataMember>
+                </concreteTypeHasMembers>
+              </members>
               <meta>
                 <concreteTypeRefersMeta Id="3bb8d68a-2319-4019-983a-ddaaa0d98256">
                   <vDCustomTypeMoniker Id="407d0176-d74b-415c-aa78-c9af8b31378b" />
