@@ -481,6 +481,17 @@ namespace MVCVisualDesigner
             }
         }
 
+        public bool IsTableBodyCell
+        {
+            get
+            {
+                if (this.ParentRow != null)
+                    return this.ParentRow.RowType == E_RowType.BodyRow;
+                else
+                    return false;
+            }
+        }
+
         protected override bool PropagateDeletingToParent { get { return true; } }
 
         internal sealed partial class RowSpanPropertyHandler : DomainPropertyValueHandler<VDTableCell, UInt32>
@@ -565,13 +576,26 @@ namespace MVCVisualDesigner
             }
         }
 
+        protected bool m_hasOwnName = false;
+        public bool HasOwnName 
+        { 
+            get 
+            {
+                GetWidgetNameValue();
+                return m_hasOwnName; 
+            } 
+        }
+
         // handle cell name
         internal override string GetWidgetNameValue()
         {
+            m_hasOwnName = true;
+
             // has specified a name 
             if (!string.IsNullOrEmpty(base.GetWidgetNameValue()))
                 return base.GetWidgetNameValue();
 
+            m_hasOwnName = false;
             // use header name otherwise
             if (this.ParentRow != null && this.ParentRow.RowType != E_RowType.HeadRow && this.ParentRow.Table != null)
             {

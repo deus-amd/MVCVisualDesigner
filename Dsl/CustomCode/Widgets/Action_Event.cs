@@ -123,7 +123,10 @@ namespace MVCVisualDesigner
             get 
             {
                 if (m_actionInfo == null)
-                    m_actionInfo = new ServerActionInfo(this.Name);
+                {
+                    VDModelStore ms = this.GetModelStore();
+                    m_actionInfo = new ServerActionInfo(this.Name, ms != null ? ms.GetSupportedServerActionJoints() : null);
+                }
                 return m_actionInfo;
             }
             set 

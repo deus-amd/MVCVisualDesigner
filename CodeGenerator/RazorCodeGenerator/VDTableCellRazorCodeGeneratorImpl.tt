@@ -10,17 +10,31 @@
     string spanAttributes = string.Empty;
     if (cell.RowSpan > 1) spanAttributes += string.Format("rowspan='{0}' ", cell.RowSpan);
     if (cell.ColSpan > 1) spanAttributes += string.Format("colspan='{0}' ", cell.ColSpan);
-
+    
+    string nameAttr = string.IsNullOrEmpty(cell.WidgetName) ? string.Empty : " name='" + cell.WidgetName + "'";
+    string text = cell.Text ?? string.Empty;
     if (cell.IsTableHeadCell) 
     {
 #>
-<th <#= spanAttributes #> <#= this.Widget.GetMoreHtmlAttributeString("rowspan", "colspan") #>><#@ include file="../GenerateChildrenCode.t4" #></th>
+<th<#= spanAttributes #><#= this.Widget.GetMoreHtmlAttributeString("rowspan", "colspan", "name") #><#= nameAttr #>><#= text #><#@ include file="../GenerateChildrenCode.t4" #></th>
 <#
     }
     else
     {
+		// get name attr
+        nameAttr = cell.HasOwnName ? " name='" + cell.WidgetName + "'" : string.Empty;
+		// get value attr
+        VDWidgetValueMember valueMember = null;
+        if (cell.WidgetValue != null)
+        {
+            valueMember = cell.WidgetValue.Members.Find(m => string.Compare(m.Name, "value", true) == 0) as VDWidgetValueMember;
+        }
+        string value = valueMember != null ? valueMember.InitValue : string.Empty;
+		string valueAttr = string.IsNullOrEmpty(value) ? string.Empty : " value='" + value + "'";
+		// get text
+		text = string.IsNullOrEmpty(text) ? value : text;
 #>
-<td <#= spanAttributes #> <#= this.Widget.GetMoreHtmlAttributeString("rowspan", "colspan") #>><#@ include file="../GenerateChildrenCode.t4" #></td>
+<td<#= spanAttributes #><#= this.Widget.GetMoreHtmlAttributeString("rowspan", "colspan", "name", "value") #><#= nameAttr #><#= valueAttr#>><#= text ?? string.Empty #><#@ include file="../GenerateChildrenCode.t4" #></td>
 <#
     }
 #>

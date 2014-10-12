@@ -219,7 +219,7 @@ namespace MVCVisualDesigner
                     if (!m_chkServer.Checked)
                         return m_cmbClientAction.SelectedItem as IClientActionInfo;
                     else
-                        return new ServerActionInfo(m_txtServerAction.Text);
+                        return new ServerActionInfo(m_txtServerAction.Text, m_serverActionJoints);
                 }
             }
 
@@ -275,7 +275,10 @@ namespace MVCVisualDesigner
             {
                 m_lstAction.Items.Clear();
                 m_cmbJoint.Items.Clear();
-                m_cmbJoint.Items.Add(DefaultActionJontInfo.Instance);
+                if (action is VDClientAction)
+                {
+                    m_cmbJoint.Items.Add(DefaultActionJontInfo.Instance);
+                }
                 
                 if (action != null)
                 {

@@ -1,0 +1,26 @@
+@model List<FriendInfo>
+
+<table >
+    <thead>
+        <tr >
+            <th name='FirstName'>First Name</th>
+            <th name='LastName'>Last Name</th>
+            <th name='Email'>Email</th>
+            <th>Action</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach(var friend in Model)
+        {
+        <tr >
+            <td value='@friend.FirstName'>@friend.FirstName</td>
+            <td value='@friend.LastName'>@friend.LastName</td>
+            <td value='@friend.EMail'>@friend.EMail</td>
+            <td><a href="#">Delete</a></td>
+        </tr>
+        }
+        
+    
+    </tbody>
+</table>

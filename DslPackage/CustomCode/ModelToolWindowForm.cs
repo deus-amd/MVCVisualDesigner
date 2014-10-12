@@ -656,8 +656,8 @@ namespace MVCVisualDesigner
                     if (m_member == null || m_member.Meta == null || m_member.Meta.Type == null)
                         return false;
 
-                    if (m_member.Meta is VDBuiltInProperty) 
-                        return false;
+                    //if (m_member.Meta is VDBuiltInProperty) 
+                    //    return false;
 
                     VDMetaType metaType = m_member.Meta.Type as VDMetaType;
                     return !(metaType is VDDictionaryType || metaType is VDListType
@@ -1050,8 +1050,8 @@ namespace MVCVisualDesigner
                     if (m_member == null || m_member.Meta == null || m_member.Meta.Type == null)
                         return false;
 
-                    if (m_member.Meta is VDBuiltInProperty)
-                        return false;
+                    //if (m_member.Meta is VDBuiltInProperty)
+                    //    return false;
 
                     VDMetaType metaType = m_member.Meta.Type as VDMetaType;
                     return !(metaType is VDDictionaryType || metaType is VDListType
@@ -1383,8 +1383,8 @@ namespace MVCVisualDesigner
                     if (m_member == null || m_member.Meta == null || m_member.Meta.Type == null)
                         return false;
 
-                    if (m_member.Meta is VDBuiltInProperty)
-                        return false;
+                    //if (m_member.Meta is VDBuiltInProperty)
+                    //    return false;
 
                     VDMetaType metaType = m_member.Meta.Type as VDMetaType;
                     return !(metaType is VDDictionaryType || metaType is VDListType

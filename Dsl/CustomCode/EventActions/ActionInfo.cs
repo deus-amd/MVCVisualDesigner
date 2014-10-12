@@ -147,9 +147,11 @@ namespace MVCVisualDesigner
     public class ServerActionInfo : IServerActionInfo
     {
         private string m_name;
-        public ServerActionInfo(string name)
+        public ServerActionInfo(string name, List<IActionJointInfo> supportedJoints)
         {
             SetName(name);
+            m_joints = supportedJoints;
+            if (m_joints == null) m_joints = new List<IActionJointInfo>();
         }
 
         public string Name { get { return m_name; } }
@@ -159,7 +161,7 @@ namespace MVCVisualDesigner
             m_name = name;
         }
 
-        private List<IActionJointInfo> m_joints = new List<IActionJointInfo>();
+        private List<IActionJointInfo> m_joints;// = new List<IActionJointInfo>();
         public List<IActionJointInfo> Joints { get { return m_joints; } }
 
         public VDActionBase CreateAction(Microsoft.VisualStudio.Modeling.Partition partition)
