@@ -1,3 +1,6 @@
+0.04
+add event handling related facilities, more widgets.
+
 0.03
 add Tab, Table, HTML Tag, Code snippet widgets
 
