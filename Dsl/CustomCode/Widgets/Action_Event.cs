@@ -154,7 +154,13 @@ namespace MVCVisualDesigner
             get
             {
                 if (m_actionJointInfo == null && this.Widget != null)
-                    m_actionJointInfo = this.Widget.GetModelStore().GetActionJointInfo(this.Category, this.Name);
+                {
+                    if (this.Widget is VDServerAction)
+                        m_actionJointInfo = this.Widget.GetModelStore()
+                            .GetSupportedServerActionJoints().Find(x => x.Category == this.Category && x.Name == this.Name);
+                    else
+                        m_actionJointInfo = this.Widget.GetModelStore().GetActionJointInfo(this.Category, this.Name);
+                }
                 return m_actionJointInfo;
             }
             set
