@@ -1,11 +1,14 @@
-0.04
+0.0.4.1
+remove getting_started_guide.rtf from the package (it's too big), refer to http://junvwang.github.io/MVCVisualDesigner/getting_started_guide.htm instead
+
+0.0.4
 add event handling related facilities, more widgets.
 
-0.03
+0.0.3
 add Tab, Table, HTML Tag, Code snippet widgets
 
-0.02
+0.0.2
 add form related widgets
 
-0.01
+0.0.1
 Initial version

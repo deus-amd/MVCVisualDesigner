@@ -166,10 +166,6 @@
     <EmbeddedResource Include="CustomCode\PanZoom\Zoom100Button.bmp" />
     <EmbeddedResource Include="CustomCode\PanZoom\ZoomInButton.bmp" />
     <EmbeddedResource Include="CustomCode\PanZoom\ZoomOutButton.bmp" />
-    <Content Include="getting_started_guide.rtf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
     <Content Include="Resources\GenerateAll_24.bmp" />
     <Content Include="Resources\ResultstoFile_9946_24.bmp" />
     <None Include="source.extension.tt">
