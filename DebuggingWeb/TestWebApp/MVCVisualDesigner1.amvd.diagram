@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<vDDiagram dslVersion="0.0.3.0" Id="717939e9-2bd2-4726-b39c-9cc96a2b82ce" absoluteBounds="0, 0, 12.780000000000001, 8.5" name="MVCVisualDesigner1">
+<vDDiagram dslVersion="0.0.4.1" Id="717939e9-2bd2-4726-b39c-9cc96a2b82ce" absoluteBounds="0, 0, 12.780000000000001, 8.5" name="MVCVisualDesigner1">
   <vDViewMoniker Id="f8cbdf98-15ee-4476-9356-6fdd85871439" />
   <nestedChildShapes>
     <vDTableShape Id="89e89866-4c07-4cea-aaf8-ffb67225e809" absoluteBounds="0.5, 0.5, 4.5600000000000005, 1.94" disabled="false" isPinned="false" relayoutChildren="false">
@@ -200,7 +200,7 @@
         <vDVertContainerShapeMoniker Id="e8dfc1a5-fb65-456e-831b-48a02d464257" />
       </nodes>
     </vDActionJoint2ComponentConnector>
-    <vDActionJoint2ComponentConnector Id="b8c9993d-6dde-4b64-a7cc-2b2360406632" edgePoints="[(9.6 : 1.905); (10.25 : 1.905)]" fixedFrom="Caller" fixedTo="Algorithm">
+    <vDActionJoint2ComponentConnector Id="b8c9993d-6dde-4b64-a7cc-2b2360406632" edgePoints="[(9.6 : 1.905); (10.25 : 1.905)]" fixedFrom="Caller" fixedTo="NotFixed">
       <r_ActionJoint2ComponentMoniker Id="f41ac22d-bf0e-4e45-a72b-649a318a98ef" />
       <nodes>
         <vDActionJointPortMoniker Id="b88b8e08-b5d5-4bce-a396-783b8032e7b6" />

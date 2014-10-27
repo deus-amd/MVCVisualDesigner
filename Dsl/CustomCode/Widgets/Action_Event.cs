@@ -49,7 +49,19 @@ namespace MVCVisualDesigner
                         VDModelStore modelStore = this.GetModelStore();
                         if (modelStore != null)
                         {
-                            base.ActionData = modelStore.CreateConcreteType<VDActionData>("{}"); // todo: give it a name to make it is able to be referenced
+                            var actions = this.Store.ElementDirectory.FindElements(VDActionBase.DomainClassId);
+                            string actionDataName = null;
+                            if (this.SourceEvents.Count > 0)
+                            {
+                                var srcEvent = SourceEvents[0];
+                                actionDataName = string.Format("{0}_{1}_{2}", srcEvent.Widget.WidgetName, srcEvent.Name, this.Name);
+                            }
+                            else
+                            {
+                                actionDataName = this.Name;
+                            }
+                            actionDataName += "_" + actions.Count;
+                            base.ActionData = modelStore.CreateConcreteType<VDActionData>(actionDataName);
                         }
                         trans.Commit();
                     }

@@ -54,7 +54,7 @@ namespace MVCVisualDesigner.CodeGenerator.JavaScriptCodeGenerator
     public class <#= widgetName #>JavaScriptCodeGeneratorBase : IJavaScriptCodeGenerator
     {
 <#
-	    if (!DefaultGenerators.Contains(widgetName))
+        if (!DefaultGenerators.Contains(widgetName))
         {
 #>
         protected <#= widgetName #>JavaScriptCodeGeneratorImpl m_impl = new <#= widgetName #>JavaScriptCodeGeneratorImpl();
@@ -114,37 +114,37 @@ namespace MVCVisualDesigner.CodeGenerator.JavaScriptCodeGenerator
         {
         }
 
-		public string GenerateWidgetInitCode(VDWidget eventSource, IJavaScriptCodeGeneratorFactory jsGenFactory)
+        public string GenerateWidgetInitCode(VDWidget eventSource, IJavaScriptCodeGeneratorFactory jsGenFactory)
         {
-			//StringBuilder sbOld = this.GenerationEnvironment;
-			//this.GenerationEnvironment = new StringBuilder();
+            //StringBuilder sbOld = this.GenerationEnvironment;
+            //this.GenerationEnvironment = new StringBuilder();
             //generateWidgetInitCodeImpl((<#= widgetName #>)eventSource, jsGenFactory);
-			//string code = this.GenerationEnvironment.ToString();
-			//this.GenerationEnvironment = sbOld;
-			//return code;
-			return string.Empty;
+            //string code = this.GenerationEnvironment.ToString();
+            //this.GenerationEnvironment = sbOld;
+            //return code;
+            return string.Empty;
         }
 
         public string GenerateActionCode(VDWidget eventSource, VDWidget eventTarget, VDClientAction action)
         {
-			//StringBuilder sbOld = this.GenerationEnvironment;
-			//this.GenerationEnvironment = new StringBuilder();
+            //StringBuilder sbOld = this.GenerationEnvironment;
+            //this.GenerationEnvironment = new StringBuilder();
             //generateActionCodeImpl(eventSource, (<#= widgetName #>)eventTarget, action);
-			//string code = this.GenerationEnvironment.ToString();
-			//this.GenerationEnvironment = sbOld;
-			//return code;
-			return string.Empty;
+            //string code = this.GenerationEnvironment.ToString();
+            //this.GenerationEnvironment = sbOld;
+            //return code;
+            return string.Empty;
         }
 
         public string GenerateGettingWidgetValueCode(VDWidget widget)
         {
-			//StringBuilder sbOld = this.GenerationEnvironment;
-			//this.GenerationEnvironment = new StringBuilder();
+            //StringBuilder sbOld = this.GenerationEnvironment;
+            //this.GenerationEnvironment = new StringBuilder();
             //generateGettingWidgetValueCodeImpl((<#= widgetName #>)widget);
-			//string code = this.GenerationEnvironment.ToString();
-			//this.GenerationEnvironment = sbOld;
-			//return code;
-			return string.Empty;
+            //string code = this.GenerationEnvironment.ToString();
+            //this.GenerationEnvironment = sbOld;
+            //return code;
+            return string.Empty;
         }
     }
 <#
@@ -157,37 +157,37 @@ namespace MVCVisualDesigner.CodeGenerator.JavaScriptCodeGenerator
         {
         }
 
-		public string GenerateWidgetInitCode(VDWidget eventSource, IJavaScriptCodeGeneratorFactory jsGenFactory)
+        public string GenerateWidgetInitCode(VDWidget eventSource, IJavaScriptCodeGeneratorFactory jsGenFactory)
         {
-			//StringBuilder sbOld = this.GenerationEnvironment;
-			//this.GenerationEnvironment = new StringBuilder();
+            //StringBuilder sbOld = this.GenerationEnvironment;
+            //this.GenerationEnvironment = new StringBuilder();
             //generateWidgetInitCodeImpl(eventSource, jsGenFactory);
-			//string code = this.GenerationEnvironment.ToString();
-			//this.GenerationEnvironment = sbOld;
-			//return code;
-			return string.Empty;
+            //string code = this.GenerationEnvironment.ToString();
+            //this.GenerationEnvironment = sbOld;
+            //return code;
+            return string.Empty;
         }
 
         public string GenerateActionCode(VDWidget eventSource, VDWidget eventTarget, VDClientAction action)
         {
-			//StringBuilder sbOld = this.GenerationEnvironment;
-			//this.GenerationEnvironment = new StringBuilder();
+            //StringBuilder sbOld = this.GenerationEnvironment;
+            //this.GenerationEnvironment = new StringBuilder();
             //generateActionCodeImpl(eventSource, eventTarget, action);
-			//string code = this.GenerationEnvironment.ToString();
-			//this.GenerationEnvironment = sbOld;
-			//return code;
-			return string.Empty;
+            //string code = this.GenerationEnvironment.ToString();
+            //this.GenerationEnvironment = sbOld;
+            //return code;
+            return string.Empty;
         }
 
         public string GenerateGettingWidgetValueCode(VDWidget widget)
         {
-			//StringBuilder sbOld = this.GenerationEnvironment;
-			//this.GenerationEnvironment = new StringBuilder();
+            //StringBuilder sbOld = this.GenerationEnvironment;
+            //this.GenerationEnvironment = new StringBuilder();
             //generateGettingWidgetValueCodeImpl(widget);
-			//string code = this.GenerationEnvironment.ToString();
-			//this.GenerationEnvironment = sbOld;
-			//return code;
-			return string.Empty;
+            //string code = this.GenerationEnvironment.ToString();
+            //this.GenerationEnvironment = sbOld;
+            //return code;
+            return string.Empty;
         }
     }
 }

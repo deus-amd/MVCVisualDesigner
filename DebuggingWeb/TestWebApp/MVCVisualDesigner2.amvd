@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<vDView xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="0.0.4.1" Id="06d09d05-d3a1-41b9-a93e-e05b5d170a8f" moreHTMLAttributes="AAEAAAD/////AQAAAAAAAAAMAgAAAFhNVkNWaXN1YWxEZXNpZ25lci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1lODRjOWNmNDk0ODU0OTYyBAEAAACeAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZSwgTVZDVmlzdWFsRGVzaWduZXIuRHNsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49ZTg0YzljZjQ5NDg1NDk2Ml1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAhTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZVtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB9NVkNWaXN1YWxEZXNpZ25lci5IVE1MQXR0cmlidXRlAgAAAAs=" classAttribute="" iDAttribute="" settings="AAEAAAD/////AQAAAAAAAAAEAQAAAOABU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlvbmFyeWAyW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlN0cmluZywgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAAB1ZlcnNpb24IQ29tcGFyZXIISGFzaFNpemUAAwAIkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0IAAAAAAkCAAAAAAAAAAQCAAAAkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0AAAAACw==" xmlns="http://schemas.microsoft.com/dsltools/MVCVisualDesigner">
+  <children>
+    <widgetHasChildren Id="4e74b15b-946f-46ff-ab5c-519de5c0aa5b">
+      <vDAlert Id="cb3ad856-a0c0-44f0-8693-3786f4ddadd0" moreHTMLAttributes="AAEAAAD/////AQAAAAAAAAAMAgAAAFhNVkNWaXN1YWxEZXNpZ25lci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1lODRjOWNmNDk0ODU0OTYyBAEAAACeAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZSwgTVZDVmlzdWFsRGVzaWduZXIuRHNsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49ZTg0YzljZjQ5NDg1NDk2Ml1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAhTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZVtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB9NVkNWaXN1YWxEZXNpZ25lci5IVE1MQXR0cmlidXRlAgAAAAs=" widgetName="VDAlert1" classAttribute="" iDAttribute="" settings="AAEAAAD/////AQAAAAAAAAAEAQAAAOABU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlvbmFyeWAyW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlN0cmluZywgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAAB1ZlcnNpb24IQ29tcGFyZXIISGFzaFNpemUAAwAIkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0IAAAAAAkCAAAAAAAAAAQCAAAAkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0AAAAACw==">
+        <title>
+          <widgetHasTitle Id="ec1ce24a-35e1-4f0b-a233-a986b6a8d59a">
+            <vDWidgetTitle Id="f3dc4ac9-5f3c-42c6-b595-2ac66b5af32f" />
+          </widgetHasTitle>
+        </title>
+        <events>
+          <widgetHasEvents Id="52ea16bd-68ba-408d-ae71-1140125be18d">
+            <vDEvent Id="a8df29c7-249d-463d-82a4-7cc46124d6c4" name="onOK" category="Alert Event">
+              <targetComponents>
+                <r_Event2Component Id="fbaf22d4-b619-4be7-b3e4-50a308b206f9">
+                  <vDClientActionMoniker Id="dbdcdb8f-2a85-47c4-a83e-d975fc533163" />
+                </r_Event2Component>
+              </targetComponents>
+            </vDEvent>
+          </widgetHasEvents>
+        </events>
+      </vDAlert>
+    </widgetHasChildren>
+    <widgetHasChildren Id="a92633be-0b7b-469b-b189-5708135107bd">
+      <vDAlert Id="df3d624e-5807-4ac2-85f1-d3ba587c9bca" moreHTMLAttributes="AAEAAAD/////AQAAAAAAAAAMAgAAAFhNVkNWaXN1YWxEZXNpZ25lci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1lODRjOWNmNDk0ODU0OTYyBAEAAACeAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZSwgTVZDVmlzdWFsRGVzaWduZXIuRHNsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49ZTg0YzljZjQ5NDg1NDk2Ml1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAhTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZVtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB9NVkNWaXN1YWxEZXNpZ25lci5IVE1MQXR0cmlidXRlAgAAAAs=" widgetName="VDAlert2" classAttribute="" iDAttribute="" settings="AAEAAAD/////AQAAAAAAAAAEAQAAAOABU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlvbmFyeWAyW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlN0cmluZywgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAAB1ZlcnNpb24IQ29tcGFyZXIISGFzaFNpemUAAwAIkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0IAAAAAAkCAAAAAAAAAAQCAAAAkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0AAAAACw==">
+        <title>
+          <widgetHasTitle Id="c081217d-0412-47a4-8430-0f6dac5e986b">
+            <vDWidgetTitle Id="794a368c-7640-4538-9e36-a93885f9897d" />
+          </widgetHasTitle>
+        </title>
+      </vDAlert>
+    </widgetHasChildren>
+    <widgetHasChildren Id="061934b0-c9ec-4e75-ae58-584ae56b54ba">
+      <vDAlert Id="770e797a-ee53-414d-b35b-8ed4f6d13ba7" moreHTMLAttributes="AAEAAAD/////AQAAAAAAAAAMAgAAAFhNVkNWaXN1YWxEZXNpZ25lci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1lODRjOWNmNDk0ODU0OTYyBAEAAACeAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZSwgTVZDVmlzdWFsRGVzaWduZXIuRHNsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49ZTg0YzljZjQ5NDg1NDk2Ml1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAhTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZVtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB9NVkNWaXN1YWxEZXNpZ25lci5IVE1MQXR0cmlidXRlAgAAAAs=" widgetName="VDAlert3" classAttribute="" iDAttribute="" settings="AAEAAAD/////AQAAAAAAAAAEAQAAAOABU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlvbmFyeWAyW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlN0cmluZywgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAAB1ZlcnNpb24IQ29tcGFyZXIISGFzaFNpemUAAwAIkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0IAAAAAAkCAAAAAAAAAAQCAAAAkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0AAAAACw==">
+        <title>
+          <widgetHasTitle Id="6f571c5f-972d-4249-b0d6-bbbcee6adc7f">
+            <vDWidgetTitle Id="8f04531d-5fac-42e2-8310-dc9f9f3cd5bf" />
+          </widgetHasTitle>
+        </title>
+        <events>
+          <widgetHasEvents Id="6bcb7694-e214-4f91-9814-5a54c77f5a41">
+            <vDEvent Id="0750e2ff-4ec8-4e93-9722-ba4a0e62805e" name="onOK" category="Alert Event">
+              <targetComponents>
+                <r_Event2Component Id="5acce603-e482-467b-af0d-047183dd325e">
+                  <vDClientActionMoniker Id="a598be4d-e75c-47b0-bc65-2f122d53fc3e" />
+                </r_Event2Component>
+              </targetComponents>
+            </vDEvent>
+          </widgetHasEvents>
+        </events>
+      </vDAlert>
+    </widgetHasChildren>
+    <widgetHasChildren Id="98d79360-c323-42a3-a446-9a4debe94b05">
+      <vDClientAction Id="dbdcdb8f-2a85-47c4-a83e-d975fc533163" moreHTMLAttributes="AAEAAAD/////AQAAAAAAAAAMAgAAAFhNVkNWaXN1YWxEZXNpZ25lci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1lODRjOWNmNDk0ODU0OTYyBAEAAACeAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZSwgTVZDVmlzdWFsRGVzaWduZXIuRHNsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49ZTg0YzljZjQ5NDg1NDk2Ml1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAhTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZVtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB9NVkNWaXN1YWxEZXNpZ25lci5IVE1MQXR0cmlidXRlAgAAAAs=" classAttribute="" iDAttribute="" settings="AAEAAAD/////AQAAAAAAAAAEAQAAAOABU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlvbmFyeWAyW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlN0cmluZywgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAAB1ZlcnNpb24IQ29tcGFyZXIISGFzaFNpemUAAwAIkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0IAAAAAAkCAAAAAAAAAAQCAAAAkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0AAAAACw==" name="Show" category="JS Action">
+        <actionJoints>
+          <widgetHasActionJoints Id="97bc837b-5b91-456d-b3ce-87dc87f07613">
+            <vDActionJoint Id="c98b5f9e-00e3-493a-a363-350173c44d70" name="(Default)">
+              <targetComponents>
+                <r_ActionJoint2Component Id="53013f40-dad4-4842-b089-5b09dd070df8">
+                  <vDAlertMoniker Id="df3d624e-5807-4ac2-85f1-d3ba587c9bca" />
+                </r_ActionJoint2Component>
+              </targetComponents>
+            </vDActionJoint>
+          </widgetHasActionJoints>
+        </actionJoints>
+        <actionData>
+          <actionHasData Id="30efcd9f-8497-4e25-bf01-0ffa1b597021">
+            <vDActionDataMoniker Id="ab7e5571-87bb-479d-88af-bd5af4236f41" />
+          </actionHasData>
+        </actionData>
+      </vDClientAction>
+    </widgetHasChildren>
+    <widgetHasChildren Id="9298d13e-6132-4b27-82c6-6a6f5fcd17fd">
+      <vDClientAction Id="a598be4d-e75c-47b0-bc65-2f122d53fc3e" moreHTMLAttributes="AAEAAAD/////AQAAAAAAAAAMAgAAAFhNVkNWaXN1YWxEZXNpZ25lci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1lODRjOWNmNDk0ODU0OTYyBAEAAACeAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZSwgTVZDVmlzdWFsRGVzaWduZXIuRHNsLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49ZTg0YzljZjQ5NDg1NDk2Ml1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAhTVZDVmlzdWFsRGVzaWduZXIuSFRNTEF0dHJpYnV0ZVtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB9NVkNWaXN1YWxEZXNpZ25lci5IVE1MQXR0cmlidXRlAgAAAAs=" classAttribute="" iDAttribute="" settings="AAEAAAD/////AQAAAAAAAAAEAQAAAOABU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuRGljdGlvbmFyeWAyW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlN0cmluZywgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAAB1ZlcnNpb24IQ29tcGFyZXIISGFzaFNpemUAAwAIkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0IAAAAAAkCAAAAAAAAAAQCAAAAkAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5HZW5lcmljRXF1YWxpdHlDb21wYXJlcmAxW1tTeXN0ZW0uR3VpZCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0AAAAACw==" name="Show" category="JS Action">
+        <actionJoints>
+          <widgetHasActionJoints Id="debec684-6d18-4998-b9b9-2c9e6219fa6c">
+            <vDActionJoint Id="c03088cf-f712-40d2-8664-6c59d5c5fb27" name="(Default)">
+              <targetComponents>
+                <r_ActionJoint2Component Id="28d26d40-e27e-485d-a9e8-136f34a13d43">
+                  <vDAlertMoniker Id="df3d624e-5807-4ac2-85f1-d3ba587c9bca" />
+                </r_ActionJoint2Component>
+              </targetComponents>
+            </vDActionJoint>
+          </widgetHasActionJoints>
+        </actionJoints>
+        <actionData>
+          <actionHasData Id="745ea4b1-6f96-4bac-a330-4cbc0ea47f91">
+            <vDActionDataMoniker Id="64953518-fd75-4e13-ba7b-9c2cafa42f32" />
+          </actionHasData>
+        </actionData>
+      </vDClientAction>
+    </widgetHasChildren>
+  </children>
+  <modelStore>
+    <designerHasModelStore Id="e53e7af9-b24d-4d4a-8ab4-9d9c756d5edc">
+      <vDModelStore Id="b568006e-e7c6-48d8-8255-41600ca3258c">
+        <metaTypes>
+          <modelStoreHasTypeDefs Id="e0e263f4-1f49-4b07-ba34-9f59b2c801c9">
+            <vDCustomType Id="9693847e-4089-4458-bbdc-eed0004ccaa3" name="{}">
+              <members>
+                <metaTypeHasMembers Id="51967c97-203f-4913-acf3-1b56ce937071">
+                  <vDProperty Id="c15c4503-2c4e-4092-b65f-fb6a881462e7" name="NewMember1">
+                    <type>
+                      <typeOfMetaMember Id="452058ef-96fa-4f40-9f3d-0865f8ef1501">
+                        <vDPrimitiveTypeMoniker Id="a4c3d566-2512-4f3c-aaa1-9995437ffa2b" />
+                      </typeOfMetaMember>
+                    </type>
+                  </vDProperty>
+                </metaTypeHasMembers>
+              </members>
+            </vDCustomType>
+          </modelStoreHasTypeDefs>
+          <modelStoreHasTypeDefs Id="7c9d3287-d722-4b88-b13e-b6a3e3e1ab31">
+            <vDPrimitiveType Id="a4c3d566-2512-4f3c-aaa1-9995437ffa2b" name="string">
+              <members>
+                <metaTypeHasMembers Id="090d78de-17e4-4a4b-8742-adf395a423fe">
+                  <vDBuiltInProperty Id="9c0a12bd-b6a1-4f56-8c4d-8911bdcc3d41" name="Value">
+                    <type>
+                      <typeOfMetaMember Id="e630d388-256f-4be0-91ee-7bdc6b5ef734">
+                        <vDPrimitiveTypeMoniker Id="a4c3d566-2512-4f3c-aaa1-9995437ffa2b" />
+                      </typeOfMetaMember>
+                    </type>
+                  </vDBuiltInProperty>
+                </metaTypeHasMembers>
+              </members>
+              <value>
+                <primitiveTypeHasValue Id="ffe21070-96c9-400d-9b0c-9eab7c3ecb32">
+                  <vDBuiltInPropertyMoniker Id="9c0a12bd-b6a1-4f56-8c4d-8911bdcc3d41" />
+                </primitiveTypeHasValue>
+              </value>
+            </vDPrimitiveType>
+          </modelStoreHasTypeDefs>
+          <modelStoreHasTypeDefs Id="678b46b3-95bf-431e-981c-8bd21f80cab3">
+            <vDCustomType Id="53c1f48e-00ea-41a5-ab05-9aed7afbf16b" name="Show_1" />
+          </modelStoreHasTypeDefs>
+          <modelStoreHasTypeDefs Id="3925d42b-a1af-4852-ae19-963797c56127">
+            <vDCustomType Id="f289bfb8-af10-4829-86c7-4432dea83c17" name="Show_2" />
+          </modelStoreHasTypeDefs>
+          <modelStoreHasTypeDefs Id="26332116-fb6d-495e-91a6-e27325e4e683">
+            <vDCustomType Id="267b17c6-b70e-4e0f-8f8a-af07d821bf04" name="Show_Alert_onOK_1" />
+          </modelStoreHasTypeDefs>
+          <modelStoreHasTypeDefs Id="aa193413-ec66-401d-b3b5-c274933e82e4">
+            <vDCustomType Id="2bb1581b-1ef8-490d-ba47-b5f49b1729ae" name="Show_Alert_onOK_2" />
+          </modelStoreHasTypeDefs>
+          <modelStoreHasTypeDefs Id="22d4b5fb-7216-4dec-a938-5fc0cb97b00c">
+            <vDCustomType Id="36a12325-61af-4873-9364-5e961c26c940" name="VDAlert1_onOK_Show_1">
+              <members>
+                <metaTypeHasMembers Id="9caecfcb-f698-467b-803f-fbb5dfa3c658">
+                  <vDProperty Id="403d48fe-7028-42fb-9874-2befd09c3c6d" name="NewMember0">
+                    <type>
+                      <typeOfMetaMember Id="3dfd66fa-3fe7-442e-a2ae-7ae5991c37c4">
+                        <vDPrimitiveTypeMoniker Id="a4c3d566-2512-4f3c-aaa1-9995437ffa2b" />
+                      </typeOfMetaMember>
+                    </type>
+                  </vDProperty>
+                </metaTypeHasMembers>
+              </members>
+            </vDCustomType>
+          </modelStoreHasTypeDefs>
+          <modelStoreHasTypeDefs Id="88a0d04b-7963-488d-91c9-7ebfac06516f">
+            <vDCustomType Id="f6b13a80-1d94-465b-86b3-fa7429199148" name="VDAlert3_onOK_Show_2" />
+          </modelStoreHasTypeDefs>
+        </metaTypes>
+        <concreteTypes>
+          <modelStoreHasTypeInsts Id="b155db53-c8d9-4b9e-bdd5-d4308484b0da">
+            <vDActionData Id="d023fd4a-2118-47be-a1b7-29d5e6fa038c" name="{}">
+              <members>
+                <concreteTypeHasMembers Id="a0db3a8b-2b34-4bd9-8fde-84ed462658ed">
+                  <vDActionDataMember Id="45955e9e-74b5-4443-8962-6dd77fc9c2b5" name="NewMember1">
+                    <type>
+                      <typeOfConcreteMember Id="14bf15ce-acea-486e-8282-9f0d0a87bb1d">
+                        <vDPrimitiveMemberTypeMoniker Id="1a45b730-4fc6-42ed-9a12-d4ea89254ec8" />
+                      </typeOfConcreteMember>
+                    </type>
+                    <meta>
+                      <concreteMemberRefersMeta Id="8f7a7178-0c4d-452b-9251-9d3dd93a0578">
+                        <vDPropertyMoniker Id="c15c4503-2c4e-4092-b65f-fb6a881462e7" />
+                      </concreteMemberRefersMeta>
+                    </meta>
+                  </vDActionDataMember>
+                </concreteTypeHasMembers>
+              </members>
+              <meta>
+                <concreteTypeRefersMeta Id="4b85b939-323e-4a2b-b905-f8a560ab7c61">
+                  <vDCustomTypeMoniker Id="9693847e-4089-4458-bbdc-eed0004ccaa3" />
+                </concreteTypeRefersMeta>
+              </meta>
+            </vDActionData>
+          </modelStoreHasTypeInsts>
+          <modelStoreHasTypeInsts Id="cada6070-e00e-451d-add1-f14c3a8c41d9">
+            <vDActionData Id="4f4e1c67-90af-4187-a77e-b715710a4d30" name="{}">
+              <members>
+                <concreteTypeHasMembers Id="5faf360a-8085-4dd6-94bf-4674b3fc4e3e">
+                  <vDActionDataMember Id="d3075e42-1c66-40b1-abd5-354574047f27" name="NewMember1">
+                    <type>
+                      <typeOfConcreteMember Id="2c731e5b-9456-405e-b169-2c9d53816683">
+                        <vDPrimitiveMemberTypeMoniker Id="1a45b730-4fc6-42ed-9a12-d4ea89254ec8" />
+                      </typeOfConcreteMember>
+                    </type>
+                    <meta>
+                      <concreteMemberRefersMeta Id="7ca3f840-bb37-4e2a-8d90-1e50dda79f74">
+                        <vDPropertyMoniker Id="c15c4503-2c4e-4092-b65f-fb6a881462e7" />
+                      </concreteMemberRefersMeta>
+                    </meta>
+                  </vDActionDataMember>
+                </concreteTypeHasMembers>
+              </members>
+              <meta>
+                <concreteTypeRefersMeta Id="ce26204b-d809-4bf7-9af5-4110cf08a3ca">
+                  <vDCustomTypeMoniker Id="9693847e-4089-4458-bbdc-eed0004ccaa3" />
+                </concreteTypeRefersMeta>
+              </meta>
+            </vDActionData>
+          </modelStoreHasTypeInsts>
+          <modelStoreHasTypeInsts Id="36f66e17-b8a4-4319-939a-4e5f12f5ae14">
+            <vDPrimitiveMemberType Id="1a45b730-4fc6-42ed-9a12-d4ea89254ec8" name="string">
+              <meta>
+                <concreteTypeRefersMeta Id="ae4a2365-725a-4d6a-8c89-7fc20c681c69">
+                  <vDPrimitiveTypeMoniker Id="a4c3d566-2512-4f3c-aaa1-9995437ffa2b" />
+                </concreteTypeRefersMeta>
+              </meta>
+            </vDPrimitiveMemberType>
+          </modelStoreHasTypeInsts>
+          <modelStoreHasTypeInsts Id="0388f5ce-5329-419a-b031-831884b6cd18">
+            <vDActionData Id="d2849a81-1e55-405d-9e52-92878ed8ad45" name="Show_1">
+              <meta>
+                <concreteTypeRefersMeta Id="7c21aacd-ab15-49d4-b02d-d8afd2bb0cd7">
+                  <vDCustomTypeMoniker Id="53c1f48e-00ea-41a5-ab05-9aed7afbf16b" />
+                </concreteTypeRefersMeta>
+              </meta>
+            </vDActionData>
+          </modelStoreHasTypeInsts>
+          <modelStoreHasTypeInsts Id="9989586f-f762-480f-9871-90d424992dde">
+            <vDActionData Id="06ef6a2a-57b5-4ed4-8909-54f359282d13" name="Show_2">
+              <meta>
+                <concreteTypeRefersMeta Id="f09880e6-caea-429a-a3b4-5cd76bac4fdb">
+                  <vDCustomTypeMoniker Id="f289bfb8-af10-4829-86c7-4432dea83c17" />
+                </concreteTypeRefersMeta>
+              </meta>
+            </vDActionData>
+          </modelStoreHasTypeInsts>
+          <modelStoreHasTypeInsts Id="c3be4ad1-2b0f-4c04-9115-90013ca99794">
+            <vDActionData Id="8cb5839c-927f-4a0e-a347-c7d94660440e" name="Show_Alert_onOK_1">
+              <meta>
+                <concreteTypeRefersMeta Id="27da443e-1717-4212-9777-ec916d2b8ac8">
+                  <vDCustomTypeMoniker Id="267b17c6-b70e-4e0f-8f8a-af07d821bf04" />
+                </concreteTypeRefersMeta>
+              </meta>
+            </vDActionData>
+          </modelStoreHasTypeInsts>
+          <modelStoreHasTypeInsts Id="b1ec158a-0df5-40b6-9565-5a17ff1f5389">
+            <vDActionData Id="4f0d1b54-4515-478e-8044-6fe1497063e6" name="Show_Alert_onOK_2">
+              <meta>
+                <concreteTypeRefersMeta Id="4e5e631c-49d9-4852-9d3a-c5da5585fa66">
+                  <vDCustomTypeMoniker Id="2bb1581b-1ef8-490d-ba47-b5f49b1729ae" />
+                </concreteTypeRefersMeta>
+              </meta>
+            </vDActionData>
+          </modelStoreHasTypeInsts>
+          <modelStoreHasTypeInsts Id="5dfad246-be52-4dc6-935a-02b8f788cd9d">
+            <vDActionData Id="ab7e5571-87bb-479d-88af-bd5af4236f41" name="VDAlert1_onOK_Show_1">
+              <members>
+                <concreteTypeHasMembers Id="79a33730-bf8e-4e7d-8ebc-3b698014e3ee">
+                  <vDActionDataMember Id="8535afdf-e4e1-48f9-9aee-5c5de4d97dcf" name="NewMember0">
+                    <type>
+                      <typeOfConcreteMember Id="67c680ce-4d59-4fa7-bd78-788b95b1e9e4">
+                        <vDPrimitiveMemberTypeMoniker Id="1a45b730-4fc6-42ed-9a12-d4ea89254ec8" />
+                      </typeOfConcreteMember>
+                    </type>
+                    <meta>
+                      <concreteMemberRefersMeta Id="b7ee7d49-096f-430e-be0b-f2d3acc754ec">
+                        <vDPropertyMoniker Id="403d48fe-7028-42fb-9874-2befd09c3c6d" />
+                      </concreteMemberRefersMeta>
+                    </meta>
+                  </vDActionDataMember>
+                </concreteTypeHasMembers>
+              </members>
+              <meta>
+                <concreteTypeRefersMeta Id="35a95e54-4dff-489c-b03f-2bfa2bc82545">
+                  <vDCustomTypeMoniker Id="36a12325-61af-4873-9364-5e961c26c940" />
+                </concreteTypeRefersMeta>
+              </meta>
+            </vDActionData>
+          </modelStoreHasTypeInsts>
+          <modelStoreHasTypeInsts Id="39cfcfec-8900-4b40-b3f6-fb1e3811e338">
+            <vDActionData Id="64953518-fd75-4e13-ba7b-9c2cafa42f32" name="VDAlert3_onOK_Show_2">
+              <meta>
+                <concreteTypeRefersMeta Id="9bf6d61b-9c6c-4d47-a976-ef34aa6e4590">
+                  <vDCustomTypeMoniker Id="f6b13a80-1d94-465b-86b3-fa7429199148" />
+                </concreteTypeRefersMeta>
+              </meta>
+            </vDActionData>
+          </modelStoreHasTypeInsts>
+        </concreteTypes>
+      </vDModelStore>
+    </designerHasModelStore>
+  </modelStore>
+</vDView>

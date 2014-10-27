@@ -181,6 +181,10 @@
     <Content Include="MVCVisualDesigner1.amvd.diagram">
       <DependentUpon>MVCVisualDesigner1.amvd</DependentUpon>
     </Content>
+    <Content Include="MVCVisualDesigner2.amvd" />
+    <Content Include="MVCVisualDesigner2.amvd.diagram">
+      <DependentUpon>MVCVisualDesigner2.amvd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
